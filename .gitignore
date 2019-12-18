@@ -62,12 +62,20 @@ $RECYCLE.BIN/
 # Development folders
 # ####################################################################################### #
 
+install/
 build/
 Build/
 deploy/
 Deploy/
 bin/
 lib/
+/install/
+/build/
+/Build/
+/deploy/
+/Deploy/
+/bin/
+/lib/
 
 # ####################################################################################### #
 # CMake
