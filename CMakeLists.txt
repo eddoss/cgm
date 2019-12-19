@@ -34,6 +34,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # ####################################################################################### #
 
 set(Math3D_PUBLIC_HEADERS
+    develop/include/${PROJECT_NAME}/Core/Iterators/RandomAccess.hpp
     develop/include/${PROJECT_NAME}/Core/Vector.hpp
     develop/include/${PROJECT_NAME}/Global.hpp
     develop/include/${PROJECT_NAME}/IO.hpp)
@@ -59,6 +60,7 @@ endif()
 install( 
     FILES ${Math3D_PUBLIC_HEADERS}
     DESTINATION "${PROJECT_INSTALL_PREFIX}/include/Math3D"
+    DESTINATION "${PROJECT_INSTALL_PREFIX}/include/Math3D"
 )
 
 install(TARGETS ${PROJECT_NAME}
@@ -71,7 +73,7 @@ install(TARGETS ${PROJECT_NAME}
 # Testing
 # ####################################################################################### #
 
-if(${BUILD_UNIT_TESTS} OR ${BUILD_VISUAL_TESTS})
+if(${BUILD_UNIT_TESTS})
     enable_testing()
     add_subdirectory(develop/tests)
 endif()

@@ -13,7 +13,8 @@ project(UnitTests
 
 set(TESTS_LIST
     run.cpp
-    Vector.cpp)
+    Vector.cpp
+    Iterators/RandomAccess.cpp)
 
 # ####################################################################################### #
 # Setup target
