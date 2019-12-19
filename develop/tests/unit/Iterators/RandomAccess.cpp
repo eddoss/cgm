@@ -1,0 +1,91 @@
+
+
+#ifndef MATH3D_VECTOR_TEST_HPP
+#define MATH3D_VECTOR_TEST_HPP
+
+
+#include <iostream>
+#include <gtest/gtest.h>
+#include <Math3D/Core/Iterators/RandomAccess.hpp>
+
+using namespace std;
+
+template <typename T, size_t Size>
+struct container
+{
+    T data[Size];
+
+    using iterator          = RandomAccessIterator<T>;
+    using const_iterator    = ConstRandomAccessIterator<T>;
+
+   ~container() = default;
+    container(){};
+    container& operator = (container&& other)       = default;
+    container& operator = (const container& other)  = default;
+    container(std::initializer_list<T> values)
+    {
+        for (size_t i = 0; i < Size; ++i)
+        {
+            data[i] = *(values.begin() + i);
+        }
+    }
+
+    T& operator [] (size_t i) {return data[i];}
+    const T& operator [] (size_t i) const {return data[i];}
+
+    iterator        begin()             {return iterator(data);}
+    iterator        end()               {return iterator(data+Size);}
+    const_iterator  begin()     const   {return const_iterator(data);}
+    const_iterator  end()       const   {return const_iterator(data+Size);}
+    const_iterator  cbegin()    const   {return const_iterator(data);}
+    const_iterator  cend()      const   {return const_iterator(data+Size);}
+};
+
+
+TEST(Iterators_RandomAccess, RangeBasedForLoop)
+{
+    const container <int,3> input {22, 33, 44};
+    const container <int,3> expec {22, 33, 44};
+    container <int,3> inter;
+
+    size_t i = 0;
+    for (auto& val : input)
+    {
+        inter[i++] = val;
+    }
+    for (i = 0; i < 3; ++i)
+    {
+        ASSERT_EQ(expec[i], inter[i]);
+    }
+}
+
+TEST(Iterators_RandomAccess, ConstIterators_Based_ForLoop)
+{
+    const container <int,3> input {22, 33, 44};
+    const container <int,3> expec {22, 33, 44};
+
+    container <int,3>::const_iterator it_in {input.cbegin()};
+    container <int,3>::const_iterator it_ex {expec.cbegin()};
+
+    for (; it_in != input.cend(); ++it_in, ++it_ex)
+    {
+        ASSERT_EQ(*it_in, *it_ex);
+    }
+}
+
+TEST(Iterators_RandomAccess, Iterators_Based_ForLoop)
+{
+    container <int,3> input {22, 33, 44};
+    container <int,3> expec {44, 66, 88};
+
+    container <int,3>::iterator it_in {input.begin()};
+    container <int,3>::iterator it_ex {expec.begin()};
+
+    for (; it_in != input.end(); ++it_in, ++it_ex)
+    {
+        *it_in *= 2;
+        ASSERT_EQ(*it_in, *it_ex);
+    }
+}
+
+#endif // MATH3D_VECTOR_TEST_HPP
