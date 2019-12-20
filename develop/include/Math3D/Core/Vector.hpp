@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
+#include <Math3D/Core/Iterators/RandomAccess.hpp>
 
 
 template<typename T, uint32_t Size>
@@ -14,24 +15,49 @@ struct Vector
     T data[Size];
 
 /* ####################################################################################### */
-public: /* Constructors */
+public: /* Typedefs */
 /* ####################################################################################### */
 
-    /** Default constructor (no initialization). */
-    Vector() = default;
+    using size_type         = uint32_t;
+    using value_type        = T;
+    using pointer           = T*;
+    using reference         = T&;
+    using const_pointer     = const T*;
+    using const_reference   = const T&;
+
+/* ####################################################################################### */
+public: /* Iterator typedefs */
+/* ####################################################################################### */
+
+    using iterator          = RandomAccessIterator<T>;
+    using const_iterator    = ConstRandomAccessIterator<T>;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
 
     /**
      * Constructor initializing all components to a single value.
      * @param value Value to set all components to.
      */
     explicit
-    Vector(T value);
+    Vector(value_type value);
 
     /**
      * Constructor initializing all components.
      * @param value Value to set all components to.
      */
     Vector(std::initializer_list<T> values);
+
+    /**
+     * Default constructor (no initialization).
+     */
+    Vector() = default;
+
+    /**
+     * Default destructor.
+     */
+    ~Vector() = default;
 
 /* ####################################################################################### */
 public: /* Assignment operator */
@@ -42,6 +68,18 @@ public: /* Assignment operator */
      */
     Vector<T,Size>&
     operator=(T scalar);
+
+    /**
+     * Default copy assignment.
+     */
+    Vector<T,Size>&
+    operator=(const Vector<T,Size>& other) = default;
+
+    /**
+     * Default move assignment.
+     */
+    Vector<T,Size>&
+    operator=(Vector<T,Size>&& other) noexcept = default;
 
 /* ####################################################################################### */
 public: /* Arithmetic operators: unary minus */
@@ -164,7 +202,7 @@ public: /* Comparison */
      * @return true if the vectors are equal, false otherwise.
      */
     bool
-    operator==(T scalar) const;
+    operator==(value_type scalar) const;
 
     /**
      * Check against another vector for equality.
@@ -180,7 +218,7 @@ public: /* Comparison */
      * @return true if the vectors are not equal, false otherwise.
      */
     bool
-    operator!=(T scalar) const;
+    operator!=(value_type scalar) const;
 
     /**
      * Check against another vector for inequality.
@@ -230,15 +268,61 @@ public: /* Components accessing */
      * Get reference to a scpecific component by index.
      * @return reference to a specific component.
      */
-    T&
-    operator[](uint32_t index);
+    reference
+    operator[](size_type index);
 
     /**
      * Get reference to a scpecific component by index.
      * @return const reference to a specific component.
      */
-    const T&
-    operator[](uint32_t index) const;
+    const_reference
+    operator[](size_type index) const;
+
+/* ####################################################################################### */
+public: /* Iterators */
+/* ####################################################################################### */
+
+    /**
+     * Get begin component iterator.
+     * @return first component iterator.
+     */
+    iterator
+    begin();
+
+    /**
+     * Get end component iterator.
+     * @return last+1 component iterator.
+     */
+    iterator
+    end();
+
+    /**
+     * Get first component const iterator.
+     * @return first component const iterator.
+     */
+    const_iterator
+    begin() const;
+
+    /**
+     * Get end component const iterator.
+     * @return last+1 component const iterator.
+     */
+    const_iterator
+    end() const;
+
+    /**
+     * Get first component const iterator.
+     * @return first component const iterator.
+     */
+    const_iterator
+    cbegin() const;
+
+    /**
+     * Get end component const iterator.
+     * @return last+1 component const iterator.
+     */
+    const_iterator
+    cend() const;
 
 /* ####################################################################################### */
 public: /* Simple functions */
@@ -250,7 +334,7 @@ public: /* Simple functions */
      * @param zeroValues How to represent zero values (it can be any number).
      */
     Vector<T,Size>
-    signs(T zeroValues) const;
+    signs(value_type zeroValues) const;
 
     /**
      * Make all components values positive.
@@ -286,7 +370,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>::Vector(T value)
 {
     static_assert(Size > 1, __FUNCTION__": vector size must be more than 1");
-    for (uint32_t i = 0; i < Size; ++i) data[i] = value;
+    for (size_type i = 0; i < Size; ++i) data[i] = value;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -295,7 +379,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>::Vector(std::initializer_list<T> values)
 {
     static_assert(Size > 1, __FUNCTION__": vector size must be more than 1");
-    for (uint32_t i = 0; i < Size; ++i) data[i] = *(values.begin() + i);
+    for (size_type i = 0; i < Size; ++i) data[i] = *(values.begin() + i);
 }
 
 /* ####################################################################################### */
@@ -306,7 +390,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator=(T scalar)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] = scalar;
+    for (size_type i = 0; i < Size; ++i) data[i] = scalar;
     return *this;
 }
 
@@ -319,7 +403,7 @@ Vector<T,Size>
 Vector<T,Size>::operator-() const
 {
     Vector<T,Size> result
-    for (uint32_t i = 0; i < Size; ++i) result.data[i] = -data[i];
+    for (size_type i = 0; i < Size; ++i) result.data[i] = -data[i];
     return result;
 }
 
@@ -331,7 +415,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator++()
 {
-    for (uint32_t i = 0; i < Size; ++i) ++(data[i]);
+    for (size_type i = 0; i < Size; ++i) ++(data[i]);
     return *this;
 }
 
@@ -341,7 +425,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator--()
 {
-    for (uint32_t i = 0; i < Size; ++i) --(data[i]);
+    for (size_type i = 0; i < Size; ++i) --(data[i]);
     return *this;
 }
 
@@ -352,7 +436,7 @@ Vector<T,Size>
 Vector<T,Size>::operator++(int)
 {
     Vector<T,Size> copy {*this};
-    for (uint32_t i = 0; i < Size; ++i) ++(data[i]);
+    for (size_type i = 0; i < Size; ++i) ++(data[i]);
     return copy;
 }
 
@@ -363,7 +447,7 @@ Vector<T,Size>
 Vector<T,Size>::operator--(int)
 {
     Vector<T,Size> copy {*this};
-    for (uint32_t i = 0; i < Size; ++i) --(data[i]);
+    for (size_type i = 0; i < Size; ++i) --(data[i]);
     return copy;
 }
 
@@ -375,7 +459,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator-=(T scalar)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] -= scalar;
+    for (size_type i = 0; i < Size; ++i) data[i] -= scalar;
     return *this;
 }
 
@@ -385,7 +469,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator-=(const Vector<T,Size>& vector)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] -= vector.data[i];
+    for (size_type i = 0; i < Size; ++i) data[i] -= vector.data[i];
     return *this;
 }
 
@@ -397,7 +481,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator+=(T scalar)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] += scalar;
+    for (size_type i = 0; i < Size; ++i) data[i] += scalar;
     return *this;
 }
 
@@ -407,7 +491,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator+=(const Vector<T,Size>& vector)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] += vector.data[i];
+    for (size_type i = 0; i < Size; ++i) data[i] += vector.data[i];
     return *this;
 }
 
@@ -419,7 +503,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator*=(T scalar)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] *= scalar;
+    for (size_type i = 0; i < Size; ++i) data[i] *= scalar;
     return *this;
 }
 
@@ -429,7 +513,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator*=(const Vector<T,Size>& vector)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] *= vector.data[i];
+    for (size_type i = 0; i < Size; ++i) data[i] *= vector.data[i];
     return *this;
 }
 
@@ -441,7 +525,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator/=(T scalar)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] /= scalar;
+    for (size_type i = 0; i < Size; ++i) data[i] /= scalar;
     return *this;
 }
 
@@ -451,7 +535,7 @@ template<typename T, uint32_t Size>
 Vector<T,Size>&
 Vector<T,Size>::operator/=(const Vector<T,Size>& vector)
 {
-    for (uint32_t i = 0; i < Size; ++i) data[i] /= vector.data[i];
+    for (size_type i = 0; i < Size; ++i) data[i] /= vector.data[i];
     return *this;
 }
 
@@ -463,7 +547,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator==(T scalar) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (notEqual(data[i], scalar)) return false;
+    for (size_type i = 0; i < Size; ++i) if (notEqual(data[i], scalar)) return false;
     return true;
 }
 
@@ -473,7 +557,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator==(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (notEqual(data[i], vector.data[i])) return false;
+    for (size_type i = 0; i < Size; ++i) if (notEqual(data[i], vector.data[i])) return false;
     return true;
 }
 
@@ -483,7 +567,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator!=(T scalar) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (equal(data[i], scalar)) return false;
+    for (size_type i = 0; i < Size; ++i) if (equal(data[i], scalar)) return false;
     return true;
 }
 
@@ -493,7 +577,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator!=(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (equal(data[i], vector.data[i])) return false;
+    for (size_type i = 0; i < Size; ++i) if (equal(data[i], vector.data[i])) return false;
     return true;
 }
 
@@ -503,7 +587,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator<(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (data[i] >= vector.data[i]) return false;
+    for (size_type i = 0; i < Size; ++i) if (data[i] >= vector.data[i]) return false;
     return true;
 }
 
@@ -513,7 +597,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator>(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (data[i] <= vector.data[i]) return false;
+    for (size_type i = 0; i < Size; ++i) if (data[i] <= vector.data[i]) return false;
     return true;
 }
 
@@ -523,7 +607,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator<=(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (data[i] > vector.data[i]) return false;
+    for (size_type i = 0; i < Size; ++i) if (data[i] > vector.data[i]) return false;
     return true;
 }
 
@@ -533,7 +617,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::operator>=(const Vector<T,Size>& vector) const
 {
-    for (uint32_t i = 0; i < Size; ++i) if (data[i] < vector.data[i]) return false;
+    for (size_type i = 0; i < Size; ++i) if (data[i] < vector.data[i]) return false;
     return true;
 }
 
@@ -543,7 +627,7 @@ Vector<T,Size>::operator>=(const Vector<T,Size>& vector) const
 
 template<typename T, uint32_t Size>
 T&
-Vector<T,Size>::operator[](uint32_t index)
+Vector<T,Size>::operator[](size_type index)
 {
     return data[index];
 }
@@ -552,9 +636,55 @@ Vector<T,Size>::operator[](uint32_t index)
 
 template<typename T, uint32_t Size>
 const T&
-Vector<T,Size>::operator[](uint32_t index) const
+Vector<T,Size>::operator[](size_type index) const
 {
     return data[index];
+}
+
+/* ####################################################################################### */
+/* Iterators */
+/* ####################################################################################### */
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::iterator
+Vector<T,Size>::begin()
+{
+    return iterator {data};
+}
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::iterator
+Vector<T,Size>::end()
+{
+    return iterator {data+Size};
+}
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::const_iterator
+Vector<T,Size>::begin() const
+{
+    return const_iterator {data};
+}
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::const_iterator
+Vector<T,Size>::end() const
+{
+    return const_iterator {data+Size};
+}
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::const_iterator
+Vector<T,Size>::cbegin() const
+{
+    return const_iterator {data};
+}
+
+template<typename T, uint32_t Size>
+typename Vector<T,Size>::const_iterator
+Vector<T,Size>::cend() const
+{
+    return const_iterator {data+Size};
 }
 
 /* ####################################################################################### */
@@ -566,7 +696,7 @@ Vector<T,Size>
 Vector<T,Size>::signs(T zeroValues) const
 {
     Vector<T,Size> result;
-    for (uint32_t i = 0; i < Size; ++i)
+    for (size_type i = 0; i < Size; ++i)
     {
         if (data[i] > 0)
             result.data[i] = 1;
@@ -584,7 +714,7 @@ template<typename T, uint32_t Size>
 void
 Vector<T,Size>::makePositive()
 {
-    for (uint32_t i = 1; i < Size; ++i) data[i] = std::abs(data[i]);
+    for (size_type i = 1; i < Size; ++i) data[i] = std::abs(data[i]);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -593,7 +723,7 @@ template<typename T, uint32_t Size>
 void
 Vector<T,Size>::makeNegative()
 {
-    for (uint32_t i = 1; i < Size; ++i) data[i] = -std::abs(data[i]);
+    for (size_type i = 1; i < Size; ++i) data[i] = -std::abs(data[i]);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -602,7 +732,7 @@ template<typename T, uint32_t Size>
 bool
 Vector<T,Size>::containsNaN() const
 {
-    for (uint32_t i = 1; i < Size; ++i) std::isnan(data[i]) ? return true;
+    for (size_type i = 1; i < Size; ++i) if (std::isnan(data[i])) return true;
     return false;
 }
 
