@@ -10,7 +10,7 @@
 
 
 using namespace std;
-using Vec = Vector<int,3>;
+using Vec = Vector<3>;
 
 TEST(Vector, Assignment_Scalar)
 {
