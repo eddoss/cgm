@@ -9,10 +9,10 @@
 #include <Math3D/Core/Iterators/RandomAccess.hpp>
 
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
 struct Vector
 {
-    T data[Size];
+    T data[D];
 
 /* ####################################################################################### */
 public: /* Typedefs */
@@ -31,6 +31,12 @@ public: /* Iterator typedefs */
 
     using iterator          = RandomAccessIterator<T>;
     using const_iterator    = ConstRandomAccessIterator<T>;
+
+/* ####################################################################################### */
+public: /* Statics */
+/* ####################################################################################### */
+
+    static constexpr size_type dimensions {D};
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -55,6 +61,16 @@ public: /* Constructors */
     Vector() = default;
 
     /**
+     * Default copy constructor.
+     */
+    Vector(const Vector<T,D>&) = default;
+
+    /**
+     * Default move constructor.
+     */
+    Vector(Vector<T,D>&&) = default;
+
+    /**
      * Default destructor.
      */
     ~Vector() = default;
@@ -66,20 +82,20 @@ public: /* Assignment operator */
     /**
      * Assigns all components single value.
      */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator=(T scalar);
 
     /**
      * Default copy assignment.
      */
-    Vector<T,Size>&
-    operator=(const Vector<T,Size>& other) = default;
+    Vector<T,D>&
+    operator=(const Vector<T,D>&) = default;
 
     /**
      * Default move assignment.
      */
-    Vector<T,Size>&
-    operator=(Vector<T,Size>&& other) noexcept = default;
+    Vector<T,D>&
+    operator=(Vector<T,D>&&) noexcept = default;
 
 /* ####################################################################################### */
 public: /* Arithmetic operators: unary minus */
@@ -89,7 +105,7 @@ public: /* Arithmetic operators: unary minus */
      * Get a negated copy of the vector.
      * @return A negated copy of the vector.
      */
-    Vector<T,Size>
+    Vector<T,D>
     operator-() const;
 
 /* ####################################################################################### */
@@ -97,19 +113,19 @@ public: /* Increment and decrement */
 /* ####################################################################################### */
 
     /** Prefix increment all components of this vector. */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator++();
 
     /** Prefix decrement all components of this vector. */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator--();
 
     /** Postfix increment all components of this vector. */
-    Vector<T,Size>
+    Vector<T,D>
     operator++(int);
 
     /** Postfix decrement all components of this vector. */
-    Vector<T,Size>
+    Vector<T,D>
     operator--(int);
 
 /* ####################################################################################### */
@@ -121,7 +137,7 @@ public: /* Arithmetic operators: inplace minus */
      * @param scalar How much to subtract from each component.
      * @return The result of subtraction.
      */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator-=(T scalar);
 
     /**
@@ -129,8 +145,8 @@ public: /* Arithmetic operators: inplace minus */
      * @param vector The vector to subtract from this.
      * @return The result of subtraction.
      */
-    Vector<T,Size>&
-    operator-=(const Vector<T,Size>& vector);
+    Vector<T,D>&
+    operator-=(const Vector<T,D>& vector);
 
 /* ####################################################################################### */
 public: /* Arithmetic operators: inplace plus */
@@ -141,7 +157,7 @@ public: /* Arithmetic operators: inplace plus */
      * @param scalar How much add to each component.
      * @return The result of adding.
      */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator+=(T scalar);
 
     /**
@@ -149,11 +165,11 @@ public: /* Arithmetic operators: inplace plus */
      * @param vector The vector to add to this.
      * @return The result of adding.
      */
-    Vector<T,Size>&
-    operator+=(const Vector<T,Size>& vector);
+    Vector<T,D>&
+    operator+=(const Vector<T,D>& vector);
 
 /* ####################################################################################### */
-public: /* Arithmetic operators: inplace  per-component multiplication */
+public: /* Arithmetic operators: inplace per-component multiplication */
 /* ####################################################################################### */
 
     /**
@@ -161,7 +177,7 @@ public: /* Arithmetic operators: inplace  per-component multiplication */
      * @param scalar The value to multiply this by.
      * @return The result of the multiplication.
      */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator*=(T scalar);
 
     /**
@@ -169,11 +185,11 @@ public: /* Arithmetic operators: inplace  per-component multiplication */
      * @param vector The vector to multiply this by.
      * @return The result of the multiplication.
      */
-    Vector<T,Size>&
-    operator*=(const Vector<T,Size>& vector);
+    Vector<T,D>&
+    operator*=(const Vector<T,D>& vector);
 
 /* ####################################################################################### */
-public: /* Arithmetic operators: inplace  per-component division */
+public: /* Arithmetic operators: inplace per-component division */
 /* ####################################################################################### */
 
     /**
@@ -181,7 +197,7 @@ public: /* Arithmetic operators: inplace  per-component division */
      * @param scalar The value to divide this by.
      * @return The result of the division.
      */
-    Vector<T,Size>&
+    Vector<T,D>&
     operator/=(T scalar);
 
     /**
@@ -189,8 +205,8 @@ public: /* Arithmetic operators: inplace  per-component division */
      * @param vector The vector to divide this by.
      * @return The result of the division.
      */
-    Vector<T,Size>&
-    operator/=(const Vector<T,Size>& vector);
+    Vector<T,D>&
+    operator/=(const Vector<T,D>& vector);
 
 /* ####################################################################################### */
 public: /* Comparison */
@@ -210,7 +226,7 @@ public: /* Comparison */
      * @return true if the vectors are equal, false otherwise.
      */
     bool
-    operator==(const Vector<T,Size>& vector) const;
+    operator==(const Vector<T,D>& vector) const;
 
     /**
      * Check against another vector for inequality.
@@ -226,7 +242,7 @@ public: /* Comparison */
      * @return true if the vectors are not equal, false otherwise.
      */
     bool
-    operator!=(const Vector<T,Size>& vector) const;
+    operator!=(const Vector<T,D>& vector) const;
 
     /**
      * Compares whether all the components of this vector are smaller than other.
@@ -234,7 +250,7 @@ public: /* Comparison */
      * @return true if this the vector is shorter, false otherwise.
      */
     bool
-    operator<(const Vector<T,Size>& vector) const;
+    operator<(const Vector<T,D>& vector) const;
 
     /**
      * Compares whether all the components of this vector are larger than other.
@@ -242,7 +258,7 @@ public: /* Comparison */
      * @return true if this the vector is longer, false otherwise.
      */
     bool
-    operator>(const Vector<T,Size>& vector) const;
+    operator>(const Vector<T,D>& vector) const;
 
     /**
      * Compares whether all the components of this vector are smaller (or equal) than other.
@@ -250,7 +266,7 @@ public: /* Comparison */
      * @return true if this the vector is shorter, false otherwise.
      */
     bool
-    operator<=(const Vector<T,Size>& vector) const;
+    operator<=(const Vector<T,D>& vector) const;
 
     /**
      * Compares whether all the components of this vector are larger (or equal) than other.
@@ -258,7 +274,7 @@ public: /* Comparison */
      * @return true if this the vector is longer, false otherwise.
      */
     bool
-    operator>=(const Vector<T,Size>& vector) const;
+    operator>=(const Vector<T,D>& vector) const;
 
 /* ####################################################################################### */
 public: /* Components accessing */
@@ -333,7 +349,7 @@ public: /* Simple functions */
      * Each component is set to +1 or -1.
      * @param zeroValues How to represent zero values (it can be any number).
      */
-    Vector<T,Size>
+    Vector<T,D>
     signs(value_type zeroValues) const;
 
     /**
@@ -366,337 +382,337 @@ public: /* Simple functions */
 
 
 
-template<typename T, uint32_t Size>
-Vector<T,Size>::Vector(T value)
+template<typename T, uint32_t D>
+Vector<T,D>::Vector(T value)
 {
-    static_assert(Size > 1, __FUNCTION__": vector size must be more than 1");
-    for (size_type i = 0; i < Size; ++i) data[i] = value;
+    static_assert(D > 1, __FUNCTION__": vector size must be more than 1");
+    for (size_type i = 0; i < D; ++i) data[i] = value;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>::Vector(std::initializer_list<T> values)
+template<typename T, uint32_t D>
+Vector<T,D>::Vector(std::initializer_list<T> values)
 {
-    static_assert(Size > 1, __FUNCTION__": vector size must be more than 1");
-    for (size_type i = 0; i < Size; ++i) data[i] = *(values.begin() + i);
+    static_assert(D > 1, __FUNCTION__": vector size must be more than 1");
+    for (size_type i = 0; i < D; ++i) data[i] = *(values.begin() + i);
 }
 
 /* ####################################################################################### */
-/* Assignment operator */
+/* IMPLEMENTATION | Assignment operator */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator=(T scalar)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator=(T scalar)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] = scalar;
+    for (size_type i = 0; i < D; ++i) data[i] = scalar;
     return *this;
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: unary minus */
+/* IMPLEMENTATION | Arithmetic operators: unary minus */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>
-Vector<T,Size>::operator-() const
+template<typename T, uint32_t D>
+Vector<T,D>
+Vector<T,D>::operator-() const
 {
-    Vector<T,Size> result
-    for (size_type i = 0; i < Size; ++i) result.data[i] = -data[i];
+    Vector<T,D> result;
+    for (size_type i = 0; i < D; ++i) result.data[i] = -data[i];
     return result;
 }
 
 /* ####################################################################################### */
-/* Increment and decrement */
+/* IMPLEMENTATION | Increment and decrement */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator++()
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator++()
 {
-    for (size_type i = 0; i < Size; ++i) ++(data[i]);
+    for (size_type i = 0; i < D; ++i) ++(data[i]);
     return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator--()
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator--()
 {
-    for (size_type i = 0; i < Size; ++i) --(data[i]);
+    for (size_type i = 0; i < D; ++i) --(data[i]);
     return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>
-Vector<T,Size>::operator++(int)
+template<typename T, uint32_t D>
+Vector<T,D>
+Vector<T,D>::operator++(int)
 {
-    Vector<T,Size> copy {*this};
-    for (size_type i = 0; i < Size; ++i) ++(data[i]);
+    Vector<T,D> copy {*this};
+    for (size_type i = 0; i < D; ++i) ++(data[i]);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>
-Vector<T,Size>::operator--(int)
+template<typename T, uint32_t D>
+Vector<T,D>
+Vector<T,D>::operator--(int)
 {
-    Vector<T,Size> copy {*this};
-    for (size_type i = 0; i < Size; ++i) --(data[i]);
+    Vector<T,D> copy {*this};
+    for (size_type i = 0; i < D; ++i) --(data[i]);
     return copy;
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: inplace minus */
+/* IMPLEMENTATION | Arithmetic operators: inplace minus */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator-=(T scalar)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator-=(T scalar)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] -= scalar;
+    for (size_type i = 0; i < D; ++i) data[i] -= scalar;
     return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator-=(const Vector<T,Size>& vector)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator-=(const Vector<T,D>& vector)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] -= vector.data[i];
+    for (size_type i = 0; i < D; ++i) data[i] -= vector.data[i];
     return *this;
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: inplace plus */
+/* IMPLEMENTATION | Arithmetic operators: inplace plus */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator+=(T scalar)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator+=(T scalar)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] += scalar;
-    return *this;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator+=(const Vector<T,Size>& vector)
-{
-    for (size_type i = 0; i < Size; ++i) data[i] += vector.data[i];
-    return *this;
-}
-
-/* ####################################################################################### */
-/* Arithmetic operators: inplace  per-component multiplication */
-/* ####################################################################################### */
-
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator*=(T scalar)
-{
-    for (size_type i = 0; i < Size; ++i) data[i] *= scalar;
+    for (size_type i = 0; i < D; ++i) data[i] += scalar;
     return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator*=(const Vector<T,Size>& vector)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator+=(const Vector<T,D>& vector)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] *= vector.data[i];
+    for (size_type i = 0; i < D; ++i) data[i] += vector.data[i];
     return *this;
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: inplace  per-component division */
+/* IMPLEMENTATION | Arithmetic operators: inplace  per-component multiplication */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator/=(T scalar)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator*=(T scalar)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] /= scalar;
+    for (size_type i = 0; i < D; ++i) data[i] *= scalar;
     return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>&
-Vector<T,Size>::operator/=(const Vector<T,Size>& vector)
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator*=(const Vector<T,D>& vector)
 {
-    for (size_type i = 0; i < Size; ++i) data[i] /= vector.data[i];
+    for (size_type i = 0; i < D; ++i) data[i] *= vector.data[i];
     return *this;
 }
 
 /* ####################################################################################### */
-/* Comparison */
+/* IMPLEMENTATION | Arithmetic operators: inplace  per-component division */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator==(T scalar) const
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator/=(T scalar)
 {
-    for (size_type i = 0; i < Size; ++i) if (notEqual(data[i], scalar)) return false;
-    return true;
+    for (size_type i = 0; i < D; ++i) data[i] /= scalar;
+    return *this;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator==(const Vector<T,Size>& vector) const
+template<typename T, uint32_t D>
+Vector<T,D>&
+Vector<T,D>::operator/=(const Vector<T,D>& vector)
 {
-    for (size_type i = 0; i < Size; ++i) if (notEqual(data[i], vector.data[i])) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator!=(T scalar) const
-{
-    for (size_type i = 0; i < Size; ++i) if (equal(data[i], scalar)) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator!=(const Vector<T,Size>& vector) const
-{
-    for (size_type i = 0; i < Size; ++i) if (equal(data[i], vector.data[i])) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator<(const Vector<T,Size>& vector) const
-{
-    for (size_type i = 0; i < Size; ++i) if (data[i] >= vector.data[i]) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator>(const Vector<T,Size>& vector) const
-{
-    for (size_type i = 0; i < Size; ++i) if (data[i] <= vector.data[i]) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator<=(const Vector<T,Size>& vector) const
-{
-    for (size_type i = 0; i < Size; ++i) if (data[i] > vector.data[i]) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T, uint32_t Size>
-bool
-Vector<T,Size>::operator>=(const Vector<T,Size>& vector) const
-{
-    for (size_type i = 0; i < Size; ++i) if (data[i] < vector.data[i]) return false;
-    return true;
+    for (size_type i = 0; i < D; ++i) data[i] /= vector.data[i];
+    return *this;
 }
 
 /* ####################################################################################### */
-/* Components accessing */
+/* IMPLEMENTATION | Comparison */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator==(T scalar) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], scalar)) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator==(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], vector.data[i])) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator!=(T scalar) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], scalar)) return true;
+    return false;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator!=(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], vector.data[i])) return true;
+    return false;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator<(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] >= vector.data[i]) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator>(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] <= vector.data[i]) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator<=(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] > vector.data[i]) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T, uint32_t D>
+bool
+Vector<T,D>::operator>=(const Vector<T,D>& vector) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] < vector.data[i]) return false;
+    return true;
+}
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Components accessing */
+/* ####################################################################################### */
+
+template<typename T, uint32_t D>
 T&
-Vector<T,Size>::operator[](size_type index)
+Vector<T,D>::operator[](size_type index)
 {
     return data[index];
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
 const T&
-Vector<T,Size>::operator[](size_type index) const
+Vector<T,D>::operator[](size_type index) const
 {
     return data[index];
 }
 
 /* ####################################################################################### */
-/* Iterators */
+/* IMPLEMENTATION | Iterators */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::iterator
-Vector<T,Size>::begin()
+template<typename T, uint32_t D>
+typename Vector<T,D>::iterator
+Vector<T,D>::begin()
 {
     return iterator {data};
 }
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::iterator
-Vector<T,Size>::end()
+template<typename T, uint32_t D>
+typename Vector<T,D>::iterator
+Vector<T,D>::end()
 {
-    return iterator {data+Size};
+    return iterator {data+D};
 }
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::const_iterator
-Vector<T,Size>::begin() const
+template<typename T, uint32_t D>
+typename Vector<T,D>::const_iterator
+Vector<T,D>::begin() const
 {
     return const_iterator {data};
 }
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::const_iterator
-Vector<T,Size>::end() const
+template<typename T, uint32_t D>
+typename Vector<T,D>::const_iterator
+Vector<T,D>::end() const
 {
-    return const_iterator {data+Size};
+    return const_iterator {data+D};
 }
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::const_iterator
-Vector<T,Size>::cbegin() const
+template<typename T, uint32_t D>
+typename Vector<T,D>::const_iterator
+Vector<T,D>::cbegin() const
 {
     return const_iterator {data};
 }
 
-template<typename T, uint32_t Size>
-typename Vector<T,Size>::const_iterator
-Vector<T,Size>::cend() const
+template<typename T, uint32_t D>
+typename Vector<T,D>::const_iterator
+Vector<T,D>::cend() const
 {
-    return const_iterator {data+Size};
+    return const_iterator {data+D};
 }
 
 /* ####################################################################################### */
-/* Simple functions */
+/* IMPLEMENTATION | Simple functions */
 /* ####################################################################################### */
 
-template<typename T, uint32_t Size>
-Vector<T,Size>
-Vector<T,Size>::signs(T zeroValues) const
+template<typename T, uint32_t D>
+Vector<T,D>
+Vector<T,D>::signs(T zeroValues) const
 {
-    Vector<T,Size> result;
-    for (size_type i = 0; i < Size; ++i)
+    Vector<T,D> result;
+    for (size_type i = 0; i < D; ++i)
     {
         if (data[i] > 0)
             result.data[i] = 1;
@@ -710,29 +726,29 @@ Vector<T,Size>::signs(T zeroValues) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
 void
-Vector<T,Size>::makePositive()
+Vector<T,D>::makePositive()
 {
-    for (size_type i = 1; i < Size; ++i) data[i] = std::abs(data[i]);
+    for (size_type i = 1; i < D; ++i) data[i] = std::abs(data[i]);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
 void
-Vector<T,Size>::makeNegative()
+Vector<T,D>::makeNegative()
 {
-    for (size_type i = 1; i < Size; ++i) data[i] = -std::abs(data[i]);
+    for (size_type i = 1; i < D; ++i) data[i] = -std::abs(data[i]);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T, uint32_t Size>
+template<typename T, uint32_t D>
 bool
-Vector<T,Size>::containsNaN() const
+Vector<T,D>::containsNaN() const
 {
-    for (size_type i = 1; i < Size; ++i) if (std::isnan(data[i])) return true;
+    for (size_type i = 1; i < D; ++i) if (std::isnan(data[i])) return true;
     return false;
 }
 
