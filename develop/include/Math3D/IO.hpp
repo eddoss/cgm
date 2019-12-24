@@ -3,17 +3,18 @@
 
 
 #include <ios>
+#include <iomanip>
 #include <Math3D/Core/Vector.hpp>
 
 
-template <typename T, uint32_t Size>
+template<uint32_t D, typename T>
 std::ostream&
-operator << (std::ostream& stream, const Vector<T,Size>& vector)
+operator << (std::ostream& stream, const Vector<D,T>& vector)
 {
     stream.setf(std::ios::showpos);
     stream << typeid(vector).name() << "\n{";
     stream << std::fixed;
-    for (uint32_t i = 0; i < Size; ++i)
+    for (uint32_t i = 0; i < D; ++i)
     {
         stream  << "\n    "
                 << std::setw(10)
