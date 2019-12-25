@@ -51,7 +51,7 @@ public: /* Constructors */
      * @param value Value to set all components to.
      */
     explicit
-    Vector(value_type value);
+    Vector(const T& value);
 
     /**
      * Constructor initializing all components.
@@ -87,7 +87,7 @@ public: /* Assignment operator */
      * Assigns all components single value.
      */
     Vector<D,T>&
-    operator=(T scalar);
+    operator=(const T& scalar);
 
     /**
      * Default copy assignment.
@@ -213,7 +213,59 @@ public: /* Arithmetic operators: inplace per-component division */
     operator/=(const Vector<D,T>& vector);
 
 /* ####################################################################################### */
-public: /* Comparison */
+public: /* Comparison with scalar */
+/* ####################################################################################### */
+
+    /**
+     * Checking the components of a vector for equality with a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are equal to scalar, false otherwise.
+     */
+    bool
+    operator==(const T& scalar) const;
+
+    /**
+     * Checking the components of a vector for inequality with a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are not equal to scalar, false otherwise.
+     */
+    bool
+    operator!=(const T& scalar) const;
+
+    /**
+     * Checks if all components of a vector are less than a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are less than scalar, false otherwise.
+     */
+    bool
+    operator<(const T& scalar) const;
+
+    /**
+     * Checks if all components of a vector are greater than a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are greater than scalar, false otherwise.
+     */
+    bool
+    operator>(const T& scalar) const;
+
+    /**
+     * Checks if all components of a vector are less or equal to a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are less or equal to a scalar, false otherwise.
+     */
+    bool
+    operator<=(const T& scalar) const;
+
+    /**
+     * Checks if all components of a vector are greater or equal to a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the vector are greater or equal to a scalar, false otherwise.
+     */
+    bool
+    operator>=(const T& scalar) const;
+
+/* ####################################################################################### */
+public: /* Comparison with other */
 /* ####################################################################################### */
 
     /**
@@ -222,15 +274,7 @@ public: /* Comparison */
      * @return true if the vectors are equal, false otherwise.
      */
     bool
-    operator==(value_type scalar) const;
-
-    /**
-     * Check against another vector for equality.
-     * @param vector The vector to check against.
-     * @return true if the vectors are equal, false otherwise.
-     */
-    bool
-    operator==(const Vector<D,T>& vector) const;
+    operator==(const Vector<D,T>& other) const;
 
     /**
      * Check against another vector for inequality.
@@ -238,15 +282,7 @@ public: /* Comparison */
      * @return true if the vectors are not equal, false otherwise.
      */
     bool
-    operator!=(value_type scalar) const;
-
-    /**
-     * Check against another vector for inequality.
-     * @param vector The vector to check against.
-     * @return true if the vectors are not equal, false otherwise.
-     */
-    bool
-    operator!=(const Vector<D,T>& vector) const;
+    operator!=(const Vector<D,T>& other) const;
 
     /**
      * Compares whether all the components of this vector are smaller than other.
@@ -254,7 +290,7 @@ public: /* Comparison */
      * @return true if this the vector is shorter, false otherwise.
      */
     bool
-    operator<(const Vector<D,T>& vector) const;
+    operator<(const Vector<D,T>& other) const;
 
     /**
      * Compares whether all the components of this vector are larger than other.
@@ -262,7 +298,7 @@ public: /* Comparison */
      * @return true if this the vector is longer, false otherwise.
      */
     bool
-    operator>(const Vector<D,T>& vector) const;
+    operator>(const Vector<D,T>& other) const;
 
     /**
      * Compares whether all the components of this vector are smaller (or equal) than other.
@@ -270,7 +306,7 @@ public: /* Comparison */
      * @return true if this the vector is shorter, false otherwise.
      */
     bool
-    operator<=(const Vector<D,T>& vector) const;
+    operator<=(const Vector<D,T>& other) const;
 
     /**
      * Compares whether all the components of this vector are larger (or equal) than other.
@@ -278,7 +314,7 @@ public: /* Comparison */
      * @return true if this the vector is longer, false otherwise.
      */
     bool
-    operator>=(const Vector<D,T>& vector) const;
+    operator>=(const Vector<D,T>& other) const;
 
 /* ####################################################################################### */
 public: /* Components accessing */
@@ -356,7 +392,7 @@ public: /* Iterators */
 
 
 template<uint32_t D, typename T>
-Vector<D,T>::Vector(T value)
+Vector<D,T>::Vector(const T& value)
 {
     static_assert(D > 1, __FUNCTION__": vector size must be more than 1");
     for (size_type i = 0; i < D; ++i) data[i] = value;
@@ -377,7 +413,7 @@ Vector<D,T>::Vector(std::initializer_list<T> values)
 
 template<uint32_t D, typename T>
 Vector<D,T>&
-Vector<D,T>::operator=(T scalar)
+Vector<D,T>::operator=(const T& scalar)
 {
     for (size_type i = 0; i < D; ++i) data[i] = scalar;
     return *this;
@@ -529,12 +565,12 @@ Vector<D,T>::operator/=(const Vector<D,T>& vector)
 }
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Comparison */
+/* IMPLEMENTATION | Comparison with scalar */
 /* ####################################################################################### */
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator==(T scalar) const
+Vector<D,T>::operator==(const T& scalar) const
 {
     for (size_type i = 0; i < D; ++i) if (notEqual(data[i], scalar)) return false;
     return true;
@@ -544,17 +580,7 @@ Vector<D,T>::operator==(T scalar) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator==(const Vector<D,T>& vector) const
-{
-    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], vector.data[i])) return false;
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<uint32_t D, typename T>
-bool
-Vector<D,T>::operator!=(T scalar) const
+Vector<D,T>::operator!=(const T& scalar) const
 {
     for (size_type i = 0; i < D; ++i) if (notEqual(data[i], scalar)) return true;
     return false;
@@ -564,9 +590,61 @@ Vector<D,T>::operator!=(T scalar) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator!=(const Vector<D,T>& vector) const
+Vector<D,T>::operator<(const T& scalar) const
 {
-    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], vector.data[i])) return true;
+    for (size_type i = 0; i < D; ++i) if (data[i] >= scalar) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t D, typename T>
+bool
+Vector<D,T>::operator>(const T& scalar) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] <= scalar) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t D, typename T>
+bool
+Vector<D,T>::operator<=(const T& scalar) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] > scalar) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t D, typename T>
+bool
+Vector<D,T>::operator>=(const T& scalar) const
+{
+    for (size_type i = 0; i < D; ++i) if (data[i] < scalar) return false;
+    return true;
+}
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Comparison with other */
+/* ####################################################################################### */
+
+template<uint32_t D, typename T>
+bool
+Vector<D,T>::operator==(const Vector<D,T>& other) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], other.data[i])) return false;
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t D, typename T>
+bool
+Vector<D,T>::operator!=(const Vector<D,T>& other) const
+{
+    for (size_type i = 0; i < D; ++i) if (notEqual(data[i], other.data[i])) return true;
     return false;
 }
 
@@ -574,9 +652,9 @@ Vector<D,T>::operator!=(const Vector<D,T>& vector) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator<(const Vector<D,T>& vector) const
+Vector<D,T>::operator<(const Vector<D,T>& other) const
 {
-    for (size_type i = 0; i < D; ++i) if (data[i] >= vector.data[i]) return false;
+    for (size_type i = 0; i < D; ++i) if (data[i] >= other.data[i]) return false;
     return true;
 }
 
@@ -584,9 +662,9 @@ Vector<D,T>::operator<(const Vector<D,T>& vector) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator>(const Vector<D,T>& vector) const
+Vector<D,T>::operator>(const Vector<D,T>& other) const
 {
-    for (size_type i = 0; i < D; ++i) if (data[i] <= vector.data[i]) return false;
+    for (size_type i = 0; i < D; ++i) if (data[i] <= other.data[i]) return false;
     return true;
 }
 
@@ -594,9 +672,9 @@ Vector<D,T>::operator>(const Vector<D,T>& vector) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator<=(const Vector<D,T>& vector) const
+Vector<D,T>::operator<=(const Vector<D,T>& other) const
 {
-    for (size_type i = 0; i < D; ++i) if (data[i] > vector.data[i]) return false;
+    for (size_type i = 0; i < D; ++i) if (data[i] > other.data[i]) return false;
     return true;
 }
 
@@ -604,9 +682,9 @@ Vector<D,T>::operator<=(const Vector<D,T>& vector) const
 
 template<uint32_t D, typename T>
 bool
-Vector<D,T>::operator>=(const Vector<D,T>& vector) const
+Vector<D,T>::operator>=(const Vector<D,T>& other) const
 {
-    for (size_type i = 0; i < D; ++i) if (data[i] < vector.data[i]) return false;
+    for (size_type i = 0; i < D; ++i) if (data[i] < other.data[i]) return false;
     return true;
 }
 

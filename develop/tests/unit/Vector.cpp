@@ -8,6 +8,10 @@
 using namespace std;
 using Vec = Vector<3>;
 
+/* ####################################################################################### */
+/* Assignment operator */
+/* ####################################################################################### */
+
 TEST(Vector, Assignment_Scalar)
 {
     Vec::value_type scalar = 4;
@@ -16,6 +20,8 @@ TEST(Vector, Assignment_Scalar)
 
     for (const auto& val : input) ASSERT_EQ(val, scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, Assignment_Other)
 {
@@ -26,6 +32,10 @@ TEST(Vector, Assignment_Other)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], other[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: unary minus */
+/* ####################################################################################### */
+
 TEST(Vector, UnaryMinus)
 {
     Vec input {1,2,3};
@@ -34,6 +44,10 @@ TEST(Vector, UnaryMinus)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* ####################################################################################### */
+/* Increment and decrement */
+/* ####################################################################################### */
 
 TEST(Vector, PreIncrement)
 {
@@ -44,6 +58,8 @@ TEST(Vector, PreIncrement)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Vector, PostIncrement)
 {
     Vec input {1,2,3};
@@ -52,6 +68,8 @@ TEST(Vector, PostIncrement)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, PreDecrement)
 {
@@ -62,6 +80,8 @@ TEST(Vector, PreDecrement)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Vector, PostDecrement)
 {
     Vec input {1,2,3};
@@ -71,6 +91,10 @@ TEST(Vector, PostDecrement)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: inplace minus */
+/* ####################################################################################### */
+
 TEST(Vector, InplaceMinus_Scalar)
 {
     Vec input {1,2,3};
@@ -79,6 +103,8 @@ TEST(Vector, InplaceMinus_Scalar)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, InplaceMinus_Other)
 {
@@ -90,6 +116,10 @@ TEST(Vector, InplaceMinus_Other)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: inplace plus */
+/* ####################################################################################### */
+
 TEST(Vector, InplacePlus_Scalar)
 {
     Vec input {1,2,3};
@@ -98,6 +128,8 @@ TEST(Vector, InplacePlus_Scalar)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, InplacePlus_Other)
 {
@@ -109,6 +141,10 @@ TEST(Vector, InplacePlus_Other)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: inplace per-component multiplication */
+/* ####################################################################################### */
+
 TEST(Vector, InplacePerComponentMultiplication_Scalar)
 {
     Vec input {1,2,3};
@@ -117,6 +153,8 @@ TEST(Vector, InplacePerComponentMultiplication_Scalar)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, InplacePerComponentMultiplication_Other)
 {
@@ -128,6 +166,10 @@ TEST(Vector, InplacePerComponentMultiplication_Other)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: inplace per-component division */
+/* ####################################################################################### */
+
 TEST(Vector, InplaceDivision_Scalar)
 {
     Vec input {4,6,10};
@@ -136,6 +178,8 @@ TEST(Vector, InplaceDivision_Scalar)
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector, InplaceDivision_Other)
 {
@@ -147,7 +191,132 @@ TEST(Vector, InplaceDivision_Other)
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
-TEST(Vector, Compares_Equal_Other_PositiveTest)
+/* ####################################################################################### */
+/* Comparison with scalar */
+/* ####################################################################################### */
+
+TEST(Vector, CompareWithScalar_Equal_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar};
+    ASSERT_TRUE(input == scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_Equal_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, 1};
+
+    ASSERT_FALSE(input == scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_NotEqual_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, 1};
+
+    ASSERT_TRUE(input != scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_NotEqual_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar};
+
+    ASSERT_FALSE(input != scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_Less_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {1, 1, 1};
+
+    ASSERT_TRUE(input < scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_Less_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar+1, scalar+1, scalar+1};
+
+    ASSERT_FALSE(input < scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_LessThan_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar};
+
+    ASSERT_TRUE(input <= scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_LessThan_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar + 1};
+
+    ASSERT_FALSE(input <= scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_Greater_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar+1, scalar+1, scalar+1};
+
+    ASSERT_TRUE(input > scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_Greater_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar-1, scalar-1, scalar-1};
+
+    ASSERT_FALSE(input > scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_GreaterOrEqual_PositiveTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar+1};
+
+    ASSERT_TRUE(input >= scalar);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithScalar_GreaterOrEqual_NegativeTest)
+{
+    Vec::value_type scalar {2};
+    Vec input {scalar, scalar, scalar-1};
+
+    ASSERT_FALSE(input >= scalar);
+}
+
+/* ####################################################################################### */
+/* Comparison with other */
+/* ####################################################################################### */
+
+TEST(Vector, CompareWithOther_Equal_PositiveTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,3};
@@ -155,7 +324,9 @@ TEST(Vector, Compares_Equal_Other_PositiveTest)
     ASSERT_TRUE(input == other);
 }
 
-TEST(Vector, Compares_Equal_Other_NegativeTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_Equal_NegativeTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,4};
@@ -163,7 +334,9 @@ TEST(Vector, Compares_Equal_Other_NegativeTest)
     ASSERT_FALSE(input == other);
 }
 
-TEST(Vector, Compares_NotEqual_Other_PositiveTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_NotEqual_PositiveTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,4};
@@ -171,7 +344,9 @@ TEST(Vector, Compares_NotEqual_Other_PositiveTest)
     ASSERT_TRUE(input != other);
 }
 
-TEST(Vector, Compares_NotEqual_Other_NegativeTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_NotEqual_NegativeTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,3};
@@ -179,39 +354,9 @@ TEST(Vector, Compares_NotEqual_Other_NegativeTest)
     ASSERT_FALSE(input != other);
 }
 
-TEST(Vector, Compares_Greater_Other_PositiveTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,2,3};
+/* --------------------------------------------------------------------------------------- */
 
-    ASSERT_TRUE(input > other);
-}
-
-TEST(Vector, Compares_Greater_Other_NegativeTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,2,3};
-
-    ASSERT_FALSE(other > input);
-}
-
-TEST(Vector, Compares_GreaterOrEqual_Other_PositiveTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,3,4};
-
-    ASSERT_TRUE(input >= other);
-}
-
-TEST(Vector, Compares_GreaterOrEqual_Other_NegativeTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,3,4};
-
-    ASSERT_FALSE(other >= input);
-}
-
-TEST(Vector, Compares_Less_Other_PositiveTest)
+TEST(Vector, CompareWithOther_Less_PositiveTest)
 {
     Vec input {1,2,3};
     Vec other {2,3,4};
@@ -219,7 +364,9 @@ TEST(Vector, Compares_Less_Other_PositiveTest)
     ASSERT_TRUE(input < other);
 }
 
-TEST(Vector, Compares_Less_Other_NegativeTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_Less_NegativeTest)
 {
     Vec input {1,2,3};
     Vec other {1,3,4};
@@ -227,7 +374,9 @@ TEST(Vector, Compares_Less_Other_NegativeTest)
     ASSERT_FALSE(other < input);
 }
 
-TEST(Vector, Compares_LessOrEqual_Other_PositiveTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_LessThan_PositiveTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,4};
@@ -235,7 +384,9 @@ TEST(Vector, Compares_LessOrEqual_Other_PositiveTest)
     ASSERT_TRUE(input <= other);
 }
 
-TEST(Vector, Compares_LessOrEqual_Other_NegativeTest)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector, CompareWithOther_LessThan_NegativeTest)
 {
     Vec input {1,2,3};
     Vec other {1,2,4};
@@ -243,34 +394,42 @@ TEST(Vector, Compares_LessOrEqual_Other_NegativeTest)
     ASSERT_FALSE(other <= input);
 }
 
-TEST(Vector, Compares_Equal_Scalar_PositiveTest)
-{
-    Vec::value_type scalar = 3;
-    Vec input(scalar);
+/* --------------------------------------------------------------------------------------- */
 
-    ASSERT_TRUE(input == scalar);
+TEST(Vector, CompareWithOther_Greater_PositiveTest)
+{
+    Vec input {2,3,4};
+    Vec other {1,2,3};
+
+    ASSERT_TRUE(input > other);
 }
 
-TEST(Vector, Compares_Equal_Scalar_NegativeTest)
-{
-    Vec::value_type scalar = 3;
-    Vec input(scalar);
+/* --------------------------------------------------------------------------------------- */
 
-    ASSERT_FALSE(input == scalar-1);
+TEST(Vector, CompareWithOther_Greater_NegativeTest)
+{
+    Vec input {2,3,4};
+    Vec other {1,2,3};
+
+    ASSERT_FALSE(other > input);
 }
 
-TEST(Vector, Compares_NotEqual_Scalar_PositiveTest)
-{
-    Vec::value_type scalar = 3;
-    Vec input(scalar*2);
+/* --------------------------------------------------------------------------------------- */
 
-    ASSERT_TRUE(input != scalar);
+TEST(Vector, CompareWithOther_GreaterOrEqual_PositiveTest)
+{
+    Vec input {2,3,4};
+    Vec other {1,3,4};
+
+    ASSERT_TRUE(input >= other);
 }
 
-TEST(Vector, Compares_NotEqual_Scalar_NegativeTest)
-{
-    Vec::value_type scalar = 3;
-    Vec input(scalar);
+/* --------------------------------------------------------------------------------------- */
 
-    ASSERT_FALSE(input != scalar);
+TEST(Vector, CompareWithOther_GreaterOrEqual_NegativeTest)
+{
+    Vec input {2,3,4};
+    Vec other {1,3,4};
+
+    ASSERT_FALSE(other >= input);
 }
