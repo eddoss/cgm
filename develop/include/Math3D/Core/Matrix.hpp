@@ -271,7 +271,59 @@ public: /* Arithmetic operators: division */
     operator/=(T scalar);
 
 /* ####################################################################################### */
-public: /* Comparison */
+public: /* Comparison with scalar */
+/* ####################################################################################### */
+
+    /**
+     * Checking the components of a matrix for equality with a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are equal to scalar, false otherwise.
+     */
+    bool
+    operator==(const T& scalar) const;
+
+    /**
+     * Checking the components of a matrix for inequality with a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are not equal to scalar, false otherwise.
+     */
+    bool
+    operator!=(const T& scalar) const;
+
+    /**
+     * Checks if all components of a matrix are less than a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are less than scalar, false otherwise.
+     */
+    bool
+    operator<(const T& scalar) const;
+
+    /**
+     * Checks if all components of a matrix are greater than a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are greater than scalar, false otherwise.
+     */
+    bool
+    operator>(const T& scalar) const;
+
+    /**
+     * Checks if all components of a matrix are less or equal to a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are less or equal to a scalar, false otherwise.
+     */
+    bool
+    operator<=(const T& scalar) const;
+
+    /**
+     * Checks if all components of a matrix are greater or equal to a scalar.
+     * @param scalar Scalar value to compare with.
+     * @return true if components of the matrix are greater or equal to a scalar, false otherwise.
+     */
+    bool
+    operator>=(const T& scalar) const;
+
+/* ####################################################################################### */
+public: /* Comparison with other */
 /* ####################################################################################### */
 
     /**
@@ -783,7 +835,105 @@ Matrix<M,N,T>::operator/=(T scalar)
 }
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Comparison */
+/* IMPLEMENTATION | Comparison with scalar */
+/* ####################################################################################### */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator==(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (notEqual(data[c][r], scalar)) return false;
+        }
+    }
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator!=(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (notEqual(data[c][r], scalar)) return true;
+        }
+    }
+    return false;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator<(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (data[c][r] >= scalar) return false;
+        }
+    }
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator>(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (data[c][r] <= scalar) return false;
+        }
+    }
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator<=(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (data[c][r] > scalar) return false;
+        }
+    }
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+bool
+Matrix<M,N,T>::operator>=(const T& scalar) const
+{
+    for (uint32_t c = 0; c < N; ++c)
+    {
+        for (uint32_t r = 0; r < M; ++r)
+        {
+            if (data[c][r] < scalar) return false;
+        }
+    }
+    return true;
+}
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Comparison with other */
 /* ####################################################################################### */
 
 template<uint32_t M, uint32_t N, typename T>

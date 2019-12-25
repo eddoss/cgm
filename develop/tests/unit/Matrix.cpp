@@ -8,6 +8,10 @@
 using namespace std;
 using Mat = Matrix<2,2>;
 
+/* ####################################################################################### */
+/* Assignment operator */
+/* ####################################################################################### */
+
 TEST(Matrix, Assignment_Scalar)
 {
     Mat input
@@ -38,6 +42,10 @@ TEST(Matrix, Assignment_Other)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], other[i]);
 }
 
+/* ####################################################################################### */
+/* Unary minus */
+/* ####################################################################################### */
+
 TEST(Matrix, UnaryMinus)
 {
     Mat input
@@ -54,6 +62,10 @@ TEST(Matrix, UnaryMinus)
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* ####################################################################################### */
+/* Increment and decrement */
+/* ####################################################################################### */
 
 TEST(Matrix, PreIncrement)
 {
@@ -123,6 +135,10 @@ TEST(Matrix, PostDecrement)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* ####################################################################################### */
+/* Arithmetic operators: minus */
+/* ####################################################################################### */
+
 TEST(Matrix, InplaceMinus_Scalar)
 {
     Mat input
@@ -161,6 +177,10 @@ TEST(Matrix, InplaceMinus_Other)
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* ####################################################################################### */
+/* Arithmetic operators: binary plus */
+/* ####################################################################################### */
 
 TEST(Matrix, InplacePlus_Scalar)
 {
@@ -201,7 +221,11 @@ TEST(Matrix, InplacePlus_Other)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
-TEST(Matrix, InplacePerComponentMultiplication_Scalar)
+/* ####################################################################################### */
+/* Arithmetic operators: multiplication */
+/* ####################################################################################### */
+
+TEST(Matrix, InplacePerComponentMultiplication_On_Scalar)
 {
     Mat input
     {
@@ -218,7 +242,28 @@ TEST(Matrix, InplacePerComponentMultiplication_Scalar)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
-TEST(Matrix, InplacePerComponentDivision_Scalar)
+TEST(Matrix, OutplacePerComponentMultiplication_On_Scalar)
+{
+    Mat input
+    {
+        1,2,
+        3,4
+    };
+    Mat expec
+    {
+        2,4,
+        6,8
+    };
+    input = input * 2;
+
+    for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
+}
+
+/* ####################################################################################### */
+/* Arithmetic operators: division */
+/* ####################################################################################### */
+
+TEST(Matrix, InplacePerComponentDivision_By_Scalar)
 {
     Mat input
     {
@@ -235,7 +280,176 @@ TEST(Matrix, InplacePerComponentDivision_Scalar)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
-TEST(Matrix, Compares_Equal_Other_PositiveTest)
+TEST(Matrix, OutplacePerComponentDivision_By_Scalar)
+{
+    Mat input
+    {
+        2,4,
+        6,8
+    };
+    Mat expec
+    {
+        1,2,
+        3,4
+    };
+    input = input / 2;
+
+    for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
+}
+
+/* ####################################################################################### */
+/* Comparison with scalar */
+/* ####################################################################################### */
+
+TEST(Matrix, ComparesWithScalar_Equal_PositiveTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar
+    };
+
+    ASSERT_TRUE(input == scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_Equal_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar + 2
+    };
+
+    ASSERT_FALSE(input == scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_NotEqual_PositiveTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar + 1
+    };
+
+    ASSERT_TRUE(input != scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_NotEqual_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar
+    };
+
+    ASSERT_FALSE(input != scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_Less_PositiveTest)
+{
+Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar-1, scalar-1,
+        scalar-1, scalar-1
+    };
+
+    ASSERT_TRUE(input < scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_Less_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar
+    };
+
+    ASSERT_FALSE(input < scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_LessOrEqual_PositiveTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar-1
+    };
+
+    ASSERT_TRUE(input <= scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_LessOrEqual_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar+1
+    };
+
+    ASSERT_FALSE(input <= scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_Greater_PositiveTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar+1, scalar+1,
+        scalar+1, scalar+1
+    };
+
+    ASSERT_TRUE(input > scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_Greater_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar
+    };
+
+    ASSERT_FALSE(input > scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_GreaterOrEqual_PositiveTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, scalar+1
+    };
+
+    ASSERT_TRUE(input >= scalar);
+}
+
+TEST(Matrix, ComparesWithScalar_GreaterOrEqual_NegativeTest)
+{
+    Mat::value_type scalar {5};
+    Mat input
+    {
+        scalar, scalar,
+        scalar, 0
+    };
+
+    ASSERT_FALSE(input >= scalar);
+}
+
+/* ####################################################################################### */
+/* Comparison with other */
+/* ####################################################################################### */
+
+TEST(Matrix, ComparesWithOther_Equal_PositiveTest)
 {
     Mat input
     {
@@ -251,7 +465,7 @@ TEST(Matrix, Compares_Equal_Other_PositiveTest)
     ASSERT_TRUE(input == other);
 }
 
-TEST(Matrix, Compares_Equal_Other_NegativeTest)
+TEST(Matrix, ComparesWithOther_Equal_NegativeTest)
 {
     Mat input
     {
@@ -267,7 +481,7 @@ TEST(Matrix, Compares_Equal_Other_NegativeTest)
     ASSERT_FALSE(input == other);
 }
 
-TEST(Matrix, Compares_NotEqual_Other_PositiveTest)
+TEST(Matrix, ComparesWithOther_NotEqual_PositiveTest)
 {
     Mat input
     {
@@ -283,7 +497,7 @@ TEST(Matrix, Compares_NotEqual_Other_PositiveTest)
     ASSERT_TRUE(input != other);
 }
 
-TEST(Matrix, Compares_NotEqual_Other_NegativeTest)
+TEST(Matrix, ComparesWithOther_NotEqual_NegativeTest)
 {
     Mat input
     {
@@ -299,71 +513,7 @@ TEST(Matrix, Compares_NotEqual_Other_NegativeTest)
     ASSERT_FALSE(input != other);
 }
 
-TEST(Matrix, Compares_Greater_Other_PositiveTest)
-{
-    Mat input
-    {
-        2,3,
-        4,5
-    };
-    Mat other
-    {
-        1,2,
-        3,4
-    };
-
-    ASSERT_TRUE(input > other);
-}
-
-TEST(Matrix, Compares_Greater_Other_NegativeTest)
-{
-    Mat input
-    {
-        1,3,
-        4,5
-    };
-    Mat other
-    {
-        1,2,
-        3,4
-    };
-
-    ASSERT_FALSE(other > input);
-}
-
-TEST(Matrix, Compares_GreaterOrEqual_Other_PositiveTest)
-{
-    Mat input
-    {
-        1,3,
-        4,5
-    };
-    Mat other
-    {
-        1,2,
-        3,4
-    };
-
-    ASSERT_TRUE(input >= other);
-}
-
-TEST(Matrix, Compares_GreaterOrEqual_Other_NegativeTest)
-{
-    Mat input
-    {
-        0,3,
-        4,5
-    };
-    Mat other
-    {
-        1,2,
-        3,4
-    };
-
-    ASSERT_FALSE(other >= input);
-}
-
-TEST(Matrix, Compares_Less_Other_PositiveTest)
+TEST(Matrix, ComparesWithOther_Less_PositiveTest)
 {
     Mat input
     {
@@ -379,7 +529,7 @@ TEST(Matrix, Compares_Less_Other_PositiveTest)
     ASSERT_TRUE(input < other);
 }
 
-TEST(Matrix, Compares_Less_Other_NegativeTest)
+TEST(Matrix, ComparesWithOther_Less_NegativeTest)
 {
     Mat input
     {
@@ -395,7 +545,7 @@ TEST(Matrix, Compares_Less_Other_NegativeTest)
     ASSERT_FALSE(other < input);
 }
 
-TEST(Matrix, Compares_LessOrEqual_Other_PositiveTest)
+TEST(Matrix, ComparesWithOther_LessOrEqual_PositiveTest)
 {
     Mat input
     {
@@ -411,7 +561,7 @@ TEST(Matrix, Compares_LessOrEqual_Other_PositiveTest)
     ASSERT_TRUE(input <= other);
 }
 
-TEST(Matrix, Compares_LessOrEqual_Other_NegativeTest)
+TEST(Matrix, ComparesWithOther_LessOrEqual_NegativeTest)
 {
     Mat input
     {
@@ -425,4 +575,68 @@ TEST(Matrix, Compares_LessOrEqual_Other_NegativeTest)
     };
 
     ASSERT_FALSE(other <= input);
+}
+
+TEST(Matrix, ComparesWithOther_Greater_PositiveTest)
+{
+    Mat input
+    {
+        2,3,
+        4,5
+    };
+    Mat other
+    {
+        1,2,
+        3,4
+    };
+
+    ASSERT_TRUE(input > other);
+}
+
+TEST(Matrix, ComparesWithOther_Greater_NegativeTest)
+{
+    Mat input
+    {
+        1,3,
+        4,5
+    };
+    Mat other
+    {
+        1,2,
+        3,4
+    };
+
+    ASSERT_FALSE(other > input);
+}
+
+TEST(Matrix, ComparesWithOther_GreaterOrEqual_PositiveTest)
+{
+    Mat input
+    {
+        1,3,
+        4,5
+    };
+    Mat other
+    {
+        1,2,
+        3,4
+    };
+
+    ASSERT_TRUE(input >= other);
+}
+
+TEST(Matrix, ComparesWithOther_GreaterOrEqual_NegativeTest)
+{
+    Mat input
+    {
+        0,3,
+        4,5
+    };
+    Mat other
+    {
+        1,2,
+        3,4
+    };
+
+    ASSERT_FALSE(other >= input);
 }
