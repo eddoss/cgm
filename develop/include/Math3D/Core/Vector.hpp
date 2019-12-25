@@ -343,37 +343,6 @@ public: /* Iterators */
      */
     const_iterator
     cend() const;
-
-/* ####################################################################################### */
-public: /* Simple functions */
-/* ####################################################################################### */
-
-    /**
-     * Get a copy of the vector as sign only.
-     * Each component is set to +1 or -1.
-     * @param zeroValues How to represent zero values (it can be any number).
-     */
-    Vector<D,T>
-    signs(value_type zeroValues) const;
-
-    /**
-     * Make all components values positive.
-     */
-    void
-    makePositive();
-
-    /**
-     * Make all components values negative.
-     */
-    void
-    makeNegative();
-
-    /**
-     * Utility to check if there are any non-finite values (NaN or Inf).
-     * @return true if there are any non-finite values, false otherwise.
-     */
-    bool
-    containsNaN() const;
 };
 
 
@@ -705,55 +674,6 @@ typename Vector<D,T>::const_iterator
 Vector<D,T>::cend() const
 {
     return const_iterator {data+D};
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Simple functions */
-/* ####################################################################################### */
-
-template<uint32_t D, typename T>
-Vector<D,T>
-Vector<D,T>::signs(T zeroValues) const
-{
-    Vector<D,T> result;
-    for (size_type i = 0; i < D; ++i)
-    {
-        if (data[i] > 0)
-            result.data[i] = 1;
-        else if (data[i] < 0)
-            result.data[i] = -1;
-        else
-            result.data[i] = zeroValues;
-    }
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<uint32_t D, typename T>
-void
-Vector<D,T>::makePositive()
-{
-    for (size_type i = 1; i < D; ++i) data[i] = std::abs(data[i]);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<uint32_t D, typename T>
-void
-Vector<D,T>::makeNegative()
-{
-    for (size_type i = 1; i < D; ++i) data[i] = -std::abs(data[i]);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<uint32_t D, typename T>
-bool
-Vector<D,T>::containsNaN() const
-{
-    for (size_type i = 1; i < D; ++i) if (std::isnan(data[i])) return true;
-    return false;
 }
 
 #endif // MATH3D_VECTOR_HPP

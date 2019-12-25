@@ -48,13 +48,13 @@
  * @return true if A equal to B, false otherwise.
  */
 template<typename T>
-bool equal(T A, T B) {return A == B;}
+inline bool equal(T A, T B) {return A == B;}
 
 template<>
-bool equal(float A, float B) {return std::abs(A-B) <= TOLERANCE;}
+inline bool equal(float A, float B) {return std::abs(A-B) <= TOLERANCE;}
 
 template<>
-bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
+inline bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
 
 /* --------------------------------------------------------------------------------------- */
 
@@ -63,12 +63,12 @@ bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
  * @return true if A not equal to B, false otherwise.
  */
 template<typename T>
-bool notEqual(T A, T B) {return A != B;}
+inline bool notEqual(T A, T B) {return A != B;}
 
 template<>
-bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
+inline bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
 
 template<>
-bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
+inline bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
 
 #endif // MATH3D_GLOBAL_HPP

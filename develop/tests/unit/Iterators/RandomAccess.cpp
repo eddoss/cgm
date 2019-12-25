@@ -1,13 +1,10 @@
 
 
-#ifndef MATH3D_VECTOR_TEST_HPP
-#define MATH3D_VECTOR_TEST_HPP
-
-
 #include <iostream>
 #include <algorithm>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Iterators/RandomAccess.hpp>
+
 
 using namespace std;
 
@@ -164,5 +161,3 @@ TEST(Iterators_RandomAccess, STL_Max_Element)
     auto it = std::max_element(input.begin(), input.end());
     ASSERT_EQ(*it, 33);
 }
-
-#endif // MATH3D_VECTOR_TEST_HPP

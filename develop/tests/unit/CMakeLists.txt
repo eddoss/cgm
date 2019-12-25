@@ -14,6 +14,7 @@ project(UnitTests
 set(TESTS_LIST
     run.cpp
     Vector.cpp
+    Matrix.cpp
     Iterators/RandomAccess.cpp)
 
 # ####################################################################################### #

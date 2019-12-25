@@ -36,6 +36,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(Math3D_PUBLIC_HEADERS
     develop/include/${PROJECT_NAME}/Core/Iterators/RandomAccess.hpp
     develop/include/${PROJECT_NAME}/Core/Vector.hpp
+    develop/include/${PROJECT_NAME}/Core/Matrix.hpp
     develop/include/${PROJECT_NAME}/Global.hpp
     develop/include/${PROJECT_NAME}/IO.hpp)
 

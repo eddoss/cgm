@@ -1,9 +1,5 @@
 
 
-#ifndef MATH3D_VECTOR_TEST_HPP
-#define MATH3D_VECTOR_TEST_HPP
-
-
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Vector.hpp>
@@ -278,5 +274,3 @@ TEST(Vector, Compares_NotEqual_Scalar_NegativeTest)
 
     ASSERT_FALSE(input != scalar);
 }
-
-#endif // MATH3D_VECTOR_TEST_HPP
