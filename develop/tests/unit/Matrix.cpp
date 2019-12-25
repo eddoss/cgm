@@ -25,6 +25,8 @@ TEST(Matrix, Assignment_Scalar)
     for (const auto& val : input) ASSERT_EQ(val, scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, Assignment_Other)
 {
     Mat input
@@ -84,6 +86,8 @@ TEST(Matrix, PreIncrement)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, PostIncrement)
 {
     Mat input
@@ -101,6 +105,8 @@ TEST(Matrix, PostIncrement)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, PreDecrement)
 {
     Mat input
@@ -117,6 +123,8 @@ TEST(Matrix, PreDecrement)
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, PostDecrement)
 {
@@ -155,6 +163,8 @@ TEST(Matrix, InplaceMinus_Scalar)
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, InplaceMinus_Other)
 {
@@ -199,6 +209,8 @@ TEST(Matrix, InplacePlus_Scalar)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, InplacePlus_Other)
 {
     Mat input
@@ -242,6 +254,8 @@ TEST(Matrix, InplacePerComponentMultiplication_On_Scalar)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, OutplacePerComponentMultiplication_On_Scalar)
 {
     Mat input
@@ -280,6 +294,8 @@ TEST(Matrix, InplacePerComponentDivision_By_Scalar)
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, OutplacePerComponentDivision_By_Scalar)
 {
     Mat input
@@ -313,6 +329,8 @@ TEST(Matrix, ComparesWithScalar_Equal_PositiveTest)
     ASSERT_TRUE(input == scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_Equal_NegativeTest)
 {
     Mat::value_type scalar {5};
@@ -324,6 +342,8 @@ TEST(Matrix, ComparesWithScalar_Equal_NegativeTest)
 
     ASSERT_FALSE(input == scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithScalar_NotEqual_PositiveTest)
 {
@@ -337,6 +357,8 @@ TEST(Matrix, ComparesWithScalar_NotEqual_PositiveTest)
     ASSERT_TRUE(input != scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_NotEqual_NegativeTest)
 {
     Mat::value_type scalar {5};
@@ -348,6 +370,8 @@ TEST(Matrix, ComparesWithScalar_NotEqual_NegativeTest)
 
     ASSERT_FALSE(input != scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithScalar_Less_PositiveTest)
 {
@@ -361,6 +385,8 @@ Mat::value_type scalar {5};
     ASSERT_TRUE(input < scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_Less_NegativeTest)
 {
     Mat::value_type scalar {5};
@@ -372,6 +398,8 @@ TEST(Matrix, ComparesWithScalar_Less_NegativeTest)
 
     ASSERT_FALSE(input < scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithScalar_LessOrEqual_PositiveTest)
 {
@@ -385,6 +413,8 @@ TEST(Matrix, ComparesWithScalar_LessOrEqual_PositiveTest)
     ASSERT_TRUE(input <= scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_LessOrEqual_NegativeTest)
 {
     Mat::value_type scalar {5};
@@ -396,6 +426,8 @@ TEST(Matrix, ComparesWithScalar_LessOrEqual_NegativeTest)
 
     ASSERT_FALSE(input <= scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithScalar_Greater_PositiveTest)
 {
@@ -409,6 +441,8 @@ TEST(Matrix, ComparesWithScalar_Greater_PositiveTest)
     ASSERT_TRUE(input > scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_Greater_NegativeTest)
 {
     Mat::value_type scalar {5};
@@ -421,6 +455,8 @@ TEST(Matrix, ComparesWithScalar_Greater_NegativeTest)
     ASSERT_FALSE(input > scalar);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithScalar_GreaterOrEqual_PositiveTest)
 {
     Mat::value_type scalar {5};
@@ -432,6 +468,8 @@ TEST(Matrix, ComparesWithScalar_GreaterOrEqual_PositiveTest)
 
     ASSERT_TRUE(input >= scalar);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithScalar_GreaterOrEqual_NegativeTest)
 {
@@ -465,6 +503,8 @@ TEST(Matrix, ComparesWithOther_Equal_PositiveTest)
     ASSERT_TRUE(input == other);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_Equal_NegativeTest)
 {
     Mat input
@@ -480,6 +520,8 @@ TEST(Matrix, ComparesWithOther_Equal_NegativeTest)
 
     ASSERT_FALSE(input == other);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithOther_NotEqual_PositiveTest)
 {
@@ -497,6 +539,8 @@ TEST(Matrix, ComparesWithOther_NotEqual_PositiveTest)
     ASSERT_TRUE(input != other);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_NotEqual_NegativeTest)
 {
     Mat input
@@ -512,6 +556,8 @@ TEST(Matrix, ComparesWithOther_NotEqual_NegativeTest)
 
     ASSERT_FALSE(input != other);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithOther_Less_PositiveTest)
 {
@@ -529,6 +575,8 @@ TEST(Matrix, ComparesWithOther_Less_PositiveTest)
     ASSERT_TRUE(input < other);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_Less_NegativeTest)
 {
     Mat input
@@ -544,6 +592,8 @@ TEST(Matrix, ComparesWithOther_Less_NegativeTest)
 
     ASSERT_FALSE(other < input);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithOther_LessOrEqual_PositiveTest)
 {
@@ -561,6 +611,8 @@ TEST(Matrix, ComparesWithOther_LessOrEqual_PositiveTest)
     ASSERT_TRUE(input <= other);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_LessOrEqual_NegativeTest)
 {
     Mat input
@@ -576,6 +628,8 @@ TEST(Matrix, ComparesWithOther_LessOrEqual_NegativeTest)
 
     ASSERT_FALSE(other <= input);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithOther_Greater_PositiveTest)
 {
@@ -593,6 +647,8 @@ TEST(Matrix, ComparesWithOther_Greater_PositiveTest)
     ASSERT_TRUE(input > other);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_Greater_NegativeTest)
 {
     Mat input
@@ -609,6 +665,8 @@ TEST(Matrix, ComparesWithOther_Greater_NegativeTest)
     ASSERT_FALSE(other > input);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix, ComparesWithOther_GreaterOrEqual_PositiveTest)
 {
     Mat input
@@ -624,6 +682,8 @@ TEST(Matrix, ComparesWithOther_GreaterOrEqual_PositiveTest)
 
     ASSERT_TRUE(input >= other);
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix, ComparesWithOther_GreaterOrEqual_NegativeTest)
 {
