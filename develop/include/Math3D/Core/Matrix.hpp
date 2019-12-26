@@ -4,6 +4,7 @@
 
 
 #include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Iterators/MatrixColumnIterator.hpp>
 
 
 /**
@@ -31,15 +32,17 @@ public: /* Typedefs */
 public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-    using iterator          = RandomAccessIterator<T>;
-    using const_iterator    = ConstRandomAccessIterator<T>;
+    using iterator              = RandomAccessIterator<T>;
+    using const_iterator        = ConstRandomAccessIterator<T>;
+    using ColumnIterator        = MatrixColumnIterator<M,N,T>;
+    using ConstColumnIterator   = ConstMatrixColumnIterator<M,N,T>;
 
 /* ####################################################################################### */
 public: /* Row and column typedefs */
 /* ####################################################################################### */
 
-    using Row       = Vector<M,T>;
-    using Column    = Vector<N,T>;
+    using Row       = Vector<N,T>;
+    using Column    = Vector<M,T>;
 
 /* ####################################################################################### */
 public: /* Statics */
@@ -457,6 +460,35 @@ public: /* Iterators */
      */
     const_iterator
     cend() const;
+
+    /**
+     * Get column begin iterator.
+     * @return column first component iterator.
+     */
+    ColumnIterator
+    column_begin(size_type column);
+
+    /**
+     * Get column end iterator.
+     * @return last+1 column component iterator.
+     */
+    ColumnIterator
+    column_end(size_type column);
+
+    /**
+     * Get column const begin iterator.
+     * @return column first component const iterator.
+     */
+    ConstColumnIterator
+    column_cbegin(size_type column);
+
+    /**
+     * Get column const end iterator.
+     * @return last+1 column component const iterator.
+     */
+    ConstColumnIterator
+    column_cend(size_type column);
+
 };
 
 
@@ -1079,12 +1111,16 @@ Matrix<M,N,T>::begin()
     return iterator {&data[0][0]};
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 template<uint32_t M, uint32_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::end()
 {
     return iterator {&data[0][0]+M*N};
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 template<uint32_t M, uint32_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
@@ -1093,12 +1129,16 @@ Matrix<M,N,T>::begin() const
     return const_iterator {&data[0][0]};
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 template<uint32_t M, uint32_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::end() const
 {
     return const_iterator {&data[0][0] + M*N};
 }
+
+/* --------------------------------------------------------------------------------------- */
 
 template<uint32_t M, uint32_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
@@ -1107,11 +1147,49 @@ Matrix<M,N,T>::cbegin() const
     return const_iterator {&data[0][0]};
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 template<uint32_t M, uint32_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cend() const
 {
     return const_iterator {&data[0][0] + M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+typename Matrix<M,N,T>::ColumnIterator
+Matrix<M,N,T>::column_begin(size_type column)
+{
+    return ColumnIterator(&data[0][0], column, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+typename Matrix<M,N,T>::ColumnIterator
+Matrix<M,N,T>::column_end(size_type column)
+{
+    return ColumnIterator(&data[0][0], column, M);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+typename Matrix<M,N,T>::ConstColumnIterator
+Matrix<M,N,T>::column_cbegin(size_type column)
+{
+    return ConstColumnIterator(&data[0][0], column, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<uint32_t M, uint32_t N, typename T>
+typename Matrix<M,N,T>::ConstColumnIterator
+Matrix<M,N,T>::column_cend(size_type column)
+{
+    return ConstColumnIterator(&data[0][0], column, M);
 }
 
 #endif // MATH3D_MATRIX_HPP
