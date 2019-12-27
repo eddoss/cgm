@@ -161,3 +161,13 @@ TEST(Iterators_RandomAccess, STL_Max_Element)
     auto it = std::max_element(input.begin(), input.end());
     ASSERT_EQ(*it, 33);
 }
+
+TEST(Iterators_RandomAccess, STL_IterSwap)
+{
+    container<int,5> input {11, 22, 33, 5, 20};
+    auto it_0 = input.begin();
+    auto it_2 = input.begin() + 2;
+    std::iter_swap(it_0, it_2);
+    ASSERT_EQ(*it_0, 33);
+    ASSERT_EQ(*it_2, 11);
+}
