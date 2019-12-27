@@ -231,7 +231,7 @@ public: /* Constructors */
 
     constexpr
     RandomAccessIterator(pointer dataPtr, size_t offset=0)
-        : base_type(dataPtr + offset)
+        : base_type(dataPtr, offset)
     {
 
     }
