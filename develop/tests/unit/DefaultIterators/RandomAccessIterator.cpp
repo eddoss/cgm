@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Iterators/RandomAccess.hpp>
+#include <Math3D/Core/Iterators/RandomAccessIterator.hpp>
 
 
 using namespace std;
@@ -40,7 +40,9 @@ struct container
     const_iterator  cend()      const   {return const_iterator(data+Size);}
 };
 
-TEST(Iterators_RandomAccess, Compares_Equal)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, Equal)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -49,7 +51,9 @@ TEST(Iterators_RandomAccess, Compares_Equal)
     ASSERT_EQ(*i, *j);
 }
 
-TEST(Iterators_RandomAccess, Compares_NotEqual)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, NotEqual)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -58,7 +62,9 @@ TEST(Iterators_RandomAccess, Compares_NotEqual)
     ASSERT_NE(*i, *j);
 }
 
-TEST(Iterators_RandomAccess, Compares_Greater)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, Greater)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -67,7 +73,9 @@ TEST(Iterators_RandomAccess, Compares_Greater)
     ASSERT_TRUE(j > i);
 }
 
-TEST(Iterators_RandomAccess, Compares_GreaterOrEqual)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, GreaterOrEqual)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -76,7 +84,9 @@ TEST(Iterators_RandomAccess, Compares_GreaterOrEqual)
     ASSERT_TRUE(j >= i);
 }
 
-TEST(Iterators_RandomAccess, Compares_Less)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, Less)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -85,7 +95,9 @@ TEST(Iterators_RandomAccess, Compares_Less)
     ASSERT_TRUE(i < j);
 }
 
-TEST(Iterators_RandomAccess, Compares_LessOrEqual)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Comparison, LessOrEqual)
 {
     container<int,3> input {22, 33, 44};
     container<int,3>::iterator i {input.begin() + 1};
@@ -94,7 +106,21 @@ TEST(Iterators_RandomAccess, Compares_LessOrEqual)
     ASSERT_TRUE(i <= j);
 }
 
-TEST(Iterators_RandomAccess, RangeBasedForLoop)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Base, Difference)
+{
+    container<int,5> input {11, 22, 33, 44, 55};
+    auto it_0 = input.cbegin();
+    auto it_3 = input.cbegin() + 3;
+    auto diff {it_3 - it_0};
+
+    ASSERT_EQ(diff, 3);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Base, RangeBasedForLoop)
 {
     const container<int,3> input {22, 33, 44};
     const container<int,3> expec {22, 33, 44};
@@ -111,7 +137,9 @@ TEST(Iterators_RandomAccess, RangeBasedForLoop)
     }
 }
 
-TEST(Iterators_RandomAccess, ConstIterators_Based_ForLoop)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Base, ConstIterators_Based_ForLoop)
 {
     const container<int,3> input {22, 33, 44};
     const container<int,3> expec {22, 33, 44};
@@ -125,7 +153,9 @@ TEST(Iterators_RandomAccess, ConstIterators_Based_ForLoop)
     }
 }
 
-TEST(Iterators_RandomAccess, Iterators_Based_ForLoop)
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Base, Iterators_Based_ForLoop)
 {
     container<int,3> input {22, 33, 44};
     container<int,3> expec {44, 66, 88};
@@ -140,29 +170,9 @@ TEST(Iterators_RandomAccess, Iterators_Based_ForLoop)
     }
 }
 
-TEST(Iterators_RandomAccess, STL_Advance)
-{
-    const container<int,3> input {11, 22, 33, 44, 55};
-    container<int,3>::const_iterator it {input.begin()};
-    std::advance(it, 2);
-    ASSERT_EQ(*it, 33);
-}
+/* --------------------------------------------------------------------------------------- */
 
-TEST(Iterators_RandomAccess, STL_Min_Element)
-{
-    const container<int,5> input {11, 22, 33, 5, 20};
-    auto it = std::min_element(input.begin(), input.end());
-    ASSERT_EQ(*it, 5);
-}
-
-TEST(Iterators_RandomAccess, STL_Max_Element)
-{
-    const container<int,5> input {11, 22, 33, 5, 20};
-    auto it = std::max_element(input.begin(), input.end());
-    ASSERT_EQ(*it, 33);
-}
-
-TEST(Iterators_RandomAccess, STL_IterSwap)
+TEST(RandomAccessIterator_STL, IterSwap)
 {
     container<int,5> input {11, 22, 33, 5, 20};
     auto it_0 = input.begin();
@@ -170,4 +180,32 @@ TEST(Iterators_RandomAccess, STL_IterSwap)
     std::iter_swap(it_0, it_2);
     ASSERT_EQ(*it_0, 33);
     ASSERT_EQ(*it_2, 11);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_STL, Advance)
+{
+    const container<int,3> input {11, 22, 33, 44, 55};
+    container<int,3>::const_iterator it {input.begin()};
+    std::advance(it, 2);
+    ASSERT_EQ(*it, 33);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_STL, Min_Element)
+{
+    const container<int,5> input {11, 22, 33, 5, 20};
+    auto it = std::min_element(input.begin(), input.end());
+    ASSERT_EQ(*it, 5);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_STL, Max_Element)
+{
+    const container<int,5> input {11, 22, 33, 5, 20};
+    auto it = std::max_element(input.begin(), input.end());
+    ASSERT_EQ(*it, 33);
 }

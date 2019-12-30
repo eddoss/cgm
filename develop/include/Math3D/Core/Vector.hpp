@@ -2,18 +2,17 @@
 #define MATH3D_VECTOR_HPP
 
 
-#include <memory>
 #include <algorithm>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Iterators/RandomAccess.hpp>
+#include <Math3D/Core/Iterators/RandomAccessIterator.hpp>
 
 /**
  * Generic Vector.
  * @tparam D Components count (dimensions).
  * @tparam T Components type.
  **/
-template<uint32_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT>
 struct Vector
 {
     T data[D];
@@ -22,7 +21,7 @@ struct Vector
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using size_type         = uint32_t;
+    using size_type         = size_t;
     using value_type        = T;
     using pointer           = T*;
     using reference         = T&;
@@ -339,7 +338,7 @@ public: /* Iterators */
 /* ####################################################################################### */
 
     /**
-     * Get begin component iterator.
+     * Get first component iterator.
      * @return first component iterator.
      */
     iterator
@@ -391,7 +390,7 @@ public: /* Iterators */
 
 
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>::Vector(const T& value)
 {
     static_assert(D > 1, __FUNCTION__": vector size must be more than 1");
@@ -400,7 +399,7 @@ Vector<D,T>::Vector(const T& value)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>::Vector(std::initializer_list<T> values)
 {
     static_assert(D > 1, __FUNCTION__": vector size must be more than 1");
@@ -411,7 +410,7 @@ Vector<D,T>::Vector(std::initializer_list<T> values)
 /* IMPLEMENTATION | Assignment operator */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator=(const T& scalar)
 {
@@ -423,7 +422,7 @@ Vector<D,T>::operator=(const T& scalar)
 /* IMPLEMENTATION | Arithmetic operators: unary minus */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>
 Vector<D,T>::operator-() const
 {
@@ -436,7 +435,7 @@ Vector<D,T>::operator-() const
 /* IMPLEMENTATION | Increment and decrement */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator++()
 {
@@ -446,7 +445,7 @@ Vector<D,T>::operator++()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator--()
 {
@@ -456,7 +455,7 @@ Vector<D,T>::operator--()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>
 Vector<D,T>::operator++(int)
 {
@@ -467,7 +466,7 @@ Vector<D,T>::operator++(int)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>
 Vector<D,T>::operator--(int)
 {
@@ -480,7 +479,7 @@ Vector<D,T>::operator--(int)
 /* IMPLEMENTATION | Arithmetic operators: inplace minus */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator-=(T scalar)
 {
@@ -490,7 +489,7 @@ Vector<D,T>::operator-=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator-=(const Vector<D,T>& vector)
 {
@@ -502,7 +501,7 @@ Vector<D,T>::operator-=(const Vector<D,T>& vector)
 /* IMPLEMENTATION | Arithmetic operators: inplace plus */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator+=(T scalar)
 {
@@ -512,7 +511,7 @@ Vector<D,T>::operator+=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator+=(const Vector<D,T>& vector)
 {
@@ -524,7 +523,7 @@ Vector<D,T>::operator+=(const Vector<D,T>& vector)
 /* IMPLEMENTATION | Arithmetic operators: inplace  per-component multiplication */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator*=(T scalar)
 {
@@ -534,7 +533,7 @@ Vector<D,T>::operator*=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator*=(const Vector<D,T>& vector)
 {
@@ -546,7 +545,7 @@ Vector<D,T>::operator*=(const Vector<D,T>& vector)
 /* IMPLEMENTATION | Arithmetic operators: inplace  per-component division */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator/=(T scalar)
 {
@@ -556,7 +555,7 @@ Vector<D,T>::operator/=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 Vector<D,T>&
 Vector<D,T>::operator/=(const Vector<D,T>& vector)
 {
@@ -568,7 +567,7 @@ Vector<D,T>::operator/=(const Vector<D,T>& vector)
 /* IMPLEMENTATION | Comparison with scalar */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator==(const T& scalar) const
 {
@@ -578,7 +577,7 @@ Vector<D,T>::operator==(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator!=(const T& scalar) const
 {
@@ -588,7 +587,7 @@ Vector<D,T>::operator!=(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator<(const T& scalar) const
 {
@@ -598,7 +597,7 @@ Vector<D,T>::operator<(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator>(const T& scalar) const
 {
@@ -608,7 +607,7 @@ Vector<D,T>::operator>(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator<=(const T& scalar) const
 {
@@ -618,7 +617,7 @@ Vector<D,T>::operator<=(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator>=(const T& scalar) const
 {
@@ -630,7 +629,7 @@ Vector<D,T>::operator>=(const T& scalar) const
 /* IMPLEMENTATION | Comparison with other */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator==(const Vector<D,T>& other) const
 {
@@ -640,7 +639,7 @@ Vector<D,T>::operator==(const Vector<D,T>& other) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator!=(const Vector<D,T>& other) const
 {
@@ -650,7 +649,7 @@ Vector<D,T>::operator!=(const Vector<D,T>& other) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator<(const Vector<D,T>& other) const
 {
@@ -660,7 +659,7 @@ Vector<D,T>::operator<(const Vector<D,T>& other) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator>(const Vector<D,T>& other) const
 {
@@ -670,7 +669,7 @@ Vector<D,T>::operator>(const Vector<D,T>& other) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator<=(const Vector<D,T>& other) const
 {
@@ -680,7 +679,7 @@ Vector<D,T>::operator<=(const Vector<D,T>& other) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 bool
 Vector<D,T>::operator>=(const Vector<D,T>& other) const
 {
@@ -692,7 +691,7 @@ Vector<D,T>::operator>=(const Vector<D,T>& other) const
 /* IMPLEMENTATION | Components accessing */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 T&
 Vector<D,T>::operator[](size_type index)
 {
@@ -701,7 +700,7 @@ Vector<D,T>::operator[](size_type index)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 const T&
 Vector<D,T>::operator[](size_type index) const
 {
@@ -712,42 +711,42 @@ Vector<D,T>::operator[](size_type index) const
 /* IMPLEMENTATION | Iterators */
 /* ####################################################################################### */
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::iterator
 Vector<D,T>::begin()
 {
     return iterator {data};
 }
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::iterator
 Vector<D,T>::end()
 {
     return iterator {data+D};
 }
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::const_iterator
 Vector<D,T>::begin() const
 {
     return const_iterator {data};
 }
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::const_iterator
 Vector<D,T>::end() const
 {
     return const_iterator {data+D};
 }
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::const_iterator
 Vector<D,T>::cbegin() const
 {
     return const_iterator {data};
 }
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 typename Vector<D,T>::const_iterator
 Vector<D,T>::cend() const
 {

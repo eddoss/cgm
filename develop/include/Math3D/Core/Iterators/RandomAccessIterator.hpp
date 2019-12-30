@@ -1,10 +1,13 @@
-#ifndef MATH3D_ITERATORS_RANDOM_ACCESS_HPP
-#define MATH3D_ITERATORS_RANDOM_ACCESS_HPP
+#ifndef MATH3D_RANDOM_ACCESS_ITERATOR_HPP
+#define MATH3D_RANDOM_ACCESS_ITERATOR_HPP
 
 
 #include <iterator>
 
 
+/**
+ * Pointer based const random access iterator.
+ **/
 template<typename T>
 class ConstRandomAccessIterator
 {
@@ -18,11 +21,15 @@ public: /* Typedefs */
     using reference             = const T&;
     using pointer               = const T*;
     using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = ptrdiff_t;
+    using difference_type       = size_t;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
+
+   ~ConstRandomAccessIterator() = default;
+
+/* --------------------------------------------------------------------------------------- */
 
     constexpr
     ConstRandomAccessIterator() = default;
@@ -30,11 +37,33 @@ public: /* Constructors */
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
+    ConstRandomAccessIterator(const self_type&)     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    ConstRandomAccessIterator(self_type&&) noexcept = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
     ConstRandomAccessIterator(pointer dataPtr, size_t offset=0)
-        : ptr(dataPtr + offset)
+        : m_data(dataPtr + offset)
     {
 
     }
+
+/* ####################################################################################### */
+public: /* Default assignment */
+/* ####################################################################################### */
+
+    constexpr ConstRandomAccessIterator&
+    operator=(const self_type&)     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr ConstRandomAccessIterator&
+    operator=(self_type&&) noexcept = default;
 
 /* ####################################################################################### */
 public: /* Data accessing */
@@ -43,7 +72,7 @@ public: /* Data accessing */
     constexpr reference
     operator*() const
     {
-        return *ptr;
+        return *m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -51,7 +80,7 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        return ptr;
+        return m_data;
     }
 
 /* ####################################################################################### */
@@ -61,8 +90,8 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        ++ptr;
-        return (*this);
+        ++m_data;
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -71,7 +100,7 @@ public: /* Move forward */
     operator++(int)
     {
         self_type tmp = *this;
-        ++ptr;
+        ++m_data;
         return tmp;
     }
 
@@ -80,8 +109,8 @@ public: /* Move forward */
     constexpr self_type&
     operator+=(size_t offset)
     {
-        ptr += offset;
-        return (*this);
+        m_data += offset;
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -89,8 +118,8 @@ public: /* Move forward */
     constexpr self_type
     operator+(size_t offset) const
     {
-        self_type tmp = (*this);
-        tmp.ptr += offset;
+        self_type tmp = *this;
+        tmp.m_data += offset;
         return tmp;
     }
 
@@ -101,8 +130,8 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --ptr;
-        return (*this);
+        --m_data;
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -111,7 +140,7 @@ public: /* Move backward */
     operator--(int)
     {
         self_type tmp = *this;
-        --ptr;
+        --m_data;
         return tmp;
     }
 
@@ -120,8 +149,8 @@ public: /* Move backward */
     constexpr self_type&
     operator-=(size_t offset)
     {
-        ptr -= offset;
-        return (*this);
+        m_data -= offset;
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -129,8 +158,8 @@ public: /* Move backward */
     constexpr self_type
     operator-(size_t offset) const
     {
-        self_type tmp = (*this);
-        tmp.ptr -= offset;
+        self_type tmp = *this;
+        tmp.m_data -= offset;
         return tmp;
     }
 
@@ -141,7 +170,7 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return ptr-other.ptr;
+        return m_data - other.m_data;
     }
 
 /* ####################################################################################### */
@@ -151,7 +180,7 @@ public: /* Compares */
     constexpr bool
     operator==(const self_type& other) const
     {
-        return ptr == other.ptr;
+        return m_data == other.m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -159,7 +188,7 @@ public: /* Compares */
     constexpr bool
     operator!=(const self_type& other) const
     {
-        return ptr != other.ptr;
+        return m_data != other.m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -167,7 +196,7 @@ public: /* Compares */
     constexpr bool
     operator<(const self_type& other) const
     {
-        return ptr < other.ptr;
+        return m_data < other.m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -175,7 +204,7 @@ public: /* Compares */
     constexpr bool
     operator>(const self_type& other) const
     {
-        return ptr > other.ptr;
+        return m_data > other.m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -183,7 +212,7 @@ public: /* Compares */
     constexpr bool
     operator<=(const self_type& other) const
     {
-        return ptr <= other.ptr;
+        return m_data <= other.m_data;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -191,19 +220,21 @@ public: /* Compares */
     constexpr bool
     operator>=(const self_type& other) const
     {
-        return ptr >= other.ptr;
+        return m_data >= other.m_data;
     }
 
 /* ####################################################################################### */
-private: /* Internal */
+protected: /* Internal */
 /* ####################################################################################### */
 
-    pointer ptr {nullptr};
+    pointer m_data {nullptr};
 };
 
 
 
-
+/**
+ * Pointer based random access iterator.
+ **/
 template<typename T>
 class RandomAccessIterator : public ConstRandomAccessIterator<T>
 {
@@ -217,15 +248,29 @@ public: /* Typedefs */
     using value_type            = T;
     using reference             = T&;
     using pointer               = T*;
-    using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = ptrdiff_t;
+    using iterator_category     = typename base_type::iterator_category;
+    using difference_type       = typename base_type::difference_type;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
+   ~RandomAccessIterator()                     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
     constexpr
-    RandomAccessIterator() = default;
+    RandomAccessIterator()                     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    RandomAccessIterator(const self_type&)     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    RandomAccessIterator(self_type&&) noexcept = default;
 
 /* --------------------------------------------------------------------------------------- */
 
@@ -235,6 +280,18 @@ public: /* Constructors */
     {
 
     }
+
+/* ####################################################################################### */
+public: /* Default assignment */
+/* ####################################################################################### */
+
+    constexpr RandomAccessIterator&
+    operator=(const self_type&)     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr RandomAccessIterator&
+    operator=(self_type&&) noexcept = default;
 
 /* ####################################################################################### */
 public: /* Data accessing */
@@ -343,4 +400,4 @@ public: /* Difference */
     }
 };
 
-#endif // MATH3D_ITERATORS_RANDOM_ACCESS_HPP
+#endif // MATH3D_RANDOM_ACCESS_ITERATOR_HPP

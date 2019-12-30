@@ -4,6 +4,7 @@
 
 
 #include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Iterators/MatrixIterator.hpp>
 #include <Math3D/Core/Iterators/MatrixColumnIterator.hpp>
 
 
@@ -12,7 +13,7 @@
  * @tparam M Row count. It must be > 1.
  * @tparam N Column count. It must be > 1.
  **/
-template<uint32_t M, uint32_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T=FLOAT>
 struct Matrix
 {
     T data[N][M];
@@ -21,7 +22,7 @@ struct Matrix
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using size_type         = uint32_t;
+    using size_type         = size_t;
     using value_type        = T;
     using pointer           = T*;
     using reference         = T&;
@@ -32,8 +33,8 @@ public: /* Typedefs */
 public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-    using iterator              = RandomAccessIterator<T>;
-    using const_iterator        = ConstRandomAccessIterator<T>;
+    using iterator              = MatrixIterator<M,N,T>;
+    using const_iterator        = ConstMatrixIterator<M,N,T>;
     using ColumnIterator        = MatrixColumnIterator<M,N,T>;
     using ConstColumnIterator   = ConstMatrixColumnIterator<M,N,T>;
 
@@ -388,7 +389,7 @@ public: /* Components accessing */
      * @return reference to a component.
      */
     T&
-    operator()(uint32_t row, uint32_t column);
+    operator()(size_t row, size_t column);
 
     /**
      * Gets a reference to a specific component of the matrix by row and column.
@@ -397,7 +398,7 @@ public: /* Components accessing */
      * @return const reference to a component.
      */
     const T&
-    operator()(uint32_t row, uint32_t column) const;
+    operator()(size_t row, size_t column) const;
 
     /**
      * Gets a reference to a specific component of the matrix by index of bulk data.
@@ -405,7 +406,7 @@ public: /* Components accessing */
      * @return reference to a component.
      */
     T&
-    operator[](uint32_t index);
+    operator[](size_t index);
 
     /**
      * Gets a reference to a specific component of the matrix by index of bulk data.
@@ -413,14 +414,14 @@ public: /* Components accessing */
      * @return const reference to a component.
      */
     const T&
-    operator[](uint32_t index) const;
+    operator[](size_t index) const;
 
 /* ####################################################################################### */
 public: /* Iterators */
 /* ####################################################################################### */
 
     /**
-     * Get begin component iterator.
+     * Get first component iterator.
      * @return first component iterator.
      */
     iterator
@@ -462,7 +463,7 @@ public: /* Iterators */
     cend() const;
 
     /**
-     * Get column begin iterator.
+     * Get column first iterator.
      * @return column first component iterator.
      */
     ColumnIterator
@@ -476,7 +477,7 @@ public: /* Iterators */
     column_end(size_type column);
 
     /**
-     * Get column const begin iterator.
+     * Get column const first iterator.
      * @return column first component const iterator.
      */
     ConstColumnIterator
@@ -488,7 +489,6 @@ public: /* Iterators */
      */
     ConstColumnIterator
     column_cend(size_type column);
-
 };
 
 
@@ -503,7 +503,7 @@ public: /* Iterators */
 /* IMPLEMENTATION | Constructors */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix()
 {
     static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
@@ -511,14 +511,14 @@ Matrix<M,N,T>::Matrix()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(T scalar)
 {
     static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
 
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] = scalar;
         }
@@ -527,14 +527,14 @@ Matrix<M,N,T>::Matrix(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
     static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
 
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] = *(values.begin() + r * N + c);
         }
@@ -543,14 +543,14 @@ Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(const T *values)
 {
     static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
 
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] = *(values + r * N + c);
         }
@@ -561,13 +561,13 @@ Matrix<M,N,T>::Matrix(const T *values)
 /* IMPLEMENTATION | Assignment operator */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator=(T scalar)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] = scalar;
         }
@@ -579,14 +579,14 @@ Matrix<M,N,T>::operator=(T scalar)
 /* IMPLEMENTATION | Unary minus, increment and decrement  */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator-() const
 {
     Matrix<M,N,T> copy;
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] = -(data[c][r]);
         }
@@ -596,13 +596,13 @@ Matrix<M,N,T>::operator-() const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator++()
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             ++(data[c][r]);
         }
@@ -612,13 +612,13 @@ Matrix<M,N,T>::operator++()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator--()
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             --(data[c][r]);
         }
@@ -628,14 +628,14 @@ Matrix<M,N,T>::operator--()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator++(int)
 {
     Matrix<M,N,T> copy;
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             ++(data[c][r]);
         }
@@ -645,14 +645,14 @@ Matrix<M,N,T>::operator++(int)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator--(int)
 {
     Matrix<M,N,T> copy;
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             --(data[c][r]);
         }
@@ -664,14 +664,14 @@ Matrix<M,N,T>::operator--(int)
 /* IMPLEMENTATION | Arithmetic operators: binary minus */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator-(T scalar) const
 {
     Matrix<M,N,T> copy( *this );
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] -= scalar;
         }
@@ -681,14 +681,14 @@ Matrix<M,N,T>::operator-(T scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator-(const Matrix<M,N,T>& matrix) const
 {
     Matrix<M,N,T> copy( *this );
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] -= matrix.data[c][r];
         }
@@ -698,13 +698,13 @@ Matrix<M,N,T>::operator-(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator-=(T scalar)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] -= scalar;
         }
@@ -714,13 +714,13 @@ Matrix<M,N,T>::operator-=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator-=(const Matrix<M,N,T>& matrix)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] -= matrix.data[c][r];
         }
@@ -732,14 +732,14 @@ Matrix<M,N,T>::operator-=(const Matrix<M,N,T>& matrix)
 /* IMPLEMENTATION | Arithmetic operators: binary plus */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator+(T scalar) const
 {
     Matrix<M,N,T> copy( *this );
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] += scalar;
         }
@@ -749,14 +749,14 @@ Matrix<M,N,T>::operator+(T scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator+(const Matrix<M,N,T>& matrix) const
 {
     Matrix<M,N,T> copy( *this );
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] += matrix.data[c][r];
         }
@@ -766,13 +766,13 @@ Matrix<M,N,T>::operator+(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator+=(T scalar)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] += scalar;
         }
@@ -782,13 +782,13 @@ Matrix<M,N,T>::operator+=(T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator+=(const Matrix<M,N,T>& matrix)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] += matrix.data[c][r];
         }
@@ -800,14 +800,14 @@ Matrix<M,N,T>::operator+=(const Matrix<M,N,T>& matrix)
 /* IMPLEMENTATION | Arithmetic operators: multiplication */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator*(T scalar) const
 {
     Matrix<M,N,T> copy( *this );
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] *= scalar;
         }
@@ -817,13 +817,13 @@ Matrix<M,N,T>::operator*(T scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator*=(T scalar)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] *= scalar;
         }
@@ -835,14 +835,14 @@ Matrix<M,N,T>::operator*=(T scalar)
 /* IMPLEMENTATION | Arithmetic operators: division */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 Matrix<M,N,T>::operator/(T scalar) const
 {
     Matrix<M,N,T> copy {*this};
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             copy.data[c][r] /= scalar;
         }
@@ -852,13 +852,13 @@ Matrix<M,N,T>::operator/(T scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator/=(T scalar)
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             data[c][r] /= scalar;
         }
@@ -870,13 +870,13 @@ Matrix<M,N,T>::operator/=(T scalar)
 /* IMPLEMENTATION | Comparison with scalar */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator==(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (notEqual(data[c][r], scalar)) return false;
         }
@@ -886,13 +886,13 @@ Matrix<M,N,T>::operator==(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator!=(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (notEqual(data[c][r], scalar)) return true;
         }
@@ -902,13 +902,13 @@ Matrix<M,N,T>::operator!=(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator<(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] >= scalar) return false;
         }
@@ -918,13 +918,13 @@ Matrix<M,N,T>::operator<(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator>(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] <= scalar) return false;
         }
@@ -934,13 +934,13 @@ Matrix<M,N,T>::operator>(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator<=(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] > scalar) return false;
         }
@@ -950,13 +950,13 @@ Matrix<M,N,T>::operator<=(const T& scalar) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator>=(const T& scalar) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] < scalar) return false;
         }
@@ -968,13 +968,13 @@ Matrix<M,N,T>::operator>=(const T& scalar) const
 /* IMPLEMENTATION | Comparison with other */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator==(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (notEqual(data[c][r], matrix.data[c][r])) return false;
         }
@@ -984,13 +984,13 @@ Matrix<M,N,T>::operator==(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator!=(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (notEqual(data[c][r], matrix.data[c][r])) return true;
         }
@@ -1000,13 +1000,13 @@ Matrix<M,N,T>::operator!=(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator<(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] >= matrix.data[c][r]) return false;
         }
@@ -1016,13 +1016,13 @@ Matrix<M,N,T>::operator<(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator>(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] <= matrix.data[c][r]) return false;
         }
@@ -1032,13 +1032,13 @@ Matrix<M,N,T>::operator>(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator<=(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] > matrix.data[c][r]) return false;
         }
@@ -1048,13 +1048,13 @@ Matrix<M,N,T>::operator<=(const Matrix<M,N,T>& matrix) const
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 bool
 Matrix<M,N,T>::operator>=(const Matrix<M,N,T>& matrix) const
 {
-    for (uint32_t c = 0; c < N; ++c)
+    for (size_t c = 0; c < N; ++c)
     {
-        for (uint32_t r = 0; r < M; ++r)
+        for (size_t r = 0; r < M; ++r)
         {
             if (data[c][r] < matrix.data[c][r]) return false;
         }
@@ -1066,36 +1066,36 @@ Matrix<M,N,T>::operator>=(const Matrix<M,N,T>& matrix) const
 /* IMPLEMENTATION | Components accessing */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 T&
-Matrix<M,N,T>::operator()(uint32_t row, uint32_t column)
+Matrix<M,N,T>::operator()(size_t row, size_t column)
 {
     return data[column][row];
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 const T&
-Matrix<M,N,T>::operator()(uint32_t row, uint32_t column) const
+Matrix<M,N,T>::operator()(size_t row, size_t column) const
 {
     return data[column][row];
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 T&
-Matrix<M,N,T>::operator[](uint32_t index)
+Matrix<M,N,T>::operator[](size_t index)
 {
     return *(&data[0][0] + index);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 const T&
-Matrix<M,N,T>::operator[](uint32_t index) const
+Matrix<M,N,T>::operator[](size_t index) const
 {
     return *(&data[0][0] + index);
 }
@@ -1104,61 +1104,61 @@ Matrix<M,N,T>::operator[](uint32_t index) const
 /* IMPLEMENTATION | Iterators */
 /* ####################################################################################### */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::begin()
 {
-    return iterator {&data[0][0]};
+    return iterator {&data[0][0], 0, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::end()
 {
-    return iterator {&data[0][0]+M*N};
+    return iterator {&data[0][0], M, N-1};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::begin() const
 {
-    return const_iterator {&data[0][0]};
+    return const_iterator {&data[0][0], 0, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::end() const
 {
-    return const_iterator {&data[0][0] + M*N};
+    return const_iterator {&data[0][0], M, N-1};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cbegin() const
 {
-    return const_iterator {&data[0][0]};
+    return const_iterator {&data[0][0], 0, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cend() const
 {
-    return const_iterator {&data[0][0] + M*N};
+    return const_iterator {&data[0][0], M, N-1};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ColumnIterator
 Matrix<M,N,T>::column_begin(size_type column)
 {
@@ -1167,7 +1167,7 @@ Matrix<M,N,T>::column_begin(size_type column)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ColumnIterator
 Matrix<M,N,T>::column_end(size_type column)
 {
@@ -1176,7 +1176,7 @@ Matrix<M,N,T>::column_end(size_type column)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::column_cbegin(size_type column)
 {
@@ -1185,7 +1185,7 @@ Matrix<M,N,T>::column_cbegin(size_type column)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::column_cend(size_type column)
 {

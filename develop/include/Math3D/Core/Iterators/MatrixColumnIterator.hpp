@@ -1,14 +1,15 @@
-#ifndef MATH3D_ITERATORS_MATRIX_COLUMN_ACCESS_HPP
-#define MATH3D_ITERATORS_MATRIX_COLUMN_ACCESS_HPP
+#ifndef MATH3D_MATRIX_COLUMN_ITERATOR_HPP
+#define MATH3D_MATRIX_COLUMN_ITERATOR_HPP
 
 
-#include <iterator>
+#include <Math3D/Core/Iterators/MatrixIterator.hpp>
+
 
 /**
- *
+ * Iterate over all components of specified column.
  **/
-template<uint32_t M, uint32_t N, typename T>
-class ConstMatrixColumnIterator
+template<size_t M, size_t N, typename T>
+class ConstMatrixColumnIterator : public ConstMatrixIterator<M,N,T>
 {
 
 /* ####################################################################################### */
@@ -16,15 +17,20 @@ public: /* Typedefs */
 /* ####################################################################################### */
 
     using self_type             = ConstMatrixColumnIterator<M,N,T>;
+    using base_type             = ConstMatrixIterator<M,N,T>;
     using value_type            = T;
     using reference             = const T&;
     using pointer               = const T*;
-    using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = ptrdiff_t;
+    using iterator_category     = typename base_type::iterator_category;
+    using difference_type       = typename base_type::difference_type;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
+
+   ~ConstMatrixColumnIterator() = default;
+
+/* --------------------------------------------------------------------------------------- */
 
     constexpr
     ConstMatrixColumnIterator() = default;
@@ -32,29 +38,33 @@ public: /* Constructors */
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstMatrixColumnIterator(pointer dataPtr, uint32_t index, uint32_t element=0)
-        : ptr(dataPtr + index*M + element)
-    {
-
-    }
-
-/* ####################################################################################### */
-public: /* Data accessing */
-/* ####################################################################################### */
-
-    constexpr reference
-    operator*() const
-    {
-        return *ptr;
-    }
+    ConstMatrixColumnIterator(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    constexpr pointer
-    operator->() const
+    constexpr
+    ConstMatrixColumnIterator(self_type&&) noexcept = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    ConstMatrixColumnIterator(pointer firstCompPtr, size_t columnIndex, size_t elementIndex=0)
+        : base_type(firstCompPtr, elementIndex, columnIndex)
     {
-        return ptr;
+
     }
+
+/* ####################################################################################### */
+public: /* Default assignment */
+/* ####################################################################################### */
+
+    constexpr ConstMatrixColumnIterator&
+    operator=(const self_type&)      = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr ConstMatrixColumnIterator&
+    operator=(self_type&&) noexcept  = default;
 
 /* ####################################################################################### */
 public: /* Move forward */
@@ -63,8 +73,8 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        ++ptr;
-        return (*this);
+        base_type::operator++();
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -72,28 +82,26 @@ public: /* Move forward */
     constexpr self_type
     operator++(int)
     {
-        self_type tmp = *this;
-        ++ptr;
+        self_type tmp {*this};
+        base_type::operator++();
         return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator+=(size_t offset)
+    operator+=(difference_type offset)
     {
-        ptr += offset;
-        return (*this);
+        base_type::operator+=(offset);
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator+(size_t offset) const
+    operator+(difference_type offset) const
     {
-        self_type tmp = (*this);
-        tmp.ptr += offset;
-        return tmp;
+        return self_type {*this} += offset;
     }
 
 /* ####################################################################################### */
@@ -103,8 +111,8 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --ptr;
-        return (*this);
+        base_type::operator--();
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -112,28 +120,26 @@ public: /* Move backward */
     constexpr self_type
     operator--(int)
     {
-        self_type tmp = *this;
-        --ptr;
+        self_type tmp {*this};
+        base_type::operator--();
         return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator-=(size_t offset)
+    operator-=(difference_type offset)
     {
-        ptr -= offset;
-        return (*this);
+        base_type::operator-=(offset);
+        return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator-(size_t offset) const
+    operator-(difference_type offset) const
     {
-        self_type tmp = (*this);
-        tmp.ptr -= offset;
-        return tmp;
+		return self_type {*this} -= offset;
     }
 
 /* ####################################################################################### */
@@ -143,70 +149,14 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return ptr-other.ptr;
+        return *static_cast<const base_type*>(this) - other;
     }
-
-/* ####################################################################################### */
-public: /* Compares */
-/* ####################################################################################### */
-
-    constexpr bool
-    operator==(const self_type& other) const
-    {
-        return ptr == other.ptr;
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    constexpr bool
-    operator!=(const self_type& other) const
-    {
-        return ptr != other.ptr;
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    constexpr bool
-    operator<(const self_type& other) const
-    {
-        return ptr < other.ptr;
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    constexpr bool
-    operator>(const self_type& other) const
-    {
-        return ptr > other.ptr;
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    constexpr bool
-    operator<=(const self_type& other) const
-    {
-        return ptr <= other.ptr;
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    constexpr bool
-    operator>=(const self_type& other) const
-    {
-        return ptr >= other.ptr;
-    }
-
-/* ####################################################################################### */
-private: /* Internal */
-/* ####################################################################################### */
-
-    pointer ptr {nullptr};
 };
 
 
 
 
-template<uint32_t M, uint32_t N, typename T>
+template<size_t M, size_t N, typename T>
 class MatrixColumnIterator : public ConstMatrixColumnIterator<M,N,T>
 {
 
@@ -219,8 +169,8 @@ public: /* Typedefs */
     using value_type            = T;
     using reference             = T&;
     using pointer               = T*;
-    using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = ptrdiff_t;
+    using iterator_category     = typename base_type::iterator_category;
+    using difference_type       = typename base_type::difference_type;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -232,7 +182,7 @@ public: /* Constructors */
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    MatrixColumnIterator(pointer dataPtr, uint32_t index, uint32_t element=0)
+    MatrixColumnIterator(pointer dataPtr, size_t index, size_t element=0)
         : base_type(dataPtr, index, element)
     {
 
@@ -253,7 +203,7 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        return const_cast<pointer>(base_type::operator->());
+        return const_cast<pointer>(base_type::operator*());
     }
 
 /* ####################################################################################### */
@@ -263,7 +213,7 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        ++*static_cast<base_type*>(this);
+        base_type::operator++();
 		return *this;
     }
 
@@ -272,27 +222,26 @@ public: /* Move forward */
     constexpr self_type
     operator++(int)
     {
-		self_type tmp = *this;
-		++*this;
+		self_type tmp {*this};
+		base_type::operator++();
 		return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator+=(size_t offset)
+    operator+=(difference_type offset)
     {
-		*static_cast<base_type*>(this) += offset;
+		base_type::operator+=(offset);
 		return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator+(size_t offset) const
+    operator+(difference_type offset) const
     {
-		self_type tmp = *this;
-		return tmp += offset;
+		return self_type {*this} += offset;
     }
 
 /* ####################################################################################### */
@@ -302,7 +251,7 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --*static_cast<base_type*>(this);
+        base_type::operator--();
 		return *this;
     }
 
@@ -311,27 +260,26 @@ public: /* Move backward */
     constexpr self_type
     operator--(int)
     {
-		self_type tmp = *this;
-		--*this;
+		self_type tmp {*this};
+		base_type::operator--();
 		return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator-=(size_t offset)
+    operator-=(difference_type offset)
     {
-		*static_cast<base_type*>(this) -= offset;
+		base_type::operator-=(offset);
 		return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator-(size_t offset) const
+    operator-(difference_type offset) const
     {
-		self_type tmp = *this;
-		return tmp -= offset;
+        return self_type {*this} -= offset;
     }
 
 /* ####################################################################################### */
@@ -341,8 +289,8 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return (*static_cast<const base_type*>(this) - other);
+        return base_type::operator-(other);
     }
 };
 
-#endif // MATH3D_ITERATORS_MATRIX_COLUMN_ACCESS_HPP
+#endif // MATH3D_MATRIX_COLUMN_ITERATOR_HPP

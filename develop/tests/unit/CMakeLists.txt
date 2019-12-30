@@ -11,18 +11,40 @@ project(UnitTests
 # Tests list
 # ####################################################################################### #
 
-set(TESTS_LIST
-    run.cpp
-    Vector.cpp
-    Matrix.cpp
-    Iterators/RandomAccess.cpp)
+set(DEFAULT_ITERATORS_TESTS_SUITES
+        DefaultIterators/RandomAccessIterator.cpp
+)
+
+set(VECTOR_TESTS_SUITES
+    Vector/Arithmetic.cpp
+    Vector/Assignment.cpp
+    Vector/IncrementDecrement.cpp
+    Vector/ComparisonWithOther.cpp
+    Vector/ComparisonWithScalar.cpp
+)
+
+set(MATRIX_TESTS_SUITES
+    Matrix/Arithmetic.cpp
+    Matrix/Assignment.cpp
+    Matrix/IncrementDecrement.cpp
+    Matrix/ComparisonWithOther.cpp
+    Matrix/ComparisonWithScalar.cpp
+    Matrix/Iterators.cpp
+    Matrix/ColumnIterators.cpp
+)
 
 # ####################################################################################### #
 # Setup target
 # ####################################################################################### #
 
+add_executable(${PROJECT_NAME}
+    run.cpp
+    ${DEFAULT_ITERATORS_TESTS_SUITES}
+    ${VECTOR_TESTS_SUITES}
+    ${MATRIX_TESTS_SUITES}
+)
+
 find_package(GTest REQUIRED)
-add_executable(${PROJECT_NAME} ${TESTS_LIST})
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ../../include)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     debug ${GTEST_LIBRARY_DEBUG} ${GTEST_MAIN_LIBRARY_DEBUG} Math3D
