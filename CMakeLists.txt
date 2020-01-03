@@ -51,9 +51,9 @@ target_include_directories(${PROJECT_NAME} INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/develop/include")
 
 if(USE_DOUBLE_PRECISION)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE MATH3D_FLOAT_PRECISION=64)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE USE_DOUBLE_PRECISION=true)
 else()
-    target_compile_definitions(${PROJECT_NAME} INTERFACE MATH3D_FLOAT_PRECISION=32)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE USE_DOUBLE_PRECISION=false)
 endif()
 
 # ####################################################################################### #

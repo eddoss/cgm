@@ -9,21 +9,7 @@
 /* Common constants */
 /* ####################################################################################### */
 
-#if MATH3D_FLOAT_PRECISION == 32
-    using FLOAT = float;
-    constexpr FLOAT BIG_NUMBER                  = 3.40282e+38f;
-    constexpr FLOAT SMALL_POSITIVE_NUMBER       = 0.00000001f;
-    constexpr FLOAT SMALL_NEGATIVE_NUMBER       = 1.17548e-38f;
-    constexpr FLOAT PI                          = 3.14159265f;
-    constexpr FLOAT PI2                         = 6.28318530f;
-    constexpr FLOAT PI_HALF                     = 1.57079632f;
-    constexpr FLOAT PI_INVERTED                 = 0.31830988f;
-    constexpr FLOAT EULER_NUMBER                = 2.71828182f;
-    constexpr FLOAT GOLDEN_RATIO                = 1.61803398f;
-    constexpr FLOAT TOLERANCE                   = 0.00000001f;
-    constexpr FLOAT TO_DEGREES                  = 57.2957790f;
-    constexpr FLOAT TO_RADIANS                  = 0.01745320f;
-#else
+#if USE_DOUBLE_PRECISION
     using FLOAT = double;
     constexpr FLOAT BIG_NUMBER                  = 1.79768e+308;
     constexpr FLOAT SMALL_NEGATIVE_NUMBER       = 2.22506e-308;
@@ -37,6 +23,20 @@
     constexpr FLOAT TOLERANCE                   = 0.0000000000001;
     constexpr FLOAT TO_DEGREES                  = 57.295779513000;
     constexpr FLOAT TO_RADIANS                  = 0.0174532925199;
+#else
+    using FLOAT = float;
+    constexpr FLOAT BIG_NUMBER                  = 3.40282e+38f;
+    constexpr FLOAT SMALL_POSITIVE_NUMBER       = 0.00000001f;
+    constexpr FLOAT SMALL_NEGATIVE_NUMBER       = 1.17548e-38f;
+    constexpr FLOAT PI                          = 3.14159265f;
+    constexpr FLOAT PI2                         = 6.28318530f;
+    constexpr FLOAT PI_HALF                     = 1.57079632f;
+    constexpr FLOAT PI_INVERTED                 = 0.31830988f;
+    constexpr FLOAT EULER_NUMBER                = 2.71828182f;
+    constexpr FLOAT GOLDEN_RATIO                = 1.61803398f;
+    constexpr FLOAT TOLERANCE                   = 0.00000001f;
+    constexpr FLOAT TO_DEGREES                  = 57.2957790f;
+    constexpr FLOAT TO_RADIANS                  = 0.01745320f;
 #endif
 
 /* ####################################################################################### */
