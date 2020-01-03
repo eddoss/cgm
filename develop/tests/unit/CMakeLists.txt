@@ -12,7 +12,7 @@ project(UnitTests
 # ####################################################################################### #
 
 set(DEFAULT_ITERATORS_TESTS_SUITES
-        DefaultIterators/RandomAccessIterator.cpp
+    DefaultIterators/RandomAccessIterator.cpp
 )
 
 set(VECTOR_TESTS_SUITES
@@ -31,6 +31,7 @@ set(MATRIX_TESTS_SUITES
     Matrix/ComparisonWithScalar.cpp
     Matrix/Iterators.cpp
     Matrix/ColumnIterators.cpp
+    Matrix/RowIterators.cpp
 )
 
 # ####################################################################################### #

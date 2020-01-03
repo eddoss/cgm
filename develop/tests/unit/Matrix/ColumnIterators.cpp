@@ -130,8 +130,8 @@ TEST(Matrix_ColumnIterators, Difference)
         7, 8, 9
     };
 
-    auto it_01  {input.column_begin(0) + 1};
-    auto it_11  {input.column_begin(1) + 1};
+    auto it_01  {input.column_begin(0)};
+    auto it_11  {input.column_begin(1)};
     auto diff   {it_11 - it_01};
 
     ASSERT_EQ(diff, (Matrix<3,3,int>::rows));

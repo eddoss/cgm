@@ -175,7 +175,14 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return m_data - other.m_data;
+        if (m_data > other.m_data)
+        {
+            return m_data - other.m_data;
+        }
+        else
+        {
+            return other.m_data - m_data;
+        }
     }
 
 /* ####################################################################################### */

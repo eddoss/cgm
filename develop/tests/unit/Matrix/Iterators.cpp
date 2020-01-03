@@ -174,7 +174,7 @@ TEST(Matrix_Iterators, Difference)
 
     auto a      {input.begin()};
     auto b      {input.begin() + 3};
-    auto diff   {b - a};
+    auto diff   {a - b};
 
     ASSERT_EQ(diff, 3);
 }

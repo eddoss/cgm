@@ -2,9 +2,9 @@
 #define MATH3D_MATRIX_HPP
 
 
-
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Iterators/MatrixIterator.hpp>
+#include <Math3D/Core/Iterators/MatrixRowIterator.hpp>
 #include <Math3D/Core/Iterators/MatrixColumnIterator.hpp>
 
 
@@ -35,6 +35,8 @@ public: /* Iterator typedefs */
 
     using iterator              = MatrixIterator<M,N,T>;
     using const_iterator        = ConstMatrixIterator<M,N,T>;
+    using RowIterator           = ConstMatrixRowIterator<M,N,T>;
+    using ConstRowIterator      = MatrixRowIterator<M,N,T>;
     using ColumnIterator        = MatrixColumnIterator<M,N,T>;
     using ConstColumnIterator   = ConstMatrixColumnIterator<M,N,T>;
 
@@ -489,6 +491,34 @@ public: /* Iterators */
      */
     ConstColumnIterator
     column_cend(size_type column);
+
+    /**
+  * Get row first iterator.
+  * @return row first component iterator.
+  */
+    RowIterator
+    row_begin(size_type row);
+
+    /**
+     * Get row end iterator.
+     * @return last+1 row component iterator.
+     */
+    RowIterator
+    row_end(size_type row);
+
+    /**
+     * Get row const first iterator.
+     * @return row first component const iterator.
+     */
+    ConstRowIterator
+    row_cbegin(size_type row);
+
+    /**
+     * Get row const end iterator.
+     * @return last+1 row component const iterator.
+     */
+    ConstRowIterator
+    row_cend(size_type row);
 };
 
 
@@ -1190,6 +1220,42 @@ typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::column_cend(size_type column)
 {
     return ConstColumnIterator(&data[0][0], column, M);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::RowIterator
+Matrix<M,N,T>::row_begin(size_type row)
+{
+    return RowIterator(&data[0][0], row, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::RowIterator
+Matrix<M,N,T>::row_end(size_type row)
+{
+    return RowIterator(&data[0][0], row, N);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstRowIterator
+Matrix<M,N,T>::row_cbegin(size_type row)
+{
+    return ConstRowIterator(&data[0][0], row, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstRowIterator
+Matrix<M,N,T>::row_cend(size_type row)
+{
+    return ConstRowIterator(&data[0][0], row, N);
 }
 
 #endif // MATH3D_MATRIX_HPP
