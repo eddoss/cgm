@@ -1,22 +1,22 @@
-#ifndef MATH3D_MATRIX_COLUMN_ITERATOR_HPP
-#define MATH3D_MATRIX_COLUMN_ITERATOR_HPP
+#ifndef MATH3D_MATRIX_ROW_ITERATOR_HPP
+#define MATH3D_MATRIX_ROW_ITERATOR_HPP
 
 
-#include <Math3D/Core/Iterators/MatrixIterator.hpp>
+#include <Math3D/Core/Matrices/Iterators/Default.hpp>
 
 
 /**
- * Iterate over all components of specified column.
+ * Iterate over all components of specified row.
  **/
 template<size_t M, size_t N, typename T>
-class ConstMatrixColumnIterator : public ConstMatrixIterator<M,N,T>
+class ConstMatrixRowIterator : public ConstMatrixIterator<M,N,T>
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = ConstMatrixColumnIterator<M,N,T>;
+    using self_type             = ConstMatrixRowIterator<M,N,T>;
     using base_type             = ConstMatrixIterator<M,N,T>;
     using value_type            = T;
     using reference             = const T&;
@@ -28,28 +28,28 @@ public: /* Typedefs */
 public: /* Constructors */
 /* ####################################################################################### */
 
-   ~ConstMatrixColumnIterator() = default;
+   ~ConstMatrixRowIterator() = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstMatrixColumnIterator() = default;
+    ConstMatrixRowIterator() = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstMatrixColumnIterator(const self_type&)     = default;
+    ConstMatrixRowIterator(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstMatrixColumnIterator(self_type&&) noexcept = default;
+    ConstMatrixRowIterator(self_type&&) noexcept = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstMatrixColumnIterator(pointer firstCompPtr, size_t columnIndex, size_t elementIndex=0)
-        : base_type(firstCompPtr, elementIndex, columnIndex)
+    ConstMatrixRowIterator(pointer firstCompPtr, size_t rowIndex, size_t elementIndex=0)
+        : base_type(firstCompPtr, rowIndex, elementIndex)
     {
 
     }
@@ -58,12 +58,12 @@ public: /* Constructors */
 public: /* Default assignment */
 /* ####################################################################################### */
 
-    constexpr ConstMatrixColumnIterator&
+    constexpr ConstMatrixRowIterator&
     operator=(const self_type&)      = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    constexpr ConstMatrixColumnIterator&
+    constexpr ConstMatrixRowIterator&
     operator=(self_type&&) noexcept  = default;
 
 /* ####################################################################################### */
@@ -73,7 +73,7 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        base_type::operator++();
+        *(static_cast<base_type*>(this)) += M;
         return *this;
     }
 
@@ -83,7 +83,7 @@ public: /* Move forward */
     operator++(int)
     {
         self_type tmp {*this};
-        base_type::operator++();
+        *(static_cast<base_type*>(this)) += M;
         return tmp;
     }
 
@@ -92,7 +92,7 @@ public: /* Move forward */
     constexpr self_type&
     operator+=(difference_type offset)
     {
-        base_type::operator+=(offset);
+        *(static_cast<base_type*>(this)) += M * offset;
         return *this;
     }
 
@@ -111,7 +111,7 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        base_type::operator--();
+        *(static_cast<base_type*>(this)) -= M;
         return *this;
     }
 
@@ -121,7 +121,7 @@ public: /* Move backward */
     operator--(int)
     {
         self_type tmp {*this};
-        base_type::operator--();
+        *(static_cast<base_type*>(this)) -= M;
         return tmp;
     }
 
@@ -130,7 +130,7 @@ public: /* Move backward */
     constexpr self_type&
     operator-=(difference_type offset)
     {
-        base_type::operator-=(offset);
+        *(static_cast<base_type*>(this)) -= M * offset;
         return *this;
     }
 
@@ -149,7 +149,17 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return *static_cast<const base_type*>(this) - other;
+        size_t beforeLeft = this->m_row * N + this->m_column;
+        size_t beforeRight = other.m_row * N + other.m_column;
+
+        if (beforeLeft > beforeRight)
+        {
+            return beforeLeft - beforeRight;
+        }
+        else
+        {
+            return beforeRight - beforeLeft;
+        }
     }
 };
 
@@ -157,15 +167,15 @@ public: /* Difference */
 
 
 template<size_t M, size_t N, typename T>
-class MatrixColumnIterator : public ConstMatrixColumnIterator<M,N,T>
+class MatrixRowIterator : public ConstMatrixRowIterator<M,N,T>
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = MatrixColumnIterator<M,N,T>;
-    using base_type             = ConstMatrixColumnIterator<M,N,T>;
+    using self_type             = MatrixRowIterator<M,N,T>;
+    using base_type             = ConstMatrixRowIterator<M,N,T>;
     using value_type            = T;
     using reference             = T&;
     using pointer               = T*;
@@ -177,12 +187,12 @@ public: /* Constructors */
 /* ####################################################################################### */
 
     constexpr
-    MatrixColumnIterator() = default;
+    MatrixRowIterator() = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    MatrixColumnIterator(pointer dataPtr, size_t index, size_t element=0)
+    MatrixRowIterator(pointer dataPtr, size_t index, size_t element=0)
         : base_type(dataPtr, index, element)
     {
 
@@ -293,4 +303,4 @@ public: /* Difference */
     }
 };
 
-#endif // MATH3D_MATRIX_COLUMN_ITERATOR_HPP
+#endif // MATH3D_MATRIX_ROW_ITERATOR_HPP

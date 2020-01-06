@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Iterators/RandomAccessIterator.hpp>
+#include <Math3D/Core/RandomAccessIterator.hpp>
 
 
 using namespace std;

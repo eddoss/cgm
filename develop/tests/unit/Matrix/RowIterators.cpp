@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Matrix.hpp>
+#include <Math3D/Core/Matrices/Matrix.hpp>
 
 
 using namespace std;
@@ -19,9 +19,9 @@ TEST(Matrix_RowIterators, Plus)
         7, 8, 9
     };
 
-    auto it_02 = input.row_begin(0) + 2;
-    auto it_12 = input.row_begin(1) + 2;
-    auto it_22 = input.row_begin(2) + 2;
+    auto it_02 = input.beginRow(0) + 2;
+    auto it_12 = input.beginRow(1) + 2;
+    auto it_22 = input.beginRow(2) + 2;
 
     ASSERT_EQ(*it_02, 3);
     ASSERT_EQ(*it_12, 6);
@@ -39,9 +39,9 @@ TEST(Matrix_RowIterators, Minus)
         7, 8
     };
 
-    auto it_01 = input.row_end(0) - 1;
-    auto it_10 = input.row_end(1) - 2;
-    auto it_20 = input.row_end(2) - 2;
+    auto it_01 = input.endRow(0) - 1;
+    auto it_10 = input.endRow(1) - 2;
+    auto it_20 = input.endRow(2) - 2;
 
     ASSERT_EQ(*it_01, 2);
     ASSERT_EQ(*it_10, 4);
@@ -59,7 +59,7 @@ TEST(Matrix_RowIterators, PreIncrement)
         7, 8, 9
     };
 
-    auto it = input.row_begin(1);
+    auto it = input.beginRow(1);
 
     ASSERT_EQ(*it, 4);
     ASSERT_EQ(*(++it), 5);
@@ -77,7 +77,7 @@ TEST(Matrix_RowIterators, PostIncrement)
         7, 8, 9
     };
 
-    auto it = input.row_begin(0);
+    auto it = input.beginRow(0);
 
     ASSERT_EQ(*(it++), 1);
 }
@@ -93,7 +93,7 @@ TEST(Matrix_RowIterators, PreDecrement)
         7, 8
     };
 
-    auto it = input.row_end(2);
+    auto it = input.endRow(2);
 
     ASSERT_EQ(*(--it), 8);
     ASSERT_EQ(*(--it), 7);
@@ -110,7 +110,7 @@ TEST(Matrix_RowIterators, PostDecrement)
         7, 8
     };
 
-    ASSERT_EQ((input.row_end(1))--, input.row_end(1));
+    ASSERT_EQ((input.endRow(1))--, input.endRow(1));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -124,15 +124,15 @@ TEST(Matrix_RowIterators, Difference)
         7, 8, 9, 5
     };
 
-    auto a = input.row_begin(0) + 0;   // (0,0)
-    auto b = input.row_begin(0) + 2;   // (0,2)
+    auto a = input.beginRow(0) + 0;   // (0,0)
+    auto b = input.beginRow(0) + 2;   // (0,2)
     ASSERT_EQ(b - a, 2);
 
-    a = input.row_begin(0) + 0;   // (0,0)
-    b = input.row_begin(1) + 3;   // (1,3)
+    a = input.beginRow(0) + 0;   // (0,0)
+    b = input.beginRow(1) + 3;   // (1,3)
     ASSERT_EQ(b - a, 7);
 
-    a = input.row_begin(0) + 1;   // (0,1)
-    b = input.row_begin(2) + 3;   // (2,3)
+    a = input.beginRow(0) + 1;   // (0,1)
+    b = input.beginRow(2) + 3;   // (2,3)
     ASSERT_EQ(b - a, 10);
 }

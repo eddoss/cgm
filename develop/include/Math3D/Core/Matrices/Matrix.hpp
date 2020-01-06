@@ -3,9 +3,9 @@
 
 
 #include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Iterators/MatrixIterator.hpp>
-#include <Math3D/Core/Iterators/MatrixRowIterator.hpp>
-#include <Math3D/Core/Iterators/MatrixColumnIterator.hpp>
+#include <Math3D/Core/Matrices/Iterators/Default.hpp>
+#include <Math3D/Core/Matrices/Iterators/Row.hpp>
+#include <Math3D/Core/Matrices/Iterators/Column.hpp>
 
 
 /**
@@ -33,12 +33,24 @@ public: /* Typedefs */
 public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-    using iterator              = MatrixIterator<M,N,T>;
-    using const_iterator        = ConstMatrixIterator<M,N,T>;
-    using RowIterator           = ConstMatrixRowIterator<M,N,T>;
-    using ConstRowIterator      = MatrixRowIterator<M,N,T>;
-    using ColumnIterator        = MatrixColumnIterator<M,N,T>;
-    using ConstColumnIterator   = ConstMatrixColumnIterator<M,N,T>;
+    using iterator                      = MatrixIterator<M,N,T>;
+    using const_iterator                = ConstMatrixIterator<M,N,T>;
+    using reverse_iterator              = std::reverse_iterator<iterator>;
+	using const_reverse_iterator        = std::reverse_iterator<const_iterator>;
+
+/* --------------------------------------------------------------------------------------- */
+
+    using RowIterator                   = MatrixRowIterator<M,N,T>;
+    using ConstRowIterator              = ConstMatrixRowIterator<M,N,T>;
+    using ReverseRowIterator            = std::reverse_iterator<RowIterator>;
+	using ConstReverseRowIterator       = std::reverse_iterator<ConstRowIterator>;
+
+/* --------------------------------------------------------------------------------------- */
+
+    using ColumnIterator                = MatrixColumnIterator<M,N,T>;
+    using ConstColumnIterator           = ConstMatrixColumnIterator<M,N,T>;
+    using ReverseColumnIterator         = std::reverse_iterator<ColumnIterator>;
+	using ConstReverseColumnIterator    = std::reverse_iterator<ConstColumnIterator>;
 
 /* ####################################################################################### */
 public: /* Row and column typedefs */
@@ -465,60 +477,222 @@ public: /* Iterators */
     cend() const;
 
     /**
+     * Get first component reversed iterator.
+     * @return first component reversed iterator.
+     */
+    reverse_iterator
+    rbegin();
+
+    /**
+     * Get end component reversed iterator.
+     * @return last+1 component reversed iterator.
+     */
+    reverse_iterator
+    rend();
+
+    /**
+     * Get first component const reversed iterator.
+     * @return first component const reversed iterator.
+     */
+    const_reverse_iterator
+    rbegin() const;
+
+    /**
+     * Get end component const reversed iterator.
+     * @return last+1 component const reversed iterator.
+     */
+    const_reverse_iterator
+    rend() const;
+
+    /**
+     * Get first component const reversed iterator.
+     * @return first component const reversed iterator.
+     */
+    const_reverse_iterator
+    crbegin() const;
+
+    /**
+     * Get end component const reversed iterator.
+     * @return last+1 component const reversed iterator.
+     */
+    const_reverse_iterator
+    crend() const;
+
+/* ####################################################################################### */
+public: /* Column iterators */
+/* ####################################################################################### */
+
+    /**
      * Get column first iterator.
      * @return column first component iterator.
      */
     ColumnIterator
-    column_begin(size_type column);
+    beginColumn(size_type column);
 
     /**
      * Get column end iterator.
      * @return last+1 column component iterator.
      */
     ColumnIterator
-    column_end(size_type column);
+    endColumn(size_type column);
 
     /**
      * Get column const first iterator.
      * @return column first component const iterator.
      */
     ConstColumnIterator
-    column_cbegin(size_type column);
+    beginColumn(size_type column) const;
 
     /**
      * Get column const end iterator.
      * @return last+1 column component const iterator.
      */
     ConstColumnIterator
-    column_cend(size_type column);
+    endColumn(size_type column) const;
 
     /**
-  * Get row first iterator.
-  * @return row first component iterator.
-  */
+     * Get column const first iterator.
+     * @return column first component const iterator.
+     */
+    ConstColumnIterator
+    cbeginColumn(size_type column) const;
+
+    /**
+     * Get column const end iterator.
+     * @return last+1 column component const iterator.
+     */
+    ConstColumnIterator
+    cendColumn(size_type column) const;
+
+    /**
+     * Get first component reversed column iterator.
+     * @return first component reversed column iterator.
+     */
+    ReverseColumnIterator
+    rbeginColumn(size_type column);
+
+    /**
+     * Get end component reversed column iterator.
+     * @return last+1 component reversed column iterator.
+     */
+    ReverseColumnIterator
+    rendColumn(size_type column);
+
+    /**
+     * Get first component const reversed column iterator.
+     * @return first component const reversed column iterator.
+     */
+    ConstReverseColumnIterator
+    rbeginColumn(size_type column) const;
+
+    /**
+     * Get end component const reversed column iterator.
+     * @return last+1 component const reversed column iterator.
+     */
+    ConstReverseColumnIterator
+    rendColumn(size_type column) const;
+
+    /**
+     * Get first component const reversed column iterator.
+     * @return first component const reversed column iterator.
+     */
+    ConstReverseColumnIterator
+    crbeginColumn(size_type column) const;
+
+    /**
+     * Get end component const reversed column iterator.
+     * @return last+1 component const reversed column iterator.
+     */
+    ConstReverseColumnIterator
+    crendColumn(size_type column) const;
+
+/* ####################################################################################### */
+public: /* Row iterators */
+/* ####################################################################################### */
+
+    /**
+     * Get row first iterator.
+     * @return row first component iterator.
+     */
     RowIterator
-    row_begin(size_type row);
+    beginRow(size_type row);
 
     /**
      * Get row end iterator.
      * @return last+1 row component iterator.
      */
     RowIterator
-    row_end(size_type row);
+    endRow(size_type row);
 
     /**
      * Get row const first iterator.
      * @return row first component const iterator.
      */
     ConstRowIterator
-    row_cbegin(size_type row);
+    beginRow(size_type row) const;
 
     /**
      * Get row const end iterator.
      * @return last+1 row component const iterator.
      */
     ConstRowIterator
-    row_cend(size_type row);
+    endRow(size_type row) const;
+
+    /**
+     * Get row const first iterator.
+     * @return row first component const iterator.
+     */
+    ConstRowIterator
+    cbeginRow(size_type row) const;
+
+    /**
+     * Get row const end iterator.
+     * @return last+1 row component const iterator.
+     */
+    ConstRowIterator
+    cendRow(size_type row) const;
+
+    /**
+     * Get first component reversed row iterator.
+     * @return first component reversed row iterator.
+     */
+    ReverseRowIterator
+    rbeginRow(size_type row);
+
+    /**
+     * Get end component reversed row iterator.
+     * @return last+1 component reversed row iterator.
+     */
+    ReverseRowIterator
+    rendRow(size_type row);
+
+    /**
+     * Get first component const reversed row iterator.
+     * @return first component const reversed row iterator.
+     */
+    ConstReverseRowIterator
+    rbeginRow(size_type row) const;
+
+    /**
+     * Get end component const reversed row iterator.
+     * @return last+1 component const reversed row iterator.
+     */
+    ConstReverseRowIterator
+    rendRow(size_type row) const;
+
+    /**
+     * Get first component const reversed row iterator.
+     * @return first component const reversed row iterator.
+     */
+    ConstReverseRowIterator
+    crbeginRow(size_type row) const;
+
+    /**
+     * Get end component const reversed row iterator.
+     * @return last+1 component const reversed row iterator.
+     */
+    ConstReverseRowIterator
+    crendRow(size_type row) const;
 };
 
 
@@ -1189,8 +1363,64 @@ Matrix<M,N,T>::cend() const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::reverse_iterator
+Matrix<M,N,T>::rbegin()
+{
+    return reverse_iterator {end()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::reverse_iterator
+Matrix<M,N,T>::rend()
+{
+    return reverse_iterator {begin()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::const_reverse_iterator
+Matrix<M,N,T>::rbegin() const
+{
+    return const_reverse_iterator {cend()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::const_reverse_iterator
+Matrix<M,N,T>::rend() const
+{
+    return const_reverse_iterator {cbegin()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::const_reverse_iterator
+Matrix<M,N,T>::crbegin() const
+{
+    return const_reverse_iterator {cend()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::const_reverse_iterator
+Matrix<M,N,T>::crend() const
+{
+    return const_reverse_iterator {cbegin()};
+}
+
+/* ####################################################################################### */
+/* Column iterators */
+/* ####################################################################################### */
+
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ColumnIterator
-Matrix<M,N,T>::column_begin(size_type column)
+Matrix<M,N,T>::beginColumn(size_type column)
 {
     return ColumnIterator(&data[0][0], column, 0);
 }
@@ -1199,7 +1429,7 @@ Matrix<M,N,T>::column_begin(size_type column)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ColumnIterator
-Matrix<M,N,T>::column_end(size_type column)
+Matrix<M,N,T>::endColumn(size_type column)
 {
     return ColumnIterator(&data[0][0], column, M);
 }
@@ -1208,7 +1438,7 @@ Matrix<M,N,T>::column_end(size_type column)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstColumnIterator
-Matrix<M,N,T>::column_cbegin(size_type column)
+Matrix<M,N,T>::beginColumn(size_type column) const
 {
     return ConstColumnIterator(&data[0][0], column, 0);
 }
@@ -1217,7 +1447,7 @@ Matrix<M,N,T>::column_cbegin(size_type column)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstColumnIterator
-Matrix<M,N,T>::column_cend(size_type column)
+Matrix<M,N,T>::endColumn(size_type column) const
 {
     return ConstColumnIterator(&data[0][0], column, M);
 }
@@ -1225,8 +1455,82 @@ Matrix<M,N,T>::column_cend(size_type column)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstColumnIterator
+Matrix<M,N,T>::cbeginColumn(size_type column) const
+{
+    return ConstColumnIterator(&data[0][0], column, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstColumnIterator
+Matrix<M,N,T>::cendColumn(size_type column) const
+{
+    return ConstColumnIterator(&data[0][0], column, M);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseColumnIterator
+Matrix<M,N,T>::rbeginColumn(size_type column)
+{
+    return ReverseColumnIterator(endColumn(column));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseColumnIterator
+Matrix<M,N,T>::rendColumn(size_type column)
+{
+    return ReverseColumnIterator(beginColumn(column));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseColumnIterator
+Matrix<M,N,T>::rbeginColumn(size_type column) const
+{
+    return ConstReverseColumnIterator(endColumn(column));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseColumnIterator
+Matrix<M,N,T>::rendColumn(size_type column) const
+{
+    return ConstReverseColumnIterator(beginColumn(column));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseColumnIterator
+Matrix<M,N,T>::crbeginColumn(size_type column) const
+{
+    return ConstReverseColumnIterator(cendColumn(column));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseColumnIterator
+Matrix<M,N,T>::crendColumn(size_type column) const
+{
+    return ConstReverseColumnIterator(cbeginColumn(column));
+}
+
+/* ####################################################################################### */
+/* Row iterators */
+/* ####################################################################################### */
+
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::RowIterator
-Matrix<M,N,T>::row_begin(size_type row)
+Matrix<M,N,T>::beginRow(size_type row)
 {
     return RowIterator(&data[0][0], row, 0);
 }
@@ -1235,7 +1539,7 @@ Matrix<M,N,T>::row_begin(size_type row)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::RowIterator
-Matrix<M,N,T>::row_end(size_type row)
+Matrix<M,N,T>::endRow(size_type row)
 {
     return RowIterator(&data[0][0], row, N);
 }
@@ -1244,7 +1548,7 @@ Matrix<M,N,T>::row_end(size_type row)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstRowIterator
-Matrix<M,N,T>::row_cbegin(size_type row)
+Matrix<M,N,T>::beginRow(size_type row) const
 {
     return ConstRowIterator(&data[0][0], row, 0);
 }
@@ -1253,9 +1557,81 @@ Matrix<M,N,T>::row_cbegin(size_type row)
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstRowIterator
-Matrix<M,N,T>::row_cend(size_type row)
+Matrix<M,N,T>::endRow(size_type row) const
 {
     return ConstRowIterator(&data[0][0], row, N);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstRowIterator
+Matrix<M,N,T>::cbeginRow(size_type row) const
+{
+    return ConstRowIterator(&data[0][0], row, 0);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstRowIterator
+Matrix<M,N,T>::cendRow(size_type row) const
+{
+    return ConstRowIterator(&data[0][0], row, N);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseRowIterator
+Matrix<M,N,T>::rbeginRow(size_type row)
+{
+    return ReverseRowIterator(endRow(row));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseRowIterator
+Matrix<M,N,T>::rendRow(size_type row)
+{
+    return ReverseRowIterator(beginRow(row));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseRowIterator
+Matrix<M,N,T>::rbeginRow(size_type row) const
+{
+    return ConstReverseRowIterator(endRow(row));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseRowIterator
+Matrix<M,N,T>::rendRow(size_type row) const
+{
+    return ConstReverseRowIterator(beginRow(row));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseRowIterator
+Matrix<M,N,T>::crbeginRow(size_type row) const
+{
+    return ConstReverseRowIterator(cendRow(row));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseRowIterator
+Matrix<M,N,T>::crendRow(size_type row) const
+{
+    return ConstReverseRowIterator(cbeginRow(row));
 }
 
 #endif // MATH3D_MATRIX_HPP
