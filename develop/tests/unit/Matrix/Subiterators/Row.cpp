@@ -10,7 +10,7 @@ using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
 
-TEST(Matrix_RowIterators, Plus)
+TEST(Matrix_RowSubiterators, Plus)
 {
     Mat33 input
     {
@@ -30,7 +30,7 @@ TEST(Matrix_RowIterators, Plus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, Minus)
+TEST(Matrix_RowSubiterators, Minus)
 {
     Mat32 input
     {
@@ -50,7 +50,7 @@ TEST(Matrix_RowIterators, Minus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PreIncrement)
+TEST(Matrix_RowSubiterators, PreIncrement)
 {
     Mat33 input
     {
@@ -68,7 +68,7 @@ TEST(Matrix_RowIterators, PreIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PostIncrement)
+TEST(Matrix_RowSubiterators, PostIncrement)
 {
     Mat33 input
     {
@@ -84,7 +84,7 @@ TEST(Matrix_RowIterators, PostIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PreDecrement)
+TEST(Matrix_RowSubiterators, PreDecrement)
 {
     Mat32 input
     {
@@ -101,7 +101,7 @@ TEST(Matrix_RowIterators, PreDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PostDecrement)
+TEST(Matrix_RowSubiterators, PostDecrement)
 {
     Mat32 input
     {
@@ -115,7 +115,7 @@ TEST(Matrix_RowIterators, PostDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, Difference)
+TEST(Matrix_RowSubiterators, Difference)
 {
     Mat34 input
     {
@@ -135,4 +135,27 @@ TEST(Matrix_RowIterators, Difference)
     a = input.beginRow(0) + 1;   // (0,1)
     b = input.beginRow(2) + 3;   // (2,3)
     ASSERT_EQ(b - a, 10);
+}
+
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_RowSubiterators, Reverse)
+{
+    Mat34 input
+    {
+        1, 2, 3, 6,
+        4, 5, 6, 8,
+        7, 8, 9, 5
+    };
+
+    auto it_00 = input.rbeginRow(1) + 3;
+    auto it_01 = input.rbeginRow(1) + 2;
+    auto it_02 = input.rbeginRow(1) + 1;
+    auto it_03 = input.rbeginRow(1);
+
+    ASSERT_EQ(*it_00, 4);
+    ASSERT_EQ(*it_01, 5);
+    ASSERT_EQ(*it_02, 6);
+    ASSERT_EQ(*it_03, 8);
 }

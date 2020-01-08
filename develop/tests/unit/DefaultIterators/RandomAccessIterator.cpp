@@ -13,13 +13,15 @@ struct container
 {
     T data[Size];
 
-    using iterator          = RandomAccessIterator<T>;
-    using const_iterator    = ConstRandomAccessIterator<T>;
+    using iterator                  = RandomAccessIterator<T>;
+    using const_iterator            = ConstRandomAccessIterator<T>;
+    using reverse_iterator          = std::reverse_iterator<iterator>;
+	using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
 
    ~container() = default;
     container(){};
-    container& operator = (container&& other)       = default;
-    container& operator = (const container& other)  = default;
+    container& operator = (container&& other) noexcept  = default;
+    container& operator = (const container& other)      = default;
     container(std::initializer_list<T> values)
     {
         for (size_t i = 0; i < Size; ++i)
@@ -32,12 +34,18 @@ struct container
     const T& operator [] (size_t i) const {return data[i];}
     constexpr size_t size() const {return Size;}
 
-    iterator        begin()             {return iterator(data);}
-    iterator        end()               {return iterator(data+Size);}
-    const_iterator  begin()     const   {return const_iterator(data);}
-    const_iterator  end()       const   {return const_iterator(data+Size);}
-    const_iterator  cbegin()    const   {return const_iterator(data);}
-    const_iterator  cend()      const   {return const_iterator(data+Size);}
+    iterator                begin()             {return iterator(data);}
+    iterator                end()               {return iterator(data+Size);}
+    const_iterator          begin()     const   {return const_iterator(data);}
+    const_iterator          end()       const   {return const_iterator(data+Size);}
+    const_iterator          cbegin()    const   {return const_iterator(data);}
+    const_iterator          cend()      const   {return const_iterator(data+Size);}
+    reverse_iterator        rbegin()             {return reverse_iterator(end());}
+    reverse_iterator        rend()               {return reverse_iterator(begin());}
+    const_reverse_iterator  rbegin()     const   {return const_reverse_iterator(end());}
+    const_reverse_iterator  rend()       const   {return const_reverse_iterator(begin());}
+    const_reverse_iterator  crbegin()    const   {return const_reverse_iterator(cend());}
+    const_reverse_iterator  crend()      const   {return const_reverse_iterator(cbegin());}
 };
 
 /* --------------------------------------------------------------------------------------- */
@@ -120,7 +128,7 @@ TEST(RandomAccessIterator_Base, Difference)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(RandomAccessIterator_Base, RangeBasedForLoop)
+TEST(RandomAccessIterator_Base, Range_Based_ForLoop)
 {
     const container<int,3> input {22, 33, 44};
     const container<int,3> expec {22, 33, 44};
@@ -166,6 +174,22 @@ TEST(RandomAccessIterator_Base, Iterators_Based_ForLoop)
     for (; it_in != input.end(); ++it_in, ++it_ex)
     {
         *it_in *= 2;
+        ASSERT_EQ(*it_in, *it_ex);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(RandomAccessIterator_Base, Reverse)
+{
+    container<int,4> input {1,2,3,4};
+    container<int,5> expec {4,3,2,1};
+
+    auto it_in {input.rbegin()};
+    auto it_ex {expec.begin()};
+
+    for (; it_in != input.rend(); ++it_in, ++it_ex)
+    {
         ASSERT_EQ(*it_in, *it_ex);
     }
 }

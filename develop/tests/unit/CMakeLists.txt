@@ -24,14 +24,17 @@ set(VECTOR_TESTS_SUITES
 )
 
 set(MATRIX_TESTS_SUITES
-    Matrix/Arithmetic.cpp
-    Matrix/Assignment.cpp
-    Matrix/IncrementDecrement.cpp
-    Matrix/ComparisonWithOther.cpp
-    Matrix/ComparisonWithScalar.cpp
-    Matrix/Iterators.cpp
-    Matrix/ColumnIterators.cpp
-    Matrix/RowIterators.cpp
+#    Matrix/Arithmetic.cpp
+#    Matrix/Assignment.cpp
+#    Matrix/IncrementDecrement.cpp
+#    Matrix/ComparisonWithOther.cpp
+#    Matrix/ComparisonWithScalar.cpp
+#    Matrix/Iterators/Default.cpp
+#    Matrix/Iterators/Column.cpp
+#    Matrix/Iterators/Row.cpp
+    Matrix/Subiterators/Default.cpp
+    Matrix/Subiterators/Column.cpp
+    Matrix/Subiterators/Row.cpp
 )
 
 # ####################################################################################### #
@@ -40,8 +43,8 @@ set(MATRIX_TESTS_SUITES
 
 add_executable(${PROJECT_NAME}
     run.cpp
-    ${DEFAULT_ITERATORS_TESTS_SUITES}
-    ${VECTOR_TESTS_SUITES}
+#    ${DEFAULT_ITERATORS_TESTS_SUITES}
+#    ${VECTOR_TESTS_SUITES}
     ${MATRIX_TESTS_SUITES}
 )
 

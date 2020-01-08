@@ -34,13 +34,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # ####################################################################################### #
 
 set(Math3D_PUBLIC_HEADERS
-    develop/include/${PROJECT_NAME}/Core/Iterators/RandomAccess.hpp
-    develop/include/${PROJECT_NAME}/Core/Iterators/MatrixIterator.hpp
-    develop/include/${PROJECT_NAME}/Core/Iterators/MatrixColumnIterator.hpp
-    develop/include/${PROJECT_NAME}/Core/Vector.hpp
-    develop/include/${PROJECT_NAME}/Core/Matrix.hpp
-    develop/include/${PROJECT_NAME}/Global.hpp
-    develop/include/${PROJECT_NAME}/IO.hpp)
+    develop/include/Math3D/IO.hpp
+    develop/include/Math3D/Global.hpp
+    develop/include/Math3D/Core/Vector.hpp
+    develop/include/Math3D/Core/RandomAccessIterator.hpp
+    develop/include/Math3D/Core/Matrices/Matrix.hpp
+    develop/include/Math3D/Core/Matrices/Iterators/Default.hpp
+    develop/include/Math3D/Core/Matrices/Iterators/Row.hpp
+    develop/include/Math3D/Core/Matrices/Iterators/Column.hpp
+    develop/include/Math3D/Core/Matrices/Subiterators/Default.hpp
+    develop/include/Math3D/Core/Matrices/Subiterators/Row.hpp
+    develop/include/Math3D/Core/Matrices/Subiterators/Column.hpp
+)
 
 # ####################################################################################### #
 # Setup main target

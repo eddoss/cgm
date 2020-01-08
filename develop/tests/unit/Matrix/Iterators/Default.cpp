@@ -6,7 +6,9 @@
 
 
 using namespace std;
-using Mat = Matrix<2,2>;
+using Mat32 = Matrix<3,2,int>;
+using Mat33 = Matrix<3,3,int>;
+using Mat34 = Matrix<3,4,int>;
 
 /* ####################################################################################### */
 /* Default iterators */
@@ -177,4 +179,25 @@ TEST(Matrix_Iterators, Difference)
     auto diff   {a - b};
 
     ASSERT_EQ(diff, 3);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Reverse)
+{
+    Matrix<2,2,int> input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_11 = input.rbegin();
+    auto it_10 = input.rbegin() + 1;
+    auto it_01 = input.rbegin() + 2;
+    auto it_00 = input.rbegin() + 3;
+
+    ASSERT_EQ(*it_00, 1);
+    ASSERT_EQ(*it_01, 4);
+    ASSERT_EQ(*it_10, 2);
+    ASSERT_EQ(*it_11, 5);
 }

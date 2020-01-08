@@ -239,11 +239,19 @@ public: /* Compares */
 public: /* Methods */
 /* ####################################################################################### */
 
+    /**
+     * Get row index of the current component.
+     * @return Current component row index.
+     **/
     size_t
     row() const {return m_row;}
 
 /* --------------------------------------------------------------------------------------- */
 
+    /**
+     * Get column index of the current component.
+     * @return Current component column index.
+     **/
     size_t
     column() const {return m_column;}
 
