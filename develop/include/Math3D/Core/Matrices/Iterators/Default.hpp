@@ -51,7 +51,7 @@ public: /* Constructors */
         : m_data(firstCompPtr + column * M + row)
         , m_first(firstCompPtr)
         , m_row(row)
-        , m_column(column)
+        , m_col(column)
     {
 
     }
@@ -253,23 +253,23 @@ public: /* Methods */
      * @return Current component column index.
      **/
     size_t
-    column() const {return m_column;}
+    column() const {return m_col;}
 
 /* ####################################################################################### */
 protected: /* Internal */
 /* ####################################################################################### */
 
     pointer
-    m_data      {nullptr};
+    m_data  {nullptr};
 
     pointer
-    m_first     {nullptr};
+    m_first {nullptr};
 
     size_t
-    m_row       {0};
+    m_row   {0};
 
     size_t
-    m_column    {0};
+    m_col   {0};
 
     void
     calcRowColumn()
@@ -277,7 +277,7 @@ protected: /* Internal */
 
         difference_type offset {static_cast<difference_type>(m_data - m_first)};
         m_row = offset % M;
-        m_column = (offset-m_row) / M;
+        m_col = (offset - m_row) / M;
     }
 };
 

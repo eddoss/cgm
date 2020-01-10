@@ -60,15 +60,11 @@ public: /* Iterators typedefs */
 //    using SubIterator                   = SubmatrixIterator<M,N,T>;
     using ConstSubIterator              = ConstSubmatrixIterator<M,N,T>;
 //    using ReverseSubIterator            = std::reverse_iterator<SubmatrixIterator>;
-//	using ConstReverseSubIterator       = std::reverse_iterator<ConstSubmatrixIterator>;
-
-/* ####################################################################################### */
-public: /* Support typedefs */
-/* ####################################################################################### */
-
+    using ConstReverseSubIterator       = std::reverse_iterator<ConstSubIterator>;
     using SubRect               = typename ConstSubIterator::SubRect;
-    using ExcludedSubRows       = typename ConstSubIterator::ExcludedRows;
-    using ExcludedSubColumns    = typename ConstSubIterator::ExcludedColumns;
+
+
+//	using ConstReverseSubIterator       = std::reverse_iterator<ConstSubmatrixIterator>;
 
 /* ####################################################################################### */
 public: /* Row and column typedefs */
@@ -735,14 +731,14 @@ public: /* Sub iterators */
      * @return first component const iterator.
      */
     ConstSubIterator
-    beginSub(const SubRect& subRect, const ExcludedSubRows& excludedRows, const ExcludedSubColumns& excludedColumns) const;
+    beginSub(const SubRect& subRect) const;
 
     /**
      * Get end component const iterator.
      * @return last+1 component const iterator.
      */
     ConstSubIterator
-    endSub(const SubRect& subRect, const ExcludedSubRows& excludedRows, const ExcludedSubColumns& excludedColumns) const;
+    endSub(const SubRect& subRect) const;
 
 //    /**
 //     * Get first component const iterator.
@@ -772,19 +768,19 @@ public: /* Sub iterators */
 //    reverse_iterator
 //    rendSub();
 //
-//    /**
-//     * Get first component const reversed iterator.
-//     * @return first component const reversed iterator.
-//     */
-//    const_reverse_iterator
-//    rbeginSub() const;
-//
-//    /**
-//     * Get end component const reversed iterator.
-//     * @return last+1 component const reversed iterator.
-//     */
-//    const_reverse_iterator
-//    rendSub() const;
+    /**
+     * Get first component const reversed iterator.
+     * @return first component const reversed iterator.
+     */
+    ConstReverseSubIterator
+    rbeginSub(const SubRect& subRect) const;
+
+    /**
+     * Get end component const reversed iterator.
+     * @return last+1 component const reversed iterator.
+     */
+    ConstReverseSubIterator
+    rendSub(const SubRect& subRect) const;
 //
 //    /**
 //     * Get first component const reversed iterator.
@@ -1741,20 +1737,17 @@ Matrix<M,N,T>::crendRow(size_type row) const
 }
 
 /* ####################################################################################### */
-/* Row iterators */
+/* Sub iterators */
 /* ####################################################################################### */
-
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstSubIterator
-Matrix<M,N,T>::beginSub(const Matrix::SubRect& subRect, const Matrix::ExcludedSubRows& excludedRows, const Matrix::ExcludedSubColumns& excludedColumns) const
+Matrix<M,N,T>::beginSub(const Matrix::SubRect& subRect) const
 {
     return ConstSubIterator
     {
         &data[0][0],
         subRect,
-        excludedRows,
-        excludedColumns,
         0,
         0
     };
@@ -1764,16 +1757,33 @@ Matrix<M,N,T>::beginSub(const Matrix::SubRect& subRect, const Matrix::ExcludedSu
 
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstSubIterator
-Matrix<M,N,T>::endSub(const Matrix::SubRect& subRect, const Matrix::ExcludedSubRows& excludedRows, const Matrix::ExcludedSubColumns& excludedColumns) const
+Matrix<M,N,T>::endSub(const Matrix::SubRect& subRect) const
 {
     return ++ConstSubIterator
     {
         &data[0][0],
         subRect,
-        excludedRows,
-        excludedColumns,
         subRect.second.first - subRect.first.first,
         subRect.second.second - subRect.first.second
     };
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseSubIterator
+Matrix<M,N,T>::rbeginSub(const SubRect& subRect) const
+{
+    return ConstReverseSubIterator(endSub(subRect));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseSubIterator
+Matrix<M,N,T>::rendSub(const SubRect& subRect) const
+{
+    return ConstReverseSubIterator(beginSub(subRect));
+}
+
 #endif // MATH3D_MATRIX_HPP

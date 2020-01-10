@@ -149,8 +149,8 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        size_t beforeLeft = this->m_row * N + this->m_column;
-        size_t beforeRight = other.m_row * N + other.m_column;
+        size_t beforeLeft = this->m_row * N + this->m_col;
+        size_t beforeRight = other.m_row * N + other.m_col;
 
         if (beforeLeft > beforeRight)
         {

@@ -9,7 +9,7 @@
 /**
  * It iterate over all components  of internal submatrix of generic
  * matrix. You need specify top-left  and bottom-right coordinates 
- * of matrix. Also you can  setup excluded rows and columns.
+ * of matrix.
  *
  * @tparam M External matrix rows count.
  * @tparam N External matrix columns count.
@@ -31,29 +31,13 @@ public: /* Typedefs */
     using iterator_category     = typename base_type::iterator_category;
     using difference_type       = typename base_type::difference_type;
     using SubRect               = std::pair<std::pair<size_t,size_t>, std::pair<size_t,size_t>>;
-    using ExcludedRows          = std::vector<size_t>;
-    using ExcludedColumns       = std::vector<size_t>;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
-    /**
-     * Initialize external matrix and excluded rows and columns.
-     * @param firstCompPtr External matrix first component pointer.
-     * @param subRect Submatrix rectangle left-top and right-bottom coordinates.
-     * @param excludedRows External matrix excluded rows numbers.
-     * @param excludedColumns External matrix excluded columns numbers.
-     **/
-    ConstSubmatrixIterator(
-        const T* firstCompPtr,
-        const SubRect& subRect,
-        const ExcludedRows& excludedRows,
-        const ExcludedColumns& excludedColumns,
-        size_t subRow,
-        size_t subColumn
-    )
-        : base_type(firstCompPtr, 0, 0)
+    ConstSubmatrixIterator(pointer firstCompPtr, const SubRect& subRect, size_t subRow, size_t subColumn)
+        : base_type(firstCompPtr, subRect.first.first, subRect.first.second)
         , m_lt_row(subRect.first.first)
         , m_lt_col(subRect.first.second)
         , m_rb_row(subRect.second.first)
@@ -61,11 +45,15 @@ public: /* Constructors */
         , m_sub_row(subRow)
         , m_sub_col(subColumn)
     {
-        validateSubRange();
-        cleanupExcludedRowsColumns(excludedRows, excludedColumns);
-        calculateRowsRealCount();
-        calculateColumnsRealCount();
-        m_sub_size = m_columns * m_rows;
+        if (m_lt_row > m_rb_row)
+        {
+            throw std::runtime_error("Submatrix top-left row id greater than bottom-right row id");
+        }
+        else if (m_lt_col > m_rb_col)
+        {
+            throw std::runtime_error("Submatrix top-left column id greater than bottom-right column id");
+        }
+
         setupDataPointer();
     }
 
@@ -178,8 +166,17 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        size_t thisId {m_sub_col * m_sub_row};
-        size_t otherId {other.m_sub_col * other.m_sub_row};
+        if (m_lt_row != other.m_lt_row ||
+            m_lt_col != other.m_lt_col ||
+            m_rb_row != other.m_rb_row ||
+            m_rb_col != other.m_rb_col)
+        {
+            throw std::runtime_error("Incompatible iterator. It must have the same sub rect.");
+        }
+
+        size_t rows {subRows()};
+        size_t thisId {m_sub_col * rows + m_sub_row};
+        size_t otherId {other.m_sub_col * rows + other.m_sub_row};
 
         if (thisId > otherId)
         {
@@ -202,7 +199,7 @@ public: /* Methods */
     size_t
     subRows() const
     {
-        return m_rows;
+        return m_rb_row - m_lt_row + 1;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -214,7 +211,7 @@ public: /* Methods */
     size_t
     subColumns() const
     {
-        return m_columns;
+        return m_rb_col - m_lt_col + 1;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -226,7 +223,7 @@ public: /* Methods */
     size_t
     subSize() const
     {
-        return m_rows*m_columns;
+        return subRows() * subColumns();
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -260,12 +257,6 @@ protected: /* Internal fields */
 /* ####################################################################################### */
 
     size_t
-    m_rows      {0};    // real rows count
-
-    size_t
-    m_columns   {0};    // real columns count
-
-    size_t
     m_lt_row    {0};    // submatrix left-top point row id
 
     size_t
@@ -283,17 +274,8 @@ protected: /* Internal fields */
     size_t
     m_sub_col   {0};    // id of submatrix current component column
 
-    size_t
-    m_sub_size  {0};    // submatrix components count
-
-    ExcludedRows
-    m_exrows;           // excluded rows (external matrix indices)
-
-    ExcludedColumns
-    m_excols;           // excluded columns (external matrix indices)
-
 /* ####################################################################################### */
-protected: /* Support for moving */
+protected: /* Support */
 /* ####################################################################################### */
 
     /*
@@ -302,8 +284,7 @@ protected: /* Support for moving */
     void
     moveForward(size_t offset)
     {
-//        goToID(m_sub_col * m_rows + m_sub_row + offset);
-        if (m_sub_col >= )
+        goToID(m_sub_col * subRows() + m_sub_row + offset);
         setupDataPointer();
     }
 
@@ -315,7 +296,7 @@ protected: /* Support for moving */
     void
     moveBackward(size_t offset)
     {
-        goToID(m_sub_col * m_rows + m_sub_row - offset);
+        goToID(m_sub_col * subRows() + m_sub_row - offset);
         setupDataPointer();
     }
 
@@ -338,176 +319,18 @@ protected: /* Support for moving */
 /* --------------------------------------------------------------------------------------- */
 
     /*
-     * Move to component by index.
+     * Move to component by index (inside submatrix).
      * If index is out of range, index will be clamped.
      * @param id Index to go to.
      */
     void
     goToID(size_t id)
     {
-        m_sub_col = id / m_rows;
-        m_sub_row = id - m_sub_col * m_rows;
-    }
-
-/* ####################################################################################### */
-protected: /* Support for constructors */
-/* ####################################################################################### */
-
-    /*
-     * Validate submatrix rect range.
-     */
-    void
-    validateSubRange()
-    {
-        if (m_lt_row >= m_rb_row)
-        {
-            throw std::runtime_error("Submatrix top-left row id greater than bottom-right row id");
-        }
-        else if (m_lt_col >= m_rb_col)
-        {
-            throw std::runtime_error("Submatrix top-left column id greater than bottom-right column id");
-        }
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    /*
-     * Ignore excluded rows and columns are not in subRect range.
-     */
-    void
-    cleanupExcludedRowsColumns(const ExcludedRows& excludedRows, const ExcludedColumns& excludedColumns)
-    {
-        // rows
-        for (auto exrow : excludedRows)
-        {
-            if (exrow >= m_lt_row && exrow <= m_rb_row)
-            {
-                m_exrows.push_back(exrow);
-            }
-        }
-
-        // columns
-        for (auto excol : excludedColumns)
-        {
-            if (excol >= m_lt_col && excol <= m_rb_col)
-            {
-                m_excols.push_back(excol);
-            }
-        }
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    /*
-     * Calculate real count of submatrix rows.
-     */
-    void
-    calculateRowsRealCount()
-    {
-        m_rows = m_rb_row - m_lt_row + 1;
-
-        if (m_exrows.size() == 1)
-        {
-            auto exvalue = m_exrows.at(0);
-            for (size_t i = m_lt_row; i != m_rb_row; ++i)
-            {
-                if (m_rows == 0)
-                {
-                    throw std::runtime_error("Submatrix rows count is 0");
-                }
-                if (i != exvalue)
-                {
-                    --m_rows;
-                }
-            }
-        }
-        else if (m_exrows.size() > 1)
-        {
-            for (size_t i = m_lt_row; i != m_rb_row; ++i)
-            {
-                if (m_rows == 0)
-                {
-                    throw std::runtime_error("Submatrix rows count is 0");
-                }
-                if (std::find(m_exrows.cbegin(), m_exrows.cend(), i) != m_exrows.cend())
-                {
-                    --m_rows;
-                }
-            }
-        }
-        if (m_rows == 0)
-        {
-            throw std::runtime_error("Submatrix rows count is 0");
-        }
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    /*
-     * Calculate real count of submatrix columns.
-     */
-    void
-    calculateColumnsRealCount()
-    {
-        m_columns = m_rb_col - m_lt_col + 1;
-
-        if (m_excols.size() == 1)
-        {
-            auto exvalue = m_excols.at(0);
-            for (size_t i = m_lt_col; i != m_rb_col; ++i)
-            {
-                if (m_rows == 0)
-                {
-                    throw std::runtime_error("Submatrix rows count is 0");
-                }
-                if (i != exvalue)
-                {
-                    --m_columns;
-                }
-            }
-        }
-        else if (m_excols.size() > 1)
-        {
-            for (size_t i = m_lt_col; i != m_rb_col; ++i)
-            {
-                if (m_rows == 0)
-                {
-                    throw std::runtime_error("Submatrix rows count is 0");
-                }
-                if (std::find(m_excols.cbegin(), m_excols.cend(), i) != m_excols.cend())
-                {
-                    --m_columns;
-                }
-            }
-        }
-        if (m_rows == 0)
-        {
-            throw std::runtime_error("Submatrix rows count is 0");
-        }
-    }
-
-/* --------------------------------------------------------------------------------------- */
-
-    /*
-     * Calculate real count of submatrix columns.
-     */
-    void
-    next()
-    {
-        if (m_sub_col == m_columns-1 && m_sub_row == m_rows-1) // last component
-        {
-            m_sub_row = 0;
-            m_sub_col = m_columns;
-        }
-        else
-        {
-            m_sub_row += 1;
-            if (m_sub_row == m_rows-1)
-            {
-                m_sub_row = 0;
-                m_sub_col += 1;
-            }
-        }
+        size_t rows = subRows();
+        m_sub_col = id / rows;
+        m_sub_row = id - m_sub_col * rows;
+        this->m_row = m_lt_row + m_sub_row;
+        this->m_col = m_lt_col + m_sub_col;
     }
 };
 
