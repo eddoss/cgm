@@ -5,22 +5,48 @@
 #include <ios>
 #include <iomanip>
 #include <Math3D/Core/Vectors/Vector.hpp>
+#include <Math3D/Core/Matrices/Matrix.hpp>
 
 
-template<uint32_t D, typename T>
+template<size_t D, typename T>
 std::ostream&
-operator << (std::ostream& stream, const Vector<D,T>& vector)
+operator << (std::ostream& stream, const Vector<D,T>& vec)
 {
     stream.setf(std::ios::showpos);
-    stream << typeid(vector).name() << "\n{";
+    stream << typeid(vec).name() << "\n{";
     stream << std::fixed;
-    for (uint32_t i = 0; i < D; ++i)
+    for (size_t i = 0; i < D; ++i)
     {
         stream  << "\n    "
                 << std::setw(10)
                 << std::left
                 << std::setprecision(6)
-                << vector[i];
+                << vec[i];
+    }
+    stream << "\n}\n";
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+std::ostream&
+operator << (std::ostream& stream, const Matrix<M,N,T>& mat)
+{
+    stream.setf(std::ios::showpos);
+    stream << typeid(mat).name() << "\n{";
+    stream << std::fixed;
+    for (size_t r = 0; r < M; ++r)
+    {
+        stream << "\n    ";
+        for (size_t c = 0; c < N; ++c)
+        {
+            stream  << "  "
+                    << std::setw(10)
+                    << std::left
+                    << std::setprecision(6)
+                    << mat(r,c);
+        }
     }
     stream << "\n}\n";
     return stream;
