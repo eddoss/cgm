@@ -16,7 +16,7 @@ using Mat44 = Matrix<4,4,int>;
 /* Default iterators */
 /* ####################################################################################### */
 
-TEST(Matrix_Subiterators, Plus)
+TEST(Matrix_SubIterator, Plus)
 {
     Mat44 input
     {
@@ -41,7 +41,7 @@ TEST(Matrix_Subiterators, Plus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Minus)
+TEST(Matrix_SubIterator, Minus)
 {
     Mat44 input
     {
@@ -66,7 +66,7 @@ TEST(Matrix_Subiterators, Minus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, PreIncrement)
+TEST(Matrix_SubIterator, PreIncrement)
 {
     Mat44 input
     {
@@ -87,7 +87,7 @@ TEST(Matrix_Subiterators, PreIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, PostIncrement)
+TEST(Matrix_SubIterator, PostIncrement)
 {
     Mat44 input
     {
@@ -108,7 +108,7 @@ TEST(Matrix_Subiterators, PostIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, PreDecrement)
+TEST(Matrix_SubIterator, PreDecrement)
 {
     Mat44 input
     {
@@ -130,7 +130,7 @@ TEST(Matrix_Subiterators, PreDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, PostDecrement)
+TEST(Matrix_SubIterator, PostDecrement)
 {
     Mat44 input
     {
@@ -153,7 +153,7 @@ TEST(Matrix_Subiterators, PostDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, RowsColumns_FirstComponent)
+TEST(Matrix_SubIterator, RowsColumns_FirstComponent)
 {
     Mat44 input
     {
@@ -175,7 +175,7 @@ TEST(Matrix_Subiterators, RowsColumns_FirstComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, RowsColumns_MidComponent)
+TEST(Matrix_SubIterator, RowsColumns_MidComponent)
 {
     Mat44 input
     {
@@ -197,7 +197,7 @@ TEST(Matrix_Subiterators, RowsColumns_MidComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, RowsColumns_LastComponent)
+TEST(Matrix_SubIterator, RowsColumns_LastComponent)
 {
     Mat44 input
     {
@@ -219,7 +219,7 @@ TEST(Matrix_Subiterators, RowsColumns_LastComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Difference)
+TEST(Matrix_SubIterator, Difference)
 {
     Mat44 input
     {
@@ -239,7 +239,7 @@ TEST(Matrix_Subiterators, Difference)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_Equal)
+TEST(Matrix_SubIterator, Comparison_Equal)
 {
     Mat44 input
     {
@@ -261,7 +261,7 @@ TEST(Matrix_Subiterators, Comparison_Equal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_NotEqual)
+TEST(Matrix_SubIterator, Comparison_NotEqual)
 {
     Mat44 input
     {
@@ -283,7 +283,7 @@ TEST(Matrix_Subiterators, Comparison_NotEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_Less)
+TEST(Matrix_SubIterator, Comparison_Less)
 {
     Mat44 input
     {
@@ -303,7 +303,7 @@ TEST(Matrix_Subiterators, Comparison_Less)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_LessOrEqual)
+TEST(Matrix_SubIterator, Comparison_LessOrEqual)
 {
     Mat44 input
     {
@@ -323,7 +323,7 @@ TEST(Matrix_Subiterators, Comparison_LessOrEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_Greater)
+TEST(Matrix_SubIterator, Comparison_Greater)
 {
     Mat44 input
     {
@@ -343,7 +343,7 @@ TEST(Matrix_Subiterators, Comparison_Greater)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Comparison_GreaterOrEqual)
+TEST(Matrix_SubIterator, Comparison_GreaterOrEqual)
 {
     Mat44 input
     {
@@ -363,7 +363,7 @@ TEST(Matrix_Subiterators, Comparison_GreaterOrEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Reverse)
+TEST(Matrix_SubIterator, Reverse)
 {
     Mat44 input
     {

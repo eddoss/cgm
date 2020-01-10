@@ -28,10 +28,8 @@ set(MATRIX_TESTS_SUITES
     Matrix/ComparisonWithScalar.cpp
     Matrix/Iterators/Default.cpp
     Matrix/Iterators/Column.cpp
+    Matrix/Iterators/Sub.cpp
     Matrix/Iterators/Row.cpp
-    Matrix/Subiterators/Default.cpp
-    Matrix/Subiterators/Column.cpp
-    Matrix/Subiterators/Row.cpp
 )
 
 # ####################################################################################### #

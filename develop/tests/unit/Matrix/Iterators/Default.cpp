@@ -16,7 +16,7 @@ using Mat44 = Matrix<4,4,int>;
 /* Default iterators */
 /* ####################################################################################### */
 
-TEST(Matrix_Iterators, Plus)
+TEST(Matrix_Iterator, Plus)
 {
     Mat33 input
     {
@@ -36,7 +36,7 @@ TEST(Matrix_Iterators, Plus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Minus)
+TEST(Matrix_Iterator, Minus)
 {
     Mat33 input
     {
@@ -56,7 +56,7 @@ TEST(Matrix_Iterators, Minus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, PreIncrement)
+TEST(Matrix_Iterator, PreIncrement)
 {
     Mat33 input
     {
@@ -74,7 +74,7 @@ TEST(Matrix_Iterators, PreIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, PostIncrement)
+TEST(Matrix_Iterator, PostIncrement)
 {
     Mat33 input
     {
@@ -90,7 +90,7 @@ TEST(Matrix_Iterators, PostIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, PreDecrement)
+TEST(Matrix_Iterator, PreDecrement)
 {
     Mat33 input
     {
@@ -108,7 +108,7 @@ TEST(Matrix_Iterators, PreDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, PostDecrement)
+TEST(Matrix_Iterator, PostDecrement)
 {
     Mat33 input
     {
@@ -122,7 +122,7 @@ TEST(Matrix_Iterators, PostDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, RowsColumns_FirstComponent)
+TEST(Matrix_Iterator, RowsColumns_FirstComponent)
 {
     Mat33 input
     {
@@ -137,7 +137,7 @@ TEST(Matrix_Iterators, RowsColumns_FirstComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, RowsColumns_MidComponent)
+TEST(Matrix_Iterator, RowsColumns_MidComponent)
 {
     Mat33 input
     {
@@ -152,7 +152,7 @@ TEST(Matrix_Iterators, RowsColumns_MidComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, RowsColumns_LastComponent)
+TEST(Matrix_Iterator, RowsColumns_LastComponent)
 {
     Mat33 input
     {
@@ -167,7 +167,7 @@ TEST(Matrix_Iterators, RowsColumns_LastComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Difference)
+TEST(Matrix_Iterator, Difference)
 {
     Mat33 input
     {
@@ -184,7 +184,7 @@ TEST(Matrix_Iterators, Difference)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_Equal)
+TEST(Matrix_Iterator, Comparison_Equal)
 {
     Mat22 input
     {
@@ -202,7 +202,7 @@ TEST(Matrix_Iterators, Comparison_Equal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_NotEqual)
+TEST(Matrix_Iterator, Comparison_NotEqual)
 {
     Mat22 input
     {
@@ -220,7 +220,7 @@ TEST(Matrix_Iterators, Comparison_NotEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_Less)
+TEST(Matrix_Iterator, Comparison_Less)
 {
     Mat22 input
     {
@@ -236,7 +236,7 @@ TEST(Matrix_Iterators, Comparison_Less)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_LessOrEqual)
+TEST(Matrix_Iterator, Comparison_LessOrEqual)
 {
     Mat22 input
     {
@@ -252,7 +252,7 @@ TEST(Matrix_Iterators, Comparison_LessOrEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_Greater)
+TEST(Matrix_Iterator, Comparison_Greater)
 {
     Mat22 input
     {
@@ -268,7 +268,7 @@ TEST(Matrix_Iterators, Comparison_Greater)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Comparison_GreaterOrEqual)
+TEST(Matrix_Iterator, Comparison_GreaterOrEqual)
 {
     Mat22 input
     {
@@ -284,7 +284,7 @@ TEST(Matrix_Iterators, Comparison_GreaterOrEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterators, Reverse)
+TEST(Matrix_Iterator, Reverse)
 {
     Mat22 input
     {

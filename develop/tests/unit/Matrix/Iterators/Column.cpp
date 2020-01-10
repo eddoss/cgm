@@ -10,7 +10,7 @@ using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
 
-TEST(Matrix_ColumnIterators, Plus)
+TEST(Matrix_ColumnIterator, Plus)
 {
     Mat33 input
     {
@@ -31,7 +31,7 @@ TEST(Matrix_ColumnIterators, Plus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, Minus)
+TEST(Matrix_ColumnIterator, Minus)
 {
     Mat33 input
     {
@@ -52,7 +52,7 @@ TEST(Matrix_ColumnIterators, Minus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, PreIncrement)
+TEST(Matrix_ColumnIterator, PreIncrement)
 {
     Mat33 input
     {
@@ -71,7 +71,7 @@ TEST(Matrix_ColumnIterators, PreIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, PostIncrement)
+TEST(Matrix_ColumnIterator, PostIncrement)
 {
     Mat33 input
     {
@@ -88,7 +88,7 @@ TEST(Matrix_ColumnIterators, PostIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, PreDecrement)
+TEST(Matrix_ColumnIterator, PreDecrement)
 {
     Mat33 input
     {
@@ -107,7 +107,7 @@ TEST(Matrix_ColumnIterators, PreDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, PostDecrement)
+TEST(Matrix_ColumnIterator, PostDecrement)
 {
     Mat33 input
     {
@@ -123,7 +123,7 @@ TEST(Matrix_ColumnIterators, PostDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, Difference)
+TEST(Matrix_ColumnIterator, Difference)
 {
     Mat33 input
     {
@@ -143,7 +143,7 @@ TEST(Matrix_ColumnIterators, Difference)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_ColumnIterators, Reverse)
+TEST(Matrix_ColumnIterator, Reverse)
 {
     Mat32 input
     {

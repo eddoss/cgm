@@ -4,11 +4,9 @@
 
 #include <Math3D/Core/Vectors/Vector.hpp>
 #include <Math3D/Core/Matrices/Iterators/Default.hpp>
-#include <Math3D/Core/Matrices/Iterators/Row.hpp>
 #include <Math3D/Core/Matrices/Iterators/Column.hpp>
-#include <Math3D/Core/Matrices/Subiterators/Default.hpp>
-//#include <Math3D/Core/Matrices/Subiterators/Row.hpp>
-//#include <Math3D/Core/Matrices/Subiterators/Column.hpp>
+#include <Math3D/Core/Matrices/Iterators/Row.hpp>
+#include <Math3D/Core/Matrices/Iterators/Sub.hpp>
 
 
 /**

@@ -42,7 +42,7 @@ set(Math3D_PUBLIC_HEADERS
     develop/include/Math3D/Core/Matrices/Iterators/Default.hpp
     develop/include/Math3D/Core/Matrices/Iterators/Row.hpp
     develop/include/Math3D/Core/Matrices/Iterators/Column.hpp
-    develop/include/Math3D/Core/Matrices/Subiterators/Default.hpp
+        develop/include/Math3D/Core/Matrices/Iterators/Sub.hpp
     develop/include/Math3D/Core/Matrices/Subiterators/Row.hpp
     develop/include/Math3D/Core/Matrices/Subiterators/Column.hpp
 )

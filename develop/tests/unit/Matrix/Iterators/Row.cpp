@@ -10,7 +10,7 @@ using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
 
-TEST(Matrix_RowIterators, Plus)
+TEST(Matrix_RowIterator, Plus)
 {
     Mat33 input
     {
@@ -30,7 +30,7 @@ TEST(Matrix_RowIterators, Plus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, Minus)
+TEST(Matrix_RowIterator, Minus)
 {
     Mat32 input
     {
@@ -50,7 +50,7 @@ TEST(Matrix_RowIterators, Minus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PreIncrement)
+TEST(Matrix_RowIterator, PreIncrement)
 {
     Mat33 input
     {
@@ -68,7 +68,7 @@ TEST(Matrix_RowIterators, PreIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PostIncrement)
+TEST(Matrix_RowIterator, PostIncrement)
 {
     Mat33 input
     {
@@ -84,7 +84,7 @@ TEST(Matrix_RowIterators, PostIncrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PreDecrement)
+TEST(Matrix_RowIterator, PreDecrement)
 {
     Mat32 input
     {
@@ -101,7 +101,7 @@ TEST(Matrix_RowIterators, PreDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, PostDecrement)
+TEST(Matrix_RowIterator, PostDecrement)
 {
     Mat32 input
     {
@@ -115,7 +115,7 @@ TEST(Matrix_RowIterators, PostDecrement)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, Difference)
+TEST(Matrix_RowIterator, Difference)
 {
     Mat34 input
     {
@@ -140,7 +140,7 @@ TEST(Matrix_RowIterators, Difference)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_RowIterators, Reverse)
+TEST(Matrix_RowIterator, Reverse)
 {
     Mat34 input
     {
