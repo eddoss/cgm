@@ -7,7 +7,7 @@
 
 /**
  * Iterate over all components of specified row.
- **/
+ */
 template<size_t M, size_t N, typename T>
 class ConstMatrixRowIterator : public ConstMatrixIterator<M,N,T>
 {

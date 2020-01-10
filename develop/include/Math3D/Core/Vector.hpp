@@ -12,7 +12,7 @@
  * Generic Vector.
  * @tparam D Components count (dimensions).
  * @tparam T Components type.
- **/
+ */
 template<size_t D, typename T=FLOAT>
 struct Vector
 {
@@ -344,85 +344,73 @@ public: /* Iterators */
 /* ####################################################################################### */
 
     /**
-     * Get first component iterator.
-     * @return first component iterator.
+     * Get an iterator pointing to the first component.
      */
     iterator
     begin();
 
     /**
-     * Get end component iterator.
-     * @return last+1 component iterator.
+     * Get an iterator pointing to the component after the last.
      */
     iterator
     end();
 
     /**
-     * Get first component const iterator.
-     * @return first component const iterator.
+     * Get an const iterator pointing to the first component.
      */
     const_iterator
     begin() const;
 
     /**
-     * Get end component const iterator.
-     * @return last+1 component const iterator.
+     * Get an const iterator pointing to the component after the last.
      */
     const_iterator
     end() const;
 
     /**
-     * Get first component const iterator.
-     * @return first component const iterator.
+     * Get an const iterator pointing to the first component.
      */
     const_iterator
     cbegin() const;
 
     /**
-     * Get end component const iterator.
-     * @return last+1 component const iterator.
+     * Get an const iterator pointing to the component after the last.
      */
     const_iterator
     cend() const;
 
     /**
-     * Get first component reversed iterator.
-     * @return first component reversed iterator.
+     * Get an iterator pointing to the last component.
      */
     reverse_iterator
     rbegin();
 
     /**
-     * Get end component reversed iterator.
-     * @return last+1 component reversed iterator.
+     * Get an iterator pointing to the component before the first.
      */
     reverse_iterator
     rend();
 
     /**
-     * Get first component const reversed iterator.
-     * @return first component const reversed iterator.
+     * Get an const iterator pointing to the last component.
      */
     const_reverse_iterator
     rbegin() const;
 
     /**
-     * Get end component const reversed iterator.
-     * @return last+1 component const reversed iterator.
+     * Get an const iterator pointing to the component before the first.
      */
     const_reverse_iterator
     rend() const;
 
     /**
-     * Get first component const reversed iterator.
-     * @return first component const reversed iterator.
+     * Get an const iterator pointing to the last component.
      */
     const_reverse_iterator
     crbegin() const;
 
     /**
-     * Get end component const reversed iterator.
-     * @return last+1 component const reversed iterator.
+     * Get an const iterator pointing to the component before the first.
      */
     const_reverse_iterator
     crend() const;

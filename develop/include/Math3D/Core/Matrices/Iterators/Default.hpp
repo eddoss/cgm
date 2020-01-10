@@ -7,7 +7,7 @@
 
 /**
  * Pointer based random access matrix const iterator.
- **/
+ */
 template<size_t M, size_t N, typename T>
 class ConstMatrixIterator
 {
@@ -242,7 +242,7 @@ public: /* Methods */
     /**
      * Get row index of the current component.
      * @return Current component row index.
-     **/
+     */
     size_t
     row() const {return m_row;}
 
@@ -251,7 +251,7 @@ public: /* Methods */
     /**
      * Get column index of the current component.
      * @return Current component column index.
-     **/
+     */
     size_t
     column() const {return m_col;}
 
@@ -286,7 +286,7 @@ protected: /* Internal */
 
 /**
  * Pointer based random access matrix iterator.
- **/
+ */
 template<size_t M, size_t N, typename T>
 class MatrixIterator : public ConstMatrixIterator<M,N,T>
 {

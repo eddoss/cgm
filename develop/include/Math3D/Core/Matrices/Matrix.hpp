@@ -15,7 +15,7 @@
  * A column-major generic matrix.
  * @tparam M Row count. It must be > 1.
  * @tparam N Column count. It must be > 1.
- **/
+ */
 template<size_t M, size_t N, typename T=FLOAT>
 struct Matrix
 {
@@ -57,14 +57,11 @@ public: /* Iterators typedefs */
 
 /* --------------------------------------------------------------------------------------- */
 
-//    using SubIterator                   = SubmatrixIterator<M,N,T>;
+    using SubIterator                   = SubmatrixIterator<M,N,T>;
     using ConstSubIterator              = ConstSubmatrixIterator<M,N,T>;
-//    using ReverseSubIterator            = std::reverse_iterator<SubmatrixIterator>;
+    using ReverseSubIterator            = std::reverse_iterator<SubIterator>;
     using ConstReverseSubIterator       = std::reverse_iterator<ConstSubIterator>;
-    using SubRect               = typename ConstSubIterator::SubRect;
-
-
-//	using ConstReverseSubIterator       = std::reverse_iterator<ConstSubmatrixIterator>;
+    using SubRect                       = typename ConstSubIterator::SubRect;
 
 /* ####################################################################################### */
 public: /* Row and column typedefs */
@@ -79,19 +76,19 @@ public: /* Statics */
 
     /**
      * Rows count.
-     **/
+     */
     static constexpr const size_type
     rows {M};
 
     /**
      * Columns count.
-     **/
+     */
     static constexpr const size_type
     columns {N};
 
     /**
      * Components count.
-     **/
+     */
     static constexpr const size_type
     size {M*N};
 
@@ -121,22 +118,22 @@ public: /* Constructors */
 
     /**
      * Default constructor.
-     **/
+     */
     Matrix();
 
     /**
      * Default copy constructor.
-     **/
+     */
     Matrix(const Matrix<M,N,T>&) = default;
 
     /**
      * Default move constructor.
-     **/
+     */
     Matrix(Matrix<M,N,T>&&) noexcept = default;
 
     /**
      * Default destructor.
-     **/
+     */
     ~Matrix() = default;
 
 /* ####################################################################################### */
@@ -449,85 +446,73 @@ public: /* Iterators */
 /* ####################################################################################### */
 
     /**
-     * Get first component iterator.
-     * @return first component iterator.
+     * Get an iterator pointing to the first component.
      */
     iterator
     begin();
 
     /**
-     * Get end component iterator.
-     * @return last+1 component iterator.
+     * Get an iterator pointing to the component after the last.
      */
     iterator
     end();
 
     /**
-     * Get first component const iterator.
-     * @return first component const iterator.
+     * Get an const iterator pointing to the first component.
      */
     const_iterator
     begin() const;
 
     /**
-     * Get end component const iterator.
-     * @return last+1 component const iterator.
+     * Get an const iterator pointing to the component after the last.
      */
     const_iterator
     end() const;
 
     /**
-     * Get first component const iterator.
-     * @return first component const iterator.
+     * Get an const iterator pointing to the first component.
      */
     const_iterator
     cbegin() const;
 
     /**
-     * Get end component const iterator.
-     * @return last+1 component const iterator.
+     * Get an const iterator pointing to the component after the last.
      */
     const_iterator
     cend() const;
 
     /**
-     * Get first component reversed iterator.
-     * @return first component reversed iterator.
+     * Get an iterator pointing to the last component.
      */
     reverse_iterator
     rbegin();
 
     /**
-     * Get end component reversed iterator.
-     * @return last+1 component reversed iterator.
+     * Get an iterator pointing to the component before the first.
      */
     reverse_iterator
     rend();
 
     /**
-     * Get first component const reversed iterator.
-     * @return first component const reversed iterator.
+     * Get an const iterator pointing to the last component.
      */
     const_reverse_iterator
     rbegin() const;
 
     /**
-     * Get end component const reversed iterator.
-     * @return last+1 component const reversed iterator.
+     * Get an const iterator pointing to the component before the first.
      */
     const_reverse_iterator
     rend() const;
 
     /**
-     * Get first component const reversed iterator.
-     * @return first component const reversed iterator.
+     * Get an const iterator pointing to the last component.
      */
     const_reverse_iterator
     crbegin() const;
 
     /**
-     * Get end component const reversed iterator.
-     * @return last+1 component const reversed iterator.
+     * Get an const iterator pointing to the component before the first.
      */
     const_reverse_iterator
     crend() const;
@@ -537,85 +522,73 @@ public: /* Column iterators */
 /* ####################################################################################### */
 
     /**
-     * Get column first iterator.
-     * @return column first component iterator.
+     * Get an iterator pointing to the first component in the specified column.
      */
     ColumnIterator
     beginColumn(size_type column);
 
     /**
-     * Get column end iterator.
-     * @return last+1 column component iterator.
+     * Get an iterator pointing to the component after the last in specified column.
      */
     ColumnIterator
     endColumn(size_type column);
 
     /**
-     * Get column const first iterator.
-     * @return column first component const iterator.
+     * Get an const iterator pointing to the first component in the specified column.
      */
     ConstColumnIterator
     beginColumn(size_type column) const;
 
     /**
-     * Get column const end iterator.
-     * @return last+1 column component const iterator.
+     * Get an const iterator pointing to the component after the last in the specified column.
      */
     ConstColumnIterator
     endColumn(size_type column) const;
 
     /**
-     * Get column const first iterator.
-     * @return column first component const iterator.
+     * Get an const iterator pointing to the first component in the specified column.
      */
     ConstColumnIterator
     cbeginColumn(size_type column) const;
 
     /**
-     * Get column const end iterator.
-     * @return last+1 column component const iterator.
+     * Get an const iterator pointing to the component after the last in the specified column.
      */
     ConstColumnIterator
     cendColumn(size_type column) const;
 
     /**
-     * Get first component reversed column iterator.
-     * @return first component reversed column iterator.
+     * Get an iterator pointing to the last component in the specified column.
      */
     ReverseColumnIterator
     rbeginColumn(size_type column);
 
     /**
-     * Get end component reversed column iterator.
-     * @return last+1 component reversed column iterator.
+     * Get an iterator pointing to the component before the first in the specified column.
      */
     ReverseColumnIterator
     rendColumn(size_type column);
 
     /**
-     * Get first component const reversed column iterator.
-     * @return first component const reversed column iterator.
+     * Get an const iterator pointing to the last component in the specified column.
      */
     ConstReverseColumnIterator
     rbeginColumn(size_type column) const;
 
     /**
-     * Get end component const reversed column iterator.
-     * @return last+1 component const reversed column iterator.
+     * Get an const iterator pointing to the component before the first in the specified column.
      */
     ConstReverseColumnIterator
     rendColumn(size_type column) const;
 
     /**
-     * Get first component const reversed column iterator.
-     * @return first component const reversed column iterator.
+     * Get an const iterator pointing to the last component in the specified column.
      */
     ConstReverseColumnIterator
     crbeginColumn(size_type column) const;
 
     /**
-     * Get end component const reversed column iterator.
-     * @return last+1 component const reversed column iterator.
+     * Get an const iterator pointing to the component before the first in the specified column.
      */
     ConstReverseColumnIterator
     crendColumn(size_type column) const;
@@ -625,85 +598,73 @@ public: /* Row iterators */
 /* ####################################################################################### */
 
     /**
-     * Get row first iterator.
-     * @return row first component iterator.
+     * Get an iterator pointing to the first component in the specified row.
      */
     RowIterator
     beginRow(size_type row);
 
     /**
-     * Get row end iterator.
-     * @return last+1 row component iterator.
+     * Get an iterator pointing to the component after the last in specified row.
      */
     RowIterator
     endRow(size_type row);
 
     /**
-     * Get row const first iterator.
-     * @return row first component const iterator.
+     * Get an const iterator pointing to the first component in the specified row.
      */
     ConstRowIterator
     beginRow(size_type row) const;
 
     /**
-     * Get row const end iterator.
-     * @return last+1 row component const iterator.
+     * Get an const iterator pointing to the component after the last in the specified row.
      */
     ConstRowIterator
     endRow(size_type row) const;
 
     /**
-     * Get row const first iterator.
-     * @return row first component const iterator.
+     * Get an const iterator pointing to the first component in the specified row.
      */
     ConstRowIterator
     cbeginRow(size_type row) const;
 
     /**
-     * Get row const end iterator.
-     * @return last+1 row component const iterator.
+     * Get an const iterator pointing to the component after the last in the specified row.
      */
     ConstRowIterator
     cendRow(size_type row) const;
 
     /**
-     * Get first component reversed row iterator.
-     * @return first component reversed row iterator.
+     * Get an iterator pointing to the last component in the specified row.
      */
     ReverseRowIterator
     rbeginRow(size_type row);
 
     /**
-     * Get end component reversed row iterator.
-     * @return last+1 component reversed row iterator.
+     * Get an iterator pointing to the component before the first in the specified row.
      */
     ReverseRowIterator
     rendRow(size_type row);
 
     /**
-     * Get first component const reversed row iterator.
-     * @return first component const reversed row iterator.
+     * Get an const iterator pointing to the last component in the specified row.
      */
     ConstReverseRowIterator
     rbeginRow(size_type row) const;
 
     /**
-     * Get end component const reversed row iterator.
-     * @return last+1 component const reversed row iterator.
+     * Get an const iterator pointing to the component before the first in the specified row.
      */
     ConstReverseRowIterator
     rendRow(size_type row) const;
 
     /**
-     * Get first component const reversed row iterator.
-     * @return first component const reversed row iterator.
+     * Get an const iterator pointing to the last component in the specified row.
      */
     ConstReverseRowIterator
     crbeginRow(size_type row) const;
 
     /**
-     * Get end component const reversed row iterator.
-     * @return last+1 component const reversed row iterator.
+     * Get an const iterator pointing to the component before the first in the specified row.
      */
     ConstReverseRowIterator
     crendRow(size_type row) const;
@@ -712,89 +673,77 @@ public: /* Row iterators */
 public: /* Sub iterators */
 /* ####################################################################################### */
 
-//    /**
-//     * Get first component iterator.
-//     * @return first component iterator.
-//     */
-//    iterator
-//    beginSub();
-//
-//    /**
-//     * Get end component iterator.
-//     * @return last+1 component iterator.
-//     */
-//    iterator
-//    endSub();
+    /**
+     * Get an iterator pointing to the first component in the specified submatrix.
+     */
+    SubIterator
+    beginSub(const SubRect& subRect);
 
     /**
-     * Get first component const iterator.
-     * @return first component const iterator.
+     * Get an iterator pointing to the component after the last in specified submatrix.
+     */
+    SubIterator
+    endSub(const SubRect& subRect);
+
+    /**
+     * Get an const iterator pointing to the first component in the specified submatrix.
      */
     ConstSubIterator
     beginSub(const SubRect& subRect) const;
 
     /**
-     * Get end component const iterator.
-     * @return last+1 component const iterator.
+     * Get an const iterator pointing to the component after the last in the specified submatrix.
      */
     ConstSubIterator
     endSub(const SubRect& subRect) const;
 
-//    /**
-//     * Get first component const iterator.
-//     * @return first component const iterator.
-//     */
-//    ConstSubIterator
-//    cbeginSub() const;
-//
-//    /**
-//     * Get end component const iterator.
-//     * @return last+1 component const iterator.
-//     */
-//    ConstSubIterator
-//    cendSub() const;
-
-//    /**
-//     * Get first component reversed iterator.
-//     * @return first component reversed iterator.
-//     */
-//    reverse_iterator
-//    rbeginSub();
-//
-//    /**
-//     * Get end component reversed iterator.
-//     * @return last+1 component reversed iterator.
-//     */
-//    reverse_iterator
-//    rendSub();
-//
     /**
-     * Get first component const reversed iterator.
-     * @return first component const reversed iterator.
+     * Get an const iterator pointing to the first component in the specified submatrix.
+     */
+    ConstSubIterator
+    cbeginSub(const SubRect& subRect) const;
+
+    /**
+     * Get an const iterator pointing to the component after the last in the specified submatrix.
+     */
+    ConstSubIterator
+    cendSub(const SubRect& subRect) const;
+
+    /**
+     * Get an iterator pointing to the last component in the specified submatrix.
+     */
+    ReverseSubIterator
+    rbeginSub(const SubRect& subRect);
+
+    /**
+     * Get an iterator pointing to the component before the first in the specified submatrix.
+     */
+    ReverseSubIterator
+    rendSub(const SubRect& subRect);
+
+    /**
+     * Get an const iterator pointing to the last component in the specified submatrix.
      */
     ConstReverseSubIterator
     rbeginSub(const SubRect& subRect) const;
 
     /**
-     * Get end component const reversed iterator.
-     * @return last+1 component const reversed iterator.
+     * Get an const iterator pointing to the component before the first in the specified submatrix.
      */
     ConstReverseSubIterator
     rendSub(const SubRect& subRect) const;
-//
-//    /**
-//     * Get first component const reversed iterator.
-//     * @return first component const reversed iterator.
-//     */
-//    const_reverse_iterator
-//    crbeginSub() const;
-//
-//    /**
-//     * Get end component const reversed iterator.
-//     * @return last+1 component const reversed iterator.
-//     */
-//    const_reverse_iterator
-//    crendSub() const;
+
+    /**
+     * Get an const iterator pointing to the last component in the specified submatrix.
+     */
+    ConstReverseSubIterator
+    crbeginSub(const SubRect& subRect) const;
+
+    /**
+     * Get an const iterator pointing to the component before the first in the specified submatrix.
+     */
+    ConstReverseSubIterator
+    crendSub(const SubRect& subRect) const;
 };
 
 
@@ -1741,6 +1690,36 @@ Matrix<M,N,T>::crendRow(size_type row) const
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::SubIterator
+Matrix<M,N,T>::beginSub(const Matrix::SubRect& subRect)
+{
+    return SubIterator
+    {
+        &data[0][0],
+        subRect,
+        0,
+        0
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::SubIterator
+Matrix<M,N,T>::endSub(const Matrix::SubRect& subRect)
+{
+    return ++SubIterator
+    {
+        &data[0][0],
+        subRect,
+        subRect.second.first - subRect.first.first,
+        subRect.second.second - subRect.first.second
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstSubIterator
 Matrix<M,N,T>::beginSub(const Matrix::SubRect& subRect) const
 {
@@ -1768,6 +1747,55 @@ Matrix<M,N,T>::endSub(const Matrix::SubRect& subRect) const
     };
 }
 
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstSubIterator
+Matrix<M,N,T>::cbeginSub(const Matrix::SubRect& subRect) const
+{
+    return ConstSubIterator
+            {
+                    &data[0][0],
+                    subRect,
+                    0,
+                    0
+            };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstSubIterator
+Matrix<M,N,T>::cendSub(const Matrix::SubRect& subRect) const
+{
+    return ++ConstSubIterator
+    {
+        &data[0][0],
+        subRect,
+        subRect.second.first - subRect.first.first,
+        subRect.second.second - subRect.first.second
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseSubIterator
+Matrix<M,N,T>::rbeginSub(const SubRect& subRect)
+{
+    return ReverseSubIterator(endSub(subRect));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ReverseSubIterator
+Matrix<M,N,T>::rendSub(const SubRect& subRect)
+{
+    return ReverseSubIterator(beginSub(subRect));
+}
+
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
@@ -1782,6 +1810,24 @@ Matrix<M,N,T>::rbeginSub(const SubRect& subRect) const
 template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::ConstReverseSubIterator
 Matrix<M,N,T>::rendSub(const SubRect& subRect) const
+{
+    return ConstReverseSubIterator(beginSub(subRect));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseSubIterator
+Matrix<M,N,T>::crbeginSub(const SubRect& subRect) const
+{
+    return ConstReverseSubIterator(endSub(subRect));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+typename Matrix<M,N,T>::ConstReverseSubIterator
+Matrix<M,N,T>::crendSub(const SubRect& subRect) const
 {
     return ConstReverseSubIterator(beginSub(subRect));
 }

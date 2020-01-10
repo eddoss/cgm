@@ -7,7 +7,7 @@
 
 /**
  * Iterate over all components of specified column.
- **/
+ */
 template<size_t M, size_t N, typename T>
 class ConstMatrixColumnIterator : public ConstMatrixIterator<M,N,T>
 {

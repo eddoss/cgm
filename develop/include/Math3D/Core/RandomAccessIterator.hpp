@@ -7,7 +7,7 @@
 
 /**
  * Pointer based const random access iterator.
- **/
+ */
 template<typename T>
 class ConstRandomAccessIterator
 {
@@ -234,7 +234,7 @@ protected: /* Internal */
 
 /**
  * Pointer based random access iterator.
- **/
+ */
 template<typename T>
 class RandomAccessIterator : public ConstRandomAccessIterator<T>
 {

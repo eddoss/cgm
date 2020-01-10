@@ -6,6 +6,7 @@
 
 
 using namespace std;
+using Mat22 = Matrix<2,2,int>;
 using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
@@ -230,18 +231,17 @@ TEST(Matrix_Subiterators, Difference)
 
     Mat44::SubRect rect {{1,1},{2,2}};
 
-    auto a      {input.beginSub(rect)};
-    auto b      {input.beginSub(rect) + 3};
-    auto diff   {a - b};
+    auto a {input.beginSub(rect)};
+    auto b {input.beginSub(rect) + 3};
 
-    ASSERT_EQ(diff, 3);
+    ASSERT_EQ(b-a, 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Subiterators, Reverse)
+TEST(Matrix_Subiterators, Comparison_Equal)
 {
-Mat44 input
+    Mat44 input
     {
         11, 12, 13, 14,
         21, 22, 23, 24,
@@ -249,20 +249,139 @@ Mat44 input
         41, 42, 43, 44
     };
 
-    Mat44::SubRect rect {{1,1},{2,2}};
+    Mat44::SubRect rect {{0,0},{2,2}};
 
-    auto it_00 = input.rendSub(rect) + 0;
-    auto it_10 = input.rendSub(rect) + 1;
-    auto it_20 = input.rendSub(rect) + 2;
-//    auto it_30 = input.r(rect) + 3;
+    auto it_00 = input.beginSub(rect);
+    auto it_same = input.beginSub(rect);
+    auto it_10 = input.beginSub(rect) + 1;
 
-//    ASSERT_EQ(*it_00, 11);
-//    ASSERT_EQ(*it_10, 21);
-//    ASSERT_EQ(*it_20, 31);
-//    ASSERT_EQ(*it_30, 41);
-//
-//    ASSERT_EQ(*it_00, 1);
-//    ASSERT_EQ(*it_01, 4);
-//    ASSERT_EQ(*it_10, 2);
-//    ASSERT_EQ(*it_11, 5);
+    ASSERT_TRUE(it_00 == it_same);
+    ASSERT_FALSE(it_00 == it_10);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Comparison_NotEqual)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{2,2}};
+
+    auto it_00 = input.beginSub(rect);
+    auto it_same = input.beginSub(rect);
+    auto it_10 = input.beginSub(rect) + 1;
+
+    ASSERT_TRUE(it_00 != it_10);
+    ASSERT_FALSE(it_00 != it_same);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Comparison_Less)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{2,2}};
+
+    auto it_00 = input.beginSub(rect);
+    auto it_10 = input.beginSub(rect) + 1;
+
+    ASSERT_TRUE(it_00 < it_10);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Comparison_LessOrEqual)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{2,2}};
+
+    auto it_00 = input.beginSub(rect);
+    auto it_same = input.beginSub(rect);
+
+    ASSERT_TRUE(it_00 <= it_same);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Comparison_Greater)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{2,2}};
+
+    auto it_00 = input.beginSub(rect);
+    auto it_10 = input.beginSub(rect) + 1;
+
+    ASSERT_TRUE(it_10 > it_00);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Comparison_GreaterOrEqual)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{2,2}};
+
+    auto it_00 = input.beginSub(rect);
+    auto it_same = input.beginSub(rect);
+
+    ASSERT_TRUE(it_00 >= it_same);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Subiterators, Reverse)
+{
+    Mat44 input
+    {
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
+        41, 42, 43, 44
+    };
+
+    Mat44::SubRect rect {{0,0},{3,0}};
+
+    auto it_00 = input.rendSub(rect) - 1;
+    auto it_10 = input.rendSub(rect) - 2;
+    auto it_20 = input.rendSub(rect) - 3;
+    auto it_30 = input.rendSub(rect) - 4;
+
+    ASSERT_EQ(*it_00, 11);
+    ASSERT_EQ(*it_10, 21);
+    ASSERT_EQ(*it_20, 31);
+    ASSERT_EQ(*it_30, 41);
 }

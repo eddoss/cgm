@@ -7,14 +7,14 @@
 
 
 /**
- * It iterate over all components  of internal submatrix of generic
- * matrix. You need specify top-left  and bottom-right coordinates 
- * of matrix.
+ * Iterate over all components  of internal sub matrix of generic
+ * matrix. You need specify top-left and bottom-right coordinates
+ * of external matrix.
  *
  * @tparam M External matrix rows count.
  * @tparam N External matrix columns count.
- * @tparam T External matrix components type..
- **/
+ * @tparam T External matrix components type.
+ */
 template<size_t M, size_t N, typename T>
 class ConstSubmatrixIterator : public ConstMatrixIterator<M,N,T>
 {
@@ -195,7 +195,7 @@ public: /* Methods */
     /**
      * Get submatrix rows count.
      * @return Submatrix rows count.
-     **/
+     */
     size_t
     subRows() const
     {
@@ -207,7 +207,7 @@ public: /* Methods */
     /**
      * Get submatrix columns count.
      * @return Submatrix columns count.
-     **/
+     */
     size_t
     subColumns() const
     {
@@ -219,7 +219,7 @@ public: /* Methods */
     /**
      * Get submatrix components count.
      * @return Submatrix components count.
-     **/
+     */
     size_t
     subSize() const
     {
@@ -232,7 +232,7 @@ public: /* Methods */
      * Get row index of the submatrix current component.
      * To get external matrix row index use row().
      * @return Submatrix row index.
-     **/
+     */
     size_t
     subRow() const
     {
@@ -245,7 +245,7 @@ public: /* Methods */
      * Get column index of the submatrix current component.
      * To get external matrix column index use column().
      * @return Submatrix column index.
-     **/
+     */
     size_t
     subColumn () const
     {
@@ -320,7 +320,6 @@ protected: /* Support */
 
     /*
      * Move to component by index (inside submatrix).
-     * If index is out of range, index will be clamped.
      * @param id Index to go to.
      */
     void
@@ -331,6 +330,169 @@ protected: /* Support */
         m_sub_row = id - m_sub_col * rows;
         this->m_row = m_lt_row + m_sub_row;
         this->m_col = m_lt_col + m_sub_col;
+    }
+};
+
+
+
+
+/**
+ * Non-const version of "ConstSubmatrixIterator".
+ */
+template<size_t M, size_t N, typename T>
+class SubmatrixIterator : public ConstSubmatrixIterator<M,N,T>
+{
+
+/* ####################################################################################### */
+public: /* Typedefs */
+/* ####################################################################################### */
+
+    using self_type             = SubmatrixIterator<M,N,T>;
+    using base_type             = ConstSubmatrixIterator<M,N,T>;
+    using value_type            = T;
+    using reference             = T&;
+    using pointer               = T*;
+    using iterator_category     = typename base_type::iterator_category;
+    using difference_type       = typename base_type::difference_type;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    SubmatrixIterator(pointer firstCompPtr, const typename base_type::SubRect& subRect, size_t subRow, size_t subColumn)
+        : base_type(firstCompPtr, subRect, subRow, subColumn)
+    {
+
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    ~SubmatrixIterator()                    = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    SubmatrixIterator(const self_type&)     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    SubmatrixIterator(self_type&&) noexcept = default;
+
+/* ####################################################################################### */
+public: /* Default assignment */
+/* ####################################################################################### */
+
+    constexpr SubmatrixIterator&
+    operator=(const self_type&)       = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr SubmatrixIterator&
+    operator=(self_type&&) noexcept   = default;
+
+/* ####################################################################################### */
+public: /* Data accessing */
+/* ####################################################################################### */
+
+    constexpr reference
+    operator*() const
+    {
+        return const_cast<reference>(base_type::operator*());
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr pointer
+    operator->() const
+    {
+        return const_cast<pointer>(base_type::operator->());
+    }
+
+/* ####################################################################################### */
+public: /* Move forward */
+/* ####################################################################################### */
+
+    constexpr self_type&
+    operator++()
+    {
+        base_type::moveForward(1);
+        return *this;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type
+    operator++(int)
+    {
+        self_type tmp = *this;
+        base_type::moveForward(1);
+        return tmp;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type&
+    operator+=(size_t offset)
+    {
+        base_type::moveForward(offset);
+        return *this;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type
+    operator+(size_t offset) const
+    {
+        return self_type {*this} += offset;
+    }
+
+/* ####################################################################################### */
+public: /* Move backward */
+/* ####################################################################################### */
+
+    constexpr self_type&
+    operator--()
+    {
+        base_type::moveBackward(1);
+        return *this;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type
+    operator--(int)
+    {
+        self_type tmp = *this;
+        base_type::moveBackward(1);
+        return tmp;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type&
+    operator-=(size_t offset)
+    {
+        base_type::moveBackward(offset);
+        return *this;
+    }
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type
+    operator-(size_t offset) const
+    {
+        return self_type {*this} -= offset;
+    }
+
+/* ####################################################################################### */
+public: /* Difference */
+/* ####################################################################################### */
+
+    constexpr difference_type
+    operator-(const self_type& other) const
+    {
+        return (*static_cast<const base_type*>(this) - other);
     }
 };
 

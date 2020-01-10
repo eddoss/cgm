@@ -6,9 +6,11 @@
 
 
 using namespace std;
+using Mat22 = Matrix<2,2,int>;
 using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
+using Mat44 = Matrix<4,4,int>;
 
 /* ####################################################################################### */
 /* Default iterators */
@@ -16,16 +18,16 @@ using Mat34 = Matrix<3,4,int>;
 
 TEST(Matrix_Iterators, Plus)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    auto it_01 = input.begin() + Matrix<3,3,int>::rows;
-    auto it_11 = input.begin() + Matrix<3,3,int>::rows + 1;
-    auto it_21 = input.begin() + Matrix<3,3,int>::rows + 2;
+    auto it_01 = input.begin() + Mat33::rows;
+    auto it_11 = input.begin() + Mat33::rows + 1;
+    auto it_21 = input.begin() + Mat33::rows + 2;
 
     ASSERT_EQ(*it_01, 2);
     ASSERT_EQ(*it_11, 5);
@@ -36,7 +38,7 @@ TEST(Matrix_Iterators, Plus)
 
 TEST(Matrix_Iterators, Minus)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -56,7 +58,7 @@ TEST(Matrix_Iterators, Minus)
 
 TEST(Matrix_Iterators, PreIncrement)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -74,7 +76,7 @@ TEST(Matrix_Iterators, PreIncrement)
 
 TEST(Matrix_Iterators, PostIncrement)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -90,7 +92,7 @@ TEST(Matrix_Iterators, PostIncrement)
 
 TEST(Matrix_Iterators, PreDecrement)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -108,7 +110,7 @@ TEST(Matrix_Iterators, PreDecrement)
 
 TEST(Matrix_Iterators, PostDecrement)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -122,7 +124,7 @@ TEST(Matrix_Iterators, PostDecrement)
 
 TEST(Matrix_Iterators, RowsColumns_FirstComponent)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -137,7 +139,7 @@ TEST(Matrix_Iterators, RowsColumns_FirstComponent)
 
 TEST(Matrix_Iterators, RowsColumns_MidComponent)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
@@ -152,13 +154,13 @@ TEST(Matrix_Iterators, RowsColumns_MidComponent)
 
 TEST(Matrix_Iterators, RowsColumns_LastComponent)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
-    auto it {input.begin() + Matrix<3,3,int>::size-1};
+    auto it {input.begin() + Mat33::size-1};
     ASSERT_EQ(it.row(), 2);
     ASSERT_EQ(it.column(), 2);
 }
@@ -167,25 +169,124 @@ TEST(Matrix_Iterators, RowsColumns_LastComponent)
 
 TEST(Matrix_Iterators, Difference)
 {
-    Matrix<3,3,int> input
+    Mat33 input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    auto a      {input.begin()};
-    auto b      {input.begin() + 3};
-    auto diff   {a - b};
+    auto a {input.begin()};
+    auto b {input.begin() + 3};
 
-    ASSERT_EQ(diff, 3);
+    ASSERT_EQ(b-a, 3);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_Equal)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_same = input.begin();
+    auto it_10 = input.begin() + 1;
+
+    ASSERT_TRUE(it_00 == it_same);
+    ASSERT_FALSE(it_00 == it_10);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_NotEqual)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_same = input.begin();
+    auto it_10 = input.begin() + 1;
+
+    ASSERT_TRUE(it_00 != it_10);
+    ASSERT_FALSE(it_00 != it_same);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_Less)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_10 = input.begin() + 1;
+
+    ASSERT_TRUE(it_00 < it_10);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_LessOrEqual)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_same = input.begin();
+
+    ASSERT_TRUE(it_00 <= it_same);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_Greater)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_10 = input.begin() + 1;
+
+    ASSERT_TRUE(it_10 > it_00);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Iterators, Comparison_GreaterOrEqual)
+{
+    Mat22 input
+    {
+        1, 2,
+        4, 5
+    };
+
+    auto it_00 = input.begin();
+    auto it_same = input.begin();
+
+    ASSERT_TRUE(it_00 >= it_same);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Matrix_Iterators, Reverse)
 {
-    Matrix<2,2,int> input
+    Mat22 input
     {
         1, 2,
         4, 5
