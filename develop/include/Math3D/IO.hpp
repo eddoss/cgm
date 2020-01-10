@@ -4,7 +4,7 @@
 
 #include <ios>
 #include <iomanip>
-#include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Vectors/Vector.hpp>
 
 
 template<uint32_t D, typename T>

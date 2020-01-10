@@ -1,22 +1,22 @@
-#ifndef MATH3D_RANDOM_ACCESS_ITERATOR_HPP
-#define MATH3D_RANDOM_ACCESS_ITERATOR_HPP
+#ifndef MATH3D_VECTOR_ITERATOR_HPP
+#define MATH3D_VECTOR_ITERATOR_HPP
 
 
 #include <iterator>
 
 
 /**
- * Pointer based const random access iterator.
+ * Iterate over vector components.
  */
 template<typename T>
-class ConstRandomAccessIterator
+class ConstVectorIterator
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = ConstRandomAccessIterator<T>;
+    using self_type             = ConstVectorIterator<T>;
     using value_type            = T;
     using reference             = const T&;
     using pointer               = const T*;
@@ -27,27 +27,27 @@ public: /* Typedefs */
 public: /* Constructors */
 /* ####################################################################################### */
 
-   ~ConstRandomAccessIterator() = default;
+   ~ConstVectorIterator() = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstRandomAccessIterator() = default;
+    ConstVectorIterator() = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstRandomAccessIterator(const self_type&)     = default;
+    ConstVectorIterator(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstRandomAccessIterator(self_type&&) noexcept = default;
+    ConstVectorIterator(self_type&&) noexcept = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstRandomAccessIterator(pointer dataPtr, size_t offset=0)
+    ConstVectorIterator(pointer dataPtr, size_t offset=0)
         : m_data(dataPtr + offset)
     {
 
@@ -57,12 +57,12 @@ public: /* Constructors */
 public: /* Default assignment */
 /* ####################################################################################### */
 
-    constexpr ConstRandomAccessIterator&
+    constexpr ConstVectorIterator&
     operator=(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    constexpr ConstRandomAccessIterator&
+    constexpr ConstVectorIterator&
     operator=(self_type&&) noexcept = default;
 
 /* ####################################################################################### */
@@ -232,19 +232,16 @@ protected: /* Internal */
 
 
 
-/**
- * Pointer based random access iterator.
- */
 template<typename T>
-class RandomAccessIterator : public ConstRandomAccessIterator<T>
+class VectorIterator : public ConstVectorIterator<T>
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = RandomAccessIterator<T>;
-    using base_type             = ConstRandomAccessIterator<T>;
+    using self_type             = VectorIterator<T>;
+    using base_type             = ConstVectorIterator<T>;
     using value_type            = T;
     using reference             = T&;
     using pointer               = T*;
@@ -255,27 +252,27 @@ public: /* Typedefs */
 public: /* Constructors */
 /* ####################################################################################### */
 
-   ~RandomAccessIterator()                     = default;
+   ~VectorIterator()                     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    RandomAccessIterator()                     = default;
+    VectorIterator()                     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    RandomAccessIterator(const self_type&)     = default;
+    VectorIterator(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    RandomAccessIterator(self_type&&) noexcept = default;
+    VectorIterator(self_type&&) noexcept = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    RandomAccessIterator(pointer dataPtr, size_t offset=0)
+    VectorIterator(pointer dataPtr, size_t offset=0)
         : base_type(dataPtr, offset)
     {
 
@@ -285,12 +282,12 @@ public: /* Constructors */
 public: /* Default assignment */
 /* ####################################################################################### */
 
-    constexpr RandomAccessIterator&
+    constexpr VectorIterator&
     operator=(const self_type&)     = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    constexpr RandomAccessIterator&
+    constexpr VectorIterator&
     operator=(self_type&&) noexcept = default;
 
 /* ####################################################################################### */
@@ -400,4 +397,4 @@ public: /* Difference */
     }
 };
 
-#endif // MATH3D_RANDOM_ACCESS_ITERATOR_HPP
+#endif // MATH3D_VECTOR_ITERATOR_HPP

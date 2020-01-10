@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Vectors/Vector.hpp>
 
 
 using namespace std;

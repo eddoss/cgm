@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/RandomAccessIterator.hpp>
+#include <Math3D/Core/Vectors/Iterator.hpp>
 
 
 /**
@@ -33,8 +33,8 @@ public: /* Typedefs */
 public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-    using iterator                  = RandomAccessIterator<T>;
-    using const_iterator            = ConstRandomAccessIterator<T>;
+    using iterator                  = VectorIterator<T>;
+    using const_iterator            = ConstVectorIterator<T>;
     using reverse_iterator          = std::reverse_iterator<iterator>;
 	using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
 
