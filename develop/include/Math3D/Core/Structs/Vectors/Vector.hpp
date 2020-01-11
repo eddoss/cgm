@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Vectors/Iterator.hpp>
+#include <Math3D/Core/Structs/Vectors/Iterator.hpp>
 
 
 /**

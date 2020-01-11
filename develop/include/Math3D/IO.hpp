@@ -4,8 +4,8 @@
 
 #include <ios>
 #include <iomanip>
-#include <Math3D/Core/Vectors/Vector.hpp>
-#include <Math3D/Core/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Vectors/Vector.hpp>
+#include <Math3D/Core/Structs/Matrices/Matrix.hpp>
 
 
 template<size_t D, typename T>

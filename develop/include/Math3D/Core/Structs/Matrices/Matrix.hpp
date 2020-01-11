@@ -2,11 +2,11 @@
 #define MATH3D_MATRIX_HPP
 
 
-#include <Math3D/Core/Vectors/Vector.hpp>
-#include <Math3D/Core/Matrices/Iterators/Default.hpp>
-#include <Math3D/Core/Matrices/Iterators/Column.hpp>
-#include <Math3D/Core/Matrices/Iterators/Row.hpp>
-#include <Math3D/Core/Matrices/Iterators/Sub.hpp>
+#include <Math3D/Core/Structs/Vectors/Vector.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Default.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Column.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Row.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Sub.hpp>
 
 
 /**

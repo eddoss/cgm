@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrices/Matrix.hpp>
 
 using namespace std;
 using Mat = Matrix<2,2>;

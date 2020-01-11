@@ -36,15 +36,15 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(Math3D_PUBLIC_HEADERS
     develop/include/Math3D/IO.hpp
     develop/include/Math3D/Global.hpp
-        develop/include/Math3D/Core/Vectors/Vector.hpp
-        develop/include/Math3D/Core/Vectors/Iterators.hpp
-    develop/include/Math3D/Core/Matrices/Matrix.hpp
-    develop/include/Math3D/Core/Matrices/Iterators/Default.hpp
-    develop/include/Math3D/Core/Matrices/Iterators/Row.hpp
-    develop/include/Math3D/Core/Matrices/Iterators/Column.hpp
-        develop/include/Math3D/Core/Matrices/Iterators/Sub.hpp
-    develop/include/Math3D/Core/Matrices/Subiterators/Row.hpp
-    develop/include/Math3D/Core/Matrices/Subiterators/Column.hpp
+    develop/include/Math3D/Core/Structs/Vectors/Vector.hpp
+    develop/include/Math3D/Core/Structs/Vectors/Iterators.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Matrix.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Iterators/Default.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Iterators/Row.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Iterators/Column.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Iterators/Sub.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Subiterators/Row.hpp
+    develop/include/Math3D/Core/Structs/Matrices/Subiterators/Column.hpp
 )
 
 # ####################################################################################### #
