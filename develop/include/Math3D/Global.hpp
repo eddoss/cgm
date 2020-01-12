@@ -3,6 +3,7 @@
 
 
 #include <algorithm>
+#include <Math3D/Platform.hpp>
 
 
 /* ####################################################################################### */
@@ -48,13 +49,13 @@
  * @return true if A equal to B, false otherwise.
  */
 template<typename T>
-inline bool equal(T A, T B) {return A == B;}
+FORCEINLINE bool equal(T A, T B) {return A == B;}
 
 template<>
-inline bool equal(float A, float B) {return std::abs(A-B) <= TOLERANCE;}
+FORCEINLINE bool equal(float A, float B) {return std::abs(A-B) <= TOLERANCE;}
 
 template<>
-inline bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
+FORCEINLINE bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
 
 /* --------------------------------------------------------------------------------------- */
 
@@ -63,12 +64,12 @@ inline bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
  * @return true if A not equal to B, false otherwise.
  */
 template<typename T>
-inline bool notEqual(T A, T B) {return A != B;}
+FORCEINLINE bool notEqual(T A, T B) {return A != B;}
 
 template<>
-inline bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
+FORCEINLINE bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
 
 template<>
-inline bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
+FORCEINLINE bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
 
 #endif // MATH3D_GLOBAL_HPP

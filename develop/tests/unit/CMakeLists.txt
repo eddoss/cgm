@@ -8,13 +8,14 @@ project(UnitTests
 )
 
 # ####################################################################################### #
-# Tests list
+# Tests suites
 # ####################################################################################### #
 
 set(VECTOR_TESTS_SUITES
     Vector/Arithmetic.cpp
     Vector/Assignment.cpp
     Vector/Iterator.cpp
+    Vector/DotAndCross.cpp
     Vector/IncrementDecrement.cpp
     Vector/ComparisonWithOther.cpp
     Vector/ComparisonWithScalar.cpp

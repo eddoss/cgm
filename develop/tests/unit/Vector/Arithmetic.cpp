@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Structs/Vectors/Vector.hpp>
+#include <Math3D/Core/Structs/Vectors/Operators.hpp>
 
 
 using namespace std;
@@ -30,7 +31,7 @@ TEST(Vector_Arithmetic, InplaceMinus_Scalar)
 {
     Vec input {1,2,3};
     Vec expec {-1,0,1};
-    input -= 2;
+    input -= Vec::value_type(2);
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -55,7 +56,7 @@ TEST(Vector_Arithmetic, InplacePlus_Scalar)
 {
     Vec input {1,2,3};
     Vec expec {3,4,5};
-    input += 2;
+    input += Vec::value_type(2);
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -80,7 +81,7 @@ TEST(Vector_Arithmetic, InplacePerComponentMultiplication_Scalar)
 {
     Vec input {1,2,3};
     Vec expec {2,4,6};
-    input *= 2;
+    input *= Vec::value_type(2);
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -105,7 +106,7 @@ TEST(Vector_Arithmetic, InplaceDivision_Scalar)
 {
     Vec input {4,6,10};
     Vec expec {2,3,5};
-    input /= 2;
+    input /= Vec::value_type(2);
 
     for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], expec[i]);
 }

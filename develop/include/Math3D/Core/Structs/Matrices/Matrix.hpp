@@ -1320,7 +1320,7 @@ Matrix<M,N,T>::operator>=(const Matrix<M,N,T>& matrix) const
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-T&
+FORCEINLINE T&
 Matrix<M,N,T>::operator()(size_t row, size_t column)
 {
     return data[column][row];
@@ -1329,7 +1329,7 @@ Matrix<M,N,T>::operator()(size_t row, size_t column)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-const T&
+FORCEINLINE const T&
 Matrix<M,N,T>::operator()(size_t row, size_t column) const
 {
     return data[column][row];
@@ -1338,7 +1338,7 @@ Matrix<M,N,T>::operator()(size_t row, size_t column) const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-T&
+FORCEINLINE T&
 Matrix<M,N,T>::operator[](size_t index)
 {
     return *(&data[0][0] + index);
@@ -1347,7 +1347,7 @@ Matrix<M,N,T>::operator[](size_t index)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-const T&
+FORCEINLINE const T&
 Matrix<M,N,T>::operator[](size_t index) const
 {
     return *(&data[0][0] + index);

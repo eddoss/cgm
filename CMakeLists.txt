@@ -34,10 +34,12 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # ####################################################################################### #
 
 set(Math3D_PUBLIC_HEADERS
-    develop/include/Math3D/IO.hpp
+    develop/include/Math3D/Core/Operators/IO.hpp
     develop/include/Math3D/Global.hpp
+    develop/include/Math3D/Platform.hpp
     develop/include/Math3D/Core/Structs/Vectors/Vector.hpp
     develop/include/Math3D/Core/Structs/Vectors/Iterators.hpp
+    develop/include/Math3D/Core/Structs/Vectors/Operators.hpp
     develop/include/Math3D/Core/Structs/Matrices/Matrix.hpp
     develop/include/Math3D/Core/Structs/Matrices/Iterators/Default.hpp
     develop/include/Math3D/Core/Structs/Matrices/Iterators/Row.hpp
@@ -53,7 +55,8 @@ set(Math3D_PUBLIC_HEADERS
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(${PROJECT_NAME} INTERFACE
-    "${CMAKE_CURRENT_SOURCE_DIR}/develop/include")
+    "${CMAKE_CURRENT_SOURCE_DIR}/develop/include"
+)
 
 if(USE_DOUBLE_PRECISION)
     target_compile_definitions(${PROJECT_NAME} INTERFACE USE_DOUBLE_PRECISION=true)
