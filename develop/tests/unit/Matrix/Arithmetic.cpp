@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Structs/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrices/Operators.hpp>
 
 
 using namespace std;
@@ -45,7 +46,7 @@ TEST(Matrix_Arithmetic, InplaceMinus_Scalar)
         -1,0,
         1,2
     };
-    input -= 2;
+    input -= Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -90,7 +91,7 @@ TEST(Matrix_Arithmetic, InplacePlus_Scalar)
         3,4,
         5,6
     };
-    input += 2;
+    input += Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -135,7 +136,7 @@ TEST(Matrix_Arithmetic, InplacePerComponentMultiplication_On_Scalar)
         2,4,
         6,8
     };
-    input *= 2;
+    input *= Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -154,7 +155,7 @@ TEST(Matrix_Arithmetic, OutplacePerComponentMultiplication_On_Scalar)
         2,4,
         6,8
     };
-    input = input * 2;
+    input = input * Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -175,7 +176,7 @@ TEST(Matrix_Arithmetic, InplacePerComponentDivision_By_Scalar)
         1,2,
         3,4
     };
-    input /= 2;
+    input /= Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }
@@ -194,7 +195,7 @@ TEST(Matrix_Arithmetic, OutplacePerComponentDivision_By_Scalar)
         1,2,
         3,4
     };
-    input = input / 2;
+    input = input / Mat::value_type(2);
 
     for (Mat::size_type i = 0; i < Mat::size; ++i) ASSERT_EQ(input[i], expec[i]);
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Structs/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrices/Operators.hpp>
 
 
 using namespace std;
