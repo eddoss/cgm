@@ -1,17 +1,35 @@
 
+# ##################################################################################### #
+# This function help you add tests based on GoogleTest framework.
+# You need find GTest package before to call this function.
+# It create executable target and setup it with GTest libraries
+# and include directories.
+#
+# TARGET    - name of the created target
+# RUNNER    - .cpp file running tests
+# SOURCES   - tests list
+# ##################################################################################### #
+
+function(math3d_add_test TARGET SOURCES)
+    add_executable(${TARGET} ${SOURCES})
+    target_include_directories(${TARGET} PRIVATE ../../include)
+    target_link_libraries(${TARGET} PRIVATE GTest::GTest GTest::Main)
+    add_test(NAME ${TARGET} COMMAND ${TARGET})
+endfunction()
+
 # ####################################################################################### #
 # Init test project
 # ####################################################################################### #
 
-project(UnitTests
-    LANGUAGES CXX
-)
+project(UnitTests LANGUAGES CXX)
+find_package(GTest REQUIRED)
 
 # ####################################################################################### #
-# Tests suites
+# Tests suites sources
 # ####################################################################################### #
 
-set(VECTOR_TESTS_SUITES
+set(VECTOR_TEST_SUITE
+    run.cpp
     Vector/Arithmetic.cpp
     Vector/Assignment.cpp
     Vector/Iterator.cpp
@@ -21,8 +39,8 @@ set(VECTOR_TESTS_SUITES
     Vector/ComparisonWithScalar.cpp
 )
 
-set(MATRIX_TESTS_SUITES
-    Matrix/Accessing.cpp
+set(MATRIX_TEST_SUITE
+    run.cpp
     Matrix/Arithmetic.cpp
     Matrix/Assignment.cpp
     Matrix/IncrementDecrement.cpp
@@ -35,28 +53,15 @@ set(MATRIX_TESTS_SUITES
     Matrix/Iterators/Row.cpp
 )
 
-# ####################################################################################### #
-# Setup target
-# ####################################################################################### #
-
-add_executable(${PROJECT_NAME}
-    run.cpp
-    ${VECTOR_TESTS_SUITES}
-    ${MATRIX_TESTS_SUITES}
-)
-
-find_package(GTest REQUIRED)
-target_include_directories(${PROJECT_NAME} PRIVATE ../../include)
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    GTest::GTest
-    GTest::Main
+set(ALL_TEST_SUITES
+    ${VECTOR_TEST_SUITE}
+    ${MATRIX_TEST_SUITE}
 )
 
 # ####################################################################################### #
-# Setup tests
+# Setup tests suites
 # ####################################################################################### #
 
-add_test(
-    NAME ${PROJECT_NAME}
-    COMMAND ${PROJECT_NAME}
-)
+math3d_add_test(AllTestSuites   "${ALL_TEST_SUITES}")
+math3d_add_test(VectorTestSuite "${VECTOR_TEST_SUITE}")
+math3d_add_test(MatrixTestSuite "${MATRIX_TEST_SUITE}")
