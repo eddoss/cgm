@@ -12,28 +12,28 @@
 /**
  * Increase all components of matrix by 1 and returns it.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator++(Matrix<M,N,T>& matrix);
 
 /**
  * Decrease all components of matrix by 1 and returns it.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator--(Matrix<M,N,T>& matrix);
 
 /**
  * Increase all components of matrix by 1 and returns unchanged copy of it.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator++(Matrix<M,N,T>& matrix, int);
 
 /**
  * Decrease all components of matrix by 1 and returns unchanged copy of it.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator--(Matrix<M,N,T>& matrix, int);
 
@@ -47,7 +47,7 @@ operator--(Matrix<M,N,T>& matrix, int);
  * @param B Right matrix.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -57,7 +57,7 @@ operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to add.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -67,7 +67,7 @@ operator+(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to add.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator+(T scalar, const Matrix<M,N,T>& matrix);
 
@@ -77,7 +77,7 @@ operator+(T scalar, const Matrix<M,N,T>& matrix);
  * @param scalar Value to add.
  * @return The result of adding.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& matrix, T scalar);
 
@@ -87,7 +87,7 @@ operator+=(Matrix<M,N,T>& matrix, T scalar);
  * @param B Matrix to add.
  * @return The result of adding.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -100,7 +100,7 @@ operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param matrix Matrix to negate.
  * @return A negated copy of the matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix);
 
@@ -110,7 +110,7 @@ operator-(const Matrix<M,N,T>& matrix);
  * @param B Right matrix.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -120,7 +120,7 @@ operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to subtract.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -130,7 +130,7 @@ operator-(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to subtract.
  * @return The result of subtraction.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& matrix, T scalar);
 
@@ -140,7 +140,7 @@ operator-=(Matrix<M,N,T>& matrix, T scalar);
  * @param B Matrix to subtract.
  * @return The result of subtraction.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -154,7 +154,7 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to multiply.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator*(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -164,7 +164,7 @@ operator*(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to multiply.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator*(T scalar, const Matrix<M,N,T>& matrix);
 
@@ -177,8 +177,8 @@ operator*(T scalar, const Matrix<M,N,T>& matrix);
  * @param BN right matrix columns count.
  * @return The result of multiplication.
  */
-template<uint32_t AM, uint32_t AN, uint32_t BN, typename T=FLOAT>
-Matrix<AM, BN>
+template<size_t AM, size_t AN, size_t BN, typename T>
+Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
 
 /**
@@ -187,19 +187,9 @@ operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
  * @param scalar Value to multiply.
  * @return The result of multiplication.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator*=(Matrix<M,N,T>& matrix, T scalar);
-
-/**
- * Multiply component wise matrix A by matrix B.
- * @param A Matrix to multiply to.
- * @param B Matrix to multiply.
- * @return The result of multiplication.
- */
-template<size_t M, size_t N, typename T=FLOAT>
-Matrix<M,N,T>&
-operator*=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
  * Multiply square matrix A by square matrix B and store result in A.
@@ -208,7 +198,7 @@ operator*=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param S matrices size
  * @return The result of multiplication.
  */
-template<size_t S, typename T=FLOAT>
+template<size_t S, typename T>
 Matrix<S,S,T>&
 operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B);
 
@@ -222,7 +212,7 @@ operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B);
  * @param scalar Value to division.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator/(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -232,7 +222,7 @@ operator/(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to division.
  * @return The result of division.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 operator/=(Matrix<M,N,T>& matrix, T scalar);
 
@@ -246,7 +236,7 @@ operator/=(Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are equal to scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator==(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -256,7 +246,7 @@ operator==(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are not equal to scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator!=(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -266,7 +256,7 @@ operator!=(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are less than scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator<(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -276,7 +266,7 @@ operator<(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are greater than scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator>(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -286,7 +276,7 @@ operator>(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are less or equal to a scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator<=(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -296,7 +286,7 @@ operator<=(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the matrix are greater or equal to a scalar, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator>=(const Matrix<M,N,T>& matrix, T scalar);
 
@@ -310,7 +300,7 @@ operator>=(const Matrix<M,N,T>& matrix, T scalar);
  * @param B Matrix to compare with.
  * @return true if the matrix are equal, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -320,7 +310,7 @@ operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param B Matrix to compare with.
  * @return true if the matrices are not equal, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -330,7 +320,7 @@ operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param B Matrix to compare with.
  * @return true if A matrix components less than B matrix components, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -340,7 +330,7 @@ operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param B Matrix to compare with.
  * @return true if A matrix components less or equal B matrix components, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -350,7 +340,7 @@ operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param B Matrix to compare with.
  * @return true if A matrix components greater than B matrix components, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -360,7 +350,7 @@ operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param B Matrix to compare with.
  * @return true if A matrix components greater or equal B matrix components, false otherwise.
  */
-template<size_t M, size_t N, typename T=FLOAT>
+template<size_t M, size_t N, typename T>
 bool
 operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
@@ -541,17 +531,9 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 }
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Component wise multiplication */
+/* IMPLEMENTATION | Multiplication */
 /* ####################################################################################### */
 
-template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
-operator*(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
-{
-    Matrix<M,N,T> copy {A};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] *= B[i];
-    return copy;
-}
 
 /* --------------------------------------------------------------------------------------- */
 
@@ -577,14 +559,14 @@ operator*(T scalar, const Matrix<M,N,T>& matrix)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<uint32_t AM, uint32_t AN, uint32_t BN, typename T>
-Matrix<AM, BN>
+template<size_t AM, size_t AN, size_t BN, typename T>
+Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
 {
     Matrix<AM,BN,T> out;
     Matrix<AM,BN,T>::value_type sum;
 
-    for (uint32_t c = 0; c < BN; ++c )
+    for (size_t c = 0; c < BN; ++c )
     {
         for (auto r = 0; r < AM; ++r)
         {
@@ -607,16 +589,6 @@ operator*=(Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] *= scalar;
     return matrix;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
-operator*=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
-{
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] *= B[i];
-    return A;
 }
 
 /* --------------------------------------------------------------------------------------- */
