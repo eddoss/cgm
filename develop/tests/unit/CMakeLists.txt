@@ -28,6 +28,7 @@ set(MATRIX_TESTS_SUITES
     Matrix/IncrementDecrement.cpp
     Matrix/ComparisonWithOther.cpp
     Matrix/ComparisonWithScalar.cpp
+    Matrix/MatrixMultiplication.cpp
     Matrix/Iterators/Default.cpp
     Matrix/Iterators/Column.cpp
     Matrix/Iterators/Sub.cpp
