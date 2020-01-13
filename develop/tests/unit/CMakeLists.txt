@@ -22,6 +22,7 @@ set(VECTOR_TESTS_SUITES
 )
 
 set(MATRIX_TESTS_SUITES
+    Matrix/Accessing.cpp
     Matrix/Arithmetic.cpp
     Matrix/Assignment.cpp
     Matrix/IncrementDecrement.cpp
