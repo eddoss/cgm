@@ -10,7 +10,7 @@
 /* Common constants */
 /* ####################################################################################### */
 
-#if USE_DOUBLE_PRECISION
+#ifdef MATH3D_USE_DOUBLE_PRECISION
     using FLOAT = double;
     constexpr FLOAT BIG_NUMBER                  = 1.79768e+308;
     constexpr FLOAT SMALL_NEGATIVE_NUMBER       = 2.22506e-308;

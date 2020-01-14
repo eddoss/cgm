@@ -17,7 +17,6 @@
 template<size_t M, size_t N, typename T=FLOAT>
 struct Matrix
 {
-    T data[N][M];
 
 /* ####################################################################################### */
 public: /* Typedefs */
@@ -117,7 +116,7 @@ public: /* Constructors */
     /**
      * Default constructor.
      */
-    Matrix();
+    Matrix() = default;
 
     /**
      * Default copy constructor.
@@ -178,6 +177,8 @@ public: /* Components accessing */
 
     /**
      * Gets a reference to a specific component of the matrix by index of bulk data.
+     * @warning Mapping based operator! For row-major indexed per rows, For column-major
+     * indexed per columns.
      * @param index Index of component.
      * @return reference to a component.
      */
@@ -185,9 +186,11 @@ public: /* Components accessing */
     operator[](size_t index);
 
     /**
-     * Gets a reference to a specific component of the matrix by index of bulk data.
+     * Gets a const reference to a specific component of the matrix by index of bulk data.
+     * @warning Mapping based operator! For row-major indexed per rows, For column-major
+     * indexed per columns.
      * @param index Index of component.
-     * @return const reference to a component.
+     * @return reference to a component.
      */
     const T&
     operator[](size_t index) const;
@@ -495,6 +498,16 @@ public: /* Sub iterators */
      */
     ConstReverseSubIterator
     crendSub(const SubRect& subRect) const;
+
+/* ####################################################################################### */
+public: /* Data */
+/* ####################################################################################### */
+
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        T data[M][N];
+    #else
+        T data[N][M];
+    #endif
 };
 
 
@@ -510,24 +523,11 @@ public: /* Sub iterators */
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>::Matrix()
-{
-    static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(T scalar)
 {
-    static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
-
-    for (size_t c = 0; c < N; ++c)
+    for (auto i = 0; i < size; ++i)
     {
-        for (size_t r = 0; r < M; ++r)
-        {
-            data[c][r] = scalar;
-        }
+        *(&data[0][0] + i) = scalar;
     }
 }
 
@@ -536,15 +536,20 @@ Matrix<M,N,T>::Matrix(T scalar)
 template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
-    static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
-
-    for (size_t c = 0; c < N; ++c)
-    {
-        for (size_t r = 0; r < M; ++r)
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        for (auto i = 0; i < size; ++i)
         {
-            data[c][r] = *(values.begin() + r * N + c);
+            *(&data[0][0] + i) = *(values.begin() + i);
         }
-    }
+    #else
+        for (auto c = 0; c < columns; ++c)
+        {
+            for (auto r = 0; r < rows; ++r)
+            {
+                data[c][r] = *(values.begin() + r * columns + c);
+            }
+        }
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -552,15 +557,20 @@ Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 template<size_t M, size_t N, typename T>
 Matrix<M,N,T>::Matrix(const T *values)
 {
-    static_assert(M > 1 && N > 1, __FUNCTION__"(): rows and columns size must be greater than 1");
-
-    for (size_t c = 0; c < N; ++c)
-    {
-        for (size_t r = 0; r < M; ++r)
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        for (auto i = 0; i < size; ++i)
         {
-            data[c][r] = *(values + r * N + c);
+            *(&data[0][0] + i) = *(values + i);
         }
-    }
+    #else
+        for (auto c = 0; c < columns; ++c)
+        {
+            for (auto r = 0; r < rows; ++r)
+            {
+                data[c][r] = *(values.begin() + r * columns + c);
+            }
+        }
+    #endif
 }
 
 /* ####################################################################################### */
@@ -571,12 +581,9 @@ template<size_t M, size_t N, typename T>
 Matrix<M,N,T>&
 Matrix<M,N,T>::operator=(T scalar)
 {
-    for (size_t c = 0; c < N; ++c)
+    for (auto i = 0; i < size; ++i)
     {
-        for (size_t r = 0; r < M; ++r)
-        {
-            data[c][r] = scalar;
-        }
+        *(&data[0][0] + i) = scalar;
     }
     return *this;
 }
@@ -589,7 +596,11 @@ template<size_t M, size_t N, typename T>
 FORCEINLINE T&
 Matrix<M,N,T>::operator()(size_t row, size_t column)
 {
-    return data[column][row];
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        return data[row][column];
+    #else
+        return data[column][row];
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -598,7 +609,11 @@ template<size_t M, size_t N, typename T>
 FORCEINLINE const T&
 Matrix<M,N,T>::operator()(size_t row, size_t column) const
 {
-    return data[column][row];
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        return data[row][column];
+    #else
+        return data[column][row];
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */

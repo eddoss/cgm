@@ -3,6 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Structs/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrices/Operators.hpp>
 
 
 using namespace std;
@@ -31,7 +32,6 @@ TEST(Matrix_Accessing, ByIndexFirst)
         7,8
     };
     input[0] *= -1;
-
     ASSERT_EQ(input, expec);
 }
 
@@ -45,14 +45,22 @@ TEST(Matrix_Accessing, ByIndexMid)
         4,5,
         7,8
     };
-    Mat32 expec
-    {
-        1,2,
-        4,-5,
-        7,8
-    };
     input[4] *= -1;
-
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        Mat32 expec
+        {
+            1,2,
+            4,5,
+            -7,8
+        };
+    #else
+        Mat32 expec
+        {
+            1,2,
+            4,-5,
+            7,8
+        };
+    #endif
     ASSERT_EQ(input, expec);
 }
 
