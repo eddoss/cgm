@@ -3,14 +3,20 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Structs/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrices/Operators.hpp>
 
 
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
+using Mat23 = Matrix<2,3,int>;
+using Mat24 = Matrix<2,4,int>;
 using Mat32 = Matrix<3,2,int>;
 using Mat33 = Matrix<3,3,int>;
 using Mat34 = Matrix<3,4,int>;
+using Mat42 = Matrix<4,2,int>;
+using Mat43 = Matrix<4,3,int>;
 using Mat44 = Matrix<4,4,int>;
+using Mat55 = Matrix<5,5,int>;
 
 /* ####################################################################################### */
 /* Default iterators */
@@ -25,13 +31,20 @@ TEST(Matrix_Iterator, Plus)
         7, 8, 9
     };
 
-    auto it_01 = input.begin() + Mat33::rows;
-    auto it_11 = input.begin() + Mat33::rows + 1;
-    auto it_21 = input.begin() + Mat33::rows + 2;
+    auto it0 = input.begin() + 1;
+    auto it1 = input.begin() + 2;
+    auto it2 = input.begin() + 3;
 
-    ASSERT_EQ(*it_01, 2);
-    ASSERT_EQ(*it_11, 5);
-    ASSERT_EQ(*it_21, 8);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*it0, 2);
+        ASSERT_EQ(*it1, 3);
+        ASSERT_EQ(*it2, 4);
+    #else
+        ASSERT_EQ(*it0, 4);
+        ASSERT_EQ(*it1, 7);
+        ASSERT_EQ(*it2, 2);
+    #endif
+
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -45,13 +58,19 @@ TEST(Matrix_Iterator, Minus)
         7, 8, 9
     };
 
-    auto it_02 = input.end() - 3;
-    auto it_12 = input.end() - 2;
-    auto it_22 = input.end() - 1;
+    auto it0 = input.end() - 1;
+    auto it1 = input.end() - 2;
+    auto it2 = input.end() - 3;
 
-    ASSERT_EQ(*it_02, 3);
-    ASSERT_EQ(*it_12, 6);
-    ASSERT_EQ(*it_22, 9);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*it0, 9);
+        ASSERT_EQ(*it1, 8);
+        ASSERT_EQ(*it2, 7);
+    #else
+        ASSERT_EQ(*it0, 9);
+        ASSERT_EQ(*it1, 6);
+        ASSERT_EQ(*it2, 3);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -67,9 +86,13 @@ TEST(Matrix_Iterator, PreIncrement)
 
     auto it = input.begin();
 
-    ASSERT_EQ(*it, 1);
-    ASSERT_EQ(*(++it), 4);
-    ASSERT_EQ(*(++it), 7);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*(++it), 2);
+        ASSERT_EQ(*(++it), 3);
+    #else
+        ASSERT_EQ(*(++it), 4);
+        ASSERT_EQ(*(++it), 7);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -84,8 +107,15 @@ TEST(Matrix_Iterator, PostIncrement)
     };
 
     auto it = input.begin();
+    it++;
 
-    ASSERT_EQ(*(it++), 1);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*(it++), 2);
+        ASSERT_EQ(*(it++), 3);
+    #else
+        ASSERT_EQ(*(it++), 4);
+        ASSERT_EQ(*(it++), 7);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -101,9 +131,13 @@ TEST(Matrix_Iterator, PreDecrement)
 
     auto it = input.end();
 
-    ASSERT_EQ(*(--it), 9);
-    ASSERT_EQ(*(--it), 6);
-    ASSERT_EQ(*(--it), 3);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*(--it), 9);
+        ASSERT_EQ(*(--it), 8);
+    #else
+        ASSERT_EQ(*(--it), 9);
+        ASSERT_EQ(*(--it), 6);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -117,7 +151,16 @@ TEST(Matrix_Iterator, PostDecrement)
         7, 8, 9
     };
 
-    ASSERT_EQ((input.begin()), input.begin());
+    auto it = input.end();
+    it--;
+
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*(it--), 9);
+        ASSERT_EQ(*(it--), 8);
+    #else
+        ASSERT_EQ(*(it--), 9);
+        ASSERT_EQ(*(it--), 6);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -130,7 +173,9 @@ TEST(Matrix_Iterator, RowsColumns_FirstComponent)
         4, 5, 6,
         7, 8, 9
     };
+
     auto it {input.begin()};
+
     ASSERT_EQ(it.row(), 0);
     ASSERT_EQ(it.column(), 0);
 }
@@ -139,15 +184,23 @@ TEST(Matrix_Iterator, RowsColumns_FirstComponent)
 
 TEST(Matrix_Iterator, RowsColumns_MidComponent)
 {
-    Mat33 input
+    Mat24 input
     {
-        1, 2, 3,
-        4, 5, 6,
-        7, 8, 9
+        1, 2, 3, 4,
+        5, 6, 7, 8
     };
+
     auto it {input.begin() + 5};
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 1);
+
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*it, 6);
+        ASSERT_EQ(it.row(), 1);
+        ASSERT_EQ(it.column(), 1);
+    #else
+        ASSERT_EQ(*it, 7);
+        ASSERT_EQ(it.row(), 1);
+        ASSERT_EQ(it.column(), 2);
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -160,7 +213,9 @@ TEST(Matrix_Iterator, RowsColumns_LastComponent)
         4, 5, 6,
         7, 8, 9
     };
+
     auto it {input.begin() + Mat33::size-1};
+
     ASSERT_EQ(it.row(), 2);
     ASSERT_EQ(it.column(), 2);
 }
