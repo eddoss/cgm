@@ -247,12 +247,12 @@ TEST(Matrix_Iterator, Comparison_Equal)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_same = input.begin();
-    auto it_10 = input.begin() + 1;
+    auto a = input.begin();
+    auto same_a = input.begin();
+    auto b = input.begin() + 1;
 
-    ASSERT_TRUE(it_00 == it_same);
-    ASSERT_FALSE(it_00 == it_10);
+    ASSERT_TRUE(a == same_a);
+    ASSERT_FALSE(a == b);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -265,12 +265,12 @@ TEST(Matrix_Iterator, Comparison_NotEqual)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_same = input.begin();
-    auto it_10 = input.begin() + 1;
+    auto a = input.begin();
+    auto same_a = input.begin();
+    auto b = input.begin() + 1;
 
-    ASSERT_TRUE(it_00 != it_10);
-    ASSERT_FALSE(it_00 != it_same);
+    ASSERT_TRUE(a != b);
+    ASSERT_FALSE(a != same_a);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -283,10 +283,10 @@ TEST(Matrix_Iterator, Comparison_Less)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_10 = input.begin() + 1;
+    auto a = input.begin();
+    auto b = input.begin() + 1;
 
-    ASSERT_TRUE(it_00 < it_10);
+    ASSERT_TRUE(a < b);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -299,10 +299,10 @@ TEST(Matrix_Iterator, Comparison_LessOrEqual)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_same = input.begin();
+    auto a = input.begin();
+    auto b = input.begin();
 
-    ASSERT_TRUE(it_00 <= it_same);
+    ASSERT_TRUE(a <= b);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -315,10 +315,10 @@ TEST(Matrix_Iterator, Comparison_Greater)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_10 = input.begin() + 1;
+    auto a = input.begin();
+    auto b = input.begin() + 1;
 
-    ASSERT_TRUE(it_10 > it_00);
+    ASSERT_TRUE(b > a);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -331,10 +331,10 @@ TEST(Matrix_Iterator, Comparison_GreaterOrEqual)
         4, 5
     };
 
-    auto it_00 = input.begin();
-    auto it_same = input.begin();
+    auto a = input.begin();
+    auto b = input.begin();
 
-    ASSERT_TRUE(it_00 >= it_same);
+    ASSERT_TRUE(b >= a);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -347,13 +347,20 @@ TEST(Matrix_Iterator, Reverse)
         4, 5
     };
 
-    auto it_11 = input.rbegin();
-    auto it_10 = input.rbegin() + 1;
-    auto it_01 = input.rbegin() + 2;
-    auto it_00 = input.rbegin() + 3;
+    auto a = input.rbegin();
+    auto b = input.rbegin() + 1;
+    auto c = input.rbegin() + 2;
+    auto d = input.rbegin() + 3;
 
-    ASSERT_EQ(*it_00, 1);
-    ASSERT_EQ(*it_01, 4);
-    ASSERT_EQ(*it_10, 2);
-    ASSERT_EQ(*it_11, 5);
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        ASSERT_EQ(*a, 5);
+        ASSERT_EQ(*b, 4);
+        ASSERT_EQ(*c, 2);
+        ASSERT_EQ(*d, 1);
+    #else
+        ASSERT_EQ(*a, 5);
+        ASSERT_EQ(*b, 2);
+        ASSERT_EQ(*c, 4);
+        ASSERT_EQ(*d, 1);
+    #endif
 }

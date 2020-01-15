@@ -46,15 +46,21 @@ public: /* Constructors */
 
 /* --------------------------------------------------------------------------------------- */
 
+#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    constexpr
+    ConstMatrixIterator(pointer firstCompPtr, size_t row, size_t column)
+        : m_data(firstCompPtr + row * N + column)
+        , m_first(firstCompPtr)
+        , m_row(row)
+        , m_col(column) {}
+#else
     constexpr
     ConstMatrixIterator(pointer firstCompPtr, size_t row, size_t column)
         : m_data(firstCompPtr + column * M + row)
         , m_first(firstCompPtr)
         , m_row(row)
-        , m_col(column)
-    {
-
-    }
+        , m_col(column) {}
+#endif
 
 /* ####################################################################################### */
 public: /* Default assignment */
@@ -274,10 +280,15 @@ protected: /* Internal */
     void
     calcRowColumn()
     {
+        size_t id {static_cast<size_t>(m_data - m_first)};
 
-        difference_type offset {static_cast<difference_type>(m_data - m_first)};
-        m_row = offset % M;
-        m_col = (offset - m_row) / M;
+        #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+            m_row = id % N;
+            m_col = (id - m_row) / N;
+        #else
+            m_row = id % M;
+            m_col = (id - m_row) / M;
+        #endif
     }
 };
 

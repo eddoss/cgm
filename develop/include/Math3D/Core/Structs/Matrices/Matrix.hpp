@@ -651,7 +651,11 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::end()
 {
-    return iterator {&data[0][0], M, N-1};
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        return iterator {&data[0][0], M-1, N};
+    #else
+        return iterator {&data[0][0], M, N-1};
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -669,7 +673,11 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::end() const
 {
-    return const_iterator {&data[0][0], M, N-1};
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        return const_iterator {&data[0][0], M-1, N};
+    #else
+        return const_iterator {&data[0][0], M, N-1};
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -687,7 +695,11 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cend() const
 {
-    return const_iterator {&data[0][0], M, N-1};
+    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+        return const_iterator {&data[0][0], M-1, N};
+    #else
+        return const_iterator {&data[0][0], M, N-1};
+    #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
