@@ -21,7 +21,7 @@ public: /* Typedefs */
     using reference             = const T&;
     using pointer               = const T*;
     using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = size_t;
+    using difference_type       = int64_t;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -170,7 +170,7 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return m_data - other.m_data;
+        return static_cast<difference_type>(m_data-other.m_data);
     }
 
 /* ####################################################################################### */

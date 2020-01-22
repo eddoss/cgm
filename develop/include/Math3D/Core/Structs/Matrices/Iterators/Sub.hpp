@@ -3,7 +3,7 @@
 
 
 #include <algorithm>
-#include <Math3D/Core/Structs/Matrices/Iterators/Default.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
 
 
 /**
@@ -16,7 +16,7 @@
  * @tparam T External matrix components type.
  */
 template<size_t M, size_t N, typename T>
-class ConstSubmatrixIterator : public ConstMatrixIterator<M,N,T>
+class ConstSubmatrixIterator : public ConstDirectMatrixIterator<M,N,T>
 {
 
 /* ####################################################################################### */
@@ -24,7 +24,7 @@ public: /* Typedefs */
 /* ####################################################################################### */
 
     using self_type             = ConstSubmatrixIterator<M,N,T>;
-    using base_type             = ConstMatrixIterator<M,N,T>;
+    using base_type             = ConstDirectMatrixIterator<M,N,T>;
     using value_type            = T;
     using reference             = const T&;
     using pointer               = const T*;
@@ -328,8 +328,8 @@ protected: /* Support */
         size_t rows = subRows();
         m_sub_col = id / rows;
         m_sub_row = id - m_sub_col * rows;
-        this->m_row = m_lt_row + m_sub_row;
-        this->m_col = m_lt_col + m_sub_col;
+        this->m_index = m_lt_row + m_sub_row;
+        this->m_element = m_lt_col + m_sub_col;
     }
 };
 

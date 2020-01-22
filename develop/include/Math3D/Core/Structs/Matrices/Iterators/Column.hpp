@@ -2,14 +2,14 @@
 #define MATH3D_MATRIX_COLUMN_ITERATOR_HPP
 
 
-#include <Math3D/Core/Structs/Matrices/Iterators/Default.hpp>
+#include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
 
 
 /**
  * Iterate over all components of specified column.
  */
 template<size_t M, size_t N, typename T>
-class ConstMatrixColumnIterator : public ConstMatrixIterator<M,N,T>
+class ConstMatrixColumnIterator : public ConstDirectMatrixIterator<M,N,T>
 {
 
 /* ####################################################################################### */
@@ -17,7 +17,7 @@ public: /* Typedefs */
 /* ####################################################################################### */
 
     using self_type             = ConstMatrixColumnIterator<M,N,T>;
-    using base_type             = ConstMatrixIterator<M,N,T>;
+    using base_type             = ConstDirectMatrixIterator<M,N,T>;
     using value_type            = T;
     using reference             = const T&;
     using pointer               = const T*;
