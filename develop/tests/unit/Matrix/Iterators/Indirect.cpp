@@ -22,34 +22,33 @@ using Mat55 = Matrix<5,5,int>;
 /* Default iterators */
 /* ####################################################################################### */
 
-TEST(Matrix_Iterator, Plus)
+TEST(Matrix_IndirectIterator, Plus)
 {
-    Mat33 input
+    Mat34 input
     {
-        1, 2, 3,
-        4, 5, 6,
-        7, 8, 9
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
     };
 
-    auto it0 = input.begin() + 1;
-    auto it1 = input.begin() + 2;
-    auto it2 = input.begin() + 3;
+    auto it0 = input.beginIndirect() + 0;
+    auto it1 = input.beginIndirect() + 1;
+    auto it2 = input.beginIndirect() + 2;
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*it0, 2);
-        ASSERT_EQ(*it1, 3);
-        ASSERT_EQ(*it2, 4);
+        ASSERT_EQ(*it0, 11);
+        ASSERT_EQ(*it1, 21);
+        ASSERT_EQ(*it2, 31);
     #else
-        ASSERT_EQ(*it0, 4);
-        ASSERT_EQ(*it1, 7);
-        ASSERT_EQ(*it2, 2);
+        ASSERT_EQ(*it0, 11);
+        ASSERT_EQ(*it1, 12);
+        ASSERT_EQ(*it2, 13);
     #endif
-
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Minus)
+TEST(Matrix_IndirectIterator, Minus)
 {
     Mat33 input
     {
@@ -58,24 +57,24 @@ TEST(Matrix_Iterator, Minus)
         7, 8, 9
     };
 
-    auto it0 = input.end() - 1;
-    auto it1 = input.end() - 2;
-    auto it2 = input.end() - 3;
+    auto it0 = input.endIndirect() - 1;
+    auto it1 = input.endIndirect() - 2;
+    auto it2 = input.endIndirect() - 3;
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*it0, 9);
-        ASSERT_EQ(*it1, 8);
-        ASSERT_EQ(*it2, 7);
-    #else
         ASSERT_EQ(*it0, 9);
         ASSERT_EQ(*it1, 6);
         ASSERT_EQ(*it2, 3);
+    #else
+        ASSERT_EQ(*it0, 9);
+        ASSERT_EQ(*it1, 8);
+        ASSERT_EQ(*it2, 7);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, PreIncrement)
+TEST(Matrix_IndirectIterator, PreIncrement)
 {
     Mat33 input
     {
@@ -84,20 +83,20 @@ TEST(Matrix_Iterator, PreIncrement)
         7, 8, 9
     };
 
-    auto it = input.begin();
+    auto it = input.beginIndirect();
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*(++it), 2);
-        ASSERT_EQ(*(++it), 3);
-    #else
         ASSERT_EQ(*(++it), 4);
         ASSERT_EQ(*(++it), 7);
+    #else
+        ASSERT_EQ(*(++it), 2);
+        ASSERT_EQ(*(++it), 3);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, PostIncrement)
+TEST(Matrix_IndirectIterator, PostIncrement)
 {
     Mat33 input
     {
@@ -106,21 +105,20 @@ TEST(Matrix_Iterator, PostIncrement)
         7, 8, 9
     };
 
-    auto it = input.begin();
-    it++;
+    auto it = input.beginIndirect();
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*(it++), 2);
-        ASSERT_EQ(*(it++), 3);
-    #else
+        ASSERT_EQ(*(it++), 1);
         ASSERT_EQ(*(it++), 4);
-        ASSERT_EQ(*(it++), 7);
+    #else
+        ASSERT_EQ(*(it++), 1);
+        ASSERT_EQ(*(it++), 2);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, PreDecrement)
+TEST(Matrix_IndirectIterator, PreDecrement)
 {
     Mat33 input
     {
@@ -129,20 +127,20 @@ TEST(Matrix_Iterator, PreDecrement)
         7, 8, 9
     };
 
-    auto it = input.end();
+    auto it = input.endIndirect();
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*(--it), 9);
-        ASSERT_EQ(*(--it), 8);
-    #else
         ASSERT_EQ(*(--it), 9);
         ASSERT_EQ(*(--it), 6);
+    #else
+        ASSERT_EQ(*(--it), 9);
+        ASSERT_EQ(*(--it), 8);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, PostDecrement)
+TEST(Matrix_IndirectIterator, PostDecrement)
 {
     Mat33 input
     {
@@ -151,21 +149,21 @@ TEST(Matrix_Iterator, PostDecrement)
         7, 8, 9
     };
 
-    auto it = input.end();
+    auto it = input.endIndirect();
     it--;
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         ASSERT_EQ(*(it--), 9);
-        ASSERT_EQ(*(it--), 8);
+        ASSERT_EQ(*(it--), 6);
     #else
         ASSERT_EQ(*(it--), 9);
-        ASSERT_EQ(*(it--), 6);
+        ASSERT_EQ(*(it--), 8);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, RowsColumns_FirstComponent)
+TEST(Matrix_IndirectIterator, RowsColumns_FirstComponent)
 {
     Mat33 input
     {
@@ -174,7 +172,7 @@ TEST(Matrix_Iterator, RowsColumns_FirstComponent)
         7, 8, 9
     };
 
-    auto it {input.begin()};
+    auto it {input.beginIndirect()};
 
     ASSERT_EQ(it.row(), 0);
     ASSERT_EQ(it.column(), 0);
@@ -182,7 +180,7 @@ TEST(Matrix_Iterator, RowsColumns_FirstComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, RowsColumns_MidComponent)
+TEST(Matrix_IndirectIterator, RowsColumns_MidComponent)
 {
     Mat24 input
     {
@@ -190,22 +188,22 @@ TEST(Matrix_Iterator, RowsColumns_MidComponent)
         5, 6, 7, 8
     };
 
-    auto it {input.begin() + 5};
+    auto it {input.beginIndirect() + 5};
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        ASSERT_EQ(*it, 6);
-        ASSERT_EQ(it.row(), 1);
-        ASSERT_EQ(it.column(), 1);
-    #else
         ASSERT_EQ(*it, 7);
         ASSERT_EQ(it.row(), 1);
         ASSERT_EQ(it.column(), 2);
+    #else
+        ASSERT_EQ(*it, 6);
+        ASSERT_EQ(it.row(), 1);
+        ASSERT_EQ(it.column(), 1);
     #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, RowsColumns_LastComponent)
+TEST(Matrix_IndirectIterator, RowsColumns_LastComponent)
 {
     Mat33 input
     {
@@ -214,7 +212,7 @@ TEST(Matrix_Iterator, RowsColumns_LastComponent)
         7, 8, 9
     };
 
-    auto it {input.begin() + Mat33::size-1};
+    auto it {input.beginIndirect() + Mat33::size-1};
 
     ASSERT_EQ(it.row(), 2);
     ASSERT_EQ(it.column(), 2);
@@ -222,24 +220,24 @@ TEST(Matrix_Iterator, RowsColumns_LastComponent)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Difference)
+TEST(Matrix_IndirectIterator, Difference)
 {
-    Mat33 input
+    Mat34 input
     {
-        1, 2, 3,
-        4, 5, 6,
-        7, 8, 9
+        11, 12, 13, 14,
+        21, 22, 23, 24,
+        31, 32, 33, 34,
     };
 
-    auto a {input.begin()};
-    auto b {input.begin() + 3};
+    auto a {input.beginIndirect()};
+    auto b {input.beginIndirect() + 4};
 
-    ASSERT_EQ(b-a, 3);
+    ASSERT_EQ(b-a, 4);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_Equal)
+TEST(Matrix_IndirectIterator, Comparison_Equal)
 {
     Mat22 input
     {
@@ -247,9 +245,9 @@ TEST(Matrix_Iterator, Comparison_Equal)
         4, 5
     };
 
-    auto a = input.begin();
-    auto same_a = input.begin();
-    auto b = input.begin() + 1;
+    auto a = input.beginIndirect();
+    auto same_a = input.beginIndirect();
+    auto b = input.beginIndirect() + 1;
 
     ASSERT_TRUE(a == same_a);
     ASSERT_FALSE(a == b);
@@ -257,7 +255,7 @@ TEST(Matrix_Iterator, Comparison_Equal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_NotEqual)
+TEST(Matrix_IndirectIterator, Comparison_NotEqual)
 {
     Mat22 input
     {
@@ -265,9 +263,9 @@ TEST(Matrix_Iterator, Comparison_NotEqual)
         4, 5
     };
 
-    auto a = input.begin();
-    auto same_a = input.begin();
-    auto b = input.begin() + 1;
+    auto a = input.beginIndirect();
+    auto same_a = input.beginIndirect();
+    auto b = input.beginIndirect() + 1;
 
     ASSERT_TRUE(a != b);
     ASSERT_FALSE(a != same_a);
@@ -275,7 +273,7 @@ TEST(Matrix_Iterator, Comparison_NotEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_Less)
+TEST(Matrix_IndirectIterator, Comparison_Less)
 {
     Mat22 input
     {
@@ -283,15 +281,15 @@ TEST(Matrix_Iterator, Comparison_Less)
         4, 5
     };
 
-    auto a = input.begin();
-    auto b = input.begin() + 1;
+    auto a = input.beginIndirect();
+    auto b = input.beginIndirect() + 1;
 
     ASSERT_TRUE(a < b);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_LessOrEqual)
+TEST(Matrix_IndirectIterator, Comparison_LessOrEqual)
 {
     Mat22 input
     {
@@ -299,15 +297,15 @@ TEST(Matrix_Iterator, Comparison_LessOrEqual)
         4, 5
     };
 
-    auto a = input.begin();
-    auto b = input.begin();
+    auto a = input.beginIndirect();
+    auto b = input.beginIndirect();
 
     ASSERT_TRUE(a <= b);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_Greater)
+TEST(Matrix_IndirectIterator, Comparison_Greater)
 {
     Mat22 input
     {
@@ -315,15 +313,15 @@ TEST(Matrix_Iterator, Comparison_Greater)
         4, 5
     };
 
-    auto a = input.begin();
-    auto b = input.begin() + 1;
+    auto a = input.beginIndirect();
+    auto b = input.beginIndirect() + 1;
 
     ASSERT_TRUE(b > a);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Comparison_GreaterOrEqual)
+TEST(Matrix_IndirectIterator, Comparison_GreaterOrEqual)
 {
     Mat22 input
     {
@@ -331,15 +329,15 @@ TEST(Matrix_Iterator, Comparison_GreaterOrEqual)
         4, 5
     };
 
-    auto a = input.begin();
-    auto b = input.begin();
+    auto a = input.beginIndirect();
+    auto b = input.beginIndirect();
 
     ASSERT_TRUE(b >= a);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Iterator, Reverse)
+TEST(Matrix_IndirectIterator, Reverse)
 {
     Mat22 input
     {
@@ -347,20 +345,20 @@ TEST(Matrix_Iterator, Reverse)
         4, 5
     };
 
-    auto a = input.rbegin();
-    auto b = input.rbegin() + 1;
-    auto c = input.rbegin() + 2;
-    auto d = input.rbegin() + 3;
+    auto a = input.rbeginIndirect();
+    auto b = input.rbeginIndirect() + 1;
+    auto c = input.rbeginIndirect() + 2;
+    auto d = input.rbeginIndirect() + 3;
 
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         ASSERT_EQ(*a, 5);
-        ASSERT_EQ(*b, 4);
-        ASSERT_EQ(*c, 2);
+        ASSERT_EQ(*b, 2);
+        ASSERT_EQ(*c, 4);
         ASSERT_EQ(*d, 1);
     #else
         ASSERT_EQ(*a, 5);
-        ASSERT_EQ(*b, 2);
-        ASSERT_EQ(*c, 4);
+        ASSERT_EQ(*b, 4);
+        ASSERT_EQ(*c, 2);
         ASSERT_EQ(*d, 1);
     #endif
 }

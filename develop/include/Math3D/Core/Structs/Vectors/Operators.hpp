@@ -4,6 +4,7 @@
 
 #include <Math3D/Core/Structs/Vectors/Vector.hpp>
 
+
 /* ####################################################################################### */
 /* Increment and decrement */
 /* ####################################################################################### */
@@ -482,14 +483,6 @@ operator^(const Vector<4,T>& A, const Vector<3,T>& B);
 template<typename T=FLOAT>
 Vector<4,T>
 operator^(const Vector<4,T>& A, const Vector<4,T>& B);
-
-/* ####################################################################################### */
-/* Stream output */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-std::ostream&
-operator << (std::ostream& stream, const Vector<D,T>& vec);
 
 
 
@@ -1038,29 +1031,6 @@ operator^(const Vector<4,T>& A, const Vector<4,T>& B)
         x(A) * y(B) - y(A) * x(B),
         static_cast<T>(0)
     };
-}
-
-/* ####################################################################################### */
-/* Stream output */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-std::ostream&
-operator << (std::ostream& stream, const Vector<D,T>& vec)
-{
-    stream.setf(std::ios::showpos);
-    stream << typeid(vec).name() << "\n{";
-    stream << std::fixed;
-    for (size_t i = 0; i < D; ++i)
-    {
-        stream  << "\n    "
-                << std::setw(10)
-                << std::left
-                << std::setprecision(6)
-                << vec[i];
-    }
-    stream << "\n}\n";
-    return stream;
 }
 
 #endif // MATH3D_VECTOR_OPERATORS_HPP

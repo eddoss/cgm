@@ -31,26 +31,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # ####################################################################################### #
-# Public headers and private sources
-# ####################################################################################### #
-
-set(Math3D_PUBLIC_HEADERS
-    develop/include/Math3D/Core/Operators/IO.hpp
-    develop/include/Math3D/Global.hpp
-    develop/include/Math3D/Platform.hpp
-    develop/include/Math3D/Core/Structs/Vectors/Vector.hpp
-    develop/include/Math3D/Core/Structs/Vectors/Iterators.hpp
-    develop/include/Math3D/Core/Structs/Vectors/Operators.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Matrix.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Iterators/Direct.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Iterators/Row.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Iterators/Column.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Iterators/Sub.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Subiterators/Row.hpp
-    develop/include/Math3D/Core/Structs/Matrices/Subiterators/Column.hpp
-)
-
-# ####################################################################################### #
 # Setup main target
 # ####################################################################################### #
 
@@ -71,18 +51,10 @@ endif()
 # Installation 
 # ####################################################################################### #
 
-install( 
-    FILES ${Math3D_PUBLIC_HEADERS}
-    DESTINATION "${PROJECT_INSTALL_PREFIX}/include/Math3D"
-    DESTINATION "${PROJECT_INSTALL_PREFIX}/include/Math3D"
+install(
+    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/develop/include"
+    DESTINATION "${PROJECT_INSTALL_PREFIX}"
 )
-
-install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION "${PROJECT_INSTALL_PREFIX}/bin/$<CONFIG>"
-    LIBRARY DESTINATION "${PROJECT_INSTALL_PREFIX}/lib/$<CONFIG>"
-    ARCHIVE DESTINATION "${PROJECT_INSTALL_PREFIX}/lib/$<CONFIG>"
-)
-
 # ####################################################################################### #
 # Testing
 # ####################################################################################### #

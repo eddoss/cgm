@@ -90,7 +90,7 @@ public: /* Move forward */
     {
         ++m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_id, this->m_end, "(Math3D) can't pre-increment matrix iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't pre-increment matrix iterator after end.")
         return *this;
     }
 
@@ -102,7 +102,7 @@ public: /* Move forward */
         self_type tmp = *this;
         ++m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_id, this->m_end, "(Math3D) can't post-increment matrix iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't post-increment matrix iterator after end.")
         return tmp;
     }
 
@@ -111,8 +111,9 @@ public: /* Move forward */
     constexpr self_type&
     operator+=(size_t offset)
     {
-        m_id += offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_id, this->m_end, "(Math3D) can't seek matrix iterator after end.")
+        m_indirect_id += offset;
+        recalculateDirectId();
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't seek matrix iterator after end.")
         return *this;
     }
 
@@ -131,8 +132,9 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_id, this->m_begin, "(Math3D) can't pre-decrement matrix iterator before begin.")
+        --m_indirect_id;
+        recalculateDirectId();
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't pre-decrement matrix iterator before begin.")
         return *this;
     }
 
@@ -142,8 +144,9 @@ public: /* Move backward */
     operator--(int)
     {
         self_type tmp = *this;
-        --m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_id, this->m_begin, "(Math3D) can't post-decrement matrix iterator before begin.")
+        --m_indirect_id;
+        recalculateDirectId();
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't post-decrement matrix iterator before begin.")
         return tmp;
     }
 
@@ -152,8 +155,9 @@ public: /* Move backward */
     constexpr self_type&
     operator-=(size_t offset)
     {
-        m_id += offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_id, this->m_begin, "(Math3D) can't seek matrix iterator before begin.")
+        m_indirect_id -= offset;
+        recalculateDirectId();
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't seek matrix iterator before begin.")
         return *this;
     }
 
@@ -172,7 +176,7 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return *static_cast<const base_type*>(this) - other;
+        return m_indirect_id - other.m_indirect_id;
     }
 
 /* ####################################################################################### */
@@ -234,19 +238,23 @@ protected: /* Internal */
 
 /* --------------------------------------------------------------------------------------- */
 
-    size_t
+    void
     recalculateDirectId()
     {
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        m_id = m_indirect_id / M + m_indirect_id % M;
+        size_t c = m_indirect_id/M;
+        size_t r = m_indirect_id - M * c;
+        this->m_direct_id = r * N + c;
     #else
-        m_id = m_indirect_id / N + m_indirect_id % N;
+        size_t r = m_indirect_id/N;
+        size_t c = m_indirect_id - N * r;
+        this->m_direct_id = c * M + r;
     #endif
     }
 };
 
 
-
+#include <memory>
 
 template<size_t M, size_t N, typename T>
 class IndirectMatrixIterator : public ConstIndirectMatrixIterator<M,N,T>

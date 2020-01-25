@@ -354,13 +354,6 @@ template<size_t M, size_t N, typename T>
 bool
 operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
-/* ####################################################################################### */
-/* Stream output */
-/* ####################################################################################### */
-
-template<size_t M, size_t N, typename T>
-std::ostream&
-operator << (std::ostream& stream, const Matrix<M,N,T>& mat);
 
 
 
@@ -371,6 +364,7 @@ operator << (std::ostream& stream, const Matrix<M,N,T>& mat);
 /* IMPLEMENTATION */
 /* --------------------------------------------------------------------------------------- */
 /* ####################################################################################### */
+
 
 
 
@@ -552,7 +546,7 @@ template<size_t M, size_t N, typename T>
 Matrix<M,N,T>
 operator*(T scalar, const Matrix<M,N,T>& matrix)
 {
-    Matrix<M,N,T> copy {A};
+    Matrix<M,N,T> copy {matrix};
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] *= scalar;
     return copy;
 }
@@ -564,13 +558,13 @@ Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
 {
     Matrix<AM,BN,T> out;
-    Matrix<AM,BN,T>::value_type sum;
+    typename Matrix<AM,BN,T>::value_type sum;
 
     for (size_t c = 0; c < BN; ++c )
     {
         for (auto r = 0; r < AM; ++r)
         {
-            sum = Matrix<AM,BN,T>::value_type(0);
+            sum = static_cast<typename Matrix<AM,BN,T>::value_type>(0);
             for (auto i = 0; i < AN; ++i)
             {
                 sum += A(r,i) * B(i,c);
@@ -782,33 +776,6 @@ operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] < B[i]) return false;
     return true;
-}
-
-/* ####################################################################################### */
-/* Stream output */
-/* ####################################################################################### */
-
-template<size_t M, size_t N, typename T>
-std::ostream&
-operator << (std::ostream& stream, const Matrix<M,N,T>& mat)
-{
-    stream.setf(std::ios::showpos);
-    stream << typeid(mat).name() << "\n{";
-    stream << std::fixed;
-    for (size_t r = 0; r < M; ++r)
-    {
-        stream << "\n    ";
-        for (size_t c = 0; c < N; ++c)
-        {
-            stream  << "  "
-                    << std::setw(10)
-                    << std::left
-                    << std::setprecision(6)
-                    << mat(r,c);
-        }
-    }
-    stream << "\n}\n";
-    return stream;
 }
 
 #endif // MATH3D_MATRIX_OPERATORS_HPP

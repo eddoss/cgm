@@ -7,38 +7,37 @@
     #include <stdexcept>
 #endif
 
-
 /* ####################################################################################### */
 /* Debug verifiers */
 /* ####################################################################################### */
 
 #ifndef NDEBUG
-
+    // FIXME 0 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
-
+    // FIXME 1 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
-
+    // FIXME 2 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(current, end, message) \
     if (current > end) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
-
+    // FIXME 3 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(current, begin, message) \
     if (current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
-
+    // FIXME 4 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
-
+    // FIXME 5 change validation from ptr to ID style
     #define MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
@@ -92,7 +91,7 @@ public: /* Constructors */
     ConstDirectMatrixIterator(pointer firstCompPtr, size_t index)
         : m_begin(firstCompPtr)
         , m_end(firstCompPtr + M*N + 1)
-        , m_id(index)
+        , m_direct_id(index)
     {
 
     }
@@ -135,8 +134,8 @@ public: /* Data accessing */
     constexpr reference
     operator*() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(m_begin + m_id, m_begin, m_end, "(Math3D) can't dereference out of range matrix iterator.")
-        return *(m_begin + m_id);
+        MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(m_begin + m_direct_id, m_begin, m_end, "(Math3D) can't dereference out of range matrix direct iterator.")
+        return *(m_begin + m_direct_id);
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -144,8 +143,8 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(m_begin + m_id, m_begin, m_end, "(Math3D) can't call selector of out of range matrix iterator.")
-        return m_begin + m_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(m_begin + m_direct_id, m_begin, m_end, "(Math3D) can't call selector of out of range matrix direct iterator.")
+        return m_begin + m_direct_id;
     }
 
 /* ####################################################################################### */
@@ -155,8 +154,8 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        ++m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_id, m_end, "(Math3D) can't pre-increment matrix iterator after end.")
+        ++m_direct_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_direct_id, m_end, "(Math3D) can't pre-increment matrix direct iterator after end.")
         return *this;
     }
 
@@ -166,8 +165,8 @@ public: /* Move forward */
     operator++(int)
     {
         self_type tmp = *this;
-        ++m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_id, m_end, "(Math3D) can't post-increment matrix iterator after end.")
+        ++m_direct_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_direct_id, m_end, "(Math3D) can't post-increment matrix direct iterator after end.")
         return tmp;
     }
 
@@ -176,8 +175,8 @@ public: /* Move forward */
     constexpr self_type&
     operator+=(size_t offset)
     {
-        m_id += offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_id, m_end, "(Math3D) can't seek matrix iterator after end.")
+        m_direct_id += offset;
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_begin + m_direct_id, m_end, "(Math3D) can't seek matrix direct iterator after end.")
         return *this;
     }
 
@@ -196,8 +195,8 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_id, m_begin, "(Math3D) can't pre-decrement matrix iterator before begin.")
+        --m_direct_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_direct_id, m_begin, "(Math3D) can't pre-decrement matrix direct iterator before begin.")
         return *this;
     }
 
@@ -207,8 +206,8 @@ public: /* Move backward */
     operator--(int)
     {
         self_type tmp = *this;
-        --m_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_id, m_begin, "(Math3D) can't post-decrement matrix iterator before begin.")
+        --m_direct_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_direct_id, m_begin, "(Math3D) can't post-decrement matrix direct iterator before begin.")
         return tmp;
     }
 
@@ -217,8 +216,8 @@ public: /* Move backward */
     constexpr self_type&
     operator-=(size_t offset)
     {
-        m_id -= offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_id, m_begin, "(Math3D) can't seek matrix iterator before begin.")
+        m_direct_id -= offset;
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_begin + m_direct_id, m_begin, "(Math3D) can't seek matrix direct iterator before begin.")
         return *this;
     }
 
@@ -237,7 +236,7 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return static_cast<difference_type>(m_id-other.m_id);
+        return static_cast<difference_type>(m_direct_id - other.m_direct_id);
     }
 
 /* ####################################################################################### */
@@ -247,7 +246,7 @@ public: /* Compares */
     constexpr bool
     operator==(const self_type& other) const
     {
-        return m_id == other.m_id;
+        return m_direct_id == other.m_direct_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -255,7 +254,7 @@ public: /* Compares */
     constexpr bool
     operator!=(const self_type& other) const
     {
-        return m_id != other.m_id;
+        return m_direct_id != other.m_direct_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -263,7 +262,7 @@ public: /* Compares */
     constexpr bool
     operator<(const self_type& other) const
     {
-        return m_id < other.m_id;
+        return m_direct_id < other.m_direct_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -271,7 +270,7 @@ public: /* Compares */
     constexpr bool
     operator>(const self_type& other) const
     {
-        return m_id > other.m_id;
+        return m_direct_id > other.m_direct_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -279,7 +278,7 @@ public: /* Compares */
     constexpr bool
     operator<=(const self_type& other) const
     {
-        return m_id <= other.m_id;
+        return m_direct_id <= other.m_direct_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -287,7 +286,7 @@ public: /* Compares */
     constexpr bool
     operator>=(const self_type& other) const
     {
-        return m_id >= other.m_id;
+        return m_direct_id >= other.m_direct_id;
     }
 
 /* ####################################################################################### */
@@ -301,11 +300,11 @@ public: /* Methods */
     size_t
     row() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(m_begin+m_id, m_begin, m_end, "(Math3D) can't get row from matrix iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(m_begin + m_direct_id, m_begin, m_end, "(Math3D) can't get row from matrix direct iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        return m_id % N;
+        return m_direct_id / N;
     #else
-        return m_id % M;
+        return m_direct_id - M * column();
     #endif
     }
 
@@ -318,11 +317,11 @@ public: /* Methods */
     size_t
     column() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(m_begin+m_id, m_begin, m_end, "(Math3D) can't get column from matrix iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(m_begin + m_direct_id, m_begin, m_end, "(Math3D) can't get column from matrix direct iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        return (m_id - m_id % N) / N;
+        return m_direct_id - N * row();
     #else
-        return (m_id - m_id % M) / M;
+        return m_direct_id / M;
     #endif
     }
 
@@ -337,7 +336,7 @@ protected: /* Internal */
     m_end       {nullptr};
 
     size_t
-    m_id        {0};
+    m_direct_id {0};
 };
 
 

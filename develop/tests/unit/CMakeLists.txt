@@ -48,7 +48,7 @@ set(MATRIX_TEST_SUITE
     Matrix/ComparisonWithScalar.cpp
     Matrix/MatrixMultiplication.cpp
     Matrix/Iterators/Direct.cpp
-#    Matrix/Iterators/Indirect.cpp
+    Matrix/Iterators/Indirect.cpp
 #    Matrix/Iterators/Column.cpp
 #    Matrix/Iterators/Sub.cpp
 #    Matrix/Iterators/Row.cpp
