@@ -254,7 +254,7 @@ protected: /* Internal */
 };
 
 
-#include <memory>
+
 
 template<size_t M, size_t N, typename T>
 class IndirectMatrixIterator : public ConstIndirectMatrixIterator<M,N,T>
