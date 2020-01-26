@@ -4,7 +4,7 @@
 
 #include <Math3D/Core/Structs/Vectors/Vector.hpp>
 #include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
-#include <Math3D/Core/Structs/Matrices/Iterators/Indirect.hpp>
+//#include <Math3D/Core/Structs/Matrices/Iterators/Indirect.hpp>
 
 
 /**
@@ -39,10 +39,10 @@ public: /* Iterators typedefs */
 
 /* --------------------------------------------------------------------------------------- */
 
-    using IndirectIterator              = IndirectMatrixIterator<M,N,T>;
-    using ConstIndirectIterator         = ConstIndirectMatrixIterator<M,N,T>;
-    using ReverseIndirectIterator       = std::reverse_iterator<IndirectIterator>;
-	using ConstReverseIndirectIterator  = std::reverse_iterator<ConstIndirectIterator>;
+//    using IndirectIterator              = IndirectMatrixIterator<M,N,T>;
+//    using ConstIndirectIterator         = ConstIndirectMatrixIterator<M,N,T>;
+//    using ReverseIndirectIterator       = std::reverse_iterator<IndirectIterator>;
+//	using ConstReverseIndirectIterator  = std::reverse_iterator<ConstIndirectIterator>;
 
 /* ####################################################################################### */
 public: /* Row and column typedefs */
@@ -259,77 +259,77 @@ public: /* Direct iterators */
 public: /* Indirect iterators */
 /* ####################################################################################### */
 
-    /**
-     * Get an indirect iterator pointing to the first component.
-     */
-    IndirectIterator
-    beginIndirect();
-
-    /**
-     * Get an indirect iterator pointing to the component after the last.
-     */
-    IndirectIterator
-    endIndirect();
-
-    /**
-     * Get an const indirect iterator pointing to the first component.
-     */
-    ConstIndirectIterator
-    beginIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the component after the last.
-     */
-    ConstIndirectIterator
-    endIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the first component.
-     */
-    ConstIndirectIterator
-    cbeginIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the component after the last.
-     */
-    ConstIndirectIterator
-    cendIndirect() const;
-
-    /**
-     * Get an indirect iterator pointing to the last component.
-     */
-    ReverseIndirectIterator
-    rbeginIndirect();
-
-    /**
-     * Get an indirect iterator pointing to the component before the first.
-     */
-    ReverseIndirectIterator
-    rendIndirect();
-
-    /**
-     * Get an const indirect iterator pointing to the last component.
-     */
-    ConstReverseIndirectIterator
-    rbeginIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the component before the first.
-     */
-    ConstReverseIndirectIterator
-    rendIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the last component.
-     */
-    ConstReverseIndirectIterator
-    crbeginIndirect() const;
-
-    /**
-     * Get an const indirect iterator pointing to the component before the first.
-     */
-    ConstReverseIndirectIterator
-    crendIndirect() const;
+//    /**
+//     * Get an indirect iterator pointing to the first component.
+//     */
+//    IndirectIterator
+//    beginIndirect();
+//
+//    /**
+//     * Get an indirect iterator pointing to the component after the last.
+//     */
+//    IndirectIterator
+//    endIndirect();
+//
+//    /**
+//     * Get an const indirect iterator pointing to the first component.
+//     */
+//    ConstIndirectIterator
+//    beginIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the component after the last.
+//     */
+//    ConstIndirectIterator
+//    endIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the first component.
+//     */
+//    ConstIndirectIterator
+//    cbeginIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the component after the last.
+//     */
+//    ConstIndirectIterator
+//    cendIndirect() const;
+//
+//    /**
+//     * Get an indirect iterator pointing to the last component.
+//     */
+//    ReverseIndirectIterator
+//    rbeginIndirect();
+//
+//    /**
+//     * Get an indirect iterator pointing to the component before the first.
+//     */
+//    ReverseIndirectIterator
+//    rendIndirect();
+//
+//    /**
+//     * Get an const indirect iterator pointing to the last component.
+//     */
+//    ConstReverseIndirectIterator
+//    rbeginIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the component before the first.
+//     */
+//    ConstReverseIndirectIterator
+//    rendIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the last component.
+//     */
+//    ConstReverseIndirectIterator
+//    crbeginIndirect() const;
+//
+//    /**
+//     * Get an const indirect iterator pointing to the component before the first.
+//     */
+//    ConstReverseIndirectIterator
+//    crendIndirect() const;
 
 ///* ####################################################################################### */
 //public: /* Column iterators */
@@ -702,7 +702,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::begin()
 {
-    return iterator {&data[0][0], 0, 0, M*N};
+    return iterator {&data[0][0], 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -711,7 +711,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::end()
 {
-    return iterator {&data[0][0], M*N, 0, M*N};
+    return iterator {&data[0][0], M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -720,7 +720,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::begin() const
 {
-    return const_iterator {&data[0][0], 0, 0, M*N};
+    return const_iterator {&data[0][0], 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -729,7 +729,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::end() const
 {
-    return const_iterator {&data[0][0], M*N, 0, M*N};
+    return const_iterator {&data[0][0], M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -738,7 +738,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cbegin() const
 {
-    return const_iterator {&data[0][0], 0, 0, M*N};
+    return const_iterator {&data[0][0], 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -747,7 +747,7 @@ template<size_t M, size_t N, typename T>
 typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cend() const
 {
-    return const_iterator {&data[0][0], M*N, 0, M*N};
+    return const_iterator {&data[0][0], M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -808,111 +808,111 @@ Matrix<M,N,T>::crend() const
 /* IMPLEMENTATION | Indirect iterators */
 /* ####################################################################################### */
 
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::IndirectIterator
-Matrix<M,N,T>::beginIndirect()
-{
-    return IndirectIterator {&data[0][0], 0, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::IndirectIterator
-Matrix<M,N,T>::endIndirect()
-{
-    return IndirectIterator {&data[0][0], M*N, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstIndirectIterator
-Matrix<M,N,T>::beginIndirect() const
-{
-    return ConstIndirectIterator {&data[0][0], 0, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstIndirectIterator
-Matrix<M,N,T>::endIndirect() const
-{
-    return ConstIndirectIterator {&data[0][0], M*N, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstIndirectIterator
-Matrix<M,N,T>::cbeginIndirect() const
-{
-    return ConstIndirectIterator {&data[0][0], 0, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstIndirectIterator
-Matrix<M,N,T>::cendIndirect() const
-{
-    return ConstIndirectIterator {&data[0][0], M*N, 0, M*N};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ReverseIndirectIterator
-Matrix<M,N,T>::rbeginIndirect()
-{
-    return ReverseIndirectIterator {endIndirect()};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ReverseIndirectIterator
-Matrix<M,N,T>::rendIndirect()
-{
-    return ReverseIndirectIterator {beginIndirect()};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstReverseIndirectIterator
-Matrix<M,N,T>::rbeginIndirect() const
-{
-    return ConstReverseIndirectIterator {cendIndirect()};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstReverseIndirectIterator
-Matrix<M,N,T>::rendIndirect() const
-{
-    return ConstReverseIndirectIterator {cbeginIndirect()};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstReverseIndirectIterator
-Matrix<M,N,T>::crbeginIndirect() const
-{
-    return ConstReverseIndirectIterator {cendIndirect()};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-typename Matrix<M,N,T>::ConstReverseIndirectIterator
-Matrix<M,N,T>::crendIndirect() const
-{
-    return ConstReverseIndirectIterator {cbeginIndirect()};
-}
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::IndirectIterator
+//Matrix<M,N,T>::beginIndirect()
+//{
+//    return IndirectIterator {&data[0][0], 0, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::IndirectIterator
+//Matrix<M,N,T>::endIndirect()
+//{
+//    return IndirectIterator {&data[0][0], M*N, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstIndirectIterator
+//Matrix<M,N,T>::beginIndirect() const
+//{
+//    return ConstIndirectIterator {&data[0][0], 0, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstIndirectIterator
+//Matrix<M,N,T>::endIndirect() const
+//{
+//    return ConstIndirectIterator {&data[0][0], M*N, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstIndirectIterator
+//Matrix<M,N,T>::cbeginIndirect() const
+//{
+//    return ConstIndirectIterator {&data[0][0], 0, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstIndirectIterator
+//Matrix<M,N,T>::cendIndirect() const
+//{
+//    return ConstIndirectIterator {&data[0][0], M*N, 0, M*N};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ReverseIndirectIterator
+//Matrix<M,N,T>::rbeginIndirect()
+//{
+//    return ReverseIndirectIterator {endIndirect()};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ReverseIndirectIterator
+//Matrix<M,N,T>::rendIndirect()
+//{
+//    return ReverseIndirectIterator {beginIndirect()};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstReverseIndirectIterator
+//Matrix<M,N,T>::rbeginIndirect() const
+//{
+//    return ConstReverseIndirectIterator {cendIndirect()};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstReverseIndirectIterator
+//Matrix<M,N,T>::rendIndirect() const
+//{
+//    return ConstReverseIndirectIterator {cbeginIndirect()};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstReverseIndirectIterator
+//Matrix<M,N,T>::crbeginIndirect() const
+//{
+//    return ConstReverseIndirectIterator {cendIndirect()};
+//}
+//
+///* --------------------------------------------------------------------------------------- */
+//
+//template<size_t M, size_t N, typename T>
+//typename Matrix<M,N,T>::ConstReverseIndirectIterator
+//Matrix<M,N,T>::crendIndirect() const
+//{
+//    return ConstReverseIndirectIterator {cbeginIndirect()};
+//}
 
 /* ####################################################################################### */
 /* Column iterators */

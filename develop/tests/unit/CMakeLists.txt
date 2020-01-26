@@ -41,14 +41,14 @@ set(VECTOR_TEST_SUITE
 
 set(MATRIX_TEST_SUITE
     run.cpp
-    Matrix/Accessing.cpp
-    Matrix/Arithmetic.cpp
-    Matrix/IncrementDecrement.cpp
-    Matrix/ComparisonWithOther.cpp
-    Matrix/ComparisonWithScalar.cpp
-    Matrix/MatrixMultiplication.cpp
+#    Matrix/Accessing.cpp
+#    Matrix/Arithmetic.cpp
+#    Matrix/IncrementDecrement.cpp
+#    Matrix/ComparisonWithOther.cpp
+#    Matrix/ComparisonWithScalar.cpp
+#    Matrix/MatrixMultiplication.cpp
     Matrix/Iterators/Direct.cpp
-    Matrix/Iterators/Indirect.cpp
+#    Matrix/Iterators/Indirect.cpp
 )
 
 set(ALL_TEST_SUITES
