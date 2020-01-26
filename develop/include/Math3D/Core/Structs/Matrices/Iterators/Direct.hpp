@@ -1,13 +1,10 @@
-#ifndef MATH3D_MATRIX_ITERATOR_HPP
-#define MATH3D_MATRIX_ITERATOR_HPP
+#ifndef MATH3D_MATRIX_DIRECT_ITERATOR_HPP
+#define MATH3D_MATRIX_DIRECT_ITERATOR_HPP
 
 
 #include <iterator>
 #ifdef NDEBUG
     #include <stdexcept>
-    #include <string>
-    #include <map>
-    #include <memory>
 #endif
 
 /* ####################################################################################### */
@@ -509,4 +506,4 @@ public: /* Difference */
     }
 };
 
-#endif // MATH3D_MATRIX_ITERATOR_HPP
+#endif // MATH3D_MATRIX_DIRECT_ITERATOR_HPP

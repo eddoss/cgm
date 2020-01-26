@@ -5,8 +5,6 @@
 #include <Math3D/Core/Structs/Vectors/Vector.hpp>
 #include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
 #include <Math3D/Core/Structs/Matrices/Iterators/Indirect.hpp>
-//#include <Math3D/Core/Structs/Matrices/Iterators/Column.hpp>
-//#include <Math3D/Core/Structs/Matrices/Iterators/Sub.hpp>
 
 
 /**
@@ -22,13 +20,13 @@ struct Matrix
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using size_type         = size_t;
-    using value_type        = T;
-    using pointer           = T*;
-    using reference         = T&;
-    using const_pointer     = const T*;
-    using const_reference   = const T&;
-    using transposed_type   = Matrix<N,M,T>;
+    using size_type                     = size_t;
+    using value_type                    = T;
+    using pointer                       = T*;
+    using reference                     = T&;
+    using const_pointer                 = const T*;
+    using const_reference               = const T&;
+    using transposed_type               = Matrix<N,M,T>;
 
 /* ####################################################################################### */
 public: /* Iterators typedefs */
@@ -46,34 +44,12 @@ public: /* Iterators typedefs */
     using ReverseIndirectIterator       = std::reverse_iterator<IndirectIterator>;
 	using ConstReverseIndirectIterator  = std::reverse_iterator<ConstIndirectIterator>;
 
-///* --------------------------------------------------------------------------------------- */
-//
-//    using RowIterator                   = MatrixRowIterator<M,N,T>;
-//    using ConstRowIterator              = ConstIndirectMatrixIterator<M,N,T>;
-//    using ReverseRowIterator            = std::reverse_iterator<RowIterator>;
-//	using ConstReverseRowIterator       = std::reverse_iterator<ConstRowIterator>;
-//
-///* --------------------------------------------------------------------------------------- */
-//
-//    using ColumnIterator                = MatrixColumnIterator<M,N,T>;
-//    using ConstColumnIterator           = ConstMatrixColumnIterator<M,N,T>;
-//    using ReverseColumnIterator         = std::reverse_iterator<ColumnIterator>;
-//	using ConstReverseColumnIterator    = std::reverse_iterator<ConstColumnIterator>;
-//
-///* --------------------------------------------------------------------------------------- */
-//
-//    using SubIterator                   = SubmatrixIterator<M,N,T>;
-//    using ConstSubIterator              = ConstSubmatrixIterator<M,N,T>;
-//    using ReverseSubIterator            = std::reverse_iterator<SubIterator>;
-//    using ConstReverseSubIterator       = std::reverse_iterator<ConstSubIterator>;
-//    using SubRect                       = typename ConstSubIterator::SubRect;
-
 /* ####################################################################################### */
 public: /* Row and column typedefs */
 /* ####################################################################################### */
 
-    using Row       = Vector<N,T>;
-    using Column    = Vector<M,T>;
+    using Row                           = Vector<N,T>;
+    using Column                        = Vector<M,T>;
 
 /* ####################################################################################### */
 public: /* Statics */
@@ -355,10 +331,10 @@ public: /* Indirect iterators */
     ConstReverseIndirectIterator
     crendIndirect() const;
 
-/* ####################################################################################### */
-public: /* Column iterators */
-/* ####################################################################################### */
-
+///* ####################################################################################### */
+//public: /* Column iterators */
+///* ####################################################################################### */
+//
 //    /**
 //     * Get an iterator pointing to the first component in the specified column.
 //     */
@@ -430,7 +406,7 @@ public: /* Column iterators */
 //     */
 //    ConstReverseColumnIterator
 //    crendColumn(size_type column) const;
-//
+
 ///* ####################################################################################### */
 //public: /* Row iterators */
 ///* ####################################################################################### */
@@ -946,7 +922,11 @@ Matrix<M,N,T>::crendIndirect() const
 //typename Matrix<M,N,T>::ColumnIterator
 //Matrix<M,N,T>::beginColumn(size_type column)
 //{
-//    return ColumnIterator(&data[0][0], column, 0);
+//#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+//    return ColumnIterator {&data[0][0], column, column, M*column+M};
+//#else
+//    return ColumnIterator {&data[0][0], M*column, M*column, M+M*column};
+//#endif
 //}
 //
 ///* --------------------------------------------------------------------------------------- */
@@ -1047,11 +1027,11 @@ Matrix<M,N,T>::crendIndirect() const
 //{
 //    return ConstReverseColumnIterator(cbeginColumn(column));
 //}
-//
-///* ####################################################################################### */
-///* Row iterators */
-///* ####################################################################################### */
-//
+
+/* ####################################################################################### */
+/* Row iterators */
+/* ####################################################################################### */
+
 //template<size_t M, size_t N, typename T>
 //typename Matrix<M,N,T>::RowIterator
 //Matrix<M,N,T>::beginRow(size_type row)

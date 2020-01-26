@@ -1,5 +1,5 @@
-#ifndef MATH3D_MATRIX_ROW_ITERATOR_HPP
-#define MATH3D_MATRIX_ROW_ITERATOR_HPP
+#ifndef MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
+#define MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
 
 
 #include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
@@ -393,4 +393,4 @@ public: /* Difference */
     }
 };
 
-#endif // MATH3D_MATRIX_ROW_ITERATOR_HPP
+#endif // MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
