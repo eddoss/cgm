@@ -42,9 +42,9 @@ public: /* Constructors */
      * @param element If a row-major is used, it represent a column id, row id otherwise.
      */
     constexpr
-    ConstIndirectMatrixIterator(pointer firstCompPtr, size_t index)
-        : base_type(firstCompPtr, 0)
-        , m_indirect_id(index)
+    ConstIndirectMatrixIterator(pointer firstComponentPointer, size_t current, size_t begin, size_t end)
+        : base_type(firstComponentPointer, 0, begin, end)
+        , m_indirect_id(current)
     {
         recalculateDirectId();
     }
@@ -74,12 +74,12 @@ public: /* Default assignment */
 /* ####################################################################################### */
 
     constexpr ConstIndirectMatrixIterator&
-    operator=(const self_type&)      = default;
+    operator=(const self_type&)                         = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr ConstIndirectMatrixIterator&
-    operator=(self_type&&) noexcept  = default;
+    operator=(self_type&&) noexcept                     = default;
 
 /* ####################################################################################### */
 public: /* Move forward */
@@ -90,7 +90,7 @@ public: /* Move forward */
     {
         ++m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't pre-increment matrix iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_direct_id, this->m_end, "(Math3D) can't pre-increment matrix indirect iterator after end.")
         return *this;
     }
 
@@ -102,7 +102,7 @@ public: /* Move forward */
         self_type tmp = *this;
         ++m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't post-increment matrix iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_direct_id, this->m_end, "(Math3D) can't post-increment matrix indirect iterator after end.")
         return tmp;
     }
 
@@ -113,7 +113,7 @@ public: /* Move forward */
     {
         m_indirect_id += offset;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_begin + this->m_direct_id, this->m_end, "(Math3D) can't seek matrix iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(this->m_direct_id, this->m_end, "(Math3D) can't move matrix indirect iterator forward after end.")
         return *this;
     }
 
@@ -134,7 +134,7 @@ public: /* Move backward */
     {
         --m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't pre-decrement matrix iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_direct_id, this->m_begin, "(Math3D) can't pre-decrement matrix indirect iterator before begin.")
         return *this;
     }
 
@@ -146,7 +146,7 @@ public: /* Move backward */
         self_type tmp = *this;
         --m_indirect_id;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't post-decrement matrix iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_direct_id, this->m_begin, "(Math3D) can't post-decrement matrix indirect iterator before begin.")
         return tmp;
     }
 
@@ -157,7 +157,7 @@ public: /* Move backward */
     {
         m_indirect_id -= offset;
         recalculateDirectId();
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_begin + this->m_direct_id, this->m_begin, "(Math3D) can't seek matrix iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(this->m_direct_id, this->m_begin, "(Math3D) can't move matrix indirect iterator backward before begin.")
         return *this;
     }
 
@@ -282,8 +282,8 @@ public: /* Constructors */
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    IndirectMatrixIterator(pointer firstCompPtr, size_t index)
-        : base_type(firstCompPtr, index)
+    IndirectMatrixIterator(pointer firstComponentPointer, size_t current, size_t begin, size_t end)
+        : base_type(firstComponentPointer, current, begin, end)
     {
 
     }
@@ -303,7 +303,7 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        return const_cast<pointer>(base_type::operator*());
+        return const_cast<pointer>(base_type::operator->());
     }
 
 /* ####################################################################################### */

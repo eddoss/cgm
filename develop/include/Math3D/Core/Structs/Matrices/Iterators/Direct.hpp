@@ -5,6 +5,9 @@
 #include <iterator>
 #ifdef NDEBUG
     #include <stdexcept>
+    #include <string>
+    #include <map>
+    #include <memory>
 #endif
 
 /* ####################################################################################### */
@@ -12,14 +15,17 @@
 /* ####################################################################################### */
 
 #ifndef NDEBUG
+
     #define MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
+
     #define MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
+
     #define MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(current, end, message) \
     if (current > end) {throw std::range_error(message);}
 
@@ -28,10 +34,12 @@
     if (current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
+
     #define MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
+
     #define MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(current, begin, end, message) \
     if (current >= end || current < begin) {throw std::range_error(message);}
 
@@ -82,10 +90,11 @@ public: /* Constructors */
      * @param element If a row-major is used, it represent a column id, row id otherwise.
      */
     constexpr
-    ConstDirectMatrixIterator(pointer firstCompPtr, size_t index)
-        : m_begin(firstCompPtr)
-        , m_end(firstCompPtr + M*N + 1)
-        , m_direct_id(index)
+    ConstDirectMatrixIterator(pointer firstComponentPointer, size_t current, size_t begin, size_t end)
+        : m_firstComp(firstComponentPointer)
+        , m_begin(begin)
+        , m_end(end)
+        , m_direct_id(current)
     {
 
     }
@@ -128,8 +137,8 @@ public: /* Data accessing */
     constexpr reference
     operator*() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(m_direct_id, 0, M*N, "(Math3D) can't dereference out of range matrix direct iterator.")
-        return *(m_begin + m_direct_id);
+        MATH3D_VERIFY_MATRIX_ITERATOR_DEREFERENCE(m_direct_id, m_begin, m_end, "(Math3D) can't dereference out of range matrix iterator.")
+        return *(m_firstComp + m_direct_id);
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -137,8 +146,8 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(m_direct_id, 0, M*N, "(Math3D) can't call selector of out of range matrix direct iterator.")
-        return m_begin + m_direct_id;
+        MATH3D_VERIFY_MATRIX_ITERATOR_SELECTOR(m_direct_id, m_begin, m_end, "(Math3D) can't call selector of out of range matrix iterator.")
+        return m_firstComp + m_direct_id;
     }
 
 /* ####################################################################################### */
@@ -149,7 +158,7 @@ public: /* Move forward */
     operator++()
     {
         ++m_direct_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, M*N, "(Math3D) can't pre-increment matrix direct iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, m_end, "(Math3D) can't pre-increment matrix direct iterator after end.")
         return *this;
     }
 
@@ -160,7 +169,7 @@ public: /* Move forward */
     {
         self_type tmp = *this;
         ++m_direct_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, M*N, "(Math3D) can't post-increment matrix direct iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, m_end, "(Math3D) can't post-increment matrix direct iterator after end.")
         return tmp;
     }
 
@@ -170,7 +179,7 @@ public: /* Move forward */
     operator+=(size_t offset)
     {
         m_direct_id += offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, M*N, "(Math3D) can't seek matrix direct iterator after end.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_FORWARD(m_direct_id, m_end, "(Math3D) can't move matrix direct iterator forward after end.")
         return *this;
     }
 
@@ -190,7 +199,7 @@ public: /* Move backward */
     operator--()
     {
         --m_direct_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, 0, "(Math3D) can't pre-decrement matrix direct iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, m_begin, "(Math3D) can't pre-decrement matrix direct iterator before begin.")
         return *this;
     }
 
@@ -201,7 +210,7 @@ public: /* Move backward */
     {
         self_type tmp = *this;
         --m_direct_id;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, 0, "(Math3D) can't post-decrement matrix direct iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, m_begin, "(Math3D) can't post-decrement matrix direct iterator before begin.")
         return tmp;
     }
 
@@ -211,7 +220,7 @@ public: /* Move backward */
     operator-=(size_t offset)
     {
         m_direct_id -= offset;
-        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, 0, "(Math3D) can't seek matrix direct iterator before begin.")
+        MATH3D_VERIFY_MATRIX_ITERATOR_BACKWARD(m_direct_id, m_begin, "(Math3D) can't move matrix direct iterator backward before begin.")
         return *this;
     }
 
@@ -294,7 +303,7 @@ public: /* Methods */
     size_t
     row() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(m_direct_id, 0, M*N, "(Math3D) can't get row from matrix direct iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_ITERATOR_GET_ROW(m_direct_id, m_begin, m_end, "(Math3D) can't get row from matrix iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         return m_direct_id / N;
     #else
@@ -311,7 +320,7 @@ public: /* Methods */
     size_t
     column() const
     {
-        MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(m_direct_id, 0, M*N, "(Math3D) can't get column from matrix direct iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_ITERATOR_GET_COLUMN(m_direct_id, m_begin, m_end, "(Math3D) can't get column from matrix iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         return m_direct_id - N * row();
     #else
@@ -324,10 +333,13 @@ protected: /* Internal */
 /* ####################################################################################### */
 
     pointer
-    m_begin     {nullptr};
+    m_firstComp {nullptr};
 
-    pointer
-    m_end       {nullptr};
+    size_t
+    m_begin     {0};
+
+    size_t
+    m_end       {0};
 
     size_t
     m_direct_id {0};
@@ -358,8 +370,8 @@ public: /* Constructors */
 /* ####################################################################################### */
 
     constexpr
-    DirectMatrixIterator(pointer firstCompPtr, size_t index)
-        : base_type(firstCompPtr, index) {}
+    DirectMatrixIterator(pointer firstComponentPointer, size_t current, size_t begin, size_t end)
+        : base_type(firstComponentPointer, current, begin, end) {}
 
 /* --------------------------------------------------------------------------------------- */
 

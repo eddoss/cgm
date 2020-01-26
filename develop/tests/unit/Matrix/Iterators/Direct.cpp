@@ -364,3 +364,245 @@ TEST(Matrix_DirectIterator, Reverse)
         ASSERT_EQ(*d, 1);
     #endif
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+#ifndef NDEBUG
+
+TEST(Matrix_DirectIterator, Exception_Dereference)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end();
+        auto val = *it;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't dereference out of range matrix iterator.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_PreIncrement)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = ++input.end();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment matrix direct iterator after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_PostIncrement)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end()++;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment matrix direct iterator after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_PlusEqual)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end();
+        it += 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix direct iterator forward after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_Plus)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end();
+        it = it + 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix direct iterator forward after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_PreDecrement)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = --input.begin();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-decrement matrix direct iterator before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_PostDecrement)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.begin()--;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-decrement matrix direct iterator before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_MinusEqual)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.begin();
+        it -= 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix direct iterator backward before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_Minus)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.begin();
+        it = it - 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix direct iterator backward before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_Row)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end();
+        auto val = it.row();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't get row from matrix iterator (out of range).");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_DirectIterator, Exception_Column)
+{
+    Mat32 input
+    {
+        1, 2,
+        4, 5,
+        7, 8
+    };
+
+    try
+    {
+        auto it = input.end();
+        auto val = it.column();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't get column from matrix iterator (out of range).");
+    }
+}
+
+#endif
