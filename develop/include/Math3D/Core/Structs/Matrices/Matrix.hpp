@@ -20,36 +20,60 @@ struct Matrix
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using size_type                     = size_t;
-    using value_type                    = T;
-    using pointer                       = T*;
-    using reference                     = T&;
-    using const_pointer                 = const T*;
-    using const_reference               = const T&;
-    using transposed_type               = Matrix<N,M,T>;
+    using size_type                         = size_t;
+    using value_type                        = T;
+    using pointer                           = T*;
+    using reference                         = T&;
+    using const_pointer                     = const T*;
+    using const_reference                   = const T&;
 
+/* ####################################################################################### */
+public: /* Matrices typedefs */
+/* ####################################################################################### */
+
+    using Row                               = Vector<N,T>;
+    using Column                            = Vector<M,T>;
+    using Transposed                        = Matrix<N,M,T>;
+    
 /* ####################################################################################### */
 public: /* Iterators typedefs */
 /* ####################################################################################### */
 
-    using iterator                      = DirectMatrixIterator<M,N,T>;
-    using const_iterator                = ConstDirectMatrixIterator<M,N,T>;
-    using reverse_iterator              = std::reverse_iterator<iterator>;
-	using const_reverse_iterator        = std::reverse_iterator<const_iterator>;
+    using iterator                          = DirectMatrixIterator<M,N,T>;
+    using const_iterator                    = ConstDirectMatrixIterator<M,N,T>;
+    using reverse_iterator                  = std::reverse_iterator<iterator>;
+	using const_reverse_iterator            = std::reverse_iterator<const_iterator>;
 
 /* --------------------------------------------------------------------------------------- */
 
-    using IndirectIterator              = IndirectMatrixIterator<M,N,T>;
-    using ConstIndirectIterator         = ConstIndirectMatrixIterator<M,N,T>;
-    using ReverseIndirectIterator       = std::reverse_iterator<IndirectIterator>;
-	using ConstReverseIndirectIterator  = std::reverse_iterator<ConstIndirectIterator>;
+    using IndirectIterator                  = IndirectMatrixIterator<M,N,T>;
+    using ConstIndirectIterator             = ConstIndirectMatrixIterator<M,N,T>;
+    using ReverseIndirectIterator           = std::reverse_iterator<IndirectIterator>;
+	using ConstReverseIndirectIterator      = std::reverse_iterator<ConstIndirectIterator>;
+	
+/* --------------------------------------------------------------------------------------- */
 
-/* ####################################################################################### */
-public: /* Row and column typedefs */
-/* ####################################################################################### */
+#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    using RowDirIterator                    = DirectMatrixIterator<M,N,T>;
+    using ConstRowDirIterator               = ConstDirectMatrixIterator<M,N,T>;
+#else
+    using RowDirIterator                    = IndirectMatrixIterator<M,N,T>;
+    using ConstRowDirIterator               = ConstIndirectMatrixIterator<M,N,T>;
+#endif
+    using ReverseRowDirIterator             = std::reverse_iterator<RowDirIterator>;
+    using ConstReverseRowDirIterator        = std::reverse_iterator<ConstRowDirIterator>;
+    
+/* --------------------------------------------------------------------------------------- */
 
-    using Row                           = Vector<N,T>;
-    using Column                        = Vector<M,T>;
+#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    using ColumnDirIterator                 = IndirectMatrixIterator<M,N,T>;
+    using ConstColumnDirIterator            = ConstIndirectMatrixIterator<M,N,T>;
+#else
+    using ColumnDirIterator                 = DirectMatrixIterator<M,N,T>;
+    using ConstColumnDirIterator            = ConstDirectMatrixIterator<M,N,T>;
+#endif
+    using ReverseColumnDirIterator          = std::reverse_iterator<ColumnDirIterator>;
+    using ConstReverseColumnDirIterator     = std::reverse_iterator<ConstColumnDirIterator>;
 
 /* ####################################################################################### */
 public: /* Statics */
@@ -81,14 +105,14 @@ public: /* Constructors */
      * Constructor initializing all components to a single value.
      * @param value Value to set all components to.
      */
-    explicit constexpr
+    constexpr explicit
     Matrix(T scalar);
 
     /**
      * Constructor using initial values for each component.
      * @param values Component values.
      */
-    explicit constexpr
+    constexpr explicit
     Matrix(const T* values);
 
     /**
@@ -331,7 +355,159 @@ public: /* Indirect iterators */
      */
     constexpr ConstReverseIndirectIterator
     crendIndirect() const;
+    
+/* ####################################################################################### */
+public: /* Row-dir iterators */
+/* ####################################################################################### */
 
+    /**
+     * Get an row-dir iterator pointing to the first component.
+     */
+    constexpr RowDirIterator
+    beginRowDir();
+
+    /**
+     * Get an row-dir iterator pointing to the component after the last.
+     */
+    constexpr RowDirIterator
+    endRowDir();
+
+    /**
+     * Get an const row-dir iterator pointing to the first component.
+     */
+    constexpr ConstRowDirIterator
+    beginRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the component after the last.
+     */
+    constexpr ConstRowDirIterator
+    endRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the first component.
+     */
+    constexpr ConstRowDirIterator
+    cbeginRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the component after the last.
+     */
+    constexpr ConstRowDirIterator
+    cendRowDir() const;
+
+    /**
+     * Get an row-dir iterator pointing to the last component.
+     */
+    constexpr ReverseRowDirIterator 
+    rbeginRowDir();
+
+    /**
+     * Get an row-dir iterator pointing to the component before the first.
+     */
+    constexpr ReverseRowDirIterator 
+    rendRowDir();
+
+    /**
+     * Get an const row-dir iterator pointing to the last component.
+     */
+    constexpr ConstReverseRowDirIterator
+    rbeginRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the component before the first.
+     */
+    constexpr ConstReverseRowDirIterator
+    rendRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the last component.
+     */
+    constexpr ConstReverseRowDirIterator
+    crbeginRowDir() const;
+
+    /**
+     * Get an const row-dir iterator pointing to the component before the first.
+     */
+    constexpr ConstReverseRowDirIterator
+    crendRowDir() const;
+
+/* ####################################################################################### */
+public: /* Column-dir iterators */
+/* ####################################################################################### */
+
+    /**
+     * Get an column-dir iterator pointing to the first component.
+     */
+    constexpr ColumnDirIterator
+    beginColumnDir();
+
+    /**
+     * Get an column-dir iterator pointing to the component after the last.
+     */
+    constexpr ColumnDirIterator
+    endColumnDir();
+
+    /**
+     * Get an const column-dir iterator pointing to the first component.
+     */
+    constexpr ConstColumnDirIterator
+    beginColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the component after the last.
+     */
+    constexpr ConstColumnDirIterator
+    endColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the first component.
+     */
+    constexpr ConstColumnDirIterator
+    cbeginColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the component after the last.
+     */
+    constexpr ConstColumnDirIterator
+    cendColumnDir() const;
+
+    /**
+     * Get an column-dir iterator pointing to the last component.
+     */
+    constexpr ReverseColumnDirIterator 
+    rbeginColumnDir();
+
+    /**
+     * Get an column-dir iterator pointing to the component before the first.
+     */
+    constexpr ReverseColumnDirIterator 
+    rendColumnDir();
+
+    /**
+     * Get an const column-dir iterator pointing to the last component.
+     */
+    constexpr ConstReverseColumnDirIterator
+    rbeginColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the component before the first.
+     */
+    constexpr ConstReverseColumnDirIterator
+    rendColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the last component.
+     */
+    constexpr ConstReverseColumnDirIterator
+    crbeginColumnDir() const;
+
+    /**
+     * Get an const column-dir iterator pointing to the component before the first.
+     */
+    constexpr ConstReverseColumnDirIterator
+    crendColumnDir() const;
+    
 ///* ####################################################################################### */
 //public: /* Column iterators */
 ///* ####################################################################################### */
@@ -913,6 +1089,226 @@ constexpr typename Matrix<M,N,T>::ConstReverseIndirectIterator
 Matrix<M,N,T>::crendIndirect() const
 {
     return ConstReverseIndirectIterator {cbeginIndirect()};
+}
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Row-dir iterators */
+/* ####################################################################################### */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::RowDirIterator
+Matrix<M,N,T>::beginRowDir()
+{
+    return RowDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::RowDirIterator
+Matrix<M,N,T>::endRowDir()
+{
+    return RowDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstRowDirIterator
+Matrix<M,N,T>::beginRowDir() const
+{
+    return ConstRowDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstRowDirIterator
+Matrix<M,N,T>::endRowDir() const
+{
+    return ConstRowDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstRowDirIterator
+Matrix<M,N,T>::cbeginRowDir() const
+{
+    return ConstRowDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstRowDirIterator
+Matrix<M,N,T>::cendRowDir() const
+{
+    return ConstRowDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ReverseRowDirIterator
+Matrix<M,N,T>::rbeginRowDir()
+{
+    return ReverseRowDirIterator {endRowDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ReverseRowDirIterator
+Matrix<M,N,T>::rendRowDir()
+{
+    return ReverseRowDirIterator {beginRowDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseRowDirIterator
+Matrix<M,N,T>::rbeginRowDir() const
+{
+    return ConstReverseRowDirIterator {cendRowDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseRowDirIterator
+Matrix<M,N,T>::rendRowDir() const
+{
+    return ConstReverseRowDirIterator {cbeginRowDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseRowDirIterator
+Matrix<M,N,T>::crbeginRowDir() const
+{
+    return ConstReverseRowDirIterator {cendRowDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseRowDirIterator
+Matrix<M,N,T>::crendRowDir() const
+{
+    return ConstReverseRowDirIterator {cbeginRowDir()};
+}
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Column-wise iterators */
+/* ####################################################################################### */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ColumnDirIterator
+Matrix<M,N,T>::beginColumnDir()
+{
+    return ColumnDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ColumnDirIterator
+Matrix<M,N,T>::endColumnDir()
+{
+    return ColumnDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
+Matrix<M,N,T>::beginColumnDir() const
+{
+    return ConstColumnDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
+Matrix<M,N,T>::endColumnDir() const
+{
+    return ConstColumnDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
+Matrix<M,N,T>::cbeginColumnDir() const
+{
+    return ConstColumnDirIterator {&data[0][0], 0};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
+Matrix<M,N,T>::cendColumnDir() const
+{
+    return ConstColumnDirIterator {&data[0][0], M*N};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ReverseColumnDirIterator
+Matrix<M,N,T>::rbeginColumnDir()
+{
+    return ReverseColumnDirIterator {endColumnDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ReverseColumnDirIterator
+Matrix<M,N,T>::rendColumnDir()
+{
+    return ReverseColumnDirIterator {beginColumnDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseColumnDirIterator
+Matrix<M,N,T>::rbeginColumnDir() const
+{
+    return ConstReverseColumnDirIterator {cendColumnDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseColumnDirIterator
+Matrix<M,N,T>::rendColumnDir() const
+{
+    return ConstReverseColumnDirIterator {cbeginColumnDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseColumnDirIterator
+Matrix<M,N,T>::crbeginColumnDir() const
+{
+    return ConstReverseColumnDirIterator {cendColumnDir()};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr typename Matrix<M,N,T>::ConstReverseColumnDirIterator
+Matrix<M,N,T>::crendColumnDir() const
+{
+    return ConstReverseColumnDirIterator {cbeginColumnDir()};
 }
 
 /* ####################################################################################### */
