@@ -13,28 +13,28 @@
  * Increase all components of matrix by 1 and returns it.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator++(Matrix<M,N,T>& matrix);
 
 /**
  * Decrease all components of matrix by 1 and returns it.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator--(Matrix<M,N,T>& matrix);
 
 /**
  * Increase all components of matrix by 1 and returns unchanged copy of it.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator++(Matrix<M,N,T>& matrix, int);
 
 /**
  * Decrease all components of matrix by 1 and returns unchanged copy of it.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator--(Matrix<M,N,T>& matrix, int);
 
 /* ####################################################################################### */
@@ -48,7 +48,7 @@ operator--(Matrix<M,N,T>& matrix, int);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -58,7 +58,7 @@ operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -68,7 +68,7 @@ operator+(const Matrix<M,N,T>& matrix, T scalar);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(T scalar, const Matrix<M,N,T>& matrix);
 
 /**
@@ -78,7 +78,7 @@ operator+(T scalar, const Matrix<M,N,T>& matrix);
  * @return The result of adding.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -88,7 +88,7 @@ operator+=(Matrix<M,N,T>& matrix, T scalar);
  * @return The result of adding.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /* ####################################################################################### */
@@ -101,7 +101,7 @@ operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return A negated copy of the matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix);
 
 /**
@@ -111,7 +111,7 @@ operator-(const Matrix<M,N,T>& matrix);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -121,7 +121,7 @@ operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -131,7 +131,7 @@ operator-(const Matrix<M,N,T>& matrix, T scalar);
  * @return The result of subtraction.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -141,7 +141,7 @@ operator-=(Matrix<M,N,T>& matrix, T scalar);
  * @return The result of subtraction.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /* ####################################################################################### */
@@ -155,7 +155,7 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator*(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -165,7 +165,7 @@ operator*(const Matrix<M,N,T>& matrix, T scalar);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator*(T scalar, const Matrix<M,N,T>& matrix);
 
 /**
@@ -178,7 +178,7 @@ operator*(T scalar, const Matrix<M,N,T>& matrix);
  * @return The result of multiplication.
  */
 template<size_t AM, size_t AN, size_t BN, typename T>
-Matrix<AM,BN,T>
+constexpr Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
 
 /**
@@ -188,7 +188,7 @@ operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
  * @return The result of multiplication.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator*=(Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -199,7 +199,7 @@ operator*=(Matrix<M,N,T>& matrix, T scalar);
  * @return The result of multiplication.
  */
 template<size_t S, typename T>
-Matrix<S,S,T>&
+constexpr Matrix<S,S,T>&
 operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B);
 
 /* ####################################################################################### */
@@ -213,7 +213,7 @@ operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B);
  * @return New copy of the result matrix.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator/(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -223,7 +223,7 @@ operator/(const Matrix<M,N,T>& matrix, T scalar);
  * @return The result of division.
  */
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator/=(Matrix<M,N,T>& matrix, T scalar);
 
 /* ####################################################################################### */
@@ -237,7 +237,7 @@ operator/=(Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are equal to scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator==(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -247,7 +247,7 @@ operator==(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are not equal to scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator!=(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -257,7 +257,7 @@ operator!=(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are less than scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -267,7 +267,7 @@ operator<(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are greater than scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -277,7 +277,7 @@ operator>(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are less or equal to a scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<=(const Matrix<M,N,T>& matrix, T scalar);
 
 /**
@@ -287,7 +287,7 @@ operator<=(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if components of the matrix are greater or equal to a scalar, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>=(const Matrix<M,N,T>& matrix, T scalar);
 
 /* ####################################################################################### */
@@ -301,7 +301,7 @@ operator>=(const Matrix<M,N,T>& matrix, T scalar);
  * @return true if the matrix are equal, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -311,7 +311,7 @@ operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return true if the matrices are not equal, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -321,7 +321,7 @@ operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return true if A matrix components less than B matrix components, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -331,7 +331,7 @@ operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return true if A matrix components less or equal B matrix components, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -341,7 +341,7 @@ operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return true if A matrix components greater than B matrix components, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 /**
@@ -351,7 +351,7 @@ operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @return true if A matrix components greater or equal B matrix components, false otherwise.
  */
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 
 
@@ -375,7 +375,7 @@ operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator++(Matrix<M,N,T>& matrix)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) ++(matrix[i]);
@@ -385,7 +385,7 @@ operator++(Matrix<M,N,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator--(Matrix<M,N,T>& matrix)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) --(matrix[i]);
@@ -395,7 +395,7 @@ operator--(Matrix<M,N,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator++(Matrix<M,N,T>& matrix, int)
 {
     Matrix<M,N,T> copy {matrix};
@@ -406,7 +406,7 @@ operator++(Matrix<M,N,T>& matrix, int)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator--(Matrix<M,N,T>& matrix, int)
 {
     Matrix<M,N,T> copy {matrix};
@@ -419,7 +419,7 @@ operator--(Matrix<M,N,T>& matrix, int)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     Matrix<M,N,T> copy {A};
@@ -430,7 +430,7 @@ operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& matrix, T scalar)
 {
     Matrix<M,N,T> copy {matrix};
@@ -441,7 +441,7 @@ operator+(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator+(T scalar, const Matrix<M,N,T>& matrix)
 {
     Matrix<M,N,T> copy {matrix};
@@ -452,7 +452,7 @@ operator+(T scalar, const Matrix<M,N,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] += scalar;
@@ -462,7 +462,7 @@ operator+=(Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] += B[i];
@@ -474,7 +474,7 @@ operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix)
 {
     Matrix<M,N,T> copy {matrix};
@@ -485,7 +485,7 @@ operator-(const Matrix<M,N,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     Matrix<M,N,T> copy {A};
@@ -496,7 +496,7 @@ operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix, T scalar)
 {
     Matrix<M,N,T> copy {matrix};
@@ -507,7 +507,7 @@ operator-(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] -= scalar;
@@ -517,7 +517,7 @@ operator-=(Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] -= B[i];
@@ -532,7 +532,7 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator*(const Matrix<M,N,T>& matrix, T scalar)
 {
     Matrix<M,N,T> copy {matrix};
@@ -543,7 +543,7 @@ operator*(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator*(T scalar, const Matrix<M,N,T>& matrix)
 {
     Matrix<M,N,T> copy {matrix};
@@ -554,7 +554,7 @@ operator*(T scalar, const Matrix<M,N,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t AM, size_t AN, size_t BN, typename T>
-Matrix<AM,BN,T>
+constexpr Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
 {
     Matrix<AM,BN,T> out;
@@ -578,7 +578,7 @@ operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator*=(Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] *= scalar;
@@ -588,11 +588,11 @@ operator*=(Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-Matrix<S,S,T>&
+constexpr Matrix<S,S,T>&
 operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B)
 {
     Matrix<S,S,T> out;
-    FLOAT sum;
+    FLOAT sum {0};
 
     for (auto c = 0; c < S; ++c)
     {
@@ -615,7 +615,7 @@ operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator/(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     Matrix<M,N,T> copy {A};
@@ -626,7 +626,7 @@ operator/(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>
+constexpr Matrix<M,N,T>
 operator/(const Matrix<M,N,T>& matrix, T scalar)
 {
     Matrix<M,N,T> copy {matrix};
@@ -637,7 +637,7 @@ operator/(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator/=(Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] /= scalar;
@@ -647,7 +647,7 @@ operator/=(Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-Matrix<M,N,T>&
+constexpr Matrix<M,N,T>&
 operator/=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] /= B[i];
@@ -659,7 +659,7 @@ operator/=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator==(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return false;
@@ -669,7 +669,7 @@ operator==(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator!=(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return true;
@@ -679,7 +679,7 @@ operator!=(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] >= scalar) return false;
@@ -689,7 +689,7 @@ operator<(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] <= scalar) return false;
@@ -699,7 +699,7 @@ operator>(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<=(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] > scalar) return false;
@@ -709,7 +709,7 @@ operator<=(const Matrix<M,N,T>& matrix, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>=(const Matrix<M,N,T>& matrix, T scalar)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] < scalar) return false;
@@ -721,7 +721,7 @@ operator>=(const Matrix<M,N,T>& matrix, T scalar)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return false;
@@ -731,7 +731,7 @@ operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return true;
@@ -741,7 +741,7 @@ operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] >= B[i]) return false;
@@ -751,7 +751,7 @@ operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] <= B[i]) return false;
@@ -761,7 +761,7 @@ operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] > B[i]) return false;
@@ -771,7 +771,7 @@ operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-bool
+constexpr bool
 operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
     for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] < B[i]) return false;
