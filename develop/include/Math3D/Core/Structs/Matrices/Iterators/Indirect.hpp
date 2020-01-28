@@ -64,14 +64,14 @@
  * @tparam T Matrix components type.
  */
 template<size_t M, size_t N, typename T>
-class ConstIndirectMatrixIterator
+class ConstMatrixIndirectIterator
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = ConstIndirectMatrixIterator<M,N,T>;
+    using self_type             = ConstMatrixIndirectIterator<M,N,T>;
     using value_type            = T;
     using reference             = const T&;
     using pointer               = const T*;
@@ -88,10 +88,9 @@ public: /* Constructors */
      * @param element If a row-major is used, it represent a column id, row id otherwise.
      */
     constexpr
-    ConstIndirectMatrixIterator(pointer firstComponentPointer, size_t index)
+    ConstMatrixIndirectIterator(pointer firstComponentPointer, size_t index)
         : m_begin(firstComponentPointer)
-        , m_end(firstComponentPointer + M*N)
-        , m_indirect_id(index)
+        , m_id(index+1)
     {
         recalculateDataAddress();
     }
@@ -99,33 +98,33 @@ public: /* Constructors */
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstIndirectMatrixIterator()                       = default;
+    ConstMatrixIndirectIterator()                       = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstIndirectMatrixIterator(const self_type&)       = default;
+    ConstMatrixIndirectIterator(const self_type&)       = default;
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    ConstIndirectMatrixIterator(self_type&&) noexcept   = default;
+    ConstMatrixIndirectIterator(self_type&&) noexcept   = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    ~ConstIndirectMatrixIterator()                      = default;
+    ~ConstMatrixIndirectIterator()                      = default;
 
 
 /* ####################################################################################### */
 public: /* Default assignment */
 /* ####################################################################################### */
 
-    constexpr ConstIndirectMatrixIterator&
+    constexpr self_type&
     operator=(const self_type&)                         = default;
 
 /* --------------------------------------------------------------------------------------- */
 
-    constexpr ConstIndirectMatrixIterator&
+    constexpr self_type&
     operator=(self_type&&) noexcept                     = default;
 
 /* ####################################################################################### */
@@ -135,7 +134,7 @@ public: /* Data accessing */
     constexpr reference
     operator*() const
     {
-        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_DEREFERENCE(m_data, m_begin, m_end, "(Math3D) can't dereference out of range matrix iterator.")
+        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_DEREFERENCE(m_id, 1, M*N+1, "(Math3D) can't dereference out of range matrix iterator.")
         return *m_data;
     }
 
@@ -144,7 +143,7 @@ public: /* Data accessing */
     constexpr pointer
     operator->() const
     {
-        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_SELECTOR(m_data, m_begin, m_end, "(Math3D) can't call selector of out of range matrix iterator.")
+        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_SELECTOR(m_id, 1, M*N+1, "(Math3D) can't call selector of out of range matrix iterator.")
         return m_data;
     }
 
@@ -155,9 +154,9 @@ public: /* Move forward */
     constexpr self_type&
     operator++()
     {
-        ++m_indirect_id;
+        ++m_id;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_data, m_end, "(Math3D) can't pre-increment matrix indirect iterator after end.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_id, M*N+1, "(Math3D) can't pre-increment matrix iterator after end.")
         return *this;
     }
 
@@ -167,27 +166,27 @@ public: /* Move forward */
     operator++(int)
     {
         self_type tmp = *this;
-        ++m_indirect_id;
+        ++m_id;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_data, m_end, "(Math3D) can't post-increment matrix indirect iterator after end.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_id, M*N+1, "(Math3D) can't post-increment matrix iterator after end.")
         return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator+=(size_t offset)
+    operator+=(difference_type offset)
     {
-        m_indirect_id += offset;
+        m_id += offset;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_data, m_end, "(Math3D) can't move matrix indirect iterator forward after end.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_FORWARD(m_id, M*N+1, "(Math3D) can't move matrix iterator forward after end.")
         return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator+(size_t offset) const
+    operator+(difference_type offset) const
     {
 		return self_type {*this} += offset;
     }
@@ -199,9 +198,9 @@ public: /* Move backward */
     constexpr self_type&
     operator--()
     {
-        --m_indirect_id;
+        --m_id;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_data, m_begin, "(Math3D) can't pre-decrement matrix indirect iterator before begin.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_id, 1, "(Math3D) can't pre-decrement matrix iterator before begin.")
         return *this;
     }
 
@@ -211,27 +210,27 @@ public: /* Move backward */
     operator--(int)
     {
         self_type tmp = *this;
-        --m_indirect_id;
+        --m_id;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_data, m_begin, "(Math3D) can't post-decrement matrix indirect iterator before begin.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_id, 1, "(Math3D) can't post-decrement matrix iterator before begin.")
         return tmp;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type&
-    operator-=(size_t offset)
+    operator-=(difference_type offset)
     {
-        m_indirect_id -= offset;
+        m_id -= offset;
         recalculateDataAddress();
-        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_data, m_begin, "(Math3D) can't move matrix indirect iterator backward before begin.")
+        MATH3D_VERIFY_MATRIX_INDIRECT_ITERATOR_BACKWARD(m_id, 1, "(Math3D) can't move matrix iterator backward before begin.")
         return *this;
     }
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr self_type
-    operator-(size_t offset) const
+    operator-(difference_type offset) const
     {
 		return self_type {*this} -= offset;
     }
@@ -243,7 +242,7 @@ public: /* Difference */
     constexpr difference_type
     operator-(const self_type& other) const
     {
-        return static_cast<difference_type>(m_indirect_id - other.m_indirect_id);
+        return static_cast<difference_type>(m_id - other.m_id);
     }
 
 /* ####################################################################################### */
@@ -253,7 +252,7 @@ public: /* Compares */
     constexpr bool
     operator==(const self_type& other) const
     {
-        return m_indirect_id == other.m_indirect_id;
+        return m_id == other.m_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -261,7 +260,7 @@ public: /* Compares */
     constexpr bool
     operator!=(const self_type& other) const
     {
-        return m_indirect_id != other.m_indirect_id;
+        return m_id != other.m_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -269,7 +268,7 @@ public: /* Compares */
     constexpr bool
     operator<(const self_type& other) const
     {
-        return m_indirect_id < other.m_indirect_id;
+        return m_id < other.m_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -277,7 +276,7 @@ public: /* Compares */
     constexpr bool
     operator>(const self_type& other) const
     {
-        return m_indirect_id > other.m_indirect_id;
+        return m_id > other.m_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -285,7 +284,7 @@ public: /* Compares */
     constexpr bool
     operator<=(const self_type& other) const
     {
-        return m_indirect_id <= other.m_indirect_id;
+        return m_id <= other.m_id;
     }
 
 /* --------------------------------------------------------------------------------------- */
@@ -293,7 +292,7 @@ public: /* Compares */
     constexpr bool
     operator>=(const self_type& other) const
     {
-        return m_indirect_id >= other.m_indirect_id;
+        return m_id >= other.m_id;
     }
 
 /* ####################################################################################### */
@@ -307,7 +306,7 @@ public: /* Methods */
     constexpr size_t
     row() const
     {
-        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_ROW(m_data, m_begin, m_end, "(Math3D) can't get row from matrix iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_ROW(m_id, 1, M*N+1, "(Math3D) can't get row from matrix iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         return (m_data - m_begin) / N;
     #else
@@ -324,7 +323,7 @@ public: /* Methods */
     constexpr size_t
     column() const
     {
-        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_COLUMN(m_data, m_begin, m_end, "(Math3D) can't get column from matrix iterator (out of range).")
+        MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_COLUMN(m_id, 1, M*N+1, "(Math3D) can't get column from matrix iterator (out of range).")
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
         return (m_data - m_begin) - N * row();
     #else
@@ -337,29 +336,27 @@ protected: /* Internal */
 /* ####################################################################################### */
 
     pointer
-    m_begin         {nullptr};
+    m_begin     {nullptr};
 
     pointer
-    m_end           {nullptr};
-
-    pointer
-    m_data          {nullptr};
+    m_data      {nullptr};
 
     size_t
-    m_indirect_id   {0};
+    m_id        {0};
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr void
     recalculateDataAddress()
     {
+        size_t id {m_id - 1};
     #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
-        size_t c {m_indirect_id / M};
-        size_t r {m_indirect_id - M * c};
+        size_t c {id / M};
+        size_t r {id - M * c};
         m_data = m_begin + (r * N + c);
     #else
-        size_t r {m_indirect_id / N};
-        size_t c {m_indirect_id - N * r};
+        size_t r {id / N};
+        size_t c {id - N * r};
         m_data = m_begin + (c * M + r);
     #endif
     }
@@ -369,15 +366,15 @@ protected: /* Internal */
 
 
 template<size_t M, size_t N, typename T>
-class IndirectMatrixIterator : public ConstIndirectMatrixIterator<M,N,T>
+class MatrixIndirectIterator : public ConstMatrixIndirectIterator<M,N,T>
 {
 
 /* ####################################################################################### */
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using self_type             = IndirectMatrixIterator<M,N,T>;
-    using base_type             = ConstIndirectMatrixIterator<M,N,T>;
+    using self_type             = MatrixIndirectIterator<M,N,T>;
+    using base_type             = ConstMatrixIndirectIterator<M,N,T>;
     using value_type            = T;
     using reference             = T&;
     using pointer               = T*;
@@ -389,16 +386,39 @@ public: /* Constructors */
 /* ####################################################################################### */
 
     constexpr
-    IndirectMatrixIterator() = default;
+    MatrixIndirectIterator(pointer firstComponentPointer, size_t index)
+        : base_type(firstComponentPointer, index) {}
 
 /* --------------------------------------------------------------------------------------- */
 
     constexpr
-    IndirectMatrixIterator(pointer firstComponentPointer, size_t index)
-        : base_type(firstComponentPointer, index)
-    {
+    MatrixIndirectIterator()                        = default;
 
-    }
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    MatrixIndirectIterator(const self_type&)        = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr
+    MatrixIndirectIterator(self_type&&) noexcept    = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    ~MatrixIndirectIterator()                       = default;
+
+/* ####################################################################################### */
+public: /* Default assignment */
+/* ####################################################################################### */
+
+    constexpr self_type&
+    operator=(const self_type&)                     = default;
+
+/* --------------------------------------------------------------------------------------- */
+
+    constexpr self_type&
+    operator=(self_type&&) noexcept                 = default;
 
 /* ####################################################################################### */
 public: /* Data accessing */

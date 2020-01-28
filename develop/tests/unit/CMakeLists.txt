@@ -51,6 +51,7 @@ set(MATRIX_TEST_SUITE
     Matrix/Iterators/Indirect.cpp
     Matrix/Iterators/RowDir.cpp
     Matrix/Iterators/ColumnDir.cpp
+    Matrix/Iterators/Row.cpp
 )
 
 set(ALL_TEST_SUITES
