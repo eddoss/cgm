@@ -33,8 +33,8 @@ public: /* Typedefs */
 public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-    using iterator                  = VectorIterator<T>;
-    using const_iterator            = ConstVectorIterator<T>;
+    using iterator                  = VectorIterator<D,T>;
+    using const_iterator            = ConstVectorIterator<D,T>;
     using reverse_iterator          = std::reverse_iterator<iterator>;
 	using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
 
@@ -370,7 +370,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::iterator
 Vector<D,T>::begin()
 {
-    return iterator {data};
+    return iterator {data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -379,7 +379,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::iterator
 Vector<D,T>::end()
 {
-    return iterator {data+D};
+    return iterator {data, D};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -388,7 +388,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::const_iterator
 Vector<D,T>::begin() const
 {
-    return const_iterator {data};
+    return const_iterator {data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -397,7 +397,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::const_iterator
 Vector<D,T>::end() const
 {
-    return const_iterator {data+D};
+    return const_iterator {data, D};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -406,7 +406,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::const_iterator
 Vector<D,T>::cbegin() const
 {
-    return const_iterator {data};
+    return const_iterator {data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -415,7 +415,7 @@ template<size_t D, typename T>
 constexpr typename Vector<D,T>::const_iterator
 Vector<D,T>::cend() const
 {
-    return const_iterator {data+D};
+    return const_iterator {data, D};
 }
 
 /* --------------------------------------------------------------------------------------- */

@@ -7,6 +7,7 @@
     #include <stdexcept>
 #endif
 
+
 /* ####################################################################################### */
 /* Debug verifiers */
 /* ####################################################################################### */
@@ -27,6 +28,7 @@
     if (current > end) {throw std::range_error(message);}
 
 /* --------------------------------------------------------------------------------------- */
+
     #define MATH3D_VERIFY_MATRIX_ROW_ITERATOR_BACKWARD(current, begin, message) \
     if (current < begin) {throw std::range_error(message);}
 

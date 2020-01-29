@@ -194,3 +194,157 @@ TEST(VectorIterator_STL, Max_Element)
     auto it = std::max_element(input.begin(), input.end());
     ASSERT_EQ(*it, 33);
 }
+
+
+/* --------------------------------------------------------------------------------------- */
+
+#ifndef NDEBUG
+
+TEST(VectorIterator_Exceptions, Dereference)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.end();
+        auto val = *it;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't dereference out of range vector iterator.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, PreIncrement)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = ++input.end();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment vector iterator after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, PostIncrement)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.end()++;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment vector iterator after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, PlusEqual)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.end();
+        it += 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move vector iterator forward after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, Plus)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.end();
+        it = it + 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move vector iterator forward after end.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, PreDecrement)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = --input.begin();
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-decrement vector iterator before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, PostDecrement)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.begin()--;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't post-decrement vector iterator before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, MinusEqual)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.begin();
+        it -= 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move vector iterator backward before begin.");
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(VectorIterator_Exceptions, Minus)
+{
+    const Vec input {1,2,3};
+
+    try
+    {
+        auto it = input.begin();
+        it = it - 1;
+    }
+    catch (const std::runtime_error& excep)
+    {
+        ASSERT_STREQ(excep.what(), "(Math3D) can't move vector iterator backward before begin.");
+    }
+}
+
+#endif
