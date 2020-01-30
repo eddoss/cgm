@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Structs/Matrices/Matrix.hpp>
-#include <Math3D/Core/Structs/Matrices/Operators.hpp>
+#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrix/Operators.hpp>
 
 
 using namespace std;

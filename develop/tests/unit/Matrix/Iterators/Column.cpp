@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Structs/Matrices/Matrix.hpp>
+#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
 
 
 using namespace std;

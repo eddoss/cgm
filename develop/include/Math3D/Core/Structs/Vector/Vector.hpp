@@ -5,14 +5,9 @@
 #include <algorithm>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Structs/Vectors/Iterator.hpp>
+#include <Math3D/Core/Structs/Vector/Iterator.hpp>
 
 
-/**
- * Generic Vector.
- * @tparam D Components count (dimensions).
- * @tparam T Components type.
- */
 template<size_t D, typename T=FLOAT>
 struct Vector
 {

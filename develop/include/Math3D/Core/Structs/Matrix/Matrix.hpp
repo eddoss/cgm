@@ -2,18 +2,15 @@
 #define MATH3D_MATRIX_HPP
 
 
-#include <Math3D/Core/Structs/Matrices/Support.hpp>
-#include <Math3D/Core/Structs/Vectors/Vector.hpp>
-#include <Math3D/Core/Structs/Matrices/Iterators/Direct.hpp>
-#include <Math3D/Core/Structs/Matrices/Iterators/Indirect.hpp>
-#include <Math3D/Core/Structs/Matrices/Iterators/Row.hpp>
-#include <Math3D/Core/Structs/Matrices/Iterators/Column.hpp>
+#include <Math3D/Global.hpp>
+#include <Math3D/Platform.hpp>
+#include <Math3D/Core/Structs/Matrix/Support.hpp>
+#include <Math3D/Core/Structs/Matrix/Iterators/Direct.hpp>
+#include <Math3D/Core/Structs/Matrix/Iterators/Indirect.hpp>
+#include <Math3D/Core/Structs/Matrix/Iterators/Row.hpp>
+#include <Math3D/Core/Structs/Matrix/Iterators/Column.hpp>
 
 
-/**
- * @tparam M Row count.
- * @tparam N Column count.
- */
 template<size_t M, size_t N, typename T=FLOAT>
 struct Matrix
 {
@@ -33,8 +30,8 @@ public: /* Typedefs */
 public: /* Matrices typedefs */
 /* ####################################################################################### */
 
-    using Row                               = Vector<N,T>;
-    using Column                            = Vector<M,T>;
+    using Row                               = Matrix<1,N,T>;
+    using Column                            = Matrix<M,1,T>;
     using Transposed                        = Matrix<N,M,T>;
     
 /* ####################################################################################### */
