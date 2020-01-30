@@ -24,7 +24,7 @@ operator << (std::ostream& stream, const Vector<D,T>& vec)
                 << std::setprecision(6)
                 << vec[i];
     }
-    stream << "\n}\n";
+    stream << "\n}";
     stream.setf(old_flags);
     return stream;
 }
@@ -51,7 +51,7 @@ operator << (std::ostream& stream, const Matrix<M,N,T>& mat)
                     << mat(r,c);
         }
     }
-    stream << "\n}\n";
+    stream << "\n}";
     stream.setf(old_flags);
     return stream;
 }

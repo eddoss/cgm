@@ -54,16 +54,6 @@
 #endif
 
 
-/**
- * Linear iterator. Iterates over the components of a simple array one by one.
- * It works with a two-dimensional array T arr [n][m], where [m] can be equal to [n].
- * To determine the current row/column, you must specify a step. If a row-major
- * is used, then the step should be equal to the number of columns in the matrix.
- * For a column-major the step should equal the number of rows in the matrix.
- *
- * @tparam Step Value to calculate current row/column.
- * @tparam T Matrix components type.
- */
 template<size_t M, size_t N, typename T>
 class ConstMatrixRowIterator
 {
@@ -83,11 +73,6 @@ public: /* Typedefs */
 public: /* Constructors */
 /* ####################################################################################### */
 
-    /**
-     * Initialize iterator for a specific component.
-     * @param index If a row-major is used, it represent a row id, column id otherwise.
-     * @param element If a row-major is used, it represent a column id, row id otherwise.
-     */
     constexpr
     ConstMatrixRowIterator(pointer firstComponentPointer, size_t row, size_t column)
         : m_row(row)

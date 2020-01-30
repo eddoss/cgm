@@ -11,9 +11,8 @@
 
 
 /**
- * A column-major generic matrix.
- * @tparam M Row count. It must be > 1.
- * @tparam N Column count. It must be > 1.
+ * @tparam M Row count.
+ * @tparam N Column count.
  */
 template<size_t M, size_t N, typename T=FLOAT>
 struct Matrix

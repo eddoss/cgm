@@ -43,9 +43,7 @@
 
 #endif
 
-/**
- * Iterate over vector components.
- */
+
 template<size_t D, typename T>
 class ConstVectorIterator
 {

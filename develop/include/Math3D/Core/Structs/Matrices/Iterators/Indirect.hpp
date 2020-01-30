@@ -54,17 +54,7 @@
 #endif
 
 
-/**
- * Nonlinear iterator. Iterates over the components of a simple array, taking into
- * account the step and the offset from the beginning of the array. It works with a
- * two-dimensional array T arr [n][m], where [m] can be equal to [n]. To determine
- * the current row / column, you must specify a step. If a major row is used, then
- * the step should be equal to the number of columns in the matrix. For a major
- * column, the step should equal the number of rows in the matrix.
- *
- * @tparam Step Value to calculate current row/column.
- * @tparam T Matrix components type.
- */
+
 template<size_t M, size_t N, typename T>
 class ConstMatrixIndirectIterator
 {
@@ -84,11 +74,6 @@ public: /* Typedefs */
 public: /* Constructors */
 /* ####################################################################################### */
 
-    /**
-     * Initialize iterator for a specific component.
-     * @tparam index If a row-major is used, it represent a row id, column id otherwise.
-     * @param element If a row-major is used, it represent a column id, row id otherwise.
-     */
     constexpr
     ConstMatrixIndirectIterator(pointer firstComponentPointer, size_t index)
         : m_begin(firstComponentPointer)
