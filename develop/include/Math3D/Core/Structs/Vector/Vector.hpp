@@ -37,6 +37,9 @@ public: /* Constructors */                                                      
 public: /* Static constants */                                                                                         \
 /* ####################################################################################### */                          \
                                                                                                                        \
+    /**
+     * Vector components count.
+     */                                                                                                                \
     constexpr static size_type                                                                                         \
     dimensions {D};                                                                                                    \
                                                                                                                        \
@@ -44,18 +47,24 @@ public: /* Static constants */                                                  
 public: /* Constructors */                                                                                             \
 /* ####################################################################################### */                          \
                                                                                                                        \
+    /**
+     * Initialize all components to single value.
+     */                                                                                                                \
     constexpr explicit                                                                                                 \
     Vector(const_reference value) : base_type()                                                                        \
     {                                                                                                                  \
         static_assert(D > 1, "Math3D::Vector::constructor: vector size must be more than 1");                          \
-        this->fill(value);                                                                                             \
+        base_type::fill(value);                                                                                        \
     }                                                                                                                  \
                                                                                                                        \
+    /**
+     * Initialize all components via initializer_list.
+     */                                                                                                                \
     constexpr                                                                                                          \
     Vector(std::initializer_list<T> values)                                                                            \
     {                                                                                                                  \
         static_assert(D > 1, "Math3D::Vector::constructor: vector size must be more than 1");                          \
-        for (auto i = 0LL; i < D; ++i) this->at(i) = *(values.begin() + i);                                            \
+        for (auto i = 0; i < D; ++i) base_type::at(i) = *(values.begin() + i);                                         \
     }                                                                                                                  \
                                                                                                                        \
     constexpr                                                                                                          \
@@ -79,40 +88,84 @@ public: /* Assignment operator */                                               
     constexpr Vector&                                                                                                  \
     operator=(Vector&&) noexcept    = default;                                                                         \
                                                                                                                        \
+    /**
+     * Set all components to a single value.
+     * @param scalar Value to set.
+     */                                                                                                                \
     constexpr Vector&                                                                                                  \
-    operator=(const_reference scalar) {this->fill(scalar); return *this;}                                              \
+    operator=(const_reference scalar) {base_type::fill(scalar); return *this;}                                         \
                                                                                                                        \
 /* ####################################################################################### */                          \
 public: /* Components accessing */                                                                                     \
 /* ####################################################################################### */                          \
                                                                                                                        \
+    /**
+     * Get component reference by index.
+     * @param component reference.
+     */                                                                                                                \
     constexpr reference                                                                                                \
     operator[](size_type index) {return base_type::at(index);}                                                         \
                                                                                                                        \
+    /**
+     * Get component const reference by index.
+     * @param component const reference.
+     */                                                                                                                \
     constexpr const_reference                                                                                          \
     operator[](size_type index) const {return base_type::at(index);}                                                   \
                                                                                                                        \
+    /**
+     * Get component reference by index.
+     * @param component reference.
+     */                                                                                                                \
     constexpr reference                                                                                                \
     operator()(size_type index) {return base_type::at(index);}                                                         \
                                                                                                                        \
+    /**
+     * Get component const reference by index.
+     * @param component const reference.
+     */                                                                                                                \
     constexpr const_reference                                                                                          \
     operator()(size_type index) const {return base_type::at(index);}                                                   \
                                                                                                                        \
+    /**
+     * Get raw pointer at the first component.
+     * @param first component raw pointer.
+     */                                                                                                                \
     constexpr pointer                                                                                                  \
     data() {return base_type::data();}                                                                                 \
                                                                                                                        \
+    /**
+     * Get const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */                                                                                                                \
     constexpr const_pointer                                                                                            \
     data() const {return base_type::data();}                                                                           \
                                                                                                                        \
+    /**
+     * Get X component reference.
+     * @param X component reference.
+     */                                                                                                                \
     constexpr reference                                                                                                \
     x() {return this->at(0);}                                                                                          \
                                                                                                                        \
+    /**
+     * Get X component const reference.
+     * @param X component const reference.
+     */                                                                                                                \
     constexpr const_reference                                                                                          \
     x() const {return this->at(0);}                                                                                    \
                                                                                                                        \
+    /**
+     * Get Y component reference.
+     * @param Y component reference.
+     */                                                                                                                \
     constexpr reference                                                                                                \
     y() {return this->at(1);}                                                                                          \
                                                                                                                        \
+    /**
+     * Get Y component const reference.
+     * @param X component const reference.
+     */                                                                                                                \
     constexpr const_reference                                                                                          \
     y() const {return this->at(1);}                                                                                    \
                                                                                                                        \
@@ -167,12 +220,23 @@ struct Vector : private std::array<T,D>
 public: /* Static constants */
 /* ####################################################################################### */
 
-    const static Vector<D,T>& zero        (){static const Vector<D,T> vec { 0, 0 }; return vec;}
-    const static Vector<D,T>& one         (){static const Vector<D,T> vec { 1, 1 }; return vec;}
-    const static Vector<D,T>& left        (){static const Vector<D,T> vec {-1, 0 }; return vec;}
-    const static Vector<D,T>& right       (){static const Vector<D,T> vec { 1, 0 }; return vec;}
-    const static Vector<D,T>& up          (){static const Vector<D,T> vec { 0, 1 }; return vec;}
-    const static Vector<D,T>& down        (){static const Vector<D,T> vec { 0,-1 }; return vec;}
+    /** 2D zero vector. */
+    const static Vector<D,T>& zero()    {static const Vector<D,T> vec { 0, 0 }; return vec;}
+
+    /** 2D one vector. */
+    const static Vector<D,T>& one()     {static const Vector<D,T> vec { 1, 1 }; return vec;}
+
+    /** 2D -X axis. */
+    const static Vector<D,T>& left()    {static const Vector<D,T> vec {-1, 0 }; return vec;}
+
+    /** 2D +X axis. */
+    const static Vector<D,T>& right()   {static const Vector<D,T> vec { 1, 0 }; return vec;}
+
+    /** 2D +Y axis. */
+    const static Vector<D,T>& up()      {static const Vector<D,T> vec { 0, 1 }; return vec;}
+
+    /** 2D -Y axis. */
+    const static Vector<D,T>& down()    {static const Vector<D,T> vec { 0,-1 }; return vec;}
 };
 
 /* --------------------------------------------------------------------------------------- */
@@ -186,24 +250,47 @@ struct Vector <D, T, std::enable_if_t<(D == 3)>> : private std::array<T,D>
 public: /* Static constants */
 /* ####################################################################################### */
 
-    const static Vector<D,T>& zero        (){static const Vector<D,T> vec { 0, 0, 0 }; return vec;}
-    const static Vector<D,T>& one         (){static const Vector<D,T> vec { 1, 1, 1 }; return vec;}
-    const static Vector<D,T>& left        (){static const Vector<D,T> vec {-1, 0, 0 }; return vec;}
-    const static Vector<D,T>& right       (){static const Vector<D,T> vec { 1, 0, 0 }; return vec;}
-    const static Vector<D,T>& up          (){static const Vector<D,T> vec { 0, 1, 0 }; return vec;}
-    const static Vector<D,T>& down        (){static const Vector<D,T> vec { 0,-1, 0 }; return vec;}
-    const static Vector<D,T>& forward     (){static const Vector<D,T> vec { 0, 0, 1 }; return vec;}
-    const static Vector<D,T>& backward    (){static const Vector<D,T> vec { 0, 0,-1 }; return vec;}
+    /** 3D zero vector. */
+    const static Vector<D,T>& zero()        {static const Vector<D,T> vec { 0, 0, 0 }; return vec;}
+
+    /** 3D one vector. */
+    const static Vector<D,T>& one()         {static const Vector<D,T> vec { 1, 1, 1 }; return vec;}
+
+    /** 3D -X axis. */
+    const static Vector<D,T>& left()        {static const Vector<D,T> vec {-1, 0, 0 }; return vec;}
+
+    /** 3D +X axis. */
+    const static Vector<D,T>& right()       {static const Vector<D,T> vec { 1, 0, 0 }; return vec;}
+
+    /** 3D +Y axis. */
+    const static Vector<D,T>& up()          {static const Vector<D,T> vec { 0, 1, 0 }; return vec;}
+
+    /** 3D -Y axis. */
+    const static Vector<D,T>& down()        {static const Vector<D,T> vec { 0,-1, 0 }; return vec;}
+
+    /** 3D +Z axis. */
+    const static Vector<D,T>& forward()     {static const Vector<D,T> vec { 0, 0, 1 }; return vec;}
+
+    /** 3D -Z axis. */
+    const static Vector<D,T>& backward()    {static const Vector<D,T> vec { 0, 0,-1 }; return vec;}
 
 /* ####################################################################################### */
 public: /* Components accessing */
 /* ####################################################################################### */
 
+    /**
+     * Get Z component reference.
+     * @param Z component reference.
+     */
     constexpr reference
-    z() {return this->at(2);}
+    z() {return base_type::at(2);}
 
+    /**
+     * Get Z component const reference.
+     * @param Z component const reference.
+     */
     constexpr const_reference
-    z() const {return this->at(2);}
+    z() const {return base_type::at(2);}
 };
 
 /* --------------------------------------------------------------------------------------- */
@@ -214,33 +301,36 @@ struct Vector <D, T, std::enable_if_t<(D > 3)>> : private std::array<T,D>
     MATH3D_VECTOR_COMMON_BODY
 
 /* ####################################################################################### */
-public: /* Static constants */
-/* ####################################################################################### */
-
-    const static Vector<D,T>& zero        (){static const Vector<D,T> vec { 0, 0, 0, 0 }; return vec;}
-    const static Vector<D,T>& one         (){static const Vector<D,T> vec { 1, 1, 1, 0 }; return vec;}
-    const static Vector<D,T>& left        (){static const Vector<D,T> vec {-1, 0, 0, 0 }; return vec;}
-    const static Vector<D,T>& right       (){static const Vector<D,T> vec { 1, 0, 0, 0 }; return vec;}
-    const static Vector<D,T>& up          (){static const Vector<D,T> vec { 0, 1, 0, 0 }; return vec;}
-    const static Vector<D,T>& down        (){static const Vector<D,T> vec { 0,-1, 0, 0 }; return vec;}
-    const static Vector<D,T>& forward     (){static const Vector<D,T> vec { 0, 0, 1, 0 }; return vec;}
-    const static Vector<D,T>& backward    (){static const Vector<D,T> vec { 0, 0,-1, 0 }; return vec;}
-
-/* ####################################################################################### */
 public: /* Components accessing */
 /* ####################################################################################### */
 
+    /**
+     * Get Z component reference.
+     * @param Z component reference.
+     */
     constexpr reference
-    z() {return this->at(2);}
+    z() {return base_type::at(2);}
 
+    /**
+     * Get Z component const reference.
+     * @param Z component const reference.
+     */
     constexpr const_reference
-    z() const {return this->at(2);}
+    z() const {return base_type::at(2);}
 
+    /**
+     * Get W component reference.
+     * @param W component reference.
+     */
     constexpr reference
-    w() {return this->at(3);}
+    w() {return base_type::at(3);}
 
+    /**
+     * Get W component const reference.
+     * @param W component const reference.
+     */
     constexpr const_reference
-    w() const {return this->at(3);}
+    w() const {return base_type::at(3);}
 };
 
 #endif // MATH3D_VECTOR_HPP
