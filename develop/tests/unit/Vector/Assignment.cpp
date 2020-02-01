@@ -14,7 +14,9 @@ TEST(Vector_Assignment, Assignment_Scalar)
     Vec input {1,2,3};
     input = scalar;
 
-    for (const auto& val : input) ASSERT_EQ(val, scalar);
+    ASSERT_EQ(input[0], scalar);
+    ASSERT_EQ(input[1], scalar);
+    ASSERT_EQ(input[2], scalar);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -25,5 +27,7 @@ TEST(Vector_Assignment, Assignment_Other)
     Vec other {4,5,6};
     input = other;
 
-    for (Vec::size_type i = 0; i < Vec::dimensions; ++i) ASSERT_EQ(input[i], other[i]);
+    ASSERT_EQ(input[0], other[0]);
+    ASSERT_EQ(input[1], other[1]);
+    ASSERT_EQ(input[2], other[2]);
 }

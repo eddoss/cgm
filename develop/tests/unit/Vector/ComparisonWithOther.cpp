@@ -7,122 +7,263 @@
 
 
 using namespace std;
-using Vec = Vector<3>;
+using Vec2 = Vector<2>;
+using Vec3 = Vector<3>;
+using Vec4 = Vector<4>;
+using Vec5 = Vector<5>;
 
-TEST(Vector_ComparisonWithOther, Equal_PositiveTest)
+TEST(Vector_ComparisonWithOther, Equal)
 {
-    Vec input {1,2,3};
-    Vec other {1,2,3};
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 eql { 2, 4 };
+        Vec2 neq { 1, 2 };
+        ASSERT_TRUE(vec == eql);
+        ASSERT_FALSE(vec == neq);
+    }
 
-    ASSERT_TRUE(input == other);
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 eql { 3, 6, 9 };
+        Vec3 neq { 1, 2, 3 };
+        ASSERT_TRUE(vec == eql);
+        ASSERT_FALSE(vec == neq);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 eql { 2, 4, 6, 8 };
+        Vec4 neq { 1, 2, 3, 4 };
+        ASSERT_TRUE(vec == eql);
+        ASSERT_FALSE(vec == neq);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 eql { 2, 4, 6, 8, 10 };
+        Vec5 neq { 1, 2, 3, 4, 5 };
+        ASSERT_TRUE(vec == eql);
+        ASSERT_FALSE(vec == neq);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_ComparisonWithOther, Equal_NegativeTest)
+TEST(Vector_ComparisonWithOther, NonEqual)
 {
-    Vec input {1,2,3};
-    Vec other {1,2,4};
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 eql { 2, 4 };
+        Vec2 neq { 1, 2 };
+        ASSERT_TRUE(vec != neq);
+        ASSERT_FALSE(vec != eql);
+    }
 
-    ASSERT_FALSE(input == other);
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 eql { 3, 6, 9 };
+        Vec3 neq { 1, 2, 3 };
+        ASSERT_TRUE(vec != neq);
+        ASSERT_FALSE(vec != eql);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 eql { 2, 4, 6, 8 };
+        Vec4 neq { 1, 2, 3, 4 };
+        ASSERT_TRUE(vec != neq);
+        ASSERT_FALSE(vec != eql);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 eql { 2, 4, 6, 8, 10 };
+        Vec5 neq { 1, 2, 3, 4, 5 };
+        ASSERT_TRUE(vec != neq);
+        ASSERT_FALSE(vec != eql);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_ComparisonWithOther, NotEqual_PositiveTest)
+TEST(Vector_ComparisonWithOther, Less)
 {
-    Vec input {1,2,3};
-    Vec other {1,2,4};
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 les { 1, 1 };
+        Vec2 mor { 2, 4 };
+        ASSERT_TRUE(les < vec);
+        ASSERT_FALSE(vec < mor);
+    }
 
-    ASSERT_TRUE(input != other);
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 les { 1, 2, 3 };
+        Vec3 mor { 3, 6, 9 };
+        ASSERT_TRUE(les < vec);
+        ASSERT_FALSE(vec < mor);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 les { 1, 2, 3, 4 };
+        Vec4 mor { 2, 4, 6, 8 };
+        ASSERT_TRUE(les < vec);
+        ASSERT_FALSE(vec < mor);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 les { 1, 2, 3, 4, 5 };
+        Vec5 mor { 2, 4, 6, 8, 10 };
+        ASSERT_TRUE(les < vec);
+        ASSERT_FALSE(vec < mor);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_ComparisonWithOther, NotEqual_NegativeTest)
+TEST(Vector_ComparisonWithOther, LessOrEqual)
 {
-    Vec input {1,2,3};
-    Vec other {1,2,3};
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 leq { 2, 4 };
+        Vec2 mor { 3, 5 };
+        ASSERT_TRUE(vec <= leq);
+        ASSERT_FALSE(mor <= vec);
+    }
 
-    ASSERT_FALSE(input != other);
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 leq { 3, 6, 9 };
+        Vec3 mor { 4, 7, 10 };
+        ASSERT_TRUE(vec <= leq);
+        ASSERT_FALSE(mor <= vec);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 leq { 2, 4, 6, 8 };
+        Vec4 mor { 3, 5, 7, 9 };
+        ASSERT_TRUE(vec <= leq);
+        ASSERT_FALSE(mor <= vec);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 leq { 2, 4, 6, 8, 10 };
+        Vec5 mor { 3, 5, 7, 9, 11 };
+        ASSERT_TRUE(vec <= leq);
+        ASSERT_FALSE(mor <= vec);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_ComparisonWithOther, Less_PositiveTest)
+TEST(Vector_ComparisonWithOther, Greater)
 {
-    Vec input {1,2,3};
-    Vec other {2,3,4};
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 les { 1, 1 };
+        Vec2 eql { 2, 4 };
+        ASSERT_TRUE(vec > les);
+        ASSERT_FALSE(vec > eql);
+    }
 
-    ASSERT_TRUE(input < other);
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 les { 1, 2, 3 };
+        Vec3 eql { 3, 6, 9 };
+        ASSERT_TRUE(vec > les);
+        ASSERT_FALSE(vec > eql);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 les { 1, 2, 3, 4 };
+        Vec4 eql { 2, 4, 6, 8 };
+        ASSERT_TRUE(vec > les);
+        ASSERT_FALSE(vec > eql);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 les { 1, 2, 3, 4, 5 };
+        Vec5 eql { 2, 4, 6, 8, 10 };
+        ASSERT_TRUE(vec > les);
+        ASSERT_FALSE(vec > eql);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_ComparisonWithOther, Less_NegativeTest)
+TEST(Vector_ComparisonWithOther, GreaterOrEqual)
 {
-    Vec input {1,2,3};
-    Vec other {1,3,4};
+    {
+        Vec2 vec { 3, 4 };
+        Vec2 meq { 2, 4 };
+        Vec2 les (100);
+        ASSERT_TRUE(vec >= meq);
+        ASSERT_FALSE(vec >= les);
+    }
 
-    ASSERT_FALSE(other < input);
-}
+    /* -------------- */
 
-/* --------------------------------------------------------------------------------------- */
+    {
+        Vec3 vec { 3, 7, 9 };
+        Vec3 meq { 3, 6, 9 };
+        Vec3 les (100);
+        ASSERT_TRUE(vec >= meq);
+        ASSERT_FALSE(vec >= les);
+    }
 
-TEST(Vector_ComparisonWithOther, LessThan_PositiveTest)
-{
-    Vec input {1,2,3};
-    Vec other {1,2,4};
+    /* -------------- */
 
-    ASSERT_TRUE(input <= other);
-}
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 meq { 2, 4, 6, 8 };
+        Vec4 les (100);
+        ASSERT_TRUE(vec >= meq);
+        ASSERT_FALSE(vec >= les);
+    }
 
-/* --------------------------------------------------------------------------------------- */
+    /* -------------- */
 
-TEST(Vector_ComparisonWithOther, LessThan_NegativeTest)
-{
-    Vec input {1,2,3};
-    Vec other {1,2,4};
-
-    ASSERT_FALSE(other <= input);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Vector_ComparisonWithOther, Greater_PositiveTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,2,3};
-
-    ASSERT_TRUE(input > other);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Vector_ComparisonWithOther, Greater_NegativeTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,2,3};
-
-    ASSERT_FALSE(other > input);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Vector_ComparisonWithOther, GreaterOrEqual_PositiveTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,3,4};
-
-    ASSERT_TRUE(input >= other);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Vector_ComparisonWithOther, GreaterOrEqual_NegativeTest)
-{
-    Vec input {2,3,4};
-    Vec other {1,3,4};
-
-    ASSERT_FALSE(other >= input);
+    {
+        Vec5 vec { 2, 4, 7, 8, 10 };
+        Vec5 meq { 2, 4, 6, 8, 10 };
+        Vec5 les (100);
+        ASSERT_TRUE(vec >= meq);
+        ASSERT_FALSE(vec >= les);
+    }
 }

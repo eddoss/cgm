@@ -33,7 +33,6 @@ set(VECTOR_TEST_SUITE
     Vector/Arithmetic.cpp
     Vector/Assignment.cpp
     Vector/DotAndCross.cpp
-    Vector/IncrementDecrement.cpp
     Vector/ComparisonWithOther.cpp
     Vector/ComparisonWithScalar.cpp
 )

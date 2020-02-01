@@ -10,6 +10,7 @@ using namespace std;
 using Vec2 = Vector<2>;
 using Vec3 = Vector<3>;
 using Vec4 = Vector<4>;
+using Vec5 = Vector<5>;
 
 
 /* ####################################################################################### */
@@ -105,7 +106,7 @@ TEST(Vector_DotAndCross, Cross_4Dx3D)
 TEST(Vector_DotAndCross, Cross_4Dx4D)
 {
     Vec4 a {0,1,0,0};
-    Vec3 b {1,0,0,0};
+    Vec4 b {1,0,0,0};
     Vec4 e {0,0,-1,0};
 
     ASSERT_EQ(a ^ b, e);

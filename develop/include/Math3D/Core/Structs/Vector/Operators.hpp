@@ -57,9 +57,9 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to add.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator+(const Vector<D,T>& vector, T scalar);
+operator+(const Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add scalar to vector and return copy.
@@ -67,9 +67,9 @@ operator+(const Vector<D,T>& vector, T scalar);
  * @param scalar Value to add.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator+(T scalar, const Vector<D,T>& vector);
+operator+(TScalar scalar, const Vector<D,T>& vector);
 
 /**
  * Add scalar to vector components.
@@ -77,9 +77,9 @@ operator+(T scalar, const Vector<D,T>& vector);
  * @param scalar Value to add.
  * @return The result of adding.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>&
-operator+=(Vector<D,T>& vector, T scalar);
+operator+=(Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add vector B to vector A.
@@ -120,9 +120,9 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to subtract.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector, T scalar);
+operator-(const Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Subtract scalar from each vector component.
@@ -130,9 +130,9 @@ operator-(const Vector<D,T>& vector, T scalar);
  * @param scalar Value to subtract.
  * @return The result of subtraction.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>&
-operator-=(Vector<D,T>& vector, T scalar);
+operator-=(Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Subtract vector B from vector A.
@@ -164,9 +164,9 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to multiply.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator*(const Vector<D,T>& vector, T scalar);
+operator*(const Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply scalar to each vector component and return copy.
@@ -174,9 +174,9 @@ operator*(const Vector<D,T>& vector, T scalar);
  * @param scalar Value to multiply.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator*(T scalar, const Vector<D,T>& vector);
+operator*(TScalar scalar, const Vector<D,T>& vector);
 
 /**
  * Multiply scalar to each vector component.
@@ -184,9 +184,9 @@ operator*(T scalar, const Vector<D,T>& vector);
  * @param scalar Value to multiply.
  * @return The result of multiplication.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>&
-operator*=(Vector<D,T>& vector, T scalar);
+operator*=(Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply component wise vector A by vector B.
@@ -218,9 +218,9 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to division.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, T scalar);
+operator/(const Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Divide each vector component by a scalar and return copy.
@@ -228,9 +228,9 @@ operator/(const Vector<D,T>& vector, T scalar);
  * @param scalar Value to division.
  * @return The result of division.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>&
-operator/=(Vector<D,T>& vector, T scalar);
+operator/=(Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Divide component wise vector A by vector B.
@@ -557,9 +557,9 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
-operator+(const Vector<D,T>& vector, T scalar)
+operator+(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
     for (auto i = 0; i < D; ++i) copy[i] += scalar;
@@ -579,9 +579,9 @@ operator+(T scalar, const Vector<D,T>& vector)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
-operator+=(Vector<D,T>& vector, T scalar)
+operator+=(Vector<D,T>& vector, TScalar scalar)
 {
     for (auto i = 0; i < D; ++i) vector[i] += scalar;
     return vector;
@@ -623,9 +623,9 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector, T scalar)
+operator-(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
     for (auto i = 0; i < D; ++i) copy[i] -= scalar;
@@ -634,9 +634,9 @@ operator-(const Vector<D,T>& vector, T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
-operator-=(Vector<D,T>& vector, T scalar)
+operator-=(Vector<D,T>& vector, TScalar scalar)
 {
     for (auto i = 0; i < D; ++i) vector[i] -= scalar;
     return vector;
@@ -667,9 +667,9 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
-operator*(const Vector<D,T>& vector, T scalar)
+operator*(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
     for (auto i = 0; i < D; ++i) copy[i] *= scalar;
@@ -689,9 +689,9 @@ operator*(T scalar, const Vector<D,T>& vector)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
-operator*=(Vector<D,T>& vector, T scalar)
+operator*=(Vector<D,T>& vector, TScalar scalar)
 {
     for (auto i = 0; i < D; ++i) vector[i] *= scalar;
     return vector;
@@ -722,9 +722,9 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, T scalar)
+operator/(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
     for (auto i = 0; i < D; ++i) copy[i] /= scalar;
@@ -733,9 +733,9 @@ operator/(const Vector<D,T>& vector, T scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
-operator/=(Vector<D,T>& vector, T scalar)
+operator/=(Vector<D,T>& vector, TScalar scalar)
 {
     for (auto i = 0; i < D; ++i) vector[i] /= scalar;
     return vector;
