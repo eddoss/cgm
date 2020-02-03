@@ -78,7 +78,7 @@ public: /* Constructors */
     ConstMatrixColumnIterator(pointer firstComponentPointer, size_t column, size_t row)
         : m_row(row+1)
         , m_column(column)
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         , m_begin(firstComponentPointer + column)
     #else
         , m_begin(firstComponentPointer + column * M)
@@ -335,7 +335,7 @@ protected: /* Internal */
     constexpr void
     recalculateDataAddress()
     {
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         m_data = m_begin + (N * (m_row - 1));
     #else
         m_data = m_begin + (m_row - 1);

@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_UNIT_TESTS "Build unit testing projects." OFF)
 option(BUILD_VISUAL_TESTS "Build visual testing projects." OFF)
 option(USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
-option(USE_ROW_MAJOR_MATRICES "Map matrix components by row (in default mapped by column)" OFF)
+option(USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)" OFF)
 # ####################################################################################### #
 
 # ####################################################################################### #
@@ -43,8 +43,8 @@ if(USE_DOUBLE_PRECISION)
     add_definitions(-DMATH3D_USE_DOUBLE_PRECISION)
 endif()
 
-if(USE_ROW_MAJOR_MATRICES)
-    add_definitions(-DMATH3D_USE_ROW_MAJOR_MAPPING)
+if(USE_ROW_WISE_MATRIX_STORING)
+    add_definitions(-DMATH3D_USE_ROW_WISE_MATRIX_STORING)
 endif()
 
 # ####################################################################################### #

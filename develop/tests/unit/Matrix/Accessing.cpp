@@ -46,7 +46,7 @@ TEST(Matrix_Accessing, ByIndexMid)
         7,8
     };
     input[4] *= -1;
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         Mat32 expec
         {
             1,2,

@@ -66,7 +66,7 @@ public: /* Iterators typedefs */
 
 /* --------------------------------------------------------------------------------------- */
 
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     using RowDirIterator                    = MatrixDirectIterator<M,N,T>;
     using ConstRowDirIterator               = ConstMatrixDirectIterator<M,N,T>;
 #else
@@ -78,7 +78,7 @@ public: /* Iterators typedefs */
     
 /* --------------------------------------------------------------------------------------- */
 
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     using ColumnDirIterator                 = MatrixIndirectIterator<M,N,T>;
     using ConstColumnDirIterator            = ConstMatrixIndirectIterator<M,N,T>;
 #else
@@ -678,7 +678,7 @@ public: /* Column iterators */
 public: /* Data */
 /* ####################################################################################### */
 
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     T data[M][N];
 #else
     T data[N][M];
@@ -711,7 +711,7 @@ constexpr Matrix<M,N,T>::Matrix(T scalar)
 template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     for (auto i = 0; i < size; ++i)
     {
         *(&data[0][0] + i) = *(values.begin() + i);
@@ -736,7 +736,7 @@ constexpr Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>::Matrix(const T *values)
 {
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     for (auto i = 0; i < size; ++i)
     {
         *(&data[0][0] + i) = *(values + i);
@@ -775,7 +775,7 @@ template<size_t M, size_t N, typename T>
 constexpr FORCEINLINE T&
 Matrix<M,N,T>::operator()(size_t row, size_t column)
 {
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     return data[row][column];
 #else
     return data[column][row];
@@ -788,7 +788,7 @@ template<size_t M, size_t N, typename T>
 constexpr FORCEINLINE const T&
 Matrix<M,N,T>::operator()(size_t row, size_t column) const
 {
-#ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+#ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
     return data[row][column];
 #else
     return data[column][row];

@@ -34,7 +34,7 @@ TEST(Matrix_DirectIterator, Plus)
     auto it1 = input.begin() + 2;
     auto it2 = input.begin() + 3;
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*it0, 2);
         ASSERT_EQ(*it1, 3);
         ASSERT_EQ(*it2, 4);
@@ -61,7 +61,7 @@ TEST(Matrix_DirectIterator, Minus)
     auto it1 = input.end() - 2;
     auto it2 = input.end() - 3;
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*it0, 9);
         ASSERT_EQ(*it1, 8);
         ASSERT_EQ(*it2, 7);
@@ -85,7 +85,7 @@ TEST(Matrix_DirectIterator, PreIncrement)
 
     auto it = input.begin();
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*(++it), 2);
         ASSERT_EQ(*(++it), 3);
     #else
@@ -108,7 +108,7 @@ TEST(Matrix_DirectIterator, PostIncrement)
     auto it = input.begin();
     it++;
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*(it++), 2);
         ASSERT_EQ(*(it++), 3);
     #else
@@ -130,7 +130,7 @@ TEST(Matrix_DirectIterator, PreDecrement)
 
     auto it = input.end();
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*(--it), 9);
         ASSERT_EQ(*(--it), 8);
     #else
@@ -153,7 +153,7 @@ TEST(Matrix_DirectIterator, PostDecrement)
     auto it = input.end();
     it--;
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*(it--), 9);
         ASSERT_EQ(*(it--), 8);
     #else
@@ -191,7 +191,7 @@ TEST(Matrix_DirectIterator, RowsColumns_MidComponent)
 
     auto it {input.begin() + 5};
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(it.row(), 1);
         ASSERT_EQ(it.column(), 1);
     #else
@@ -349,7 +349,7 @@ TEST(Matrix_DirectIterator, Reverse)
     auto c = input.rbegin() + 2;
     auto d = input.rbegin() + 3;
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(*a, 5);
         ASSERT_EQ(*b, 4);
         ASSERT_EQ(*c, 2);
@@ -408,7 +408,7 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbegin() + 5};
 
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         ASSERT_EQ(it.row(), 0);
         ASSERT_EQ(it.column(), 2);
     #else

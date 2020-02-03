@@ -287,7 +287,7 @@ public: /* Methods */
     row() const
     {
         MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_ROW(m_data, m_begin, m_begin + M*N, "(Math3D) can't get row from matrix iterator (out of range).")
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         return (m_data - m_begin) / N;
     #else
         return (m_data - m_begin) - M * column();
@@ -304,7 +304,7 @@ public: /* Methods */
     column() const
     {
         MATH3D_VERIFY_MATRIX_DIRECT_ITERATOR_GET_COLUMN(m_data, m_begin, m_begin + M*N, "(Math3D) can't get column from matrix iterator (out of range).")
-    #ifdef MATH3D_USE_ROW_MAJOR_MAPPING
+    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
         return (m_data - m_begin) - N * row();
     #else
         return (m_data - m_begin) / M;
