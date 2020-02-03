@@ -143,28 +143,28 @@ public: /* Components accessing */                                              
                                                                                                                        \
     /**
      * Get X component reference.
-     * @param X component reference.
+     * @return X component reference.
      */                                                                                                                \
     constexpr reference                                                                                                \
     x() {return this->at(0);}                                                                                          \
                                                                                                                        \
     /**
      * Get X component const reference.
-     * @param X component const reference.
+     * @return X component const reference.
      */                                                                                                                \
     constexpr const_reference                                                                                          \
     x() const {return this->at(0);}                                                                                    \
                                                                                                                        \
     /**
      * Get Y component reference.
-     * @param Y component reference.
+     * @return Y component reference.
      */                                                                                                                \
     constexpr reference                                                                                                \
     y() {return this->at(1);}                                                                                          \
                                                                                                                        \
     /**
      * Get Y component const reference.
-     * @param X component const reference.
+     * @return X component const reference.
      */                                                                                                                \
     constexpr const_reference                                                                                          \
     y() const {return this->at(1);}                                                                                    \
@@ -280,14 +280,14 @@ public: /* Components accessing */
 
     /**
      * Get Z component reference.
-     * @param Z component reference.
+     * @return Z component reference.
      */
     constexpr reference
     z() {return base_type::at(2);}
 
     /**
      * Get Z component const reference.
-     * @param Z component const reference.
+     * @return Z component const reference.
      */
     constexpr const_reference
     z() const {return base_type::at(2);}
@@ -306,28 +306,28 @@ public: /* Components accessing */
 
     /**
      * Get Z component reference.
-     * @param Z component reference.
+     * @return Z component reference.
      */
     constexpr reference
     z() {return base_type::at(2);}
 
     /**
      * Get Z component const reference.
-     * @param Z component const reference.
+     * @return Z component const reference.
      */
     constexpr const_reference
     z() const {return base_type::at(2);}
 
     /**
      * Get W component reference.
-     * @param W component reference.
+     * @return W component reference.
      */
     constexpr reference
     w() {return base_type::at(3);}
 
     /**
      * Get W component const reference.
-     * @param W component const reference.
+     * @return W component const reference.
      */
     constexpr const_reference
     w() const {return base_type::at(3);}
