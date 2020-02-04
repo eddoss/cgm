@@ -88,6 +88,8 @@ TEST(Vector_Arithmetic, PreIncrement)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Vector_Arithmetic, PostIncrement)
 {
     {
@@ -160,6 +162,8 @@ TEST(Vector_Arithmetic, PreDecrement)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Vector_Arithmetic, PostDecrement)
 {
     {
@@ -195,7 +199,7 @@ TEST(Vector_Arithmetic, PostDecrement)
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: inplace minus */
+/* Arithmetic operators: minus */
 /* ####################################################################################### */
 
 TEST(Vector_Arithmetic, InplaceMinus_Scalar)
@@ -278,9 +282,7 @@ TEST(Vector_Arithmetic, InplaceMinus_Other)
     }
 }
 
-/* ####################################################################################### */
-/* Arithmetic operators: inplace minus */
-/* ####################################################################################### */
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector_Arithmetic, Minus_Scalar)
 {
@@ -363,7 +365,7 @@ TEST(Vector_Arithmetic, Minus_Other)
 }
 
 /* ####################################################################################### */
-/* Arithmetic operators: inplace plus */
+/* Arithmetic operators: plus */
 /* ####################################################################################### */
 
 TEST(Vector_Arithmetic, InplacePlus_Scalar)
@@ -446,9 +448,7 @@ TEST(Vector_Arithmetic, InplacePlus_Other)
     }
 }
 
-/* ####################################################################################### */
-/* Arithmetic operators: inplace plus */
-/* ####################################################################################### */
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Vector_Arithmetic, Plus_Scalar)
 {
@@ -534,7 +534,7 @@ TEST(Vector_Arithmetic, Plus_Other)
 /* Arithmetic operators: inplace per-component multiplication */
 /* ####################################################################################### */
 
-TEST(Vector_Arithmetic, InplacePerComponentMultiplication_Scalar)
+TEST(Vector_Arithmetic, Inplace_ComponentWise_Multiplication_Scalar)
 {
     {
         Vec2 vec { 1, 2 };
@@ -573,7 +573,7 @@ TEST(Vector_Arithmetic, InplacePerComponentMultiplication_Scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_Arithmetic, InplacePerComponentMultiplication_Other)
+TEST(Vector_Arithmetic, Inplace_ComponentWise_Multiplication_Other)
 {
     {
         Vec2 vec { 1, 2 };
@@ -614,11 +614,93 @@ TEST(Vector_Arithmetic, InplacePerComponentMultiplication_Other)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector_Arithmetic, ComponentWise_Multiplication_Scalar)
+{
+    {
+        Vec2 vec { 1, 2 };
+        Vec2 exp { 3, 6 };
+        vec = vec * 3;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 vec { 1, 2, 3 };
+        Vec3 exp { 3, 6, 9 };
+        vec = vec * 3;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 1, 2, 3, 4 };
+        Vec4 exp { 2, 4, 6, 8 };
+        vec = vec * 3;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 1, 2, 3, 4, 5 };
+        Vec5 exp { 2, 4, 6, 8, 10 };
+        vec = vec * 3;
+        ASSERT_EQ(vec, exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector_Arithmetic, ComponentWise_Multiplication_Other)
+{
+    {
+        Vec2 vec { 1, 2 };
+        Vec2 oth { 2, 2 };
+        Vec2 exp { 2, 4 };
+        vec = vec * oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 vec { 1, 2, 3 };
+        Vec3 oth { 2, 3, 2 };
+        Vec3 exp { 2, 6, 6 };
+        vec = vec * oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 1, 2, 3, 4 };
+        Vec4 oth { 2, 3, 3, 2 };
+        Vec4 exp { 2, 6, 9, 8 };
+        vec = vec * oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 1, 2, 3, 4, 5 };
+        Vec5 oth { 2, 2, 3, 2, 1 };
+        Vec5 exp { 2, 4, 9, 8, 5 };
+        vec = vec * oth;
+        ASSERT_EQ(vec, exp);
+    }
+}
+
 /* ####################################################################################### */
 /* Arithmetic operators: inplace per-component division */
 /* ####################################################################################### */
 
-TEST(Vector_Arithmetic, InplaceDivision_Scalar)
+TEST(Vector_Arithmetic, Inplace_ComponentWise_Division_Scalar)
 {
     {
         Vec2 vec { 2, 4 };
@@ -657,7 +739,7 @@ TEST(Vector_Arithmetic, InplaceDivision_Scalar)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Vector_Arithmetic, InplaceDivision_Other)
+TEST(Vector_Arithmetic, Inplace_ComponentWise_Division_Other)
 {
     {
         Vec2 vec { 1, 2 };
@@ -694,6 +776,88 @@ TEST(Vector_Arithmetic, InplaceDivision_Other)
         Vec5 oth { 2, 2, 2, 2, 2 };
         Vec5 exp { 1, 2, 3, 4, 5 };
         vec /= oth;
+        ASSERT_EQ(vec, exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector_Arithmetic, ComponentWise_Division_Scalar)
+{
+    {
+        Vec2 vec { 2, 4 };
+        Vec2 exp { 1, 2 };
+        vec = vec / 2;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 vec { 3, 6, 9 };
+        Vec3 exp { 1, 2, 3 };
+        vec = vec / 3;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 exp { 1, 2, 3, 4 };
+        vec = vec / 2;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 exp { 1, 2, 3, 4, 5 };
+        vec = vec / 2;
+        ASSERT_EQ(vec, exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector_Arithmetic, ComponentWise_Division_Other)
+{
+    {
+        Vec2 vec { 1, 2 };
+        Vec2 oth { 1, 2 };
+        Vec2 exp { 1, 1 };
+        vec = vec / oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 vec { 4, 6, 8 };
+        Vec3 oth { 2, 2, 2 };
+        Vec3 exp { 2, 3, 4 };
+        vec = vec / oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 vec { 2, 4, 6, 8 };
+        Vec4 oth { 2, 2, 2, 2 };
+        Vec4 exp { 1, 2, 3, 4 };
+        vec = vec / oth;
+        ASSERT_EQ(vec, exp);
+    }
+
+    /* -------------- */
+
+    {
+        Vec5 vec { 2, 4, 6, 8, 10 };
+        Vec5 oth { 2, 2, 2, 2, 2 };
+        Vec5 exp { 1, 2, 3, 4, 5 };
+        vec = vec / oth;
         ASSERT_EQ(vec, exp);
     }
 }
