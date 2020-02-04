@@ -704,7 +704,32 @@ template<size_t D, typename T>
 constexpr Vector<D,T>
 operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    return Vector<D,T> {A} += B;
+    Vector<D,T> copy {A};
+
+    if constexpr (D == 2)
+    {
+        copy[0] += B[0];
+        copy[1] += B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] += B[0];
+        copy[1] += B[1];
+        copy[2] += B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] += B[0];
+        copy[1] += B[1];
+        copy[2] += B[2];
+        copy[3] += B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] += B[i];
+    }
+
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -713,7 +738,33 @@ template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
 operator+(const Vector<D,T>& vector, TScalar scalar)
 {
-    return Vector<D,T> {vector} += scalar;
+    Vector<D,T> copy {vector};
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (D == 2)
+    {
+        copy[0] += value;
+        copy[1] += value;
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] += value;
+        copy[1] += value;
+        copy[2] += value;
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] += value;
+        copy[1] += value;
+        copy[2] += value;
+        copy[3] += value;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] += value;
+    }
+
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -722,7 +773,33 @@ template<size_t D, typename T>
 constexpr Vector<D,T>
 operator+(T scalar, const Vector<D,T>& vector)
 {
-    return vector + scalar;
+    Vector<D,T> copy {vector};
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (D == 2)
+    {
+        copy[0] += value;
+        copy[1] += value;
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] += value;
+        copy[1] += value;
+        copy[2] += value;
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] += value;
+        copy[1] += value;
+        copy[2] += value;
+        copy[3] += value;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] += value;
+    }
+
+    return copy;
 }
 
 /* ####################################################################################### */
@@ -731,9 +808,34 @@ operator+(T scalar, const Vector<D,T>& vector)
 
 template<size_t D, typename T>
 constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector)
+operator-(Vector<D,T>& vector)
 {
-    return Vector<D,T> {vector} *= -1;
+    auto copy {vector};
+
+    if constexpr (D == 2)
+    {
+        copy[0] = -copy[0];
+        copy[1] = -copy[1];
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] = -copy[0];
+        copy[1] = -copy[1];
+        copy[2] = -copy[2];
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] = -copy[0];
+        copy[1] = -copy[1];
+        copy[2] = -copy[2];
+        copy[3] = -copy[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] = -copy[i];
+    }
+
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -806,7 +908,32 @@ template<size_t D, typename T>
 constexpr Vector<D,T>
 operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    return Vector<D,T> {A} -= B;
+    Vector<D,T> copy {A};
+
+    if constexpr (D == 2)
+    {
+        copy[0] -= B[0];
+        copy[1] -= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] -= B[0];
+        copy[1] -= B[1];
+        copy[2] -= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] -= B[0];
+        copy[1] -= B[1];
+        copy[2] -= B[2];
+        copy[3] -= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] -= B[i];
+    }
+
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -815,7 +942,33 @@ template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
 operator-(const Vector<D,T>& vector, TScalar scalar)
 {
-    return Vector<D,T> {vector} -= scalar;
+    Vector<D,T> copy {vector};
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (D == 2)
+    {
+        copy[0] -= value;
+        copy[1] -= value;
+    }
+    else if constexpr (D == 3)
+    {
+        copy[0] -= value;
+        copy[1] -= value;
+        copy[2] -= value;
+    }
+    else if constexpr (D == 4)
+    {
+        copy[0] -= value;
+        copy[1] -= value;
+        copy[2] -= value;
+        copy[3] -= value;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) copy[i] -= value;
+    }
+
+    return copy;
 }
 
 /* ####################################################################################### */
@@ -846,7 +999,7 @@ operator*=(Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) vector[i] *= scalar;
+        for (auto i = 0; i < D; ++i) vector[i] *= static_cast<T>(scalar);
     }
 
     return vector;
@@ -899,7 +1052,7 @@ template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
 operator*(const Vector<D,T>& vector, TScalar scalar)
 {
-    return Vector<D,T> {vector} *= scalar;
+    return Vector<D,T> {vector} *= static_cast<T>(scalar);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -908,7 +1061,7 @@ template<size_t D, typename T>
 constexpr Vector<D,T>
 operator*(T scalar, const Vector<D,T>& vector)
 {
-    return Vector<D,T> {vector} *= scalar;
+    return Vector<D,T> {vector} *= static_cast<T>(scalar);
 }
 
 /* ####################################################################################### */
@@ -992,7 +1145,7 @@ template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>
 operator/(const Vector<D,T>& vector, TScalar scalar)
 {
-    return Vector<D,T> {vector} /= scalar;
+    return Vector<D,T> {vector} /= static_cast<T>(scalar);
 }
 
 /* ####################################################################################### */
