@@ -639,7 +639,7 @@ TEST(Vector_Arithmetic, ComponentWise_Multiplication_Scalar)
     {
         Vec4 vec { 1, 2, 3, 4 };
         Vec4 exp { 2, 4, 6, 8 };
-        vec = vec * 3;
+        vec = vec * 2;
         ASSERT_EQ(vec, exp);
     }
 
@@ -648,7 +648,7 @@ TEST(Vector_Arithmetic, ComponentWise_Multiplication_Scalar)
     {
         Vec5 vec { 1, 2, 3, 4, 5 };
         Vec5 exp { 2, 4, 6, 8, 10 };
-        vec = vec * 3;
+        vec = vec * 2;
         ASSERT_EQ(vec, exp);
     }
 }
