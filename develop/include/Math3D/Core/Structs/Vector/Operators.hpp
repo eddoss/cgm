@@ -42,6 +42,26 @@ operator--(Vector<D,T>& vector, int);
 /* ####################################################################################### */
 
 /**
+ * Add scalar to vector components.
+ * @param vector Vector to add to.
+ * @param scalar Value to add.
+ * @return The result of adding.
+ */
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
+constexpr Vector<D,T>&
+operator+=(Vector<D,T>& vector, TScalar scalar);
+
+/**
+ * Add vector B to vector A.
+ * @param A Vector to add to.
+ * @param B Vector to add.
+ * @return The result of adding.
+ */
+template<size_t D, typename T=FLOAT>
+constexpr Vector<D,T>&
+operator+=(Vector<D,T>& A, const Vector<D,T>& B);
+
+/**
  * Calculates sum of two vectors.
  * @param A Left vector.
  * @param B Right vector.
@@ -71,29 +91,29 @@ template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
 operator+(TScalar scalar, const Vector<D,T>& vector);
 
-/**
- * Add scalar to vector components.
- * @param vector Vector to add to.
- * @param scalar Value to add.
- * @return The result of adding.
- */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& vector, TScalar scalar);
-
-/**
- * Add vector B to vector A.
- * @param A Vector to add to.
- * @param B Vector to add.
- * @return The result of adding.
- */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& A, const Vector<D,T>& B);
-
 /* ####################################################################################### */
 /* Minus */
 /* ####################################################################################### */
+
+/**
+ * Subtract scalar from each vector component.
+ * @param vector Vector to subtract from.
+ * @param scalar Value to subtract.
+ * @return The result of subtraction.
+ */
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
+constexpr Vector<D,T>&
+operator-=(Vector<D,T>& vector, TScalar scalar);
+
+/**
+ * Subtract vector B from vector A.
+ * @param A Vector to subtract from.
+ * @param B Vector to subtract.
+ * @return The result of subtraction.
+ */
+template<size_t D, typename T=FLOAT>
+constexpr Vector<D,T>&
+operator-=(Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
  * Get a negated copy of the vector.
@@ -124,29 +144,29 @@ template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
 operator-(const Vector<D,T>& vector, TScalar scalar);
 
-/**
- * Subtract scalar from each vector component.
- * @param vector Vector to subtract from.
- * @param scalar Value to subtract.
- * @return The result of subtraction.
- */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& vector, TScalar scalar);
-
-/**
- * Subtract vector B from vector A.
- * @param A Vector to subtract from.
- * @param B Vector to subtract.
- * @return The result of subtraction.
- */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& A, const Vector<D,T>& B);
-
 /* ####################################################################################### */
 /* Component wise multiplication */
 /* ####################################################################################### */
+
+/**
+ * Multiply scalar to each vector component.
+ * @param vector Vector to multiply to.
+ * @param scalar Value to multiply.
+ * @return The result of multiplication.
+ */
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
+constexpr Vector<D,T>&
+operator*=(Vector<D,T>& vector, TScalar scalar);
+
+/**
+ * Multiply component wise vector A by vector B.
+ * @param A Vector to multiply to.
+ * @param B Vector to multiply.
+ * @return The result of multiplication.
+ */
+template<size_t D, typename T=FLOAT>
+constexpr Vector<D,T>&
+operator*=(Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
  * Calculates component wise multiplication of two vectors.
@@ -178,49 +198,9 @@ template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
 constexpr Vector<D,T>
 operator*(TScalar scalar, const Vector<D,T>& vector);
 
-/**
- * Multiply scalar to each vector component.
- * @param vector Vector to multiply to.
- * @param scalar Value to multiply.
- * @return The result of multiplication.
- */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& vector, TScalar scalar);
-
-/**
- * Multiply component wise vector A by vector B.
- * @param A Vector to multiply to.
- * @param B Vector to multiply.
- * @return The result of multiplication.
- */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& A, const Vector<D,T>& B);
-
 /* ####################################################################################### */
 /* Component wise division */
 /* ####################################################################################### */
-
-/**
- * Calculates component wise division of two vectors.
- * @param A Left vector.
- * @param B Right vector.
- * @return New copy of the result vector.
- */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Divide each vector component by a scalar and return copy.
- * @param vector Vector to division to.
- * @param scalar Value to division.
- * @return New copy of the result vector.
- */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Divide each vector component by a scalar and return copy.
@@ -241,6 +221,26 @@ operator/=(Vector<D,T>& vector, TScalar scalar);
 template<size_t D, typename T=FLOAT>
 constexpr Vector<D,T>&
 operator/=(Vector<D,T>& A, const Vector<D,T>& B);
+
+/**
+ * Calculates component wise division of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T=FLOAT>
+constexpr Vector<D,T>
+operator/(const Vector<D,T>& A, const Vector<D,T>& B);
+
+/**
+ * Divide each vector component by a scalar and return copy.
+ * @param vector Vector to division to.
+ * @param scalar Value to division.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
+constexpr Vector<D,T>
+operator/(const Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
 /* Comparison with scalar */
@@ -506,7 +506,29 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator++(Vector<D,T>& vector)
 {
-    for (auto i = 0; i < D; ++i) ++(vector[i]);
+    if constexpr (D == 2)
+    {
+        ++vector[0];
+        ++vector[1];
+    }
+    else if constexpr (D == 3)
+    {
+        ++vector[0];
+        ++vector[1];
+        ++vector[2];
+    }
+    else if constexpr (D == 4)
+    {
+        ++vector[0];
+        ++vector[1];
+        ++vector[2];
+        ++vector[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) ++(vector[i]);
+    }
+
     return vector;
 }
 
@@ -516,7 +538,29 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator--(Vector<D,T>& vector)
 {
-    for (auto i = 0; i < D; ++i) --(vector[i]);
+    if constexpr (D == 2)
+    {
+        --vector[0];
+        --vector[1];
+    }
+    else if constexpr (D == 3)
+    {
+        --vector[0];
+        --vector[1];
+        --vector[2];
+    }
+    else if constexpr (D == 4)
+    {
+        --vector[0];
+        --vector[1];
+        --vector[2];
+        --vector[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) --vector[i];
+    }
+
     return vector;
 }
 
@@ -527,7 +571,30 @@ constexpr Vector<D,T>
 operator++(Vector<D,T>& vector, int)
 {
     Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) ++(vector[i]);
+
+    if constexpr (D == 2)
+    {
+        ++vector[0];
+        ++vector[1];
+    }
+    else if constexpr (D == 3)
+    {
+        ++vector[0];
+        ++vector[1];
+        ++vector[2];
+    }
+    else if constexpr (D == 4)
+    {
+        ++vector[0];
+        ++vector[1];
+        ++vector[2];
+        ++vector[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) ++(vector[i]);
+    }
+
     return copy;
 }
 
@@ -538,7 +605,30 @@ constexpr Vector<D,T>
 operator--(Vector<D,T>& vector, int)
 {
     Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) --(vector[i]);
+
+    if constexpr (D == 2)
+    {
+        --vector[0];
+        --vector[1];
+    }
+    else if constexpr (D == 3)
+    {
+        --vector[0];
+        --vector[1];
+        --vector[2];
+    }
+    else if constexpr (D == 4)
+    {
+        --vector[0];
+        --vector[1];
+        --vector[2];
+        --vector[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) --vector[i];
+    }
+
     return copy;
 }
 
@@ -546,44 +636,33 @@ operator--(Vector<D,T>& vector, int)
 /* IMPLEMENTATION | Plus */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-    for (auto i = 0; i < D; ++i) copy[i] += B[i];
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] += scalar;
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator+(T scalar, const Vector<D,T>& vector)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] += scalar;
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
 operator+=(Vector<D,T>& vector, TScalar scalar)
 {
-    for (auto i = 0; i < D; ++i) vector[i] += scalar;
+    if constexpr (D == 2)
+    {
+        vector[0] += scalar;
+        vector[1] += scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        vector[0] += scalar;
+        vector[1] += scalar;
+        vector[2] += scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        vector[0] += scalar;
+        vector[1] += scalar;
+        vector[2] += scalar;
+        vector[3] += scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) vector[i] += scalar;
+    }
+
     return vector;
 }
 
@@ -593,8 +672,57 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator+=(Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) A[i] += B[i];
+    if constexpr (D == 2)
+    {
+        A[0] += B[0];
+        A[1] += B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        A[0] += B[0];
+        A[1] += B[1];
+        A[2] += B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        A[0] += B[0];
+        A[1] += B[1];
+        A[2] += B[2];
+        A[3] += B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) A[i] += B[i];
+    }
+
     return A;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator+(const Vector<D,T>& A, const Vector<D,T>& B)
+{
+    return Vector<D,T> {A} += B;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T, typename TScalar>
+constexpr Vector<D,T>
+operator+(const Vector<D,T>& vector, TScalar scalar)
+{
+    return Vector<D,T> {vector} += scalar;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator+(T scalar, const Vector<D,T>& vector)
+{
+    return vector + scalar;
 }
 
 /* ####################################################################################### */
@@ -605,31 +733,7 @@ template<size_t D, typename T>
 constexpr Vector<D,T>
 operator-(const Vector<D,T>& vector)
 {
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] = -copy[i];
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-    for (auto i = 0; i < D; ++i) copy[i] -= B[i];
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] -= scalar;
-    return copy;
+    return Vector<D,T> {vector} *= -1;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -638,7 +742,29 @@ template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
 operator-=(Vector<D,T>& vector, TScalar scalar)
 {
-    for (auto i = 0; i < D; ++i) vector[i] -= scalar;
+    if constexpr (D == 2)
+    {
+        vector[0] -= scalar;
+        vector[1] -= scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        vector[0] -= scalar;
+        vector[1] -= scalar;
+        vector[2] -= scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        vector[0] -= scalar;
+        vector[1] -= scalar;
+        vector[2] -= scalar;
+        vector[3] -= scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) vector[i] -= scalar;
+    }
+
     return vector;
 }
 
@@ -648,52 +774,81 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator-=(Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) A[i] -= B[i];
+    if constexpr (D == 2)
+    {
+        A[0] -= B[0];
+        A[1] -= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        A[0] -= B[0];
+        A[1] -= B[1];
+        A[2] -= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        A[0] -= B[0];
+        A[1] -= B[1];
+        A[2] -= B[2];
+        A[3] -= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) A[i] -= B[i];
+    }
+
     return A;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator-(const Vector<D,T>& A, const Vector<D,T>& B)
+{
+    return Vector<D,T> {A} -= B;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T, typename TScalar>
+constexpr Vector<D,T>
+operator-(const Vector<D,T>& vector, TScalar scalar)
+{
+    return Vector<D,T> {vector} -= scalar;
 }
 
 /* ####################################################################################### */
 /* IMPLEMENTATION | Component wise multiplication */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-    for (auto i = 0; i < D; ++i) copy[i] *= B[i];
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] *= scalar;
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator*(T scalar, const Vector<D,T>& vector)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] *= scalar;
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
 operator*=(Vector<D,T>& vector, TScalar scalar)
 {
-    for (auto i = 0; i < D; ++i) vector[i] *= scalar;
+    if constexpr (D == 2)
+    {
+        vector[0] *= scalar;
+        vector[1] *= scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        vector[0] *= scalar;
+        vector[1] *= scalar;
+        vector[2] *= scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        vector[0] *= scalar;
+        vector[1] *= scalar;
+        vector[2] *= scalar;
+        vector[3] *= scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) vector[i] *= scalar;
+    }
+
     return vector;
 }
 
@@ -703,41 +858,90 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator*=(Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) A[i] *= B[i];
+    if constexpr (D == 2)
+    {
+        A[0] *= B[0];
+        A[1] *= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        A[0] *= B[0];
+        A[1] *= B[1];
+        A[2] *= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        A[0] *= B[0];
+        A[1] *= B[1];
+        A[2] *= B[2];
+        A[3] *= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) A[i] *= B[i];
+    }
+
     return A;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator*(const Vector<D,T>& A, const Vector<D,T>& B)
+{
+    return Vector<D,T> {A} *= B;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T, typename TScalar>
+constexpr Vector<D,T>
+operator*(const Vector<D,T>& vector, TScalar scalar)
+{
+    return Vector<D,T> {vector} *= scalar;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator*(T scalar, const Vector<D,T>& vector)
+{
+    return Vector<D,T> {vector} *= scalar;
 }
 
 /* ####################################################################################### */
 /* IMPLEMENTATION | Component wise division */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-    for (auto i = 0; i < D; ++i) copy[i] /= B[i];
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    for (auto i = 0; i < D; ++i) copy[i] /= scalar;
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 template<size_t D, typename T, typename TScalar>
 constexpr Vector<D,T>&
 operator/=(Vector<D,T>& vector, TScalar scalar)
 {
-    for (auto i = 0; i < D; ++i) vector[i] /= scalar;
+    if constexpr (D == 2)
+    {
+        vector[0] /= scalar;
+        vector[1] /= scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        vector[0] /= scalar;
+        vector[1] /= scalar;
+        vector[2] /= scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        vector[0] /= scalar;
+        vector[1] /= scalar;
+        vector[2] /= scalar;
+        vector[3] /= scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) vector[i] /= scalar;
+    }
+
     return vector;
 }
 
@@ -747,8 +951,48 @@ template<size_t D, typename T>
 constexpr Vector<D,T>&
 operator/=(Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) A[i] /= B[i];
+    if constexpr (D == 2)
+    {
+        A[0] /= B[0];
+        A[1] /= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        A[0] /= B[0];
+        A[1] /= B[1];
+        A[2] /= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        A[0] /= B[0];
+        A[1] /= B[1];
+        A[2] /= B[2];
+        A[3] /= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) A[i] /= B[i];
+    }
+
     return A;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr Vector<D,T>
+operator/(const Vector<D,T>& A, const Vector<D,T>& B)
+{
+    return Vector<D,T> {A} /= B;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T, typename TScalar>
+constexpr Vector<D,T>
+operator/(const Vector<D,T>& vector, TScalar scalar)
+{
+    return Vector<D,T> {vector} /= scalar;
 }
 
 /* ####################################################################################### */
@@ -759,8 +1003,29 @@ template<size_t D, typename T>
 constexpr bool
 operator==(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  equal(vector[0], scalar) &&
+                equal(vector[1], scalar);
+    }
+    else if constexpr (D == 3)
+    {
+        return  equal(vector[0], scalar) &&
+                equal(vector[1], scalar) &&
+                equal(vector[2], scalar);
+    }
+    else if constexpr (D == 4)
+    {
+        return  equal(vector[0], scalar) &&
+                equal(vector[1], scalar) &&
+                equal(vector[2], scalar) &&
+                equal(vector[3], scalar);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -769,8 +1034,29 @@ template<size_t D, typename T>
 constexpr bool
 operator!=(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return true;
-    return false;
+    if constexpr (D == 2)
+    {
+        return  notEqual(vector[0], scalar) &&
+                notEqual(vector[1], scalar);
+    }
+    else if constexpr (D == 3)
+    {
+        return  notEqual(vector[0], scalar) &&
+                notEqual(vector[1], scalar) &&
+                notEqual(vector[2], scalar);
+    }
+    else if constexpr (D == 4)
+    {
+        return  notEqual(vector[0], scalar) &&
+                notEqual(vector[1], scalar) &&
+                notEqual(vector[2], scalar) &&
+                notEqual(vector[3], scalar);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return true;
+        return false;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -779,8 +1065,29 @@ template<size_t D, typename T>
 constexpr bool
 operator<(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (vector[i] >= scalar) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  vector[0] < scalar &&
+                vector[1] < scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        return  vector[0] < scalar &&
+                vector[1] < scalar &&
+                vector[2] < scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        return  vector[0] < scalar &&
+                vector[1] < scalar &&
+                vector[2] < scalar &&
+                vector[3] < scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (vector[i] >= scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -789,8 +1096,29 @@ template<size_t D, typename T>
 constexpr bool
 operator>(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (vector[i] <= scalar) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  vector[0] > scalar &&
+                vector[1] > scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        return  vector[0] > scalar &&
+                vector[1] > scalar &&
+                vector[2] > scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        return  vector[0] > scalar &&
+                vector[1] > scalar &&
+                vector[2] > scalar &&
+                vector[3] > scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (vector[i] <= scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -799,8 +1127,29 @@ template<size_t D, typename T>
 constexpr bool
 operator<=(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (vector[i] > scalar) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  vector[0] <= scalar &&
+                vector[1] <= scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        return  vector[0] <= scalar &&
+                vector[1] <= scalar &&
+                vector[2] <= scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        return  vector[0] <= scalar &&
+                vector[1] <= scalar &&
+                vector[2] <= scalar &&
+                vector[3] <= scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (vector[i] > scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -809,8 +1158,29 @@ template<size_t D, typename T>
 constexpr bool
 operator>=(const Vector<D,T>& vector, T scalar)
 {
-    for (auto i = 0; i < D; ++i) if (vector[i] < scalar) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  vector[0] >= scalar &&
+                vector[1] >= scalar;
+    }
+    else if constexpr (D == 3)
+    {
+        return  vector[0] >= scalar &&
+                vector[1] >= scalar &&
+                vector[2] >= scalar;
+    }
+    else if constexpr (D == 4)
+    {
+        return  vector[0] >= scalar &&
+                vector[1] >= scalar &&
+                vector[2] >= scalar &&
+                vector[3] >= scalar;
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (vector[i] < scalar) return false;
+        return true;
+    }
 }
 
 /* ####################################################################################### */
@@ -821,8 +1191,29 @@ template<size_t D, typename T>
 constexpr bool
 operator==(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  equal(A[0], B[0]) &&
+                equal(A[1], B[1]);
+    }
+    else if constexpr (D == 3)
+    {
+        return  equal(A[0], B[0]) &&
+                equal(A[1], B[1]) &&
+                equal(A[2], B[2]);
+    }
+    else if constexpr (D == 4)
+    {
+        return  equal(A[0], B[0]) &&
+                equal(A[1], B[1]) &&
+                equal(A[2], B[2]) &&
+                equal(A[3], B[3]);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -831,8 +1222,29 @@ template<size_t D, typename T>
 constexpr bool
 operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return true;
-    return false;
+    if constexpr (D == 2)
+    {
+        return  notEqual(A[0], B[0]) &&
+                notEqual(A[1], B[1]);
+    }
+    else if constexpr (D == 3)
+    {
+        return  notEqual(A[0], B[0]) &&
+                notEqual(A[1], B[1]) &&
+                notEqual(A[2], B[2]);
+    }
+    else if constexpr (D == 4)
+    {
+        return  notEqual(A[0], B[0]) &&
+                notEqual(A[1], B[1]) &&
+                notEqual(A[2], B[2]) &&
+                notEqual(A[3], B[3]);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return true;
+        return false;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -841,8 +1253,29 @@ template<size_t D, typename T>
 constexpr bool
 operator<(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (A[i] >= B[i]) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  A[0] < B[0] &&
+                A[1] < B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        return  A[0] < B[0] &&
+                A[1] < B[1] &&
+                A[2] < B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        return  A[0] < B[0] &&
+                A[1] < B[1] &&
+                A[2] < B[2] &&
+                A[3] < B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (A[i] >= B[i]) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -851,8 +1284,29 @@ template<size_t D, typename T>
 constexpr bool
 operator>(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (A[i] <= B[i]) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  A[0] > B[0] &&
+                A[1] > B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        return  A[0] > B[0] &&
+                A[1] > B[1] &&
+                A[2] > B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        return  A[0] > B[0] &&
+                A[1] > B[1] &&
+                A[2] > B[2] &&
+                A[3] > B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (A[i] <= B[i]) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -861,8 +1315,29 @@ template<size_t D, typename T>
 constexpr bool
 operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (A[i] > B[i]) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  A[0] <= B[0] &&
+                A[1] <= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        return  A[0] <= B[0] &&
+                A[1] <= B[1] &&
+                A[2] <= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        return  A[0] <= B[0] &&
+                A[1] <= B[1] &&
+                A[2] <= B[2] &&
+                A[3] <= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (A[i] > B[i]) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -871,8 +1346,29 @@ template<size_t D, typename T>
 constexpr bool
 operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    for (auto i = 0; i < D; ++i) if (A[i] < B[i]) return false;
-    return true;
+    if constexpr (D == 2)
+    {
+        return  A[0] >= B[0] &&
+                A[1] >= B[1];
+    }
+    else if constexpr (D == 3)
+    {
+        return  A[0] >= B[0] &&
+                A[1] >= B[1] &&
+                A[2] >= B[2];
+    }
+    else if constexpr (D == 4)
+    {
+        return  A[0] >= B[0] &&
+                A[1] >= B[1] &&
+                A[2] >= B[2] &&
+                A[3] >= B[3];
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (A[i] < B[i]) return false;
+        return true;
+    }
 }
 
 /* ####################################################################################### */
@@ -898,7 +1394,7 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B)
     else
     {
         T result {static_cast<T>(0)};
-        for (size_t i = 0; i < D; ++i)
+        for (auto i = 0; i < D; ++i)
         {
             result += A(i) * B(i);
         }
