@@ -503,7 +503,7 @@ operator^(const Vector<4,T>& A, const Vector<4,T>& B);
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator++(Vector<D,T>& vector)
 {
     if constexpr (D == 2)
@@ -535,7 +535,7 @@ operator++(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator--(Vector<D,T>& vector)
 {
     if constexpr (D == 2)
@@ -567,7 +567,7 @@ operator--(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator++(Vector<D,T>& vector, int)
 {
     Vector<D,T> copy {vector};
@@ -601,7 +601,7 @@ operator++(Vector<D,T>& vector, int)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator--(Vector<D,T>& vector, int)
 {
     Vector<D,T> copy {vector};
@@ -637,7 +637,7 @@ operator--(Vector<D,T>& vector, int)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator+=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
@@ -669,7 +669,7 @@ operator+=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator+=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -701,7 +701,7 @@ operator+=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     Vector<D,T> copy {A};
@@ -735,7 +735,7 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator+(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
@@ -770,7 +770,7 @@ operator+(const Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator+(T scalar, const Vector<D,T>& vector)
 {
     Vector<D,T> copy {vector};
@@ -807,7 +807,7 @@ operator+(T scalar, const Vector<D,T>& vector)
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator-(Vector<D,T>& vector)
 {
     auto copy {vector};
@@ -841,7 +841,7 @@ operator-(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator-=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
@@ -873,7 +873,7 @@ operator-=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator-=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -905,7 +905,7 @@ operator-=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     Vector<D,T> copy {A};
@@ -939,7 +939,7 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator-(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
@@ -976,7 +976,7 @@ operator-(const Vector<D,T>& vector, TScalar scalar)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator*=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
@@ -1008,7 +1008,7 @@ operator*=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator*=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1040,7 +1040,7 @@ operator*=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator*(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     Vector<D,T> copy {A};
@@ -1074,7 +1074,7 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator*(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
@@ -1109,7 +1109,7 @@ operator*(const Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator*(T scalar, const Vector<D,T>& vector)
 {
         Vector<D,T> copy {vector};
@@ -1146,7 +1146,7 @@ operator*(T scalar, const Vector<D,T>& vector)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator/=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
@@ -1178,7 +1178,7 @@ operator/=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>&
+constexpr FORCEINLINE Vector<D,T>&
 operator/=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1210,7 +1210,7 @@ operator/=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator/(const Vector<D,T>& A, const Vector<D,T>& B)
 {
         Vector<D,T> copy {A};
@@ -1244,7 +1244,7 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr Vector<D,T>
+constexpr FORCEINLINE Vector<D,T>
 operator/(const Vector<D,T>& vector, TScalar scalar)
 {
     Vector<D,T> copy {vector};
@@ -1281,7 +1281,7 @@ operator/(const Vector<D,T>& vector, TScalar scalar)
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator==(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1312,7 +1312,7 @@ operator==(const Vector<D,T>& vector, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator!=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1343,7 +1343,7 @@ operator!=(const Vector<D,T>& vector, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator<(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1374,7 +1374,7 @@ operator<(const Vector<D,T>& vector, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator>(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1405,7 +1405,7 @@ operator>(const Vector<D,T>& vector, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator<=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1436,7 +1436,7 @@ operator<=(const Vector<D,T>& vector, T scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator>=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
@@ -1469,7 +1469,7 @@ operator>=(const Vector<D,T>& vector, T scalar)
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator==(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1500,7 +1500,7 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1531,7 +1531,7 @@ operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator<(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1562,7 +1562,7 @@ operator<(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator>(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1593,7 +1593,7 @@ operator>(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1624,7 +1624,7 @@ operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr bool
+constexpr FORCEINLINE bool
 operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
@@ -1697,7 +1697,7 @@ operator^(const Vector<2,T>& A, const Vector<2,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 operator^(const Vector<2,T>& A, const Vector<3,T>& B)
 {
     return Vector<3,T>
@@ -1711,7 +1711,7 @@ operator^(const Vector<2,T>& A, const Vector<3,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<4,T>
+constexpr FORCEINLINE Vector<4,T>
 operator^(const Vector<2,T>& A, const Vector<4,T>& B)
 {
     return Vector<4,T>
@@ -1726,7 +1726,7 @@ operator^(const Vector<2,T>& A, const Vector<4,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 operator^(const Vector<3,T>& A, const Vector<2,T>& B)
 {
     return Vector<3,T>
@@ -1740,7 +1740,7 @@ operator^(const Vector<3,T>& A, const Vector<2,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 operator^(const Vector<3,T>& A, const Vector<3,T>& B)
 {
     return Vector<3,T>
@@ -1754,7 +1754,7 @@ operator^(const Vector<3,T>& A, const Vector<3,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 operator^(const Vector<3,T>& A, const Vector<4,T>& B)
 {
     return Vector<3,T>
@@ -1768,7 +1768,7 @@ operator^(const Vector<3,T>& A, const Vector<4,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<4,T>
+constexpr FORCEINLINE Vector<4,T>
 operator^(const Vector<4,T>& A, const Vector<2,T>& B)
 {
     return Vector<4,T>
@@ -1783,7 +1783,7 @@ operator^(const Vector<4,T>& A, const Vector<2,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<4,T>
+constexpr FORCEINLINE Vector<4,T>
 operator^(const Vector<4,T>& A, const Vector<3,T>& B)
 {
     return Vector<4,T>
@@ -1798,7 +1798,7 @@ operator^(const Vector<4,T>& A, const Vector<3,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<4,T>
+constexpr FORCEINLINE Vector<4,T>
 operator^(const Vector<4,T>& A, const Vector<4,T>& B)
 {
     return Vector<4,T>
