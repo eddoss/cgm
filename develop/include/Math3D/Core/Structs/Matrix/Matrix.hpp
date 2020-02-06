@@ -205,7 +205,7 @@ public: /* Constructors */                                                      
     }                                                                                                                  \
                                                                                                                        \
     /**
-     * Constructor using initial values for each component.
+     * Constructor using initial values for each component (row-wise init).
      * @param values Component values.
      */                                                                                                                \
     constexpr explicit                                                                                                 \
@@ -215,8 +215,8 @@ public: /* Constructors */                                                      
     }                                                                                                                  \
                                                                                                                        \
     /**
-     * Constructor initializing all components.
-     * @param value Value to set all components to.
+     * Constructor initializing all components (row-wise init).
+     * @param values Values to set all components to.
      */                                                                                                                \
     constexpr                                                                                                          \
     Matrix(std::initializer_list<T> values)                                                                            \

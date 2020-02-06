@@ -57,9 +57,9 @@ operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to add.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator+(const Matrix<M,N,T>& matrix, T scalar);
+operator+(const Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Add scalar to matrix and return copy.
@@ -77,9 +77,9 @@ operator+(T scalar, const Matrix<M,N,T>& matrix);
  * @param scalar Value to add.
  * @return The result of adding.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator+=(Matrix<M,N,T>& matrix, T scalar);
+operator+=(Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Add matrix B to matrix A.
@@ -120,9 +120,9 @@ operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to subtract.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator-(const Matrix<M,N,T>& matrix, T scalar);
+operator-(const Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Subtract scalar from each matrix component.
@@ -130,9 +130,9 @@ operator-(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to subtract.
  * @return The result of subtraction.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator-=(Matrix<M,N,T>& matrix, T scalar);
+operator-=(Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Subtract matrix B from matrix A.
@@ -154,9 +154,9 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B);
  * @param scalar Value to multiply.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator*(const Matrix<M,N,T>& matrix, T scalar);
+operator*(const Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Multiply scalar to each matrix component and return copy.
@@ -164,9 +164,9 @@ operator*(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to multiply.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator*(T scalar, const Matrix<M,N,T>& matrix);
+operator*(TScalar scalar, const Matrix<M,N,T>& matrix);
 
 /**
  * Multiply A matrix by B matrix.
@@ -187,9 +187,9 @@ operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
  * @param scalar Value to multiply.
  * @return The result of multiplication.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator*=(Matrix<M,N,T>& matrix, T scalar);
+operator*=(Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Multiply square matrix A by square matrix B and store result in A.
@@ -212,9 +212,9 @@ operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B);
  * @param scalar Value to division.
  * @return New copy of the result matrix.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator/(const Matrix<M,N,T>& matrix, T scalar);
+operator/(const Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Divide each matrix component by a scalar and return copy.
@@ -222,9 +222,9 @@ operator/(const Matrix<M,N,T>& matrix, T scalar);
  * @param scalar Value to division.
  * @return The result of division.
  */
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator/=(Matrix<M,N,T>& matrix, T scalar);
+operator/=(Matrix<M,N,T>& matrix, TScalar scalar);
 
 /* ####################################################################################### */
 /* Comparison with scalar */
@@ -378,7 +378,65 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 operator++(Matrix<M,N,T>& matrix)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) ++(matrix[i]);
+    if constexpr (M == 2 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);
+        ++matrix(1,0);  ++matrix(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  
+        ++matrix(1,0);  ++matrix(1,1);
+        ++matrix(2,0);  ++matrix(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);  ++matrix(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  
+        ++matrix(1,0);  ++matrix(1,1);
+        ++matrix(2,0);  ++matrix(2,1);
+        ++matrix(3,0);  ++matrix(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);
+        ++matrix(3,0);  ++matrix(3,1);  ++matrix(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);  ++matrix(2,3);
+        ++matrix(3,0);  ++matrix(3,1);  ++matrix(3,2);  ++matrix(3,3);
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) ++(matrix[i]);        
+    }
+
     return matrix;
 }
 
@@ -388,7 +446,65 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 operator--(Matrix<M,N,T>& matrix)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) --(matrix[i]);
+    if constexpr (M == 2 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);
+        --matrix(1,0);  --matrix(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);  
+        --matrix(1,0);  --matrix(1,1);
+        --matrix(2,0);  --matrix(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);  --matrix(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);  
+        --matrix(1,0);  --matrix(1,1);
+        --matrix(2,0);  --matrix(2,1);
+        --matrix(3,0);  --matrix(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);
+        --matrix(3,0);  --matrix(3,1);  --matrix(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);  --matrix(2,3);
+        --matrix(3,0);  --matrix(3,1);  --matrix(3,2);  --matrix(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) --(matrix[i]);
+    }
+
     return matrix;
 }
 
@@ -399,7 +515,66 @@ constexpr Matrix<M,N,T>
 operator++(Matrix<M,N,T>& matrix, int)
 {
     Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) ++(matrix[i]);
+
+    if constexpr (M == 2 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);
+        ++matrix(1,0);  ++matrix(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);
+        ++matrix(1,0);  ++matrix(1,1);
+        ++matrix(2,0);  ++matrix(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);  ++matrix(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        ++matrix(0,0);  ++matrix(0,1);
+        ++matrix(1,0);  ++matrix(1,1);
+        ++matrix(2,0);  ++matrix(2,1);
+        ++matrix(3,0);  ++matrix(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);
+        ++matrix(3,0);  ++matrix(3,1);  ++matrix(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        ++matrix(0,0);  ++matrix(0,1);  ++matrix(0,2);  ++matrix(0,3);
+        ++matrix(1,0);  ++matrix(1,1);  ++matrix(1,2);  ++matrix(1,3);
+        ++matrix(2,0);  ++matrix(2,1);  ++matrix(2,2);  ++matrix(2,3);
+        ++matrix(3,0);  ++matrix(3,1);  ++matrix(3,2);  ++matrix(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) ++(matrix[i]);
+    }
+
     return copy;
 }
 
@@ -410,7 +585,66 @@ constexpr Matrix<M,N,T>
 operator--(Matrix<M,N,T>& matrix, int)
 {
     Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) --(matrix[i]);
+
+    if constexpr (M == 2 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);
+        --matrix(1,0);  --matrix(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);
+        --matrix(1,0);  --matrix(1,1);
+        --matrix(2,0);  --matrix(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);  --matrix(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        --matrix(0,0);  --matrix(0,1);
+        --matrix(1,0);  --matrix(1,1);
+        --matrix(2,0);  --matrix(2,1);
+        --matrix(3,0);  --matrix(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);
+        --matrix(3,0);  --matrix(3,1);  --matrix(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        --matrix(0,0);  --matrix(0,1);  --matrix(0,2);  --matrix(0,3);
+        --matrix(1,0);  --matrix(1,1);  --matrix(1,2);  --matrix(1,3);
+        --matrix(2,0);  --matrix(2,1);  --matrix(2,2);  --matrix(2,3);
+        --matrix(3,0);  --matrix(3,1);  --matrix(3,2);  --matrix(3,3);
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) --(matrix[i]);
+    }
+
     return copy;
 }
 
@@ -422,20 +656,196 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>
 operator+(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    Matrix<M,N,T> copy {A};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] += B[i];
-    return copy;
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1)
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2)
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),  A(0,3)+B(0,3),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2),  A(1,3)+B(1,3)
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1)
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1),  A(2,2)+B(2,2)
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),  A(0,3)+B(0,3),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2),  A(1,3)+B(1,3),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1),  A(2,2)+B(2,2),  A(2,3)+B(2,3)
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1),
+            A(3,0)+B(3,0),  A(3,1)+B(3,1)
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1),  A(2,2)+B(2,2),
+            A(3,0)+B(3,0),  A(3,1)+B(3,1),  A(3,2)+B(3,2)
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)+B(0,0),  A(0,1)+B(0,1),  A(0,2)+B(0,2),  A(0,3)+B(0,3),
+            A(1,0)+B(1,0),  A(1,1)+B(1,1),  A(1,2)+B(1,2),  A(1,3)+B(1,3),
+            A(2,0)+B(2,0),  A(2,1)+B(2,1),  A(2,2)+B(2,2),  A(2,3)+B(2,3),
+            A(3,0)+B(3,0),  A(3,1)+B(3,1),  A(3,2)+B(3,2),  A(3,3)+B(3,3)
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = A[i] + B[i];
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator+(const Matrix<M,N,T>& matrix, T scalar)
+operator+(const Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] += scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,
+            matrix(2,0)+value,  matrix(2,1)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,  matrix(2,3)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,
+            matrix(3,0)+value,  matrix(3,1)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,
+            matrix(3,0)+value,  matrix(3,1)+value,  matrix(3,2)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,  matrix(2,3)+value,
+            matrix(3,0)+value,  matrix(3,1)+value,  matrix(3,2)+value,  matrix(3,3)+value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result {matrix};
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] += value;
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -444,18 +854,167 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>
 operator+(T scalar, const Matrix<M,N,T>& matrix)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] += scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,
+            matrix(2,0)+value,  matrix(2,1)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,  matrix(2,3)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,
+            matrix(3,0)+value,  matrix(3,1)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,
+            matrix(3,0)+value,  matrix(3,1)+value,  matrix(3,2)+value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)+value,  matrix(0,1)+value,  matrix(0,2)+value,  matrix(0,3)+value,
+            matrix(1,0)+value,  matrix(1,1)+value,  matrix(1,2)+value,  matrix(1,3)+value,
+            matrix(2,0)+value,  matrix(2,1)+value,  matrix(2,2)+value,  matrix(2,3)+value,
+            matrix(3,0)+value,  matrix(3,1)+value,  matrix(3,2)+value,  matrix(3,3)+value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result {matrix};
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] += value;
+        }
+        return result;
+    } 
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator+=(Matrix<M,N,T>& matrix, T scalar)
+operator+=(Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] += scalar;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;  matrix(0,3)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;  matrix(1,3)+=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;  matrix(2,2)+=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;  matrix(0,3)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;  matrix(1,3)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;  matrix(2,2)+=value;  matrix(2,3)+=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;
+        matrix(3,0)+=value;  matrix(3,1)+=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;  matrix(2,2)+=value;
+        matrix(3,0)+=value;  matrix(3,1)+=value;  matrix(3,2)+=value;
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        matrix(0,0)+=value;  matrix(0,1)+=value;  matrix(0,2)+=value;  matrix(0,3)+=value;
+        matrix(1,0)+=value;  matrix(1,1)+=value;  matrix(1,2)+=value;  matrix(1,3)+=value;
+        matrix(2,0)+=value;  matrix(2,1)+=value;  matrix(2,2)+=value;  matrix(2,3)+=value;
+        matrix(3,0)+=value;  matrix(3,1)+=value;  matrix(3,2)+=value;  matrix(3,3)+=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] += value;
+    }
+    
     return matrix;
 }
 
@@ -465,7 +1024,65 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 operator+=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] += B[i];
+    if constexpr (M == 2 && N == 2)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);  A(0,3)+=B(0,3);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);  A(1,3)+=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);  A(2,2)+=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);  A(0,3)+=B(0,3);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);  A(1,3)+=B(1,3);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);  A(2,2)+=B(2,2);  A(2,3)+=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);
+        A(3,0)+=B(3,0);  A(3,1)+=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);  A(2,2)+=B(2,2);
+        A(3,0)+=B(3,0);  A(3,1)+=B(3,1);  A(3,2)+=B(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        A(0,0)+=B(0,0);  A(0,1)+=B(0,1);  A(0,2)+=B(0,2);  A(0,3)+=B(0,3);
+        A(1,0)+=B(1,0);  A(1,1)+=B(1,1);  A(1,2)+=B(1,2);  A(1,3)+=B(1,3);
+        A(2,0)+=B(2,0);  A(2,1)+=B(2,1);  A(2,2)+=B(2,2);  A(2,3)+=B(2,3);
+        A(3,0)+=B(3,0);  A(3,1)+=B(3,1);  A(3,2)+=B(3,2);  A(3,3)+=B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] += B[i];
+    }
+    
     return A;
 }
 
@@ -477,9 +1094,96 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& matrix)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] = -copy[i];
-    return copy;
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),
+            -matrix(1,0),  -matrix(1,1)
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2)
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),  -matrix(0,3),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2),  -matrix(1,3)
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),
+            -matrix(1,0),  -matrix(1,1),
+            -matrix(2,0),  -matrix(2,1)
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2),
+            -matrix(2,0),  -matrix(2,1),  -matrix(2,2)
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),  -matrix(0,3),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2),  -matrix(1,3),
+            -matrix(2,0),  -matrix(2,1),  -matrix(2,2),  -matrix(2,3)
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),
+            -matrix(1,0),  -matrix(1,1),
+            -matrix(2,0),  -matrix(2,1),
+            -matrix(3,0),  -matrix(3,1)
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2),
+            -matrix(2,0),  -matrix(2,1),  -matrix(2,2),
+            -matrix(3,0),  -matrix(3,1),  -matrix(3,2)
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            -matrix(0,0),  -matrix(0,1),  -matrix(0,2),  -matrix(0,3),
+            -matrix(1,0),  -matrix(1,1),  -matrix(1,2),  -matrix(1,3),
+            -matrix(2,0),  -matrix(2,1),  -matrix(2,2),  -matrix(2,3),
+            -matrix(3,0),  -matrix(3,1),  -matrix(3,2),  -matrix(3,3)
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = -matrix[i];
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -488,29 +1192,265 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>
 operator-(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    Matrix<M,N,T> copy {A};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] -= B[i];
-    return copy;
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1)
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2)
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),  A(0,3)-B(0,3),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2),  A(1,3)-B(1,3)
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1)
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1),  A(2,2)-B(2,2)
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),  A(0,3)-B(0,3),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2),  A(1,3)-B(1,3),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1),  A(2,2)-B(2,2),  A(2,3)-B(2,3)
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1),
+            A(3,0)-B(3,0),  A(3,1)-B(3,1)
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1),  A(2,2)-B(2,2),
+            A(3,0)-B(3,0),  A(3,1)-B(3,1),  A(3,2)-B(3,2)
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)-B(0,0),  A(0,1)-B(0,1),  A(0,2)-B(0,2),  A(0,3)-B(0,3),
+            A(1,0)-B(1,0),  A(1,1)-B(1,1),  A(1,2)-B(1,2),  A(1,3)-B(1,3),
+            A(2,0)-B(2,0),  A(2,1)-B(2,1),  A(2,2)-B(2,2),  A(2,3)-B(2,3),
+            A(3,0)-B(3,0),  A(3,1)-B(3,1),  A(3,2)-B(3,2),  A(3,3)-B(3,3)
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = A[i] - B[i];
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator-(const Matrix<M,N,T>& matrix, T scalar)
+operator-(const Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] -= scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,
+            matrix(1,0)-value,  matrix(1,1)-value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,  matrix(0,3)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value,  matrix(1,3)-value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,
+            matrix(2,0)-value,  matrix(2,1)-value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value,
+            matrix(2,0)-value,  matrix(2,1)-value,  matrix(2,2)-value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,  matrix(0,3)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value,  matrix(1,3)-value,
+            matrix(2,0)-value,  matrix(2,1)-value,  matrix(2,2)-value,  matrix(2,3)-value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,
+            matrix(2,0)-value,  matrix(2,1)-value,
+            matrix(3,0)-value,  matrix(3,1)-value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value,
+            matrix(2,0)-value,  matrix(2,1)-value,  matrix(2,2)-value,
+            matrix(3,0)-value,  matrix(3,1)-value,  matrix(3,2)-value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)-value,  matrix(0,1)-value,  matrix(0,2)-value,  matrix(0,3)-value,
+            matrix(1,0)-value,  matrix(1,1)-value,  matrix(1,2)-value,  matrix(1,3)-value,
+            matrix(2,0)-value,  matrix(2,1)-value,  matrix(2,2)-value,  matrix(2,3)-value,
+            matrix(3,0)-value,  matrix(3,1)-value,  matrix(3,2)-value,  matrix(3,3)-value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = matrix[i] - value;
+        }
+        return result;
+    } 
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator-=(Matrix<M,N,T>& matrix, T scalar)
+operator-=(Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] -= scalar;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;  matrix(0,3)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;  matrix(1,3)-=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;  matrix(2,2)-=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;  matrix(0,3)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;  matrix(1,3)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;  matrix(2,2)-=value;  matrix(2,3)-=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;
+        matrix(3,0)-=value;  matrix(3,1)-=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;  matrix(2,2)-=value;
+        matrix(3,0)-=value;  matrix(3,1)-=value;  matrix(3,2)-=value;
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        matrix(0,0)-=value;  matrix(0,1)-=value;  matrix(0,2)-=value;  matrix(0,3)-=value;
+        matrix(1,0)-=value;  matrix(1,1)-=value;  matrix(1,2)-=value;  matrix(1,3)-=value;
+        matrix(2,0)-=value;  matrix(2,1)-=value;  matrix(2,2)-=value;  matrix(2,3)-=value;
+        matrix(3,0)-=value;  matrix(3,1)-=value;  matrix(3,2)-=value;  matrix(3,3)-=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] -= value;
+    }
+    
     return matrix;
 }
 
@@ -520,7 +1460,65 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] -= B[i];
+    if constexpr (M == 2 && N == 2)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);  A(0,3)-=B(0,3);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);  A(1,3)-=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);  A(2,2)-=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);  A(0,3)-=B(0,3);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);  A(1,3)-=B(1,3);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);  A(2,2)-=B(2,2);  A(2,3)-=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);
+        A(3,0)-=B(3,0);  A(3,1)-=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);  A(2,2)-=B(2,2);
+        A(3,0)-=B(3,0);  A(3,1)-=B(3,1);  A(3,2)-=B(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        A(0,0)-=B(0,0);  A(0,1)-=B(0,1);  A(0,2)-=B(0,2);  A(0,3)-=B(0,3);
+        A(1,0)-=B(1,0);  A(1,1)-=B(1,1);  A(1,2)-=B(1,2);  A(1,3)-=B(1,3);
+        A(2,0)-=B(2,0);  A(2,1)-=B(2,1);  A(2,2)-=B(2,2);  A(2,3)-=B(2,3);
+        A(3,0)-=B(3,0);  A(3,1)-=B(3,1);  A(3,2)-=B(3,2);  A(3,3)-=B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] -= B[i];
+    }
+
     return A;
 }
 
@@ -531,24 +1529,202 @@ operator-=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator*(const Matrix<M,N,T>& matrix, T scalar)
+operator*(const Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] *= scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,
+            matrix(2,0)*value,  matrix(2,1)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,  matrix(2,3)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,
+            matrix(3,0)*value,  matrix(3,1)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,
+            matrix(3,0)*value,  matrix(3,1)*value,  matrix(3,2)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,  matrix(2,3)*value,
+            matrix(3,0)*value,  matrix(3,1)*value,  matrix(3,2)*value,  matrix(3,3)*value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result {matrix};
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] *= value;
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator*(T scalar, const Matrix<M,N,T>& matrix)
+operator*(TScalar scalar, const Matrix<M,N,T>& matrix)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] *= scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,
+            matrix(2,0)*value,  matrix(2,1)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,  matrix(2,3)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,
+            matrix(3,0)*value,  matrix(3,1)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,
+            matrix(3,0)*value,  matrix(3,1)*value,  matrix(3,2)*value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)*value,  matrix(0,1)*value,  matrix(0,2)*value,  matrix(0,3)*value,
+            matrix(1,0)*value,  matrix(1,1)*value,  matrix(1,2)*value,  matrix(1,3)*value,
+            matrix(2,0)*value,  matrix(2,1)*value,  matrix(2,2)*value,  matrix(2,3)*value,
+            matrix(3,0)*value,  matrix(3,1)*value,  matrix(3,2)*value,  matrix(3,3)*value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result {matrix};
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] *= value;
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -557,31 +1733,815 @@ template<size_t AM, size_t AN, size_t BN, typename T>
 constexpr Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
 {
-    Matrix<AM,BN,T> out;
-    typename Matrix<AM,BN,T>::value_type sum;
-
-    for (size_t c = 0; c < BN; ++c )
+    /* 2x2 * 2x2 -> 2x2 */ if constexpr (AM == 2 && AN == 2 && BN == 2)
     {
-        for (auto r = 0; r < AM; ++r)
+        return Matrix<AM,BN,T>
         {
-            sum = static_cast<typename Matrix<AM,BN,T>::value_type>(0);
-            for (auto i = 0; i < AN; ++i)
-            {
-                sum += A(r,i) * B(i,c);
-            }
-            out(r,c) = sum;
-        }
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1)
+        };
     }
-    return out;
+    /* 2x2 * 2x3 -> 2x3 */ if constexpr (AM == 2 && AN == 2 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2)
+        };
+    }
+    /* 2x2 * 2x4 -> 2x4 */ if constexpr (AM == 2 && AN == 2 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3)
+        };
+    }
+    /* 2x3 * 3x2 -> 2x2 */ if constexpr (AM == 2 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1)
+        };
+    }
+    /* 2x3 * 3x3 -> 2x3 */ if constexpr (AM == 2 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2)
+        };
+    }
+    /* 2x3 * 3x4 -> 2x4 */ if constexpr (AM == 2 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3)
+        };
+    }
+    /* 2x3 * 3x2 -> 2x2 */ if constexpr (AM == 2 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1)
+        };
+    }
+    /* 2x3 * 3x3 -> 2x3 */ if constexpr (AM == 2 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2)
+        };
+    }
+    /* 2x3 * 3x4 -> 2x4 */ if constexpr (AM == 2 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3)
+        };
+    }
+    /* 2x4 * 4x2 -> 2x2 */ if constexpr (AM == 2 && AN == 4 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1)
+        };
+    }
+    /* 2x4 * 4x3 -> 2x3 */ if constexpr (AM == 2 && AN == 4 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2)
+        };
+    }
+    /* 2x4 * 4x4 -> 2x4 */ if constexpr (AM == 2 && AN == 4 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3)
+        };
+    }
+    /* 3x2 * 2x2 -> 3x2 */ if constexpr (AM == 3 && AN == 2 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1)
+        };
+    }
+    /* 3x2 * 2x3 -> 3x3 */ if constexpr (AM == 3 && AN == 2 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+        };
+    }
+    /* 3x2 * 2x4 -> 3x4 */ if constexpr (AM == 3 && AN == 2 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3)
+        };
+    }
+    /* 3x3 * 3x2 -> 3x2 */ if constexpr (AM == 3 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1)
+        };
+    }
+    /* 3x3 * 3x3 -> 3x3 */ if constexpr (AM == 3 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+        };
+    }
+    /* 3x3 * 3x4 -> 3x4 */ if constexpr (AM == 3 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3)
+        };
+    }
+    /* 3x3 * 3x2 -> 3x2 */ if constexpr (AM == 3 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1)
+        };
+    }
+    /* 3x3 * 3x3 -> 3x3 */ if constexpr (AM == 3 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+        };
+    }
+    /* 3x3 * 3x4 -> 3x4 */ if constexpr (AM == 3 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3)
+        };
+    }
+    /* 3x4 * 4x2 -> 3x2 */ if constexpr (AM == 3 && AN == 4 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1)
+        };
+    }
+    /* 3x4 * 4x3 -> 3x3 */ if constexpr (AM == 3 && AN == 4 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+        };
+    }
+    /* 3x4 * 4x4 -> 3x4 */ if constexpr (AM == 3 && AN == 4 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3)
+        };
+    }
+    /* 4x2 * 2x2 -> 4x2 */ if constexpr (AM == 4 && AN == 2 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1)
+        };
+    }
+    /* 4x2 * 2x3 -> 4x3 */ if constexpr (AM == 4 && AN == 2 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2)
+        };
+    }
+    /* 4x2 * 2x4 -> 4x4 */ if constexpr (AM == 4 && AN == 2 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3) + A(0,3)*B(3,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3) + A(1,3)*B(3,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3) + A(2,3)*B(3,3),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2),
+            A(3,0)*B(0,3) + A(3,1)*B(1,3) + A(3,2)*B(2,3) + A(3,3)*B(3,3)
+        };
+    }
+    /* 4x3 * 3x2 -> 4x2 */ if constexpr (AM == 4 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1)
+        };
+    }
+    /* 4x3 * 3x3 -> 4x3 */ if constexpr (AM == 4 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2)
+        };
+    }
+    /* 4x3 * 3x4 -> 4x4 */ if constexpr (AM == 4 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3) + A(0,3)*B(3,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3) + A(1,3)*B(3,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3) + A(2,3)*B(3,3),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2),
+            A(3,0)*B(0,3) + A(3,1)*B(1,3) + A(3,2)*B(2,3) + A(3,3)*B(3,3)
+        };
+    }
+    /* 4x3 * 3x2 -> 4x2 */ if constexpr (AM == 4 && AN == 3 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1)
+        };
+    }
+    /* 4x3 * 3x3 -> 4x3 */ if constexpr (AM == 4 && AN == 3 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2)
+        };
+    }
+    /* 4x3 * 3x4 -> 4x4 */ if constexpr (AM == 4 && AN == 3 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3) + A(0,3)*B(3,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3) + A(1,3)*B(3,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3) + A(2,3)*B(3,3),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2),
+            A(3,0)*B(0,3) + A(3,1)*B(1,3) + A(3,2)*B(2,3) + A(3,3)*B(3,3)
+        };
+    }
+    /* 4x4 * 4x2 -> 4x2 */ if constexpr (AM == 4 && AN == 4 && BN == 2)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1)
+        };
+    }
+    /* 4x4 * 4x3 -> 4x3 */ if constexpr (AM == 4 && AN == 4 && BN == 3)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2)
+        };
+    }
+    /* 4x4 * 4x4 -> 4x4 */ if constexpr (AM == 4 && AN == 4 && BN == 4)
+    {
+        return Matrix<AM,BN,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3) + A(0,3)*B(3,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3) + A(1,3)*B(3,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3) + A(2,3)*B(3,3),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2),
+            A(3,0)*B(0,3) + A(3,1)*B(1,3) + A(3,2)*B(2,3) + A(3,3)*B(3,3)
+        };
+    }
+
+    if constexpr (AM > 4 && AN > 4 && BN > 4)
+    {
+        Matrix<AM,BN,T> result;
+        typename Matrix<AM,BN,T>::value_type sum;
+
+        for (size_t c = 0; c < BN; ++c )
+        {
+            for (auto r = 0; r < AM; ++r)
+            {
+                sum = static_cast<typename Matrix<AM,BN,T>::value_type>(0);
+                for (auto i = 0; i < AN; ++i)
+                {
+                    sum += A(r,i) * B(i,c);
+                }
+                result(r,c) = sum;
+            }
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator*=(Matrix<M,N,T>& matrix, T scalar)
+operator*=(Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] *= scalar;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;  matrix(0,3)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;  matrix(1,3)*=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;  matrix(2,2)*=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;  matrix(0,3)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;  matrix(1,3)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;  matrix(2,2)*=value;  matrix(2,3)*=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;
+        matrix(3,0)*=value;  matrix(3,1)*=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;  matrix(2,2)*=value;
+        matrix(3,0)*=value;  matrix(3,1)*=value;  matrix(3,2)*=value;
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        matrix(0,0)*=value;  matrix(0,1)*=value;  matrix(0,2)*=value;  matrix(0,3)*=value;
+        matrix(1,0)*=value;  matrix(1,1)*=value;  matrix(1,2)*=value;  matrix(1,3)*=value;
+        matrix(2,0)*=value;  matrix(2,1)*=value;  matrix(2,2)*=value;  matrix(2,3)*=value;
+        matrix(3,0)*=value;  matrix(3,1)*=value;  matrix(3,2)*=value;  matrix(3,3)*=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] *= value;
+    }
+    
     return matrix;
 }
 
@@ -591,23 +2551,89 @@ template<size_t S, typename T>
 constexpr Matrix<S,S,T>&
 operator*=(Matrix<S,S,T>& A, const Matrix<S,S,T>& B)
 {
-    Matrix<S,S,T> out;
-    FLOAT sum {0};
+    Matrix<S,S,T> result;
 
-    for (auto c = 0; c < S; ++c)
+    if constexpr (S== 2)
     {
-        for (auto r = 0; r < S; ++r)
+        A = Matrix<S,S,T>
         {
-            sum = Matrix<S,S,T>::value_type(0);
-            for (auto i = 0; i < S; ++i)
-            {
-                sum += A(r,i) * B(i,c);
-            }
-            out(r,c) = sum;
-        }
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1)
+        };
     }
-    A = out;
-    return A;
+    else if constexpr (S == 3)
+    {
+        A = Matrix<S,S,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+        };
+    }
+    else if constexpr (S == 4)
+    {
+        A = Matrix<S,S,T>
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0) + A(0,3)*B(3,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1) + A(0,3)*B(3,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2) + A(0,3)*B(3,2),
+            A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3) + A(0,3)*B(3,3),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0) + A(1,3)*B(3,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1) + A(1,3)*B(3,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2) + A(1,3)*B(3,2),
+            A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3) + A(1,3)*B(3,3),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0) + A(2,3)*B(3,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1) + A(2,3)*B(3,1),
+            A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2) + A(2,3)*B(3,2),
+            A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3) + A(2,3)*B(3,3),
+
+            // row 3
+            A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0) + A(3,3)*B(3,0),
+            A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1) + A(3,3)*B(3,1),
+            A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2) + A(3,3)*B(3,2),
+            A(3,0)*B(0,3) + A(3,1)*B(1,3) + A(3,2)*B(2,3) + A(3,3)*B(3,3)
+        };
+    }
+    else
+    {
+        typename Matrix<S,S,T>::value_type sum;
+    
+        for (auto c = 0; c < S; ++c)
+        {
+            for (auto r = 0; r < S; ++r)
+            {
+                sum = typename Matrix<S,S,T>::value_type(0);
+                for (auto i = 0; i < S; ++i)
+                {
+                    sum += A(r,i) * B(i,c);
+                }
+                result(r,c) = sum;
+            }
+        }
+        A = result;
+        return A;
+    }
 }
 
 /* ####################################################################################### */
@@ -618,29 +2644,265 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>
 operator/(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    Matrix<M,N,T> copy {A};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] /= B[i];
-    return copy;
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1)
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2)
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),  A(0,3)/B(0,3),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2),  A(1,3)/B(1,3)
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1)
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1),  A(2,2)/B(2,2)
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),  A(0,3)/B(0,3),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2),  A(1,3)/B(1,3),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1),  A(2,2)/B(2,2),  A(2,3)/B(2,3)
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1),
+            A(3,0)/B(3,0),  A(3,1)/B(3,1)
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1),  A(2,2)/B(2,2),
+            A(3,0)/B(3,0),  A(3,1)/B(3,1),  A(3,2)/B(3,2)
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            A(0,0)/B(0,0),  A(0,1)/B(0,1),  A(0,2)/B(0,2),  A(0,3)/B(0,3),
+            A(1,0)/B(1,0),  A(1,1)/B(1,1),  A(1,2)/B(1,2),  A(1,3)/B(1,3),
+            A(2,0)/B(2,0),  A(2,1)/B(2,1),  A(2,2)/B(2,2),  A(2,3)/B(2,3),
+            A(3,0)/B(3,0),  A(3,1)/B(3,1),  A(3,2)/B(3,2),  A(3,3)/B(3,3)
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = A[i] / B[i];
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>
-operator/(const Matrix<M,N,T>& matrix, T scalar)
+operator/(const Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    Matrix<M,N,T> copy {matrix};
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) copy[i] /= scalar;
-    return copy;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,
+            matrix(1,0)/value,  matrix(1,1)/value
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,  matrix(0,3)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value,  matrix(1,3)/value
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,
+            matrix(2,0)/value,  matrix(2,1)/value
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value,
+            matrix(2,0)/value,  matrix(2,1)/value,  matrix(2,2)/value
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,  matrix(0,3)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value,  matrix(1,3)/value,
+            matrix(2,0)/value,  matrix(2,1)/value,  matrix(2,2)/value,  matrix(2,3)/value
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,
+            matrix(2,0)/value,  matrix(2,1)/value,
+            matrix(3,0)/value,  matrix(3,1)/value
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value,
+            matrix(2,0)/value,  matrix(2,1)/value,  matrix(2,2)/value,
+            matrix(3,0)/value,  matrix(3,1)/value,  matrix(3,2)/value
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return Matrix<M,N,T>
+        {
+            matrix(0,0)/value,  matrix(0,1)/value,  matrix(0,2)/value,  matrix(0,3)/value,
+            matrix(1,0)/value,  matrix(1,1)/value,  matrix(1,2)/value,  matrix(1,3)/value,
+            matrix(2,0)/value,  matrix(2,1)/value,  matrix(2,2)/value,  matrix(2,3)/value,
+            matrix(3,0)/value,  matrix(3,1)/value,  matrix(3,2)/value,  matrix(3,3)/value
+        };
+    }
+    else
+    {
+        Matrix<M,N,T> result;
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i)
+        {
+            result[i] = matrix[i] / value;
+        }
+        return result;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t M, size_t N, typename T>
+template<size_t M, size_t N, typename T, typename TScalar>
 constexpr Matrix<M,N,T>&
-operator/=(Matrix<M,N,T>& matrix, T scalar)
+operator/=(Matrix<M,N,T>& matrix, TScalar scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] /= scalar;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;  matrix(0,3)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;  matrix(1,3)/=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;  matrix(2,2)/=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;  matrix(0,3)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;  matrix(1,3)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;  matrix(2,2)/=value;  matrix(2,3)/=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;
+        matrix(3,0)/=value;  matrix(3,1)/=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;  matrix(2,2)/=value;
+        matrix(3,0)/=value;  matrix(3,1)/=value;  matrix(3,2)/=value;
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        matrix(0,0)/=value;  matrix(0,1)/=value;  matrix(0,2)/=value;  matrix(0,3)/=value;
+        matrix(1,0)/=value;  matrix(1,1)/=value;  matrix(1,2)/=value;  matrix(1,3)/=value;
+        matrix(2,0)/=value;  matrix(2,1)/=value;  matrix(2,2)/=value;  matrix(2,3)/=value;
+        matrix(3,0)/=value;  matrix(3,1)/=value;  matrix(3,2)/=value;  matrix(3,3)/=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) matrix[i] /= value;
+    }
+    
     return matrix;
 }
 
@@ -650,7 +2912,65 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 operator/=(Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] /= B[i];
+    if constexpr (M == 2 && N == 2)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);  A(0,3)/=B(0,3);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);  A(1,3)/=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);  A(2,2)/=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);  A(0,3)/=B(0,3);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);  A(1,3)/=B(1,3);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);  A(2,2)/=B(2,2);  A(2,3)/=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);
+        A(3,0)/=B(3,0);  A(3,1)/=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);  A(2,2)/=B(2,2);
+        A(3,0)/=B(3,0);  A(3,1)/=B(3,1);  A(3,2)/=B(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        A(0,0)/=B(0,0);  A(0,1)/=B(0,1);  A(0,2)/=B(0,2);  A(0,3)/=B(0,3);
+        A(1,0)/=B(1,0);  A(1,1)/=B(1,1);  A(1,2)/=B(1,2);  A(1,3)/=B(1,3);
+        A(2,0)/=B(2,0);  A(2,1)/=B(2,1);  A(2,2)/=B(2,2);  A(2,3)/=B(2,3);
+        A(3,0)/=B(3,0);  A(3,1)/=B(3,1);  A(3,2)/=B(3,2);  A(3,3)/=B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) A[i] /= B[i];
+    }
+    
     return A;
 }
 
@@ -662,8 +2982,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator==(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return false;
-    return true;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value &&
+        matrix(1,0)==value && matrix(1,1)==value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value && matrix(0,3)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value && matrix(1,3)==value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value &&
+        matrix(1,0)==value && matrix(1,1)==value &&
+        matrix(2,0)==value && matrix(2,1)==value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value &&
+        matrix(2,0)==value && matrix(2,1)==value && matrix(2,2)==value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value && matrix(0,3)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value && matrix(1,3)==value &&
+        matrix(2,0)==value && matrix(2,1)==value && matrix(2,2)==value && matrix(2,3)==value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value &&
+        matrix(1,0)==value && matrix(1,1)==value &&
+        matrix(2,0)==value && matrix(2,1)==value &&
+        matrix(3,0)==value && matrix(3,1)==value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value &&
+        matrix(2,0)==value && matrix(2,1)==value && matrix(2,2)==value &&
+        matrix(3,0)==value && matrix(3,1)==value && matrix(3,2)==value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)==value && matrix(0,1)==value && matrix(0,2)==value && matrix(0,3)==value &&
+        matrix(1,0)==value && matrix(1,1)==value && matrix(1,2)==value && matrix(1,3)==value &&
+        matrix(2,0)==value && matrix(2,1)==value && matrix(2,2)==value && matrix(2,3)==value &&
+        matrix(3,0)==value && matrix(3,1)==value && matrix(3,2)==value && matrix(3,3)==value;
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return false;
+        return true;   
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -672,8 +3060,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator!=(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return true;
-    return false;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value && matrix(0,3)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value && matrix(1,3)!=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value && matrix(2,2)!=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value && matrix(0,3)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value && matrix(1,3)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value && matrix(2,2)!=value && matrix(2,3)!=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value &&
+        matrix(3,0)!=value && matrix(3,1)!=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value && matrix(2,2)!=value &&
+        matrix(3,0)!=value && matrix(3,1)!=value && matrix(3,2)!=value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)!=value && matrix(0,1)!=value && matrix(0,2)!=value && matrix(0,3)!=value &&
+        matrix(1,0)!=value && matrix(1,1)!=value && matrix(1,2)!=value && matrix(1,3)!=value &&
+        matrix(2,0)!=value && matrix(2,1)!=value && matrix(2,2)!=value && matrix(2,3)!=value &&
+        matrix(3,0)!=value && matrix(3,1)!=value && matrix(3,2)!=value && matrix(3,3)!=value;
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(matrix[i], scalar)) return true;
+        return false;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -682,8 +3138,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator<(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] >= scalar) return false;
-    return true;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value &&
+        matrix(1,0)<value && matrix(1,1)<value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value && matrix(0,3)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value && matrix(1,3)<value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value &&
+        matrix(1,0)<value && matrix(1,1)<value &&
+        matrix(2,0)<value && matrix(2,1)<value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value &&
+        matrix(2,0)<value && matrix(2,1)<value && matrix(2,2)<value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value && matrix(0,3)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value && matrix(1,3)<value &&
+        matrix(2,0)<value && matrix(2,1)<value && matrix(2,2)<value && matrix(2,3)<value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value &&
+        matrix(1,0)<value && matrix(1,1)<value &&
+        matrix(2,0)<value && matrix(2,1)<value &&
+        matrix(3,0)<value && matrix(3,1)<value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value &&
+        matrix(2,0)<value && matrix(2,1)<value && matrix(2,2)<value &&
+        matrix(3,0)<value && matrix(3,1)<value && matrix(3,2)<value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)<value && matrix(0,1)<value && matrix(0,2)<value && matrix(0,3)<value &&
+        matrix(1,0)<value && matrix(1,1)<value && matrix(1,2)<value && matrix(1,3)<value &&
+        matrix(2,0)<value && matrix(2,1)<value && matrix(2,2)<value && matrix(2,3)<value &&
+        matrix(3,0)<value && matrix(3,1)<value && matrix(3,2)<value && matrix(3,3)<value;
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] >= scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -692,8 +3216,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator>(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] <= scalar) return false;
-    return true;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value &&
+        matrix(1,0)>value && matrix(1,1)>value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value && matrix(0,3)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value && matrix(1,3)>value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value &&
+        matrix(1,0)>value && matrix(1,1)>value &&
+        matrix(2,0)>value && matrix(2,1)>value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value &&
+        matrix(2,0)>value && matrix(2,1)>value && matrix(2,2)>value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value && matrix(0,3)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value && matrix(1,3)>value &&
+        matrix(2,0)>value && matrix(2,1)>value && matrix(2,2)>value && matrix(2,3)>value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value &&
+        matrix(1,0)>value && matrix(1,1)>value &&
+        matrix(2,0)>value && matrix(2,1)>value &&
+        matrix(3,0)>value && matrix(3,1)>value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value &&
+        matrix(2,0)>value && matrix(2,1)>value && matrix(2,2)>value &&
+        matrix(3,0)>value && matrix(3,1)>value && matrix(3,2)>value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)>value && matrix(0,1)>value && matrix(0,2)>value && matrix(0,3)>value &&
+        matrix(1,0)>value && matrix(1,1)>value && matrix(1,2)>value && matrix(1,3)>value &&
+        matrix(2,0)>value && matrix(2,1)>value && matrix(2,2)>value && matrix(2,3)>value &&
+        matrix(3,0)>value && matrix(3,1)>value && matrix(3,2)>value && matrix(3,3)>value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M, N, T>::size; ++i) if (matrix[i] <= scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -702,8 +3294,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator<=(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] > scalar) return false;
-    return true;
+    T value {static_cast<T>(scalar)};
+    
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value && matrix(0,3)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value && matrix(1,3)<=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value && matrix(2,2)<=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value && matrix(0,3)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value && matrix(1,3)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value && matrix(2,2)<=value && matrix(2,3)<=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value &&
+        matrix(3,0)<=value && matrix(3,1)<=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value && matrix(2,2)<=value &&
+        matrix(3,0)<=value && matrix(3,1)<=value && matrix(3,2)<=value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)<=value && matrix(0,1)<=value && matrix(0,2)<=value && matrix(0,3)<=value &&
+        matrix(1,0)<=value && matrix(1,1)<=value && matrix(1,2)<=value && matrix(1,3)<=value &&
+        matrix(2,0)<=value && matrix(2,1)<=value && matrix(2,2)<=value && matrix(2,3)<=value &&
+        matrix(3,0)<=value && matrix(3,1)<=value && matrix(3,2)<=value && matrix(3,3)<=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] > scalar) return false;
+        return true;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -712,8 +3372,76 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator>=(const Matrix<M,N,T>& matrix, T scalar)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] < scalar) return false;
-    return true;
+    T value {static_cast<T>(scalar)};
+
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value;
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value;
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value && matrix(0,3)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value && matrix(1,3)>=value;
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value;
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value && matrix(2,2)>=value;
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value && matrix(0,3)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value && matrix(1,3)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value && matrix(2,2)>=value && matrix(2,3)>=value;
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value &&
+        matrix(3,0)>=value && matrix(3,1)>=value;
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value && matrix(2,2)>=value &&
+        matrix(3,0)>=value && matrix(3,1)>=value && matrix(3,2)>=value; 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        matrix(0,0)>=value && matrix(0,1)>=value && matrix(0,2)>=value && matrix(0,3)>=value &&
+        matrix(1,0)>=value && matrix(1,1)>=value && matrix(1,2)>=value && matrix(1,3)>=value &&
+        matrix(2,0)>=value && matrix(2,1)>=value && matrix(2,2)>=value && matrix(2,3)>=value &&
+        matrix(3,0)>=value && matrix(3,1)>=value && matrix(3,2)>=value && matrix(3,3)>=value;
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (matrix[i] < scalar) return false;
+        return true; 
+    }
 }
 
 /* ####################################################################################### */
@@ -724,8 +3452,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return false;
-    return true;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) && A(0,3)==B(0,3) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2) && A(1,3)==B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1) && A(2,2)==B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) && A(0,3)==B(0,3) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2) && A(1,3)==B(1,3) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1) && A(2,2)==B(2,2) && A(2,3)==B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1) &&
+        A(3,0)==B(3,0) && A(3,1)==B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1) && A(2,2)==B(2,2) &&
+        A(3,0)==B(3,0) && A(3,1)==B(3,1) && A(3,2)==B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)==B(0,0) && A(0,1)==B(0,1) && A(0,2)==B(0,2) && A(0,3)==B(0,3) &&
+        A(1,0)==B(1,0) && A(1,1)==B(1,1) && A(1,2)==B(1,2) && A(1,3)==B(1,3) &&
+        A(2,0)==B(2,0) && A(2,1)==B(2,1) && A(2,2)==B(2,2) && A(2,3)==B(2,3) &&
+        A(3,0)==B(3,0) && A(3,1)==B(3,1) && A(3,2)==B(3,2) && A(3,3)==B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return false;
+        return true; 
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -734,8 +3528,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return true;
-    return false;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) && A(0,3)!=B(0,3) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2) && A(1,3)!=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1) && A(2,2)!=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) && A(0,3)!=B(0,3) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2) && A(1,3)!=B(1,3) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1) && A(2,2)!=B(2,2) && A(2,3)!=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1) &&
+        A(3,0)!=B(3,0) && A(3,1)!=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1) && A(2,2)!=B(2,2) &&
+        A(3,0)!=B(3,0) && A(3,1)!=B(3,1) && A(3,2)!=B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)!=B(0,0) && A(0,1)!=B(0,1) && A(0,2)!=B(0,2) && A(0,3)!=B(0,3) &&
+        A(1,0)!=B(1,0) && A(1,1)!=B(1,1) && A(1,2)!=B(1,2) && A(1,3)!=B(1,3) &&
+        A(2,0)!=B(2,0) && A(2,1)!=B(2,1) && A(2,2)!=B(2,2) && A(2,3)!=B(2,3) &&
+        A(3,0)!=B(3,0) && A(3,1)!=B(3,1) && A(3,2)!=B(3,2) && A(3,3)!=B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (notEqual(A[i], B[i])) return true;
+        return false;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -744,8 +3604,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator<(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] >= B[i]) return false;
-    return true;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) && A(0,3)<B(0,3) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2) && A(1,3)<B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1) && A(2,2)<B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) && A(0,3)<B(0,3) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2) && A(1,3)<B(1,3) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1) && A(2,2)<B(2,2) && A(2,3)<B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1) &&
+        A(3,0)<B(3,0) && A(3,1)<B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1) && A(2,2)<B(2,2) &&
+        A(3,0)<B(3,0) && A(3,1)<B(3,1) && A(3,2)<B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)<B(0,0) && A(0,1)<B(0,1) && A(0,2)<B(0,2) && A(0,3)<B(0,3) &&
+        A(1,0)<B(1,0) && A(1,1)<B(1,1) && A(1,2)<B(1,2) && A(1,3)<B(1,3) &&
+        A(2,0)<B(2,0) && A(2,1)<B(2,1) && A(2,2)<B(2,2) && A(2,3)<B(2,3) &&
+        A(3,0)<B(3,0) && A(3,1)<B(3,1) && A(3,2)<B(3,2) && A(3,3)<B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] >= B[i]) return false;
+        return true;  
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -754,8 +3680,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator>(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] <= B[i]) return false;
-    return true;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) && A(0,3)>B(0,3) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2) && A(1,3)>B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1) && A(2,2)>B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) && A(0,3)>B(0,3) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2) && A(1,3)>B(1,3) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1) && A(2,2)>B(2,2) && A(2,3)>B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1) &&
+        A(3,0)>B(3,0) && A(3,1)>B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1) && A(2,2)>B(2,2) &&
+        A(3,0)>B(3,0) && A(3,1)>B(3,1) && A(3,2)>B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)>B(0,0) && A(0,1)>B(0,1) && A(0,2)>B(0,2) && A(0,3)>B(0,3) &&
+        A(1,0)>B(1,0) && A(1,1)>B(1,1) && A(1,2)>B(1,2) && A(1,3)>B(1,3) &&
+        A(2,0)>B(2,0) && A(2,1)>B(2,1) && A(2,2)>B(2,2) && A(2,3)>B(2,3) &&
+        A(3,0)>B(3,0) && A(3,1)>B(3,1) && A(3,2)>B(3,2) && A(3,3)>B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] <= B[i]) return false;
+        return true;   
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -764,8 +3756,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator<=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] > B[i]) return false;
-    return true;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) && A(0,3)<=B(0,3) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2) && A(1,3)<=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1) && A(2,2)<=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) && A(0,3)<=B(0,3) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2) && A(1,3)<=B(1,3) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1) && A(2,2)<=B(2,2) && A(2,3)<=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1) &&
+        A(3,0)<=B(3,0) && A(3,1)<=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1) && A(2,2)<=B(2,2) &&
+        A(3,0)<=B(3,0) && A(3,1)<=B(3,1) && A(3,2)<=B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)<=B(0,0) && A(0,1)<=B(0,1) && A(0,2)<=B(0,2) && A(0,3)<=B(0,3) &&
+        A(1,0)<=B(1,0) && A(1,1)<=B(1,1) && A(1,2)<=B(1,2) && A(1,3)<=B(1,3) &&
+        A(2,0)<=B(2,0) && A(2,1)<=B(2,1) && A(2,2)<=B(2,2) && A(2,3)<=B(2,3) &&
+        A(3,0)<=B(3,0) && A(3,1)<=B(3,1) && A(3,2)<=B(3,2) && A(3,3)<=B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] > B[i]) return false;
+        return true;  
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -774,8 +3832,74 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator>=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] < B[i]) return false;
-    return true;
+    if constexpr (M == 2 && N == 2)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) && A(0,3)>=B(0,3) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2) && A(1,3)>=B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1) && A(2,2)>=B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) && A(0,3)>=B(0,3) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2) && A(1,3)>=B(1,3) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1) && A(2,2)>=B(2,2) && A(2,3)>=B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1) &&
+        A(3,0)>=B(3,0) && A(3,1)>=B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1) && A(2,2)>=B(2,2) &&
+        A(3,0)>=B(3,0) && A(3,1)>=B(3,1) && A(3,2)>=B(3,2); 
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        A(0,0)>=B(0,0) && A(0,1)>=B(0,1) && A(0,2)>=B(0,2) && A(0,3)>=B(0,3) &&
+        A(1,0)>=B(1,0) && A(1,1)>=B(1,1) && A(1,2)>=B(1,2) && A(1,3)>=B(1,3) &&
+        A(2,0)>=B(2,0) && A(2,1)>=B(2,1) && A(2,2)>=B(2,2) && A(2,3)>=B(2,3) &&
+        A(3,0)>=B(3,0) && A(3,1)>=B(3,1) && A(3,2)>=B(3,2) && A(3,3)>=B(3,3);
+    } 
+    else
+    {
+        for (auto i = 0; i < Matrix<M,N,T>::size; ++i) if (A[i] < B[i]) return false;
+        return true;
+    }
 }
 
 #endif // MATH3D_MATRIX_OPERATORS_HPP
