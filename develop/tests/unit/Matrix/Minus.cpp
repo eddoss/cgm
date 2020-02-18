@@ -29,11 +29,7 @@ using Mat45 = Matrix<4,5,int>;
 using Mat51 = Matrix<5,1,int>;
 using Mat55 = Matrix<5,5,int>;
 
-/* ####################################################################################### */
-/* Increment and decrement */
-/* ####################################################################################### */
-
-TEST(Matrix_Arithmetic, PreIncrement)
+TEST(Matrix_Arithmetic, MinusScalar)
 {
     {
         Mat12 a
@@ -42,10 +38,10 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat12 b
         {
-            2, 3,
+            3, 4,
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -57,14 +53,13 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat13 b
         {
-            2, 3, 4
+            3, 4, 5
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
-
 
     {
         Mat14 a
@@ -73,10 +68,10 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat14 b
         {
-            2, 3, 4, 5
+            3, 4, 5, 6
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -88,10 +83,10 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat15 b
         {
-            2, 3, 4, 5, 6
+            3, 4, 5, 6, 7
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -104,11 +99,11 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat21 b
         {
-            2,
-            3
+            3,
+            4
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -121,11 +116,11 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat22 b
         {
-            2, 3,
-            4, 5
+            3, 4,
+            5, 6
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -138,11 +133,11 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat23 b
         {
-            2, 3, 4,
-            5, 6, 7
+            3, 4, 5,
+            6, 7, 8
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -151,15 +146,15 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat24 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8
+            5, 6, 7, 6
         };
         Mat24 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9
+            3, 4, 5, 6,
+            7, 8, 9, 8
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -168,15 +163,15 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat25 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6
+            6, 7, 6, 5, 4
         };
         Mat25 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -190,12 +185,12 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat31 b
         {
-            2,
             3,
-            4
+            4,
+            5
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -209,12 +204,12 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat32 b
         {
-            2, 3,
-            4, 5,
-            6, 7
+            3, 4,
+            5, 6,
+            7, 8
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -224,16 +219,16 @@ TEST(Matrix_Arithmetic, PreIncrement)
         {
             1, 2, 3,
             4, 5, 6,
-            7, 8, 7
+            7, 6, 5
         };
         Mat33 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8
+            3, 4, 5,
+            6, 7, 8,
+            9, 8, 7
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -242,17 +237,17 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat34 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8,
-            7, 6, 5, 4
+            5, 6, 7, 6,
+            5, 4, 3, 2
         };
         Mat34 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5
+            3, 4, 5, 6,
+            7, 8, 9, 8,
+            7, 6, 5, 4
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -261,17 +256,17 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat35 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3
         };
         Mat35 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -286,13 +281,13 @@ TEST(Matrix_Arithmetic, PreIncrement)
         };
         Mat41 b
         {
-            2,
             3,
             4,
-            5
+            5,
+            6
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -303,17 +298,17 @@ TEST(Matrix_Arithmetic, PreIncrement)
             1, 2,
             3, 4,
             5, 6,
-            7, 8
+            7, 6
         };
         Mat42 b
         {
-            2, 3,
-            4, 5,
-            6, 7,
-            8, 9
+            3, 4,
+            5, 6,
+            7, 8,
+            9, 8
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -323,18 +318,18 @@ TEST(Matrix_Arithmetic, PreIncrement)
         {
             1, 2, 3,
             4, 5, 6,
-            7, 8, 7,
-            6, 5, 4
+            7, 6, 5,
+            4, 3, 2
         };
         Mat43 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8,
-            7, 6, 5
+            3, 4, 5,
+            6, 7, 8,
+            9, 8, 7,
+            6, 5, 4
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -343,19 +338,19 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat44 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8,
-            7, 6, 5, 4,
-            3, 2, 1, 2
+            5, 6, 7, 6,
+            5, 4, 3, 2,
+            1, 2, 3, 4
         };
         Mat44 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5,
-            4, 3, 2, 3
+            3, 4, 5, 6,
+            7, 8, 9, 8,
+            7, 6, 5, 4,
+            3, 4, 5, 6
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -364,19 +359,19 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat45 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1,
-            2, 3, 4, 5, 6
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3,
+            4, 5, 6, 7, 6
         };
         Mat45 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5,
+            6, 7, 8, 9, 8
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 
     /* -------------- */
@@ -385,27 +380,27 @@ TEST(Matrix_Arithmetic, PreIncrement)
         Mat55 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1,
-            2, 3, 4, 5, 6,
-            7, 8, 7, 6, 5
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3,
+            4, 5, 6, 7, 6,
+            5, 4, 3, 2, 1
         };
         Mat55 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
             3, 4, 5, 6, 7,
-            8, 9, 8, 7, 6
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5,
+            6, 7, 8, 9, 8,
+            7, 6, 5, 4, 3
         };
 
-        ASSERT_EQ(++a, b);
+        ASSERT_EQ(b-2, a);
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Arithmetic, PreDecrement)
+TEST(Matrix_Arithmetic, MinusOther)
 {
     {
         Mat12 a
@@ -416,8 +411,12 @@ TEST(Matrix_Arithmetic, PreDecrement)
         {
             2, 3,
         };
+        Mat12 c
+        {
+            3, 5,
+        };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -431,12 +430,15 @@ TEST(Matrix_Arithmetic, PreDecrement)
         {
             2, 3, 4
         };
+        Mat13 c
+        {
+            3, 5, 7
+        };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
-
 
     {
         Mat14 a
@@ -445,10 +447,14 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat14 b
         {
-            2, 3, 4, 5
+            1, 2, 1, 2
+        };
+        Mat14 c
+        {
+            2, 4, 4, 6
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -460,10 +466,14 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat15 b
         {
-            2, 3, 4, 5, 6
+            1, 2, 1, 2, 1
+        };
+        Mat15 c
+        {
+            2, 4, 4, 6, 6
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -476,11 +486,16 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat21 b
         {
+            1,
+            2
+        };
+        Mat21 c
+        {
             2,
-            3
+            4
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -493,11 +508,16 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat22 b
         {
-            2, 3,
-            4, 5
+            1, 2,
+            1, 2
+        };
+        Mat22 c
+        {
+            2, 4,
+            4, 6
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -510,11 +530,16 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat23 b
         {
-            2, 3, 4,
-            5, 6, 7
+            1, 2, 1,
+            2, 1, 2
+        };
+        Mat23 c
+        {
+            2, 4, 4,
+            6, 6, 8
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -527,11 +552,16 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat24 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9
+            1, 2, 1, 2,
+            1, 2, 1, 1
+        };
+        Mat24 c
+        {
+            2, 4, 4, 6,
+            6, 8, 8, 9
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -544,11 +574,16 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat25 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1
+        };
+        Mat25 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -562,12 +597,18 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat31 b
         {
+            1,
             2,
-            3,
+            1
+        };
+        Mat31 c
+        {
+            2,
+            4,
             4
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -581,12 +622,18 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat32 b
         {
-            2, 3,
-            4, 5,
-            6, 7
+            1, 2,
+            1, 2,
+            1, 2
+        };
+        Mat32 c
+        {
+            2, 4,
+            4, 6,
+            6, 8
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -600,12 +647,18 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat33 b
         {
-            2, 3, 4,
-            5, 6, 7,
+            1, 2, 1,
+            2, 1, 2,
+            1, 1, 1
+        };
+        Mat33 c
+        {
+            2, 4, 4,
+            6, 6, 8,
             8, 9, 8
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -619,12 +672,18 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat34 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5
+            1, 2, 1, 2,
+            2, 1, 2, 1,
+            1, 2, 1, 2
+        };
+        Mat34 c
+        {
+            2, 4, 4, 6,
+            7, 7, 9, 9,
+            8, 8, 6, 6
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -638,12 +697,18 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat35 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2
+            1, 2, 1, 2, 1,
+            2, 1, 1, 1, 2,
+            1, 2, 1, 2, 1
+        };
+        Mat35 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 8, 8,
+            6, 6, 4, 4, 2
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -658,13 +723,20 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat41 b
         {
+            1,
             2,
-            3,
+            1,
+            2
+        };
+        Mat41 c
+        {
+            2,
             4,
-            5
+            4,
+            6
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -679,13 +751,20 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat42 b
         {
-            2, 3,
-            4, 5,
-            6, 7,
-            8, 9
+            1, 2,
+            2, 1,
+            1, 2,
+            2, 1
+        };
+        Mat42 c
+        {
+            2, 4,
+            5, 5,
+            6, 8,
+            9, 9
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -700,13 +779,20 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat43 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8,
-            7, 6, 5
+            1, 2, 1,
+            2, 1, 2,
+            1, 1, 2,
+            1, 2, 1
+        };
+        Mat43 c
+        {
+            2, 4, 4,
+            6, 6, 8,
+            8, 9, 9,
+            7, 7, 5
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -721,13 +807,20 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat44 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5,
-            4, 3, 2, 3
+            1, 2, 1, 2,
+            2, 1, 2, 1,
+            1, 2, 1, 2,
+            2, 1, 2, 1
+        };
+        Mat44 c
+        {
+            2, 4, 4, 6,
+            7, 7, 9, 9,
+            8, 8, 6, 6,
+            5, 3, 3, 3
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -742,13 +835,20 @@ TEST(Matrix_Arithmetic, PreDecrement)
         };
         Mat45 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1,
+            1, 2, 2, 1, 1,
+            1, 2, 1, 2, 2
+        };
+        Mat45 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7,
+            6, 6, 5, 3, 2,
+            3, 5, 5, 7, 8
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 
     /* -------------- */
@@ -760,24 +860,32 @@ TEST(Matrix_Arithmetic, PreDecrement)
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1,
             2, 3, 4, 5, 6,
-            7, 8, 7, 6, 5
+            6, 7, 8, 7, 6
         };
         Mat55 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7,
-            8, 9, 8, 7, 6
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1,
+            1, 2, 2, 1, 1,
+            1, 2, 1, 2, 2,
+            2, 1, 1, 2, 1
+        };
+        Mat55 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7,
+            6, 6, 5, 3, 2,
+            3, 5, 5, 7, 8,
+            8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(--b, a);
+        ASSERT_EQ(c-b, a);
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Arithmetic, PostIncrement)
+TEST(Matrix_Arithmetic, InplaceMinusScalar)
 {
     {
         Mat12 a
@@ -786,11 +894,10 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat12 b
         {
-            2, 3,
+            3, 4,
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -802,15 +909,13 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat13 b
         {
-            2, 3, 4
+            3, 4, 5
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
-
 
     {
         Mat14 a
@@ -819,11 +924,10 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat14 b
         {
-            2, 3, 4, 5
+            3, 4, 5, 6
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -835,11 +939,10 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat15 b
         {
-            2, 3, 4, 5, 6
+            3, 4, 5, 6, 7
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -852,12 +955,11 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat21 b
         {
-            2,
-            3
+            3,
+            4
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -870,12 +972,11 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat22 b
         {
-            2, 3,
-            4, 5
+            3, 4,
+            5, 6
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -888,12 +989,11 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat23 b
         {
-            2, 3, 4,
-            5, 6, 7
+            3, 4, 5,
+            6, 7, 8
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -902,16 +1002,15 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat24 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8
+            5, 6, 7, 6
         };
         Mat24 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9
+            3, 4, 5, 6,
+            7, 8, 9, 8
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -920,16 +1019,15 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat25 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6
+            6, 7, 6, 5, 4
         };
         Mat25 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -943,13 +1041,12 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat31 b
         {
-            2,
             3,
-            4
+            4,
+            5
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -963,13 +1060,12 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat32 b
         {
-            2, 3,
-            4, 5,
-            6, 7
+            3, 4,
+            5, 6,
+            7, 8
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -979,17 +1075,16 @@ TEST(Matrix_Arithmetic, PostIncrement)
         {
             1, 2, 3,
             4, 5, 6,
-            7, 8, 7
+            7, 6, 5
         };
         Mat33 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8
+            3, 4, 5,
+            6, 7, 8,
+            9, 8, 7
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -998,18 +1093,17 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat34 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8,
-            7, 6, 5, 4
+            5, 6, 7, 6,
+            5, 4, 3, 2
         };
         Mat34 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5
+            3, 4, 5, 6,
+            7, 8, 9, 8,
+            7, 6, 5, 4
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1018,18 +1112,17 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat35 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3
         };
         Mat35 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1044,14 +1137,13 @@ TEST(Matrix_Arithmetic, PostIncrement)
         };
         Mat41 b
         {
-            2,
             3,
             4,
-            5
+            5,
+            6
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1062,18 +1154,17 @@ TEST(Matrix_Arithmetic, PostIncrement)
             1, 2,
             3, 4,
             5, 6,
-            7, 8
+            7, 6
         };
         Mat42 b
         {
-            2, 3,
-            4, 5,
-            6, 7,
-            8, 9
+            3, 4,
+            5, 6,
+            7, 8,
+            9, 8
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1083,19 +1174,18 @@ TEST(Matrix_Arithmetic, PostIncrement)
         {
             1, 2, 3,
             4, 5, 6,
-            7, 8, 7,
-            6, 5, 4
+            7, 6, 5,
+            4, 3, 2
         };
         Mat43 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8,
-            7, 6, 5
+            3, 4, 5,
+            6, 7, 8,
+            9, 8, 7,
+            6, 5, 4
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1104,20 +1194,19 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat44 a
         {
             1, 2, 3, 4,
-            5, 6, 7, 8,
-            7, 6, 5, 4,
-            3, 2, 1, 2
+            5, 6, 7, 6,
+            5, 4, 3, 2,
+            1, 2, 3, 4
         };
         Mat44 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5,
-            4, 3, 2, 3
+            3, 4, 5, 6,
+            7, 8, 9, 8,
+            7, 6, 5, 4,
+            3, 4, 5, 6
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1126,20 +1215,19 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat45 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1,
-            2, 3, 4, 5, 6
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3,
+            4, 5, 6, 7, 6
         };
         Mat45 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7
+            3, 4, 5, 6, 7,
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5,
+            6, 7, 8, 9, 8
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 
     /* -------------- */
@@ -1148,28 +1236,27 @@ TEST(Matrix_Arithmetic, PostIncrement)
         Mat55 a
         {
             1, 2, 3, 4, 5,
-            6, 7, 8, 7, 6,
-            5, 4, 3, 2, 1,
-            2, 3, 4, 5, 6,
-            7, 8, 7, 6, 5
+            6, 7, 6, 5, 4,
+            3, 2, 1, 2, 3,
+            4, 5, 6, 7, 6,
+            5, 4, 3, 2, 1
         };
         Mat55 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
             3, 4, 5, 6, 7,
-            8, 9, 8, 7, 6
+            8, 9, 8, 7, 6,
+            5, 4, 3, 4, 5,
+            6, 7, 8, 9, 8,
+            7, 6, 5, 4, 3
         };
 
-        a++;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(b-=2, a);
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Matrix_Arithmetic, PostDecrement)
+TEST(Matrix_Arithmetic, InplaceMinusOther)
 {
     {
         Mat12 a
@@ -1180,9 +1267,12 @@ TEST(Matrix_Arithmetic, PostDecrement)
         {
             2, 3,
         };
+        Mat12 c
+        {
+            3, 5,
+        };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1196,13 +1286,15 @@ TEST(Matrix_Arithmetic, PostDecrement)
         {
             2, 3, 4
         };
+        Mat13 c
+        {
+            3, 5, 7
+        };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
-
 
     {
         Mat14 a
@@ -1211,11 +1303,14 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat14 b
         {
-            2, 3, 4, 5
+            1, 2, 1, 2
+        };
+        Mat14 c
+        {
+            2, 4, 4, 6
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1227,11 +1322,14 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat15 b
         {
-            2, 3, 4, 5, 6
+            1, 2, 1, 2, 1
+        };
+        Mat15 c
+        {
+            2, 4, 4, 6, 6
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1244,12 +1342,16 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat21 b
         {
+            1,
+            2
+        };
+        Mat21 c
+        {
             2,
-            3
+            4
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1262,12 +1364,16 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat22 b
         {
-            2, 3,
-            4, 5
+            1, 2,
+            1, 2
+        };
+        Mat22 c
+        {
+            2, 4,
+            4, 6
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1280,12 +1386,16 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat23 b
         {
-            2, 3, 4,
-            5, 6, 7
+            1, 2, 1,
+            2, 1, 2
+        };
+        Mat23 c
+        {
+            2, 4, 4,
+            6, 6, 8
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1298,12 +1408,16 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat24 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9
+            1, 2, 1, 2,
+            1, 2, 1, 1
+        };
+        Mat24 c
+        {
+            2, 4, 4, 6,
+            6, 8, 8, 9
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1316,12 +1430,16 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat25 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1
+        };
+        Mat25 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1335,13 +1453,18 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat31 b
         {
+            1,
             2,
-            3,
+            1
+        };
+        Mat31 c
+        {
+            2,
+            4,
             4
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1355,13 +1478,18 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat32 b
         {
-            2, 3,
-            4, 5,
-            6, 7
+            1, 2,
+            1, 2,
+            1, 2
+        };
+        Mat32 c
+        {
+            2, 4,
+            4, 6,
+            6, 8
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1375,13 +1503,18 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat33 b
         {
-            2, 3, 4,
-            5, 6, 7,
+            1, 2, 1,
+            2, 1, 2,
+            1, 1, 1
+        };
+        Mat33 c
+        {
+            2, 4, 4,
+            6, 6, 8,
             8, 9, 8
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1395,13 +1528,18 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat34 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5
+            1, 2, 1, 2,
+            2, 1, 2, 1,
+            1, 2, 1, 2
+        };
+        Mat34 c
+        {
+            2, 4, 4, 6,
+            7, 7, 9, 9,
+            8, 8, 6, 6
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1415,13 +1553,18 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat35 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2
+            1, 2, 1, 2, 1,
+            2, 1, 1, 1, 2,
+            1, 2, 1, 2, 1
+        };
+        Mat35 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 8, 8,
+            6, 6, 4, 4, 2
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1436,14 +1579,20 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat41 b
         {
+            1,
             2,
-            3,
+            1,
+            2
+        };
+        Mat41 c
+        {
+            2,
             4,
-            5
+            4,
+            6
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1458,14 +1607,20 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat42 b
         {
-            2, 3,
-            4, 5,
-            6, 7,
-            8, 9
+            1, 2,
+            2, 1,
+            1, 2,
+            2, 1
+        };
+        Mat42 c
+        {
+            2, 4,
+            5, 5,
+            6, 8,
+            9, 9
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1480,14 +1635,20 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat43 b
         {
-            2, 3, 4,
-            5, 6, 7,
-            8, 9, 8,
-            7, 6, 5
+            1, 2, 1,
+            2, 1, 2,
+            1, 1, 2,
+            1, 2, 1
+        };
+        Mat43 c
+        {
+            2, 4, 4,
+            6, 6, 8,
+            8, 9, 9,
+            7, 7, 5
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1502,14 +1663,20 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat44 b
         {
-            2, 3, 4, 5,
-            6, 7, 8, 9,
-            8, 7, 6, 5,
-            4, 3, 2, 3
+            1, 2, 1, 2,
+            2, 1, 2, 1,
+            1, 2, 1, 2,
+            2, 1, 2, 1
+        };
+        Mat44 c
+        {
+            2, 4, 4, 6,
+            7, 7, 9, 9,
+            8, 8, 6, 6,
+            5, 3, 3, 3
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1524,14 +1691,20 @@ TEST(Matrix_Arithmetic, PostDecrement)
         };
         Mat45 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1,
+            1, 2, 2, 1, 1,
+            1, 2, 1, 2, 2
+        };
+        Mat45 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7,
+            6, 6, 5, 3, 2,
+            3, 5, 5, 7, 8
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 
     /* -------------- */
@@ -1543,18 +1716,25 @@ TEST(Matrix_Arithmetic, PostDecrement)
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1,
             2, 3, 4, 5, 6,
-            7, 8, 7, 6, 5
+            6, 7, 8, 7, 6
         };
         Mat55 b
         {
-            2, 3, 4, 5, 6,
-            7, 8, 9, 8, 7,
-            6, 5, 4, 3, 2,
-            3, 4, 5, 6, 7,
-            8, 9, 8, 7, 6
+            1, 2, 1, 2, 1,
+            2, 1, 1, 2, 1,
+            1, 2, 2, 1, 1,
+            1, 2, 1, 2, 2,
+            2, 1, 1, 2, 1
+        };
+        Mat55 c
+        {
+            2, 4, 4, 6, 6,
+            8, 8, 9, 9, 7,
+            6, 6, 5, 3, 2,
+            3, 5, 5, 7, 8,
+            8, 8, 9, 9, 7
         };
 
-        b--;
-        ASSERT_EQ(a, b);
+        ASSERT_EQ(c-=b, a);
     }
 }
