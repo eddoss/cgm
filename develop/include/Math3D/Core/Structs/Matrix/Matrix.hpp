@@ -782,25 +782,55 @@ public: /* Static constants */
 /* ####################################################################################### */
 
     /**
-     * Get identity matrix.
+     * Get reference to identity matrix.
      * @return const reference to identity matrix.
      */
-    const static Matrix<M,N,T>&
+    const static Matrix<M,M,T>&
     identity()
     {
-        static const Matrix<M,N,T> mat { makeIdentity() }; return mat;
+        static const Matrix<M,M,T> mat { makeIdentity() }; return mat;
     }
 
-/* ####################################################################################### */
-private: /* Internals */
-/* ####################################################################################### */
-
-    constexpr static Matrix<M,N,T>
+    /**
+     * Create identity matrix.
+     * @return copy of identity matrix.
+     */
+    constexpr static Matrix<M,M,T>
     makeIdentity()
     {
-        Matrix<M,M,T> matrix(static_cast<T>(0));
-        for (auto i = 0; i < M; ++i) matrix(i,i) = static_cast<T>(1);
-        return matrix;
+        if constexpr (M==2)
+        {
+            return Matrix<M,M,T>
+            {
+                1, 0,
+                0, 1
+            };
+        }
+        else if constexpr (M==3)
+        {
+            return Matrix<M,M,T>
+            {
+                1, 0, 0,
+                0, 1, 0,
+                0, 0, 1
+            };
+        }
+        else if constexpr (M==4)
+        {
+            return Matrix<M,M,T>
+            {
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+            };
+        }
+        else
+        {
+            Matrix<M, M, T> matrix(static_cast<T>(0));
+            for (auto i = 0; i < M; ++i) matrix(i,i) = static_cast<T>(1);
+            return matrix;
+        }
     }
 };
 
