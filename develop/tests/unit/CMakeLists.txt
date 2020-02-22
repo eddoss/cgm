@@ -41,12 +41,14 @@ set(MATRIX_TEST_SUITE
     run.cpp
     Matrix/Accessing.cpp
     Matrix/Identity.cpp
-    Matrix/Plus.cpp
-    Matrix/Minus.cpp
-    Matrix/IncrementDecrement.cpp
-    Matrix/ComparisonWithOther.cpp
-    Matrix/ComparisonWithScalar.cpp
-    Matrix/MatrixMultiplication.cpp
+    Matrix/Arithmetic/Plus.cpp
+    Matrix/Arithmetic/Minus.cpp
+    Matrix/Arithmetic/IncrementDecrement.cpp
+    Matrix/Arithmetic/DivisionByScalar.cpp
+    Matrix/Arithmetic/MultiplicationToScalar.cpp
+    Matrix/Arithmetic/MatrixMultiplication.cpp
+    Matrix/Comparison/WithOther.cpp
+    Matrix/Comparison/WithScalar.cpp
     Matrix/Iterators/Direct.cpp
     Matrix/Iterators/Indirect.cpp
     Matrix/Iterators/RowDir.cpp

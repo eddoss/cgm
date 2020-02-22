@@ -5,7 +5,6 @@
 #include <Math3D/Core/Structs/Vector/Vector.hpp>
 #include <Math3D/Core/Structs/Vector/Operators.hpp>
 
-
 using namespace std;
 using Vec2 = Vector<2>;
 using Vec3 = Vector<3>;
