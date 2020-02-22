@@ -45,7 +45,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-    #define MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                \
+    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                               \
     return m_data[row][column];                                                                                        \
 
 #else
@@ -88,7 +88,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-    #define MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                \
+    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                               \
     return m_data[column][row];
 
 #endif
@@ -271,7 +271,7 @@ public: /* Components accessing */                                              
     constexpr reference                                                                                                \
     operator()(size_t row, size_t column)                                                                              \
     {                                                                                                                  \
-        MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                    \
+        MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                           \
     }                                                                                                                  \
                                                                                                                        \
     /**
@@ -283,7 +283,7 @@ public: /* Components accessing */                                              
     constexpr const_reference                                                                                          \
     operator()(size_t row, size_t column) const                                                                        \
     {                                                                                                                  \
-        MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                    \
+        MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                           \
     }                                                                                                                  \
                                                                                                                        \
     /**
