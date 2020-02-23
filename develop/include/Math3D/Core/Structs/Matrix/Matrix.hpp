@@ -45,7 +45,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                               \
+    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                       \
     return m_data[row][column];                                                                                        \
 
 #else
@@ -261,6 +261,13 @@ public: /* Assignment operator */                                               
 /* ####################################################################################### */                          \
 public: /* Components accessing */                                                                                     \
 /* ####################################################################################### */                          \
+                                                                                                                       \
+    /**
+     * Get raw pointer at the first component.
+     * @param first component raw pointer.
+     */                                                                                                                \
+    constexpr pointer                                                                                                  \
+    data() {return &m_data[0][0];}                                                                                     \
                                                                                                                        \
     /**
      * Gets a reference to a specific component of the matrix by row and column.
