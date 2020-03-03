@@ -31,10 +31,10 @@ find_package(GTest REQUIRED)
 set(VECTOR_TEST_SUITE
     run.cpp
     Vector/Arithmetic.cpp
-    Vector/Assignment.cpp
-    Vector/DotAndCross.cpp
-    Vector/ComparisonWithOther.cpp
-    Vector/ComparisonWithScalar.cpp
+#    Vector/Assignment.cpp
+#    Vector/DotAndCross.cpp
+#    Vector/ComparisonWithOther.cpp
+#    Vector/ComparisonWithScalar.cpp
 )
 
 set(MATRIX_TEST_SUITE
