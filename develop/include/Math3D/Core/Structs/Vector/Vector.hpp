@@ -8,6 +8,22 @@
 #include <initializer_list>
 #include <Math3D/Global.hpp>
 
+/* ################################################################################################################## */
+#define MATH3D_VECTOR_DATA_GETTERS                                                                                     \
+    /**
+     * Get raw pointer at the first component.
+     * @param first component raw pointer.
+     */                                                                                                                \
+    constexpr pointer                                                                                                  \
+    data() {return &x;}                                                                                                \
+                                                                                                                       \
+    /**
+     * Get const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */                                                                                                                \
+    constexpr const_pointer                                                                                            \
+    data() const {return &x;}                                                                                          \
+/* ################################################################################################################## */
 
 /* ################################################################################################################## */
 #define MATH3D_VECTOR_COMMON_BODY                                                                                      \
@@ -16,22 +32,11 @@
 public: /* Typedefs */                                                                                                 \
 /* ####################################################################################### */                          \
                                                                                                                        \
-    using base_type                 = std::array<T,D>;                                                                 \
-    using size_type                 = typename base_type::size_type;                                                   \
-    using value_type                = typename base_type::value_type;                                                  \
-    using pointer                   = typename base_type::pointer;                                                     \
-    using reference                 = typename base_type::reference;                                                   \
-    using const_pointer             = typename base_type::const_pointer;                                               \
-    using const_reference           = typename base_type::const_reference;                                             \
-                                                                                                                       \
-/* ####################################################################################### */                          \
-public: /* Constructors */                                                                                             \
-/* ####################################################################################### */                          \
-                                                                                                                       \
-    using iterator                  = typename base_type::iterator;                                                    \
-    using const_iterator            = typename base_type::const_iterator;                                              \
-    using reverse_iterator          = typename base_type::reverse_iterator;                                            \
-    using const_reverse_iterator    = typename base_type::const_reverse_iterator;                                      \
+    using value_type                = T;                                                                               \
+    using pointer                   = T*;                                                                              \
+    using reference                 = T&;                                                                              \
+    using const_pointer             = const T*;                                                                        \
+    using const_reference           = const T&;                                                                        \
                                                                                                                        \
 /* ####################################################################################### */                          \
 public: /* Static constants */                                                                                         \
@@ -40,32 +45,12 @@ public: /* Static constants */                                                  
     /**
      * Vector components count.
      */                                                                                                                \
-    constexpr static size_type                                                                                         \
+    constexpr static size_t                                                                                            \
     dimensions {D};                                                                                                    \
                                                                                                                        \
 /* ####################################################################################### */                          \
-public: /* Constructors */                                                                                             \
+public: /* Default constructors */                                                                                     \
 /* ####################################################################################### */                          \
-                                                                                                                       \
-    /**
-     * Initialize all components to single value.
-     */                                                                                                                \
-    constexpr explicit                                                                                                 \
-    Vector(const_reference value) : base_type()                                                                        \
-    {                                                                                                                  \
-        static_assert(D > 1, "Math3D::Vector::constructor: vector size must be more than 1");                          \
-        base_type::fill(value);                                                                                        \
-    }                                                                                                                  \
-                                                                                                                       \
-    /**
-     * Initialize all components via initializer_list.
-     */                                                                                                                \
-    constexpr                                                                                                          \
-    Vector(std::initializer_list<T> values)                                                                            \
-    {                                                                                                                  \
-        static_assert(D > 1, "Math3D::Vector::constructor: vector size must be more than 1");                          \
-        for (auto i = 0; i < D; ++i) base_type::at(i) = *(values.begin() + i);                                         \
-    }                                                                                                                  \
                                                                                                                        \
     constexpr                                                                                                          \
     Vector()                        = default;                                                                         \
@@ -79,7 +64,7 @@ public: /* Constructors */                                                      
     ~Vector()                       = default;                                                                         \
                                                                                                                        \
 /* ####################################################################################### */                          \
-public: /* Assignment operator */                                                                                      \
+public: /* Default assignment operators */                                                                             \
 /* ####################################################################################### */                          \
                                                                                                                        \
     constexpr Vector&                                                                                                  \
@@ -88,249 +73,289 @@ public: /* Assignment operator */                                               
     constexpr Vector&                                                                                                  \
     operator=(Vector&&) noexcept    = default;                                                                         \
                                                                                                                        \
+/* ################################################################################################################## */
+
+template<size_t D, typename T=FLOAT, typename = void> struct Vector;
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+struct Vector <D, T, std::enable_if_t<(D == 2)>>
+{
+    T x;
+    T y;
+
+    MATH3D_VECTOR_COMMON_BODY
+    MATH3D_VECTOR_DATA_GETTERS
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
     /**
-     * Set all components to a single value.
-     * @param scalar Value to set.
-     */                                                                                                                \
-    constexpr Vector&                                                                                                  \
-    operator=(const_reference scalar) {base_type::fill(scalar); return *this;}                                         \
-                                                                                                                       \
-/* ####################################################################################### */                          \
-public: /* Components accessing */                                                                                     \
-/* ####################################################################################### */                          \
-                                                                                                                       \
+     * Initialize all components via initializer_list.
+     */
+    constexpr
+    Vector(std::initializer_list<T> values)
+        : x(*(values.begin()))
+        , y(*(values.begin() + 1)) {};
+
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T singleValue)
+        : x(singleValue)
+        , y(singleValue) {};
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assign all components by single value.
+     */
+    constexpr Vector&
+    operator = (value_type value)
+    {
+        x = value;
+        y = value;
+    }
+};
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+struct Vector <D, T, std::enable_if_t<(D == 3)>>
+{
+    T x;
+    T y;
+    T z;
+
+    MATH3D_VECTOR_COMMON_BODY
+    MATH3D_VECTOR_DATA_GETTERS
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Initialize all components via initializer_list.
+     */
+    constexpr
+    Vector(std::initializer_list<T> values)
+        : x(*(values.begin()))
+        , y(*(values.begin() + 1))
+        , z(*(values.begin() + 2)) {};
+
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T singleValue)
+        : x(singleValue)
+        , y(singleValue)
+        , z(singleValue) {};
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assign all components by single value.
+     */
+    constexpr Vector&
+    operator = (value_type value)
+    {
+        x = value;
+        y = value;
+        z = value;
+    }
+};
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+struct Vector <D, T, std::enable_if_t<(D == 4)>>
+{
+    T x;
+    T y;
+    T z;
+    T w;
+
+    MATH3D_VECTOR_COMMON_BODY
+    MATH3D_VECTOR_DATA_GETTERS
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Initialize all components via initializer_list.
+     */
+    constexpr
+    Vector(std::initializer_list<T> values)
+        : x(*(values.begin()))
+        , y(*(values.begin() + 1))
+        , z(*(values.begin() + 2))
+        , w(*(values.begin() + 3)) {};
+
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T singleValue)
+        : x(singleValue)
+        , y(singleValue)
+        , z(singleValue)
+        , w(singleValue) {};
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assign all components by single value.
+     */
+    constexpr Vector&
+    operator = (value_type value)
+    {
+        x = value;
+        y = value;
+        z = value;
+        w = value;
+    }
+};
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+struct Vector <D, T, std::enable_if_t<(D > 4)>> : private std::array<T,D>
+{
+    MATH3D_VECTOR_COMMON_BODY
+
+/* ####################################################################################### */
+public: /* Typedefs */
+/* ####################################################################################### */
+
+    using base_type                 = std::array<T,D>;
+    using size_type                 = typename base_type::size_type;
+
+/* ####################################################################################### */
+public: /* Iterator typedefs */
+/* ####################################################################################### */
+
+    using iterator                  = typename base_type::iterator;
+    using const_iterator            = typename base_type::const_iterator;
+    using reverse_iterator          = typename base_type::reverse_iterator;
+    using const_reverse_iterator    = typename base_type::const_reverse_iterator;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Initialize all components via initializer_list.
+     */
+    constexpr
+    Vector(std::initializer_list<T> values)
+    {
+        for (auto i = 0; i < D; ++i) base_type::at(i) = *(values.begin() + i);
+    }
+
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T singleValue)
+    {
+        for (auto i = 0; i < D; ++i) base_type::at(i) = singleValue;
+    }
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assign all components by single value.
+     */
+    constexpr Vector&
+    operator = (value_type value)
+    {
+        for (auto i = 0; i < D; ++i) base_type::at(i) = value;
+    }
+
+/* ####################################################################################### */
+public: /* Components accessing */
+/* ####################################################################################### */
+
     /**
      * Get component reference by index.
      * @param component reference.
-     */                                                                                                                \
-    constexpr reference                                                                                                \
-    operator[](size_type index) {return base_type::at(index);}                                                         \
-                                                                                                                       \
+     */
+    constexpr reference
+    operator[](size_type index) {return base_type::at(index);}
+
     /**
      * Get component const reference by index.
      * @param component const reference.
-     */                                                                                                                \
-    constexpr const_reference                                                                                          \
-    operator[](size_type index) const {return base_type::at(index);}                                                   \
-                                                                                                                       \
-    /**
-     * Get component reference by index.
-     * @param component reference.
-     */                                                                                                                \
-    constexpr reference                                                                                                \
-    operator()(size_type index) {return base_type::at(index);}                                                         \
-                                                                                                                       \
-    /**
-     * Get component const reference by index.
-     * @param component const reference.
-     */                                                                                                                \
-    constexpr const_reference                                                                                          \
-    operator()(size_type index) const {return base_type::at(index);}                                                   \
-                                                                                                                       \
+     */
+    constexpr const_reference
+    operator[](size_type index) const {return base_type::at(index);}
+
     /**
      * Get raw pointer at the first component.
      * @param first component raw pointer.
-     */                                                                                                                \
-    constexpr pointer                                                                                                  \
-    data() {return base_type::data();}                                                                                 \
-                                                                                                                       \
+     */
+    constexpr pointer
+    data() {return base_type::data();}
+
     /**
      * Get const raw pointer at the first component.
      * @param first component const raw pointer.
-     */                                                                                                                \
-    constexpr const_pointer                                                                                            \
-    data() const {return base_type::data();}                                                                           \
-                                                                                                                       \
-    /**
-     * Get X component reference.
-     * @return X component reference.
-     */                                                                                                                \
-    constexpr reference                                                                                                \
-    x() {return this->at(0);}                                                                                          \
-                                                                                                                       \
-    /**
-     * Get X component const reference.
-     * @return X component const reference.
-     */                                                                                                                \
-    constexpr const_reference                                                                                          \
-    x() const {return this->at(0);}                                                                                    \
-                                                                                                                       \
-    /**
-     * Get Y component reference.
-     * @return Y component reference.
-     */                                                                                                                \
-    constexpr reference                                                                                                \
-    y() {return this->at(1);}                                                                                          \
-                                                                                                                       \
-    /**
-     * Get Y component const reference.
-     * @return X component const reference.
-     */                                                                                                                \
-    constexpr const_reference                                                                                          \
-    y() const {return this->at(1);}                                                                                    \
-                                                                                                                       \
-/* ####################################################################################### */                          \
-public: /* Direct iterators */                                                                                         \
-/* ####################################################################################### */                          \
-                                                                                                                       \
-    constexpr iterator                                                                                                 \
-    begin() {return base_type::begin();}                                                                               \
-                                                                                                                       \
-    constexpr iterator                                                                                                 \
-    end() {return base_type::end();}                                                                                   \
-                                                                                                                       \
-    constexpr const_iterator                                                                                           \
-    begin() const {return base_type::begin();}                                                                         \
-                                                                                                                       \
-    constexpr const_iterator                                                                                           \
-    end() const {return base_type::end();}                                                                             \
-                                                                                                                       \
-    constexpr const_iterator                                                                                           \
-    cbegin() const {return base_type::cbegin();}                                                                       \
-                                                                                                                       \
-    constexpr const_iterator                                                                                           \
-    cend() const {return base_type::cend();}                                                                           \
-                                                                                                                       \
-    constexpr reverse_iterator                                                                                         \
-    rbegin() {return base_type::rbegin();}                                                                             \
-                                                                                                                       \
-    constexpr reverse_iterator                                                                                         \
-    rend() {return base_type::rend();}                                                                                 \
-                                                                                                                       \
-    constexpr const_reverse_iterator                                                                                   \
-    rbegin() const {return base_type::rbegin();}                                                                       \
-                                                                                                                       \
-    constexpr const_reverse_iterator                                                                                   \
-    rend() const {return base_type::rend();}                                                                           \
-                                                                                                                       \
-    constexpr const_reverse_iterator                                                                                   \
-    crbegin() const {return base_type::crbegin();}                                                                     \
-                                                                                                                       \
-    constexpr const_reverse_iterator                                                                                   \
-    crend() const {return base_type::crend();}                                                                         \
-/* ################################################################################################################## */
-
-
-template<size_t D, typename T=FLOAT, typename = void>
-struct Vector : private std::array<T,D>
-{
-    MATH3D_VECTOR_COMMON_BODY
-
-/* ####################################################################################### */
-public: /* Static constants */
-/* ####################################################################################### */
-
-    /** 2D zero vector. */
-    const static Vector<D,T>& zero()    {static const Vector<D,T> vec { 0, 0 }; return vec;}
-
-    /** 2D one vector. */
-    const static Vector<D,T>& one()     {static const Vector<D,T> vec { 1, 1 }; return vec;}
-
-    /** 2D -X axis. */
-    const static Vector<D,T>& left()    {static const Vector<D,T> vec {-1, 0 }; return vec;}
-
-    /** 2D +X axis. */
-    const static Vector<D,T>& right()   {static const Vector<D,T> vec { 1, 0 }; return vec;}
-
-    /** 2D +Y axis. */
-    const static Vector<D,T>& up()      {static const Vector<D,T> vec { 0, 1 }; return vec;}
-
-    /** 2D -Y axis. */
-    const static Vector<D,T>& down()    {static const Vector<D,T> vec { 0,-1 }; return vec;}
-};
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-struct Vector <D, T, std::enable_if_t<(D == 3)>> : private std::array<T,D>
-{
-    MATH3D_VECTOR_COMMON_BODY
-
-/* ####################################################################################### */
-public: /* Static constants */
-/* ####################################################################################### */
-
-    /** 3D zero vector. */
-    const static Vector<D,T>& zero()        {static const Vector<D,T> vec { 0, 0, 0 }; return vec;}
-
-    /** 3D one vector. */
-    const static Vector<D,T>& one()         {static const Vector<D,T> vec { 1, 1, 1 }; return vec;}
-
-    /** 3D -X axis. */
-    const static Vector<D,T>& left()        {static const Vector<D,T> vec {-1, 0, 0 }; return vec;}
-
-    /** 3D +X axis. */
-    const static Vector<D,T>& right()       {static const Vector<D,T> vec { 1, 0, 0 }; return vec;}
-
-    /** 3D +Y axis. */
-    const static Vector<D,T>& up()          {static const Vector<D,T> vec { 0, 1, 0 }; return vec;}
-
-    /** 3D -Y axis. */
-    const static Vector<D,T>& down()        {static const Vector<D,T> vec { 0,-1, 0 }; return vec;}
-
-    /** 3D +Z axis. */
-    const static Vector<D,T>& forward()     {static const Vector<D,T> vec { 0, 0, 1 }; return vec;}
-
-    /** 3D -Z axis. */
-    const static Vector<D,T>& backward()    {static const Vector<D,T> vec { 0, 0,-1 }; return vec;}
-
-/* ####################################################################################### */
-public: /* Components accessing */
-/* ####################################################################################### */
-
-    /**
-     * Get Z component reference.
-     * @return Z component reference.
      */
-    constexpr reference
-    z() {return base_type::at(2);}
-
-    /**
-     * Get Z component const reference.
-     * @return Z component const reference.
-     */
-    constexpr const_reference
-    z() const {return base_type::at(2);}
-};
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-struct Vector <D, T, std::enable_if_t<(D > 3)>> : private std::array<T,D>
-{
-    MATH3D_VECTOR_COMMON_BODY
+    constexpr const_pointer
+    data() const {return base_type::data();}
 
 /* ####################################################################################### */
-public: /* Components accessing */
+public: /* Iterators */
 /* ####################################################################################### */
 
-    /**
-     * Get Z component reference.
-     * @return Z component reference.
-     */
-    constexpr reference
-    z() {return base_type::at(2);}
+    constexpr iterator
+    begin() {return base_type::begin();}
 
-    /**
-     * Get Z component const reference.
-     * @return Z component const reference.
-     */
-    constexpr const_reference
-    z() const {return base_type::at(2);}
+    constexpr iterator
+    end() {return base_type::end();}
 
-    /**
-     * Get W component reference.
-     * @return W component reference.
-     */
-    constexpr reference
-    w() {return base_type::at(3);}
+    constexpr const_iterator
+    begin() const {return base_type::begin();}
 
-    /**
-     * Get W component const reference.
-     * @return W component const reference.
-     */
-    constexpr const_reference
-    w() const {return base_type::at(3);}
+    constexpr const_iterator
+    end() const {return base_type::end();}
+
+    constexpr const_iterator
+    cbegin() const {return base_type::cbegin();}
+
+    constexpr const_iterator
+    cend() const {return base_type::cend();}
+
+    constexpr reverse_iterator
+    rbegin() {return base_type::rbegin();}
+
+    constexpr reverse_iterator
+    rend() {return base_type::rend();}
+
+    constexpr const_reverse_iterator
+    rbegin() const {return base_type::rbegin();}
+
+    constexpr const_reverse_iterator
+    rend() const {return base_type::rend();}
+
+    constexpr const_reverse_iterator
+    crbegin() const {return base_type::crbegin();}
+
+    constexpr const_reverse_iterator
+    crend() const {return base_type::crend();}
 };
 
 #endif // MATH3D_VECTOR_HPP

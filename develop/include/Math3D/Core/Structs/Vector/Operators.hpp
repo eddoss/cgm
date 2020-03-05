@@ -508,21 +508,21 @@ operator++(Vector<D,T>& vector)
 {
     if constexpr (D == 2)
     {
-        ++vector[0];
-        ++vector[1];
+        ++vector.x;
+        ++vector.y;
     }
     else if constexpr (D == 3)
     {
-        ++vector[0];
-        ++vector[1];
-        ++vector[2];
+        ++vector.x;
+        ++vector.y;
+        ++vector.z;
     }
     else if constexpr (D == 4)
     {
-        ++vector[0];
-        ++vector[1];
-        ++vector[2];
-        ++vector[3];
+        ++vector.x;
+        ++vector.y;
+        ++vector.z;
+        ++vector.w;
     }
     else
     {
@@ -540,21 +540,21 @@ operator--(Vector<D,T>& vector)
 {
     if constexpr (D == 2)
     {
-        --vector[0];
-        --vector[1];
+        --vector.x;
+        --vector.y;
     }
     else if constexpr (D == 3)
     {
-        --vector[0];
-        --vector[1];
-        --vector[2];
+        --vector.x;
+        --vector.y;
+        --vector.z;
     }
     else if constexpr (D == 4)
     {
-        --vector[0];
-        --vector[1];
-        --vector[2];
-        --vector[3];
+        --vector.x;
+        --vector.y;
+        --vector.z;
+        --vector.w;
     }
     else
     {
@@ -574,21 +574,21 @@ operator++(Vector<D,T>& vector, int)
 
     if constexpr (D == 2)
     {
-        ++vector[0];
-        ++vector[1];
+        ++vector.x;
+        ++vector.y;
     }
     else if constexpr (D == 3)
     {
-        ++vector[0];
-        ++vector[1];
-        ++vector[2];
+        ++vector.x;
+        ++vector.y;
+        ++vector.z;
     }
     else if constexpr (D == 4)
     {
-        ++vector[0];
-        ++vector[1];
-        ++vector[2];
-        ++vector[3];
+        ++vector.x;
+        ++vector.y;
+        ++vector.z;
+        ++vector.w;
     }
     else
     {
@@ -608,21 +608,21 @@ operator--(Vector<D,T>& vector, int)
 
     if constexpr (D == 2)
     {
-        --vector[0];
-        --vector[1];
+        --vector.x;
+        --vector.y;
     }
     else if constexpr (D == 3)
     {
-        --vector[0];
-        --vector[1];
-        --vector[2];
+        --vector.x;
+        --vector.y;
+        --vector.z;
     }
     else if constexpr (D == 4)
     {
-        --vector[0];
-        --vector[1];
-        --vector[2];
-        --vector[3];
+        --vector.x;
+        --vector.y;
+        --vector.z;
+        --vector.w;
     }
     else
     {
@@ -642,21 +642,21 @@ operator+=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
-        vector[0] += scalar;
-        vector[1] += scalar;
+        vector.x += scalar;
+        vector.y += scalar;
     }
     else if constexpr (D == 3)
     {
-        vector[0] += scalar;
-        vector[1] += scalar;
-        vector[2] += scalar;
+        vector.x += scalar;
+        vector.y += scalar;
+        vector.z += scalar;
     }
     else if constexpr (D == 4)
     {
-        vector[0] += scalar;
-        vector[1] += scalar;
-        vector[2] += scalar;
-        vector[3] += scalar;
+        vector.x += scalar;
+        vector.y += scalar;
+        vector.z += scalar;
+        vector.w += scalar;
     }
     else
     {
@@ -674,21 +674,21 @@ operator+=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        A[0] += B[0];
-        A[1] += B[1];
+        A.x += B.x;
+        A.y += B.y;
     }
     else if constexpr (D == 3)
     {
-        A[0] += B[0];
-        A[1] += B[1];
-        A[2] += B[2];
+        A.x += B.x;
+        A.y += B.y;
+        A.z += B.z;
     }
     else if constexpr (D == 4)
     {
-        A[0] += B[0];
-        A[1] += B[1];
-        A[2] += B[2];
-        A[3] += B[3];
+        A.x += B.x;
+        A.y += B.y;
+        A.z += B.z;
+        A.w += B.w;
     }
     else
     {
@@ -708,21 +708,21 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 
     if constexpr (D == 2)
     {
-        copy[0] += B[0];
-        copy[1] += B[1];
+        copy.x += B.x;
+        copy.y += B.y;
     }
     else if constexpr (D == 3)
     {
-        copy[0] += B[0];
-        copy[1] += B[1];
-        copy[2] += B[2];
+        copy.x += B.x;
+        copy.y += B.y;
+        copy.z += B.z;
     }
     else if constexpr (D == 4)
     {
-        copy[0] += B[0];
-        copy[1] += B[1];
-        copy[2] += B[2];
-        copy[3] += B[3];
+        copy.x += B.x;
+        copy.y += B.y;
+        copy.z += B.z;
+        copy.w += B.w;
     }
     else
     {
@@ -743,21 +743,21 @@ operator+(const Vector<D,T>& vector, TScalar scalar)
 
     if constexpr (D == 2)
     {
-        copy[0] += value;
-        copy[1] += value;
+        copy.x += value;
+        copy.y += value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] += value;
-        copy[1] += value;
-        copy[2] += value;
+        copy.x += value;
+        copy.y += value;
+        copy.z += value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] += value;
-        copy[1] += value;
-        copy[2] += value;
-        copy[3] += value;
+        copy.x += value;
+        copy.y += value;
+        copy.z += value;
+        copy.w += value;
     }
     else
     {
@@ -778,21 +778,21 @@ operator+(T scalar, const Vector<D,T>& vector)
 
     if constexpr (D == 2)
     {
-        copy[0] += value;
-        copy[1] += value;
+        copy.x += value;
+        copy.y += value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] += value;
-        copy[1] += value;
-        copy[2] += value;
+        copy.x += value;
+        copy.y += value;
+        copy.z += value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] += value;
-        copy[1] += value;
-        copy[2] += value;
-        copy[3] += value;
+        copy.x += value;
+        copy.y += value;
+        copy.z += value;
+        copy.w += value;
     }
     else
     {
@@ -814,21 +814,21 @@ operator-(Vector<D,T>& vector)
 
     if constexpr (D == 2)
     {
-        copy[0] = -copy[0];
-        copy[1] = -copy[1];
+        copy.x = -copy.x;
+        copy.y = -copy.y;
     }
     else if constexpr (D == 3)
     {
-        copy[0] = -copy[0];
-        copy[1] = -copy[1];
-        copy[2] = -copy[2];
+        copy.x = -copy.x;
+        copy.y = -copy.y;
+        copy.z = -copy.z;
     }
     else if constexpr (D == 4)
     {
-        copy[0] = -copy[0];
-        copy[1] = -copy[1];
-        copy[2] = -copy[2];
-        copy[3] = -copy[3];
+        copy.x = -copy.x;
+        copy.y = -copy.y;
+        copy.z = -copy.z;
+        copy.w = -copy.w;
     }
     else
     {
@@ -846,21 +846,21 @@ operator-=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
-        vector[0] -= scalar;
-        vector[1] -= scalar;
+        vector.x -= scalar;
+        vector.y -= scalar;
     }
     else if constexpr (D == 3)
     {
-        vector[0] -= scalar;
-        vector[1] -= scalar;
-        vector[2] -= scalar;
+        vector.x -= scalar;
+        vector.y -= scalar;
+        vector.z -= scalar;
     }
     else if constexpr (D == 4)
     {
-        vector[0] -= scalar;
-        vector[1] -= scalar;
-        vector[2] -= scalar;
-        vector[3] -= scalar;
+        vector.x -= scalar;
+        vector.y -= scalar;
+        vector.z -= scalar;
+        vector.w -= scalar;
     }
     else
     {
@@ -878,21 +878,21 @@ operator-=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        A[0] -= B[0];
-        A[1] -= B[1];
+        A.x -= B.x;
+        A.y -= B.y;
     }
     else if constexpr (D == 3)
     {
-        A[0] -= B[0];
-        A[1] -= B[1];
-        A[2] -= B[2];
+        A.x -= B.x;
+        A.y -= B.y;
+        A.z -= B.z;
     }
     else if constexpr (D == 4)
     {
-        A[0] -= B[0];
-        A[1] -= B[1];
-        A[2] -= B[2];
-        A[3] -= B[3];
+        A.x -= B.x;
+        A.y -= B.y;
+        A.z -= B.z;
+        A.w -= B.w;
     }
     else
     {
@@ -912,21 +912,21 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 
     if constexpr (D == 2)
     {
-        copy[0] -= B[0];
-        copy[1] -= B[1];
+        copy.x -= B.x;
+        copy.y -= B.y;
     }
     else if constexpr (D == 3)
     {
-        copy[0] -= B[0];
-        copy[1] -= B[1];
-        copy[2] -= B[2];
+        copy.x -= B.x;
+        copy.y -= B.y;
+        copy.z -= B.z;
     }
     else if constexpr (D == 4)
     {
-        copy[0] -= B[0];
-        copy[1] -= B[1];
-        copy[2] -= B[2];
-        copy[3] -= B[3];
+        copy.x -= B.x;
+        copy.y -= B.y;
+        copy.z -= B.z;
+        copy.w -= B.w;
     }
     else
     {
@@ -947,21 +947,21 @@ operator-(const Vector<D,T>& vector, TScalar scalar)
 
     if constexpr (D == 2)
     {
-        copy[0] -= value;
-        copy[1] -= value;
+        copy.x -= value;
+        copy.y -= value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] -= value;
-        copy[1] -= value;
-        copy[2] -= value;
+        copy.x -= value;
+        copy.y -= value;
+        copy.z -= value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] -= value;
-        copy[1] -= value;
-        copy[2] -= value;
-        copy[3] -= value;
+        copy.x -= value;
+        copy.y -= value;
+        copy.z -= value;
+        copy.w -= value;
     }
     else
     {
@@ -981,21 +981,21 @@ operator*=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
-        vector[0] *= scalar;
-        vector[1] *= scalar;
+        vector.x *= scalar;
+        vector.y *= scalar;
     }
     else if constexpr (D == 3)
     {
-        vector[0] *= scalar;
-        vector[1] *= scalar;
-        vector[2] *= scalar;
+        vector.x *= scalar;
+        vector.y *= scalar;
+        vector.z *= scalar;
     }
     else if constexpr (D == 4)
     {
-        vector[0] *= scalar;
-        vector[1] *= scalar;
-        vector[2] *= scalar;
-        vector[3] *= scalar;
+        vector.x *= scalar;
+        vector.y *= scalar;
+        vector.z *= scalar;
+        vector.w *= scalar;
     }
     else
     {
@@ -1013,21 +1013,21 @@ operator*=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        A[0] *= B[0];
-        A[1] *= B[1];
+        A.x *= B.x;
+        A.y *= B.y;
     }
     else if constexpr (D == 3)
     {
-        A[0] *= B[0];
-        A[1] *= B[1];
-        A[2] *= B[2];
+        A.x *= B.x;
+        A.y *= B.y;
+        A.z *= B.z;
     }
     else if constexpr (D == 4)
     {
-        A[0] *= B[0];
-        A[1] *= B[1];
-        A[2] *= B[2];
-        A[3] *= B[3];
+        A.x *= B.x;
+        A.y *= B.y;
+        A.z *= B.z;
+        A.w *= B.w;
     }
     else
     {
@@ -1047,21 +1047,21 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B)
 
     if constexpr (D == 2)
     {
-        copy[0] *= B[0];
-        copy[1] *= B[1];
+        copy.x *= B.x;
+        copy.y *= B.y;
     }
     else if constexpr (D == 3)
     {
-        copy[0] *= B[0];
-        copy[1] *= B[1];
-        copy[2] *= B[2];
+        copy.x *= B.x;
+        copy.y *= B.y;
+        copy.z *= B.z;
     }
     else if constexpr (D == 4)
     {
-        copy[0] *= B[0];
-        copy[1] *= B[1];
-        copy[2] *= B[2];
-        copy[3] *= B[3];
+        copy.x *= B.x;
+        copy.y *= B.y;
+        copy.z *= B.z;
+        copy.w *= B.w;
     }
     else
     {
@@ -1082,21 +1082,21 @@ operator*(const Vector<D,T>& vector, TScalar scalar)
 
     if constexpr (D == 2)
     {
-        copy[0] *= value;
-        copy[1] *= value;
+        copy.x *= value;
+        copy.y *= value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] *= value;
-        copy[1] *= value;
-        copy[2] *= value;
+        copy.x *= value;
+        copy.y *= value;
+        copy.z *= value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] *= value;
-        copy[1] *= value;
-        copy[2] *= value;
-        copy[3] *= value;
+        copy.x *= value;
+        copy.y *= value;
+        copy.z *= value;
+        copy.w *= value;
     }
     else
     {
@@ -1117,21 +1117,21 @@ operator*(T scalar, const Vector<D,T>& vector)
 
     if constexpr (D == 2)
     {
-        copy[0] *= value;
-        copy[1] *= value;
+        copy.x *= value;
+        copy.y *= value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] *= value;
-        copy[1] *= value;
-        copy[2] *= value;
+        copy.x *= value;
+        copy.y *= value;
+        copy.z *= value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] *= value;
-        copy[1] *= value;
-        copy[2] *= value;
-        copy[3] *= value;
+        copy.x *= value;
+        copy.y *= value;
+        copy.z *= value;
+        copy.w *= value;
     }
     else
     {
@@ -1151,21 +1151,21 @@ operator/=(Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
-        vector[0] /= scalar;
-        vector[1] /= scalar;
+        vector.x /= scalar;
+        vector.y /= scalar;
     }
     else if constexpr (D == 3)
     {
-        vector[0] /= scalar;
-        vector[1] /= scalar;
-        vector[2] /= scalar;
+        vector.x /= scalar;
+        vector.y /= scalar;
+        vector.z /= scalar;
     }
     else if constexpr (D == 4)
     {
-        vector[0] /= scalar;
-        vector[1] /= scalar;
-        vector[2] /= scalar;
-        vector[3] /= scalar;
+        vector.x /= scalar;
+        vector.y /= scalar;
+        vector.z /= scalar;
+        vector.w /= scalar;
     }
     else
     {
@@ -1183,21 +1183,21 @@ operator/=(Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        A[0] /= B[0];
-        A[1] /= B[1];
+        A.x /= B.x;
+        A.y /= B.y;
     }
     else if constexpr (D == 3)
     {
-        A[0] /= B[0];
-        A[1] /= B[1];
-        A[2] /= B[2];
+        A.x /= B.x;
+        A.y /= B.y;
+        A.z /= B.z;
     }
     else if constexpr (D == 4)
     {
-        A[0] /= B[0];
-        A[1] /= B[1];
-        A[2] /= B[2];
-        A[3] /= B[3];
+        A.x /= B.x;
+        A.y /= B.y;
+        A.z /= B.z;
+        A.w /= B.w;
     }
     else
     {
@@ -1217,21 +1217,21 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B)
 
     if constexpr (D == 2)
     {
-        copy[0] /= B[0];
-        copy[1] /= B[1];
+        copy.x /= B.x;
+        copy.y /= B.y;
     }
     else if constexpr (D == 3)
     {
-        copy[0] /= B[0];
-        copy[1] /= B[1];
-        copy[2] /= B[2];
+        copy.x /= B.x;
+        copy.y /= B.y;
+        copy.z /= B.z;
     }
     else if constexpr (D == 4)
     {
-        copy[0] /= B[0];
-        copy[1] /= B[1];
-        copy[2] /= B[2];
-        copy[3] /= B[3];
+        copy.x /= B.x;
+        copy.y /= B.y;
+        copy.z /= B.z;
+        copy.w /= B.w;
     }
     else
     {
@@ -1252,21 +1252,21 @@ operator/(const Vector<D,T>& vector, TScalar scalar)
 
     if constexpr (D == 2)
     {
-        copy[0] /= value;
-        copy[1] /= value;
+        copy.x /= value;
+        copy.y /= value;
     }
     else if constexpr (D == 3)
     {
-        copy[0] /= value;
-        copy[1] /= value;
-        copy[2] /= value;
+        copy.x /= value;
+        copy.y /= value;
+        copy.z /= value;
     }
     else if constexpr (D == 4)
     {
-        copy[0] /= value;
-        copy[1] /= value;
-        copy[2] /= value;
-        copy[3] /= value;
+        copy.x /= value;
+        copy.y /= value;
+        copy.z /= value;
+        copy.w /= value;
     }
     else
     {
@@ -1286,21 +1286,21 @@ operator==(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  equal(vector[0], scalar) &&
-                equal(vector[1], scalar);
+        return  equal(vector.x, scalar) &&
+                equal(vector.y, scalar);
     }
     else if constexpr (D == 3)
     {
-        return  equal(vector[0], scalar) &&
-                equal(vector[1], scalar) &&
-                equal(vector[2], scalar);
+        return  equal(vector.x, scalar) &&
+                equal(vector.y, scalar) &&
+                equal(vector.z, scalar);
     }
     else if constexpr (D == 4)
     {
-        return  equal(vector[0], scalar) &&
-                equal(vector[1], scalar) &&
-                equal(vector[2], scalar) &&
-                equal(vector[3], scalar);
+        return  equal(vector.x, scalar) &&
+                equal(vector.y, scalar) &&
+                equal(vector.z, scalar) &&
+                equal(vector.w, scalar);
     }
     else
     {
@@ -1317,21 +1317,21 @@ operator!=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  notEqual(vector[0], scalar) &&
-                notEqual(vector[1], scalar);
+        return  notEqual(vector.x, scalar) &&
+                notEqual(vector.y, scalar);
     }
     else if constexpr (D == 3)
     {
-        return  notEqual(vector[0], scalar) &&
-                notEqual(vector[1], scalar) &&
-                notEqual(vector[2], scalar);
+        return  notEqual(vector.x, scalar) &&
+                notEqual(vector.y, scalar) &&
+                notEqual(vector.z, scalar);
     }
     else if constexpr (D == 4)
     {
-        return  notEqual(vector[0], scalar) &&
-                notEqual(vector[1], scalar) &&
-                notEqual(vector[2], scalar) &&
-                notEqual(vector[3], scalar);
+        return  notEqual(vector.x, scalar) &&
+                notEqual(vector.y, scalar) &&
+                notEqual(vector.z, scalar) &&
+                notEqual(vector.w, scalar);
     }
     else
     {
@@ -1348,21 +1348,21 @@ operator<(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  vector[0] < scalar &&
-                vector[1] < scalar;
+        return  vector.x < scalar &&
+                vector.y < scalar;
     }
     else if constexpr (D == 3)
     {
-        return  vector[0] < scalar &&
-                vector[1] < scalar &&
-                vector[2] < scalar;
+        return  vector.x < scalar &&
+                vector.y < scalar &&
+                vector.z < scalar;
     }
     else if constexpr (D == 4)
     {
-        return  vector[0] < scalar &&
-                vector[1] < scalar &&
-                vector[2] < scalar &&
-                vector[3] < scalar;
+        return  vector.x < scalar &&
+                vector.y < scalar &&
+                vector.z < scalar &&
+                vector.w < scalar;
     }
     else
     {
@@ -1379,21 +1379,21 @@ operator>(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  vector[0] > scalar &&
-                vector[1] > scalar;
+        return  vector.x > scalar &&
+                vector.y > scalar;
     }
     else if constexpr (D == 3)
     {
-        return  vector[0] > scalar &&
-                vector[1] > scalar &&
-                vector[2] > scalar;
+        return  vector.x > scalar &&
+                vector.y > scalar &&
+                vector.z > scalar;
     }
     else if constexpr (D == 4)
     {
-        return  vector[0] > scalar &&
-                vector[1] > scalar &&
-                vector[2] > scalar &&
-                vector[3] > scalar;
+        return  vector.x > scalar &&
+                vector.y > scalar &&
+                vector.z > scalar &&
+                vector.w > scalar;
     }
     else
     {
@@ -1410,21 +1410,21 @@ operator<=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  vector[0] <= scalar &&
-                vector[1] <= scalar;
+        return  vector.x <= scalar &&
+                vector.y <= scalar;
     }
     else if constexpr (D == 3)
     {
-        return  vector[0] <= scalar &&
-                vector[1] <= scalar &&
-                vector[2] <= scalar;
+        return  vector.x <= scalar &&
+                vector.y <= scalar &&
+                vector.z <= scalar;
     }
     else if constexpr (D == 4)
     {
-        return  vector[0] <= scalar &&
-                vector[1] <= scalar &&
-                vector[2] <= scalar &&
-                vector[3] <= scalar;
+        return  vector.x <= scalar &&
+                vector.y <= scalar &&
+                vector.z <= scalar &&
+                vector.w <= scalar;
     }
     else
     {
@@ -1441,21 +1441,21 @@ operator>=(const Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  vector[0] >= scalar &&
-                vector[1] >= scalar;
+        return  vector.x >= scalar &&
+                vector.y >= scalar;
     }
     else if constexpr (D == 3)
     {
-        return  vector[0] >= scalar &&
-                vector[1] >= scalar &&
-                vector[2] >= scalar;
+        return  vector.x >= scalar &&
+                vector.y >= scalar &&
+                vector.z >= scalar;
     }
     else if constexpr (D == 4)
     {
-        return  vector[0] >= scalar &&
-                vector[1] >= scalar &&
-                vector[2] >= scalar &&
-                vector[3] >= scalar;
+        return  vector.x >= scalar &&
+                vector.y >= scalar &&
+                vector.z >= scalar &&
+                vector.w >= scalar;
     }
     else
     {
@@ -1474,21 +1474,21 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  equal(A[0], B[0]) &&
-                equal(A[1], B[1]);
+        return  equal(A.x, B.x) &&
+                equal(A.y, B.y);
     }
     else if constexpr (D == 3)
     {
-        return  equal(A[0], B[0]) &&
-                equal(A[1], B[1]) &&
-                equal(A[2], B[2]);
+        return  equal(A.x, B.x) &&
+                equal(A.y, B.y) &&
+                equal(A.z, B.z);
     }
     else if constexpr (D == 4)
     {
-        return  equal(A[0], B[0]) &&
-                equal(A[1], B[1]) &&
-                equal(A[2], B[2]) &&
-                equal(A[3], B[3]);
+        return  equal(A.x, B.x) &&
+                equal(A.y, B.y) &&
+                equal(A.z, B.z) &&
+                equal(A.w, B.w);
     }
     else
     {
@@ -1505,21 +1505,21 @@ operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  notEqual(A[0], B[0]) &&
-                notEqual(A[1], B[1]);
+        return  notEqual(A.x, B.x) &&
+                notEqual(A.y, B.y);
     }
     else if constexpr (D == 3)
     {
-        return  notEqual(A[0], B[0]) &&
-                notEqual(A[1], B[1]) &&
-                notEqual(A[2], B[2]);
+        return  notEqual(A.x, B.x) &&
+                notEqual(A.y, B.y) &&
+                notEqual(A.z, B.z);
     }
     else if constexpr (D == 4)
     {
-        return  notEqual(A[0], B[0]) &&
-                notEqual(A[1], B[1]) &&
-                notEqual(A[2], B[2]) &&
-                notEqual(A[3], B[3]);
+        return  notEqual(A.x, B.x) &&
+                notEqual(A.y, B.y) &&
+                notEqual(A.z, B.z) &&
+                notEqual(A.w, B.w);
     }
     else
     {
@@ -1536,21 +1536,21 @@ operator<(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  A[0] < B[0] &&
-                A[1] < B[1];
+        return  A.x < B.x &&
+                A.y < B.y;
     }
     else if constexpr (D == 3)
     {
-        return  A[0] < B[0] &&
-                A[1] < B[1] &&
-                A[2] < B[2];
+        return  A.x < B.x &&
+                A.y < B.y &&
+                A.z < B.z;
     }
     else if constexpr (D == 4)
     {
-        return  A[0] < B[0] &&
-                A[1] < B[1] &&
-                A[2] < B[2] &&
-                A[3] < B[3];
+        return  A.x < B.x &&
+                A.y < B.y &&
+                A.z < B.z &&
+                A.w < B.w;
     }
     else
     {
@@ -1567,21 +1567,21 @@ operator>(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  A[0] > B[0] &&
-                A[1] > B[1];
+        return  A.x > B.x &&
+                A.y > B.y;
     }
     else if constexpr (D == 3)
     {
-        return  A[0] > B[0] &&
-                A[1] > B[1] &&
-                A[2] > B[2];
+        return  A.x > B.x &&
+                A.y > B.y &&
+                A.z > B.z;
     }
     else if constexpr (D == 4)
     {
-        return  A[0] > B[0] &&
-                A[1] > B[1] &&
-                A[2] > B[2] &&
-                A[3] > B[3];
+        return  A.x > B.x &&
+                A.y > B.y &&
+                A.z > B.z &&
+                A.w > B.w;
     }
     else
     {
@@ -1598,21 +1598,21 @@ operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  A[0] <= B[0] &&
-                A[1] <= B[1];
+        return  A.x <= B.x &&
+                A.y <= B.y;
     }
     else if constexpr (D == 3)
     {
-        return  A[0] <= B[0] &&
-                A[1] <= B[1] &&
-                A[2] <= B[2];
+        return  A.x <= B.x &&
+                A.y <= B.y &&
+                A.z <= B.z;
     }
     else if constexpr (D == 4)
     {
-        return  A[0] <= B[0] &&
-                A[1] <= B[1] &&
-                A[2] <= B[2] &&
-                A[3] <= B[3];
+        return  A.x <= B.x &&
+                A.y <= B.y &&
+                A.z <= B.z &&
+                A.w <= B.w;
     }
     else
     {
@@ -1629,21 +1629,21 @@ operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  A[0] >= B[0] &&
-                A[1] >= B[1];
+        return  A.x >= B.x &&
+                A.y >= B.y;
     }
     else if constexpr (D == 3)
     {
-        return  A[0] >= B[0] &&
-                A[1] >= B[1] &&
-                A[2] >= B[2];
+        return  A.x >= B.x &&
+                A.y >= B.y &&
+                A.z >= B.z;
     }
     else if constexpr (D == 4)
     {
-        return  A[0] >= B[0] &&
-                A[1] >= B[1] &&
-                A[2] >= B[2] &&
-                A[3] >= B[3];
+        return  A.x >= B.x &&
+                A.y >= B.y &&
+                A.z >= B.z &&
+                A.w >= B.w;
     }
     else
     {
@@ -1662,15 +1662,15 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return A.x() * B.x() + A.y() * B.y();
+        return A.x * B.x + A.y * B.y;
     }
     else if constexpr (D == 3)
     {
-        return A.x() * B.x() + A.y() * B.y() + A.z() * B.z();
+        return A.x * B.x + A.y * B.y + A.z * B.z;
     }
     else if constexpr (D == 4)
     {
-        return A.x() * B.x() + A.y() * B.y() + A.z() * B.z() + A.w() * B.w();
+        return A.x * B.x + A.y * B.y + A.z * B.z + A.w() * B.w();
     }
     else
     {
@@ -1691,7 +1691,7 @@ template<typename T>
 constexpr T
 operator^(const Vector<2,T>& A, const Vector<2,T>& B)
 {
-    return A.x() * B.y() - A.y() * B.x();
+    return A.x * B.y - A.y * B.x;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -1702,9 +1702,9 @@ operator^(const Vector<2,T>& A, const Vector<3,T>& B)
 {
     return Vector<3,T>
     {
-        A.y() * B.z(),
-       -A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x()
+        A.y * B.z,
+       -A.x * B.z,
+        A.x * B.y - A.y * B.x
     };
 }
 
@@ -1716,9 +1716,9 @@ operator^(const Vector<2,T>& A, const Vector<4,T>& B)
 {
     return Vector<4,T>
     {
-        A.y() * B.z(),
-       -A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x(),
+        A.y * B.z,
+       -A.x * B.z,
+        A.x * B.y - A.y * B.x,
         static_cast<T>(0)
     };
 }
@@ -1731,9 +1731,9 @@ operator^(const Vector<3,T>& A, const Vector<2,T>& B)
 {
     return Vector<3,T>
     {
-       -A.z() * B.y(),
-        A.z() * B.x(),
-        A.x() * B.y() - A.y() * B.x()
+       -A.z * B.y,
+        A.z * B.x,
+        A.x * B.y - A.y * B.x
     };
 }
 
@@ -1745,9 +1745,9 @@ operator^(const Vector<3,T>& A, const Vector<3,T>& B)
 {
     return Vector<3,T>
     {
-        A.y() * B.z() - A.z() * B.y(),
-        A.z() * B.x() - A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x()
+        A.y * B.z - A.z * B.y,
+        A.z * B.x - A.x * B.z,
+        A.x * B.y - A.y * B.x
     };
 }
 
@@ -1759,9 +1759,9 @@ operator^(const Vector<3,T>& A, const Vector<4,T>& B)
 {
     return Vector<3,T>
     {
-        A.y() * B.z() - A.z() * B.y(),
-        A.z() * B.x() - A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x()
+        A.y * B.z - A.z * B.y,
+        A.z * B.x - A.x * B.z,
+        A.x * B.y - A.y * B.x
     };
 }
 
@@ -1773,9 +1773,9 @@ operator^(const Vector<4,T>& A, const Vector<2,T>& B)
 {
     return Vector<4,T>
     {
-       -A.z() * B.y(),
-        A.z() * B.x(),
-        A.x() * B.y() - A.y() * B.x(),
+       -A.z * B.y,
+        A.z * B.x,
+        A.x * B.y - A.y * B.x,
         static_cast<T>(0)
     };
 }
@@ -1788,9 +1788,9 @@ operator^(const Vector<4,T>& A, const Vector<3,T>& B)
 {
     return Vector<4,T>
     {
-        A.y() * B.z() - A.z() * B.y(),
-        A.z() * B.x() - A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x(),
+        A.y * B.z - A.z * B.y,
+        A.z * B.x - A.x * B.z,
+        A.x * B.y - A.y * B.x,
         static_cast<T>(0)
     };
 }
@@ -1803,9 +1803,9 @@ operator^(const Vector<4,T>& A, const Vector<4,T>& B)
 {
     return Vector<4,T>
     {
-        A.y() * B.z() - A.z() * B.y(),
-        A.z() * B.x() - A.x() * B.z(),
-        A.x() * B.y() - A.y() * B.x(),
+        A.y * B.z - A.z * B.y,
+        A.z * B.x - A.x * B.z,
+        A.x * B.y - A.y * B.x,
         static_cast<T>(0)
     };
 }
