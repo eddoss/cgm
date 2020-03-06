@@ -45,6 +45,7 @@ set(MATRIX_TEST_SUITE
     Matrix/Arithmetic/IncrementDecrement.cpp
     Matrix/Arithmetic/DivisionByScalar.cpp
     Matrix/Arithmetic/MultiplicationToScalar.cpp
+    Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
     Matrix/Arithmetic/MatrixMultiplication.cpp
     Matrix/Comparison/WithOther.cpp
     Matrix/Comparison/WithScalar.cpp

@@ -183,6 +183,17 @@ constexpr Matrix<AM,BN,T>
 operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B);
 
 /**
+ * Multiply matrix A<1,N> by matrix B<N,1>.
+ * @param A left matrix.
+ * @param B right matrix.
+ * @tparam S matrices size.
+ * @return The result of multiplication (scalar value).
+ */
+template<size_t S, typename T>
+constexpr T
+operator*(const Matrix<1,S,T>& A, const Matrix<S,1,T>& B);
+
+/**
  * Multiply scalar to each matrix component.
  * @param matrix Matrix to multiply to.
  * @param scalar Value to multiply.
@@ -196,7 +207,7 @@ operator*=(Matrix<M,N,T>& matrix, TScalar scalar);
  * Multiply square matrix A by square matrix B and store result in A.
  * @param A left matrix.
  * @param B right matrix.
- * @param S matrices size
+ * @tparam S matrices size.
  * @return The result of multiplication.
  */
 template<size_t S, typename T>
@@ -2280,6 +2291,41 @@ operator*(const Matrix<AM,AN,T>& A, const Matrix<AN,BN,T>& B)
             }
         }
         return result;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr T
+operator*(const Matrix<1,S,T>& A, const Matrix<S,1,T>& B)
+{
+    if constexpr (S == 2)
+    {
+        return  A(0,0) * B(0,0) +
+                A(0,1) * B(1,0);
+    }
+    if constexpr (S == 3)
+    {
+        return  A(0,0) * B(0,0) +
+                A(0,1) * B(1,0) +
+                A(0,2) * B(2,0);
+    }
+    if constexpr (S == 4)
+    {
+        return  A(0,0) * B(0,0) +
+                A(0,1) * B(1,0) +
+                A(0,2) * B(2,0) +
+                A(0,3) * B(3,0);
+    }
+    if constexpr (S > 4)
+    {
+        T value {static_cast<T>(0)};
+        for (int i = 0; i < S; ++i)
+        {
+            value += A(0,i) * B(i,0);
+        }
+        return value;
     }
 }
 
