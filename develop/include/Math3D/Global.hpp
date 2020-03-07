@@ -72,4 +72,32 @@ FORCEINLINE bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
 template<>
 FORCEINLINE bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
 
+/* ####################################################################################### */
+/* Floating point numbers comparison with given tolerance */
+/* ####################################################################################### */
+
+/**
+ * Compare floating point number A and B with given tolerance.
+ * @return true if abs(A-B) <= tolerance, false otherwise.
+ */
+template<typename T>
+FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
+equalTolerance(T A, T B, T tolerance)
+{
+    return std::abs(A-B) <= tolerance;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+/**
+ * Compare floating point number A and B with given tolerance.
+ * @return true if abs(A-B) > tolerance, false otherwise.
+ */
+template<typename T>
+FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
+notEqualTolerance(T A, T B, T tolerance)
+{
+    return std::abs(A-B) > tolerance;
+}
+
 #endif // MATH3D_GLOBAL_HPP
