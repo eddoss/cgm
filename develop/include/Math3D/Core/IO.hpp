@@ -22,7 +22,7 @@ operator << (std::ostream& stream, const Vector<D,T>& vec)
                 << std::setw(10)
                 << std::left
                 << std::setprecision(6)
-                << vec[i];
+                << *(vec.data()+i);
     }
     stream << "\n}";
     stream.setf(old_flags);
