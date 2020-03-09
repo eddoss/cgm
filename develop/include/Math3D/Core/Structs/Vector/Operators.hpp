@@ -392,7 +392,7 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B);
  * Calculates cross product of 2D vector and 2D vectors.
  * @param A Left vector.
  * @param B Right vector.
- * @return The cross product (scalar or 3D/4D vector).
+ * @return The cross product.
  */
 template<typename T=FLOAT>
 constexpr T
@@ -1670,14 +1670,14 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B)
     }
     else if constexpr (D == 4)
     {
-        return A.x * B.x + A.y * B.y + A.z * B.z + A.w() * B.w();
+        return A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w;
     }
     else
     {
-        T result {static_cast<T>(0)};
+        T result {zero<T>()};
         for (auto i = 0; i < D; ++i)
         {
-            result += A(i) * B(i);
+            result += A[i] * B[i];
         }
         return result;
     }
@@ -1719,7 +1719,7 @@ operator^(const Vector<2,T>& A, const Vector<4,T>& B)
         A.y * B.z,
        -A.x * B.z,
         A.x * B.y - A.y * B.x,
-        static_cast<T>(0)
+        zero<T>()
     };
 }
 
@@ -1776,7 +1776,7 @@ operator^(const Vector<4,T>& A, const Vector<2,T>& B)
        -A.z * B.y,
         A.z * B.x,
         A.x * B.y - A.y * B.x,
-        static_cast<T>(0)
+        zero<T>()
     };
 }
 
@@ -1791,7 +1791,7 @@ operator^(const Vector<4,T>& A, const Vector<3,T>& B)
         A.y * B.z - A.z * B.y,
         A.z * B.x - A.x * B.z,
         A.x * B.y - A.y * B.x,
-        static_cast<T>(0)
+        zero<T>()
     };
 }
 
@@ -1806,7 +1806,7 @@ operator^(const Vector<4,T>& A, const Vector<4,T>& B)
         A.y * B.z - A.z * B.y,
         A.z * B.x - A.x * B.z,
         A.x * B.y - A.y * B.x,
-        static_cast<T>(0)
+        zero<T>()
     };
 }
 
