@@ -390,3 +390,85 @@ TEST(Vector_Functions, Angle)
         ASSERT_TRUE(equalTolerance(ang,exp,0.01f));
     }
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Vector_Functions, Cross)
+{
+    {
+        Vec2 a {2,3};
+        Vec2 b {4,5};
+
+        ASSERT_EQ(cross(a,b), -2);
+    }
+
+    /* -------------- */
+
+    {
+        Vec2 a {2,3};
+        Vec3 b {4,5,6};
+        Vec3 e {18.0f, -12.0f, -2.0f};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec2 a {2,3};
+        Vec4 b {4,5,6,7};
+        Vec4 e {18, -12, -2, 0};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 a {0,1,0};
+        Vec2 b {1,0};
+        Vec3 e {0,0,-1};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec3 a {0,1,0};
+        Vec3 b {1,0,0};
+        Vec3 e {0,0,-1};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 a {0,1,0,0};
+        Vec2 b {1,0};
+        Vec4 e {0,0,-1,0};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 a {0,1,0,0};
+        Vec3 b {1,0,0};
+        Vec4 e {0,0,-1,0};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+
+    /* -------------- */
+
+    {
+        Vec4 a {0,1,0,0};
+        Vec4 b {1,0,0,0};
+        Vec4 e {0,0,-1,0};
+
+        ASSERT_EQ(cross(a,b), e);
+    }
+}
