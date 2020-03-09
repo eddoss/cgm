@@ -108,6 +108,14 @@ public: /* Constructors */
         : x(singleValue)
         , y(singleValue) {};
 
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y)
+        : x(X)
+        , y(Y) {};
+
 /* ####################################################################################### */
 public: /* Assignment operator */
 /* ####################################################################################### */
@@ -156,6 +164,15 @@ public: /* Constructors */
         : x(singleValue)
         , y(singleValue)
         , z(singleValue) {};
+
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y, T Z)
+        : x(X)
+        , y(Y)
+        , z(Z){};
 
 /* ####################################################################################### */
 public: /* Assignment operator */
@@ -209,6 +226,16 @@ public: /* Constructors */
         , y(singleValue)
         , z(singleValue)
         , w(singleValue) {};
+
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y, T Z, T W)
+        : x(X)
+        , y(Y)
+        , z(Z)
+        , w(W) {};
 
 /* ####################################################################################### */
 public: /* Assignment operator */
