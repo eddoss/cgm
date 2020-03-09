@@ -30,8 +30,8 @@ find_package(GTest REQUIRED)
 
 set(VECTOR_TEST_SUITE
     run.cpp
+    Vector/Functions.cpp
     Vector/Arithmetic.cpp
-    Vector/DotAndCross.cpp
     Vector/ComparisonWithOther.cpp
     Vector/ComparisonWithScalar.cpp
 )
