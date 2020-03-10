@@ -39,6 +39,7 @@ set(VECTOR_TEST_SUITE
 set(MATRIX_TEST_SUITE
     run.cpp
     Matrix/Accessing.cpp
+    Matrix/Functions.cpp
     Matrix/Identity.cpp
     Matrix/Arithmetic/Plus.cpp
     Matrix/Arithmetic/Minus.cpp
