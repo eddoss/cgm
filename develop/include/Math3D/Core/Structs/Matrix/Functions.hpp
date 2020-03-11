@@ -21,8 +21,8 @@ transpose(Matrix<S,S,T>& matrix);
  * @return The transposed matrix.
  */
 template<size_t M, size_t N, typename T>
-constexpr Matrix<N,M>
-transposed(const Matrix<M,N>& matrix);
+constexpr typename Matrix<M,N,T>::Transposed
+transposed(const Matrix<M,N,T>& matrix);
 
 /**
  * Calculate determinant of square matrix.
@@ -48,8 +48,8 @@ cofactors(const Matrix<S,S,T>& matrix);
  * @param[out] success Set this false if cant calculate inverted matrix.
  * @return inverted matrix if could calculate, trash otherwise.
  */
-template<size_t S, typename T>
-static Matrix<S,S,T>
+template<typename TResult=FLOAT, size_t S, typename T>
+constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success);
 
 /* ####################################################################################### */
@@ -66,13 +66,14 @@ transpose(Matrix<S,S,T>& matrix)
     {
         std::swap(matrix(0,1), matrix(1,0));
     }
-    if constexpr (S == 3)
+
+    else if constexpr (S == 3)
     {
         std::swap(matrix(0,1), matrix(1,0));
         std::swap(matrix(0,2), matrix(2,0));
         std::swap(matrix(1,2), matrix(2,1));
     }
-    if constexpr (S == 4)
+    else if constexpr (S == 4)
     {
         std::swap(matrix(0,1), matrix(1,0));
         std::swap(matrix(0,2), matrix(2,0));
@@ -98,16 +99,20 @@ transpose(Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-constexpr Matrix<N,M,T>&
-transposed(Matrix<M,N,T>& matrix)
+constexpr typename Matrix<M,N,T>::Transposed
+transposed(const Matrix<M,N,T>& matrix)
 {
+    using Transposed = typename Matrix<M,N,T>::Transposed;
+
     if constexpr (M==N)
     {
-        return transpose(Matrix(matrix));
+        auto copy {Matrix<M,N,T>(matrix)};
+        transpose(copy);
+        return copy;
     }
     if constexpr (M == 1 && N == 2)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0),
             matrix(0,1)
@@ -115,7 +120,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 1 && N == 3)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0),
             matrix(0,1),
@@ -124,7 +129,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 1 && N == 4)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0),
             matrix(0,1),
@@ -134,28 +139,28 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 2 && N == 1)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(0,1)
         };
     }
     if constexpr (M == 3 && N == 1)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(0,1), matrix(0,2)
         };
     }
     if constexpr (M == 4 && N == 1)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(0,1), matrix(0,2), matrix(0,3)
         };
     }
     if constexpr (M == 2 && N == 3)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0),
             matrix(0,1), matrix(1,1),
@@ -164,7 +169,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 2 && N == 4)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0),
             matrix(0,1), matrix(1,1),
@@ -174,7 +179,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 3 && N == 2)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0), matrix(2,0),
             matrix(0,1), matrix(1,1), matrix(2,1),
@@ -182,7 +187,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 3 && N == 4)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0), matrix(2,0),
             matrix(0,1), matrix(1,1), matrix(2,1),
@@ -192,7 +197,7 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 4 && N == 2)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
             matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1)
@@ -200,15 +205,13 @@ transposed(Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 4 && N == 3)
     {
-        return Matrix<N,M,T>
+        return Transposed
         {
             matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
             matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1),
             matrix(0,2), matrix(1,2), matrix(2,2), matrix(3,2)
         };
     }
-
-    return matrix;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -217,6 +220,8 @@ template<size_t S, typename T>
 constexpr T
 determinant(const Matrix<S,S,T>& matrix)
 {
+    static_assert(S <= 4, "Matrix functions. Cant calculate determinant for matrices more than 4 size.");
+
     if constexpr (S == 2)
     {
         return matrix(0,0)*matrix(1,1) - matrix(0,1)*matrix(1,0);
@@ -256,11 +261,6 @@ determinant(const Matrix<S,S,T>& matrix)
                     matrix(1,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
                 );
     }
-
-    if constexpr (S > 4)
-    {
-        static_assert(S > 4, "Matrix functions. Cant calculate determinant for matrices more than 4 size.");
-    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -269,22 +269,24 @@ template<size_t S, typename T>
 constexpr Matrix<S,S,T>
 cofactors(const Matrix<S,S,T>& matrix)
 {
+    static_assert(S <= 4, "Matrix functions. Cant calculate cofactors for matrices more than 4 size.");
+
     if constexpr (S == 2)
     {
-        return Matrix<S,S>
+        return Matrix<S,S,T>
         {
-            matrix(1,1),    -matrix(0,1),
-            -matrix(1,0),    matrix(0,0),
+            matrix(1,1),    -matrix(1,0),
+            -matrix(0,1),    matrix(0,0),
         };
     }
 
     if constexpr (S == 3)
     {
-        return Matrix<S,S>
+        return Matrix<S,S,T>
         {
-            matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1),  matrix(1,2)*matrix(2,0) - matrix(1,0)*matrix(2,2),  matrix(1,0)*matrix(2,1) - matrix(1,2)*matrix(2,0),
-            matrix(0,2)*matrix(2,1) - matrix(0,1)*matrix(2,2),  matrix(0,0)*matrix(2,2) - matrix(0,2)*matrix(2,0),  matrix(0,1)*matrix(2,0) - matrix(0,0)*matrix(2,1),
-            matrix(0,1)*matrix(1,2) - matrix(0,2)*matrix(1,1),  matrix(0,2)*matrix(1,0) - matrix(0,0)*matrix(1,2),  matrix(0,0)*matrix(1,1) - matrix(0,1)*matrix(1,0)
+            matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1), matrix(1,2)*matrix(2,0) - matrix(1,0)*matrix(2,2), matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0),
+            matrix(0,2)*matrix(2,1) - matrix(0,1)*matrix(2,2), matrix(0,0)*matrix(2,2) - matrix(0,2)*matrix(2,0), matrix(0,1)*matrix(2,0) - matrix(0,0)*matrix(2,1),
+            matrix(0,1)*matrix(1,2) - matrix(0,2)*matrix(1,1), matrix(0,2)*matrix(1,0) - matrix(0,0)*matrix(1,2), matrix(0,0)*matrix(1,1) - matrix(0,1)*matrix(1,0)
         };
     }
 
@@ -310,32 +312,27 @@ cofactors(const Matrix<S,S,T>& matrix)
             matrix(0,0) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)) - matrix(0,1) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)) + matrix(0,2) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0))
         };
     }
-
-    if constexpr (S > 4)
-    {
-        static_assert(S > 4, "Matrix functions. Cant calculate cofactors for matrices more than 4 size.");
-    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t S, typename T>
-Matrix<S,S,T>
-inverted(const Matrix<S,S>& matrix, bool& success)
+template<typename TResult, size_t S, typename T>
+constexpr Matrix<S,S,TResult>
+inverted(const Matrix<S,S,T>& matrix, bool& success)
 {
-    static_assert(S > 4, "Matrix functions. Cant calculate inverted matrices more than 4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrices more than 4 size.");
 
     T det {determinant(matrix)};
 
     if (equal(det, zero<T>()))
     {
         success = false;
-        return Matrix<S,S,T>();
+        return Matrix<S,S,TResult>();
     }
     else
     {
         success = true;
-        return transposed(cofactors(matrix)/det);
+        return transposed(cofactors(matrix))/det;
     }
 }
 

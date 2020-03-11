@@ -2837,8 +2837,50 @@ constexpr bool
 operator==(const Matrix<M,N,T>& matrix, T scalar)
 {
     T value {static_cast<T>(scalar)};
-    
-    if constexpr (M == 2 && N == 2)
+
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(0,1), value);
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(0,1), value) &&
+        equal(matrix(0,2), value);
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(0,1), value) &&
+        equal(matrix(0,2), value) &&
+        equal(matrix(0,3), value);
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(1,0), value);
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(1,0), value) &&
+        equal(matrix(2,0), value);
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        equal(matrix(0,0), value) &&
+        equal(matrix(1,0), value) &&
+        equal(matrix(2,0), value) &&
+        equal(matrix(3,0), value);
+    }
+    else if constexpr (M == 2 && N == 2)
     {
         return
         equal(matrix(0,0),value) &&
@@ -2969,8 +3011,50 @@ constexpr bool
 operator!=(const Matrix<M,N,T>& matrix, T scalar)
 {
     T value {static_cast<T>(scalar)};
-    
-    if constexpr (M == 2 && N == 2)
+
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(0,1), value);
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(0,1), value) ||
+        notEqual(matrix(0,2), value);
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(0,1), value) ||
+        notEqual(matrix(0,2), value) ||
+        notEqual(matrix(0,3), value);
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(1,0), value);
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(1,0), value) ||
+        notEqual(matrix(2,0), value);
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        notEqual(matrix(0,0), value) ||
+        notEqual(matrix(1,0), value) ||
+        notEqual(matrix(2,0), value) ||
+        notEqual(matrix(3,0), value);
+    }
+    else if constexpr (M == 2 && N == 2)
     {
         return
         notEqual(matrix(0,0),value) ||
@@ -3102,7 +3186,49 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator==(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    if constexpr (M == 2 && N == 2)
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(0,1), B(0,1));
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(0,1), B(0,1)) &&
+        equal(A(0,2), B(0,2));
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(0,1), B(0,1)) &&
+        equal(A(0,2), B(0,2)) &&
+        equal(A(0,3), B(0,3));
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(1,0), B(1,0));
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(1,0), B(1,0)) &&
+        equal(A(2,0), B(2,0));
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        equal(A(0,0), B(0,0)) &&
+        equal(A(1,0), B(1,0)) &&
+        equal(A(2,0), B(2,0)) &&
+        equal(A(3,0), B(3,0));
+    }
+    else if constexpr (M == 2 && N == 2)
     {
         return
         equal(A(0,0), B(0,0)) &&
@@ -3232,7 +3358,49 @@ template<size_t M, size_t N, typename T>
 constexpr bool
 operator!=(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B)
 {
-    if constexpr (M == 2 && N == 2)
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(0,1), B(0,1));
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(0,1), B(0,1)) ||
+        notEqual(A(0,2), B(0,2));
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(0,1), B(0,1)) ||
+        notEqual(A(0,2), B(0,2)) ||
+        notEqual(A(0,3), B(0,3));
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(1,0), B(1,0));
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(1,0), B(1,0)) ||
+        notEqual(A(2,0), B(2,0));
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        notEqual(A(0,0), B(0,0)) ||
+        notEqual(A(1,0), B(1,0)) ||
+        notEqual(A(2,0), B(2,0)) ||
+        notEqual(A(3,0), B(3,0));
+    }
+    else if constexpr (M == 2 && N == 2)
     {
         return
         notEqual(A(0,0), B(0,0)) ||
