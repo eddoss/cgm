@@ -4,54 +4,45 @@
 
 #include <Math3D/Global.hpp>
 #include <Math3D/Platform.hpp>
-#include <Math3D/Core/Vector/Vector.hpp>
+
 
 template<typename T=FLOAT>
 struct Quaternion
 {
 
 /* ####################################################################################### */
-public: /* Typedefs */
-/* ####################################################################################### */
-
-    using ScalarType    = T;
-    using VectorType    = Vector<3,T>;
-
-/* ####################################################################################### */
 public: /* Components */
 /* ####################################################################################### */
 
-    VectorType vector   {0,0,0};    /**< imaginary components. */
-    ScalarType scalar   {0};        /**< Scalar component. */
+    // Quaternion equation:
+    // Q = s + ai + bj + ck
+
+    T s; ///< scalar component;
+    T a; ///< i imaginary component coefficient;
+    T b; ///< j imaginary component coefficient;
+    T c; ///< k imaginary component coefficient;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
     /**
-     * Constructor separately initializes the vector and the scalar.
-     * @param v Value to set all imaginary components to.
-     * @param s Scalar component value.
+     * Separately initialize the i,j,k coefficients and the scalar component.
+     * @param S Scalar component value.
+     * @param A i imaginary component coefficient.
+     * @param B j imaginary component coefficient.
+     * @param C k imaginary component coefficient.
      */
     constexpr
-    Quaternion(const VectorType& v, ScalarType s);
+    Quaternion(T S, T A, T B, T C);
 
     /**
-     * Constructor using initial values for imaginary and scalar components.
-     * @param s Scalar component value.
-     * @param x X imaginary component value.
-     * @param y Y imaginary component value.
-     * @param z Z imaginary component value.
+     * Initialize scalar component and the i,j,k coefficients to a single value.
+     * @param scalar Scalar component value.
+     * @param coefficient Imaginary components coefficient.
      */
     constexpr
-    Quaternion(T x, T y, T z, ScalarType s);
-
-    /**
-     * Construct from 4D vector. W component use as quaternion scalar.
-     * @param vector 4D vector containing quaternion xyz and scalar values.
-     */
-    constexpr explicit
-    Quaternion(const Vector<4,T>& values);
+    Quaternion(T scalar, T coefficient);
 
     ~Quaternion()                       = default;
 
@@ -82,15 +73,59 @@ public: /* Components accessing */
      * Get a raw data.
      * @return pointer to a components.
      */
-    T*
+    constexpr T*
     data();
 
     /**
      * Get a raw data.
      * @return const pointer to a components.
      */
-    const T*
+    constexpr const T*
     data() const;
 };
+
+/* ####################################################################################### */
+/* --------------------------------------------------------------------------------------- */
+/* IMPLEMENTATION */
+/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr
+Quaternion<T>::Quaternion(T S, T A, T B, T C)
+    : s(S)
+    , a(A)
+    , b(B)
+    , c(C) {}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr
+Quaternion<T>::Quaternion(T scalar, T coefficient)
+    : s(scalar)
+    , a(coefficient)
+    , b(coefficient)
+    , c(coefficient) {}
+
+/* ####################################################################################### */
+/* Components accessing */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr FORCEINLINE T*
+Quaternion<T>::data()
+{
+    return &s;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE const T*
+Quaternion<T>::data() const
+{
+    return &s;
+}
 
 #endif // MATH3D_QUATERNION_HPP

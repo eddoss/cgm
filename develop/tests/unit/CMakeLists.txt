@@ -59,7 +59,8 @@ set(MATRIX_TEST_SUITE
 
 set(QUATERNION_TEST_SUITE
     run.cpp
-    Quaternion/Arithmetic.cpp
+    Quaternion/Operators.cpp
+    Quaternion/Functions.cpp
 )
 
 set(ALL_TEST_SUITES
