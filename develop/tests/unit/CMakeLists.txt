@@ -30,9 +30,8 @@ find_package(GTest REQUIRED)
 
 set(VECTOR_TEST_SUITE
     run.cpp
+    Vector/Functions.cpp
     Vector/Arithmetic.cpp
-    Vector/Assignment.cpp
-    Vector/DotAndCross.cpp
     Vector/ComparisonWithOther.cpp
     Vector/ComparisonWithScalar.cpp
 )
@@ -40,11 +39,16 @@ set(VECTOR_TEST_SUITE
 set(MATRIX_TEST_SUITE
     run.cpp
     Matrix/Accessing.cpp
-    Matrix/Arithmetic.cpp
-    Matrix/IncrementDecrement.cpp
-    Matrix/ComparisonWithOther.cpp
-    Matrix/ComparisonWithScalar.cpp
-    Matrix/MatrixMultiplication.cpp
+    Matrix/Functions.cpp
+    Matrix/Arithmetic/Plus.cpp
+    Matrix/Arithmetic/Minus.cpp
+    Matrix/Arithmetic/IncrementDecrement.cpp
+    Matrix/Arithmetic/DivisionByScalar.cpp
+    Matrix/Arithmetic/MultiplicationToScalar.cpp
+    Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
+    Matrix/Arithmetic/MatrixMultiplication.cpp
+    Matrix/Comparison/WithOther.cpp
+    Matrix/Comparison/WithScalar.cpp
     Matrix/Iterators/Direct.cpp
     Matrix/Iterators/Indirect.cpp
     Matrix/Iterators/RowDir.cpp

@@ -4,8 +4,8 @@
 
 #include <iomanip>
 #include <iostream>
-#include <Math3D/Core/Structs/Vector/Vector.hpp>
-#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
+#include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
 
 
 template<size_t D, typename T>
@@ -22,7 +22,7 @@ operator << (std::ostream& stream, const Vector<D,T>& vec)
                 << std::setw(10)
                 << std::left
                 << std::setprecision(6)
-                << vec[i];
+                << *(vec.data()+i);
     }
     stream << "\n}";
     stream.setf(old_flags);

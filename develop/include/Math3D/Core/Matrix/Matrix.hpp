@@ -4,11 +4,11 @@
 #include <type_traits>
 #include <Math3D/Global.hpp>
 #include <Math3D/Platform.hpp>
-#include <Math3D/Core/Structs/Matrix/Support.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Direct.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Indirect.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Row.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Column.hpp>
+#include <Math3D/Core/Matrix/Support.hpp>
+#include <Math3D/Core/Matrix/Iterators/Direct.hpp>
+#include <Math3D/Core/Matrix/Iterators/Indirect.hpp>
+#include <Math3D/Core/Matrix/Iterators/Row.hpp>
+#include <Math3D/Core/Matrix/Iterators/Column.hpp>
 
 
 #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
@@ -45,7 +45,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-    #define MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                \
+    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                       \
     return m_data[row][column];                                                                                        \
 
 #else
@@ -88,7 +88,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-    #define MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                \
+    #define MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                               \
     return m_data[column][row];
 
 #endif
@@ -205,7 +205,7 @@ public: /* Constructors */                                                      
     }                                                                                                                  \
                                                                                                                        \
     /**
-     * Constructor using initial values for each component.
+     * Constructor using initial values for each component (row-wise init).
      * @param values Component values.
      */                                                                                                                \
     constexpr explicit                                                                                                 \
@@ -215,8 +215,8 @@ public: /* Constructors */                                                      
     }                                                                                                                  \
                                                                                                                        \
     /**
-     * Constructor initializing all components.
-     * @param value Value to set all components to.
+     * Constructor initializing all components (row-wise init).
+     * @param values Values to set all components to.
      */                                                                                                                \
     constexpr                                                                                                          \
     Matrix(std::initializer_list<T> values)                                                                            \
@@ -263,6 +263,13 @@ public: /* Components accessing */                                              
 /* ####################################################################################### */                          \
                                                                                                                        \
     /**
+     * Get raw pointer at the first component.
+     * @param first component raw pointer.
+     */                                                                                                                \
+    constexpr pointer                                                                                                  \
+    data() {return &m_data[0][0];}                                                                                     \
+                                                                                                                       \
+    /**
      * Gets a reference to a specific component of the matrix by row and column.
      * @param row Row of matrix.
      * @param column Column of matrix.
@@ -271,7 +278,7 @@ public: /* Components accessing */                                              
     constexpr reference                                                                                                \
     operator()(size_t row, size_t column)                                                                              \
     {                                                                                                                  \
-        MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                    \
+        MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                           \
     }                                                                                                                  \
                                                                                                                        \
     /**
@@ -283,7 +290,7 @@ public: /* Components accessing */                                              
     constexpr const_reference                                                                                          \
     operator()(size_t row, size_t column) const                                                                        \
     {                                                                                                                  \
-        MATH3D_MATRIX_CONSTRUCTOR_GET_BY_ROW_COLUMN                                                                    \
+        MATH3D_MATRIX_BODY_GET_BY_ROW_COLUMN                                                                           \
     }                                                                                                                  \
                                                                                                                        \
     /**
@@ -768,40 +775,6 @@ template<size_t M, size_t N, typename T=FLOAT, typename = void>
 struct Matrix
 {
     MATH3D_MATRIX_COMMON_BODY
-};
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t M, size_t N, typename T>
-struct Matrix <M, N, T, std::enable_if_t<(M == N)>>
-{
-    MATH3D_MATRIX_COMMON_BODY
-
-/* ####################################################################################### */
-public: /* Static constants */
-/* ####################################################################################### */
-
-    /**
-     * Get identity matrix.
-     * @return const reference to identity matrix.
-     */
-    const static Matrix<M,N,T>&
-    identity()
-    {
-        static const Matrix<M,N,T> mat { makeIdentity() }; return mat;
-    }
-
-/* ####################################################################################### */
-private: /* Internals */
-/* ####################################################################################### */
-
-    constexpr static Matrix<M,N,T>
-    makeIdentity()
-    {
-        Matrix<M,M,T> matrix(static_cast<T>(0));
-        for (auto i = 0; i < M; ++i) matrix(i,i) = static_cast<T>(1);
-        return matrix;
-    }
 };
 
 #endif // MATH3D_MATRIX_HPP

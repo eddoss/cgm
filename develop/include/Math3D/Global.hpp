@@ -72,4 +72,59 @@ FORCEINLINE bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
 template<>
 FORCEINLINE bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
 
+/* ####################################################################################### */
+/* Floating point numbers comparison with given tolerance */
+/* ####################################################################################### */
+
+/**
+ * Compare floating point number A and B with given tolerance.
+ * @return true if abs(A-B) <= tolerance, false otherwise.
+ */
+template<typename T>
+FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
+equalTolerance(T A, T B, T tolerance)
+{
+    return std::abs(A-B) <= tolerance;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+/**
+ * Compare floating point number A and B with given tolerance.
+ * @return true if abs(A-B) > tolerance, false otherwise.
+ */
+template<typename T>
+FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
+notEqualTolerance(T A, T B, T tolerance)
+{
+    return std::abs(A-B) > tolerance;
+}
+
+/* ####################################################################################### */
+/* Number converter */
+/* ####################################################################################### */
+
+/**
+ * Convert number from type A in type B.
+ */
+template<typename AT, typename BT>
+constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<AT> || std::is_integral_v<AT>), AT>
+number(BT value)
+{
+    return static_cast<AT>(value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+/**
+ * Create zero value number with given type.
+ * @return Zero with given type.
+ */
+template<typename T>
+constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
+zero()
+{
+    return static_cast<T>(0);
+}
+
 #endif // MATH3D_GLOBAL_HPP

@@ -2,9 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Structs/Vector/Vector.hpp>
-#include <Math3D/Core/Structs/Vector/Operators.hpp>
-
+#include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Vector/Operators.hpp>
 
 using namespace std;
 using Vec2 = Vector<2>;
