@@ -52,6 +52,14 @@ template<typename TResult=FLOAT, size_t S, typename T>
 constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success);
 
+/**
+ * Create identity matrix.
+ * @return copy of identity matrix.
+ */
+template<size_t S, typename T=FLOAT>
+constexpr Matrix<S,S,T>
+identity();
+
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
 /* IMPLEMENTATION */
@@ -333,6 +341,47 @@ inverted(const Matrix<S,S,T>& matrix, bool& success)
     {
         success = true;
         return transposed(cofactors(matrix))/det;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr Matrix<S,S,T>
+identity()
+{
+    if constexpr (S==2)
+    {
+        return Matrix<S,S,T>
+        {
+            1, 0,
+            0, 1
+        };
+    }
+    else if constexpr (S==3)
+    {
+        return Matrix<S,S,T>
+        {
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1
+        };
+    }
+    else if constexpr (S==4)
+    {
+        return Matrix<S,S,T>
+        {
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        };
+    }
+    else
+    {
+        Matrix<S,S,T> matrix(zero<T>());
+        for (auto i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
+        return matrix;
     }
 }
 

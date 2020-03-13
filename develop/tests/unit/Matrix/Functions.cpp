@@ -528,3 +528,67 @@ TEST(Matrix_Functions, Inverse)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Functions, Identity)
+{
+    {
+        Mat22 ident
+        {
+            1, 0,
+            0, 1
+        };
+
+        auto exp = identity<2,int>();
+
+        ASSERT_EQ(exp, ident);
+    }
+
+    /* -------------- */
+
+    {
+        Mat33 ident
+        {
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1
+        };
+
+        auto exp = identity<3,int>();
+
+        ASSERT_EQ(exp, ident);
+    }
+
+    /* -------------- */
+
+    {
+        Mat44 ident
+        {
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        };
+
+        auto exp = identity<4,int>();
+
+        ASSERT_EQ(exp, ident);
+    }
+
+    /* -------------- */
+
+    {
+        Mat55 ident
+        {
+            1, 0, 0, 0, 0,
+            0, 1, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0,
+            0, 0, 0, 0, 1
+        };
+
+        auto exp = identity<5,int>();
+
+        ASSERT_EQ(exp, ident);
+    }
+}
