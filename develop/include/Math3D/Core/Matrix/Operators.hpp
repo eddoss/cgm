@@ -2,7 +2,7 @@
 #define MATH3D_MATRIX_OPERATORS_HPP
 
 
-#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Global.hpp>
 
 

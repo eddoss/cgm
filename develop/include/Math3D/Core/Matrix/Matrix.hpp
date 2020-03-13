@@ -4,11 +4,11 @@
 #include <type_traits>
 #include <Math3D/Global.hpp>
 #include <Math3D/Platform.hpp>
-#include <Math3D/Core/Structs/Matrix/Support.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Direct.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Indirect.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Row.hpp>
-#include <Math3D/Core/Structs/Matrix/Iterators/Column.hpp>
+#include <Math3D/Core/Matrix/Support.hpp>
+#include <Math3D/Core/Matrix/Iterators/Direct.hpp>
+#include <Math3D/Core/Matrix/Iterators/Indirect.hpp>
+#include <Math3D/Core/Matrix/Iterators/Row.hpp>
+#include <Math3D/Core/Matrix/Iterators/Column.hpp>
 
 
 #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING

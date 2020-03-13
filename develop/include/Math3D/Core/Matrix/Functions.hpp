@@ -2,8 +2,8 @@
 #define MATH3D_MATRIX_FUNCTIONS_HPP
 
 
-#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
-#include <Math3D/Core/Structs/Matrix/Operators.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
+#include <Math3D/Core/Matrix/Operators.hpp>
 
 
 /**

@@ -2,13 +2,14 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Structs/Matrix/Matrix.hpp>
-#include <Math3D/Core/Structs/Matrix/Operators.hpp>
-#include <Math3D/Core/Structs/Matrix/Functions.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
+#include <Math3D/Core/Matrix/Operators.hpp>
+#include <Math3D/Core/Matrix/Functions.hpp>
 #include <Math3D/Core/IO.hpp>
 
 
 using namespace std;
+
 using Mat12 = Matrix<1,2,int>;
 using Mat13 = Matrix<1,3,int>;
 using Mat14 = Matrix<1,4,int>;

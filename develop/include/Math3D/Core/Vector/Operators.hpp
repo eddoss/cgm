@@ -2,7 +2,7 @@
 #define MATH3D_VECTOR_OPERATORS_HPP
 
 
-#include <Math3D/Core/Structs/Vector/Vector.hpp>
+#include <Math3D/Core/Vector/Vector.hpp>
 
 
 /* ####################################################################################### */
