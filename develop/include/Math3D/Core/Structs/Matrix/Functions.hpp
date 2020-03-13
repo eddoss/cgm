@@ -1,5 +1,5 @@
-#ifndef MATH3D_FUNCTIONS_HPP
-#define MATH3D_FUNCTIONS_HPP
+#ifndef MATH3D_MATRIX_FUNCTIONS_HPP
+#define MATH3D_MATRIX_FUNCTIONS_HPP
 
 
 #include <Math3D/Core/Structs/Matrix/Matrix.hpp>
@@ -385,4 +385,4 @@ identity()
     }
 }
 
-#endif //MATH3D_FUNCTIONS_HPP
+#endif //MATH3D_MATRIX_FUNCTIONS_HPP
