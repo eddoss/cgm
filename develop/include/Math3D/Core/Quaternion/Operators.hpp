@@ -18,8 +18,7 @@ Quaternion<T>
 operator - (const Quaternion<T>& quaternion);
 
 /**
- * Gets the result of subtraction of this by another quaternion.
- * @param quaternion The quaternion to subtract from this.
+ * Gets the result of subtraction quaternion "A" and quaternion "B".
  * @return The result of quaternion subtraction.
  */
 template<typename T>
@@ -27,8 +26,7 @@ Quaternion<T>
 operator - (const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
- * Subtracts another quaternion from this.
- * @param quaternion The quaternion to subtract from this.
+ * Subtracts quaternion "B" from quaternion "B".
  * @return The result of quaternion subtraction.
  */
 template<typename T>
@@ -40,8 +38,7 @@ operator -= (Quaternion<T>& A, const Quaternion<T>& B);
 /* ####################################################################################### */
 
 /**
- * Gets the result of adding this to another quaternion.
- * @param quaternion The quaternion to add to this.
+ * Gets the result of adding quaternion "A" and quaternion "B".
  * @return The result of quaternion adding.
  */
 template<typename T>
@@ -49,9 +46,8 @@ Quaternion<T>
 operator + (const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
- * Add another quaternion to this.
- * @param quaternion The quaternion to add to this.
- * @return The result of quaternion adding.
+ * Add quaternion "A" and quaternion "B".
+ * @return The result of adding subtraction.
  */
 template<typename T>
 Quaternion<T>&
@@ -62,8 +58,7 @@ operator += (Quaternion<T>& A, const Quaternion<T>& B);
 /* ####################################################################################### */
 
 /**
- * Multiply this quaternion by a scaling factor.
- * @param scale The scaling factor.
+ * Multiply quaternion by a scaling factor.
  * @return The result of scaling.
  */
 template<typename T, typename TScale>
@@ -71,17 +66,15 @@ Quaternion<T>
 operator * (TScale scale);
 
 /**
- * Gets the result of multiplying this to another quaternion.
- * @param quaternion The quaternion to multiply this by.
- * @return The result of multiplication.
+ * Gets the result of multiplication quaternion "A" and quaternion "B".
+ * @return The result of quaternion multiplication.
  */
 template<typename T>
 Quaternion<T>
 operator * (const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
- * Multiply this quaternion by a scaling factor.
- * @param scale The scaling factor.
+ * Multiply quaternion by a scaling factor.
  * @return The result of scaling.
  */
 template<typename T, typename TScale>
@@ -89,9 +82,8 @@ Quaternion<T>&
 operator *= (Quaternion<T>& quaternion, TScale scale);
 
 /**
- * Multiply this by a quaternion.
- * @param quaternion The quaternion to multiply this by.
- * @return The result of multiplication.
+ * Gets the result of multiplication quaternion "A" and quaternion "B".
+ * @return The result of quaternion multiplication.
  */
 template<typename T>
 Quaternion<T>&
@@ -103,7 +95,6 @@ operator *= (Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
  * Divide this quaternion by scale.
- * @param scale What to divide by.
  * @return Results of division.
  */
 template<typename T, typename TScale>
@@ -112,7 +103,6 @@ operator / (const Quaternion<T>& quaternion, TScale scale);
 
 /**
  * Divide this quaternion by scale.
- * @param scale What to divide by.
  * @return Results of division.
  */
 template<typename T, typename TScale>
@@ -124,8 +114,7 @@ operator /= (Quaternion<T>& quaternion, TScale scale);
 /* ####################################################################################### */
 
 /**
- * Checks whether another quaternion is equal to this.
- * @param quaternion The quaternion to check against.
+ * Checks whether quaternion "A" is equal to quaternion "B".
  * @return true if the quaternion are equal, false otherwise.
  */
 template<typename T>
@@ -133,8 +122,7 @@ bool
 operator == (const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
- * Checks whether another quaternion is not equal to this.
- * @param quaternion The quaternion to check against.
+ * Checks whether quaternion "A" is not equal to quaternion "B".
  * @return true if the quaternion are not equal, false otherwise.
  */
 template<typename T>
@@ -147,7 +135,6 @@ operator != (const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
  * Calculates dot product of two quaternions.
- * @param quaternion The other quaternion.
  * @return The dot product.
  */
 template<typename T>
@@ -164,7 +151,13 @@ template<typename T>
 Quaternion<T>
 operator - (const Quaternion<T>& quaternion)
 {
-
+    return Quaternion
+    {
+        -quaternion.s,
+        -quaternion.a,
+        -quaternion.b,
+        -quaternion.c
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -173,7 +166,13 @@ template<typename T>
 Quaternion<T>
 operator - (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return Quaternion
+    {
+        A.s - B.s,
+        A.a - B.a,
+        A.b - B.b,
+        A.c - B.c
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -182,7 +181,10 @@ template<typename T>
 Quaternion<T>&
 operator -= (Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    A.s -= B.s;
+    A.a -= B.a;
+    A.b -= B.b;
+    A.c -= B.c;
 }
 
 /* ####################################################################################### */
@@ -193,7 +195,13 @@ template<typename T>
 Quaternion<T>
 operator + (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return Quaternion
+    {
+        A.s + B.s,
+        A.a + B.a,
+        A.b + B.b,
+        A.c + B.c
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -202,7 +210,10 @@ template<typename T>
 Quaternion<T>&
 operator += (Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    A.s += B.s;
+    A.a += B.a;
+    A.b += B.b;
+    A.c += B.c;
 }
 
 /* ####################################################################################### */
@@ -213,7 +224,13 @@ template<typename T, typename TScale>
 Quaternion<T>
 operator * (TScale scale)
 {
-
+    return Quaternion
+    {
+        A.s * scale,
+        A.a * scale,
+        A.b * scale,
+        A.c * scale
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -222,7 +239,13 @@ template<typename T>
 Quaternion<T>
 operator * (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return Quaternion
+    {
+        A.s * B.s - A.a * B.a - A.b * B.b - A.c * B.c,
+        A.a * B.s + B.a * A.s + A.b * B.c - A.c * B.b,
+        A.b * B.s + B.b * A.s + A.c * B.a - A.a * B.c,
+        A.c * B.s + B.c * A.s + A.a * B.b - A.b * B.a
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -231,7 +254,10 @@ template<typename T, typename TScale>
 Quaternion<T>&
 operator *= (Quaternion<T>& quaternion, TScale scale)
 {
-
+    quaternion.s *= scale;
+    quaternion.a *= scale;
+    quaternion.b *= scale;
+    quaternion.c *= scale;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -240,7 +266,7 @@ template<typename T>
 Quaternion<T>&
 operator *= (Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    A = A * B;
 }
 
 /* ####################################################################################### */
@@ -249,9 +275,15 @@ operator *= (Quaternion<T>& A, const Quaternion<T>& B)
 
 template<typename T, typename TScale>
 Quaternion<T>
-operator / (const Quaternion<T>& quaternion, TScale scale)
-{
+operator / (const Quaternion<T>& quaternion, TScale scale) {
 
+    return Quaternion<T>
+    {
+        quaternion.s / scale;
+        quaternion.a / scale;
+        quaternion.b / scale;
+        quaternion.c / scale;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -260,7 +292,10 @@ template<typename T, typename TScale>
 Quaternion<T>&
 operator /= (Quaternion<T>& quaternion, TScale scale)
 {
-
+    quaternion.s /= scale;
+    quaternion.a /= scale;
+    quaternion.b /= scale;
+    quaternion.c /= scale;
 }
 
 /* ####################################################################################### */
@@ -271,7 +306,10 @@ template<typename T>
 bool
 operator == (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return  equal(A.s, B.s) &&
+            equal(A.a, B.a) &&
+            equal(A.b, B.b) &&
+            equal(A.c, B.c);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -280,7 +318,10 @@ template<typename T>
 bool
 operator != (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return  notEqual(A.s, B.s) ||
+            notEqual(A.a, B.a) ||
+            notEqual(A.b, B.b) ||
+            notEqual(A.c, B.c);
 }
 
 /* ####################################################################################### */
@@ -291,7 +332,7 @@ template<typename T>
 T
 operator | (const Quaternion<T>& A, const Quaternion<T>& B)
 {
-
+    return A.s * B.s + A.a * B.a + A.b * B.b + A.c * B.c;
 }
 
 #endif // MATH3D_QUATERNION_OPERATORS_HPP

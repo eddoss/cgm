@@ -54,7 +54,7 @@ inverted(const Matrix<S,S,T>& matrix, bool& success);
 
 /**
  * Create identity matrix.
- * @return copy of identity matrix.
+ * @return Identity matrix.
  */
 template<size_t S, typename T=FLOAT>
 constexpr Matrix<S,S,T>

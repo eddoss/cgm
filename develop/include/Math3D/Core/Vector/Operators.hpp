@@ -1505,20 +1505,20 @@ operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  notEqual(A.x, B.x) &&
+        return  notEqual(A.x, B.x) ||
                 notEqual(A.y, B.y);
     }
     else if constexpr (D == 3)
     {
-        return  notEqual(A.x, B.x) &&
-                notEqual(A.y, B.y) &&
+        return  notEqual(A.x, B.x) ||
+                notEqual(A.y, B.y) ||
                 notEqual(A.z, B.z);
     }
     else if constexpr (D == 4)
     {
-        return  notEqual(A.x, B.x) &&
-                notEqual(A.y, B.y) &&
-                notEqual(A.z, B.z) &&
+        return  notEqual(A.x, B.x) ||
+                notEqual(A.y, B.y) ||
+                notEqual(A.z, B.z) ||
                 notEqual(A.w, B.w);
     }
     else
