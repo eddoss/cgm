@@ -63,7 +63,7 @@ operator += (Quaternion<T>& A, const Quaternion<T>& B);
  */
 template<typename T, typename TScale>
 Quaternion<T>
-operator * (TScale scale);
+operator * (const Quaternion<T>& quaternion, TScale scale);
 
 /**
  * Gets the result of multiplication quaternion "A" and quaternion "B".
@@ -185,6 +185,8 @@ operator -= (Quaternion<T>& A, const Quaternion<T>& B)
     A.a -= B.a;
     A.b -= B.b;
     A.c -= B.c;
+
+    return A;
 }
 
 /* ####################################################################################### */
@@ -214,6 +216,8 @@ operator += (Quaternion<T>& A, const Quaternion<T>& B)
     A.a += B.a;
     A.b += B.b;
     A.c += B.c;
+
+    return A;
 }
 
 /* ####################################################################################### */
@@ -222,14 +226,16 @@ operator += (Quaternion<T>& A, const Quaternion<T>& B)
 
 template<typename T, typename TScale>
 Quaternion<T>
-operator * (TScale scale)
+operator * (const Quaternion<T>& quaternion, TScale scale)
 {
+    T scl {static_cast<T>(scale)};
+
     return Quaternion
     {
-        A.s * scale,
-        A.a * scale,
-        A.b * scale,
-        A.c * scale
+        quaternion.s * scl,
+        quaternion.a * scl,
+        quaternion.b * scl,
+        quaternion.c * scl
     };
 }
 
@@ -258,6 +264,8 @@ operator *= (Quaternion<T>& quaternion, TScale scale)
     quaternion.a *= scale;
     quaternion.b *= scale;
     quaternion.c *= scale;
+
+    return quaternion;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -267,6 +275,8 @@ Quaternion<T>&
 operator *= (Quaternion<T>& A, const Quaternion<T>& B)
 {
     A = A * B;
+
+    return A;
 }
 
 /* ####################################################################################### */
@@ -279,11 +289,11 @@ operator / (const Quaternion<T>& quaternion, TScale scale) {
 
     return Quaternion<T>
     {
-        quaternion.s / scale;
-        quaternion.a / scale;
-        quaternion.b / scale;
-        quaternion.c / scale;
-    }
+        quaternion.s / scale,
+        quaternion.a / scale,
+        quaternion.b / scale,
+        quaternion.c / scale
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -296,6 +306,8 @@ operator /= (Quaternion<T>& quaternion, TScale scale)
     quaternion.a /= scale;
     quaternion.b /= scale;
     quaternion.c /= scale;
+
+    return quaternion;
 }
 
 /* ####################################################################################### */

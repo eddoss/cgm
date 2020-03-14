@@ -87,7 +87,7 @@ inverted(const Quaternion<T>& quaternion);
  * Create identity quaternion.
  * @return Identity quaternion.
  */
-template<typename T>
+template<typename T=FLOAT>
 constexpr Quaternion<T>
 identity();
 
@@ -113,6 +113,8 @@ conjugate(Quaternion<T>& quaternion)
     quaternion.a *= -1;
     quaternion.b *= -1;
     quaternion.c *= -1;
+
+    return quaternion;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -124,9 +126,9 @@ conjugated(const Quaternion<T>& quaternion)
     return Quaternion<T>
     {
         quaternion.s,
-        quaternion.a *= -1,
-        quaternion.b *= -1,
-        quaternion.c *= -1
+        quaternion.a * -1,
+        quaternion.b * -1,
+        quaternion.c * -1
     };
 }
 
@@ -189,17 +191,7 @@ template<typename T>
 Quaternion<T>&
 invert(Quaternion<T>& quaternion)
 {
-    double sum {static_cast<double>(dot(quaternion, quaternion))};
-    double zer {0.0};
-
-    if (notEqual(sum,zer))
-    {
-        quaternion.a = -quaternion.a / len;
-        quaternion.b = -quaternion.b / len;
-        quaternion.c = -quaternion.c / len;
-    }
-
-    return quaternion;
+    return conjugate(quaternion) /= lengthSquared(quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */
