@@ -10,17 +10,30 @@ project(Math3D
     VERSION 0.0.1
 )
 
+# ####################################################################################### #
+# Project C++ parameters
+# ####################################################################################### #
+
 set(PROJECT_INSTALL_PREFIX ${PROJECT_NAME}/${PROJECT_VERSION})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Build parameters
 # ####################################################################################### #
+# Promoted cmake options
+# ####################################################################################### #
+
 option(BUILD_UNIT_TESTS "Build unit testing projects." OFF)
 option(BUILD_VISUAL_TESTS "Build visual testing projects." OFF)
 option(USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
-option(USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)" OFF)
+option(USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)." OFF)
+option(USE_LEFT_HANDED_CORD_SYSTEM "Use left handed Cartesian system. Right handed is default." OFF)
+set(CARTESIAN_AXES "XYZ" CACHE STRING "Chose 'Right', 'Up', 'Forward' vectors of Cartesian system. By default its XYZ.")
+
 # ####################################################################################### #
+# Promoted cmake options constraints
+# ####################################################################################### #
+
+set_property(CACHE CARTESIAN_AXES PROPERTY STRINGS "XYZ;YXZ;ZYX;YZX;XZY;ZXY")
 
 # ####################################################################################### #
 # Setup shared and static libraries output dir
@@ -45,6 +58,36 @@ endif()
 
 if(USE_ROW_WISE_MATRIX_STORING)
     add_definitions(-DMATH3D_USE_ROW_WISE_MATRIX_STORING)
+endif()
+
+if(USE_LEFT_HANDED_CORD_SYSTEM)
+    add_definitions(-DMATH3D_USE_LEFT_HANDED_CORD_SYSTEM)
+endif()
+
+if(CARTESIAN_AXES STREQUAL ZXY)
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Z)
+    add_definitions(-DMATH3D_CARTESIAN_UP_X)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Y)
+elseif(CARTESIAN_AXES STREQUAL YXZ)
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Y)
+    add_definitions(-DMATH3D_CARTESIAN_UP_X)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Z)
+elseif(CARTESIAN_AXES STREQUAL ZYX)
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Z)
+    add_definitions(-DMATH3D_CARTESIAN_UP_Y)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_X)
+elseif(CARTESIAN_AXES STREQUAL YZX)
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Y)
+    add_definitions(-DMATH3D_CARTESIAN_UP_Z)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_X)
+elseif(CARTESIAN_AXES STREQUAL XZY)
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_X)
+    add_definitions(-DMATH3D_CARTESIAN_UP_Z)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Y)
+else()
+    add_definitions(-DMATH3D_CARTESIAN_RIGHT_X)
+    add_definitions(-DMATH3D_CARTESIAN_UP_Y)
+    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Z)
 endif()
 
 # ####################################################################################### #
