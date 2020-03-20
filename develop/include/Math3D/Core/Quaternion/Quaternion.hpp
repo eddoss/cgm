@@ -4,11 +4,13 @@
 
 #include <Math3D/Global.hpp>
 #include <Math3D/Platform.hpp>
+#include <Math3D/Utils.hpp>
 
 
 template<typename T=FLOAT>
 struct Quaternion
 {
+    MATH3D_RULE_OF_FIVE_CONSTEXPR(Quaternion)
 
 /* ####################################################################################### */
 public: /* Components */
@@ -17,10 +19,10 @@ public: /* Components */
     // Quaternion equation:
     // Q = s + ai + bj + ck
 
-    T s; ///< scalar component;
-    T a; ///< i imaginary component coefficient;
-    T b; ///< j imaginary component coefficient;
-    T c; ///< k imaginary component coefficient;
+    T s; ///< scalar component.
+    T a; ///< i imaginary component coefficient.
+    T b; ///< j imaginary component coefficient.
+    T c; ///< k imaginary component coefficient.
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -43,27 +45,6 @@ public: /* Constructors */
      */
     constexpr
     Quaternion(T scalar, T coefficient);
-
-    ~Quaternion()                       = default;
-
-    constexpr
-    Quaternion()                        = default;
-
-    constexpr
-    Quaternion(Quaternion&&) noexcept   = default;
-
-    constexpr
-    Quaternion(const Quaternion&)       = default;
-
-/* ####################################################################################### */
-public: /* Assignment operator */
-/* ####################################################################################### */
-
-    constexpr Quaternion&
-    operator = (Quaternion&&) noexcept  = default;
-
-    constexpr Quaternion&
-    operator = (const Quaternion&)      = default;
 
 /* ####################################################################################### */
 public: /* Components accessing */

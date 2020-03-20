@@ -3,14 +3,16 @@
 
 
 #include <Math3D/Global.hpp>
+#include <Math3D/Utils.hpp>
 
 
 namespace coord
 {
 
-template<typename T>
+template<typename T=FLOAT>
 struct Polar
 {
+    MATH3D_RULE_OF_FIVE_CONSTEXPR(Polar)
 
 /* ####################################################################################### */
 /* Components */
@@ -27,17 +29,6 @@ struct Polar
     Polar(T InAngle, T InRadius=number<T>(1))
         : angle(InAngle)
         , radius(InRadius) {}
-
-    ~Polar()                    = default;
-
-    constexpr
-    Polar()                     = default;
-
-    constexpr
-    Polar(Polar&&) noexcept     = default;
-
-    constexpr
-    Polar(const Polar&)         = default;
 };
 
 };

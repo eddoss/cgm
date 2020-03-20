@@ -3,14 +3,16 @@
 
 
 #include <Math3D/Global.hpp>
+#include <Math3D/Utils.hpp>
 
 
 namespace coord
 {
 
-template<typename T>
+template<typename T=FLOAT>
 struct Spherical
 {
+    MATH3D_RULE_OF_FIVE_CONSTEXPR(Spherical)
 
 /* ####################################################################################### */
 /* Components */
@@ -29,17 +31,6 @@ struct Spherical
         : longitude(InLongitude)
         , latitude(InLatitude)
         , radius(InRadius) {}
-
-    ~Spherical()                    = default;
-
-    constexpr
-    Spherical()                     = default;
-
-    constexpr
-    Spherical(Spherical&&) noexcept = default;
-
-    constexpr
-    Spherical(const Spherical&)     = default;
 };
 
 };

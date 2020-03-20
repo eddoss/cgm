@@ -3,14 +3,15 @@
 
 
 #include <Math3D/Global.hpp>
-
+#include <Math3D/Utils.hpp>
 
 namespace coord
 {
 
-template<typename T>
+template<typename T=FLOAT>
 struct Cylindrical
 {
+    MATH3D_RULE_OF_FIVE_CONSTEXPR(Cylindrical)
 
 /* ####################################################################################### */
 /* Components */
@@ -29,17 +30,6 @@ struct Cylindrical
         : angle(InAngle)
         , height(InHeight)
         , radius(InRadius) {}
-
-    ~Cylindrical()                      = default;
-
-    constexpr
-    Cylindrical()                       = default;
-
-    constexpr
-    Cylindrical(Cylindrical&&) noexcept = default;
-
-    constexpr
-    Cylindrical(const Cylindrical&)     = default;
 };
 
 };
