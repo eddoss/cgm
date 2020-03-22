@@ -266,46 +266,6 @@ template<size_t D, typename T=FLOAT>
 constexpr bool
 operator!=(const Vector<D,T>& vector, T scalar);
 
-/**
- * Checks if all components of a vector are less than a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are less than scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are greater than a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are greater than scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are less or equal to a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are less or equal to a scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<=(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are greater or equal to a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are greater or equal to a scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>=(const Vector<D,T>& vector, T scalar);
-
 /* ####################################################################################### */
 /* Comparison with other */
 /* ####################################################################################### */
@@ -329,46 +289,6 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B);
 template<size_t D, typename T=FLOAT>
 constexpr bool
 operator!=(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are smaller than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components less than B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are larger than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components less or equal B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<=(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are smaller (or equal) than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components greater than B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are larger (or equal) than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components greater or equal B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>=(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Dot product operator */
@@ -399,39 +319,6 @@ constexpr T
 operator^(const Vector<2,T>& A, const Vector<2,T>& B);
 
 /**
- * Calculates cross product of 2D vector and 3D vectors.
- * Represent 2D as 3D with Z=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<2,T>& A, const Vector<3,T>& B);
-
-/**
- * Calculates cross product of 2D vector and 4D vectors.
- * Represent 2D as 4D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<2,T>& A, const Vector<4,T>& B);
-
-/**
- * Calculates cross product of 3D vector and 2D vectors.
- * Represent 2D as 3D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<2,T>& B);
-
-/**
  * Calculates cross product of 3D vector and 3D vectors.
  * @param A Left vector.
  * @param B Right vector.
@@ -441,65 +328,10 @@ template<typename T=FLOAT>
 constexpr Vector<3,T>
 operator^(const Vector<3,T>& A, const Vector<3,T>& B);
 
-/**
- * Calculates cross product of 3D vector and 4D vectors.
- * Represent 3D as 4D with W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<4,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 2D vectors.
- * Represent 2D as 4D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<2,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 3D vectors.
- * Represent 3D as 4D with W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<3,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 4D vectors.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<4,T>& B);
-
-
-
-
-
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
 /* IMPLEMENTATION */
 /* --------------------------------------------------------------------------------------- */
-/* ####################################################################################### */
-
-
-
-
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Increment and decrement */
 /* ####################################################################################### */
 
 template<size_t D, typename T>
@@ -1340,130 +1172,6 @@ operator!=(const Vector<D,T>& vector, T scalar)
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar &&
-                vector.z < scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar &&
-                vector.z < scalar &&
-                vector.w < scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] >= scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar &&
-                vector.z > scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar &&
-                vector.z > scalar &&
-                vector.w > scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] <= scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<=(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar &&
-                vector.z <= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar &&
-                vector.z <= scalar &&
-                vector.w <= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] > scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>=(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar &&
-                vector.z >= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar &&
-                vector.z >= scalar &&
-                vector.w >= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] < scalar) return false;
-        return true;
-    }
-}
-
 /* ####################################################################################### */
 /* IMPLEMENTATION | Comparison with other */
 /* ####################################################################################### */
@@ -1528,130 +1236,6 @@ operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x < B.x &&
-                A.y < B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x < B.x &&
-                A.y < B.y &&
-                A.z < B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x < B.x &&
-                A.y < B.y &&
-                A.z < B.z &&
-                A.w < B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] >= B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x > B.x &&
-                A.y > B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x > B.x &&
-                A.y > B.y &&
-                A.z > B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x > B.x &&
-                A.y > B.y &&
-                A.z > B.z &&
-                A.w > B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] <= B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y &&
-                A.z <= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y &&
-                A.z <= B.z &&
-                A.w <= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] > B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y &&
-                A.z >= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y &&
-                A.z >= B.z &&
-                A.w >= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] < B[i]) return false;
-        return true;
-    }
-}
-
 /* ####################################################################################### */
 /* Dot product operator */
 /* ####################################################################################### */
@@ -1698,116 +1282,23 @@ operator^(const Vector<2,T>& A, const Vector<2,T>& B)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<2,T>& A, const Vector<3,T>& B)
-{
-    return Vector<3,T>
-    {
-        A.y * B.z,
-       -A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<2,T>& A, const Vector<4,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z,
-       -A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<2,T>& B)
-{
-    return Vector<3,T>
-    {
-       -A.z * B.y,
-        A.z * B.x,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
 operator^(const Vector<3,T>& A, const Vector<3,T>& B)
 {
-    return Vector<3,T>
+#ifdef MATH3D_USE_LEFT_HANDED_CORD_SYSTEM
+    return
+    {
+        A.z * B.y - A.y * B.z,
+        A.x * B.z - A.z * B.x,
+        A.y * B.x - A.x * B.y
+    };
+#else
+    return
     {
         A.y * B.z - A.z * B.y,
         A.z * B.x - A.x * B.z,
         A.x * B.y - A.y * B.x
     };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<4,T>& B)
-{
-    return Vector<3,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<2,T>& B)
-{
-    return Vector<4,T>
-    {
-       -A.z * B.y,
-        A.z * B.x,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<3,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<4,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
+#endif
 }
 
 #endif // MATH3D_VECTOR_OPERATORS_HPP

@@ -91,17 +91,11 @@ template<typename TResult=FLOAT, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
-
-
-
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
 /* IMPLEMENTATION */
 /* --------------------------------------------------------------------------------------- */
 /* ####################################################################################### */
-
-
-
 
 template<size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<T>, Vector<D,T>&>
