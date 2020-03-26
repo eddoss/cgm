@@ -81,7 +81,7 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 distance(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
- * Calculates angle between two vectors (in radians).
+ * Calculates angle between two normalized vectors (in radians).
  * @param A First vector.
  * @param B Second vector.
  * @tparam TResult Type of result. It must be float or double.
@@ -269,7 +269,7 @@ template<typename TResult, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    return std::acos(A | B);
+    return std::acos(A|B);
 }
 
 #endif // MATH3D_VECTOR_FUNCTIONS_HPP
