@@ -82,6 +82,65 @@ constexpr FORCEINLINE Vector<3,T>
 backward();
 
 /* ####################################################################################### */
+/* Utils */
+/* ####################################################################################### */
+
+/**
+ * Create Cartesian coordinate independently from axes labels.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+makeCoord(T right, T up, T forward);
+
+/**
+ * Extracts the vector component responsible for "Right" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+rightComponent(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Up" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+upComponent(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Forward" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+forwardComponent(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Right" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+rightComponent(const Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Up" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+upComponent(const Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Forward" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+forwardComponent(const Vector<3,T>& coord);
+
+/* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
 /* IMPLEMENTATION */
 /* --------------------------------------------------------------------------------------- */
@@ -205,6 +264,225 @@ constexpr Vector<3,T>
 backward()
 {
     return -forward<T>();
+}
+
+/* ####################################################################################### */
+/* Utils */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+makeCoord(T right, T up, T forward)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return {up, forward, right};
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return {up, right, forward};
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return {forward, up, right};
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return {forward, right, up};
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return {right, forward, up};
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return {right, up, forward};
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE T&
+rightComponent(Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.x;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE T&
+upComponent(Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.y;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE T&
+forwardComponent(Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.z;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE const T&
+rightComponent(const Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.x;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE const T&
+upComponent(const Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.y;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE const T&
+forwardComponent(const Vector<3,T>& coord)
+{
+#ifdef MATH3D_CARTESIAN_ZXY
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YXZ
+    return coord.z;
+#endif
+
+#ifdef MATH3D_CARTESIAN_ZYX
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_YZX
+    return coord.x;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XZY
+    return coord.y;
+#endif
+
+#ifdef MATH3D_CARTESIAN_XYZ
+    return coord.z;
+#endif
 }
 
 };
