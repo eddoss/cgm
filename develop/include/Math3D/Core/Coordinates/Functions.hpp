@@ -109,7 +109,11 @@ template<typename T>
 Vector<2,T>
 cartesian(const Polar<T>& coord)
 {
-
+    return
+    {
+        coord.radius * std::cos(coord.angle),
+        coord.radius * std::sin(coord.angle)
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -118,7 +122,10 @@ template<typename T>
 Vector<3,T>
 cartesian(const Spherical<T>& coord)
 {
+    return axes::makeCoord
+    (
 
+    );
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -127,7 +134,7 @@ template<typename T>
 Vector<3,T>
 cartesian(const Cylindrical<T>& coord)
 {
-
+    return axes::makeCoord();
 }
 
 /* ####################################################################################### */
@@ -138,7 +145,11 @@ template<typename T>
 Polar<T>
 polar(const Vector<2,T>& coord)
 {
-
+    return
+    {
+        /* Angle */     std::atan2(coord.y, coord.x),
+        /* Radius */    std::sqrt(coord.x * coord.x + coord.y * coord.y)
+    }
 }
 
 /* ####################################################################################### */
@@ -149,7 +160,7 @@ template<typename T>
 Spherical<T>
 spherical(const Vector<3,T>& coord)
 {
-
+    return axes::makeCoord();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -158,7 +169,14 @@ template<typename T>
 Spherical<T>
 spherical(const Cylindrical<T>& coord)
 {
+    T radius {std::sqrt(coord.radius * coord.radius + coord.height * coord.height)};
 
+    return
+    {
+        /* Longitude */ coord.angle,
+        /* Latitude */  coord.height / radius,
+        /* Radius */    radius
+    };
 }
 
 /* ####################################################################################### */
@@ -169,7 +187,12 @@ template<typename T>
 Cylindrical<T>
 cylindrical(const Spherical<T>& coord)
 {
-
+    return
+    {
+        /* Angle */     coord.longitude,
+        /* Height */    coord.radius * std::sin(coord.latitude),
+        /* Radius */    coord.radius * std::cos(coord.latitude)
+    };
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -178,7 +201,12 @@ template<typename T>
 Cylindrical<T>
 cylindrical(const Vector<3,T>& coord)
 {
-
+    return
+    {
+        /* Angle */     coord.longitude,
+        /* Height */    coord.radius * std::sin(coord.latitude),
+        /* Radius */    coord.radius * std::cos(coord.latitude)
+    };
 }
 
 };
