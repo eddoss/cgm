@@ -110,8 +110,6 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::Transposed
 transposed(const Matrix<M,N,T>& matrix)
 {
-    using Transposed = typename Matrix<M,N,T>::Transposed;
-
     if constexpr (M==N)
     {
         auto copy {Matrix<M,N,T>(matrix)};
@@ -120,7 +118,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 1 && N == 2)
     {
-        return Transposed
+        return
         {
             matrix(0,0),
             matrix(0,1)
@@ -128,7 +126,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 1 && N == 3)
     {
-        return Transposed
+        return
         {
             matrix(0,0),
             matrix(0,1),
@@ -137,7 +135,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 1 && N == 4)
     {
-        return Transposed
+        return
         {
             matrix(0,0),
             matrix(0,1),
@@ -147,28 +145,28 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 2 && N == 1)
     {
-        return Transposed
+        return
         {
-            matrix(0,0), matrix(0,1)
+            matrix(0,0), matrix(1,0)
         };
     }
     if constexpr (M == 3 && N == 1)
     {
-        return Transposed
+        return
         {
-            matrix(0,0), matrix(0,1), matrix(0,2)
+            matrix(0,0), matrix(1,0), matrix(2,0)
         };
     }
     if constexpr (M == 4 && N == 1)
     {
-        return Transposed
+        return
         {
-            matrix(0,0), matrix(0,1), matrix(0,2), matrix(0,3)
+            matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0)
         };
     }
     if constexpr (M == 2 && N == 3)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0),
             matrix(0,1), matrix(1,1),
@@ -177,7 +175,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 2 && N == 4)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0),
             matrix(0,1), matrix(1,1),
@@ -187,7 +185,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 3 && N == 2)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0), matrix(2,0),
             matrix(0,1), matrix(1,1), matrix(2,1),
@@ -195,7 +193,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 3 && N == 4)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0), matrix(2,0),
             matrix(0,1), matrix(1,1), matrix(2,1),
@@ -205,7 +203,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 4 && N == 2)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
             matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1)
@@ -213,7 +211,7 @@ transposed(const Matrix<M,N,T>& matrix)
     }
     if constexpr (M == 4 && N == 3)
     {
-        return Transposed
+        return
         {
             matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
             matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1),
@@ -244,30 +242,31 @@ determinant(const Matrix<S,S,T>& matrix)
 
     if constexpr (S == 4)
     {
-        return  matrix(0,0) *
-                (
-                    matrix(1,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
-                    matrix(1,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) +
-                    matrix(1,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1))
-                )
-                -matrix(0,1) *
-                (
-                    matrix(1,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
-                    matrix(1,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
-                    matrix(1,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0))
-                )
-                +matrix(0,2) *
-                (
-                    matrix(1,0) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) -
-                    matrix(1,1) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
-                    matrix(1,3) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
-                )
-                -matrix(0,3) *
-                (
-                    matrix(1,0) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)) -
-                    matrix(1,1) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)) +
-                    matrix(1,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
-                );
+        return
+        matrix(0,0) *
+        (
+            matrix(1,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
+            matrix(1,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) +
+            matrix(1,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1))
+        )
+        -matrix(0,1) *
+        (
+            matrix(1,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
+            matrix(1,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
+            matrix(1,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0))
+        )
+        +matrix(0,2) *
+        (
+            matrix(1,0) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) -
+            matrix(1,1) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
+            matrix(1,3) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
+        )
+        -matrix(0,3) *
+        (
+            matrix(1,0) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)) -
+            matrix(1,1) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)) +
+            matrix(1,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
+        );
     }
 }
 
