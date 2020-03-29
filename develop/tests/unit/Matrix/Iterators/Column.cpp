@@ -5,6 +5,8 @@
 #include <Math3D/Core/Matrix/Matrix.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
 using Mat23 = Matrix<2,3,int>;
@@ -31,9 +33,9 @@ TEST(Matrix_ColumnIterator, Plus)
     auto it_12 = input.beginColumn(column) + 1;
     auto it_22 = input.beginColumn(column) + 2;
 
-    ASSERT_EQ(*it_02, 3);
-    ASSERT_EQ(*it_12, 6);
-    ASSERT_EQ(*it_22, 9);
+    ASSERT_TRUE(*it_02 == 3);
+    ASSERT_TRUE(*it_12 == 6);
+    ASSERT_TRUE(*it_22 == 9);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -52,9 +54,9 @@ TEST(Matrix_ColumnIterator, Minus)
     auto it_12 = input.endColumn(column) - 2;
     auto it_02 = input.endColumn(column) - 3;
 
-    ASSERT_EQ(*it_02, 3);
-    ASSERT_EQ(*it_12, 6);
-    ASSERT_EQ(*it_22, 9);
+    ASSERT_TRUE(*it_02 == 3);
+    ASSERT_TRUE(*it_12 == 6);
+    ASSERT_TRUE(*it_22 == 9);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -71,9 +73,9 @@ TEST(Matrix_ColumnIterator, PreIncrement)
     Matrix<3,3,int>::size_type column = 2;
     auto it_02 = input.beginColumn(column);
 
-    ASSERT_EQ(*it_02, 3);
-    ASSERT_EQ(*(++it_02), 6);
-    ASSERT_EQ(*(++it_02), 9);
+    ASSERT_TRUE(*it_02 == 3);
+    ASSERT_TRUE(*(++it_02) == 6);
+    ASSERT_TRUE(*(++it_02) == 9);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -90,7 +92,7 @@ TEST(Matrix_ColumnIterator, PostIncrement)
     Matrix<3,3,int>::size_type column = 2;
     auto it_02 = input.beginColumn(column);
 
-    ASSERT_EQ(*(it_02++), 3);
+    ASSERT_TRUE(*(it_02++) == 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -107,9 +109,9 @@ TEST(Matrix_ColumnIterator, PreDecrement)
     Mat33::size_type column = 2;
     auto it_22 = input.endColumn(column);
 
-    ASSERT_EQ(*(--it_22), 9);
-    ASSERT_EQ(*(--it_22), 6);
-    ASSERT_EQ(*(--it_22), 3);
+    ASSERT_TRUE(*(--it_22) == 9);
+    ASSERT_TRUE(*(--it_22) == 6);
+    ASSERT_TRUE(*(--it_22) == 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -123,7 +125,7 @@ TEST(Matrix_ColumnIterator, PostDecrement)
         7, 8, 9
     };
 
-    ASSERT_EQ((input.endColumn(1))--, input.endColumn(1));
+    ASSERT_TRUE((input.endColumn(1))-- == input.endColumn(1));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -139,18 +141,18 @@ TEST(Matrix_ColumnIterator, Difference)
 
     auto a = input.beginColumn(0) + 0;     // (0,0)
     auto b = input.beginColumn(0) + 2;     // (2,0)
-    ASSERT_EQ(a - b, -2);
-    ASSERT_EQ(b - a, 2);
+    ASSERT_TRUE(a - b == -2);
+    ASSERT_TRUE(b - a == 2);
 
     a = input.beginColumn(0) + 0;          // (0,0)
     b = input.beginColumn(1) + 2;          // (2,1)
-    ASSERT_EQ(a - b, -2);
-    ASSERT_EQ(b - a, 2);
+    ASSERT_TRUE(a - b == -2);
+    ASSERT_TRUE(b - a == 2);
 
     a = input.beginColumn(0) + 1;          // (1,0)
     b = input.beginColumn(2) + 2;          // (2,2)
-    ASSERT_EQ(a - b, -1);
-    ASSERT_EQ(b - a, 1);
+    ASSERT_TRUE(a - b == -1);
+    ASSERT_TRUE(b - a == 1);
 }
 
 
@@ -170,9 +172,9 @@ TEST(Matrix_ColumnIterator, Reverse)
     auto b = input.rbeginColumn(1) + 1;
     auto c = input.rbeginColumn(1) + 2;
 
-    ASSERT_EQ(*a, 8);
-    ASSERT_EQ(*b, 5);
-    ASSERT_EQ(*c, 2);
+    ASSERT_TRUE(*a == 8);
+    ASSERT_TRUE(*b == 5);
+    ASSERT_TRUE(*c == 2);
 }
 
 
@@ -189,8 +191,8 @@ TEST(Matrix_ColumnIterator, Reverse_Differece)
     auto a = input.rbeginColumn(1);
     auto b = input.rbeginColumn(1) + 1;
 
-    ASSERT_EQ(a - b, -1);
-    ASSERT_EQ(b - a, 1);
+    ASSERT_TRUE(a - b == -1);
+    ASSERT_TRUE(b - a == 1);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -206,8 +208,8 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_FirstComponent)
 
     auto it {input.rbeginColumn(0) + 2};
 
-    ASSERT_EQ(it.row(), 0);
-    ASSERT_EQ(it.column(), 0);
+    ASSERT_TRUE(it.row() == 0);
+    ASSERT_TRUE(it.column() == 0);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -222,8 +224,8 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbeginColumn(2) + 1};
 
-    ASSERT_EQ(it.row(), 0);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 0);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -239,8 +241,8 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_LastComponent)
 
     auto it {input.rbeginColumn(2)};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */

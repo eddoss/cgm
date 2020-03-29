@@ -1,6 +1,12 @@
 #ifndef MATH3D_SUPPORT_HPP
 #define MATH3D_SUPPORT_HPP
 
+
+#include <Math3D/Global.hpp>
+
+
+MATH3D_NAMESPACE_BEGIN
+
 template <typename Iterator>
 class ReverseMatrixIterator : public Iterator
 {
@@ -172,5 +178,7 @@ public: /* Methods */
         return (--static_cast<base_type>(self_type{*this})).column();
     }
 };
+
+MATH3D_NAMESPACE_END
 
 #endif //MATH3D_SUPPORT_HPP

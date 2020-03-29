@@ -5,6 +5,9 @@
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
 #include <Math3D/Core/Quaternion/Operators.hpp>
 
+
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 
 /* ####################################################################################### */
@@ -15,7 +18,7 @@ TEST(Quaternion_Operators, UnaryMinus)
 {
     Quaternion<int> qat { 1, 2, 3, 4 };
     Quaternion<int> exp {-1,-2,-3,-4 };
-    ASSERT_EQ(-qat, exp);
+    ASSERT_TRUE(-qat == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -28,7 +31,7 @@ TEST(Quaternion_Operators, OutplaceMinus)
 
     a = a - b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,7 +44,7 @@ TEST(Quaternion_Operators, InplaceMinus)
 
     a -= b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* ####################################################################################### */
@@ -56,7 +59,7 @@ TEST(Quaternion_Operators, OutplacePlus)
 
     a = a + b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -69,7 +72,7 @@ TEST(Quaternion_Operators, InplacePlus)
 
     a += b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* ####################################################################################### */
@@ -83,7 +86,7 @@ TEST(Quaternion_Operators, OutplaceScalarMultiplication)
 
     a = a * 2;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -96,7 +99,7 @@ TEST(Quaternion_Operators, OutplaceOtherMultiplication)
 
     a = a * b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -108,7 +111,7 @@ TEST(Quaternion_Operators, InplaceScalarMultiplication)
 
     a *= 2;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -121,7 +124,7 @@ TEST(Quaternion_Operators, InplaceOtherMultiplication)
 
     a *= b;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* ####################################################################################### */
@@ -135,7 +138,7 @@ TEST(Quaternion_Operators, OutplaceScalarDivision)
 
     a = a / 2;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -147,7 +150,7 @@ TEST(Quaternion_Operators, InplaceScalarDivision)
 
     a /= 2;
 
-    ASSERT_EQ(a, e);
+    ASSERT_TRUE(a == e);
 }
 
 /* ####################################################################################### */

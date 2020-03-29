@@ -6,6 +6,8 @@
 #include <Math3D/Core/Matrix/Operators.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat12 = Matrix<1,2,int>;
 using Mat13 = Matrix<1,3,int>;
@@ -41,7 +43,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4,
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -56,7 +58,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -71,7 +73,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -86,7 +88,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4, 6, 8, 6
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -103,7 +105,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -120,7 +122,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 8
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -137,7 +139,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -154,7 +156,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 4, 2, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -171,7 +173,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             4, 2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -190,7 +192,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -209,7 +211,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -228,7 +230,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -247,7 +249,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 8, 6, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -266,7 +268,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 4, 2, 4, 6
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -287,7 +289,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             8
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -308,7 +310,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -329,7 +331,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -350,7 +352,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -371,7 +373,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             8, 6, 4, 2, 4
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 
     /* -------------- */
@@ -394,7 +396,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             6, 8, 6, 4, 2
         };
 
-        ASSERT_EQ(a*2, b);
+        ASSERT_TRUE((a*2) == b);
     }
 }
 
@@ -412,7 +414,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4,
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -427,7 +429,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -442,7 +444,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -457,7 +459,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4, 6, 8, 6
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -474,7 +476,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -491,7 +493,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 8
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -508,7 +510,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -525,7 +527,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 4, 2, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -542,7 +544,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             4, 2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -561,7 +563,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -580,7 +582,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -599,7 +601,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -618,7 +620,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 8, 6, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -637,7 +639,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 4, 2, 4, 6
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -658,7 +660,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             8
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -679,7 +681,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -700,7 +702,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -721,7 +723,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -742,7 +744,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             8, 6, 4, 2, 4
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 
     /* -------------- */
@@ -765,6 +767,6 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             6, 8, 6, 4, 2
         };
 
-        ASSERT_EQ(a*=2, b);
+        ASSERT_TRUE((a*=2) == b);
     }
 }

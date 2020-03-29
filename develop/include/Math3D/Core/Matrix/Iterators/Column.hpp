@@ -1,12 +1,13 @@
 #ifndef MATH3D_MATRIX_COLUMN_ITERATOR_HPP
 #define MATH3D_MATRIX_COLUMN_ITERATOR_HPP
 
-
+#include <Math3D/Global.hpp>
 #include <iterator>
 #ifdef NDEBUG
     #include <stdexcept>
 #endif
 
+MATH3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Debug verifiers */
@@ -506,5 +507,7 @@ public: /* Difference */
         return (*static_cast<const base_type*>(this) - other);
     }
 };
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_MATRIX_COLUMN_ITERATOR_HPP

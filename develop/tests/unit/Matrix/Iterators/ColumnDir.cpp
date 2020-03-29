@@ -5,6 +5,8 @@
 #include <Math3D/Core/Matrix/Matrix.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
 using Mat23 = Matrix<2,3,int>;
@@ -34,9 +36,9 @@ TEST(Matrix_ColumnDirIterator, Plus)
     auto it1 = input.beginColumnDir() + 2;
     auto it2 = input.beginColumnDir() + 3;
 
-    ASSERT_EQ(*it0, 4);
-    ASSERT_EQ(*it1, 7);
-    ASSERT_EQ(*it2, 2);
+    ASSERT_TRUE(*it0 == 4);
+    ASSERT_TRUE(*it1 == 7);
+    ASSERT_TRUE(*it2 == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -54,9 +56,9 @@ TEST(Matrix_ColumnDirIterator, Minus)
     auto it1 = input.endColumnDir() - 2;
     auto it2 = input.endColumnDir() - 3;
 
-    ASSERT_EQ(*it0, 9);
-    ASSERT_EQ(*it1, 6);
-    ASSERT_EQ(*it2, 3);
+    ASSERT_TRUE(*it0 == 9);
+    ASSERT_TRUE(*it1 == 6);
+    ASSERT_TRUE(*it2 == 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -72,8 +74,8 @@ TEST(Matrix_ColumnDirIterator, PreIncrement)
 
     auto it = input.beginColumnDir();
 
-    ASSERT_EQ(*(++it), 4);
-    ASSERT_EQ(*(++it), 7);
+    ASSERT_TRUE(*(++it) == 4);
+    ASSERT_TRUE(*(++it) == 7);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -90,8 +92,8 @@ TEST(Matrix_ColumnDirIterator, PostIncrement)
     auto it = input.beginColumnDir();
     it++;
 
-    ASSERT_EQ(*(it++), 4);
-    ASSERT_EQ(*(it++), 7);
+    ASSERT_TRUE(*(it++) == 4);
+    ASSERT_TRUE(*(it++) == 7);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -107,8 +109,8 @@ TEST(Matrix_ColumnDirIterator, PreDecrement)
 
     auto it = input.endColumnDir();
 
-    ASSERT_EQ(*(--it), 9);
-    ASSERT_EQ(*(--it), 6);
+    ASSERT_TRUE(*(--it) == 9);
+    ASSERT_TRUE(*(--it) == 6);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -125,8 +127,8 @@ TEST(Matrix_ColumnDirIterator, PostDecrement)
     auto it = input.endColumnDir();
     it--;
 
-    ASSERT_EQ(*(it--), 9);
-    ASSERT_EQ(*(it--), 6);
+    ASSERT_TRUE(*(it--) == 9);
+    ASSERT_TRUE(*(it--) == 6);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -142,8 +144,8 @@ TEST(Matrix_ColumnDirIterator, RowsColumns_FirstComponent)
 
     auto it {input.beginColumnDir()};
 
-    ASSERT_EQ(it.row(), 0);
-    ASSERT_EQ(it.column(), 0);
+    ASSERT_TRUE(it.row() == 0);
+    ASSERT_TRUE(it.column() == 0);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -158,9 +160,9 @@ TEST(Matrix_ColumnDirIterator, RowsColumns_MidComponent)
 
     auto it {input.beginColumnDir() + 5};
 
-    ASSERT_EQ(*it, 7);
-    ASSERT_EQ(it.row(), 1);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(*it == 7);
+    ASSERT_TRUE(it.row() == 1);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -176,8 +178,8 @@ TEST(Matrix_ColumnDirIterator, RowsColumns_LastComponent)
 
     auto it {input.beginColumnDir() + Mat33::size-1};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -194,7 +196,7 @@ TEST(Matrix_ColumnDirIterator, Difference)
     auto a {input.beginColumnDir()};
     auto b {input.beginColumnDir() + 3};
 
-    ASSERT_EQ(b-a, 3);
+    ASSERT_TRUE(b-a == 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -312,10 +314,10 @@ TEST(Matrix_ColumnDirIterator, Reverse)
     auto c = input.rbeginColumnDir() + 2;
     auto d = input.rbeginColumnDir() + 3;
 
-    ASSERT_EQ(*a, 5);
-    ASSERT_EQ(*b, 2);
-    ASSERT_EQ(*c, 4);
-    ASSERT_EQ(*d, 1);
+    ASSERT_TRUE(*a == 5);
+    ASSERT_TRUE(*b == 2);
+    ASSERT_TRUE(*c == 4);
+    ASSERT_TRUE(*d == 1);
 }
 
 /* --------------------------------------------------------------------------------------- */

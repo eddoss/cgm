@@ -6,6 +6,8 @@
 #include <Math3D/Core/Matrix/Operators.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 /**
  * Get the transpose square matrix.
  * @param matrix Matrix to transpose.
@@ -112,7 +114,7 @@ transposed(const Matrix<M,N,T>& matrix)
 {
     if constexpr (M==N)
     {
-        auto copy {Matrix<M,N,T>(matrix)};
+        auto copy {matrix};
         transpose(copy);
         return copy;
     }
@@ -226,7 +228,7 @@ template<size_t S, typename T>
 constexpr T
 determinant(const Matrix<S,S,T>& matrix)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate determinant for matrices more than 4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate determinant for matrices more than 4x4 size.");
 
     if constexpr (S == 2)
     {
@@ -235,9 +237,10 @@ determinant(const Matrix<S,S,T>& matrix)
 
     if constexpr (S == 3)
     {
-        return  matrix(0,0) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)) -
-                matrix(0,1) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)) +
-                matrix(0,2) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0));
+        return
+        matrix(0,0) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)) -
+        matrix(0,1) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)) +
+        matrix(0,2) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0));
     }
 
     if constexpr (S == 4)
@@ -276,11 +279,11 @@ template<size_t S, typename T>
 constexpr Matrix<S,S,T>
 cofactors(const Matrix<S,S,T>& matrix)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate cofactors for matrices more than 4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate cofactors for matrices more than 4x4 size.");
 
     if constexpr (S == 2)
     {
-        return Matrix<S,S,T>
+        return
         {
             matrix(1,1),    -matrix(1,0),
             -matrix(0,1),    matrix(0,0),
@@ -289,7 +292,7 @@ cofactors(const Matrix<S,S,T>& matrix)
 
     if constexpr (S == 3)
     {
-        return Matrix<S,S,T>
+        return
         {
             matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1), matrix(1,2)*matrix(2,0) - matrix(1,0)*matrix(2,2), matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0),
             matrix(0,2)*matrix(2,1) - matrix(0,1)*matrix(2,2), matrix(0,0)*matrix(2,2) - matrix(0,2)*matrix(2,0), matrix(0,1)*matrix(2,0) - matrix(0,0)*matrix(2,1),
@@ -299,7 +302,7 @@ cofactors(const Matrix<S,S,T>& matrix)
 
     if constexpr (S == 4)
     {
-        return Matrix<S,S,T>
+        return
         {
             matrix(1,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(1,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) + matrix(1,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)),
             matrix(1,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) - matrix(1,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(1,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)),
@@ -327,7 +330,7 @@ template<typename TResult, size_t S, typename T>
 constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrices more than 4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrices more than 4x4 size.");
 
     T det {determinant(matrix)};
 
@@ -351,7 +354,7 @@ identity()
 {
     if constexpr (S==2)
     {
-        return Matrix<S,S,T>
+        return
         {
             1, 0,
             0, 1
@@ -359,7 +362,7 @@ identity()
     }
     else if constexpr (S==3)
     {
-        return Matrix<S,S,T>
+        return
         {
             1, 0, 0,
             0, 1, 0,
@@ -368,7 +371,7 @@ identity()
     }
     else if constexpr (S==4)
     {
-        return Matrix<S,S,T>
+        return
         {
             1, 0, 0, 0,
             0, 1, 0, 0,
@@ -383,5 +386,7 @@ identity()
         return matrix;
     }
 }
+
+MATH3D_NAMESPACE_END
 
 #endif //MATH3D_MATRIX_FUNCTIONS_HPP

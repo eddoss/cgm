@@ -10,7 +10,7 @@
 
 template<size_t D, typename T>
 std::ostream&
-operator << (std::ostream& stream, const Vector<D,T>& vec)
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::Vector<D,T>& vec)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
@@ -33,7 +33,7 @@ operator << (std::ostream& stream, const Vector<D,T>& vec)
 
 template<size_t M, size_t N, typename T>
 std::ostream&
-operator << (std::ostream& stream, const Matrix<M,N,T>& mat)
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::Matrix<M,N,T>& mat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);

@@ -6,6 +6,8 @@
 #include <Math3D/Core/Quaternion/Functions.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 
 TEST(Quaternion_Functions, Dot)
@@ -26,7 +28,7 @@ TEST(Quaternion_Functions, Conjugate)
     Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
     Quaternion<float> b {6.f, -5.f, -8.f, -3.f};
 
-    ASSERT_EQ(conjugate(a), b);
+    ASSERT_TRUE(conjugate(a) == b);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -36,7 +38,7 @@ TEST(Quaternion_Functions, Conjugated)
     Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
     Quaternion<float> b {6.f, -5.f, -8.f, -3.f};
 
-    ASSERT_EQ(conjugated(a), b);
+    ASSERT_TRUE(conjugated(a) == b);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -129,8 +131,8 @@ TEST(Quaternion_Functions, Identity)
     Quaternion<float> idn = identity<float>();
     Quaternion<float> exp = {1.0f, 0.f, 0.f, 0.f};
 
-    ASSERT_EQ(idn.s, exp.s);
-    ASSERT_EQ(idn.a, exp.a);
-    ASSERT_EQ(idn.b, exp.b);
-    ASSERT_EQ(idn.c, exp.c);
+    ASSERT_TRUE(idn.s == exp.s);
+    ASSERT_TRUE(idn.a == exp.a);
+    ASSERT_TRUE(idn.b == exp.b);
+    ASSERT_TRUE(idn.c == exp.c);
 }

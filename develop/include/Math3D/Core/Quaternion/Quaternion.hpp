@@ -6,6 +6,8 @@
 #include <Math3D/Platform.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 template<typename T=FLOAT>
 struct Quaternion
 {
@@ -127,5 +129,7 @@ Quaternion<T>::data() const
 {
     return &s;
 }
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_QUATERNION_HPP

@@ -8,6 +8,8 @@
 #include <Math3D/Core/IO.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 
 using Mat12 = Matrix<1,2,int>;
@@ -49,7 +51,7 @@ TEST(Matrix_Functions, Transpose)
 
         transpose(a);
 
-        ASSERT_EQ(a,b);
+        ASSERT_TRUE(a == b);
     }
 
     /* -------------- */
@@ -70,7 +72,7 @@ TEST(Matrix_Functions, Transpose)
 
         transpose(a);
 
-        ASSERT_EQ(a,b);
+        ASSERT_TRUE(a == b);
     }
 
     /* -------------- */
@@ -93,7 +95,7 @@ TEST(Matrix_Functions, Transpose)
 
         transpose(a);
 
-        ASSERT_EQ(a,b);
+        ASSERT_TRUE(a == b);
     }
 
    /* -------------- */
@@ -118,7 +120,7 @@ TEST(Matrix_Functions, Transpose)
 
         transpose(a);
 
-        ASSERT_EQ(a,b);
+        ASSERT_TRUE(a == b);
     }
 }
 
@@ -137,7 +139,7 @@ TEST(Matrix_Functions, Transposed)
             2
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -154,7 +156,7 @@ TEST(Matrix_Functions, Transposed)
             3
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -172,7 +174,7 @@ TEST(Matrix_Functions, Transposed)
             4
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -188,7 +190,7 @@ TEST(Matrix_Functions, Transposed)
             1,2
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
         /* -------------- */
@@ -205,7 +207,7 @@ TEST(Matrix_Functions, Transposed)
             1, 2, 3
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -223,7 +225,7 @@ TEST(Matrix_Functions, Transposed)
             1,2,3,4
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -241,7 +243,7 @@ TEST(Matrix_Functions, Transposed)
             1, 7
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -260,7 +262,7 @@ TEST(Matrix_Functions, Transposed)
             5, 8
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -278,7 +280,7 @@ TEST(Matrix_Functions, Transposed)
             2, 4, 2
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -298,7 +300,7 @@ TEST(Matrix_Functions, Transposed)
             4, 1, 5
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -317,7 +319,7 @@ TEST(Matrix_Functions, Transposed)
             2, 4, 8, 1
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 
     /* -------------- */
@@ -337,7 +339,7 @@ TEST(Matrix_Functions, Transposed)
             2, 3, 1, 8
         };
 
-        ASSERT_EQ(transposed(a), b);
+        ASSERT_TRUE(transposed(a) == b);
     }
 }
 
@@ -352,7 +354,7 @@ TEST(Matrix_Functions, Determinant)
             3, 4
         };
 
-        ASSERT_EQ(determinant(a), -2);
+        ASSERT_TRUE(determinant(a) == -2);
     }
 
     /* -------------- */
@@ -365,7 +367,7 @@ TEST(Matrix_Functions, Determinant)
             6, 7, 3
         };
 
-        ASSERT_EQ(determinant(a), 25);
+        ASSERT_TRUE(determinant(a) == 25);
     }
 
     /* -------------- */
@@ -379,7 +381,7 @@ TEST(Matrix_Functions, Determinant)
             1, 2, 3, 4
         };
 
-        ASSERT_EQ(determinant(a), 0);
+        ASSERT_TRUE(determinant(a) == 0);
     }
 
 //   /* -------------- */
@@ -394,7 +396,7 @@ TEST(Matrix_Functions, Determinant)
 //            1, 3, 3, 0, 1
 //        };
 //
-//        ASSERT_EQ(determinant(a), 4);
+//        ASSERT_TRUE(determinant(a), 4);
 //    }
 }
 
@@ -414,7 +416,7 @@ TEST(Matrix_Functions, Cofactors)
             -2, 1
         };
 
-        ASSERT_EQ(cofactors(a),b);
+        ASSERT_TRUE(cofactors(a) == b);
     }
 
     /* -------------- */
@@ -433,7 +435,7 @@ TEST(Matrix_Functions, Cofactors)
             -5, 10, -5
         };
 
-        ASSERT_EQ(cofactors(a),b);
+        ASSERT_TRUE(cofactors(a) == b);
     }
 
     /* -------------- */
@@ -454,7 +456,7 @@ TEST(Matrix_Functions, Cofactors)
             -119,47,170,-44
         };
 
-        ASSERT_EQ(cofactors(a),b);
+        ASSERT_TRUE(cofactors(a) == b);
     }
 }
 
@@ -478,7 +480,7 @@ TEST(Matrix_Functions, Inverse)
         bool success = false;
         auto inv = inverted(a, success);
 
-        ASSERT_EQ(inv, b);
+        ASSERT_TRUE(inv == b);
     }
 
     /* -------------- */
@@ -501,7 +503,7 @@ TEST(Matrix_Functions, Inverse)
         bool success = false;
         auto inv = inverted(a, success);
 
-        ASSERT_EQ(inv, b);
+        ASSERT_TRUE(inv == b);
     }
 
     /* -------------- */
@@ -525,7 +527,7 @@ TEST(Matrix_Functions, Inverse)
         bool success = false;
         auto inv = inverted(a, success);
 
-        ASSERT_EQ(inv, b);
+        ASSERT_TRUE(inv == b);
     }
 }
 
@@ -542,7 +544,7 @@ TEST(Matrix_Functions, Identity)
 
         auto exp = identity<2,int>();
 
-        ASSERT_EQ(exp, ident);
+        ASSERT_TRUE(exp == ident);
     }
 
     /* -------------- */
@@ -557,7 +559,7 @@ TEST(Matrix_Functions, Identity)
 
         auto exp = identity<3,int>();
 
-        ASSERT_EQ(exp, ident);
+        ASSERT_TRUE(exp == ident);
     }
 
     /* -------------- */
@@ -573,7 +575,7 @@ TEST(Matrix_Functions, Identity)
 
         auto exp = identity<4,int>();
 
-        ASSERT_EQ(exp, ident);
+        ASSERT_TRUE(exp == ident);
     }
 
     /* -------------- */
@@ -590,6 +592,6 @@ TEST(Matrix_Functions, Identity)
 
         auto exp = identity<5,int>();
 
-        ASSERT_EQ(exp, ident);
+        ASSERT_TRUE(exp == ident);
     }
 }

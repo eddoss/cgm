@@ -8,6 +8,8 @@
 #include <Math3D/Core/Vector/Operators.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 /**
  * Normalize vectors. If given vector length equal to zero,
  * return given vector, normalized otherwise.
@@ -40,7 +42,7 @@ constexpr T
 dot(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
- * Calculates cross product of two vectors.
+ * @brief Calculates cross product of two vectors.
  * @param A First vector.
  * @param B Second vector.
  * @tparam TResult Type of result. It must be float or double.
@@ -277,5 +279,7 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     return std::acos(A | B);
 }
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_VECTOR_FUNCTIONS_HPP

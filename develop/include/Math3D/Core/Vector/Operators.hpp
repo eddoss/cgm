@@ -13,29 +13,29 @@
  * Increase all components of vector by 1 and returns it.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator++(Vector<D,T>& vector);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Decrease all components of vector by 1 and returns it.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator--(Vector<D,T>& vector);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Increase all components of vector by 1 and returns unchanged copy of it.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator++(Vector<D,T>& vector, int);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector, int);
 
 /**
  * Decrease all components of vector by 1 and returns unchanged copy of it.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator--(Vector<D,T>& vector, int);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector, int);
 
 /* ####################################################################################### */
 /* Plus */
@@ -48,8 +48,8 @@ operator--(Vector<D,T>& vector, int);
  * @return The result of adding.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add vector B to vector A.
@@ -58,8 +58,8 @@ operator+=(Vector<D,T>& vector, TScalar scalar);
  * @return The result of adding.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates sum of two vectors.
@@ -68,8 +68,8 @@ operator+=(Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Add scalar to vector and return copy.
@@ -78,8 +78,8 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add scalar to vector and return copy.
@@ -88,8 +88,8 @@ operator+(const Vector<D,T>& vector, TScalar scalar);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator+(TScalar scalar, const Vector<D,T>& vector);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(TScalar scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /* ####################################################################################### */
 /* Minus */
@@ -102,8 +102,8 @@ operator+(TScalar scalar, const Vector<D,T>& vector);
  * @return The result of subtraction.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Subtract vector B from vector A.
@@ -112,8 +112,8 @@ operator-=(Vector<D,T>& vector, TScalar scalar);
  * @return The result of subtraction.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Get a negated copy of the vector.
@@ -121,8 +121,8 @@ operator-=(Vector<D,T>& A, const Vector<D,T>& B);
  * @return A negated copy of the vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Calculates difference of two vectors.
@@ -131,8 +131,8 @@ operator-(const Vector<D,T>& vector);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Subtract scalar from each vector component and return copy.
@@ -141,8 +141,8 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
 /* Component wise multiplication */
@@ -155,8 +155,8 @@ operator-(const Vector<D,T>& vector, TScalar scalar);
  * @return The result of multiplication.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply component wise vector A by vector B.
@@ -165,8 +165,8 @@ operator*=(Vector<D,T>& vector, TScalar scalar);
  * @return The result of multiplication.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates component wise multiplication of two vectors.
@@ -175,8 +175,8 @@ operator*=(Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Multiply scalar to each vector component and return copy.
@@ -185,8 +185,8 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply scalar to each vector component and return copy.
@@ -195,8 +195,8 @@ operator*(const Vector<D,T>& vector, TScalar scalar);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator*(TScalar scalar, const Vector<D,T>& vector);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(TScalar scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /* ####################################################################################### */
 /* Component wise division */
@@ -209,8 +209,8 @@ operator*(TScalar scalar, const Vector<D,T>& vector);
  * @return The result of division.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator/=(Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Divide component wise vector A by vector B.
@@ -219,8 +219,8 @@ operator/=(Vector<D,T>& vector, TScalar scalar);
  * @return The result of division.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator/=(Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates component wise division of two vectors.
@@ -229,8 +229,8 @@ operator/=(Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Divide each vector component by a scalar and return copy.
@@ -239,8 +239,8 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
 /* Comparison with scalar */
@@ -254,7 +254,7 @@ operator/(const Vector<D,T>& vector, TScalar scalar);
  */
 template<size_t D, typename T=FLOAT>
 constexpr bool
-operator==(const Vector<D,T>& vector, T scalar);
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar);
 
 /**
  * Checking the components of a vector for inequality with a scalar.
@@ -264,47 +264,7 @@ operator==(const Vector<D,T>& vector, T scalar);
  */
 template<size_t D, typename T=FLOAT>
 constexpr bool
-operator!=(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are less than a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are less than scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are greater than a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are greater than scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are less or equal to a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are less or equal to a scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<=(const Vector<D,T>& vector, T scalar);
-
-/**
- * Checks if all components of a vector are greater or equal to a scalar.
- * @param vector Vector to compare.
- * @param scalar Scalar value to compare with.
- * @return true if components of the vector are greater or equal to a scalar, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>=(const Vector<D,T>& vector, T scalar);
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar);
 
 /* ####################################################################################### */
 /* Comparison with other */
@@ -318,7 +278,7 @@ operator>=(const Vector<D,T>& vector, T scalar);
  */
 template<size_t D, typename T=FLOAT>
 constexpr bool
-operator==(const Vector<D,T>& A, const Vector<D,T>& B);
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Check against another vector for inequality.
@@ -328,47 +288,7 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B);
  */
 template<size_t D, typename T=FLOAT>
 constexpr bool
-operator!=(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are smaller than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components less than B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are larger than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components less or equal B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator<=(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are smaller (or equal) than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components greater than B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Compares whether all the components of this vector are larger (or equal) than other.
- * @param A Vector to compare.
- * @param B Vector to compare with.
- * @return true if A vector components greater or equal B vector components, false otherwise.
- */
-template<size_t D, typename T=FLOAT>
-constexpr bool
-operator>=(const Vector<D,T>& A, const Vector<D,T>& B);
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Dot product operator */
@@ -382,7 +302,7 @@ operator>=(const Vector<D,T>& A, const Vector<D,T>& B);
  */
 template<size_t D, typename T=FLOAT>
 constexpr T
-operator|(const Vector<D,T>& A, const Vector<D,T>& B);
+operator|(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Cross product operator */
@@ -396,40 +316,7 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B);
  */
 template<typename T=FLOAT>
 constexpr T
-operator^(const Vector<2,T>& A, const Vector<2,T>& B);
-
-/**
- * Calculates cross product of 2D vector and 3D vectors.
- * Represent 2D as 3D with Z=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<2,T>& A, const Vector<3,T>& B);
-
-/**
- * Calculates cross product of 2D vector and 4D vectors.
- * Represent 2D as 4D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<2,T>& A, const Vector<4,T>& B);
-
-/**
- * Calculates cross product of 3D vector and 2D vectors.
- * Represent 2D as 3D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<2,T>& B);
+operator^(const MATH3D_NAMESPACE::Vector<2,T>& A, const MATH3D_NAMESPACE::Vector<2,T>& B);
 
 /**
  * Calculates cross product of 3D vector and 3D vectors.
@@ -438,51 +325,8 @@ operator^(const Vector<3,T>& A, const Vector<2,T>& B);
  * @return The cross product.
  */
 template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<3,T>& B);
-
-/**
- * Calculates cross product of 3D vector and 4D vectors.
- * Represent 3D as 4D with W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<4,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 2D vectors.
- * Represent 2D as 4D with Z=0, W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<2,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 3D vectors.
- * Represent 3D as 4D with W=0.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<3,T>& B);
-
-/**
- * Calculates cross product of 4D vector and 4D vectors.
- * @param A Left vector.
- * @param B Right vector.
- * @return The cross product.
- */
-template<typename T=FLOAT>
-constexpr Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<4,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<3,T>
+operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector<3,T>& B);
 
 
 
@@ -503,8 +347,8 @@ operator^(const Vector<4,T>& A, const Vector<4,T>& B);
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator++(Vector<D,T>& vector)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
     if constexpr (D == 2)
     {
@@ -535,8 +379,8 @@ operator++(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator--(Vector<D,T>& vector)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
     if constexpr (D == 2)
     {
@@ -567,10 +411,10 @@ operator--(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator++(Vector<D,T>& vector, int)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector, int)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
 
     if constexpr (D == 2)
     {
@@ -601,10 +445,10 @@ operator++(Vector<D,T>& vector, int)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator--(Vector<D,T>& vector, int)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector, int)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
 
     if constexpr (D == 2)
     {
@@ -637,8 +481,8 @@ operator--(Vector<D,T>& vector, int)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator+=(Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
@@ -669,8 +513,8 @@ operator+=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator+=(Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -701,10 +545,10 @@ operator+=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator+(const Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
-    Vector<D,T> copy {A};
+    auto copy {A};
 
     if constexpr (D == 2)
     {
@@ -735,10 +579,10 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator+(const Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -770,10 +614,10 @@ operator+(const Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator+(T scalar, const Vector<D,T>& vector)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator+(T scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -807,8 +651,8 @@ operator+(T scalar, const Vector<D,T>& vector)
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator-(Vector<D,T>& vector)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator-(MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
     auto copy {vector};
 
@@ -841,8 +685,8 @@ operator-(Vector<D,T>& vector)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator-=(Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
@@ -873,8 +717,8 @@ operator-=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator-=(Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -905,10 +749,10 @@ operator-=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator-(const Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
-    Vector<D,T> copy {A};
+    auto copy {A};
 
     if constexpr (D == 2)
     {
@@ -939,10 +783,10 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator-(const Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -976,8 +820,8 @@ operator-(const Vector<D,T>& vector, TScalar scalar)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator*=(Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
@@ -1008,8 +852,8 @@ operator*=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator*=(Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -1040,10 +884,10 @@ operator*=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator*(const Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
-    Vector<D,T> copy {A};
+    auto copy {A};
 
     if constexpr (D == 2)
     {
@@ -1074,10 +918,10 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator*(const Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
-    Vector<D,T> copy {vector};
+    auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -1109,10 +953,10 @@ operator*(const Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator*(T scalar, const Vector<D,T>& vector)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator*(T scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
-        Vector<D,T> copy {vector};
+    auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -1146,8 +990,8 @@ operator*(T scalar, const Vector<D,T>& vector)
 /* ####################################################################################### */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator/=(Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
     if constexpr (D == 2)
     {
@@ -1178,8 +1022,8 @@ operator/=(Vector<D,T>& vector, TScalar scalar)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator/=(Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -1210,10 +1054,10 @@ operator/=(Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
-        Vector<D,T> copy {A};
+    auto copy {A};
 
     if constexpr (D == 2)
     {
@@ -1244,10 +1088,10 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar)
 {
-    Vector<D,T> copy {vector};
+   auto copy {vector};
     T value {static_cast<T>(scalar)};
 
     if constexpr (D == 2)
@@ -1282,29 +1126,29 @@ operator/(const Vector<D,T>& vector, TScalar scalar)
 
 template<size_t D, typename T>
 constexpr FORCEINLINE bool
-operator==(const Vector<D,T>& vector, T scalar)
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar);
+        return  MATH3D_NAMESPACE::equal(vector.x, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.y, scalar);
     }
     else if constexpr (D == 3)
     {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar) &&
-                equal(vector.z, scalar);
+        return  MATH3D_NAMESPACE::equal(vector.x, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.y, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.z, scalar);
     }
     else if constexpr (D == 4)
     {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar) &&
-                equal(vector.z, scalar) &&
-                equal(vector.w, scalar);
+        return  MATH3D_NAMESPACE::equal(vector.x, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.y, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.z, scalar) &&
+                MATH3D_NAMESPACE::equal(vector.w, scalar);
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return false;
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(vector[i], scalar)) return false;
         return true;
     }
 }
@@ -1313,154 +1157,30 @@ operator==(const Vector<D,T>& vector, T scalar)
 
 template<size_t D, typename T>
 constexpr FORCEINLINE bool
-operator!=(const Vector<D,T>& vector, T scalar)
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar);
+        return  MATH3D_NAMESPACE::notEqual(vector.x, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.y, scalar);
     }
     else if constexpr (D == 3)
     {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar) &&
-                notEqual(vector.z, scalar);
+        return  MATH3D_NAMESPACE::notEqual(vector.x, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.y, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.z, scalar);
     }
     else if constexpr (D == 4)
     {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar) &&
-                notEqual(vector.z, scalar) &&
-                notEqual(vector.w, scalar);
+        return  MATH3D_NAMESPACE::notEqual(vector.x, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.y, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.z, scalar) &&
+                MATH3D_NAMESPACE::notEqual(vector.w, scalar);
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return true;
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(vector[i], scalar)) return true;
         return false;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar &&
-                vector.z < scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x < scalar &&
-                vector.y < scalar &&
-                vector.z < scalar &&
-                vector.w < scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] >= scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar &&
-                vector.z > scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x > scalar &&
-                vector.y > scalar &&
-                vector.z > scalar &&
-                vector.w > scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] <= scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<=(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar &&
-                vector.z <= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x <= scalar &&
-                vector.y <= scalar &&
-                vector.z <= scalar &&
-                vector.w <= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] > scalar) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>=(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar &&
-                vector.z >= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        return  vector.x >= scalar &&
-                vector.y >= scalar &&
-                vector.z >= scalar &&
-                vector.w >= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (vector[i] < scalar) return false;
-        return true;
     }
 }
 
@@ -1470,29 +1190,29 @@ operator>=(const Vector<D,T>& vector, T scalar)
 
 template<size_t D, typename T>
 constexpr FORCEINLINE bool
-operator==(const Vector<D,T>& A, const Vector<D,T>& B)
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y);
+        return  MATH3D_NAMESPACE::equal(A.x, B.x) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y);
     }
     else if constexpr (D == 3)
     {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y) &&
-                equal(A.z, B.z);
+        return  MATH3D_NAMESPACE::equal(A.x, B.x) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y) &&
+                MATH3D_NAMESPACE::equal(A.z, B.z);
     }
     else if constexpr (D == 4)
     {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y) &&
-                equal(A.z, B.z) &&
-                equal(A.w, B.w);
+        return  MATH3D_NAMESPACE::equal(A.x, B.x) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y) &&
+                MATH3D_NAMESPACE::equal(A.z, B.z) &&
+                MATH3D_NAMESPACE::equal(A.w, B.w);
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return false;
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i])) return false;
         return true;
     }
 }
@@ -1501,154 +1221,30 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B)
 
 template<size_t D, typename T>
 constexpr FORCEINLINE bool
-operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y);
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y);
     }
     else if constexpr (D == 3)
     {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y) ||
-                notEqual(A.z, B.z);
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y) ||
+                MATH3D_NAMESPACE::notEqual(A.z, B.z);
     }
     else if constexpr (D == 4)
     {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y) ||
-                notEqual(A.z, B.z) ||
-                notEqual(A.w, B.w);
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y) ||
+                MATH3D_NAMESPACE::notEqual(A.z, B.z) ||
+                MATH3D_NAMESPACE::notEqual(A.w, B.w);
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return true;
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i])) return true;
         return false;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x < B.x &&
-                A.y < B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x < B.x &&
-                A.y < B.y &&
-                A.z < B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x < B.x &&
-                A.y < B.y &&
-                A.z < B.z &&
-                A.w < B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] >= B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x > B.x &&
-                A.y > B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x > B.x &&
-                A.y > B.y &&
-                A.z > B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x > B.x &&
-                A.y > B.y &&
-                A.z > B.z &&
-                A.w > B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] <= B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator<=(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y &&
-                A.z <= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x <= B.x &&
-                A.y <= B.y &&
-                A.z <= B.z &&
-                A.w <= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] > B[i]) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y &&
-                A.z >= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return  A.x >= B.x &&
-                A.y >= B.y &&
-                A.z >= B.z &&
-                A.w >= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (A[i] < B[i]) return false;
-        return true;
     }
 }
 
@@ -1658,7 +1254,7 @@ operator>=(const Vector<D,T>& A, const Vector<D,T>& B)
 
 template<size_t D, typename T>
 constexpr T
-operator|(const Vector<D,T>& A, const Vector<D,T>& B)
+operator|(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -1674,7 +1270,7 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B)
     }
     else
     {
-        T result {zero<T>()};
+        T result {MATH3D_NAMESPACE::zero<T>()};
         for (auto i = 0; i < D; ++i)
         {
             result += A[i] * B[i];
@@ -1689,7 +1285,7 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B)
 
 template<typename T>
 constexpr T
-operator^(const Vector<2,T>& A, const Vector<2,T>& B)
+operator^(const MATH3D_NAMESPACE::Vector<2,T>& A, const MATH3D_NAMESPACE::Vector<2,T>& B)
 {
     return A.x * B.y - A.y * B.x;
 }
@@ -1697,53 +1293,10 @@ operator^(const Vector<2,T>& A, const Vector<2,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<2,T>& A, const Vector<3,T>& B)
+constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<3,T>
+operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector<3,T>& B)
 {
-    return Vector<3,T>
-    {
-        A.y * B.z,
-       -A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<2,T>& A, const Vector<4,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z,
-       -A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<2,T>& B)
-{
-    return Vector<3,T>
-    {
-       -A.z * B.y,
-        A.z * B.x,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<3,T>& B)
-{
-    return Vector<3,T>
+    return
     {
         A.y * B.z - A.z * B.y,
         A.z * B.x - A.x * B.z,
@@ -1751,63 +1304,5 @@ operator^(const Vector<3,T>& A, const Vector<3,T>& B)
     };
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<4,T>& B)
-{
-    return Vector<3,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<2,T>& B)
-{
-    return Vector<4,T>
-    {
-       -A.z * B.y,
-        A.z * B.x,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<3,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<4,T>
-operator^(const Vector<4,T>& A, const Vector<4,T>& B)
-{
-    return Vector<4,T>
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x,
-        zero<T>()
-    };
-}
 
 #endif // MATH3D_VECTOR_OPERATORS_HPP

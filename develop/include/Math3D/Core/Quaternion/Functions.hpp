@@ -8,6 +8,8 @@
 #include <Math3D/Core/Quaternion/Operators.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 /**
  * Calculates dot product of two quaternions.
  * @return The dot product.
@@ -219,5 +221,7 @@ identity()
         zero<T>()
     };
 }
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_QUATERNION_FUNCTIONS_HPP

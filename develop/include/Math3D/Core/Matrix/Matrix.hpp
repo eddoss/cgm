@@ -11,6 +11,8 @@
 #include <Math3D/Core/Matrix/Iterators/Column.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
 
     #define MATH3D_MATRIX_INTERNAL_DATA T m_data[M][N];
@@ -776,5 +778,7 @@ struct Matrix
 {
     MATH3D_MATRIX_COMMON_BODY
 };
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_MATRIX_HPP
