@@ -4,11 +4,11 @@
 #include <type_traits>
 #include <Math3D/Global.hpp>
 #include <Math3D/Platform.hpp>
-#include <Math3D/Core/Matrix/Support.hpp>
-#include <Math3D/Core/Matrix/Iterators/Direct.hpp>
-#include <Math3D/Core/Matrix/Iterators/Indirect.hpp>
-#include <Math3D/Core/Matrix/Iterators/Row.hpp>
-#include <Math3D/Core/Matrix/Iterators/Column.hpp>
+#include <private/Math3D/Core/Matrix/Support.hpp>
+#include <private/Math3D/Core/Matrix/Iterators/Direct.hpp>
+#include <private/Math3D/Core/Matrix/Iterators/Indirect.hpp>
+#include <private/Math3D/Core/Matrix/Iterators/Row.hpp>
+#include <private/Math3D/Core/Matrix/Iterators/Column.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

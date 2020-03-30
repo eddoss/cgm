@@ -5,7 +5,7 @@
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Matrix/Operators.hpp>
 #include <Math3D/Core/Matrix/Functions.hpp>
-#include <Math3D/Core/IO.hpp>
+#include <Math3D/IO.hpp>
 
 
 using namespace MATH3D_NAMESPACE;

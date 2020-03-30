@@ -1,5 +1,5 @@
-#ifndef MATH3D_SUPPORT_HPP
-#define MATH3D_SUPPORT_HPP
+#ifndef MATH3D_PRIVATE_SUPPORT_HPP
+#define MATH3D_PRIVATE_SUPPORT_HPP
 
 
 #include <Math3D/Global.hpp>
@@ -181,4 +181,4 @@ public: /* Methods */
 
 MATH3D_NAMESPACE_END
 
-#endif //MATH3D_SUPPORT_HPP
+#endif //MATH3D_PRIVATE_SUPPORT_HPP
