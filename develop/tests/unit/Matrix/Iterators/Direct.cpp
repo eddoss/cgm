@@ -5,6 +5,8 @@
 #include <Math3D/Core/Matrix/Matrix.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
 using Mat23 = Matrix<2,3,int>;
@@ -35,13 +37,13 @@ TEST(Matrix_DirectIterator, Plus)
     auto it2 = input.begin() + 3;
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*it0, 2);
-        ASSERT_EQ(*it1, 3);
-        ASSERT_EQ(*it2, 4);
+        ASSERT_TRUE(*it0 == 2);
+        ASSERT_TRUE(*it1 == 3);
+        ASSERT_TRUE(*it2 == 4);
     #else
-        ASSERT_EQ(*it0, 4);
-        ASSERT_EQ(*it1, 7);
-        ASSERT_EQ(*it2, 2);
+        ASSERT_TRUE(*it0 == 4);
+        ASSERT_TRUE(*it1 == 7);
+        ASSERT_TRUE(*it2 == 2);
     #endif
 
 }
@@ -62,13 +64,13 @@ TEST(Matrix_DirectIterator, Minus)
     auto it2 = input.end() - 3;
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*it0, 9);
-        ASSERT_EQ(*it1, 8);
-        ASSERT_EQ(*it2, 7);
+        ASSERT_TRUE(*it0 == 9);
+        ASSERT_TRUE(*it1 == 8);
+        ASSERT_TRUE(*it2 == 7);
     #else
-        ASSERT_EQ(*it0, 9);
-        ASSERT_EQ(*it1, 6);
-        ASSERT_EQ(*it2, 3);
+        ASSERT_TRUE(*it0 == 9);
+        ASSERT_TRUE(*it1 == 6);
+        ASSERT_TRUE(*it2 == 3);
     #endif
 }
 
@@ -86,11 +88,11 @@ TEST(Matrix_DirectIterator, PreIncrement)
     auto it = input.begin();
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*(++it), 2);
-        ASSERT_EQ(*(++it), 3);
+        ASSERT_TRUE(*(++it) == 2);
+        ASSERT_TRUE(*(++it) == 3);
     #else
-        ASSERT_EQ(*(++it), 4);
-        ASSERT_EQ(*(++it), 7);
+        ASSERT_TRUE(*(++it) == 4);
+        ASSERT_TRUE(*(++it) == 7);
     #endif
 }
 
@@ -109,11 +111,11 @@ TEST(Matrix_DirectIterator, PostIncrement)
     it++;
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*(it++), 2);
-        ASSERT_EQ(*(it++), 3);
+        ASSERT_TRUE(*(it++) == 2);
+        ASSERT_TRUE(*(it++) == 3);
     #else
-        ASSERT_EQ(*(it++), 4);
-        ASSERT_EQ(*(it++), 7);
+        ASSERT_TRUE(*(it++) == 4);
+        ASSERT_TRUE(*(it++) == 7);
     #endif
 }
 
@@ -131,11 +133,11 @@ TEST(Matrix_DirectIterator, PreDecrement)
     auto it = input.end();
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*(--it), 9);
-        ASSERT_EQ(*(--it), 8);
+        ASSERT_TRUE(*(--it) == 9);
+        ASSERT_TRUE(*(--it) == 8);
     #else
-        ASSERT_EQ(*(--it), 9);
-        ASSERT_EQ(*(--it), 6);
+        ASSERT_TRUE(*(--it) == 9);
+        ASSERT_TRUE(*(--it) == 6);
     #endif
 }
 
@@ -154,11 +156,11 @@ TEST(Matrix_DirectIterator, PostDecrement)
     it--;
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*(it--), 9);
-        ASSERT_EQ(*(it--), 8);
+        ASSERT_TRUE(*(it--) == 9);
+        ASSERT_TRUE(*(it--) == 8);
     #else
-        ASSERT_EQ(*(it--), 9);
-        ASSERT_EQ(*(it--), 6);
+        ASSERT_TRUE(*(it--) == 9);
+        ASSERT_TRUE(*(it--) == 6);
     #endif
 }
 
@@ -175,8 +177,8 @@ TEST(Matrix_DirectIterator, RowsColumns_FirstComponent)
 
     auto it {input.begin()};
 
-    ASSERT_EQ(it.row(), 0);
-    ASSERT_EQ(it.column(), 0);
+    ASSERT_TRUE(it.row() == 0);
+    ASSERT_TRUE(it.column() == 0);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -192,11 +194,11 @@ TEST(Matrix_DirectIterator, RowsColumns_MidComponent)
     auto it {input.begin() + 5};
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(it.row(), 1);
-        ASSERT_EQ(it.column(), 1);
+        ASSERT_TRUE(it.row() == 1);
+        ASSERT_TRUE(it.column() == 1);
     #else
-        ASSERT_EQ(it.row(), 1);
-        ASSERT_EQ(it.column(), 2);
+        ASSERT_TRUE(it.row() == 1);
+        ASSERT_TRUE(it.column() == 2);
     #endif
 }
 
@@ -213,8 +215,8 @@ TEST(Matrix_DirectIterator, RowsColumns_LastComponent)
 
     auto it {input.begin() + Mat33::size-1};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -231,7 +233,7 @@ TEST(Matrix_DirectIterator, Difference)
     auto a {input.begin()};
     auto b {input.begin() + 3};
 
-    ASSERT_EQ(b-a, 3);
+    ASSERT_TRUE(b-a == 3);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -350,15 +352,15 @@ TEST(Matrix_DirectIterator, Reverse)
     auto d = input.rbegin() + 3;
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(*a, 5);
-        ASSERT_EQ(*b, 4);
-        ASSERT_EQ(*c, 2);
-        ASSERT_EQ(*d, 1);
+        ASSERT_TRUE(*a == 5);
+        ASSERT_TRUE(*b == 4);
+        ASSERT_TRUE(*c == 2);
+        ASSERT_TRUE(*d == 1);
     #else
-        ASSERT_EQ(*a, 5);
-        ASSERT_EQ(*b, 2);
-        ASSERT_EQ(*c, 4);
-        ASSERT_EQ(*d, 1);
+        ASSERT_TRUE(*a == 5);
+        ASSERT_TRUE(*b == 2);
+        ASSERT_TRUE(*c == 4);
+        ASSERT_TRUE(*d == 1);
     #endif
 }
 
@@ -375,8 +377,8 @@ TEST(Matrix_DirectIterator, Reverse_Differece)
     auto a = input.rbegin();
     auto b = input.rbegin() + 2;
 
-    ASSERT_EQ(a - b, -2);
-    ASSERT_EQ(b - a, 2);
+    ASSERT_TRUE(a - b == -2);
+    ASSERT_TRUE(b - a == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -392,8 +394,8 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_FirstComponent)
 
     auto it {input.rbegin()};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -409,11 +411,11 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_MidComponent)
     auto it {input.rbegin() + 5};
 
     #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
-        ASSERT_EQ(it.row(), 0);
-        ASSERT_EQ(it.column(), 2);
+        ASSERT_TRUE(it.row() == 0);
+        ASSERT_TRUE(it.column() == 2);
     #else
-        ASSERT_EQ(it.row(), 0);
-        ASSERT_EQ(it.column(), 1);
+        ASSERT_TRUE(it.row() == 0);
+        ASSERT_TRUE(it.column() == 1);
     #endif
 }
 
@@ -430,8 +432,8 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_LastComponent)
 
     auto it {input.rbegin() + Mat33::size-1};
 
-    ASSERT_EQ(it.row(), 0);
-    ASSERT_EQ(it.column(), 0);
+    ASSERT_TRUE(it.row() == 0);
+    ASSERT_TRUE(it.column() == 0);
 }
 
 /* --------------------------------------------------------------------------------------- */

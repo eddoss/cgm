@@ -12,30 +12,30 @@
 /**
  * Increase all components of vector by 1 and returns it.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator++(Vector<D,T>& vector);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Decrease all components of vector by 1 and returns it.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator--(Vector<D,T>& vector);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Increase all components of vector by 1 and returns unchanged copy of it.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator++(Vector<D,T>& vector, int);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator++(MATH3D_NAMESPACE::Vector<D,T>& vector, int);
 
 /**
  * Decrease all components of vector by 1 and returns unchanged copy of it.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator--(Vector<D,T>& vector, int);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator--(MATH3D_NAMESPACE::Vector<D,T>& vector, int);
 
 /* ####################################################################################### */
 /* Plus */
@@ -47,9 +47,9 @@ operator--(Vector<D,T>& vector, int);
  * @param scalar Value to add.
  * @return The result of adding.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add vector B to vector A.
@@ -57,9 +57,9 @@ operator+=(Vector<D,T>& vector, TScalar scalar);
  * @param B Vector to add.
  * @return The result of adding.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator+=(Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator+=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates sum of two vectors.
@@ -68,8 +68,8 @@ operator+=(Vector<D,T>& A, const Vector<D,T>& B);
  * @return New copy of the result vector.
  */
 template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& A, const Vector<D,T>& B);
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Add scalar to vector and return copy.
@@ -77,9 +77,9 @@ operator+(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to add.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator+(const Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Add scalar to vector and return copy.
@@ -87,9 +87,9 @@ operator+(const Vector<D,T>& vector, TScalar scalar);
  * @param scalar Value to add.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator+(TScalar scalar, const Vector<D,T>& vector);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator+(TScalar scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /* ####################################################################################### */
 /* Minus */
@@ -101,9 +101,9 @@ operator+(TScalar scalar, const Vector<D,T>& vector);
  * @param scalar Value to subtract.
  * @return The result of subtraction.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Subtract vector B from vector A.
@@ -111,18 +111,18 @@ operator-=(Vector<D,T>& vector, TScalar scalar);
  * @param B Vector to subtract.
  * @return The result of subtraction.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator-=(Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator-=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Get a negated copy of the vector.
  * @param vector Vector to negate.
  * @return A negated copy of the vector.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /**
  * Calculates difference of two vectors.
@@ -130,9 +130,9 @@ operator-(const Vector<D,T>& vector);
  * @param B Right vector.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Subtract scalar from each vector component and return copy.
@@ -140,9 +140,9 @@ operator-(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to subtract.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator-(const Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
 /* Component wise multiplication */
@@ -154,9 +154,9 @@ operator-(const Vector<D,T>& vector, TScalar scalar);
  * @param scalar Value to multiply.
  * @return The result of multiplication.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply component wise vector A by vector B.
@@ -164,9 +164,9 @@ operator*=(Vector<D,T>& vector, TScalar scalar);
  * @param B Vector to multiply.
  * @return The result of multiplication.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator*=(Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator*=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates component wise multiplication of two vectors.
@@ -174,9 +174,9 @@ operator*=(Vector<D,T>& A, const Vector<D,T>& B);
  * @param B Right vector.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Multiply scalar to each vector component and return copy.
@@ -184,9 +184,9 @@ operator*(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to multiply.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator*(const Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Multiply scalar to each vector component and return copy.
@@ -194,9 +194,9 @@ operator*(const Vector<D,T>& vector, TScalar scalar);
  * @param scalar Value to multiply.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator*(TScalar scalar, const Vector<D,T>& vector);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator*(TScalar scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector);
 
 /* ####################################################################################### */
 /* Component wise division */
@@ -208,9 +208,9 @@ operator*(TScalar scalar, const Vector<D,T>& vector);
  * @param scalar Value to division.
  * @return The result of division.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>&
-operator/=(Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /**
  * Divide component wise vector A by vector B.
@@ -218,9 +218,9 @@ operator/=(Vector<D,T>& vector, TScalar scalar);
  * @param B Vector to division.
  * @return The result of division.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>&
-operator/=(Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>&
+operator/=(MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Calculates component wise division of two vectors.
@@ -228,9 +228,9 @@ operator/=(Vector<D,T>& A, const Vector<D,T>& B);
  * @param B Right vector.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B);
+template<size_t D, typename T>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Divide each vector component by a scalar and return copy.
@@ -238,9 +238,9 @@ operator/(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param scalar Value to division.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT, typename TScalar=FLOAT>
-constexpr Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar);
+template<size_t D, typename T, typename TScalar>
+constexpr MATH3D_NAMESPACE::Vector<D,T>
+operator/(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
 /* Comparison with scalar */
@@ -252,9 +252,9 @@ operator/(const Vector<D,T>& vector, TScalar scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the vector are equal to scalar, false otherwise.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr bool
-operator==(const Vector<D,T>& vector, T scalar);
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar);
 
 /**
  * Checking the components of a vector for inequality with a scalar.
@@ -262,9 +262,9 @@ operator==(const Vector<D,T>& vector, T scalar);
  * @param scalar Scalar value to compare with.
  * @return true if components of the vector are not equal to scalar, false otherwise.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr bool
-operator!=(const Vector<D,T>& vector, T scalar);
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& vector, T scalar);
 
 /* ####################################################################################### */
 /* Comparison with other */
@@ -276,9 +276,9 @@ operator!=(const Vector<D,T>& vector, T scalar);
  * @param B Vector to compare with.
  * @return true if the vectors are equal, false otherwise.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr bool
-operator==(const Vector<D,T>& A, const Vector<D,T>& B);
+operator==(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /**
  * Check against another vector for inequality.
@@ -286,9 +286,9 @@ operator==(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param B Vector to compare with.
  * @return true if the vectors are not equal, false otherwise.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr bool
-operator!=(const Vector<D,T>& A, const Vector<D,T>& B);
+operator!=(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Dot product operator */
@@ -300,9 +300,9 @@ operator!=(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param B Right vector.
  * @return The dot product.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr T
-operator|(const Vector<D,T>& A, const Vector<D,T>& B);
+operator|(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Cross product operator */
@@ -314,9 +314,9 @@ operator|(const Vector<D,T>& A, const Vector<D,T>& B);
  * @param B Right vector.
  * @return The cross product.
  */
-template<typename T=FLOAT>
+template<typename T>
 constexpr T
-operator^(const Vector<2,T>& A, const Vector<2,T>& B);
+operator^(const MATH3D_NAMESPACE::Vector<2,T>& A, const MATH3D_NAMESPACE::Vector<2,T>& B);
 
 /**
  * Calculates cross product of 3D vector and 3D vectors.
@@ -324,981 +324,12 @@ operator^(const Vector<2,T>& A, const Vector<2,T>& B);
  * @param B Right vector.
  * @return The cross product.
  */
-template<typename T=FLOAT>
-constexpr Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<3,T>& B);
-
-/* ####################################################################################### */
-/* --------------------------------------------------------------------------------------- */
-/* IMPLEMENTATION */
-/* --------------------------------------------------------------------------------------- */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator++(Vector<D,T>& vector)
-{
-    if constexpr (D == 2)
-    {
-        ++vector.x;
-        ++vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-        ++vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator--(Vector<D,T>& vector)
-{
-    if constexpr (D == 2)
-    {
-        --vector.x;
-        --vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-        --vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) --vector[i];
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator++(Vector<D,T>& vector, int)
-{
-    Vector<D,T> copy {vector};
-
-    if constexpr (D == 2)
-    {
-        ++vector.x;
-        ++vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-        ++vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator--(Vector<D,T>& vector, int)
-{
-    Vector<D,T> copy {vector};
-
-    if constexpr (D == 2)
-    {
-        --vector.x;
-        --vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-        --vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) --vector[i];
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Plus */
-/* ####################################################################################### */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator+=(Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-        vector.z += scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-        vector.z += scalar;
-        vector.w += scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] += scalar;
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator+=(Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x += B.x;
-        A.y += B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x += B.x;
-        A.y += B.y;
-        A.z += B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x += B.x;
-        A.y += B.y;
-        A.z += B.z;
-        A.w += B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] += B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator+(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-        copy.z += B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-        copy.z += B.z;
-        copy.w += B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator+(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x += value;
-        copy.y += value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-        copy.w += value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator+(T scalar, const Vector<D,T>& vector)
-{
-    Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x += value;
-        copy.y += value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-        copy.w += value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Minus */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator-(Vector<D,T>& vector)
-{
-    auto copy {vector};
-
-    if constexpr (D == 2)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-        copy.z = -copy.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-        copy.z = -copy.z;
-        copy.w = -copy.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] = -copy[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator-=(Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-        vector.z -= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-        vector.z -= scalar;
-        vector.w -= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] -= scalar;
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator-=(Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-        A.z -= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-        A.z -= B.z;
-        A.w -= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] -= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator-(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-        copy.z -= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-        copy.z -= B.z;
-        copy.w -= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] -= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator-(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x -= value;
-        copy.y -= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x -= value;
-        copy.y -= value;
-        copy.z -= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x -= value;
-        copy.y -= value;
-        copy.z -= value;
-        copy.w -= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] -= value;
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Component wise multiplication */
-/* ####################################################################################### */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator*=(Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-        vector.z *= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-        vector.z *= scalar;
-        vector.w *= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] *= static_cast<T>(scalar);
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator*=(Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-        A.z *= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-        A.z *= B.z;
-        A.w *= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] *= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator*(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    Vector<D,T> copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-        copy.z *= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-        copy.z *= B.z;
-        copy.w *= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator*(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x *= value;
-        copy.y *= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-        copy.w *= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator*(T scalar, const Vector<D,T>& vector)
-{
-        Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x *= value;
-        copy.y *= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-        copy.w *= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Component wise division */
-/* ####################################################################################### */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>&
-operator/=(Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-        vector.z /= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-        vector.z /= scalar;
-        vector.w /= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] /= scalar;
-    }
-
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>&
-operator/=(Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-        A.z /= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-        A.z /= B.z;
-        A.w /= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] /= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE Vector<D,T>
-operator/(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-        Vector<D,T> copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-        copy.z /= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-        copy.z /= B.z;
-        copy.w /= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] /= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T, typename TScalar>
-constexpr FORCEINLINE Vector<D,T>
-operator/(const Vector<D,T>& vector, TScalar scalar)
-{
-    Vector<D,T> copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x /= value;
-        copy.y /= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x /= value;
-        copy.y /= value;
-        copy.z /= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x /= value;
-        copy.y /= value;
-        copy.z /= value;
-        copy.w /= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] /= value;
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Comparison with scalar */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator==(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar);
-    }
-    else if constexpr (D == 3)
-    {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar) &&
-                equal(vector.z, scalar);
-    }
-    else if constexpr (D == 4)
-    {
-        return  equal(vector.x, scalar) &&
-                equal(vector.y, scalar) &&
-                equal(vector.z, scalar) &&
-                equal(vector.w, scalar);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator!=(const Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar);
-    }
-    else if constexpr (D == 3)
-    {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar) &&
-                notEqual(vector.z, scalar);
-    }
-    else if constexpr (D == 4)
-    {
-        return  notEqual(vector.x, scalar) &&
-                notEqual(vector.y, scalar) &&
-                notEqual(vector.z, scalar) &&
-                notEqual(vector.w, scalar);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (notEqual(vector[i], scalar)) return true;
-        return false;
-    }
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Comparison with other */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator==(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y);
-    }
-    else if constexpr (D == 3)
-    {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y) &&
-                equal(A.z, B.z);
-    }
-    else if constexpr (D == 4)
-    {
-        return  equal(A.x, B.x) &&
-                equal(A.y, B.y) &&
-                equal(A.z, B.z) &&
-                equal(A.w, B.w);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return false;
-        return true;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr FORCEINLINE bool
-operator!=(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y);
-    }
-    else if constexpr (D == 3)
-    {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y) ||
-                notEqual(A.z, B.z);
-    }
-    else if constexpr (D == 4)
-    {
-        return  notEqual(A.x, B.x) ||
-                notEqual(A.y, B.y) ||
-                notEqual(A.z, B.z) ||
-                notEqual(A.w, B.w);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (notEqual(A[i], B[i])) return true;
-        return false;
-    }
-}
-
-/* ####################################################################################### */
-/* Dot product operator */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr T
-operator|(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return A.x * B.x + A.y * B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w;
-    }
-    else
-    {
-        T result {zero<T>()};
-        for (auto i = 0; i < D; ++i)
-        {
-            result += A[i] * B[i];
-        }
-        return result;
-    }
-}
-
-/* ####################################################################################### */
-/* Cross product operator */
-/* ####################################################################################### */
-
 template<typename T>
-constexpr T
-operator^(const Vector<2,T>& A, const Vector<2,T>& B)
-{
-    return A.x * B.y - A.y * B.x;
-}
+constexpr MATH3D_NAMESPACE::Vector<3,T>
+operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector<3,T>& B);
 
-/* --------------------------------------------------------------------------------------- */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-operator^(const Vector<3,T>& A, const Vector<3,T>& B)
-{
-#ifdef MATH3D_USE_LEFT_HANDED_CORD_SYSTEM
-    return
-    {
-        A.z * B.y - A.y * B.z,
-        A.x * B.z - A.z * B.x,
-        A.y * B.x - A.x * B.y
-    };
-#else
-    return
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-#endif
-}
+#include <private/Math3D/Core/Vector/Operators.hpp>
+
 
 #endif // MATH3D_VECTOR_OPERATORS_HPP

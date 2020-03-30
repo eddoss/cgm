@@ -6,6 +6,8 @@
 #include <Math3D/Core/Matrix/Operators.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat12 = Matrix<1,2,int>;
 using Mat13 = Matrix<1,3,int>;
@@ -41,7 +43,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4,
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -56,7 +58,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -71,7 +73,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -86,7 +88,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4, 6, 8, 6
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -103,7 +105,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -120,7 +122,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 8
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -137,7 +139,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -154,7 +156,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 4, 2, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -171,7 +173,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             4, 2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -190,7 +192,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -209,7 +211,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -228,7 +230,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -247,7 +249,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 8, 6, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -266,7 +268,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 4, 2, 4, 6
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -287,7 +289,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             8
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -308,7 +310,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -329,7 +331,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -350,7 +352,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -371,7 +373,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             8, 6, 4, 2, 4
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 
     /* -------------- */
@@ -394,7 +396,7 @@ TEST(Matrix_Arithmetic, DivisionByScalar)
             6, 8, 6, 4, 2
         };
 
-        ASSERT_EQ(b/2, a);
+        ASSERT_TRUE(b/2 == a);
     }
 }
 
@@ -412,7 +414,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4,
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -427,7 +429,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -442,7 +444,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -457,7 +459,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4, 6, 8, 6
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -474,7 +476,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -491,7 +493,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 8
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -508,7 +510,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -525,7 +527,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 4, 2, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -542,7 +544,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             4, 2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -561,7 +563,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -580,7 +582,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -599,7 +601,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4, 6
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -618,7 +620,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 8, 6, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -637,7 +639,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 4, 2, 4, 6
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -658,7 +660,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             8
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -679,7 +681,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -700,7 +702,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             8, 6, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -721,7 +723,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             2, 4, 6, 8
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -742,7 +744,7 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             8, 6, 4, 2, 4
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 
     /* -------------- */
@@ -765,6 +767,6 @@ TEST(Matrix_Arithmetic, InplaceDivisionByScalar)
             6, 8, 6, 4, 2
         };
 
-        ASSERT_EQ(b/=2, a);
+        ASSERT_TRUE((b/=2) == a);
     }
 }

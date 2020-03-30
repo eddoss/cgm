@@ -7,6 +7,8 @@
 #include <Math3D/Utils.hpp>
 
 
+MATH3D_NAMESPACE_BEGIN
+
 template<typename T=FLOAT>
 struct Quaternion
 {
@@ -65,48 +67,10 @@ public: /* Components accessing */
     data() const;
 };
 
-/* ####################################################################################### */
-/* --------------------------------------------------------------------------------------- */
-/* IMPLEMENTATION */
-/* --------------------------------------------------------------------------------------- */
-/* ####################################################################################### */
+MATH3D_NAMESPACE_END
 
-template<typename T>
-constexpr
-Quaternion<T>::Quaternion(T S, T A, T B, T C)
-    : s(S)
-    , a(A)
-    , b(B)
-    , c(C) {}
 
-/* --------------------------------------------------------------------------------------- */
+#include <private/Math3D/Core/Quaternion/Quaternion.hpp>
 
-template<typename T>
-constexpr
-Quaternion<T>::Quaternion(T scalar, T coefficient)
-    : s(scalar)
-    , a(coefficient)
-    , b(coefficient)
-    , c(coefficient) {}
-
-/* ####################################################################################### */
-/* Components accessing */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr FORCEINLINE T*
-Quaternion<T>::data()
-{
-    return &s;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE const T*
-Quaternion<T>::data() const
-{
-    return &s;
-}
 
 #endif // MATH3D_QUATERNION_HPP

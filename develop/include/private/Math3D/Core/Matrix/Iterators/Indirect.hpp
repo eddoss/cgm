@@ -2,11 +2,13 @@
 #define MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
 
 
+#include <Math3D/Global.hpp>
 #include <iterator>
 #ifdef NDEBUG
     #include <stdexcept>
 #endif
 
+MATH3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Debug verifiers */
@@ -511,5 +513,7 @@ public: /* Difference */
         return base_type::operator-(other);
     }
 };
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_MATRIX_INDIRECT_ITERATOR_HPP

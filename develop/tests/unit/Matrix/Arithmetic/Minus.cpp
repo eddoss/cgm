@@ -6,6 +6,8 @@
 #include <Math3D/Core/Matrix/Operators.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat12 = Matrix<1,2,int>;
 using Mat13 = Matrix<1,3,int>;
@@ -41,7 +43,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             3, 4,
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -56,7 +58,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             3, 4, 5
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -71,7 +73,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             3, 4, 5, 6
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -86,7 +88,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             3, 4, 5, 6, 7
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -103,7 +105,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             4
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -120,7 +122,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             5, 6
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -137,7 +139,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             6, 7, 8
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -154,7 +156,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             7, 8, 9, 8
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -171,7 +173,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             8, 9, 8, 7, 6
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -190,7 +192,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             5
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -209,7 +211,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             7, 8
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -228,7 +230,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             9, 8, 7
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -247,7 +249,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             7, 6, 5, 4
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -266,7 +268,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             5, 4, 3, 4, 5
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -287,7 +289,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             6
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -308,7 +310,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             9, 8
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -329,7 +331,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             6, 5, 4
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -350,7 +352,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             3, 4, 5, 6
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -371,7 +373,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             6, 7, 8, 9, 8
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 
     /* -------------- */
@@ -394,7 +396,7 @@ TEST(Matrix_Arithmetic, MinusScalar)
             7, 6, 5, 4, 3
         };
 
-        ASSERT_EQ(b-2, a);
+        ASSERT_TRUE((b-2) == a);
     }
 }
 
@@ -416,7 +418,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             3, 5,
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -435,7 +437,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             3, 5, 7
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -454,7 +456,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             2, 4, 4, 6
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -473,7 +475,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             2, 4, 4, 6, 6
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -495,7 +497,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             4
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -517,7 +519,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             4, 6
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -539,7 +541,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             6, 6, 8
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -561,7 +563,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             6, 8, 8, 9
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -583,7 +585,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -608,7 +610,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             4
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -633,7 +635,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             6, 8
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -658,7 +660,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             8, 9, 8
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -683,7 +685,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             8, 8, 6, 6
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -708,7 +710,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             6, 6, 4, 4, 2
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -736,7 +738,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             6
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -764,7 +766,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             9, 9
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -792,7 +794,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             7, 7, 5
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -820,7 +822,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             5, 3, 3, 3
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -848,7 +850,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             3, 5, 5, 7, 8
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 
     /* -------------- */
@@ -879,7 +881,7 @@ TEST(Matrix_Arithmetic, MinusOther)
             8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(c-b, a);
+        ASSERT_TRUE((c-b) == a);
     }
 }
 
@@ -897,7 +899,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             3, 4,
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -912,7 +914,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             3, 4, 5
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -927,7 +929,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             3, 4, 5, 6
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -942,7 +944,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             3, 4, 5, 6, 7
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -959,7 +961,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             4
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -976,7 +978,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             5, 6
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -993,7 +995,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             6, 7, 8
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1010,7 +1012,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             7, 8, 9, 8
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1027,7 +1029,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             8, 9, 8, 7, 6
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1046,7 +1048,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             5
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1065,7 +1067,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             7, 8
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1084,7 +1086,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             9, 8, 7
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1103,7 +1105,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             7, 6, 5, 4
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1122,7 +1124,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             5, 4, 3, 4, 5
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1143,7 +1145,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             6
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1164,7 +1166,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             9, 8
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1185,7 +1187,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             6, 5, 4
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1206,7 +1208,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             3, 4, 5, 6
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1227,7 +1229,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             6, 7, 8, 9, 8
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 
     /* -------------- */
@@ -1250,7 +1252,7 @@ TEST(Matrix_Arithmetic, InplaceMinusScalar)
             7, 6, 5, 4, 3
         };
 
-        ASSERT_EQ(b-=2, a);
+        ASSERT_TRUE((b-=2) == a);
     }
 }
 
@@ -1272,7 +1274,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             3, 5,
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1291,7 +1293,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             3, 5, 7
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1310,7 +1312,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             2, 4, 4, 6
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1329,7 +1331,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             2, 4, 4, 6, 6
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1351,7 +1353,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             4
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1373,7 +1375,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             4, 6
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1395,7 +1397,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             6, 6, 8
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1417,7 +1419,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             6, 8, 8, 9
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1439,7 +1441,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1464,7 +1466,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             4
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1489,7 +1491,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             6, 8
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1514,7 +1516,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             8, 9, 8
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1539,7 +1541,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             8, 8, 6, 6
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1564,7 +1566,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             6, 6, 4, 4, 2
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1592,7 +1594,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             6
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1620,7 +1622,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             9, 9
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1648,7 +1650,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             7, 7, 5
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1676,7 +1678,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             5, 3, 3, 3
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1704,7 +1706,7 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             3, 5, 5, 7, 8
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 
     /* -------------- */
@@ -1735,6 +1737,6 @@ TEST(Matrix_Arithmetic, InplaceMinusOther)
             8, 8, 9, 9, 7
         };
 
-        ASSERT_EQ(c-=b, a);
+        ASSERT_TRUE((c-=b) == a);
     }
 }

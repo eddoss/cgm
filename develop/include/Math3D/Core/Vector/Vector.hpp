@@ -8,6 +8,9 @@
 #include <initializer_list>
 #include <Math3D/Global.hpp>
 
+
+MATH3D_NAMESPACE_BEGIN
+
 /* ################################################################################################################## */
 #define MATH3D_VECTOR_DATA_GETTERS                                                                                     \
     /**
@@ -384,5 +387,7 @@ public: /* Iterators */
     constexpr const_reverse_iterator
     crend() const {return base_type::crend();}
 };
+
+MATH3D_NAMESPACE_END
 
 #endif // MATH3D_VECTOR_HPP

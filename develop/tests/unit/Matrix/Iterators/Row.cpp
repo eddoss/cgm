@@ -5,6 +5,8 @@
 #include <Math3D/Core/Matrix/Matrix.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
 using Mat23 = Matrix<2,3,int>;
@@ -30,9 +32,9 @@ TEST(Matrix_RowIterator, Plus)
     auto it_12 = input.beginRow(1) + 2;
     auto it_22 = input.beginRow(2) + 2;
 
-    ASSERT_EQ(*it_02, 3);
-    ASSERT_EQ(*it_12, 6);
-    ASSERT_EQ(*it_22, 9);
+    ASSERT_TRUE(*it_02 == 3);
+    ASSERT_TRUE(*it_12 == 6);
+    ASSERT_TRUE(*it_22 == 9);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -50,9 +52,9 @@ TEST(Matrix_RowIterator, Minus)
     auto it_10 = input.endRow(1) - 2;
     auto it_20 = input.endRow(2) - 2;
 
-    ASSERT_EQ(*it_01, 2);
-    ASSERT_EQ(*it_10, 4);
-    ASSERT_EQ(*it_20, 7);
+    ASSERT_TRUE(*it_01 == 2);
+    ASSERT_TRUE(*it_10 == 4);
+    ASSERT_TRUE(*it_20 == 7);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -68,9 +70,9 @@ TEST(Matrix_RowIterator, PreIncrement)
 
     auto it = input.beginRow(1);
 
-    ASSERT_EQ(*it, 4);
-    ASSERT_EQ(*(++it), 5);
-    ASSERT_EQ(*(++it), 6);
+    ASSERT_TRUE(*it == 4);
+    ASSERT_TRUE(*(++it) == 5);
+    ASSERT_TRUE(*(++it) == 6);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -86,7 +88,7 @@ TEST(Matrix_RowIterator, PostIncrement)
 
     auto it = input.beginRow(0);
 
-    ASSERT_EQ(*(it++), 1);
+    ASSERT_TRUE(*(it++) == 1);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -102,8 +104,8 @@ TEST(Matrix_RowIterator, PreDecrement)
 
     auto it = input.endRow(2);
 
-    ASSERT_EQ(*(--it), 8);
-    ASSERT_EQ(*(--it), 7);
+    ASSERT_TRUE(*(--it) == 8);
+    ASSERT_TRUE(*(--it) == 7);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -117,7 +119,7 @@ TEST(Matrix_RowIterator, PostDecrement)
         7, 8
     };
 
-    ASSERT_EQ((input.endRow(1))--, input.endRow(1));
+    ASSERT_TRUE((input.endRow(1))-- == input.endRow(1));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -133,18 +135,18 @@ TEST(Matrix_RowIterator, Difference)
 
     auto a = input.beginRow(0) + 0;     // (0,0)
     auto b = input.beginRow(0) + 2;     // (0,2)
-    ASSERT_EQ(a - b, -2);
-    ASSERT_EQ(b - a, 2);
+    ASSERT_TRUE(a - b == -2);
+    ASSERT_TRUE(b - a == 2);
 
     a = input.beginRow(0) + 0;          // (0,0)
     b = input.beginRow(1) + 3;          // (1,3)
-    ASSERT_EQ(a - b, -3);
-    ASSERT_EQ(b - a, 3);
+    ASSERT_TRUE(a - b == -3);
+    ASSERT_TRUE(b - a == 3);
 
     a = input.beginRow(0) + 1;          // (0,1)
     b = input.beginRow(2) + 3;          // (2,3)
-    ASSERT_EQ(a - b, -2);
-    ASSERT_EQ(b - a, 2);
+    ASSERT_TRUE(a - b == -2);
+    ASSERT_TRUE(b - a == 2);
 }
 
 
@@ -164,10 +166,10 @@ TEST(Matrix_RowIterator, Reverse)
     auto it_02 = input.rbeginRow(1) + 1;
     auto it_03 = input.rbeginRow(1);
 
-    ASSERT_EQ(*it_00, 4);
-    ASSERT_EQ(*it_01, 5);
-    ASSERT_EQ(*it_02, 6);
-    ASSERT_EQ(*it_03, 8);
+    ASSERT_TRUE(*it_00 == 4);
+    ASSERT_TRUE(*it_01 == 5);
+    ASSERT_TRUE(*it_02 == 6);
+    ASSERT_TRUE(*it_03 == 8);
 }
 
 
@@ -184,8 +186,8 @@ TEST(Matrix_RowIterator, Reverse_Differece)
     auto a = input.rbeginRow(1);
     auto b = input.rbeginRow(1) + 1;
 
-    ASSERT_EQ(a - b, -1);
-    ASSERT_EQ(b - a, 1);
+    ASSERT_TRUE(a - b == -1);
+    ASSERT_TRUE(b - a == 1);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -201,8 +203,8 @@ TEST(Matrix_RowIterator, Reverse_RowsColumns_FirstComponent)
 
     auto it {input.rbeginRow(2) + 2};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 0);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 0);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -217,8 +219,8 @@ TEST(Matrix_RowIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbeginRow(1) + 2};
 
-    ASSERT_EQ(it.row(), 1);
-    ASSERT_EQ(it.column(), 1);
+    ASSERT_TRUE(it.row() == 1);
+    ASSERT_TRUE(it.column() == 1);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -234,8 +236,8 @@ TEST(Matrix_RowIterator, Reverse_RowsColumns_LastComponent)
 
     auto it {input.rbeginRow(2)};
 
-    ASSERT_EQ(it.row(), 2);
-    ASSERT_EQ(it.column(), 2);
+    ASSERT_TRUE(it.row() == 2);
+    ASSERT_TRUE(it.column() == 2);
 }
 
 /* --------------------------------------------------------------------------------------- */

@@ -7,6 +7,8 @@
 
 
 using namespace std;
+using namespace MATH3D_NAMESPACE;
+
 using Vec2 = Vector<2>;
 using Vec3 = Vector<3>;
 using Vec4 = Vector<4>;

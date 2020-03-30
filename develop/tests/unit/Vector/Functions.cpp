@@ -8,6 +8,8 @@
 
 
 using namespace std;
+using namespace MATH3D_NAMESPACE;
+
 using Vec2 = Vector<2,float>;
 using Vec3 = Vector<3,float>;
 using Vec4 = Vector<4,float>;
@@ -399,7 +401,7 @@ TEST(Vector_Functions, Cross)
         Vec2 a {2,3};
         Vec2 b {4,5};
 
-        ASSERT_EQ(cross(a,b), -2);
+        ASSERT_TRUE(cross(a,b) == -2);
     }
 
     /* -------------- */
@@ -409,12 +411,12 @@ TEST(Vector_Functions, Cross)
         Vec3 a {0,1,0};
         Vec3 b {1,0,0};
         Vec3 e {0,0,1};
-        ASSERT_EQ(cross(a,b), e);
+        ASSERT_TRUE(cross(a,b) == e);
 #else
         Vec3 a {0,1,0};
         Vec3 b {1,0,0};
         Vec3 e {0,0,-1};
-        ASSERT_EQ(cross(a,b), e);
+        ASSERT_TRUE(cross(a,b) == e);
 #endif
     }
 }

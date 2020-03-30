@@ -6,6 +6,8 @@
 #include <Math3D/Core/Vector/Operators.hpp>
 
 
+using namespace MATH3D_NAMESPACE;
+
 using namespace std;
 using Vec2 = Vector<2>;
 using Vec3 = Vector<3>;

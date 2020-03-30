@@ -48,6 +48,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # ####################################################################################### #
 
 add_library(${PROJECT_NAME} INTERFACE)
+
 target_include_directories(${PROJECT_NAME} INTERFACE
     "${CMAKE_CURRENT_SOURCE_DIR}/develop/include"
 )
