@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_QUATERNION_OPERATORS_HPP
-#define MATH3D_PRIVATE_QUATERNION_OPERATORS_HPP
 
 
 #include <Math3D/Core/Quaternion/Operators.hpp>
@@ -204,5 +202,3 @@ operator | (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Qu
 {
     return A.s * B.s + A.a * B.a + A.b * B.b + A.c * B.c;
 }
-
-#endif // MATH3D_PRIVATE_QUATERNION_OPERATORS_HPP

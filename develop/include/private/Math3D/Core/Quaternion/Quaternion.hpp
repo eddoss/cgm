@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_QUATERNION_HPP
-#define MATH3D_PRIVATE_QUATERNION_HPP
 
 
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
@@ -46,5 +44,3 @@ Quaternion<T>::data() const
 }
 
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_PRIVATE_QUATERNION_HPP

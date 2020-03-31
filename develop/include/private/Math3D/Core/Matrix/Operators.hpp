@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_MATRIX_OPERATORS_HPP
-#define MATH3D_PRIVATE_MATRIX_OPERATORS_HPP
 
 
 #include <Math3D/Core/Matrix/Operators.hpp>
@@ -3272,5 +3270,3 @@ operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Mat
         return false;
     }
 }
-
-#endif // MATH3D_PRIVATE_MATRIX_OPERATORS_HPP

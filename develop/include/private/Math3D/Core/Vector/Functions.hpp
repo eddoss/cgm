@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_VECTOR_FUNCTIONS_HPP
-#define MATH3D_PRIVATE_VECTOR_FUNCTIONS_HPP
 
 
 #include <Math3D/Core/Vector/Functions.hpp>
@@ -183,5 +181,3 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B)
 }
 
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_PRIVATE_VECTOR_FUNCTIONS_HPP

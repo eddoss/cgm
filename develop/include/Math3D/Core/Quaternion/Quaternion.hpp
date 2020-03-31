@@ -18,8 +18,7 @@ struct Quaternion
 public: /* Components */
 /* ####################################################################################### */
 
-    // Quaternion equation:
-    // Q = s + ai + bj + ck
+    // Quaternion equation: Q = s + ai + bj + ck
 
     T s; ///< scalar component.
     T a; ///< i imaginary component coefficient.

@@ -1,8 +1,5 @@
-#ifndef MATH3D_PRIVATE_MATRIX_FUNCTIONS_HPP
-#define MATH3D_PRIVATE_MATRIX_FUNCTIONS_HPP
 
 
-#include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Matrix/Operators.hpp>
 
 
@@ -328,5 +325,3 @@ identity()
 }
 
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_PRIVATE_MATRIX_FUNCTIONS_HPP

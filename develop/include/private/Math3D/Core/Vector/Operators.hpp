@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_VECTOR_OPERATORS_HPP
-#define MATH3D_PRIVATE_VECTOR_OPERATORS_HPP
 
 
 #include <Math3D/Core/Vector/Operators.hpp>
@@ -966,5 +964,3 @@ operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector
         A.x * B.y - A.y * B.x
     };
 }
-
-#endif // MATH3D_PRIVATE_VECTOR_OPERATORS_HPP

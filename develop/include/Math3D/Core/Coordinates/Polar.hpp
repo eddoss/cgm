@@ -6,8 +6,8 @@
 #include <Math3D/Utils.hpp>
 
 
-namespace coord
-{
+MATH3D_NAMESPACE_BEGIN
+MATH3D_COORD_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
 struct Polar
@@ -15,22 +15,63 @@ struct Polar
     MATH3D_RULE_OF_FIVE_CONSTEXPR(Polar)
 
 /* ####################################################################################### */
-/* Components */
-/* ####################################################################################### */
-
-    T angle;
-    T radius;
-
-/* ####################################################################################### */
 /* Constructors */
 /* ####################################################################################### */
 
-    constexpr explicit
-    Polar(T InAngle, T InRadius=number<T>(1))
-        : angle(InAngle)
-        , radius(InRadius) {}
+    /** Constructor initializing angle and radius. */
+    constexpr
+    Polar(T angle, T radius);
+
+/* ####################################################################################### */
+public: /* Properties getters */
+/* ####################################################################################### */
+
+    /**
+     * @brief Get rotation angle.
+     * @return Angle in radians.
+     */
+    constexpr FORCEINLINE T
+    angle() const;
+
+    /**
+     * @brief Get circle radius.
+     * @return Circle radius.
+     */
+    constexpr FORCEINLINE T
+    radius() const;
+
+/* ####################################################################################### */
+public: /* Properties setters */
+/* ####################################################################################### */
+
+    /**
+     * @brief Set rotation angle.
+     * @param angle Angle in radians.
+     */
+    constexpr FORCEINLINE void
+    setAngle(T angle);
+
+    /**
+     * @brief Set circle radius. Value must be >= 0.
+     * @param radius Circle radius.
+     * @note If the given value is less than "0", then "0" will be set.
+     */
+    constexpr FORCEINLINE void
+    setRadius(T radius);
+
+/* ####################################################################################### */
+protected: /* Protected members */
+/* ####################################################################################### */
+
+    T m_angle;
+    T m_radius;
 };
 
-};
+MATH3D_COORD_NAMESPACE_END
+MATH3D_NAMESPACE_END
+
+
+#include <private/Math3D/Core/Coordinates/Polar.hpp>
+
 
 #endif // MATH3D_COORDINATES_SYSTEMS_POLAR_HPP
