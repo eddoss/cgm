@@ -3,6 +3,7 @@
 
 
 #include <algorithm>
+#include <type_traits>
 #include <Math3D/Platform.hpp>
 
 
@@ -72,28 +73,14 @@ MATH3D_NAMESPACE_BEGIN
  * @return true if A equal to B, false otherwise.
  */
 template<typename T>
-FORCEINLINE bool equal(T A, T B) {return A == B;}
-
-template<>
-FORCEINLINE bool equal(float A, float B) {return std::abs(A-B) <= TOLERANCE;}
-
-template<>
-FORCEINLINE bool equal(double A, double B) {return std::abs(A-B) <= TOLERANCE;}
-
-/* --------------------------------------------------------------------------------------- */
+FORCEINLINE bool equal(T A, T B);
 
 /**
  * Compare number A and B.
  * @return true if A not equal to B, false otherwise.
  */
 template<typename T>
-FORCEINLINE bool notEqual(T A, T B) {return A != B;}
-
-template<>
-FORCEINLINE bool notEqual(float A, float B) {return std::abs(A-B) > TOLERANCE;}
-
-template<>
-FORCEINLINE bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;}
+FORCEINLINE bool notEqual(T A, T B);
 
 /* ####################################################################################### */
 /* Floating point numbers comparison with given tolerance */
@@ -105,12 +92,7 @@ FORCEINLINE bool notEqual(double A, double B) {return std::abs(A-B) > TOLERANCE;
  */
 template<typename T>
 FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-equalTolerance(T A, T B, T tolerance)
-{
-    return std::abs(A-B) <= tolerance;
-}
-
-/* --------------------------------------------------------------------------------------- */
+equalTolerance(T A, T B, T tolerance);
 
 /**
  * Compare floating point number A and B with given tolerance.
@@ -118,10 +100,7 @@ equalTolerance(T A, T B, T tolerance)
  */
 template<typename T>
 FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-notEqualTolerance(T A, T B, T tolerance)
-{
-    return std::abs(A-B) > tolerance;
-}
+notEqualTolerance(T A, T B, T tolerance);
 
 /* ####################################################################################### */
 /* Number converter */
@@ -132,12 +111,7 @@ notEqualTolerance(T A, T B, T tolerance)
  */
 template<typename AT, typename BT>
 constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<AT> || std::is_integral_v<AT>), AT>
-number(BT value)
-{
-    return static_cast<AT>(value);
-}
-
-/* --------------------------------------------------------------------------------------- */
+number(BT value);
 
 /**
  * Create zero value number with given type.
@@ -145,11 +119,12 @@ number(BT value)
  */
 template<typename T>
 constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
-zero()
-{
-    return static_cast<T>(0);
-}
+zero();
 
 MATH3D_NAMESPACE_END
+
+
+#include <private/Math3D/Global.hpp>
+
 
 #endif // MATH3D_GLOBAL_HPP
