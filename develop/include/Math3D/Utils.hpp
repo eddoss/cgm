@@ -1,6 +1,10 @@
 #ifndef MATH3D_UTILS_HPP
 #define MATH3D_UTILS_HPP
 
+
+#include <type_traits>
+
+
 #define MATH3D_RULE_OF_FIVE_CONSTEXPR(className) \
     ~className()                                            = default; \
     constexpr className()                                   = default; \
@@ -16,5 +20,12 @@
     className(const className&)                     = default; \
     className& operator = (const className&)        = default; \
     className& operator = (className&&) noexcept    = default;
+
+
+template <typename T, typename TOut>
+using enable_if_floating = std::enable_if_t<std::is_floating_point_v<T>, TOut>;
+
+template <typename T, typename TOut>
+using enable_if_integral = std::enable_if_t<std::is_integral_v<T>, TOut>;
 
 #endif // MATH3D_UTILS_HPP

@@ -18,7 +18,7 @@ TEST(Quaternion_Functions, Dot)
     float dtp = dot(a,b);
     float exp = 116.179f;
 
-    ASSERT_TRUE(equalTolerance(dtp,exp,0.01f));
+    ASSERT_TRUE(equal(dtp,exp,0.01f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ TEST(Quaternion_Functions, Length)
     float len = length(q);
     float exp = 13.612f;
 
-    ASSERT_TRUE(equalTolerance(len,exp,0.001f));
+    ASSERT_TRUE(equal(len,exp,0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -61,7 +61,7 @@ TEST(Quaternion_Functions, LengthSquared)
     float len = lengthSquared(q);
     float exp = 173.973f;
 
-    ASSERT_TRUE(equalTolerance(len,exp,0.01f));
+    ASSERT_TRUE(equal(len,exp,0.01f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -73,10 +73,10 @@ TEST(Quaternion_Functions, Normalize)
 
     normalize(qat);
 
-    ASSERT_TRUE(equalTolerance(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.a,nrm.a,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.b,nrm.b,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.c,nrm.c,0.001f));
+    ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
+    ASSERT_TRUE(equal(qat.a,nrm.a,0.001f));
+    ASSERT_TRUE(equal(qat.b,nrm.b,0.001f));
+    ASSERT_TRUE(equal(qat.c,nrm.c,0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -88,10 +88,10 @@ TEST(Quaternion_Functions, Normalized)
 
     qat = normalized(qat);
 
-    ASSERT_TRUE(equalTolerance(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.a,nrm.a,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.b,nrm.b,0.001f));
-    ASSERT_TRUE(equalTolerance(qat.c,nrm.c,0.001f));
+    ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
+    ASSERT_TRUE(equal(qat.a,nrm.a,0.001f));
+    ASSERT_TRUE(equal(qat.b,nrm.b,0.001f));
+    ASSERT_TRUE(equal(qat.c,nrm.c,0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -103,10 +103,10 @@ TEST(Quaternion_Functions, Invert)
 
     invert(qat);
 
-    ASSERT_TRUE(equalTolerance(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equalTolerance(qat.a,inv.a,0.001));
-    ASSERT_TRUE(equalTolerance(qat.b,inv.b,0.001));
-    ASSERT_TRUE(equalTolerance(qat.c,inv.c,0.001));
+    ASSERT_TRUE(equal(qat.s,inv.s,0.001));
+    ASSERT_TRUE(equal(qat.a,inv.a,0.001));
+    ASSERT_TRUE(equal(qat.b,inv.b,0.001));
+    ASSERT_TRUE(equal(qat.c,inv.c,0.001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -118,10 +118,10 @@ TEST(Quaternion_Functions, Inverted)
 
     qat = inverted(qat);
 
-    ASSERT_TRUE(equalTolerance(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equalTolerance(qat.a,inv.a,0.001));
-    ASSERT_TRUE(equalTolerance(qat.b,inv.b,0.001));
-    ASSERT_TRUE(equalTolerance(qat.c,inv.c,0.001));
+    ASSERT_TRUE(equal(qat.s,inv.s,0.001));
+    ASSERT_TRUE(equal(qat.a,inv.a,0.001));
+    ASSERT_TRUE(equal(qat.b,inv.b,0.001));
+    ASSERT_TRUE(equal(qat.c,inv.c,0.001));
 }
 
 /* --------------------------------------------------------------------------------------- */

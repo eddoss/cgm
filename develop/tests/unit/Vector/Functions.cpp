@@ -24,8 +24,8 @@ TEST(Vector_Functions, Normalize)
 
         normalize(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
     }
 
     /* -------------- */
@@ -36,9 +36,9 @@ TEST(Vector_Functions, Normalize)
 
         normalize(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.z,nrm.z,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
     }
 
     /* -------------- */
@@ -49,10 +49,10 @@ TEST(Vector_Functions, Normalize)
 
         normalize(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.z,nrm.z,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.w,nrm.w,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
+        ASSERT_TRUE(equal(vec.w,nrm.w,0.001f));
     }
 
     /* -------------- */
@@ -65,7 +65,7 @@ TEST(Vector_Functions, Normalize)
 
         for (size_t i = 0; i < 2; ++i)
         {
-            ASSERT_TRUE(equalTolerance(vec[i],nrm[i],0.001f));
+            ASSERT_TRUE(equal(vec[i],nrm[i],0.001f));
         }
     }
 
@@ -77,8 +77,8 @@ TEST(Vector_Functions, Normalize)
 
         normalize(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
     }
 }
 
@@ -92,8 +92,8 @@ TEST(Vector_Functions, Normalized)
 
         vec = normalized(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
     }
 
     /* -------------- */
@@ -104,9 +104,9 @@ TEST(Vector_Functions, Normalized)
 
         vec = normalized(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.z,nrm.z,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
     }
 
     /* -------------- */
@@ -117,10 +117,10 @@ TEST(Vector_Functions, Normalized)
 
         vec = normalized(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.z,nrm.z,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.w,nrm.w,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
+        ASSERT_TRUE(equal(vec.w,nrm.w,0.001f));
     }
 
     /* -------------- */
@@ -133,7 +133,7 @@ TEST(Vector_Functions, Normalized)
 
         for (size_t i = 0; i < 2; ++i)
         {
-            ASSERT_TRUE(equalTolerance(vec[i],nrm[i],0.001f));
+            ASSERT_TRUE(equal(vec[i],nrm[i],0.001f));
         }
     }
 
@@ -145,8 +145,8 @@ TEST(Vector_Functions, Normalized)
 
         vec = normalized(vec);
 
-        ASSERT_TRUE(equalTolerance(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equalTolerance(vec.y,nrm.y,0.001f));
+        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
+        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
     }
 }
 
@@ -159,7 +159,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 5.064f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.001f));
+        ASSERT_TRUE(equal(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -169,7 +169,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 7.872f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.001f));
+        ASSERT_TRUE(equal(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -179,7 +179,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 13.612f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.001f));
+        ASSERT_TRUE(equal(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -189,7 +189,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 12.833f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.001f));
+        ASSERT_TRUE(equal(len,exp,0.001f));
     }
 }
 
@@ -203,7 +203,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 50.267f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.01f));
+        ASSERT_TRUE(equal(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -214,7 +214,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 158.169f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.01f));
+        ASSERT_TRUE(equal(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -225,7 +225,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 173.973f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.01f));
+        ASSERT_TRUE(equal(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -236,7 +236,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 47.912f;
 
-        ASSERT_TRUE(equalTolerance(len,exp,0.01f));
+        ASSERT_TRUE(equal(len,exp,0.01f));
     }
 }
 
@@ -251,7 +251,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 7.913f;
 
-        ASSERT_TRUE(equalTolerance(dtp,exp,0.01f));
+        ASSERT_TRUE(equal(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -263,7 +263,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 56.273f;
 
-        ASSERT_TRUE(equalTolerance(dtp,exp,0.01f));
+        ASSERT_TRUE(equal(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -275,7 +275,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 116.179f;
 
-        ASSERT_TRUE(equalTolerance(dtp,exp,0.01f));
+        ASSERT_TRUE(equal(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -287,7 +287,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 158.500f;
 
-        ASSERT_TRUE(equalTolerance(dtp,exp,0.01f));
+        ASSERT_TRUE(equal(dtp,exp,0.01f));
     }
 }
 
@@ -302,7 +302,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 7.380f;
 
-        ASSERT_TRUE(equalTolerance(dst,exp,0.01f));
+        ASSERT_TRUE(equal(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -314,7 +314,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 3.715f;
 
-        ASSERT_TRUE(equalTolerance(dst,exp,0.01f));
+        ASSERT_TRUE(equal(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -326,7 +326,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 9.429f;
 
-        ASSERT_TRUE(equalTolerance(dst,exp,0.01f));
+        ASSERT_TRUE(equal(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -338,7 +338,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 8.083f;
 
-        ASSERT_TRUE(equalTolerance(dst,exp,0.01f));
+        ASSERT_TRUE(equal(dst,exp,0.01f));
     }
 }
 
@@ -353,7 +353,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.497f;
 
-        ASSERT_TRUE(equalTolerance(ang,exp,0.01f));
+        ASSERT_TRUE(equal(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -365,7 +365,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 1.128f;
 
-        ASSERT_TRUE(equalTolerance(ang,exp,0.01f));
+        ASSERT_TRUE(equal(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -377,7 +377,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.589f;
 
-        ASSERT_TRUE(equalTolerance(ang,exp,0.01f));
+        ASSERT_TRUE(equal(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -389,7 +389,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.637f;
 
-        ASSERT_TRUE(equalTolerance(ang,exp,0.01f));
+        ASSERT_TRUE(equal(ang,exp,0.01f));
     }
 }
 

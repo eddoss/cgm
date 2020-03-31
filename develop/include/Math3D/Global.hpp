@@ -3,8 +3,8 @@
 
 
 #include <algorithm>
-#include <type_traits>
 #include <Math3D/Platform.hpp>
+#include <Math3D/Utils.hpp>
 
 
 /* ####################################################################################### */
@@ -69,45 +69,53 @@ MATH3D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Compare number A and B.
+ * Compare number A and B (integral numbers).
+ * @param A First number.
+ * @param B Second number.
  * @return true if A equal to B, false otherwise.
  */
 template<typename T>
-FORCEINLINE bool equal(T A, T B);
+constexpr FORCEINLINE enable_if_integral<T,bool>
+equal(T A, T B);
 
 /**
- * Compare number A and B.
+ * Compare number A and B (floating point numbers).
+ * @param A First number.
+ * @param B Second number.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
+template<typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(T A, T B, T tolerance=TOLERANCE);
+
+/**
+ * Compare number A and B (integral numbers).
+ * @param A First number.
+ * @param B Second number.
  * @return true if A not equal to B, false otherwise.
  */
 template<typename T>
-FORCEINLINE bool notEqual(T A, T B);
-
-/* ####################################################################################### */
-/* Floating point numbers comparison with given tolerance */
-/* ####################################################################################### */
+constexpr FORCEINLINE enable_if_integral<T,bool>
+notEqual(T A, T B);
 
 /**
- * Compare floating point number A and B with given tolerance.
- * @return true if abs(A-B) <= tolerance, false otherwise.
+ * Compare number A and B (floating point numbers).
+ * @param A First number.
+ * @param B Second number.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
  */
 template<typename T>
-FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-equalTolerance(T A, T B, T tolerance);
-
-/**
- * Compare floating point number A and B with given tolerance.
- * @return true if abs(A-B) > tolerance, false otherwise.
- */
-template<typename T>
-FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-notEqualTolerance(T A, T B, T tolerance);
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(T A, T B, T tolerance=TOLERANCE);
 
 /* ####################################################################################### */
 /* Number converter */
 /* ####################################################################################### */
 
 /**
- * Convert number from type A in type B.
+ * Convert number from type A to type B.
  */
 template<typename AT, typename BT>
 constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<AT> || std::is_integral_v<AT>), AT>

@@ -6,39 +6,17 @@
 MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
-FORCEINLINE bool equal(T A, T B)
+constexpr FORCEINLINE enable_if_integral<T,bool>
+equal(T A, T B)
 {
-    if constexpr (std::is_floating_point_v<T>)
-    {
-        return std::abs(A-B) <= TOLERANCE;
-    }
-    else
-    {
-        return A == B;
-    }
+    return A == B;
 }
+
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-FORCEINLINE bool notEqual(T A, T B)
-{
-    if constexpr (std::is_floating_point_v<T>)
-    {
-        return std::abs(A-B) > TOLERANCE;
-    }
-    else
-    {
-        return A != B;
-    }
-}
-
-/* ####################################################################################### */
-/* Floating point numbers comparison with given tolerance */
-/* ####################################################################################### */
-
-template<typename T>
-FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-equalTolerance(T A, T B, T tolerance)
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(T A, T B, T tolerance)
 {
     return std::abs(A-B) <= tolerance;
 }
@@ -46,8 +24,17 @@ equalTolerance(T A, T B, T tolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-FORCEINLINE typename std::enable_if_t<std::is_floating_point<T>::value, bool>
-notEqualTolerance(T A, T B, T tolerance)
+constexpr FORCEINLINE enable_if_integral<T,bool>
+notEqual(T A, T B)
+{
+    return A != B;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(T A, T B, T tolerance)
 {
     return std::abs(A-B) > tolerance;
 }
