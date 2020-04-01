@@ -1,59 +1,198 @@
-#ifndef MATH3D_COORDINATES_SYSTEMS_FUNCTIONS_HPP
-#define MATH3D_COORDINATES_SYSTEMS_FUNCTIONS_HPP
+#ifndef MATH3D_COORDINATE_SYSTEMS_FUNCTIONS_HPP
+#define MATH3D_COORDINATE_SYSTEMS_FUNCTIONS_HPP
 
 
+#include <cmath>
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Coordinates/Polar.hpp>
 #include <Math3D/Core/Coordinates/Spherical.hpp>
 #include <Math3D/Core/Coordinates/Cylindrical.hpp>
-#include <Math3D/Core/Axes.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
+
+namespace axes
+{
+
+/* ####################################################################################### */
+/* X, Y, Z axes */
+/* ####################################################################################### */
+
+/**
+ * Cartesian x axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+x();
+
+/**
+ * Cartesian system y axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+y();
+
+/**
+ * Cartesian system z axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+z();
+
+/* ####################################################################################### */
+/* Cartesian system axes */
+/* ####################################################################################### */
+
+/**
+ * Return Cartesian system up axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+up();
+
+/**
+ * Return Cartesian system right axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+right();
+
+/**
+ * Return Cartesian system forward axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+forward();
+
+/**
+ * Return Cartesian system down axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+down();
+
+/**
+ * Return Cartesian system left axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+left();
+
+/**
+ * Return Cartesian system backward axis.
+ */
+template<typename T=FLOAT>
+constexpr FORCEINLINE Vector<3,T>
+backward();
+
+} // axes namespace
+
 MATH3D_COORD_NAMESPACE_BEGIN
+
+/* ####################################################################################### */
+/* Vector component extractors */
+/* ####################################################################################### */
+
+/**
+ * Extracts the vector component responsible for "Right" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+right(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Up" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+up(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Forward" axis coordinate.
+ * @return Reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE T&
+forward(Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Right" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+right(const Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Up" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+up(const Vector<3,T>& coord);
+
+/**
+ * Extracts the vector component responsible for "Forward" axis coordinate.
+ * @return Const reference to component.
+ */
+template<typename T>
+constexpr FORCEINLINE const T&
+forward(const Vector<3,T>& coord);
 
 /* ####################################################################################### */
 /* Convert to Cartesian system */
 /* ####################################################################################### */
 
 /**
- * Convert polar coordinate to cartesian coordinate.
- * @param coord Polar coordinate to convert.
- * @return converted coordinate.
+ * Create cartesian coordinate from polar coordinate.
+ * @param coord Polar coordinate to create from.
+ * @return 2D Cartesian coord.
  */
 template<typename T>
-Vector<2,T>
+constexpr FORCEINLINE Vector<2,T>
 cartesian(const Polar<T>& coord);
 
 /**
- * Convert spherical coordinate to cartesian coordinate.
- * @param coord Spherical coordinate to convert.
- * @return converted coordinate.
+ * Create cartesian coordinate from spherical coordinate.
+ * @param coord Spherical coordinate to create from.
+ * @return 3D Cartesian coord.
  */
 template<typename T>
-Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 cartesian(const Spherical<T>& coord);
 
 /**
- * Convert cylindrical coordinate to cartesian coordinate.
- * @param coord Cylindrical coordinate to convert.
- * @return converted coordinate.
+ * Create cartesian coordinate from cylindrical coordinate.
+ * @param coord Cylindrical coordinate to create from.
+ * @return 3D Cartesian coord.
  */
 template<typename T>
-Vector<3,T>
+constexpr FORCEINLINE Vector<3,T>
 cartesian(const Cylindrical<T>& coord);
+
+/**
+ * Create Cartesian coordinate independently from axes labels.
+ * @param right Right component of coord.
+ * @param up Up component of coord.
+ * @param forward Forward component of coord.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+cartesian(T right, T up, T forward);
 
 /* ####################################################################################### */
 /* Convert to Polar system */
 /* ####################################################################################### */
 
 /**
- * Convert cartesian coordinate to polar coordinate.
- * @param coord Cartesian coordinate to convert.
- * @return converted coordinate.
+ * Create Polar coordinate from 2D Cartesian coord.
+ * @param coord 2D Cartesian coordinate to create from.
+ * @return Polar coord.
  */
 template<typename T>
-Polar<T>
+constexpr FORCEINLINE Polar<T>
 polar(const Vector<2,T>& coord);
 
 /* ####################################################################################### */
@@ -61,21 +200,21 @@ polar(const Vector<2,T>& coord);
 /* ####################################################################################### */
 
 /**
- * Convert cartesian coordinate to spherical coordinate.
- * @param coord Cartesian coordinate to convert.
- * @return converted coordinate.
+ * Create Spherical coordinate from Cartesian coord.
+ * @param coord Cartesian coordinate to create from.
+ * @return Spherical coord.
  */
 template<typename T>
-Spherical<T>
+constexpr FORCEINLINE Spherical<T>
 spherical(const Vector<3,T>& coord);
 
 /**
- * Convert cylindrical coordinate to cylindrical coordinate.
- * @param coord Cylindrical coordinate to convert.
- * @return converted coordinate.
+ * Create Spherical coordinate from Cylindrical coord.
+ * @param coord Cylindrical coordinate to create from.
+ * @return Spherical coord.
  */
 template<typename T>
-Spherical<T>
+constexpr FORCEINLINE Spherical<T>
 spherical(const Cylindrical<T>& coord);
 
 /* ####################################################################################### */
@@ -83,21 +222,21 @@ spherical(const Cylindrical<T>& coord);
 /* ####################################################################################### */
 
 /**
- * Convert spherical coordinate to cylindrical coordinate.
- * @param coord Cylindrical coordinate to convert.
- * @return converted coordinate.
+ * Create Cylindrical coordinate from Spherical coord.
+ * @param coord Spherical coordinate to create from.
+ * @return Cylindrical coord.
  */
 template<typename T>
-Cylindrical<T>
+constexpr FORCEINLINE Cylindrical<T>
 cylindrical(const Spherical<T>& coord);
 
 /**
- * Convert cartesian coordinate to cylindrical coordinate.
- * @param coord Cartesian coordinate to convert.
- * @return converted coordinate.
+ * Create Cylindrical coordinate from Cartesian coord.
+ * @param coord Cartesian coordinate to create from.
+ * @return Cylindrical coord.
  */
 template<typename T>
-Cylindrical<T>
+constexpr FORCEINLINE Cylindrical<T>
 cylindrical(const Vector<3,T>& coord);
 
 MATH3D_COORD_NAMESPACE_END

@@ -64,7 +64,7 @@ set(QUATERNION_TEST_SUITE
 
 set(COORDINATES_TEST_SUITE
     run.cpp
-    Spherical.cpp
+    Coordinates.cpp
 )
 
 set(ALL_TEST_SUITES
@@ -78,8 +78,8 @@ set(ALL_TEST_SUITES
 # Setup tests suites
 # ####################################################################################### #
 
-math3d_add_test(AllTestSuites       "${ALL_TEST_SUITES}")
-math3d_add_test(VectorTestSuite     "${VECTOR_TEST_SUITE}")
-math3d_add_test(MatrixTestSuite     "${MATRIX_TEST_SUITE}")
-math3d_add_test(QuaternionTestSuite "${QUATERNION_TEST_SUITE}")
-math3d_add_test(CoordinatesTestSuite "${COORDINATES_TEST_SUITE}")
+math3d_add_test(AllTestSuites           "${ALL_TEST_SUITES}")
+math3d_add_test(VectorTestSuite         "${VECTOR_TEST_SUITE}")
+math3d_add_test(MatrixTestSuite         "${MATRIX_TEST_SUITE}")
+math3d_add_test(QuaternionTestSuite     "${QUATERNION_TEST_SUITE}")
+math3d_add_test(CoordinatesTestSuite    "${COORDINATES_TEST_SUITE}")

@@ -10,7 +10,6 @@
 /* ####################################################################################### */
 
 #define MATH3D_NAMESPACE        mth
-#define MATH3D_AXES_NAMESPACE   axes
 #define MATH3D_COORD_NAMESPACE  coord
 
 /* ####################################################################################### */
@@ -19,9 +18,6 @@
 
 #define MATH3D_NAMESPACE_BEGIN          namespace MATH3D_NAMESPACE {
 #define MATH3D_NAMESPACE_END            }
-
-#define MATH3D_AXES_NAMESPACE_BEGIN     namespace MATH3D_AXES_NAMESPACE {
-#define MATH3D_AXES_NAMESPACE_END       }
 
 #define MATH3D_COORD_NAMESPACE_BEGIN    namespace MATH3D_COORD_NAMESPACE {
 #define MATH3D_COORD_NAMESPACE_END      }
