@@ -3,7 +3,6 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Platform.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
 
 

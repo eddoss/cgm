@@ -73,4 +73,57 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat)
     return stream;
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Polar<T>& polarCoord)
+{
+    std::ios_base::fmtflags old_flags {stream.flags()};
+    stream.setf(std::ios::showpos);
+    stream << typeid(polarCoord).name() << "\n{\n";
+    stream << std::fixed << std::left << std::setprecision(6);
+    stream << "    ang = " << polarCoord.angle() << "\n";
+    stream << "    rad = " << polarCoord.radius() << "\n";
+    stream << "}";
+    stream.setf(old_flags);
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Spherical<T>& sphericalCoord)
+{
+    std::ios_base::fmtflags old_flags {stream.flags()};
+    stream.setf(std::ios::showpos);
+    stream << typeid(sphericalCoord).name() << "\n{\n";
+    stream << std::fixed << std::left << std::setprecision(6);
+    stream << "    lon = " << sphericalCoord.longitude() << "\n";
+    stream << "    lat = " << sphericalCoord.latitude() << "\n";
+    stream << "    rad = " << sphericalCoord.radius() << "\n";
+    stream << "}";
+    stream.setf(old_flags);
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& cylindricalCoord)
+{
+    std::ios_base::fmtflags old_flags {stream.flags()};
+    stream.setf(std::ios::showpos);
+    stream << typeid(cylindricalCoord).name() << "\n{\n";
+    stream << std::fixed << std::left << std::setprecision(6);
+    stream << "    ang = " << cylindricalCoord.angle() << "\n";
+    stream << "    hei = " << cylindricalCoord.height() << "\n";
+    stream << "    rad = " << cylindricalCoord.radius() << "\n";
+    stream << "}";
+    stream.setf(old_flags);
+    return stream;
+}
+
 #endif //MATH3D_PRIVATE_IO_HPP

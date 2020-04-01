@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <type_traits>
+#include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Vector/Operators.hpp>
 

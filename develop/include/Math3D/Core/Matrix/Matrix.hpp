@@ -3,7 +3,6 @@
 
 #include <type_traits>
 #include <Math3D/Global.hpp>
-#include <Math3D/Platform.hpp>
 #include <private/Math3D/Core/Matrix/Support.hpp>
 #include <private/Math3D/Core/Matrix/Iterators/Direct.hpp>
 #include <private/Math3D/Core/Matrix/Iterators/Indirect.hpp>

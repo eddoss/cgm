@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Global.hpp>
+#include <Math3D/Common.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

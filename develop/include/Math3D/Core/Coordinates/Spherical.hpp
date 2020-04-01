@@ -3,7 +3,7 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Utils.hpp>
+#include <Math3D/Common.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -12,7 +12,7 @@ MATH3D_COORD_NAMESPACE_BEGIN
 template<typename T=FLOAT>
 struct Spherical
 {
-    MATH3D_RULE_OF_FIVE_CONSTEXPR(Spherical)
+    MATH3D_RULE_OF_FIVE(Spherical)
 
 /* ####################################################################################### */
 /* Constructors */

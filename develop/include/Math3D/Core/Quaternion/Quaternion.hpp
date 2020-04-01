@@ -3,8 +3,7 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Platform.hpp>
-#include <Math3D/Utils.hpp>
+#include <Math3D/Common.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -12,7 +11,7 @@ MATH3D_NAMESPACE_BEGIN
 template<typename T=FLOAT>
 struct Quaternion
 {
-    MATH3D_RULE_OF_FIVE_CONSTEXPR(Quaternion)
+    MATH3D_RULE_OF_FIVE(Quaternion)
 
 /* ####################################################################################### */
 public: /* Components */

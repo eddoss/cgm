@@ -12,8 +12,8 @@ cartesian(const Polar<T>& coord)
 {
     return
     {
-        coord.radius * std::cos(coord.angle),       // x
-        coord.radius * std::sin(coord.angle)        // y
+        coord.radius() * std::cos(coord.angle()),       // x
+        coord.radius() * std::sin(coord.angle())        // y
     };
 }
 
@@ -23,9 +23,10 @@ template<typename T>
 Vector<3,T>
 cartesian(const Spherical<T>& coord)
 {
-    T u = coord.radius * std::sin(coord.latitude);  // up
-    T r = u * std::sin(coord.longitude);            // right
-    T f = u * std::cos(coord.longitude)             // forward
+    T sinLat = std::sin(coord.latitude());
+    T u = coord.radius() * std::cos(coord.latitude());              // up
+    T r = coord.radius() * sinLat * std::sin(coord.longitude());    // right
+    T f = coord.radius() * sinLat * std::cos(coord.longitude());    // forward
 
     return axes::makeCoord(r, u, f);
 }
@@ -36,9 +37,9 @@ template<typename T>
 Vector<3,T>
 cartesian(const Cylindrical<T>& coord)
 {
-    T u = coord.height;                             // right
-    T r = coord.radius * std::sin(coord.angle);     // right
-    T f = coord.radius * std::cos(coord.angle);     // forward
+    T u = coord.height();                               // right
+    T r = coord.radius() * std::sin(coord.angle());     // right
+    T f = coord.radius() * std::cos(coord.angle());     // forward
 
     return axes::makeCoord(r, u, f);
 }
@@ -66,7 +67,15 @@ template<typename T>
 Spherical<T>
 spherical(const Vector<3,T>& coord)
 {
-    return axes::makeCoord();
+    T up        {axes::upComponent(coord)};
+    T right     {axes::rightComponent(coord)};
+    T forward   {axes::forwardComponent(coord)};
+
+    T radius    {std::sqrt(coord.x * coord.x + coord.y * coord.y + coord.z * coord.z)};
+    T longitude {std::atan2(right, forward)};
+    T latitude  {std::atan2(std::sqrt(right * right + forward * forward), up)};
+
+    return {longitude, latitude, radius};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -75,13 +84,13 @@ template<typename T>
 Spherical<T>
 spherical(const Cylindrical<T>& coord)
 {
-    T radius {std::sqrt(coord.radius * coord.radius + coord.height * coord.height)};
+    T radius {std::sqrt(coord.radius() * coord.radius() + coord.height() * coord.height())};
 
     return
     {
-        coord.angle,            // longitude
-        coord.height / radius,  // latitude
-        radius                  // radius
+        coord.angle(),              // longitude
+        coord.height() / radius,    // latitude
+        radius                      // radius
     };
 }
 
@@ -95,9 +104,9 @@ cylindrical(const Spherical<T>& coord)
 {
     return
     {
-        coord.longitude,                            // angle
-        coord.radius * std::sin(coord.latitude),    // height
-        coord.radius * std::cos(coord.latitude)     // radius
+        coord.longitude(),                              // angle
+        coord.radius() * std::sin(coord.latitude()),    // height
+        coord.radius() * std::cos(coord.latitude())     // radius
     };
 }
 
@@ -107,11 +116,18 @@ template<typename T>
 Cylindrical<T>
 cylindrical(const Vector<3,T>& coord)
 {
+    T right     {axes::rightComponent(coord)};
+    T forward   {axes::forwardComponent(coord)};
+
+    T radius    {std::sqrt(right * right + forward * forward)};
+    T angle     {std::atan2(right/forward)};
+    T height    {axes::upComponent(coord)};
+
     return
     {
-        coord.longitude,                            // angle
-        coord.radius * std::sin(coord.latitude),    // height
-        coord.radius * std::cos(coord.latitude)     // radius
+        angle,
+        height,
+        radius
     };
 }
 

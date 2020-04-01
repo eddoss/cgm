@@ -7,6 +7,9 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Coordinates/Polar.hpp>
+#include <Math3D/Core/Coordinates/Spherical.hpp>
+#include <Math3D/Core/Coordinates/Cylindrical.hpp>
 
 
 template <size_t D, typename T>
@@ -20,6 +23,18 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Matrix<M,N,T>& mat);
 template <typename T>
 std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat);
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Polar<T>& polarCoord);
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Spherical<T>& sphericalCoord);
+
+template <typename T>
+std::ostream&
+operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& cylindricalCoord);
 
 #include <private/Math3D/IO.hpp>
 

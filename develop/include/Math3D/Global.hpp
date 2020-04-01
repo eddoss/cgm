@@ -2,18 +2,16 @@
 #define MATH3D_GLOBAL_HPP
 
 
-#include <algorithm>
-#include <Math3D/Platform.hpp>
-#include <Math3D/Utils.hpp>
+#include <type_traits>
 
 
 /* ####################################################################################### */
 /* Library namespaces */
 /* ####################################################################################### */
 
-#define MATH3D_NAMESPACE mth
-#define MATH3D_AXES_NAMESPACE axes
-#define MATH3D_COORD_NAMESPACE coord
+#define MATH3D_NAMESPACE        mth
+#define MATH3D_AXES_NAMESPACE   axes
+#define MATH3D_COORD_NAMESPACE  coord
 
 /* ####################################################################################### */
 /* Library namespaces macro */
@@ -27,8 +25,6 @@
 
 #define MATH3D_COORD_NAMESPACE_BEGIN    namespace MATH3D_COORD_NAMESPACE {
 #define MATH3D_COORD_NAMESPACE_END      }
-
-MATH3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Common constants */
@@ -65,74 +61,48 @@ MATH3D_NAMESPACE_BEGIN
 #endif
 
 /* ####################################################################################### */
-/* Numbers comparison */
+/* Platform */
 /* ####################################################################################### */
 
-/**
- * Compare number A and B (integral numbers).
- * @param A First number.
- * @param B Second number.
- * @return true if A equal to B, false otherwise.
- */
-template<typename T>
-constexpr FORCEINLINE enable_if_integral<T,bool>
-equal(T A, T B);
+#ifdef __GNUC__
+    #define FORCEINLINE     inline __attribute__((always_inline))
+    #define FORCENOINLINE   __attribute__((noinline))
+#endif
 
-/**
- * Compare number A and B (floating point numbers).
- * @param A First number.
- * @param B Second number.
- * @param tolerance Compare tolerance.
- * @return true if A equal to B, false otherwise.
- */
-template<typename T>
-constexpr FORCEINLINE enable_if_floating<T,bool>
-equal(T A, T B, T tolerance=TOLERANCE);
+/* --------------------------------------------------------------------------------------- */
 
-/**
- * Compare number A and B (integral numbers).
- * @param A First number.
- * @param B Second number.
- * @return true if A not equal to B, false otherwise.
- */
-template<typename T>
-constexpr FORCEINLINE enable_if_integral<T,bool>
-notEqual(T A, T B);
+#ifdef __clang__
+    #define FORCEINLINE     inline __attribute__((always_inline))
+    #define FORCENOINLINE   __attribute__((noinline))
+#endif
 
-/**
- * Compare number A and B (floating point numbers).
- * @param A First number.
- * @param B Second number.
- * @param tolerance Compare tolerance.
- * @return true if A not equal to B, false otherwise.
- */
-template<typename T>
-constexpr FORCEINLINE enable_if_floating<T,bool>
-notEqual(T A, T B, T tolerance=TOLERANCE);
+/* --------------------------------------------------------------------------------------- */
+
+#ifdef _MSC_VER
+    #define FORCEINLINE     __forceinline
+    #define FORCENOINLINE   __declspec(noinline)
+#endif
 
 /* ####################################################################################### */
-/* Number converter */
+/* Utils */
 /* ####################################################################################### */
 
-/**
- * Convert number from type A to type B.
- */
-template<typename AT, typename BT>
-constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<AT> || std::is_integral_v<AT>), AT>
-number(BT value);
+#define MATH3D_RULE_OF_FIVE(className) \
+    ~className()                                            = default; \
+    constexpr className()                                   = default; \
+    constexpr className(className&&) noexcept               = default; \
+    constexpr className(const className&)                   = default; \
+    constexpr className& operator = (const className&)      = default; \
+    constexpr className& operator = (className&&) noexcept  = default;
 
-/**
- * Create zero value number with given type.
- * @return Zero with given type.
- */
-template<typename T>
-constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
-zero();
+/* --------------------------------------------------------------------------------------- */
 
-MATH3D_NAMESPACE_END
+template <typename T, typename TOut>
+using enable_if_floating = std::enable_if_t<std::is_floating_point_v<T>, TOut>;
 
+/* --------------------------------------------------------------------------------------- */
 
-#include <private/Math3D/Global.hpp>
-
+template <typename T, typename TOut>
+using enable_if_integral = std::enable_if_t<std::is_integral_v<T>, TOut>;
 
 #endif // MATH3D_GLOBAL_HPP
