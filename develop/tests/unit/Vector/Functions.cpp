@@ -5,6 +5,7 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Vector/Operators.hpp>
 #include <Math3D/Core/Vector/Functions.hpp>
+#include <Math3D/Core/Coordinates/Functions.hpp>
 
 
 using namespace std;
@@ -397,26 +398,25 @@ TEST(Vector_Functions, Angle)
 
 TEST(Vector_Functions, Cross)
 {
-    {
-        Vec2 a {2,3};
-        Vec2 b {4,5};
+    auto i = axes::right();
+    auto j = axes::up();
+    auto k = axes::forward();
 
-        ASSERT_TRUE(cross(a,b) == -2);
-    }
+#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    ASSERT_TRUE(cross(i,j) == -k);
+    ASSERT_TRUE(cross(j,k) == -i);
+    ASSERT_TRUE(cross(k,i) == -j);
 
-    /* -------------- */
-
-    {
-#ifdef MATH3D_USE_LEFT_HANDED_CORD_SYSTEM
-        Vec3 a {0,1,0};
-        Vec3 b {1,0,0};
-        Vec3 e {0,0,1};
-        ASSERT_TRUE(cross(a,b) == e);
+    ASSERT_TRUE(cross(j,i) == k);
+    ASSERT_TRUE(cross(k,j) == i);
+    ASSERT_TRUE(cross(i,k) == j);
 #else
-        Vec3 a {0,1,0};
-        Vec3 b {1,0,0};
-        Vec3 e {0,0,-1};
-        ASSERT_TRUE(cross(a,b) == e);
+    ASSERT_TRUE(cross(i,j) == k);
+    ASSERT_TRUE(cross(j,k) == i);
+    ASSERT_TRUE(cross(k,i) == j);
+
+    ASSERT_TRUE(cross(j,i) == -k);
+    ASSERT_TRUE(cross(k,j) == -i);
+    ASSERT_TRUE(cross(i,k) == -j);
 #endif
-    }
 }

@@ -957,10 +957,19 @@ template<typename T>
 constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<3,T>
 operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector<3,T>& B)
 {
+#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    return
+    {
+        A.z * B.y - A.y * B.z,
+        A.x * B.z - A.z * B.x,
+        A.y * B.x - A.x * B.y
+    };
+#else
     return
     {
         A.y * B.z - A.z * B.y,
         A.z * B.x - A.x * B.z,
         A.x * B.y - A.y * B.x
     };
+#endif
 }
