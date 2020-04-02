@@ -93,6 +93,18 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::Vector(T X, T Y, T Z)
 
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr
+Vector <D, T, std::enable_if_t<(D == 3)>>::Vector(const Vector<2,T>& XY, T Z)
+    : x(XY.x)
+    , y(XY.y)
+    , z(Z)
+{
+
+}
+
 /* ####################################################################################### */
 /* Assignment operator */
 /* ####################################################################################### */
@@ -154,6 +166,32 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(T X, T Y, T Z, T W)
     , y(Y)
     , z(Z)
     , w(W)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr
+Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(const Vector<3,T>& XYZ, T W)
+    : x(XYZ.x)
+    , y(XYZ.y)
+    , z(XYZ.z)
+    , w(W)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr
+Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(const Vector<2,T>& XY, const Vector<2,T>& ZW)
+    : x(XY.x)
+    , y(XY.y)
+    , z(ZW.z)
+    , w(ZW.w)
 {
 
 }

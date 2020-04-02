@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
+#include <Math3D/Common.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -149,6 +150,12 @@ public: /* Constructors */
     constexpr
     Vector(T X, T Y, T Z);
 
+    /**
+     * Initialize X and Y components from 2D vector.
+     */
+    constexpr explicit
+    Vector(const Vector<2,T>& XY, T Z=zero<T>());
+
 /* ####################################################################################### */
 public: /* Assignment operator */
 /* ####################################################################################### */
@@ -233,6 +240,18 @@ public: /* Constructors */
      */
     constexpr
     Vector(T X, T Y, T Z, T W);
+
+    /**
+     * Initialize X, Y, Z components from 3D vector.
+     */
+    constexpr explicit
+    Vector(const Vector<3,T>& XYZ, T W=zero<T>());
+
+    /**
+     * Initialize components from two 2D vectors.
+     */
+    constexpr
+    Vector(const Vector<2,T>& XY, const Vector<2,T>& ZW);
 
 /* ####################################################################################### */
 public: /* Assignment operator */
