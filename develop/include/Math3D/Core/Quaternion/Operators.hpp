@@ -97,17 +97,17 @@ operator *= (MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quatern
  * Divide this quaternion by scale.
  * @return Results of division.
  */
-template<typename T, typename TScale>
+template<typename T, typename TDivider>
 constexpr MATH3D_NAMESPACE::Quaternion<T>
-operator / (const MATH3D_NAMESPACE::Quaternion<T>& quaternion, TScale scale);
+operator / (const MATH3D_NAMESPACE::Quaternion<T>& quaternion, TDivider divider);
 
 /**
  * Divide this quaternion by scale.
  * @return Results of division.
  */
-template<typename T, typename TScale>
+template<typename T, typename TDivider>
 constexpr MATH3D_NAMESPACE::Quaternion<T>&
-operator /= (MATH3D_NAMESPACE::Quaternion<T>& quaternion, TScale scale);
+operator /= (MATH3D_NAMESPACE::Quaternion<T>& quaternion, TDivider divider);
 
 /* ####################################################################################### */
 /* Comparison */

@@ -16,8 +16,8 @@ using namespace std;
 
 TEST(Quaternion_Operators, UnaryMinus)
 {
-    Quaternion<int> qat { 1, 2, 3, 4 };
-    Quaternion<int> exp {-1,-2,-3,-4 };
+    Quaternion<double> qat { 1, 2, 3, 4 };
+    Quaternion<double> exp {-1,-2,-3,-4 };
     ASSERT_TRUE(-qat == exp);
 }
 
@@ -25,9 +25,9 @@ TEST(Quaternion_Operators, UnaryMinus)
 
 TEST(Quaternion_Operators, OutplaceMinus)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> b { 1, 1, 2, 2 };
-    Quaternion<int> e { 0, 1, 1, 2 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> b { 1, 1, 2, 2 };
+    Quaternion<double> e { 0, 1, 1, 2 };
 
     a = a - b;
 
@@ -38,9 +38,9 @@ TEST(Quaternion_Operators, OutplaceMinus)
 
 TEST(Quaternion_Operators, InplaceMinus)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> b { 1, 1, 2, 2 };
-    Quaternion<int> e { 0, 1, 1, 2 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> b { 1, 1, 2, 2 };
+    Quaternion<double> e { 0, 1, 1, 2 };
 
     a -= b;
 
@@ -53,9 +53,9 @@ TEST(Quaternion_Operators, InplaceMinus)
 
 TEST(Quaternion_Operators, OutplacePlus)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> b { 1, 1, 2, 2 };
-    Quaternion<int> e { 2, 3, 5, 6 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> b { 1, 1, 2, 2 };
+    Quaternion<double> e { 2, 3, 5, 6 };
 
     a = a + b;
 
@@ -66,9 +66,9 @@ TEST(Quaternion_Operators, OutplacePlus)
 
 TEST(Quaternion_Operators, InplacePlus)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> b { 1, 1, 2, 2 };
-    Quaternion<int> e { 2, 3, 5, 6 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> b { 1, 1, 2, 2 };
+    Quaternion<double> e { 2, 3, 5, 6 };
 
     a += b;
 
@@ -81,8 +81,8 @@ TEST(Quaternion_Operators, InplacePlus)
 
 TEST(Quaternion_Operators, OutplaceScalarMultiplication)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> e { 2, 4, 6, 8 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> e { 2, 4, 6, 8 };
 
     a = a * 2;
 
@@ -93,9 +93,9 @@ TEST(Quaternion_Operators, OutplaceScalarMultiplication)
 
 TEST(Quaternion_Operators, OutplaceOtherMultiplication)
 {
-    Quaternion<int> a { 2, 3, 1, 5 };
-    Quaternion<int> b { 7, 9, 1, 3 };
-    Quaternion<int> e { -29,37,45,35 };
+    Quaternion<double> a { 2, 3, 1, 5 };
+    Quaternion<double> b { 7, 9, 1, 3 };
+    Quaternion<double> e { -29,37,45,35 };
 
     a = a * b;
 
@@ -106,8 +106,8 @@ TEST(Quaternion_Operators, OutplaceOtherMultiplication)
 
 TEST(Quaternion_Operators, InplaceScalarMultiplication)
 {
-    Quaternion<int> a { 1, 2, 3, 4 };
-    Quaternion<int> e { 2, 4, 6, 8 };
+    Quaternion<double> a { 1, 2, 3, 4 };
+    Quaternion<double> e { 2, 4, 6, 8 };
 
     a *= 2;
 
@@ -118,9 +118,9 @@ TEST(Quaternion_Operators, InplaceScalarMultiplication)
 
 TEST(Quaternion_Operators, InplaceOtherMultiplication)
 {
-    Quaternion<int> a { 2, 3, 1, 5 };
-    Quaternion<int> b { 7, 9, 1, 3 };
-    Quaternion<int> e { -29,37,45,35 };
+    Quaternion<double> a { 2, 3, 1, 5 };
+    Quaternion<double> b { 7, 9, 1, 3 };
+    Quaternion<double> e { -29,37,45,35 };
 
     a *= b;
 
@@ -133,8 +133,8 @@ TEST(Quaternion_Operators, InplaceOtherMultiplication)
 
 TEST(Quaternion_Operators, OutplaceScalarDivision)
 {
-    Quaternion<int> a { 2, 4, 6, 8 };
-    Quaternion<int> e { 1, 2, 3, 4 };
+    Quaternion<double> a { 2, 4, 6, 8 };
+    Quaternion<double> e { 1, 2, 3, 4 };
 
     a = a / 2;
 
@@ -145,8 +145,8 @@ TEST(Quaternion_Operators, OutplaceScalarDivision)
 
 TEST(Quaternion_Operators, InplaceScalarDivision)
 {
-    Quaternion<int> a { 2, 4, 6, 8 };
-    Quaternion<int> e { 1, 2, 3, 4 };
+    Quaternion<double> a { 2, 4, 6, 8 };
+    Quaternion<double> e { 1, 2, 3, 4 };
 
     a /= 2;
 
@@ -159,13 +159,13 @@ TEST(Quaternion_Operators, InplaceScalarDivision)
 
 TEST(Quaternion_Operators, ComparisonEqual)
 {
-    Quaternion<int> a { 2, 4, 6, 8 };
-    Quaternion<int> b { 2, 4, 6, 8 };
+    Quaternion<double> a { 2, 4, 6, 8 };
+    Quaternion<double> b { 2, 4, 6, 8 };
 
     ASSERT_TRUE(a == b);
 
-    Quaternion<int> c { 2, 4, 6, 8 };
-    Quaternion<int> d { 1, 4, 6, 8 };
+    Quaternion<double> c { 2, 4, 6, 8 };
+    Quaternion<double> d { 1, 4, 6, 8 };
 
     ASSERT_FALSE(c == d);
 }
@@ -174,13 +174,13 @@ TEST(Quaternion_Operators, ComparisonEqual)
 
 TEST(Quaternion_Operators, ComparisonNotEqual)
 {
-    Quaternion<int> a { 2, 4, 6, 8 };
-    Quaternion<int> b { 1, 4, 6, 8 };
+    Quaternion<double> a { 2, 4, 6, 8 };
+    Quaternion<double> b { 1, 4, 6, 8 };
 
     ASSERT_TRUE(a != b);
 
-    Quaternion<int> c { 2, 4, 6, 8 };
-    Quaternion<int> d { 2, 4, 6, 8 };
+    Quaternion<double> c { 2, 4, 6, 8 };
+    Quaternion<double> d { 2, 4, 6, 8 };
 
     ASSERT_FALSE(c != d);
 }

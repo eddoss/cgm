@@ -2,14 +2,17 @@
 #define MATH3D_QUATERNION_HPP
 
 
+#include <type_traits>
 #include <Math3D/Global.hpp>
 #include <Math3D/Common.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
 
-template<typename T=FLOAT>
-struct Quaternion
+template<typename T=FLOAT, typename = void> struct Quaternion;
+
+template<typename T>
+struct Quaternion <T, enable_if_floating<T,void>>
 {
     MATH3D_RULE_OF_FIVE(Quaternion)
 
