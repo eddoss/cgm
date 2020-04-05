@@ -74,15 +74,6 @@ length(const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr T
-lengthSquared(const Quaternion<T>& quaternion)
-{
-    return dot(quaternion, quaternion);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
 constexpr Quaternion<T>&
 normalize(Quaternion<T>& quaternion)
 {
@@ -111,7 +102,7 @@ template<typename T>
 constexpr Quaternion<T>&
 invert(Quaternion<T>& quaternion)
 {
-    return conjugate(quaternion) /= lengthSquared(quaternion);
+    return conjugate(quaternion) /= norm(quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */

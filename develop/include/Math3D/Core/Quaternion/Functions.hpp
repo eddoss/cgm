@@ -51,14 +51,6 @@ constexpr TResult
 length(const Quaternion<T>& quaternion);
 
 /**
- * Get the squared length of the quaternion.
- * @return The squared length of the quaternion.
- */
-template<typename T>
-constexpr T
-lengthSquared(const Quaternion<T>& quaternion);
-
-/**
  * Normalize the quaternion if it is large enough.
  * If it is too small, returns an no changed quaternion.
  */

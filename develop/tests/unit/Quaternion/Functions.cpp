@@ -54,11 +54,11 @@ TEST(Quaternion_Functions, Length)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, LengthSquared)
+TEST(Quaternion_Functions, Norm)
 {
     Quaternion<float> q {9.678f, 1.690f, 8.336f, 2.821f};
 
-    float len = lengthSquared(q);
+    float len = norm(q);
     float exp = 173.973f;
 
     ASSERT_TRUE(equal(len,exp,0.01f));
