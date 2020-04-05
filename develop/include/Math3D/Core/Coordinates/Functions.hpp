@@ -4,89 +4,13 @@
 
 #include <cmath>
 #include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/CartesianAxes.hpp>
 #include <Math3D/Core/Coordinates/Polar.hpp>
 #include <Math3D/Core/Coordinates/Spherical.hpp>
 #include <Math3D/Core/Coordinates/Cylindrical.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
-
-namespace axes
-{
-
-/* ####################################################################################### */
-/* X, Y, Z axes */
-/* ####################################################################################### */
-
-/**
- * Cartesian x axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-x();
-
-/**
- * Cartesian system y axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-y();
-
-/**
- * Cartesian system z axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-z();
-
-/* ####################################################################################### */
-/* Cartesian system axes */
-/* ####################################################################################### */
-
-/**
- * Return Cartesian system up axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-up();
-
-/**
- * Return Cartesian system right axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-right();
-
-/**
- * Return Cartesian system forward axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-forward();
-
-/**
- * Return Cartesian system down axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-down();
-
-/**
- * Return Cartesian system left axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-left();
-
-/**
- * Return Cartesian system backward axis.
- */
-template<typename T=FLOAT>
-constexpr FORCEINLINE Vector<3,T>
-backward();
-
-} // axes namespace
-
 MATH3D_COORD_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
