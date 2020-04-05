@@ -119,6 +119,15 @@ inverted(const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
+constexpr T
+angle(const Quaternion<T>& A, const Quaternion<T>& B)
+{
+    return 2 * std::acos(dot(A,B));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
 constexpr Quaternion<T>
 identity()
 {

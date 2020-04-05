@@ -6,15 +6,6 @@
 MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr FORCEINLINE enable_if_integral<T,bool>
-equal(T A, T B)
-{
-    return A == B;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
 constexpr FORCEINLINE enable_if_floating<T,bool>
 equal(T A, T B, T tolerance)
 {
@@ -25,9 +16,9 @@ equal(T A, T B, T tolerance)
 
 template<typename T>
 constexpr FORCEINLINE enable_if_integral<T,bool>
-notEqual(T A, T B)
+equal(T A, T B)
 {
-    return A != B;
+    return A == B;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -37,6 +28,15 @@ constexpr FORCEINLINE enable_if_floating<T,bool>
 notEqual(T A, T B, T tolerance)
 {
     return std::abs(A-B) > tolerance;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE enable_if_integral<T,bool>
+notEqual(T A, T B)
+{
+    return A != B;
 }
 
 /* ####################################################################################### */

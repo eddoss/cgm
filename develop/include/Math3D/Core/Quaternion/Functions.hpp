@@ -86,6 +86,16 @@ constexpr Quaternion<T>
 inverted(const Quaternion<T>& quaternion);
 
 /**
+ * Get angle between two quaternions.
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @return Shortest angle between two quaternions.
+ */
+template<typename T>
+constexpr T
+angle(const Quaternion<T>& A, const Quaternion<T>& B);
+
+/**
  * Create identity quaternion.
  * @return Identity quaternion.
  */
