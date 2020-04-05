@@ -15,15 +15,23 @@ MATH3D_NAMESPACE_BEGIN
  * @return The dot product.
  */
 template<typename T>
-T
+constexpr T
 dot(const Quaternion<T>& A, const Quaternion<T>& B);
+
+/**
+ * Calculates quaternion norm.
+ * @return The quaternion norm.
+ */
+template<typename T>
+constexpr T
+norm(const Quaternion<T>& quaternion);
 
 /**
  * Make quaternion conjugated.
  * @return The conjugated quaternion.
  */
 template<typename T>
-Quaternion<T>&
+constexpr Quaternion<T>&
 conjugate(Quaternion<T>& quaternion);
 
 /**
@@ -31,7 +39,7 @@ conjugate(Quaternion<T>& quaternion);
  * @return The conjugated quaternion.
  */
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 conjugated(const Quaternion<T>& quaternion);
 
 /**
@@ -39,7 +47,7 @@ conjugated(const Quaternion<T>& quaternion);
  * @return The length of this quaternion.
  */
 template<typename TResult=FLOAT, typename T>
-TResult
+constexpr TResult
 length(const Quaternion<T>& quaternion);
 
 /**
@@ -47,7 +55,7 @@ length(const Quaternion<T>& quaternion);
  * @return The squared length of the quaternion.
  */
 template<typename T>
-T
+constexpr T
 lengthSquared(const Quaternion<T>& quaternion);
 
 /**
@@ -55,7 +63,7 @@ lengthSquared(const Quaternion<T>& quaternion);
  * If it is too small, returns an no changed quaternion.
  */
 template<typename T>
-Quaternion<T>&
+constexpr Quaternion<T>&
 normalize(Quaternion<T>& quaternion);
 
 /**
@@ -64,7 +72,7 @@ normalize(Quaternion<T>& quaternion);
  * @return normalized quternion.
  */
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 normalized(const Quaternion<T>& quaternion);
 
 /**
@@ -73,7 +81,7 @@ normalized(const Quaternion<T>& quaternion);
  * @return Inverted quaternion.
  */
 template<typename T>
-Quaternion<T>&
+constexpr Quaternion<T>&
 invert(Quaternion<T>& quaternion);
 
 /**
@@ -82,7 +90,7 @@ invert(Quaternion<T>& quaternion);
  * @return Inverted quaternion.
  */
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 inverted(const Quaternion<T>& quaternion);
 
 /**
