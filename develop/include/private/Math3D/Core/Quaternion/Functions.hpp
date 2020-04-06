@@ -54,20 +54,19 @@ conjugated(const Quaternion<T>& quaternion)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, typename T>
-constexpr TResult
+template<typename T>
+constexpr T
 length(const Quaternion<T>& quaternion)
 {
-    TResult nrm {norm(quaternion)};
-    TResult zer {zero<TResult>()};
+    T nrm {norm(quaternion)};
 
-    if (equal(nrm,zer))
+    if (equal(nrm, zero<T>()))
     {
-        return zer;
+        return zero<T>();
     }
     else
     {
-        return static_cast<TResult>(sqrt(nrm));
+        return sqrt(nrm);
     }
 }
 

@@ -46,8 +46,8 @@ conjugated(const Quaternion<T>& quaternion);
  * Get the length of the quaternion.
  * @return The length of this quaternion.
  */
-template<typename TResult=FLOAT, typename T>
-constexpr TResult
+template<typename T>
+constexpr T
 length(const Quaternion<T>& quaternion);
 
 /**
