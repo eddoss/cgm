@@ -60,9 +60,9 @@ length(const Quaternion<T>& quaternion)
 {
     T nrm {norm(quaternion)};
 
-    if (equal(nrm, zero<T>()))
+    if (equal(nrm, zero<T>))
     {
-        return zero<T>();
+        return zero<T>;
     }
     else
     {
@@ -78,7 +78,7 @@ normalize(Quaternion<T>& quaternion)
 {
     T len {length<T>(quaternion)};
 
-    if (notEqual(len, zero<T>()))
+    if (notEqual(len, zero<T>))
     {
         quaternion /= len;
     }
@@ -133,9 +133,9 @@ identity()
     return Quaternion<T>
     {
         number<T>(1),
-        zero<T>(),
-        zero<T>(),
-        zero<T>()
+        zero<T>,
+        zero<T>,
+        zero<T>
     };
 }
 

@@ -271,7 +271,7 @@ inverted(const Matrix<S,S,T>& matrix, bool& success)
 
     T det {determinant(matrix)};
 
-    if (equal(det, zero<T>()))
+    if (equal(det, zero<T>))
     {
         success = false;
         return Matrix<S,S,TResult>();
@@ -318,7 +318,7 @@ identity()
     }
     else
     {
-        Matrix<S,S,T> matrix(zero<T>());
+        Matrix<S,S,T> matrix(zero<T>);
         for (auto i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
         return matrix;
     }

@@ -69,8 +69,8 @@ number(BT value);
  * @return Zero with given type.
  */
 template<typename T>
-constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
-zero();
+constexpr typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
+zero = T(0);
 
 MATH3D_NAMESPACE_END
 
