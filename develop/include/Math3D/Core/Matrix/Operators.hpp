@@ -15,28 +15,28 @@
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
+operator ++ (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
 
 /**
  * Decrease all components of matrix by 1 and returns it.
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
+operator -- (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
 
 /**
  * Increase all components of matrix by 1 and returns unchanged copy of it.
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int);
+operator ++ (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int);
 
 /**
  * Decrease all components of matrix by 1 and returns unchanged copy of it.
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int);
+operator -- (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int);
 
 /* ####################################################################################### */
 /* Plus */
@@ -50,7 +50,7 @@ operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int);
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator + (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /**
  * Add scalar to matrix and return copy.
@@ -60,7 +60,7 @@ operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matr
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator + (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Add scalar to matrix and return copy.
@@ -70,7 +70,7 @@ operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
+operator + (T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
 
 /**
  * Add scalar to matrix components.
@@ -80,7 +80,7 @@ operator+(T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator += (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Add matrix B to matrix A.
@@ -90,7 +90,7 @@ operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator += (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /* ####################################################################################### */
 /* Minus */
@@ -103,7 +103,7 @@ operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
 
 /**
  * Calculates difference of two matrix.
@@ -113,7 +113,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /**
  * Subtract scalar from each matrix component and return copy.
@@ -123,7 +123,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matr
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Subtract scalar from each matrix component.
@@ -133,7 +133,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator -= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Subtract matrix B from matrix A.
@@ -143,7 +143,7 @@ operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator -= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /* ####################################################################################### */
 /* Multiplication */
@@ -157,7 +157,7 @@ operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator*(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator * (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Multiply scalar to each matrix component and return copy.
@@ -167,7 +167,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator*(TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
+operator * (TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
 
 /**
  * Multiply A matrix by B matrix.
@@ -180,7 +180,7 @@ operator*(TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix);
  */
 template<size_t AM, size_t AN, size_t BN, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<AM,BN,T>
-operator*(const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Matrix<AN,BN,T>& B);
+operator * (const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Matrix<AN,BN,T>& B);
 
 /**
  * Multiply matrix A<1,N> by matrix B<N,1>.
@@ -191,7 +191,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Ma
  */
 template<size_t S, typename T>
 constexpr T
-operator*(const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,1,T>& B);
+operator * (const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,1,T>& B);
 
 /**
  * Multiply scalar to each matrix component.
@@ -201,7 +201,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matr
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator*=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator *= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Multiply square matrix A by square matrix B and store result in A.
@@ -212,7 +212,7 @@ operator*=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t S, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<S,S,T>&
-operator*=(MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,S,T>& B);
+operator *= (MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,S,T>& B);
 
 /* ####################################################################################### */
 /* Component wise division */
@@ -226,7 +226,7 @@ operator*=(MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator / (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /**
  * Divide each matrix component by a scalar and return copy.
@@ -236,7 +236,7 @@ operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
+operator /= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
 
 /* ####################################################################################### */
 /* Comparison with scalar */
@@ -250,7 +250,7 @@ operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
+operator == (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
 
 /**
  * Checking the components of a matrix for inequality with a scalar.
@@ -260,7 +260,7 @@ operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
+operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
 
 /* ####################################################################################### */
 /* Comparison with other */
@@ -274,7 +274,7 @@ operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar);
  */
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator == (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /**
  * Check against another matrix for inequality.
@@ -284,7 +284,7 @@ operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Mat
  */
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 
 #include <private/Math3D/Core/Matrix/Operators.hpp>

@@ -9,7 +9,7 @@
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
+operator ++ (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -80,7 +80,7 @@ operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
+operator -- (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -151,7 +151,7 @@ operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
+operator ++ (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
 {
     auto copy {matrix};
 
@@ -224,7 +224,7 @@ operator++(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
+operator -- (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
 {
     auto copy {matrix};
 
@@ -299,7 +299,7 @@ operator--(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, int)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator + (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -397,7 +397,7 @@ operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matr
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator + (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -497,7 +497,7 @@ operator+(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator+(T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
+operator + (T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 {
     T value {static_cast<T>(scalar)};
 
@@ -597,7 +597,7 @@ operator+(T scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator += (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
     
@@ -670,7 +670,7 @@ operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator += (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -743,7 +743,7 @@ operator+=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -841,7 +841,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -939,7 +939,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matr
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator - (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -1039,7 +1039,7 @@ operator-(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator -= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
     
@@ -1112,7 +1112,7 @@ operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator -= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -1185,7 +1185,7 @@ operator-=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator*(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator * (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -1285,7 +1285,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator*(TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
+operator * (TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 {
     T value {static_cast<T>(scalar)};
 
@@ -1385,7 +1385,7 @@ operator*(TScalar scalar, const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix)
 
 template<size_t AM, size_t AN, size_t BN, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<AM,BN,T>
-operator*(const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Matrix<AN,BN,T>& B)
+operator * (const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Matrix<AN,BN,T>& B)
 {
     // 2x2 * 2x2 -> 2x2
     if constexpr (AM == 2 && AN == 2 && BN == 2)
@@ -2024,7 +2024,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<AM,AN,T>& A, const MATH3D_NAMESPACE::Ma
 
 template<size_t S, typename T>
 constexpr T
-operator*(const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,1,T>& B)
+operator * (const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,1,T>& B)
 {
     if constexpr (S == 2)
     {
@@ -2059,7 +2059,7 @@ operator*(const MATH3D_NAMESPACE::Matrix<1,S,T>& A, const MATH3D_NAMESPACE::Matr
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator*=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator *= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
     
@@ -2132,7 +2132,7 @@ operator*=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t S, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<S,S,T>&
-operator*=(MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,S,T>& B)
+operator *= (MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,S,T>& B)
 {
     MATH3D_NAMESPACE::Matrix<S,S,T> result;
 
@@ -2225,7 +2225,7 @@ operator*=(MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator / (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -2323,7 +2323,7 @@ operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matr
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator / (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -2423,7 +2423,7 @@ operator/(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
+operator /= (MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 {
     T value {static_cast<T>(scalar)};
     
@@ -2496,7 +2496,7 @@ operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, TScalar scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
-operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator /= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -2569,7 +2569,7 @@ operator/=(MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,
 
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
+operator == (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -2746,7 +2746,7 @@ operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
+operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
 {
     T value {static_cast<T>(scalar)};
 
@@ -2925,7 +2925,7 @@ operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& matrix, T scalar)
 
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator == (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 1 && N == 2)
     {
@@ -3100,7 +3100,7 @@ operator==(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Mat
 
 template<size_t M, size_t N, typename T>
 constexpr bool
-operator!=(const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 1 && N == 2)
     {
