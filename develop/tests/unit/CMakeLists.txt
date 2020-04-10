@@ -46,6 +46,7 @@ set(MATRIX_TEST_SUITE
     Matrix/Arithmetic/MultiplicationToScalar.cpp
     Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
     Matrix/Arithmetic/MatrixMultiplication.cpp
+    Matrix/Arithmetic/MatrixVectorMultiplication.cpp
     Matrix/Comparison/WithOther.cpp
     Matrix/Comparison/WithScalar.cpp
     Matrix/Iterators/Direct.cpp

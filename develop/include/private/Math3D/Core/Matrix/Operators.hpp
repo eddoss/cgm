@@ -2219,6 +2219,320 @@ operator *= (MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, size_t N, typename T>
+constexpr std::conditional_t<(N == 1), T, MATH3D_NAMESPACE::Vector<N,T>>
+operator * (const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Matrix<D,N,T>& B)
+{
+    if constexpr (N == 1)
+    {
+        if constexpr (D == 2)
+        {
+            return {A.x * B(0, 0) + A.y * B(1, 0)};
+        }
+        else if constexpr (D == 3)
+        {
+            return {A.x * B(0, 0) + A.y * B(1, 0) + A.z * B(2, 0)};
+        }
+        else if constexpr (D == 4)
+        {
+            return {A.x * B(0, 0) + A.y * B(1, 0) + A.z * B(2, 0) + A.w * B(3, 0)};
+        }
+        else
+        {
+            T sum {zero<T>};
+
+            for (size_t i = 0; i < D; ++i)
+            {
+                sum = A[i] * B(i,0);
+            }
+
+            return sum;
+        }
+    }
+    else if constexpr (D == 2)
+    {
+        if constexpr (N == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0),
+                A.x * B(0,1) + A.y * B(1,1)
+            };
+        }
+        else if constexpr (N == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0),
+                A.x * B(0,1) + A.y * B(1,1),
+                A.x * B(0,2) + A.y * B(1,2)
+            };
+        }
+        else if constexpr (N == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0),
+                A.x * B(0,1) + A.y * B(1,1),
+                A.x * B(0,2) + A.y * B(1,2),
+                A.x * B(0,3) + A.y * B(1,3)
+            };
+        }
+        else
+        {
+            Vector<N,T> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec[i] = A[0] * B(0,i) + A[1] * B(1,i);
+            }
+
+            return vec;
+        }
+    }
+    else if constexpr (D == 3)
+    {
+        if constexpr (N == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1)
+            };
+        }
+        else if constexpr (N == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1),
+                A.x * B(0,2) + A.y * B(1,2) + A.z * B(2,2)
+            };
+        }
+        else if constexpr (N == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1),
+                A.x * B(0,2) + A.y * B(1,2) + A.z * B(2,2),
+                A.x * B(0,3) + A.y * B(1,3) + A.z * B(2,3)
+            };
+        }
+        else
+        {
+            Vector<N,T> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec[i] = A[0] * B(0,i) + A[1] * B(1,i) + A[2] * B(2,i);
+            }
+
+            return vec;
+        }
+    }
+    else if constexpr (N == 4)
+    {
+        if constexpr (N == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0) + A.w * B(3,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1) + A.w * B(3,1)
+            };
+        }
+        else if constexpr (N == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0) + A.w * B(3,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1) + A.w * B(3,1),
+                A.x * B(0,2) + A.y * B(1,2) + A.z * B(2,2) + A.w * B(3,2)
+            };
+        }
+        else if constexpr (N == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0) + A.w * B(3,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1) + A.w * B(3,1),
+                A.x * B(0,2) + A.y * B(1,2) + A.z * B(2,2) + A.w * B(3,2),
+                A.x * B(0,3) + A.y * B(1,3) + A.z * B(2,3) + A.w * B(3,3)
+            };
+        }
+        else
+        {
+            Vector<N,T> vec;
+
+            for (size_t i = 0; i < N; ++i)
+            {
+                vec[i] = A[0] * B(0,i) + A[1] * B(1,i) + A[2] * B(2,i) + A[3] * B(3,i);
+            }
+            
+            return vec;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, size_t M, typename T>
+constexpr std::conditional_t<(M == 1), T, MATH3D_NAMESPACE::Vector<M,T>>
+operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
+{
+    if constexpr (M == 1)
+    {
+        if constexpr (D == 2)
+        {
+            return {A.x * B(0, 0) + A.y * B(0, 1)};
+        }
+        else if constexpr (D == 3)
+        {
+            return {A.x * B(0, 0) + A.y * B(0, 1) + A.z * B(0, 2)};
+        }
+        else if constexpr (D == 4)
+        {
+            return {A.x * B(0, 0) + A.y * B(0, 1) + A.z * B(0, 2) + A.w * B(0, 3)};
+        }
+        else
+        {
+            T sum {zero<T>};
+
+            for (size_t i = 0; i < D; ++i)
+            {
+                sum = A[i] * B(0,i);
+            }
+
+            return sum;
+        }
+    }
+    else if constexpr (D == 2)
+    {
+        if constexpr (M == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1),
+                A.x * B(1,0) + A.y * B(1,1)
+            };
+        }
+        else if constexpr (M == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1),
+                A.x * B(1,0) + A.y * B(1,1),
+                A.x * B(2,0) + A.y * B(2,1)
+            };
+        }
+        else if constexpr (M == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1),
+                A.x * B(1,0) + A.y * B(1,1),
+                A.x * B(2,0) + A.y * B(2,1),
+                A.x * B(3,0) + A.y * B(3,1)
+            };
+        }
+        else
+        {
+            Vector<M,T> vec;
+
+            for (size_t i = 0; i < M; ++i)
+            {
+                vec[i] = A[0] * B(i,0) + A[1] * B(i,1);
+            }
+
+            return vec;
+        }
+    }
+    else if constexpr (D == 3)
+    {
+        if constexpr (M == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(1,0) + A.z * B(2,0),
+                A.x * B(0,1) + A.y * B(1,1) + A.z * B(2,1)
+            };
+        }
+        else if constexpr (M == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1) + A.z * B(0,2),
+                A.x * B(1,0) + A.y * B(1,1) + A.z * B(1,2),
+                A.x * B(2,0) + A.y * B(2,1) + A.z * B(2,2)
+            };
+        }
+        else if constexpr (M == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1) + A.z * B(0,2),
+                A.x * B(1,0) + A.y * B(1,1) + A.z * B(1,2),
+                A.x * B(2,0) + A.y * B(2,1) + A.z * B(2,2),
+                A.x * B(3,0) + A.y * B(3,1) + A.z * B(3,2)
+            };
+        }
+        else
+        {
+            Vector<M,T> vec;
+
+            for (size_t i = 0; i < M; ++i)
+            {
+                vec[i] = A[0] * B(i,0) + A[1] * B(i,1) + A[2] * B(i,2);
+            }
+
+            return vec;
+        }
+    }
+    else if constexpr (M == 4)
+    {
+        if constexpr (M == 2)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1) + A.z * B(0,2) + A.w * B(0,3),
+                A.x * B(1,0) + A.y * B(1,1) + A.z * B(1,2) + A.w * B(1,3)
+            };
+        }
+        else if constexpr (M == 3)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1) + A.z * B(0,2) + A.w * B(0,3),
+                A.x * B(1,0) + A.y * B(1,1) + A.z * B(1,2) + A.w * B(1,3),
+                A.x * B(2,0) + A.y * B(2,1) + A.z * B(2,2) + A.w * B(2,3)
+            };
+        }
+        else if constexpr (M == 4)
+        {
+            return
+            {
+                A.x * B(0,0) + A.y * B(0,1) + A.z * B(0,2) + A.w * B(0,3),
+                A.x * B(1,0) + A.y * B(1,1) + A.z * B(1,2) + A.w * B(1,3),
+                A.x * B(2,0) + A.y * B(2,1) + A.z * B(2,2) + A.w * B(2,3),
+                A.x * B(3,0) + A.y * B(3,1) + A.z * B(3,2) + A.w * B(3,3)
+            };
+        }
+        else
+        {
+            Vector<M,T> vec;
+
+            for (size_t i = 0; i < M; ++i)
+            {
+                vec[i] = A[0] * B(i,0) + A[1] * B(i,1) + A[2] * B(i,2) + A[3] * B(i,3);
+            }
+            
+            return vec;
+        }
+    }
+}
+
 /* ####################################################################################### */
 /* IMPLEMENTATION | Component wise division */
 /* ####################################################################################### */
