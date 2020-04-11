@@ -6,7 +6,7 @@
 MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
-T
+constexpr T
 dot(const Quaternion<T> &A, const Quaternion<T> &B)
 {
     return A | B;
@@ -15,7 +15,19 @@ dot(const Quaternion<T> &A, const Quaternion<T> &B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-Quaternion<T>&
+constexpr T
+norm(const Quaternion<T>& quaternion)
+{
+    return  quaternion.a * quaternion.a +
+            quaternion.b * quaternion.b +
+            quaternion.c * quaternion.c +
+            quaternion.s * quaternion.s;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Quaternion<T>&
 conjugate(Quaternion<T>& quaternion)
 {
     quaternion.a *= -1;
@@ -28,7 +40,7 @@ conjugate(Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 conjugated(const Quaternion<T>& quaternion)
 {
     return Quaternion<T>
@@ -42,41 +54,31 @@ conjugated(const Quaternion<T>& quaternion)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, typename T>
-TResult
+template<typename T>
+constexpr T
 length(const Quaternion<T>& quaternion)
 {
-    TResult sum {dot(quaternion, quaternion)};
-    TResult zer {zero<TResult>()};
+    T nrm {norm(quaternion)};
 
-    if (equal(sum,zer))
+    if (equal(nrm, zero<T>))
     {
-        return zer;
+        return zero<T>;
     }
     else
     {
-        return static_cast<TResult>(sqrt(sum));
+        return sqrt(nrm);
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-T
-lengthSquared(const Quaternion<T>& quaternion)
-{
-    return dot(quaternion, quaternion);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-Quaternion<T>&
+constexpr Quaternion<T>&
 normalize(Quaternion<T>& quaternion)
 {
     T len {length<T>(quaternion)};
 
-    if (notEqual(len, zero<T>()))
+    if (notEqual(len, zero<T>))
     {
         quaternion /= len;
     }
@@ -87,7 +89,7 @@ normalize(Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 normalized(const Quaternion<T>& quaternion)
 {
     auto copy {quaternion};
@@ -96,21 +98,30 @@ normalized(const Quaternion<T>& quaternion)
 }
 
 template<typename T>
-Quaternion<T>&
+constexpr Quaternion<T>&
 invert(Quaternion<T>& quaternion)
 {
-    return conjugate(quaternion) /= lengthSquared(quaternion);
+    return conjugate(quaternion) /= norm(quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-Quaternion<T>
+constexpr Quaternion<T>
 inverted(const Quaternion<T>& quaternion)
 {
     auto copy {quaternion};
     invert(copy);
     return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr T
+angle(const Quaternion<T>& A, const Quaternion<T>& B)
+{
+    return 2 * std::acos(dot(A,B));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -122,9 +133,9 @@ identity()
     return Quaternion<T>
     {
         number<T>(1),
-        zero<T>(),
-        zero<T>(),
-        zero<T>()
+        zero<T>,
+        zero<T>,
+        zero<T>
     };
 }
 

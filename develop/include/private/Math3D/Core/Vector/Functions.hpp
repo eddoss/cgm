@@ -11,7 +11,7 @@ normalize(Vector<D,T>& vector)
 {
     T len {length<T>(vector)};
 
-    if (equal(len, zero<T>())) return vector;
+    if (equal(len, zero<T>)) return vector;
 
     if constexpr (D == 2)
     {
@@ -53,7 +53,7 @@ normalized(const Vector<D,T>& vector)
 {
     T len {length<T>(vector)};
 
-    if (equal(len, zero<T>())) return vector;
+    if (equal(len, zero<T>)) return vector;
 
     if constexpr (D == 2)
     {
@@ -116,7 +116,7 @@ dot(const Vector<D,T>& A, const Vector<D,T>& B)
     }
     if constexpr (D > 4)
     {
-        T sum {zero<T>()};
+        T sum {zero<T>};
         for (size_t i = 0; i < D; ++i)
         {
             sum += A[i] * B[i];
@@ -141,7 +141,7 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 length(const Vector<D,T>& vector)
 {
     TResult sum {dot(vector, vector)};
-    TResult zer {zero<TResult>()};
+    TResult zer {zero<TResult>};
 
     if (equal(sum,zer))
     {

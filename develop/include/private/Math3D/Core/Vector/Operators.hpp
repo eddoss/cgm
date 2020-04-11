@@ -931,7 +931,7 @@ operator|(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector
     }
     else
     {
-        T result {MATH3D_NAMESPACE::zero<T>()};
+        T result {MATH3D_NAMESPACE::zero<T>};
         for (auto i = 0; i < D; ++i)
         {
             result += A[i] * B[i];

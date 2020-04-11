@@ -7,7 +7,7 @@ MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr
-Quaternion<T>::Quaternion(T S, T A, T B, T C)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(T S, T A, T B, T C)
     : s(S)
     , a(A)
     , b(B)
@@ -17,7 +17,7 @@ Quaternion<T>::Quaternion(T S, T A, T B, T C)
 
 template<typename T>
 constexpr
-Quaternion<T>::Quaternion(T scalar, T coefficient)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(T scalar, T coefficient)
     : s(scalar)
     , a(coefficient)
     , b(coefficient)
@@ -29,7 +29,7 @@ Quaternion<T>::Quaternion(T scalar, T coefficient)
 
 template<typename T>
 constexpr FORCEINLINE T*
-Quaternion<T>::data()
+Quaternion<T, enable_if_floating<T,void>>::data()
 {
     return &s;
 }
@@ -38,7 +38,7 @@ Quaternion<T>::data()
 
 template<typename T>
 constexpr FORCEINLINE const T*
-Quaternion<T>::data() const
+Quaternion<T, enable_if_floating<T,void>>::data() const
 {
     return &s;
 }

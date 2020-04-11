@@ -12,16 +12,6 @@ MATH3D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Compare number A and B (integral numbers).
- * @param A First number.
- * @param B Second number.
- * @return true if A equal to B, false otherwise.
- */
-template<typename T>
-constexpr FORCEINLINE enable_if_integral<T,bool>
-equal(T A, T B);
-
-/**
  * Compare number A and B (floating point numbers).
  * @param A First number.
  * @param B Second number.
@@ -36,11 +26,11 @@ equal(T A, T B, T tolerance=TOLERANCE);
  * Compare number A and B (integral numbers).
  * @param A First number.
  * @param B Second number.
- * @return true if A not equal to B, false otherwise.
+ * @return true if A equal to B, false otherwise.
  */
 template<typename T>
 constexpr FORCEINLINE enable_if_integral<T,bool>
-notEqual(T A, T B);
+equal(T A, T B);
 
 /**
  * Compare number A and B (floating point numbers).
@@ -52,6 +42,16 @@ notEqual(T A, T B);
 template<typename T>
 constexpr FORCEINLINE enable_if_floating<T,bool>
 notEqual(T A, T B, T tolerance=TOLERANCE);
+
+/**
+ * Compare number A and B (integral numbers).
+ * @param A First number.
+ * @param B Second number.
+ * @return true if A not equal to B, false otherwise.
+ */
+template<typename T>
+constexpr FORCEINLINE enable_if_integral<T,bool>
+notEqual(T A, T B);
 
 /* ####################################################################################### */
 /* Number converter */
@@ -69,8 +69,8 @@ number(BT value);
  * @return Zero with given type.
  */
 template<typename T>
-constexpr FORCEINLINE typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
-zero();
+constexpr typename std::enable_if_t<(std::is_floating_point_v<T> || std::is_integral_v<T>), T>
+zero = T(0);
 
 MATH3D_NAMESPACE_END
 

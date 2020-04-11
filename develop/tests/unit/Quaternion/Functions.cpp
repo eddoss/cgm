@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
+#include <Math3D/Common.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
 #include <Math3D/Core/Quaternion/Functions.hpp>
 
@@ -54,11 +55,11 @@ TEST(Quaternion_Functions, Length)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, LengthSquared)
+TEST(Quaternion_Functions, Norm)
 {
     Quaternion<float> q {9.678f, 1.690f, 8.336f, 2.821f};
 
-    float len = lengthSquared(q);
+    float len = norm(q);
     float exp = 173.973f;
 
     ASSERT_TRUE(equal(len,exp,0.01f));
@@ -122,6 +123,21 @@ TEST(Quaternion_Functions, Inverted)
     ASSERT_TRUE(equal(qat.a,inv.a,0.001));
     ASSERT_TRUE(equal(qat.b,inv.b,0.001));
     ASSERT_TRUE(equal(qat.c,inv.c,0.001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Quaternion_Functions, Angle)
+{
+    Quaternion<float> a {1.22f, 4.34f, 5.11f, 3.74f};
+    Quaternion<float> b {0.25f, 2.16f, 1.45f, 2.47f};
+
+    normalize(a);
+    normalize(b);
+
+    float ang = angle(a,b);
+
+    ASSERT_TRUE(equal(ang, 0.6855f, 0.0001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
