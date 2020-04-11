@@ -3,6 +3,6 @@ project(
     LANGUAGES CXX
 )
 
-if(${BUILD_UNIT_TESTS})
+if(${MATH3D_BUILD_UNIT_TESTS})
     add_subdirectory(unit)
 endif()

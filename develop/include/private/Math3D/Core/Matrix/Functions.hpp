@@ -157,6 +157,20 @@ transposed(const Matrix<M,N,T>& matrix)
             matrix(0,2), matrix(1,2), matrix(2,2), matrix(3,2)
         };
     }
+    else
+    {
+        typename Matrix<M,N,T>::Transposed mat;
+
+        for (size_t m = 0; m < M; ++m)
+        {
+            for (size_t n = 0; n < N; ++n)
+            {
+                mat(n,m) = matrix(m,n);
+            }
+        }
+
+        return mat;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */

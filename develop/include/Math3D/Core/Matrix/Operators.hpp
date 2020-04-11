@@ -235,8 +235,6 @@ template<size_t D, size_t M, typename T>
 constexpr std::conditional_t<(M == 1), T, MATH3D_NAMESPACE::Vector<M,T>>
 operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
 
-#endif
-
 /* ####################################################################################### */
 /* Component wise division */
 /* ####################################################################################### */

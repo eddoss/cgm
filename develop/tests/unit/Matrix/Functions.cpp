@@ -32,6 +32,7 @@ using Mat43 = Matrix<4,3,int>;
 using Mat44 = Matrix<4,4,int>;
 using Mat45 = Matrix<4,5,int>;
 using Mat51 = Matrix<5,1,int>;
+using Mat54 = Matrix<5,4,int>;
 using Mat55 = Matrix<5,5,int>;
 
 
@@ -337,6 +338,29 @@ TEST(Matrix_Functions, Transposed)
             1, 3, 3, 7,
             2, 4, 2, 2,
             2, 3, 1, 8
+        };
+
+        ASSERT_TRUE(transposed(a) == b);
+    }
+
+
+    /* -------------- */
+
+    {
+        Mat45 a
+        {
+            1,2,2,7,8,
+            3,4,3,4,9,
+            3,2,1,3,1,
+            7,2,8,7,8
+        };
+        Mat54 b
+        {
+            1,3,3,7,
+            2,4,2,2,
+            2,3,1,8,
+            7,4,3,7,
+            8,9,1,8
         };
 
         ASSERT_TRUE(transposed(a) == b);

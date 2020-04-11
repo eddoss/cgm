@@ -130,7 +130,7 @@ install(
 # Testing
 # ####################################################################################### #
 
-if(${BUILD_UNIT_TESTS})
+if(${MATH3D_BUILD_UNIT_TESTS})
     enable_testing()
     add_subdirectory(develop/tests)
 endif()
