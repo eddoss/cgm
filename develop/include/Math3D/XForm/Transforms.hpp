@@ -44,6 +44,12 @@ template<size_t D, typename T>
 struct Transforms
 {
     /**
+     * Transformations pivot point.
+     */
+    Pivot<D,T>
+    pivot;
+
+    /**
      * Describe translations.
      */
     Vector<D,T>
@@ -66,12 +72,6 @@ struct Transforms
      */
     T
     uniformScale;
-
-    /**
-     * Transformations pivot point.
-     */
-    Pivot<D,T>
-    pivot;
 
     /**
      * Describe transformation order.
