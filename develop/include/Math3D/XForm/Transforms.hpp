@@ -68,6 +68,12 @@ struct Transforms
     scales;
 
     /**
+     * Describe uniform scale.
+     */
+    T
+    uniformScale;
+
+    /**
      * Describe transformation order.
      */
     ETransformOrder
