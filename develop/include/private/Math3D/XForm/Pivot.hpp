@@ -30,6 +30,3 @@ Pivot<D, T, std::enable_if_t<(D == 3)>>::Pivot(const Vector<D,T>& InX, const Vec
 
 MATH3D_XFORM_NAMESPACE_END
 MATH3D_NAMESPACE_END
-
-
-#include <private/Math3D/Core/Coordinates/Cylindrical.hpp>
