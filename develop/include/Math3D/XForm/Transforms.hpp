@@ -56,7 +56,7 @@ struct Transforms
     translations;
 
     /**
-     * Describe Rotations (in degrees).
+     * Describe Rotations (in radians).
      */
     Vector<D,T>
     rotations;
