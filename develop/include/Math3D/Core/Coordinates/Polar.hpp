@@ -15,7 +15,7 @@ struct Polar
     MATH3D_RULE_OF_FIVE(Polar)
 
 /* ####################################################################################### */
-/* Constructors */
+public: /* Constructors */
 /* ####################################################################################### */
 
     /** Constructor initializing angle and radius. */

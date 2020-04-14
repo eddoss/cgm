@@ -15,7 +15,7 @@ struct Cylindrical
     MATH3D_RULE_OF_FIVE(Cylindrical)
 
 /* ####################################################################################### */
-/* Constructors */
+public: /* Constructors */
 /* ####################################################################################### */
 
     /** Constructor initializing angle, height and radius. */
