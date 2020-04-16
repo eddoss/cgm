@@ -75,9 +75,9 @@ TEST(Quaternion_Functions, Normalize)
     normalize(qat);
 
     ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equal(qat.a,nrm.a,0.001f));
-    ASSERT_TRUE(equal(qat.b,nrm.b,0.001f));
-    ASSERT_TRUE(equal(qat.c,nrm.c,0.001f));
+    ASSERT_TRUE(equal(qat.x, nrm.x, 0.001f));
+    ASSERT_TRUE(equal(qat.y, nrm.y, 0.001f));
+    ASSERT_TRUE(equal(qat.z, nrm.z, 0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -90,9 +90,9 @@ TEST(Quaternion_Functions, Normalized)
     qat = normalized(qat);
 
     ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equal(qat.a,nrm.a,0.001f));
-    ASSERT_TRUE(equal(qat.b,nrm.b,0.001f));
-    ASSERT_TRUE(equal(qat.c,nrm.c,0.001f));
+    ASSERT_TRUE(equal(qat.x, nrm.x, 0.001f));
+    ASSERT_TRUE(equal(qat.y, nrm.y, 0.001f));
+    ASSERT_TRUE(equal(qat.z, nrm.z, 0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -105,9 +105,9 @@ TEST(Quaternion_Functions, Invert)
     invert(qat);
 
     ASSERT_TRUE(equal(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equal(qat.a,inv.a,0.001));
-    ASSERT_TRUE(equal(qat.b,inv.b,0.001));
-    ASSERT_TRUE(equal(qat.c,inv.c,0.001));
+    ASSERT_TRUE(equal(qat.x, inv.x, 0.001));
+    ASSERT_TRUE(equal(qat.y, inv.y, 0.001));
+    ASSERT_TRUE(equal(qat.z, inv.z, 0.001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -120,9 +120,9 @@ TEST(Quaternion_Functions, Inverted)
     qat = inverted(qat);
 
     ASSERT_TRUE(equal(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equal(qat.a,inv.a,0.001));
-    ASSERT_TRUE(equal(qat.b,inv.b,0.001));
-    ASSERT_TRUE(equal(qat.c,inv.c,0.001));
+    ASSERT_TRUE(equal(qat.x, inv.x, 0.001));
+    ASSERT_TRUE(equal(qat.y, inv.y, 0.001));
+    ASSERT_TRUE(equal(qat.z, inv.z, 0.001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -148,7 +148,7 @@ TEST(Quaternion_Functions, Identity)
     Quaternion<float> exp = {1.0f, 0.f, 0.f, 0.f};
 
     ASSERT_TRUE(idn.s == exp.s);
-    ASSERT_TRUE(idn.a == exp.a);
-    ASSERT_TRUE(idn.b == exp.b);
-    ASSERT_TRUE(idn.c == exp.c);
+    ASSERT_TRUE(idn.x == exp.x);
+    ASSERT_TRUE(idn.y == exp.y);
+    ASSERT_TRUE(idn.z == exp.z);
 }

@@ -10,9 +10,9 @@ operator - (const MATH3D_NAMESPACE::Quaternion<T>& quaternion)
     return
     {
         -quaternion.s,
-        -quaternion.a,
-        -quaternion.b,
-        -quaternion.c
+        -quaternion.x,
+        -quaternion.y,
+        -quaternion.z
     };
 }
 
@@ -25,9 +25,9 @@ operator - (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Qu
     return
     {
         A.s - B.s,
-        A.a - B.a,
-        A.b - B.b,
-        A.c - B.c
+        A.x - B.x,
+        A.y - B.y,
+        A.z - B.z
     };
 }
 
@@ -38,9 +38,9 @@ constexpr MATH3D_NAMESPACE::Quaternion<T>&
 operator -= (MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B)
 {
     A.s -= B.s;
-    A.a -= B.a;
-    A.b -= B.b;
-    A.c -= B.c;
+    A.x -= B.x;
+    A.y -= B.y;
+    A.z -= B.z;
 
     return A;
 }
@@ -56,9 +56,9 @@ operator + (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Qu
     return
     {
         A.s + B.s,
-        A.a + B.a,
-        A.b + B.b,
-        A.c + B.c
+        A.x + B.x,
+        A.y + B.y,
+        A.z + B.z
     };
 }
 
@@ -69,9 +69,9 @@ constexpr MATH3D_NAMESPACE::Quaternion<T>&
 operator += (MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B)
 {
     A.s += B.s;
-    A.a += B.a;
-    A.b += B.b;
-    A.c += B.c;
+    A.x += B.x;
+    A.y += B.y;
+    A.z += B.z;
 
     return A;
 }
@@ -89,9 +89,9 @@ operator * (const MATH3D_NAMESPACE::Quaternion<T>& quaternion, TScale scale)
     return
     {
         quaternion.s * scl,
-        quaternion.a * scl,
-        quaternion.b * scl,
-        quaternion.c * scl
+        quaternion.x * scl,
+        quaternion.y * scl,
+        quaternion.z * scl
     };
 }
 
@@ -103,10 +103,10 @@ operator * (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Qu
 {
     return
     {
-        A.s * B.s - A.a * B.a - A.b * B.b - A.c * B.c,
-        A.a * B.s + B.a * A.s + A.b * B.c - A.c * B.b,
-        A.b * B.s + B.b * A.s + A.c * B.a - A.a * B.c,
-        A.c * B.s + B.c * A.s + A.a * B.b - A.b * B.a
+        A.s * B.s - A.x * B.x - A.y * B.y - A.z * B.z,
+        A.x * B.s + B.x * A.s + A.y * B.z - A.z * B.y,
+        A.y * B.s + B.y * A.s + A.z * B.x - A.x * B.z,
+        A.z * B.s + B.z * A.s + A.x * B.y - A.y * B.x
     };
 }
 
@@ -117,9 +117,9 @@ constexpr MATH3D_NAMESPACE::Quaternion<T>&
 operator *= (MATH3D_NAMESPACE::Quaternion<T>& quaternion, TScale scale)
 {
     quaternion.s *= scale;
-    quaternion.a *= scale;
-    quaternion.b *= scale;
-    quaternion.c *= scale;
+    quaternion.x *= scale;
+    quaternion.y *= scale;
+    quaternion.z *= scale;
 
     return quaternion;
 }
@@ -148,9 +148,9 @@ operator / (const MATH3D_NAMESPACE::Quaternion<T>& quaternion, TDivider divider)
     return
     {
         quaternion.s / castedDivider,
-        quaternion.a / castedDivider,
-        quaternion.b / castedDivider,
-        quaternion.c / castedDivider
+        quaternion.x / castedDivider,
+        quaternion.y / castedDivider,
+        quaternion.z / castedDivider
     };
 }
 
@@ -163,9 +163,9 @@ operator /= (MATH3D_NAMESPACE::Quaternion<T>& quaternion, TDivider divider)
     T castedDivider = MATH3D_NAMESPACE::number<T>(divider);
 
     quaternion.s /= castedDivider;
-    quaternion.a /= castedDivider;
-    quaternion.b /= castedDivider;
-    quaternion.c /= castedDivider;
+    quaternion.x /= castedDivider;
+    quaternion.y /= castedDivider;
+    quaternion.z /= castedDivider;
 
     return quaternion;
 }
@@ -178,10 +178,10 @@ template<typename T>
 constexpr bool
 operator == (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B)
 {
-    return  MATH3D_NAMESPACE::equal(A.s, B.s) &&
-            MATH3D_NAMESPACE::equal(A.a, B.a) &&
-            MATH3D_NAMESPACE::equal(A.b, B.b) &&
-            MATH3D_NAMESPACE::equal(A.c, B.c);
+    return MATH3D_NAMESPACE::equal(A.s, B.s) &&
+           MATH3D_NAMESPACE::equal(A.x, B.x) &&
+           MATH3D_NAMESPACE::equal(A.y, B.y) &&
+           MATH3D_NAMESPACE::equal(A.z, B.z);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -190,10 +190,10 @@ template<typename T>
 constexpr bool
 operator != (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B)
 {
-    return  MATH3D_NAMESPACE::notEqual(A.s, B.s) ||
-            MATH3D_NAMESPACE::notEqual(A.a, B.a) ||
-            MATH3D_NAMESPACE::notEqual(A.b, B.b) ||
-            MATH3D_NAMESPACE::notEqual(A.c, B.c);
+    return MATH3D_NAMESPACE::notEqual(A.s, B.s) ||
+           MATH3D_NAMESPACE::notEqual(A.x, B.x) ||
+           MATH3D_NAMESPACE::notEqual(A.y, B.y) ||
+           MATH3D_NAMESPACE::notEqual(A.z, B.z);
 }
 
 /* ####################################################################################### */
@@ -205,7 +205,7 @@ constexpr T
 operator | (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B)
 {
     return  A.s * B.s +
-            A.a * B.a +
-            A.b * B.b +
-            A.c * B.c;
+            A.x * B.x +
+            A.y * B.y +
+            A.z * B.z;
 }
