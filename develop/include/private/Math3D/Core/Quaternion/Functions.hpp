@@ -18,10 +18,10 @@ template<typename T>
 constexpr T
 norm(const Quaternion<T>& quaternion)
 {
-    return  quaternion.a * quaternion.a +
-            quaternion.b * quaternion.b +
-            quaternion.c * quaternion.c +
-            quaternion.s * quaternion.s;
+    return quaternion.x * quaternion.x +
+           quaternion.y * quaternion.y +
+           quaternion.z * quaternion.z +
+           quaternion.s * quaternion.s;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -30,9 +30,9 @@ template<typename T>
 constexpr Quaternion<T>&
 conjugate(Quaternion<T>& quaternion)
 {
-    quaternion.a *= -1;
-    quaternion.b *= -1;
-    quaternion.c *= -1;
+    quaternion.x *= -1;
+    quaternion.y *= -1;
+    quaternion.z *= -1;
 
     return quaternion;
 }
@@ -46,9 +46,9 @@ conjugated(const Quaternion<T>& quaternion)
     return Quaternion<T>
     {
         quaternion.s,
-        quaternion.a * -1,
-        quaternion.b * -1,
-        quaternion.c * -1
+        -quaternion.x,
+        -quaternion.y,
+        -quaternion.z
     };
 }
 

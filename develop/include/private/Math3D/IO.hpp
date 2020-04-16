@@ -64,10 +64,9 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat)
     stream << typeid(quat).name() << "\n{\n";
     stream << std::fixed << std::left << std::setprecision(6);
     stream << "    s = " << quat.s << "\n";
-    stream << "    a = " << quat.a << "\n";
-    stream << "    a = " << quat.a << "\n";
-    stream << "    b = " << quat.b << "\n";
-    stream << "    c = " << quat.c << "\n";
+    stream << "    x = " << quat.x << "\n";
+    stream << "    y = " << quat.y << "\n";
+    stream << "    z = " << quat.z << "\n";
     stream << "}";
     stream.setf(old_flags);
     return stream;
