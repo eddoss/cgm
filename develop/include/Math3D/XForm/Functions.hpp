@@ -106,6 +106,64 @@ template<typename T>
 constexpr FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, const Transforms<3,T>& transforms);
 
+/* ####################################################################################### */
+/* Translating */
+/* ####################################################################################### */
+
+/**
+ * Translate 2D transform matrix by vector.
+ * @param matrix Matrix to translate.
+ * @param value How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Matrix<3,3,T>& matrix, const Vector<2,T>& value);
+
+/**
+ * Translate 2D vector by vector.
+ * @param vector Vector to translate.
+ * @param value How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Vector<2,T>& vector, const Vector<2,T>& value);
+
+/**
+ * Translate 2D vector by transforms.
+ * @param vector Vector to translate.
+ * @param transforms How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Vector<2,T>& vector, const Transforms<2,T>& transforms);
+
+/**
+ * Translate 3D transform matrix by vector.
+ * @param matrix Matrix to translate.
+ * @param value How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
+
+/**
+ * Translate 3D vector by vector.
+ * @param vector Vector to translate.
+ * @param value How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Vector<3,T>& vector, const Vector<3,T>& value);
+
+/**
+ * Translate 3D vector by transforms.
+ * @param vector Vector to translate.
+ * @param transforms How much to translate.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+translate(Vector<3,T>& vector, const Transforms<3,T>& transforms);
+
 MATH3D_XFORM_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
