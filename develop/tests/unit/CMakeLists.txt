@@ -70,7 +70,7 @@ set(COORDINATES_TEST_SUITE
 
 set(XFORM_TEST_SUITE
     run.cpp
-    XForm.cpp
+    XForms.cpp
 )
 
 set(ALL_TEST_SUITES

@@ -3,9 +3,9 @@
 
 
 #include <Math3D/Common.hpp>
-#include <Math3D/XForm/Pivot.hpp>
-#include <Math3D/XForm/Transforms.hpp>
-#include <Math3D/XForm/EulerAngles.hpp>
+#include <Math3D/XForms/3D/Pivot.hpp>
+#include <Math3D/XForms/3D/Transforms.hpp>
+#include <Math3D/XForms/3D/EulerAngles.hpp>
 
 
 /* ####################################################################################### */

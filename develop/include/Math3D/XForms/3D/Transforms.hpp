@@ -4,7 +4,7 @@
 
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
-#include <Math3D/XForm/Pivot.hpp>
+#include <Math3D/XForms/3D/Pivot.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -40,31 +40,31 @@ enum class ETransformOrder
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<typename T>
 struct Transforms
 {
     /**
      * Transformations pivot point.
      */
-    Pivot<D,T>
+    Pivot<T>
     pivot;
 
     /**
      * Describe translations.
      */
-    Vector<D,T>
+    Vector<3,T>
     translations;
 
     /**
      * Describe Rotations (in radians).
      */
-    Vector<D,T>
+    Vector<3,T>
     rotations;
 
     /**
      * Describe scales.
      */
-    Vector<D,T>
+    Vector<3,T>
     scales;
 
     /**

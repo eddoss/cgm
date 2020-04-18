@@ -5,8 +5,11 @@
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
-#include <Math3D/XForm/Pivot.hpp>
-#include <Math3D/XForm/Transforms.hpp>
+#include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/XForms/3D/Pivot.hpp>
+#include <Math3D/XForms/3D/Transforms.hpp>
+#include <Math3D/XForms/3D/EulerAngles.hpp>
+#include <Math3D/XForms/3D/RotationVector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -32,7 +35,7 @@ apply(Vector<2,T>& vector, const Matrix<3,3,T>& transforms);
  */
 template<typename T>
 constexpr FORCEINLINE void
-apply(Vector<2,T>& vector, const Transforms<2,T>& transforms);
+apply(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Apply transforms to 3D vector.
@@ -50,7 +53,7 @@ apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms);
  */
 template<typename T>
 constexpr FORCEINLINE void
-apply(Vector<3,T>& vector, const Transforms<3,T>& transforms);
+apply(Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Apply transforms to 4D vector.
@@ -68,7 +71,7 @@ apply(Vector<4,T>& vector, const Matrix<4,4,T>& transforms);
  */
 template<typename T>
 constexpr FORCEINLINE void
-apply(Vector<4,T>& vector, const Transforms<3,T>& transforms);
+apply(Vector<4,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Apply transforms to 2D transform matrix.
@@ -86,7 +89,7 @@ apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
  */
 template<typename T>
 constexpr FORCEINLINE void
-apply(Matrix<3,3,T>& matrix, const Transforms<2,T>& transforms);
+apply(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /**
  * Apply transforms to 3D transform matrix.
@@ -104,7 +107,7 @@ apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms);
  */
 template<typename T>
 constexpr FORCEINLINE void
-apply(Matrix<4,4,T>& matrix, const Transforms<3,T>& transforms);
+apply(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Translating */
@@ -135,7 +138,7 @@ translate(Vector<2,T>& vector, const Vector<2,T>& value);
  */
 template<typename T>
 constexpr FORCEINLINE void
-translate(Vector<2,T>& vector, const Transforms<2,T>& transforms);
+translate(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Translate 3D transform matrix by vector.
@@ -162,7 +165,7 @@ translate(Vector<3,T>& vector, const Vector<3,T>& value);
  */
 template<typename T>
 constexpr FORCEINLINE void
-translate(Vector<3,T>& vector, const Transforms<3,T>& transforms);
+translate(Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Scaling */
@@ -195,7 +198,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& value, const Vector<2,T>& pivotP
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Matrix<3,3,T>& matrix, const Vector<2,T>& value, const Pivot<2,T>& pivot);
+scale(Matrix<3,3,T>& matrix, const Vector<2,T>& value, const Pivot<T>& pivot);
 
 /**
  * Scale 2D transform matrix by transforms.
@@ -204,7 +207,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& value, const Pivot<2,T>& pivot);
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Matrix<3,3,T>& matrix, const Transforms<2,T>& transforms);
+scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /**
  * Scale 2D vector by vector.
@@ -233,7 +236,7 @@ scale(Vector<2,T>& vector, const Vector<2,T>& value, const Vector<2,T>& pivotPoi
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Vector<2,T>& vector, const Vector<2,T>& value, const Pivot<2,T>& pivot);
+scale(Vector<2,T>& vector, const Vector<2,T>& value, const Pivot<T>& pivot);
 
 /**
  * Scale 2D vector by transforms.
@@ -242,7 +245,7 @@ scale(Vector<2,T>& vector, const Vector<2,T>& value, const Pivot<2,T>& pivot);
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Vector<2,T>& vector, const Transforms<2,T>& transforms);
+scale(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Scale 3D transform matrix by vector.
@@ -271,7 +274,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& value, const Vector<3,T>& pivotP
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Matrix<4,4,T>& matrix, const Vector<3,T>& value, const Pivot<3,T>& pivot);
+scale(Matrix<4,4,T>& matrix, const Vector<3,T>& value, const Pivot<T>& pivot);
 
 /**
  * Scale 3D transform matrix by transforms.
@@ -280,7 +283,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& value, const Pivot<3,T>& pivot);
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Matrix<4,4,T>& matrix, const Transforms<3,T>& transforms);
+scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /**
  * Scale 3D vector by vector.
@@ -309,7 +312,7 @@ scale(Vector<3,T>& vector, const Vector<3,T>& value, const Vector<3,T>& pivotPoi
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Vector<3,T>& vector, const Vector<3,T>& value, const Pivot<3,T>& pivot);
+scale(Vector<3,T>& vector, const Vector<3,T>& value, const Pivot<T>& pivot);
 
 /**
  * Scale 3D vector by transforms.
@@ -318,8 +321,8 @@ scale(Vector<3,T>& vector, const Vector<3,T>& value, const Pivot<3,T>& pivot);
  */
 template<typename T>
 constexpr FORCEINLINE void
-scale(Vector<3,T>& vector, const Transforms<3,T>& transforms);
-
+scale(Vector<3,T>& vector, const Transforms<T>& transforms);
+        
 MATH3D_XFORM_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
