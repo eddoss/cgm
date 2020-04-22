@@ -55,11 +55,55 @@ constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success);
 
 /**
+ * Calculate matrix trace - sum of diagonal elements.
+ * @return Matrix trace.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE T
+trace(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is symmetric (a symmetric matrix is a square matrix
+ * that equals its transpose: i.e., M = transposed(M)).
+ * @return True if matrix is symmetric, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE T
+symmetric(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is antisymmetric (an antisymmetric matrix is a matrix
+ * whose transpose is its own negative: i.e., -M = transposed(M)).
+ * @return True if matrix is antisymmetric, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE T
+antisymmetric(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is diagonal (a diagonal matrix is a square matrix
+ * whose elements are zero, apart from its diagonal).
+ * @return True if matrix is diagonal, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr T
+diagonal(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is orthogonal (a matrix is orthogonal if its transpose
+ * is also its inverse, i.e., transposed(M) = inverted(M)).
+ * @return True if matrix is orthogonal, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr T
+orthogonal(const Matrix<S,S,T>& matrix);
+
+/**
  * Create identity matrix.
  * @return Identity matrix.
  */
 template<size_t S, typename T=FLOAT>
-constexpr Matrix<S,S,T>
+constexpr FORCEINLINE Matrix<S,S,T>
 identity();
 
 MATH3D_NAMESPACE_END
