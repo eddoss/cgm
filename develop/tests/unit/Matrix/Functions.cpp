@@ -557,6 +557,242 @@ TEST(Matrix_Functions, Inverse)
 
 /* --------------------------------------------------------------------------------------- */
 
+TEST(Matrix_Functions, Trace)
+{
+    {
+        Mat22 mat
+        {
+            2, 0,
+            0, 3
+        };
+
+        ASSERT_TRUE(trace(mat) == 5);
+    }
+
+    /* -------------- */
+
+    {
+        Mat33 mat
+        {
+            2, 0, 0,
+            0, 3, 0,
+            0, 0, 1
+        };
+
+        ASSERT_TRUE(trace(mat) == 6);
+    }
+
+    /* -------------- */
+
+    {
+        Mat44 mat
+        {
+            1, 0, 0, 0,
+            0, 2, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 4
+        };
+
+        ASSERT_TRUE(trace(mat) == 8);
+    }
+
+    /* -------------- */
+
+    {
+        Mat55 mat
+        {
+            1, 0, 0, 0, 0,
+            0, 2, 0, 0, 0,
+            0, 0, 4, 0, 0,
+            0, 0, 0, 5, 0,
+            0, 0, 0, 0, 1
+        };
+
+        ASSERT_TRUE(trace(mat) == 13);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Functions, Symmetric)
+{
+    {
+        Mat22 mat
+        {
+            1, 2,
+            2, 1
+        };
+
+        ASSERT_TRUE(symmetric(mat));
+
+        mat =
+        {
+            1,2,
+            3,4
+        };
+
+        ASSERT_FALSE(symmetric(mat));
+    }
+
+    /* -------------- */
+
+    {
+        Mat33 mat
+        {
+            1, 2, 3,
+            2, 1, 0,
+            3, 0, 3
+        };
+
+        ASSERT_TRUE(symmetric(mat));
+
+        mat =
+        {
+            1, 2, 3,
+            2, 1, 2,
+            3, 5, 3
+        };
+
+        ASSERT_FALSE(symmetric(mat));
+    }
+
+    /* -------------- */
+
+    {
+        Mat44 mat
+        {
+            1, 2, 3, 4,
+            2, 1, 0, 2,
+            3, 0, 3, 2,
+            4, 2, 2, 3
+        };
+
+        ASSERT_TRUE(symmetric(mat));
+
+        mat =
+        {
+            1, 2, 3, 4,
+            4, 1, 0, 2,
+            3, 0, 3, 2,
+            4, 2, 2, 3
+        };
+
+        ASSERT_FALSE(symmetric(mat));
+    }
+
+    /* -------------- */
+
+    {
+        Mat55 mat
+        {
+            1, 2, 3, 4, 2,
+            2, 1, 0, 2, 3,
+            3, 0, 3, 2, 5,
+            4, 2, 2, 3, 2,
+            2, 3, 5, 2, 2
+        };
+
+        ASSERT_TRUE(symmetric(mat));
+
+        mat =
+        {
+            1, 2, 3, 4, 2,
+            2, 1, 0, 2, 3,
+            3, 4, 3, 2, 5,
+            4, 2, 2, 3, 2,
+            2, 3, 5, 2, 2
+        };
+
+        ASSERT_FALSE(symmetric(mat));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Functions, Antisymmetric)
+{
+    Mat33 mat
+    {
+        0, -2, 4,
+        2, 0, -3,
+        -4, 3, 0
+    };
+
+    ASSERT_TRUE(antisymmetric(mat));
+
+    mat =
+    {
+        1, 2, 3,
+        2, 1, 0,
+        3, 0, 4
+    };
+
+    ASSERT_FALSE(antisymmetric(mat));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Functions, Diagonal)
+{
+    {
+        Mat22 mat
+        {
+            3, 0,
+            0, 2
+        };
+
+        ASSERT_TRUE(diagonal(mat));
+        ASSERT_FALSE(diagonal(Mat22(2)));
+    }
+
+    /* -------------- */
+
+    {
+        Mat33 mat
+        {
+            2, 0, 0,
+            0, 2, 0,
+            0, 0, 4
+        };
+
+        ASSERT_TRUE(diagonal(mat));
+        ASSERT_FALSE(diagonal(Mat33(2)));
+    }
+
+    /* -------------- */
+
+    {
+        Mat44 mat
+        {
+            2, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 2, 0,
+            0, 0, 0, 1
+        };
+
+        ASSERT_TRUE(diagonal(mat));
+        ASSERT_FALSE(diagonal(Mat44(2)));
+    }
+
+    /* -------------- */
+
+    {
+        Mat55 mat
+        {
+            4, 0, 0, 0, 0,
+            0, 5, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            0, 0, 0, 1, 0,
+            0, 0, 0, 0, 1
+        };
+
+        ASSERT_TRUE(diagonal(mat));
+        ASSERT_FALSE(diagonal(Mat55(2)));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix_Functions, Identity)
 {
     {
