@@ -1,6 +1,6 @@
 
 
-#include <Math3D/XForms/3D/Operators.hpp>
+#include <Math3D/XForm/Operators.hpp>
 
 
 /* ####################################################################################### */
