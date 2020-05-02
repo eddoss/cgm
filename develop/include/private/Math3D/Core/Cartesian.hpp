@@ -1,9 +1,9 @@
 
 
-#include <Math3D/Core/CartesianAxes.hpp>
+#include <Math3D/Core/Cartesian.hpp>
 
 MATH3D_NAMESPACE_BEGIN
-MATH3D_AXES_NAMESPACE_BEGIN
+MATH3D_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y, Z axes */
@@ -129,5 +129,5 @@ backward()
     return -forward<T>();
 }
 
-MATH3D_AXES_NAMESPACE_END
+MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END

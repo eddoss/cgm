@@ -4,7 +4,7 @@
 
 #include <cmath>
 #include <Math3D/Core/Vector/Vector.hpp>
-#include <Math3D/Core/CartesianAxes.hpp>
+#include <Math3D/Core/Cartesian.hpp>
 #include <Math3D/Core/Coordinates/Polar.hpp>
 #include <Math3D/Core/Coordinates/Spherical.hpp>
 #include <Math3D/Core/Coordinates/Cylindrical.hpp>

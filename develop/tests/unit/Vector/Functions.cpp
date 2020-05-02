@@ -5,7 +5,7 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Vector/Operators.hpp>
 #include <Math3D/Core/Vector/Functions.hpp>
-#include <Math3D/Core/CartesianAxes.hpp>
+#include <Math3D/Core/Cartesian.hpp>
 
 
 using namespace std;
@@ -398,9 +398,9 @@ TEST(Vector_Functions, Angle)
 
 TEST(Vector_Functions, Cross)
 {
-    auto i = axes::right();
-    auto j = axes::up();
-    auto k = axes::forward();
+    auto i = MATH3D_XYZ_NAMESPACE::right();
+    auto j = MATH3D_XYZ_NAMESPACE::up();
+    auto k = MATH3D_XYZ_NAMESPACE::forward();
 
 #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
     ASSERT_TRUE(cross(i,j) == -k);
