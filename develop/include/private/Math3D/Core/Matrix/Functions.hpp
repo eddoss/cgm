@@ -300,7 +300,138 @@ inverted(const Matrix<S,S,T>& matrix, bool& success)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr Matrix<S,S,T>
+constexpr FORCEINLINE T
+trace(const Matrix<S,S,T>& matrix)
+{
+    if constexpr (S == 2)
+    {
+        return matrix(0,0) + matrix(1,1);
+    }
+    else if constexpr (S == 3)
+    {
+        return matrix(0,0) + matrix(1,1) + matrix(2,2);
+    }
+    else if constexpr (S == 4)
+    {
+        return matrix(0,0) + matrix(1,1) + matrix(2,2) + matrix(3,3);
+    }
+    else
+    {
+        T sum {zero<T>};
+
+        for (size_t i = 0; i < S; ++i)
+        {
+            sum += matrix(i,i);
+        }
+
+        return sum;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr FORCEINLINE T
+symmetric(const Matrix<S,S,T>& matrix)
+{
+    if constexpr (S == 2)
+    {
+        return equal(matrix(0,1), matrix(1,0));
+    }
+    else if constexpr (S == 3)
+    {
+        return
+        equal(matrix(0,1), matrix(1,0)) &&
+        equal(matrix(0,2), matrix(2,0)) &&
+        equal(matrix(1,2), matrix(2,1));
+    }
+    else if constexpr (S == 4)
+    {
+        return
+        equal(matrix(0,1), matrix(1,0)) &&
+        equal(matrix(0,2), matrix(2,0)) &&
+        equal(matrix(0,3), matrix(3,0)) &&
+        equal(matrix(1,2), matrix(2,1)) &&
+        equal(matrix(1,3), matrix(3,1)) &&
+        equal(matrix(2,3), matrix(3,2));
+    }
+    else
+    {
+        for (size_t i = 0; i < S-1; ++i)
+        {
+            for (size_t j = i+1; j < S; ++j)
+            {
+                if (notEqual(matrix(i,j),matrix(j,i)))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr FORCEINLINE T
+antisymmetric(const Matrix<S,S,T>& matrix)
+{
+    return -matrix == transposed(matrix);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr T
+diagonal(const Matrix<S,S,T>& matrix)
+{
+    for (size_t i = 0; i < S; ++i)
+    {
+        if (equal(matrix(i,i), zero<T>))
+        {
+            return false;
+        }
+    }
+
+    for (size_t m = 0; m < S; ++m)
+    {
+        for (size_t n = 0; n < S; ++n)
+        {
+            if (m == n) {continue;}
+
+            if (notEqual(matrix(m,n), zero<T>))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr T
+orthogonal(const Matrix<S,S,T>& matrix)
+{
+    bool existInverse {false};
+    auto inverse {inverted(matrix, existInverse)};
+
+    if (!existInverse)
+    {
+        return false;
+    }
+    else
+    {
+        return transposed(matrix) == inverse;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr FORCEINLINE Matrix<S,S,T>
 identity()
 {
     if constexpr (S==2)

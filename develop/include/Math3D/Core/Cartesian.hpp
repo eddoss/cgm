@@ -7,7 +7,31 @@
 
 
 MATH3D_NAMESPACE_BEGIN
-MATH3D_AXES_NAMESPACE_BEGIN
+MATH3D_XYZ_NAMESPACE_BEGIN
+
+/* ####################################################################################### */
+/* Enums */
+/* ####################################################################################### */
+
+/**
+ * Cartesian axes enum.
+ */
+enum class EAxes
+{
+    X = 0,  ///< X axes.
+    Y,      ///< Y axes.
+    Z       ///< Z axes.
+};
+
+/**
+ * Cartesian planes enum.
+ */
+enum class EPlane
+{
+    XY = 0,  ///< XY plane.
+    XZ,      ///< XZ plane.
+    YZ       ///< YZ plane.
+};
 
 /* ####################################################################################### */
 /* X, Y, Z axes */
@@ -80,11 +104,11 @@ template<typename T=FLOAT>
 constexpr FORCEINLINE Vector<3,T>
 backward();
 
-MATH3D_AXES_NAMESPACE_END
+MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/CartesianAxes.hpp>
+#include <private/Math3D/Core/Cartesian.hpp>
 
 
 #endif // MATH3D_CARTESIAN_AXES_HPP
