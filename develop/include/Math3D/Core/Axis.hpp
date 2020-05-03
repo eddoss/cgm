@@ -2,17 +2,19 @@
 #define MATH3D_AXIS_HPP
 
 
-#include <Math3D/Global.hpp>
+#include <type_traits>
 #include <Math3D/Core/Vector/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
 
-template<typename T>
-struct Axis
+template <size_t D, typename T, typename = void> struct Axis;
+
+template <size_t D, typename T>
+struct Axis <D, T, std::enable_if_t<(D == 2 || D == 3)>>
 {
-    Vector<3,T> direction;  ///< Axis direction.
-    Vector<3,T> position;   ///< Axis position.
+    Vector<D,T> direction;  ///< Direction of the axis.
+    Vector<D,T> center;     ///< Point through which the axis center passes.
 };
 
 MATH3D_NAMESPACE_END
