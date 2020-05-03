@@ -7,7 +7,6 @@
 
 
 MATH3D_NAMESPACE_BEGIN
-MATH3D_XFORM_NAMESPACE_BEGIN
 
 template<typename T>
 struct Axis
@@ -16,7 +15,6 @@ struct Axis
     Vector<3,T> position;   ///< Axis position.
 };
 
-MATH3D_XFORM_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 #endif // MATH3D_AXIS_HPP

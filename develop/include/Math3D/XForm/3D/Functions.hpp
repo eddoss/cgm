@@ -7,6 +7,7 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
 #include <Math3D/Core/Axis.hpp>
+#include <Math3D/Core/Cartesian.hpp>
 #include <Math3D/XForm/3D/Pivot.hpp>
 #include <Math3D/XForm/3D/Transforms.hpp>
 #include <Math3D/XForm/3D/EulerAngles.hpp>
@@ -14,6 +15,9 @@
 
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XFORM_NAMESPACE_BEGIN
+
+using MATH3D_XYZ_NAMESPACE::EAxes3D;
+using MATH3D_XYZ_NAMESPACE::EPlane;
 
 /* ####################################################################################### */
 /* Apply transformations */
@@ -196,14 +200,23 @@ scale(Matrix<4,4,T>& matrix, const Transforms<3,T>& transforms);
 /* ####################################################################################### */
 
 /**
+ * Rotate 3D vector around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes3D Axis, typename T>
+constexpr FORCEINLINE void
+rotate(Vector<3,T>& vector, T angle);
+
+/**
  * Rotate 3D vector by Euler angles.
  * @param vector Vector to rotate.
  * @param eulerAngles Euler angles.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<typename T>
 constexpr FORCEINLINE void
-rotate(Vector<3,T>& vector, const EulerAngles<T>& eulerAngles, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Vector<3,T>& vector, const EulerAngles<T>& eulerAngles);
 
 /**
  * Rotate 3D vector around arbitrary axis.
@@ -244,15 +257,25 @@ constexpr FORCEINLINE void
 rotate(Vector<3,T>& vector, const Transforms<3,T>& transforms);
 
 /**
+ * Rotate 3D orientation matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes3D Axis, ESpace Space = ESpace::Local, typename T>
+constexpr FORCEINLINE void
+rotate(Matrix<3,3,T>& matrix, T angle);
+
+/**
  * Rotate 3D orientation matrix by Euler angles.
  * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param eulerAngles Euler angles.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, const EulerAngles<T>& eulerAngles, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Matrix<3,3,T>& matrix, const EulerAngles<T>& eulerAngles);
 
 /**
  * Rotate 3D orientation matrix around axis.
@@ -296,15 +319,25 @@ constexpr FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<3,T>& transforms);
 
 /**
+ * Rotate 3D transformation matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes3D Axis, ESpace Space = ESpace::Local, typename T>
+constexpr FORCEINLINE void
+rotate(Matrix<4,4,T>& matrix, T angle);
+
+/**
  * Rotate 3D transformation matrix by Euler angles.
  * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param eulerAngles Euler angles.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, const EulerAngles<T>& eulerAngles, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Matrix<4,4,T>& matrix, const EulerAngles<T>& eulerAngles);
 
 /**
  * Rotate 3D transformation matrix around axis.

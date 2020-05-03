@@ -9,7 +9,6 @@
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XFORM_NAMESPACE_BEGIN
 
-
 template<typename T>
 struct EulerAngles
 {
