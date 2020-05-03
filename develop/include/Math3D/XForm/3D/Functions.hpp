@@ -226,7 +226,7 @@ rotate(Vector<3,T>& vector, const EulerAngles<T>& eulerAngles);
  */
 template<typename T>
 constexpr FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const Axis<T>& axis);
+rotate(Vector<3,T>& vector, T angle, const Axis<3,T>& axis);
 
 /**
  * Rotate 3D vector around each axis of pivot on angle contained in "values".
@@ -285,7 +285,7 @@ rotate(Matrix<3,3,T>& matrix, const EulerAngles<T>& eulerAngles);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, T angle, const Axis<T>& axis);
+rotate(Matrix<3,3,T>& matrix, T angle, const Axis<3,T>& axis);
 
 /**
  * Rotate 3D orientation matrix around each axis of pivot on angle contained in "values".
@@ -347,7 +347,7 @@ rotate(Matrix<4,4,T>& matrix, const EulerAngles<T>& eulerAngles);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis);
+rotate(Matrix<4,4,T>& matrix, T angle, const Axis<3,T>& axis);
 
 /**
  * Rotate 3D transformation matrix around each axis of pivot on angle contained in "values".
