@@ -14,13 +14,22 @@ MATH3D_XYZ_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Cartesian axes enum.
+ * Cartesian 2D axes enum.
  */
-enum class EAxes
+enum class EAxes2D
 {
-    X = 0,  ///< X axes.
-    Y,      ///< Y axes.
-    Z       ///< Z axes.
+    X = 0,  ///< X axis.
+    Y,      ///< Y axis.
+};
+
+/**
+ * Cartesian 3D axes enum.
+ */
+enum class EAxes3D
+{
+    X = 0,  ///< X axis.
+    Y,      ///< Y axis.
+    Z       ///< Z axis.
 };
 
 /**
