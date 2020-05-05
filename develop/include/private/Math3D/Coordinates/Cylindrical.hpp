@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Coordinates/Spherical.hpp>
+#include <Math3D/Coordinates/Cylindrical.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -10,11 +10,11 @@ MATH3D_COORD_NAMESPACE_BEGIN
 /* IMPLEMENTATION | Constructors */
 /* ####################################################################################### */
 
-template<typename T>
+template <typename T>
 constexpr
-Spherical<T>::Spherical(T longitude, T latitude, T radius)
-    : m_longitude(longitude)
-    , m_latitude(latitude)
+Cylindrical<T>::Cylindrical(T angle, T height, T radius)
+    : m_angle(angle)
+    , m_height(height)
     , m_radius(radius)
 {
 
@@ -25,28 +25,28 @@ Spherical<T>::Spherical(T longitude, T latitude, T radius)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr FORCEINLINE T
-Spherical<T>::longitude() const
+constexpr T
+Cylindrical<T>::angle() const
 {
-    return m_longitude;
+    return m_angle;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr FORCEINLINE T
-Spherical<T>::latitude() const
-{
-    return m_latitude;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE T
-Spherical<T>::radius() const
+constexpr T
+Cylindrical<T>::radius() const
 {
     return m_radius;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr T
+Cylindrical<T>::height() const
+{
+    return m_height;
 }
 
 /* ####################################################################################### */
@@ -54,37 +54,17 @@ Spherical<T>::radius() const
 /* ####################################################################################### */
 
 template<typename T>
-constexpr FORCEINLINE void
-Spherical<T>::setLongitude(T longitude)
+constexpr void
+Cylindrical<T>::setAngle(T angle)
 {
-    m_longitude = longitude;
+    m_angle = angle;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr FORCEINLINE void
-Spherical<T>::setLatitude(T latitude)
-{
-    if (latitude > PI)
-    {
-        m_latitude = PI;
-    }
-    else if (latitude < 0)
-    {
-        m_latitude = 0;
-    }
-    else
-    {
-        m_latitude = latitude;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE void
-Spherical<T>::setRadius(T radius)
+constexpr void
+Cylindrical<T>::setRadius(T radius)
 {
     if (radius < 0)
     {
@@ -94,6 +74,15 @@ Spherical<T>::setRadius(T radius)
     {
         m_radius = radius;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+Cylindrical<T>::setHeight(T height)
+{
+    m_height = height;
 }
 
 MATH3D_COORD_NAMESPACE_END

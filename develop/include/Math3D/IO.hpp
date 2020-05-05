@@ -7,9 +7,9 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
-#include <Math3D/Core/Coordinates/Polar.hpp>
-#include <Math3D/Core/Coordinates/Spherical.hpp>
-#include <Math3D/Core/Coordinates/Cylindrical.hpp>
+#include <Math3D/Coordinates/Polar.hpp>
+#include <Math3D/Coordinates/Spherical.hpp>
+#include <Math3D/Coordinates/Cylindrical.hpp>
 
 
 template <size_t D, typename T>

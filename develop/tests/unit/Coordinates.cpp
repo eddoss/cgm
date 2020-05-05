@@ -3,8 +3,8 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Vector/Operators.hpp>
-#include <Math3D/Core/Coordinates/Functions.hpp>
-#include <Math3D/Core/Coordinates/Operators.hpp>
+#include <Math3D/Coordinates/Functions.hpp>
+#include <Math3D/Coordinates/Operators.hpp>
 
 
 using namespace std;

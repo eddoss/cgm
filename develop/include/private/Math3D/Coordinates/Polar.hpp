@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Coordinates/Polar.hpp>
+#include <Math3D/Coordinates/Polar.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

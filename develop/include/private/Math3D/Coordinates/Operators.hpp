@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Coordinates/Operators.hpp>
+#include <Math3D/Coordinates/Operators.hpp>
 
 
 /* ####################################################################################### */

@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Coordinates/Functions.hpp>
+#include <Math3D/Coordinates/Functions.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

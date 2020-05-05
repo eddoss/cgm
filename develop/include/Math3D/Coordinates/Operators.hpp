@@ -3,9 +3,9 @@
 
 
 #include <Math3D/Common.hpp>
-#include <Math3D/Core/Coordinates/Polar.hpp>
-#include <Math3D/Core/Coordinates/Spherical.hpp>
-#include <Math3D/Core/Coordinates/Cylindrical.hpp>
+#include <Math3D/Coordinates/Polar.hpp>
+#include <Math3D/Coordinates/Spherical.hpp>
+#include <Math3D/Coordinates/Cylindrical.hpp>
 
 
 /* ####################################################################################### */
@@ -81,7 +81,7 @@ constexpr bool
 operator != (const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& A, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& B);
 
 
-#include <private/Math3D/Core/Coordinates/Operators.hpp>
+#include <private/Math3D/Coordinates/Operators.hpp>
 
 
 #endif // MATH3D_COORDINATE_SYSTEMS_OPERATORS_HPP

@@ -1,5 +1,5 @@
-#ifndef MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
-#define MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
+#ifndef MATH3D_COORDINATES_SYSTEMS_CYLINDRICAL_HPP
+#define MATH3D_COORDINATES_SYSTEMS_CYLINDRICAL_HPP
 
 
 #include <Math3D/Global.hpp>
@@ -10,78 +10,75 @@ MATH3D_NAMESPACE_BEGIN
 MATH3D_COORD_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
-struct Spherical
+struct Cylindrical
 {
-    MATH3D_RULE_OF_FIVE(Spherical)
+    MATH3D_RULE_OF_FIVE(Cylindrical)
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
-    /**
-     * @brief Constructor initializing longitude (horizontal) angle,
-     * latitude (vertical) angle and sphere radius.
-     */
+    /** Constructor initializing angle, height and radius. */
     constexpr
-    Spherical(T longitude, T latitude, T radius);
+    Cylindrical(T angle, T height, T radius);
 
 /* ####################################################################################### */
 public: /* Properties getters */
 /* ####################################################################################### */
 
     /**
-     * @brief Get longitude angle.
-     * @return Horizontal angle in radians.
+     * @brief Get rotation angle.
+     * @return Angle in radians.
      */
     constexpr FORCEINLINE T
-    longitude() const;
+    angle() const;
 
     /**
-     * @brief Get latitude angle.
-     * @return Vertical angle in radians.
-     */
-    constexpr FORCEINLINE T
-    latitude() const;
-
-    /**
-     * @brief Get sphere radius.
-     * @return Sphere radius.
+     * @brief Get cylinder radius.
+     * @return Cylinder radius.
      */
     constexpr FORCEINLINE T
     radius() const;
+
+    /**
+     * @brief Get cylinder radius.
+     * @return Cylinder radius.
+     */
+    constexpr FORCEINLINE T
+    height() const;
 
 /* ####################################################################################### */
 public: /* Properties setters */
 /* ####################################################################################### */
 
     /**
-     * @brief Set longitude angle.
-     * @param longitude Horizontal angle in radians.
+     * @brief Set rotation angle.
+     * @param angle Angle in radians.
      */
     constexpr FORCEINLINE void
-    setLongitude(T longitude);
+    setAngle(T angle);
 
     /**
-     * Set longitude angle in radians. Value must be in range [0, PI].
-     * @note If the given value is out of range, given value
-     * will be clamped.
-     */
-    constexpr FORCEINLINE void
-    setLatitude(T latitude);
-
-    /**
-     * Set sphere radius. Value must be >= 0.
+     * @brief Set cylinder radius. Value must be >= 0.
+     * @param radius Cylinder radius.
      * @note If the given value is less than "0", then "0" will be set.
      */
     constexpr FORCEINLINE void
     setRadius(T radius);
 
+    /**
+     * @brief Set cylinder height.
+     * @param radius Cylinder height.
+     */
+    constexpr FORCEINLINE void
+    setHeight(T height);
+
 /* ####################################################################################### */
 protected: /* Protected members */
 /* ####################################################################################### */
 
-    T m_longitude;    // azimuth, horizontal
-    T m_latitude;     // elevation, vertical
+    T m_angle;
+    T m_height;
     T m_radius;
 };
 
@@ -89,7 +86,7 @@ MATH3D_COORD_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/Coordinates/Spherical.hpp>
+#include <private/Math3D/Coordinates/Cylindrical.hpp>
 
 
-#endif // MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
+#endif // MATH3D_COORDINATES_SYSTEMS_CYLINDRICAL_HPP

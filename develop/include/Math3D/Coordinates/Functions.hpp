@@ -5,9 +5,9 @@
 #include <cmath>
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Cartesian.hpp>
-#include <Math3D/Core/Coordinates/Polar.hpp>
-#include <Math3D/Core/Coordinates/Spherical.hpp>
-#include <Math3D/Core/Coordinates/Cylindrical.hpp>
+#include <Math3D/Coordinates/Polar.hpp>
+#include <Math3D/Coordinates/Spherical.hpp>
+#include <Math3D/Coordinates/Cylindrical.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -167,7 +167,7 @@ MATH3D_COORD_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/Coordinates/Functions.hpp>
+#include <private/Math3D/Coordinates/Functions.hpp>
 
 
 #endif // MATH3D_COORDINATES_SYSTEMS_FUNCTIONS_HPP
