@@ -1,6 +1,7 @@
 
 
-#include <Math3D/Core/Cartesian.hpp>
+#include <Math3D/Cartesian/Functions.hpp>
+
 
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
@@ -9,30 +10,34 @@ MATH3D_XYZ_NAMESPACE_BEGIN
 /* X, Y, Z axes */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE std::enable_if_t<(D == 2 || D == 3), Vector<D,T>>
 x()
 {
-    return
+    if constexpr (D == 2)
     {
-        number<T>(1),
-        number<T>(0),
-        number<T>(0)
-    };
+        return {T(1), T(0)};
+    }
+    else
+    {
+        return {T(1), T(0), T(0)};
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE std::enable_if_t<(D == 2 || D == 3), Vector<D,T>>
 y()
 {
-    return
+    if constexpr (D == 2)
     {
-        number<T>(0),
-        number<T>(1),
-        number<T>(0)
-    };
+        return {T(0), T(1)};
+    }
+    else
+    {
+        return {T(0), T(1), T(0)};
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,48 +46,57 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 z()
 {
-    return
-    {
-        number<T>(0),
-        number<T>(0),
-        number<T>(1)
-    };
+    return {T(0), T(0), T(1)};
 }
 
 /* ####################################################################################### */
 /* Cartesian system axes */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<D,T>
 up()
 {
-#ifdef MATH3D_CARTESIAN_UP_X
-    return x<T>();
+    if constexpr (D == 2)
+    {
+        return y<2,T>();
+    }
+    else
+    {
+ #ifdef MATH3D_CARTESIAN_UP_X
+        return x<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Y
-    return y<T>();
+        return y<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Z
-    return z<T>();
+        return z<T>();
 #endif
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<D,T>
 right()
 {
+    if constexpr (D == 2)
+    {
+        return x<2,T>();
+    }
+    else
+    {
 #ifdef MATH3D_CARTESIAN_RIGHT_X
-    return x<T>();
+        return x<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Y
-    return y<T>();
+        return y<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Z
-    return z<T>();
+        return z<T>();
 #endif
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -92,10 +106,10 @@ constexpr FORCEINLINE Vector<3,T>
 forward()
 {
 #ifdef MATH3D_CARTESIAN_FORWARD_X
-    return x<T>();
+    return x<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Y
-    return y<T>();
+    return y<3,T>();
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Z
     return z<T>();
@@ -104,20 +118,20 @@ forward()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<D,T>
 down()
 {
-    return -up<T>();
+    return -up<D,T>();
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<D,T>
 left()
 {
-    return -right<T>();
+    return -right<D,T>();
 }
 
 /* --------------------------------------------------------------------------------------- */

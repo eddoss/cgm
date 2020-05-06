@@ -1,5 +1,5 @@
-#ifndef MATH3D_AXIS_HPP
-#define MATH3D_AXIS_HPP
+#ifndef MATH3D_XYZ_AXIS_HPP
+#define MATH3D_XYZ_AXIS_HPP
 
 
 #include <type_traits>
@@ -7,6 +7,7 @@
 
 
 MATH3D_NAMESPACE_BEGIN
+MATH3D_XYZ_NAMESPACE_BEGIN
 
 template <size_t D, typename T, typename = void> struct Axis;
 
@@ -17,6 +18,7 @@ struct Axis <D, T, std::enable_if_t<(D == 2 || D == 3)>>
     Vector<D,T> center;     ///< Point through which the axis center passes.
 };
 
+MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
-#endif // MATH3D_AXIS_HPP
+#endif // MATH3D_XYZ_AXIS_HPP

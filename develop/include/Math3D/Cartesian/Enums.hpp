@@ -1,0 +1,54 @@
+#ifndef MATH3D_XYZ_ENUMS_HPP
+#define MATH3D_XYZ_ENUMS_HPP
+
+
+#include <Math3D/Global.hpp>
+#include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
+#include <Math3D/Core/Quaternion/Quaternion.hpp>
+
+
+MATH3D_NAMESPACE_BEGIN
+MATH3D_XYZ_NAMESPACE_BEGIN
+
+/**
+ * Cartesian 2D axes enum.
+ */
+enum class EAxes2D
+{
+    X = 0,  ///< X axis.
+    Y,      ///< Y axis.
+};
+
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+
+/**
+ * Cartesian 3D axes enum.
+ */
+enum class EAxes3D
+{
+    X = 0,  ///< X axis.
+    Y,      ///< Y axis.
+    Z       ///< Z axis.
+};
+
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+
+/**
+ * Cartesian planes enum.
+ */
+enum class EPlane
+{
+    XY = 0,  ///< XY plane.
+    XZ,      ///< XZ plane.
+    YZ       ///< YZ plane.
+};
+
+MATH3D_XYZ_NAMESPACE_END
+MATH3D_NAMESPACE_END
+
+#endif // MATH3D_XYZ_ENUMS_HPP
