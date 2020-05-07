@@ -87,4 +87,8 @@ backward();
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
+
+#include <private/Math3D/Cartesian/Functions/AxesCreators.hpp>
+
+
 #endif // MATH3D_XYZ_FUNCTIONS_DEFAULT_AXES_HPP

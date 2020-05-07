@@ -22,7 +22,7 @@ MATH3D_XYZ_NAMESPACE_BEGIN
  * @return 2D basis represented by 2x2 matrix.
  */
 template<typename T>
-constexpr Matrix<2,2,T>
+constexpr FORCEINLINE Matrix<2,2,T>
 basis2D(const Vector<2,T>& x, const Vector<2,T>& y);
 
 /**
@@ -33,7 +33,7 @@ basis2D(const Vector<2,T>& x, const Vector<2,T>& y);
  * @return 2D basis represented by 3x3 matrix.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr FORCEINLINE Matrix<3,3,T>
 basis2D(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
 
 /**
@@ -43,7 +43,7 @@ basis2D(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position)
  * @return 2D basis represented by 4x4 matrix.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr FORCEINLINE Matrix<3,3,T>
 basis2D(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
 /* ####################################################################################### */
@@ -58,7 +58,7 @@ basis2D(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
  * @return 3D basis represented by 3x3 matrix.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr FORCEINLINE Matrix<3,3,T>
 basis3D(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
 /**
@@ -70,7 +70,7 @@ basis3D(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
  * @return 3D basis represented by 4x4 matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr FORCEINLINE Matrix<4,4,T>
 basis3D(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
 
 /**
@@ -80,7 +80,7 @@ basis3D(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const 
  * @return 3D basis represented by 4x4 matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr FORCEINLINE Matrix<4,4,T>
 basis3D(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
@@ -104,5 +104,9 @@ basis3D(const Quaternion<T>& quaternion, const Vector<3,T>& position);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
+
+
+#include <private/Math3D/Cartesian/Functions/BasisCreators.hpp>
+
 
 #endif // MATH3D_XYZ_FUNCTIONS_HPP

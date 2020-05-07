@@ -144,4 +144,8 @@ moveToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientatio
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
+
+#include <private/Math3D/Cartesian/Functions/SpaceConverters.hpp>
+
+
 #endif // MATH3D_XYZ_FUNCTIONS_HPP

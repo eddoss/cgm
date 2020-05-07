@@ -173,4 +173,8 @@ set3DBasisPosition(const Matrix<4,4,T>& basis, const Vector<3,T>& position);
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
+
+#include <private/Math3D/Cartesian/Functions/Utils.hpp>
+
+
 #endif // MATH3D_XYZ_FUNCTIONS_HPP
