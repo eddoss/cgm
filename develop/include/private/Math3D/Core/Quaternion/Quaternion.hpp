@@ -75,4 +75,13 @@ Quaternion<T, enable_if_floating<T,void>>::data() const
     return &s;
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+Quaternion<T, enable_if_floating<T,void>>::xyz() const
+{
+    return {x,y,z};
+}
+
 MATH3D_NAMESPACE_END

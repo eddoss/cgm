@@ -1,11 +1,13 @@
-#ifndef MATH3D_XYZ_FUNCTIONS_HPP
-#define MATH3D_XYZ_FUNCTIONS_HPP
+#ifndef MATH3D_XYZ_FUNCTIONS_UTILS_HPP
+#define MATH3D_XYZ_FUNCTIONS_UTILS_HPP
 
 
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Quaternion/Functions.hpp>
+#include <Math3D/Core/Quaternion/Operators.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -40,7 +42,7 @@ get2DBasisY(const Matrix<S,S,T>& basis);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
-set2DBasisX(const Matrix<S,S,T>& basis, const Vector<2,T>& value);
+set2DBasisX(Matrix<S,S,T>& basis, const Vector<2,T>& value);
 
 /**
  * Set basis Y axis.
@@ -49,7 +51,7 @@ set2DBasisX(const Matrix<S,S,T>& basis, const Vector<2,T>& value);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
-set2DBasisY(const Matrix<S,S,T>& basis, const Vector<2,T>& value);
+set2DBasisY(Matrix<S,S,T>& basis, const Vector<2,T>& value);
 
 /**
  * Gets basis position.
@@ -66,7 +68,7 @@ get2DBasisPosition(const Matrix<3,3,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE void
-set2DBasisPosition(const Matrix<3,3,T>& basis, const Vector<2,T>& position);
+set2DBasisPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position);
 
 /* ####################################################################################### */
 /* 3D */
@@ -133,7 +135,7 @@ get3DBasisZ(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
-set3DBasisX(const Matrix<S,S,T>& basis, const Vector<3,T>& value);
+set3DBasisX(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Y axis.
@@ -142,7 +144,7 @@ set3DBasisX(const Matrix<S,S,T>& basis, const Vector<3,T>& value);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
-set3DBasisY(const Matrix<S,S,T>& basis, const Vector<3,T>& value);
+set3DBasisY(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Z axis.
@@ -151,7 +153,7 @@ set3DBasisY(const Matrix<S,S,T>& basis, const Vector<3,T>& value);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
-set3DBasisZ(const Matrix<S,S,T>& basis, const Vector<3,T>& value);
+set3DBasisZ(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Gets basis position.
@@ -168,7 +170,7 @@ get3DBasisPosition(const Matrix<4,4,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE void
-set3DBasisPosition(const Matrix<4,4,T>& basis, const Vector<3,T>& position);
+set3DBasisPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
@@ -177,4 +179,4 @@ MATH3D_NAMESPACE_END
 #include <private/Math3D/Cartesian/Functions/Utils.hpp>
 
 
-#endif // MATH3D_XYZ_FUNCTIONS_HPP
+#endif // MATH3D_XYZ_FUNCTIONS_UTILS_HPP

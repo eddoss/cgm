@@ -6,6 +6,8 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Matrix/Matrix.hpp>
 #include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Quaternion/Functions.hpp>
+#include <Math3D/Core/Quaternion/Operators.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -85,22 +87,22 @@ basis3D(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
  * Creates 3D basis from Quaternion.
- * @param quaternion Orientation Quaternion.
+ * @param orientation Basis orientation.
  * @return 3D basis represented by 3x3 matrix.
  */
 template<typename T>
 constexpr Matrix<3,3,T>
-basis3D(const Quaternion<T>& quaternion);
+basis3D(const Quaternion<T>& orientation);
 
 /**
  * Creates 3D basis from Quaternion.
- * @param quaternion Orientation Quaternion.
+ * @param orientation Basis orientation.
  * @param position Basis position.
  * @return 3D basis represented by 4x4 matrix.
  */
 template<typename T>
 constexpr Matrix<4,4,T>
-basis3D(const Quaternion<T>& quaternion, const Vector<3,T>& position);
+basis3D(const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
@@ -109,4 +111,4 @@ MATH3D_NAMESPACE_END
 #include <private/Math3D/Cartesian/Functions/BasisCreators.hpp>
 
 
-#endif // MATH3D_XYZ_FUNCTIONS_HPP
+#endif // MATH3D_XYZ_FUNCTIONS_BASIS_CREATORS_HPP

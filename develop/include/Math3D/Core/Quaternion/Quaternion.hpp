@@ -63,7 +63,7 @@ public: /* Constructors */
      * @param values Scalar and imaginary coefficients.
      * @note Scalar component init from W.
      */
-    constexpr
+    constexpr explicit
     Quaternion(const Vector<4,T>& values);
 
 /* ####################################################################################### */
@@ -71,18 +71,25 @@ public: /* Components accessing */
 /* ####################################################################################### */
 
     /**
-     * Get a raw data.
+     * Gets a raw data.
      * @return pointer to a components.
      */
-    constexpr T*
+    constexpr FORCEINLINE T*
     data();
 
     /**
-     * Get a raw data.
+     * Gets a raw data.
      * @return const pointer to a components.
      */
-    constexpr const T*
+    constexpr FORCEINLINE const T*
     data() const;
+
+    /**
+     * Gets a imaginary coefficients.
+     * @return Imaginary coefficients.
+     */
+    constexpr FORCEINLINE Vector<3,T>
+    xyz() const;
 };
 
 MATH3D_NAMESPACE_END

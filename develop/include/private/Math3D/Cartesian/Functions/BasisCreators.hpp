@@ -148,18 +148,33 @@ basis3D(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 
 template<typename T>
 constexpr Matrix<3,3,T>
-basis3D(const Quaternion<T>& quaternion)
+basis3D(const Quaternion<T>& orientation)
 {
+    Quaternion<T> conj {conjugated(orientation)};
 
+    return basis3D
+    (
+        (orientation * Quaternion<T>{0,T(1),0,0} * conj).xyz(),
+        (orientation * Quaternion<T>{0,0,T(1),0} * conj).xyz(),
+        (orientation * Quaternion<T>{0,0,0,T(1)} * conj).xyz()
+    );
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr Matrix<4,4,T>
-basis3D(const Quaternion<T>& quaternion, const Vector<3,T>& position)
+basis3D(const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
+    Quaternion<T> conj {conjugated(orientation)};
 
+    return basis3D
+    (
+        (orientation * Quaternion<T>{0,T(1),0,0} * conj).xyz(),
+        (orientation * Quaternion<T>{0,0,T(1),0} * conj).xyz(),
+        (orientation * Quaternion<T>{0,0,0,T(1)} * conj).xyz(),
+        position
+    );
 }
 
 MATH3D_XYZ_NAMESPACE_END
