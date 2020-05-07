@@ -2,8 +2,10 @@
 #define MATH3D_VECTOR_OPERATORS_HPP
 
 
+#include <type_traits>
 #include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Matrix/Matrix.hpp>
 
 
 /* ####################################################################################### */
@@ -144,6 +146,20 @@ operator-(const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Vector
 template<size_t D, typename T, typename TScalar>
 constexpr MATH3D_NAMESPACE::Vector<D,T>
 operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector, TScalar scalar);
+
+/* ####################################################################################### */
+/* Multiplication on matrix */
+/* ####################################################################################### */
+
+/**
+ * Generic multiplication vector A by matrix B.
+ * @tparam D Vector dimensions.
+ * @tparam N Matrix rows count.
+ * @return If N == 1 return scalar, otherwise return Vector<N>.
+ */
+template<size_t D, size_t N, typename T>
+constexpr std::conditional_t<(N == 1), T, MATH3D_NAMESPACE::Vector<N,T>>
+operator * (const MATH3D_NAMESPACE::Vector<D,T>& A, const MATH3D_NAMESPACE::Matrix<D,N,T>& B);
 
 /* ####################################################################################### */
 /* Component wise multiplication */

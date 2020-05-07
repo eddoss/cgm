@@ -34,6 +34,7 @@ set(VECTOR_TEST_SUITE
     Vector/Arithmetic.cpp
     Vector/ComparisonWithOther.cpp
     Vector/ComparisonWithScalar.cpp
+    Vector/VectorMatrixMultiplication.cpp
 )
 
 set(MATRIX_TEST_SUITE
