@@ -3,8 +3,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Matrix/Matrix.hpp>
-#include <Math3D/Core/Matrix/Operators.hpp>
-#include <Math3D/Core/Matrix/Functions.hpp>
 #include <Math3D/Core/Vector/Operators.hpp>
 
 
@@ -45,7 +43,7 @@ using Mat55 = Matrix<5,5,int>;
 /* Vector to matrix: 2D vector */
 /* ####################################################################################### */
 
-TEST(MatrixVectorMultiplication, Vec2__Mat21)
+TEST(VectorMatrixMultiplication, Vec2__Mat21)
 {
     Vec2 vec = {2,5};
     Mat21 mat
@@ -54,15 +52,14 @@ TEST(MatrixVectorMultiplication, Vec2__Mat21)
         4
     };
 
-    auto trs = transposed(mat);
     auto exp = 26;
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec2__Mat22)
+TEST(VectorMatrixMultiplication, Vec2__Mat22)
 {
     Vec2 vec = {2,5};
     Mat22 mat
@@ -71,15 +68,14 @@ TEST(MatrixVectorMultiplication, Vec2__Mat22)
         4,6
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec2(26,34);
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec2__Mat23)
+TEST(VectorMatrixMultiplication, Vec2__Mat23)
 {
     Vec2 vec = {2,5};
     Mat23 mat
@@ -88,15 +84,14 @@ TEST(MatrixVectorMultiplication, Vec2__Mat23)
         4,6,3
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec3(26,34,17);
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec2__Mat24)
+TEST(VectorMatrixMultiplication, Vec2__Mat24)
 {
     Vec2 vec = {2,5};
     Mat24 mat
@@ -105,15 +100,14 @@ TEST(MatrixVectorMultiplication, Vec2__Mat24)
         4,6,3,4
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec4(26,34,17,30);
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec2__Mat25)
+TEST(VectorMatrixMultiplication, Vec2__Mat25)
 {
     Vec2 vec = {2,5};
     Mat25 mat
@@ -122,17 +116,16 @@ TEST(MatrixVectorMultiplication, Vec2__Mat25)
         4,6,3,4,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec5 {26,34,17,30,7};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* ####################################################################################### */
 /* Vector to matrix: 3D vector */
 /* ####################################################################################### */
 
-TEST(MatrixVectorMultiplication, Vec3__Mat31)
+TEST(VectorMatrixMultiplication, Vec3__Mat31)
 {
     Vec3 vec = {2,5,4};
     Mat31 mat
@@ -142,15 +135,14 @@ TEST(MatrixVectorMultiplication, Vec3__Mat31)
         2
     };
 
-    auto trs = transposed(mat);
     auto exp = 34;
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec3__Mat32)
+TEST(VectorMatrixMultiplication, Vec3__Mat32)
 {
     Vec3 vec = {2,5,4};
     Mat32 mat
@@ -160,15 +152,14 @@ TEST(MatrixVectorMultiplication, Vec3__Mat32)
         2,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec2 {34,38};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec3__Mat33)
+TEST(VectorMatrixMultiplication, Vec3__Mat33)
 {
     Vec3 vec = {2,5,4};
     Mat33 mat
@@ -178,15 +169,14 @@ TEST(MatrixVectorMultiplication, Vec3__Mat33)
         2,1,4
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec3 {34,38,33};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec3__Mat34)
+TEST(VectorMatrixMultiplication, Vec3__Mat34)
 {
     Vec3 vec = {2,5,4};
     Mat34 mat
@@ -196,15 +186,14 @@ TEST(MatrixVectorMultiplication, Vec3__Mat34)
         2,1,4,4
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec4 {34,38,33,46};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec3__Mat35)
+TEST(VectorMatrixMultiplication, Vec3__Mat35)
 {
     Vec3 vec = {2,5,4};
     Mat35 mat
@@ -214,17 +203,16 @@ TEST(MatrixVectorMultiplication, Vec3__Mat35)
         2,1,4,4,3
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec5 {34,38,33,46,19};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* ####################################################################################### */
 /* Vector to matrix: 4D vector */
 /* ####################################################################################### */
 
-TEST(MatrixVectorMultiplication, Vec4__Mat41)
+TEST(VectorMatrixMultiplication, Vec4__Mat41)
 {
     Vec4 vec = {2,5,4,3};
     Mat41 mat
@@ -235,15 +223,14 @@ TEST(MatrixVectorMultiplication, Vec4__Mat41)
         3
     };
 
-    auto trs = transposed(mat);
     auto exp = 43;
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec4__Mat42)
+TEST(VectorMatrixMultiplication, Vec4__Mat42)
 {
     Vec4 vec = {2,5,4,3};
     Mat42 mat
@@ -254,15 +241,14 @@ TEST(MatrixVectorMultiplication, Vec4__Mat42)
         3,6
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec2 {43,56};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec4__Mat43)
+TEST(VectorMatrixMultiplication, Vec4__Mat43)
 {
     Vec4 vec = {2,5,4,3};
     Mat43 mat
@@ -273,15 +259,14 @@ TEST(MatrixVectorMultiplication, Vec4__Mat43)
         3,6,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec3 {43,56,36};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec4__Mat44)
+TEST(VectorMatrixMultiplication, Vec4__Mat44)
 {
     Vec4 vec = {2,5,4,3};
     Mat44 mat
@@ -292,15 +277,14 @@ TEST(MatrixVectorMultiplication, Vec4__Mat44)
         3,6,1,2
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec4 {43,56,36,52};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec4__Mat45)
+TEST(VectorMatrixMultiplication, Vec4__Mat45)
 {
     Vec4 vec = {2,5,4,3};
     Mat45 mat
@@ -311,17 +295,16 @@ TEST(MatrixVectorMultiplication, Vec4__Mat45)
         3,6,1,2,3
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec5 {43,56,36,52,28};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* ####################################################################################### */
 /* Vector to matrix: 4+D vector */
 /* ####################################################################################### */
 
-TEST(MatrixVectorMultiplication, Vec5__Mat51)
+TEST(VectorMatrixMultiplication, Vec5__Mat51)
 {
     Vec5 vec = {2,5,4,3,1};
     Mat51 mat
@@ -333,15 +316,14 @@ TEST(MatrixVectorMultiplication, Vec5__Mat51)
         1
     };
 
-    auto trs = transposed(mat);
     auto exp = 44;
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec5__Mat52)
+TEST(VectorMatrixMultiplication, Vec5__Mat52)
 {
     Vec5 vec = {2,5,4,3,1};
     Mat52 mat
@@ -353,15 +335,14 @@ TEST(MatrixVectorMultiplication, Vec5__Mat52)
         1,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec2 {44,57};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec5__Mat53)
+TEST(VectorMatrixMultiplication, Vec5__Mat53)
 {
     Vec5 vec = {2,5,4,3,1};
     Mat53 mat
@@ -373,15 +354,14 @@ TEST(MatrixVectorMultiplication, Vec5__Mat53)
         1,1,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec3 {44,57,37};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec5__Mat54)
+TEST(VectorMatrixMultiplication, Vec5__Mat54)
 {
     Vec5 vec = {2,5,4,3,1};
     Mat54 mat
@@ -393,15 +373,14 @@ TEST(MatrixVectorMultiplication, Vec5__Mat54)
         1,1,1,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec4 {44,57,37,53};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(MatrixVectorMultiplication, Vec5__Mat55)
+TEST(VectorMatrixMultiplication, Vec5__Mat55)
 {
     Vec5 vec = {2,5,4,3,1};
     Mat55 mat
@@ -413,8 +392,7 @@ TEST(MatrixVectorMultiplication, Vec5__Mat55)
         1,1,1,1,1
     };
 
-    auto trs = transposed(mat);
     auto exp = Vec5 {44,57,37,53,29};
 
-    ASSERT_TRUE((trs*vec) == exp);
+    ASSERT_TRUE((vec*mat) == exp);
 }
