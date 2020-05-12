@@ -277,7 +277,7 @@ constexpr FORCEINLINE Spherical<T>
 spherical(const Cylindrical<T>& coord)
 {
     T radius    {std::sqrt(coord.radius() * coord.radius() + coord.height() * coord.height())};
-    T latitude {std::atan2(coord.radius(), coord.height())};
+    T latitude  {std::atan2(coord.radius(), coord.height())};
 
     return {coord.angle(), latitude, radius};
 }

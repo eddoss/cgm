@@ -5,7 +5,7 @@
 #include <Math3D/Core/Vector/Vector.hpp>
 #include <Math3D/Core/Vector/Operators.hpp>
 #include <Math3D/Core/Vector/Functions.hpp>
-#include <Math3D/Core/Cartesian.hpp>
+#include <Math3D/Cartesian/Functions/AxesCreators.hpp>
 
 
 using namespace std;
