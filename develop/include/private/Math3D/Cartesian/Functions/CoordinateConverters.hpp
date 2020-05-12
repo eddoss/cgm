@@ -7,17 +7,97 @@ MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Local to parent */
+/* Global to local */
 /* ####################################################################################### */
 
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-localToParent(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
+globalToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * localSpace;
+    return invertedForce(localSpace) * vector;
 #else
+    return vector * invertedForce(localSpace);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+globalToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return invertedForce(localSpace) * vector;
+#else
+    return vector * invertedForce(localSpace);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return invertedForce(localSpace) * vector;
+#else
+    return vector * invertedForce(localSpace);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return invertedForce(localSpace) * vector;
+#else
+    return vector * invertedForce(localSpace);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return invertedForce(basis3D(localSpaceOrientation)) * vector;
+#else
+    return vector * invertedForce(basis3D(localSpaceOrientation));
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return invertedForce(basis3D(localSpaceOrientation, localSpacePosition)) * vector;
+#else
+    return vector * invertedForce(basis3D(localSpaceOrientation, localSpacePosition));
+#endif
+}
+
+/* ####################################################################################### */
+/* Local to global */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     return localSpace * vector;
+#else
+    return vector * localSpace;
 #endif
 }
 
@@ -25,7 +105,7 @@ localToParent(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
 
 template<typename T>
 constexpr Vector<2,T>
-localToParent(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
+localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 {
     Vector<2,T> oriented
     {
@@ -39,12 +119,12 @@ localToParent(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
+localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * localSpace;
-#else
     return localSpace * vector;
+#else
+    return vector * localSpace;
 #endif
 }
 
@@ -52,7 +132,7 @@ localToParent(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
 
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
+localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
     Vector<3,T> oriented
     {
@@ -67,12 +147,12 @@ localToParent(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation)
+localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * basis3D(localSpaceOrientation);
-#else
     return basis3D(localSpaceOrientation) * vector;
+#else
+    return vector * basis3D(localSpaceOrientation);
 #endif
 }
 
@@ -80,93 +160,13 @@ localToParent(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientat
 
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition)
+localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition)
 {
     auto orientation = basis3D(localSpaceOrientation);
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * orientation + localSpacePosition;
-#else
     return orientation * vector + localSpacePosition;
-#endif
-}
-
-/* ####################################################################################### */
-/* Prent to local */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr FORCEINLINE Vector<2,T>
-parentToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(localSpace);
 #else
-    return invertedForce(localSpace) * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<2,T>
-parentToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(localSpace);
-#else
-    return invertedForce(localSpace) * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(localSpace);
-#else
-    return invertedForce(localSpace) * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(localSpace);
-#else
-    return invertedForce(localSpace) * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(basis3D(localSpaceOrientation));
-#else
-    return invertedForce(basis3D(localSpaceOrientation)) * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition)
-{
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * invertedForce(basis3D(localSpaceOrientation, localSpacePosition));
-#else
-    return invertedForce(basis3D(localSpaceOrientation, localSpacePosition)) * vector;
+    return vector * orientation + localSpacePosition;
 #endif
 }
 
@@ -178,34 +178,63 @@ template<typename T>
 constexpr FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& A, const Matrix<2,2,T>& B)
 {
-
+    return globalToLocal(localToGlobal(vector, A), B);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
+localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& A, const Matrix<2,2,T>& B)
 {
-
+    return globalToLocal(localToGlobal(vector, A), B);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace)
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& A, const Matrix<3,3,T>& B)
 {
-
+    return globalToLocal(localToGlobal(vector, A), B);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& A, const Matrix<3,3,T>& B)
 {
+    return globalToLocal(localToGlobal(vector, A), B);
+}
 
+/* --------------------------------------------------------------------------------------- */
+
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& A, const Matrix<3,3,T>& B)
+{
+    return globalToLocal(localToGlobal(vector, A), B);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& A, const Matrix<4,4,T>& B)
+{
+    return globalToLocal(localToGlobal(vector, A), B);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& A, const Matrix<4,4,T>& B)
+{
+    return globalToLocal(localToGlobal(vector, A), B);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -214,7 +243,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
-
+    return globalToLocal(localToGlobal(vector, orientationA), orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -223,7 +252,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-
+    return globalToLocal(localToGlobal(vector, orientationA, positionA), orientationB, positionB);
 }
 
 MATH3D_XYZ_NAMESPACE_END

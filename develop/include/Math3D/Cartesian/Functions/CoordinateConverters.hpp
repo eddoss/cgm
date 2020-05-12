@@ -11,9 +11,9 @@
 #include <Math3D/Cartesian/Functions/Utils.hpp>
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-#include <Math3D/Core/Vector/Operators.hpp>
-#else
 #include <Math3D/Core/Matrix/Operators.hpp>
+#else
+#include <Math3D/Core/Vector/Operators.hpp>
 #endif
 
 
@@ -21,141 +21,167 @@ MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Local to parent */
+/* Global to local */
+/* ####################################################################################### */
+
+/**
+ * Translates 2D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @param localSpace Local space represented as 2x2 matrix.
+ * @return Position recalculated to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+globalToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace);
+
+/**
+ * Translates 2D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @@param localSpace Local space represented as 3x3 matrix.
+ * @return Vector converted to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+globalToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
+
+/**
+ * Translates 3D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @param localSpace Local space represented as 3x3 matrix.
+ * @return Vector converted to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
+
+/**
+ * Translates 3D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @param localSpace Local space represented as 4x4 matrix.
+ * @return Vector converted to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
+
+/**
+ * Translates 3D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @param localSpaceOrientation Quaternion that orients local space.
+ * @return Vector converted to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation);
+
+/**
+ * Translates 3D vector from global space to local space. The "physically"
+ * position of the vector does not change, only recalculation to the local
+ * system occurs.
+ * @param vector Vector in global space.
+ * @param localSpaceOrientation Quaternion that orients local space.
+ * @param localSpacePosition Position of local space.
+ * @return Vector converted to local space.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition);
+
+/* ####################################################################################### */
+/* Local to global */
 /* ####################################################################################### */
 
  /**
- * Converts 2D vector from local space to parent space (local space is in parent space).
+ * Translates 2D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
  * @param localSpace Local space represented as 2x2 matrix.
  * @return converted to world space vector.
  */
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-localToParent(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace);
+localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace);
 
 /**
- * Converts 2D vector from local space to parent space (local space is in parent space).
+ * Translates 2D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
- * @@param localSpace Local space represented as 3x3 matrix.
- * @return Converted to parent space vector.
+ * @param localSpace Local space represented as 3x3 matrix.
+ * @return Converted to global space vector.
  */
 template<typename T>
 constexpr Vector<2,T>
-localToParent(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
+localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
 
 /**
- * Converts 3D vector from local space to parent space (local space is in parent space).
+ * Translates 3D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
  * @param localSpace Local space represented as 3x3 matrix.
- * @return Converted to parent space vector.
+ * @return Converted to global space vector.
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
+localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
 
 /**
- * Converts 3D vector from local space to parent space (local space is in parent space).
+ * Translates 3D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
  * @param localSpace Local space represented as 4x4 matrix.
- * @return Converted to parent space vector.
+ * @return Converted to global space vector.
  */
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
+localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
 
 /**
- * Converts 3D vector from local space to parent space (local space is in parent space).
+ * Translates 3D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
  * @param localSpaceOrientation Quaternion that orients local space.
- * @return Converted to parent space vector.
+ * @return Converted to global space vector.
  */
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation);
+localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation);
 
 /**
- * Converts 3D vector from local space to parent space (local space is in parent space).
+ * Translates 3D vector from local space to global space. The "physically"
+ * position of the vector does not change, only recalculation to the global
+ * system occurs.
  * @param vector Vector in local space.
  * @param localSpaceOrientation Quaternion that orients local space.
  * @tparam localSpacePosition Position of local space.
- * @return Converted to parent space vector.
+ * @return Converted to global space vector.
  */
 template<typename T>
 constexpr Vector<3,T>
-localToParent(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition);
-
-/* ####################################################################################### */
-/* Prent to local */
-/* ####################################################################################### */
-
-/**
- * Converts 2D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @param localSpace Local space represented as 2x2 matrix.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<2,T>
-parentToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace);
-
-/**
- * Converts 2D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @@param localSpace Local space represented as 3x3 matrix.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<2,T>
-parentToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
-
-/**
- * Converts 3D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @param localSpace Local space represented as 3x3 matrix.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
-
-/**
- * Converts 3D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @param localSpace Local space represented as 4x4 matrix.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
-
-/**
- * Converts 3D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @param localSpaceOrientation Quaternion that orients local space.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation);
-
-/**
- * Converts 3D vector from parent space to local space (local space is in parent space).
- * @param vector Vector in parent space.
- * @param localSpaceOrientation Quaternion that orients local space.
- * @tparam localSpacePosition Position of local space.
- * @return Vector converted to local space.
- */
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-parentToLocal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition);
+localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& localSpaceOrientation, const Vector<3,T>& localSpacePosition);
 
 /* ####################################################################################### */
 /* Local to local */
 /* ####################################################################################### */
 
 /**
- * Converts 2D vector from space A to space B (A and B spaces are in one space).
+ * Translates 2D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param A Space to convert from.
  * @param B Space to convert to.
@@ -166,7 +192,9 @@ constexpr FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& A, const Matrix<2,2,T>& B);
 
 /**
- * Converts 2D vector from space A to space B (A and B spaces are in one space).
+ * Translates 2D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param A Space to convert from.
  * @param B Space to convert to.
@@ -174,10 +202,38 @@ localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& A, const Matrix<2,2
  */
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
+localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& A, const Matrix<2,2,T>& B);
 
 /**
- * Converts 3D vector from space A to space B (A and B spaces are in one space).
+ * Translates 2D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
+ * @param vector Vector in A space.
+ * @param A Space to convert from.
+ * @param B Space to convert to.
+ * @return Converted vector from space A to B.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& A, const Matrix<3,3,T>& B);
+
+/**
+ * Translates 2D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
+ * @param vector Vector in A space.
+ * @param A Space to convert from.
+ * @param B Space to convert to.
+ * @return Converted vector from space A to B.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& A, const Matrix<3,3,T>& B);
+
+/**
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param A Space to convert from.
  * @param B Space to convert to.
@@ -185,10 +241,12 @@ localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& A, const Matrix<3,3,T>& B);
 
 /**
- * Converts 3D vector from space A to space B (A and B spaces are in one space).
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param A Space to convert from.
  * @param B Space to convert to.
@@ -196,10 +254,38 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& localSpace);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
+localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& A, const Matrix<3,3,T>& B);
 
 /**
- * Converts 3D vector from space A to space B (A and B spaces are in one space).
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
+ * @param vector Vector in A space.
+ * @param A Space to convert from.
+ * @param B Space to convert to.
+ * @return Converted vector from space A to B.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& A, const Matrix<4,4,T>& B);
+
+/**
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
+ * @param vector Vector in A space.
+ * @param A Space to convert from.
+ * @param B Space to convert to.
+ * @return Converted vector from space A to B.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& A, const Matrix<4,4,T>& B);
+
+/**
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param orientationA Quaternion that orients "A" space.
  * @param orientationB Quaternion that orients "B" space.
@@ -210,7 +296,9 @@ constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
 /**
- * Converts 3D vector from space A to space B (A and B spaces are in one space).
+ * Translates 3D vector from space A to space B (A and B are in one space).
+ * The "physically" position of the vector does not change, only recalculation
+ * to the B system occurs.
  * @param vector Vector in A space.
  * @param orientationA Quaternion that orients "A" space.
  * @param positionA "A" space position.
@@ -226,7 +314,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/Functions/SpaceConverters.hpp>
+#include <private/Math3D/Cartesian/Functions/CoordinateConverters.hpp>
 
 
 #endif // MATH3D_XYZ_FUNCTIONS_SPACE_CONVERTERS_HPP
