@@ -3,7 +3,7 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

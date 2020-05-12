@@ -3,10 +3,10 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Vector/Vector.hpp>
-#include <Math3D/Core/Matrix/Matrix.hpp>
+#include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Matrix/Functions.hpp>
-#include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Cartesian/Functions/BasisCreators.hpp>
 #include <Math3D/Cartesian/Functions/Utils.hpp>
 

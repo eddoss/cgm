@@ -3,7 +3,7 @@
 
 
 #include <cmath>
-#include <Math3D/Core/Vector/Vector.hpp>
+#include <Math3D/Core/Vector.hpp>
 #include <Math3D/Coordinates/Polar.hpp>
 #include <Math3D/Coordinates/Spherical.hpp>
 #include <Math3D/Coordinates/Cylindrical.hpp>

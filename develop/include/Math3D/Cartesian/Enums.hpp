@@ -3,9 +3,6 @@
 
 
 #include <Math3D/Global.hpp>
-#include <Math3D/Core/Vector/Vector.hpp>
-#include <Math3D/Core/Matrix/Matrix.hpp>
-#include <Math3D/Core/Quaternion/Quaternion.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
