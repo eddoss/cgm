@@ -4,7 +4,7 @@
 
 #include <cmath>
 #include <type_traits>
-#include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Core/Quaternion/Operators.hpp>
 
 
