@@ -45,7 +45,7 @@ constexpr Matrix<S,S,T>
 cofactors(const Matrix<S,S,T>& matrix);
 
 /**
- * Calculate inverse matrix. Change flag to false, if cant calculate.
+ * Safely calculate inverse matrix. Change flag to false, if cant calculate.
  * @param[in] matrix Matrix to calculate.
  * @param[out] success Set this false if cant calculate inverted matrix.
  * @return inverted matrix if could calculate, trash otherwise.
@@ -53,6 +53,15 @@ cofactors(const Matrix<S,S,T>& matrix);
 template<typename TResult=FLOAT, size_t S, typename T>
 constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success);
+
+/**
+ * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
+ * @param matrix Matrix to calculate.
+ * @return inverted matrix if could calculate, trash otherwise.
+ */
+template<typename TResult=FLOAT, size_t S, typename T>
+constexpr FORCEINLINE Matrix<S,S,TResult>
+invertedForce(const Matrix<S,S,T>& matrix);
 
 /**
  * Calculate matrix trace - sum of diagonal elements.

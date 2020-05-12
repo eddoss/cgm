@@ -557,6 +557,74 @@ TEST(Matrix_Functions, Inverse)
 
 /* --------------------------------------------------------------------------------------- */
 
+TEST(Matrix_Functions, InverseForce)
+{
+    {
+        Matrix<2,2,FLOAT> a
+        {
+            1, 2,
+            3, 4
+        };
+
+        Matrix<2,2,FLOAT> b
+        {
+            -2, 1,
+            1.5f, -0.5f
+        };
+
+        auto inv = invertedForce(a);
+
+        ASSERT_TRUE(inv == b);
+    }
+
+    /* -------------- */
+
+    {
+        Matrix<3,3,FLOAT> a
+        {
+            1, 2, 3,
+            4, 3, 2,
+            6, 7, 3
+        };
+
+        Matrix<3,3,FLOAT> b
+        {
+            -0.2f, 0.6f, -0.2f,
+            0, -0.6f, 0.4f,
+            0.4f, 0.2f, -0.2f
+        };
+
+        auto inv = invertedForce(a);
+
+        ASSERT_TRUE(inv == b);
+    }
+
+    /* -------------- */
+
+    {
+        Matrix<4,4,FLOAT> a
+        {
+            1, 2, 3, 4,
+            3, 2, 1, 2,
+            3, 4, 3, 2,
+            1, 2, 3, 2
+        };
+        Matrix<4,4,FLOAT> b
+        {
+            -0.5f, 0.75f, -0.5f, 0.75,
+            0.5f, -0.75f, 1.0f, -1.25f,
+            -0.5f, 0.25f, -0.5f, 1.25f,
+            0.5, 0.0f, 0.0f, -0.5f
+        };
+
+        auto inv = invertedForce(a);
+
+        ASSERT_TRUE(inv == b);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Matrix_Functions, Trace)
 {
     {

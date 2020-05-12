@@ -281,7 +281,7 @@ template<typename TResult, size_t S, typename T>
 constexpr Matrix<S,S,TResult>
 inverted(const Matrix<S,S,T>& matrix, bool& success)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrices more than 4x4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrix more than 4x4 size.");
 
     T det {determinant(matrix)};
 
@@ -293,8 +293,19 @@ inverted(const Matrix<S,S,T>& matrix, bool& success)
     else
     {
         success = true;
-        return transposed(cofactors(matrix))/det;
+        return transposed(cofactors(matrix)) / det;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename TResult, size_t S, typename T>
+constexpr FORCEINLINE Matrix<S,S,TResult>
+invertedForce(const Matrix<S,S,T>& matrix)
+{
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrix more than 4x4 size.");
+
+    return transposed(cofactors(matrix)) / determinant(matrix);
 }
 
 /* --------------------------------------------------------------------------------------- */
