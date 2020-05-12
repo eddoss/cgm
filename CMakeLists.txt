@@ -23,7 +23,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ####################################################################################### #
 
 option(MATH3D_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
-option(MATH3D_BUILD_VISUAL_TESTS "Build visual testing projects." OFF)
 option(MATH3D_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
 option(MATH3D_USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)." OFF)
 option(MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM "Use left handed Cartesian system. Right handed is default." OFF)

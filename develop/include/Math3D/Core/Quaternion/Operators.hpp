@@ -2,7 +2,7 @@
 #define MATH3D_QUATERNION_OPERATORS_HPP
 
 
-#include <Math3D/Core/Quaternion/Quaternion.hpp>
+#include <Math3D/Core/Quaternion.hpp>
 
 
 /* ####################################################################################### */
