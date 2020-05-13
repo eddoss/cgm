@@ -28,60 +28,68 @@ find_package(GTest REQUIRED)
 # Tests suites sources
 # ####################################################################################### #
 
-set(VECTOR_TEST_SUITE
+set(CORE_VECTOR_TEST_SUITE
     run.cpp
-    Vector/Functions.cpp
-    Vector/Arithmetic.cpp
-    Vector/ComparisonWithOther.cpp
-    Vector/ComparisonWithScalar.cpp
-    Vector/VectorMatrixMultiplication.cpp
+    Core/Vector/Functions.cpp
+    Core/Vector/Arithmetic.cpp
+    Core/Vector/ComparisonWithOther.cpp
+    Core/Vector/ComparisonWithScalar.cpp
 )
 
-set(MATRIX_TEST_SUITE
+set(CORE_MATRIX_TEST_SUITE
     run.cpp
-    Matrix/Functions.cpp
-    Matrix/Arithmetic/Plus.cpp
-    Matrix/Arithmetic/Minus.cpp
-    Matrix/Arithmetic/IncrementDecrement.cpp
-    Matrix/Arithmetic/DivisionByScalar.cpp
-    Matrix/Arithmetic/MultiplicationToScalar.cpp
-    Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
-    Matrix/Arithmetic/MatrixMultiplication.cpp
-    Matrix/Arithmetic/MatrixVectorMultiplication.cpp
-    Matrix/Comparison/WithOther.cpp
-    Matrix/Comparison/WithScalar.cpp
-    Matrix/Iterators/Direct.cpp
-    Matrix/Iterators/Indirect.cpp
-    Matrix/Iterators/RowDir.cpp
-    Matrix/Iterators/ColumnDir.cpp
-    Matrix/Iterators/Row.cpp
-    Matrix/Iterators/Column.cpp
+    Core/Matrix/Functions.cpp
+    Core/Matrix/Arithmetic/Plus.cpp
+    Core/Matrix/Arithmetic/Minus.cpp
+    Core/Matrix/Arithmetic/IncrementDecrement.cpp
+    Core/Matrix/Arithmetic/DivisionByScalar.cpp
+    Core/Matrix/Arithmetic/MultiplicationToScalar.cpp
+    Core/Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
+    Core/Matrix/Arithmetic/MatrixMultiplication.cpp
+    Core/Matrix/Arithmetic/MatrixVectorMultiplication.cpp
+    Core/Matrix/Comparison/WithOther.cpp
+    Core/Matrix/Comparison/WithScalar.cpp
+    Core/Matrix/Iterators/Direct.cpp
+    Core/Matrix/Iterators/Indirect.cpp
+    Core/Matrix/Iterators/RowDir.cpp
+    Core/Matrix/Iterators/ColumnDir.cpp
+    Core/Matrix/Iterators/Row.cpp
+    Core/Matrix/Iterators/Column.cpp
 )
 
-set(QUATERNION_TEST_SUITE
+set(CORE_QUATERNION_TEST_SUITE
     run.cpp
-    Quaternion/Operators.cpp
-    Quaternion/Functions.cpp
+    Core/Quaternion/Operators.cpp
+    Core/Quaternion/Functions.cpp
 )
 
-set(COORDINATES_TEST_SUITE
+set(CORE_COORDINATES_TEST_SUITE
     run.cpp
-    Coordinates.cpp
+    Core/Coordinates.cpp
 )
 
-set(ALL_TEST_SUITES
-    ${VECTOR_TEST_SUITE}
-    ${MATRIX_TEST_SUITE}
-    ${QUATERNION_TEST_SUITE}
-    ${COORDINATES_TEST_SUITE}
+set(MODULE_CORE_TEST_SUITE
+    run.cpp
+    "${CORE_VECTOR_TEST_SUITE}"
+    "${CORE_MATRIX_TEST_SUITE}"
+    "${CORE_QUATERNION_TEST_SUITE}"
+    "${CORE_COORDINATES_TEST_SUITE}"
+)
+
+set(ALL_MODULES_TEST_SUITES
+    ${CORE_VECTOR_TEST_SUITE}
+    ${CORE_MATRIX_TEST_SUITE}
+    ${CORE_QUATERNION_TEST_SUITE}
+    ${CORE_COORDINATES_TEST_SUITE}
 )
 
 # ####################################################################################### #
 # Setup tests suites
 # ####################################################################################### #
 
-math3d_add_test(AllTestSuites           "${ALL_TEST_SUITES}")
-math3d_add_test(VectorTestSuite         "${VECTOR_TEST_SUITE}")
-math3d_add_test(MatrixTestSuite         "${MATRIX_TEST_SUITE}")
-math3d_add_test(QuaternionTestSuite     "${QUATERNION_TEST_SUITE}")
-math3d_add_test(CoordinatesTestSuite    "${COORDINATES_TEST_SUITE}")
+math3d_add_test(AllTestSuites           "${ALL_MODULES_TEST_SUITES}")
+math3d_add_test(ModuleCoreTestSuite     "${MODULE_CORE_TEST_SUITE}")
+math3d_add_test(VectorTestSuite         "${CORE_VECTOR_TEST_SUITE}")
+math3d_add_test(MatrixTestSuite         "${CORE_MATRIX_TEST_SUITE}")
+math3d_add_test(QuaternionTestSuite     "${CORE_QUATERNION_TEST_SUITE}")
+math3d_add_test(CoordinatesTestSuite    "${CORE_COORDINATES_TEST_SUITE}")
