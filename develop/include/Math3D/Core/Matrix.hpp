@@ -1,5 +1,5 @@
-#ifndef MATH3D_MATRIX_HPP
-#define MATH3D_MATRIX_HPP
+#ifndef MATH3D_CORE_MATRIX_HPP
+#define MATH3D_CORE_MATRIX_HPP
 
 
 #include <type_traits>
@@ -677,4 +677,4 @@ MATH3D_NAMESPACE_END
 #include <private/Math3D/Core/Matrix.hpp>
 
 
-#endif // MATH3D_MATRIX_HPP
+#endif // MATH3D_CORE_MATRIX_HPP

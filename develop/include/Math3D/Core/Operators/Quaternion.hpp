@@ -1,5 +1,5 @@
-#ifndef MATH3D_QUATERNION_OPERATORS_HPP
-#define MATH3D_QUATERNION_OPERATORS_HPP
+#ifndef MATH3D_CORE_OPERATORS_QUATERNION_HPP
+#define MATH3D_CORE_OPERATORS_QUATERNION_HPP
 
 
 #include <Math3D/Core/Quaternion.hpp>
@@ -145,4 +145,4 @@ operator | (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Qu
 #include <private/Math3D/Core/Operators/Quaternion.hpp>
 
 
-#endif // MATH3D_QUATERNION_OPERATORS_HPP
+#endif // MATH3D_CORE_OPERATORS_QUATERNION_HPP
