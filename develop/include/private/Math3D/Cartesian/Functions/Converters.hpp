@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Cartesian/Functions/CoordinateConverters.hpp>
+#include <Math3D/Cartesian/Functions/Converters.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

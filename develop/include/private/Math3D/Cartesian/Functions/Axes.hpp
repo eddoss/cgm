@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Cartesian/Functions/AxesCreators.hpp>
+#include <Math3D/Cartesian/Functions/Axes.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

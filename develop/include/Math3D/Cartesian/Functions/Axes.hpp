@@ -88,7 +88,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/Functions/AxesCreators.hpp>
+#include <private/Math3D/Cartesian/Functions/Axes.hpp>
 
 
 #endif // MATH3D_XYZ_FUNCTIONS_AXES_CREATORS_HPP

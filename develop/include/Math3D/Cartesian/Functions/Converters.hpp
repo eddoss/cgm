@@ -5,16 +5,11 @@
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Matrix/Functions.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Cartesian/Functions/BasisCreators.hpp>
+#include <Math3D/Core/Operators/MatrixVectorMultiplication.hpp>
+#include <Math3D/Core/Functions/Matrix.hpp>
+#include <Math3D/Cartesian/Functions/Basis.hpp>
 #include <Math3D/Cartesian/Functions/Utils.hpp>
-
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-#include <Math3D/Core/Matrix/Operators.hpp>
-#else
-#include <Math3D/Core/Vector/Operators.hpp>
-#endif
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -314,7 +309,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/Functions/CoordinateConverters.hpp>
+#include <private/Math3D/Cartesian/Functions/Converters.hpp>
 
 
 #endif // MATH3D_XYZ_FUNCTIONS_SPACE_CONVERTERS_HPP
