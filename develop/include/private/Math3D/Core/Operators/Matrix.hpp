@@ -2221,197 +2221,225 @@ operator *= (MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, size_t M, typename T>
-constexpr std::conditional_t<(M == 1), T, MATH3D_NAMESPACE::Vector<M,T>>
-operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B)
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator ^ (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
-    if constexpr (M == 1)
+    if constexpr (M == 2 && N == 2)
     {
-        if constexpr (D == 2)
+        return
         {
-            return {B.x * A(0,0) + B.y * A(0,1)};
-        }
-        else if constexpr (D == 3)
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1)
+        };
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
         {
-            return {B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2)};
-        }
-        else if constexpr (D == 4)
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2)
+        };
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
         {
-            return {B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2) + B.w * A(0,3)};
-        }
-        else
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),  A(0,3)*B(0,3),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2),  A(1,3)*B(1,3)
+        };
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
         {
-            T sum {MATH3D_NAMESPACE::zero<T>};
-
-            for (size_t i = 0; i < D; ++i)
-            {
-                sum += B[i] * A(0,i);
-            }
-
-            return sum;
-        }
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1)
+        };
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        {
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1),  A(2,2)*B(2,2)
+        };
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        {
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),  A(0,3)*B(0,3),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2),  A(1,3)*B(1,3),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1),  A(2,2)*B(2,2),  A(2,3)*B(2,3)
+        };
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        {
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1),
+            A(3,0)*B(3,0),  A(3,1)*B(3,1)
+        };
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        {
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1),  A(2,2)*B(2,2),
+            A(3,0)*B(3,0),  A(3,1)*B(3,1),  A(3,2)*B(3,2)
+        };
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        {
+            A(0,0)*B(0,0),  A(0,1)*B(0,1),  A(0,2)*B(0,2),  A(0,3)*B(0,3),
+            A(1,0)*B(1,0),  A(1,1)*B(1,1),  A(1,2)*B(1,2),  A(1,3)*B(1,3),
+            A(2,0)*B(2,0),  A(2,1)*B(2,1),  A(2,2)*B(2,2),  A(2,3)*B(2,3),
+            A(3,0)*B(3,0),  A(3,1)*B(3,1),  A(3,2)*B(3,2),  A(3,3)*B(3,3)
+        };
     }
     else
     {
-        if constexpr (D == 2)
+        MATH3D_NAMESPACE::Matrix<M,N,T> result;
+        for (auto i = 0; i < MATH3D_NAMESPACE::Matrix<M,N,T>::size; ++i)
         {
-            if constexpr (M == 2)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1),
-                    B.x * A(1,0) + B.y * A(1,1)
-                };
-            }
-            else if constexpr (M == 3)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1),
-                    B.x * A(1,0) + B.y * A(1,1),
-                    B.x * A(2,0) + B.y * A(2,1)
-                };
-            }
-            else if constexpr (M == 4)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1),
-                    B.x * A(1,0) + B.y * A(1,1),
-                    B.x * A(2,0) + B.y * A(2,1),
-                    B.x * A(3,0) + B.y * A(3,1)
-                };
-            }
-            else
-            {
-                MATH3D_NAMESPACE::Vector<M,T> vec(MATH3D_NAMESPACE::zero<T>);
-
-                for (size_t i = 0; i < M; ++i)
-                {
-                    vec[i] = B.x * A(i,0) + B.y * A(i,1);
-                }
-
-                return vec;
-            }
+            result[i] = A[i] * B[i];
         }
-        else if constexpr (D == 3)
-        {
-            if constexpr (M == 2)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2)
-                };
-            }
-            else if constexpr (M == 3)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2),
-                    B.x * A(2,0) + B.y * A(2,1) + B.z * A(2,2)
-                };
-            }
-            else if constexpr (M == 4)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2),
-                    B.x * A(2,0) + B.y * A(2,1) + B.z * A(2,2),
-                    B.x * A(3,0) + B.y * A(3,1) + B.z * A(3,2)
-                };
-            }
-            else
-            {
-                MATH3D_NAMESPACE::Vector<M,T> vec(MATH3D_NAMESPACE::zero<T>);
-
-                for (size_t i = 0; i < M; ++i)
-                {
-                    vec[i] = B.x * A(i,0) + B.y * A(i,1) + B.z * A(i,2);
-                }
-
-                return vec;
-            }
-        }
-        else if constexpr (D == 4)
-        {
-            if constexpr (M == 2)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2) + B.w * A(0,3),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2) + B.w * A(1,3)
-                };
-            }
-            else if constexpr (M == 3)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2) + B.w * A(0,3),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2) + B.w * A(1,3),
-                    B.x * A(2,0) + B.y * A(2,1) + B.z * A(2,2) + B.w * A(2,3)
-                };
-            }
-            else if constexpr (M == 4)
-            {
-                return
-                {
-                    B.x * A(0,0) + B.y * A(0,1) + B.z * A(0,2) + B.w * A(0,3),
-                    B.x * A(1,0) + B.y * A(1,1) + B.z * A(1,2) + B.w * A(1,3),
-                    B.x * A(2,0) + B.y * A(2,1) + B.z * A(2,2) + B.w * A(2,3),
-                    B.x * A(3,0) + B.y * A(3,1) + B.z * A(3,2) + B.w * A(3,3)
-                };
-            }
-            else
-            {
-                MATH3D_NAMESPACE::Vector<M,T> vec(MATH3D_NAMESPACE::zero<T>);
-
-                for (size_t i = 0; i < M; ++i)
-                {
-                    vec[i] = B.x * A(i,0) + B.y * A(i,1) + B.z * A(i,2) + B.w * A(i,3);
-                }
-
-                return vec;
-            }
-        }
-        else
-        {
-            MATH3D_NAMESPACE::Vector<M,T> vec(MATH3D_NAMESPACE::zero<T>);
-            
-            if constexpr (M == 2)
-            {
-                for (size_t i = 0; i < D; ++i) {vec.x += B[i] * A(0,i);}
-                for (size_t i = 0; i < D; ++i) {vec.y += B[i] * A(1,i);}
-            }
-            else if constexpr (M == 3)
-            {
-                for (size_t i = 0; i < D; ++i) {vec.x += B[i] * A(0,i);}
-                for (size_t i = 0; i < D; ++i) {vec.y += B[i] * A(1,i);}
-                for (size_t i = 0; i < D; ++i) {vec.z += B[i] * A(2,i);}
-            }
-            else if constexpr (M == 4)
-            {
-                for (size_t i = 0; i < D; ++i) {vec.x += B[i] * A(0,i);}
-                for (size_t i = 0; i < D; ++i) {vec.y += B[i] * A(1,i);}
-                for (size_t i = 0; i < D; ++i) {vec.z += B[i] * A(2,i);}
-                for (size_t i = 0; i < D; ++i) {vec.w += B[i] * A(3,i);}
-            }
-            else
-            {
-                for (size_t i = 0; i < M; ++i)
-                {
-                    for (size_t j = 0; j < D; ++j)
-                    {
-                        vec[i] += B[j] * A(i,j);
-                    }
-                }
-            }
-            
-            return vec;
-        }
+        return result;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator ^= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+{
+    if constexpr (M == 2 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(2,3) =* B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+        A(3,2) =* B(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(2,3) =* B(2,3);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+        A(3,2) =* B(3,2);
+        A(3,3) =* B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < MATH3D_NAMESPACE::Matrix<M,N,T>::size; ++i)
+        {
+            A[i] *= B[i];
+        };
+    }
+
+    return A;
 }
 
 /* ####################################################################################### */
@@ -2420,7 +2448,7 @@ operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Ve
 
 template<size_t M, size_t N, typename T>
 constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
-operator / (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+operator | (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
 {
     if constexpr (M == 2 && N == 2)
     {
@@ -2512,6 +2540,131 @@ operator / (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Ma
         }
         return result;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator |= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B)
+{
+    if constexpr (M == 2 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(2,3) =* B(2,3);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+        A(3,2) =* B(3,2);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        A(0,0) =* B(0,0);
+        A(0,1) =* B(0,1);
+        A(0,2) =* B(0,2);
+        A(0,3) =* B(0,3);
+        A(1,0) =* B(1,0);
+        A(1,1) =* B(1,1);
+        A(1,2) =* B(1,2);
+        A(1,3) =* B(1,3);
+        A(2,0) =* B(2,0);
+        A(2,1) =* B(2,1);
+        A(2,2) =* B(2,2);
+        A(2,3) =* B(2,3);
+        A(3,0) =* B(3,0);
+        A(3,1) =* B(3,1);
+        A(3,2) =* B(3,2);
+        A(3,3) =* B(3,3);
+    }
+    else
+    {
+        for (auto i = 0; i < MATH3D_NAMESPACE::Matrix<M,N,T>::size; ++i)
+        {
+            A[i] /= B[i];
+        };
+    }
+
+    return A;
 }
 
 /* --------------------------------------------------------------------------------------- */

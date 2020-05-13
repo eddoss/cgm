@@ -377,73 +377,73 @@ public: /* Iterators */
     /**
      * Get an iterator pointing to the first component.
      */
-    constexpr iterator
+    constexpr FORCEINLINE iterator
     begin();
 
     /**
      * Get an iterator pointing to the component after the last.
      */
-    constexpr iterator
+    constexpr FORCEINLINE iterator
     end();
 
     /**
      * Get an const iterator pointing to the first component.
      */
-    constexpr const_iterator
+    constexpr FORCEINLINE const_iterator
     begin() const;
 
     /**
      * Get an const iterator pointing to the component after the last.
      */
-    constexpr const_iterator
+    constexpr FORCEINLINE const_iterator
     end() const;
 
     /**
      * Get an const iterator pointing to the first component.
      */
-    constexpr const_iterator
+    constexpr FORCEINLINE const_iterator
     cbegin() const;
 
     /**
      * Get an const iterator pointing to the component after the last.
      */
-    constexpr const_iterator
+    constexpr FORCEINLINE const_iterator
     cend() const;
 
     /**
      * Get an iterator pointing to the last component.
      */
-    constexpr reverse_iterator
+    constexpr FORCEINLINE reverse_iterator
     rbegin();
 
     /**
      * Get an iterator pointing to the component before the first.
      */
-    constexpr reverse_iterator
+    constexpr FORCEINLINE reverse_iterator
     rend();
 
     /**
      * Get an const iterator pointing to the last component.
      */
-    constexpr const_reverse_iterator
+    constexpr FORCEINLINE const_reverse_iterator
     rbegin() const;
 
     /**
      * Get an const iterator pointing to the component before the first.
      */
-    constexpr const_reverse_iterator
+    constexpr FORCEINLINE const_reverse_iterator
     rend() const;
 
     /**
      * Get an const iterator pointing to the last component.
      */
-    constexpr const_reverse_iterator
+    constexpr FORCEINLINE const_reverse_iterator
     crbegin() const;
 
     /**
      * Get an const iterator pointing to the component before the first.
      */
-    constexpr const_reverse_iterator
+    constexpr FORCEINLINE const_reverse_iterator
     crend() const;
 
 /* ####################################################################################### */
