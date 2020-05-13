@@ -3,7 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Vector/Operators.hpp>
+#include <Math3D/Core/Operators/Vector.hpp>
 
 
 using namespace std;

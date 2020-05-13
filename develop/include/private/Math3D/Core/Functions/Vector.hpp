@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Vector/Functions.hpp>
+#include <Math3D/Core/Operators/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

@@ -298,7 +298,7 @@ constexpr bool
 operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 
-#include <private/Math3D/Core/Matrix/Operators.hpp>
+#include <private/Math3D/Core/Operators/Matrix.hpp>
 
 
 #endif // MATH3D_MATRIX_OPERATORS_HPP

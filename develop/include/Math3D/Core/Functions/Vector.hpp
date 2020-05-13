@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Vector/Operators.hpp>
+#include <Math3D/Core/Operators/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -97,7 +97,7 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B);
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/Vector/Functions.hpp>
+#include <private/Math3D/Core/Functions/Vector.hpp>
 
 
 #endif // MATH3D_VECTOR_FUNCTIONS_HPP

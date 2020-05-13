@@ -5,7 +5,7 @@
 #include <cmath>
 #include <type_traits>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Quaternion/Operators.hpp>
+#include <Math3D/Core/Operators/Quaternion.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -15,7 +15,7 @@ MATH3D_NAMESPACE_BEGIN
  * @return The dot product.
  */
 template<typename T>
-constexpr T
+constexpr FORCEINLINE T
 dot(const Quaternion<T>& A, const Quaternion<T>& B);
 
 /**
@@ -39,7 +39,7 @@ conjugate(Quaternion<T>& quaternion);
  * @return The conjugated quaternion.
  */
 template<typename T>
-constexpr Quaternion<T>
+constexpr FORCEINLINE Quaternion<T>
 conjugated(const Quaternion<T>& quaternion);
 
 /**
@@ -106,7 +106,7 @@ identity();
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/Quaternion/Functions.hpp>
+#include <private/Math3D/Core/Functions/Quaternion.hpp>
 
 
 #endif // MATH3D_QUATERNION_FUNCTIONS_HPP

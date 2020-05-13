@@ -3,7 +3,7 @@
 
 
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Matrix/Operators.hpp>
+#include <Math3D/Core/Operators/Matrix.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -109,7 +109,7 @@ identity();
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Core/Matrix/Functions.hpp>
+#include <private/Math3D/Core/Functions/Matrix.hpp>
 
 
 #endif //MATH3D_MATRIX_FUNCTIONS_HPP

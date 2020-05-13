@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include <Math3D/Common.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Quaternion/Functions.hpp>
+#include <Math3D/Core/Functions/Quaternion.hpp>
 
 
 using namespace MATH3D_NAMESPACE;

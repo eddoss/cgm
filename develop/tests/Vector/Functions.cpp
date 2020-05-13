@@ -3,8 +3,8 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Vector/Operators.hpp>
-#include <Math3D/Core/Vector/Functions.hpp>
+#include <Math3D/Core/Operators/Vector.hpp>
+#include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Cartesian.hpp>
 
 

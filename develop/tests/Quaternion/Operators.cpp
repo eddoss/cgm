@@ -3,7 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Quaternion/Operators.hpp>
+#include <Math3D/Core/Operators/Quaternion.hpp>
 
 
 using namespace MATH3D_NAMESPACE;

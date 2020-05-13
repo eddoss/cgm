@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Matrix/Operators.hpp>
+#include <Math3D/Core/Operators/Matrix.hpp>
 
 
 /* ####################################################################################### */

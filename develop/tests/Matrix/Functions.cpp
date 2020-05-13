@@ -3,8 +3,8 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Matrix/Operators.hpp>
-#include <Math3D/Core/Matrix/Functions.hpp>
+#include <Math3D/Core/Operators/Matrix.hpp>
+#include <Math3D/Core/Functions/Matrix.hpp>
 #include <Math3D/IO.hpp>
 
 

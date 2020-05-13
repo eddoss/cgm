@@ -1,12 +1,12 @@
 
 
-#include <Math3D/Core/Quaternion/Functions.hpp>
+#include <Math3D/Core/Functions/Quaternion.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr T
+constexpr FORCEINLINE T
 dot(const Quaternion<T> &A, const Quaternion<T> &B)
 {
     return A | B;
@@ -40,7 +40,7 @@ conjugate(Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Quaternion<T>
+constexpr FORCEINLINE Quaternion<T>
 conjugated(const Quaternion<T>& quaternion)
 {
     return Quaternion<T>
