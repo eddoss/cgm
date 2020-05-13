@@ -5,6 +5,7 @@
 #include <Math3D/Common.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Vector.hpp>
+#include <Math3D/Core/Operators/MatrixVectorMultiplication.hpp>
 
 
 /* ####################################################################################### */
@@ -216,21 +217,50 @@ constexpr MATH3D_NAMESPACE::Matrix<S,S,T>&
 operator *= (MATH3D_NAMESPACE::Matrix<S,S,T>& A, const MATH3D_NAMESPACE::Matrix<S,S,T>& B);
 
 /**
- * Generic multiplication matrix A by vector B.
- * @tparam D Vector dimensions.
- * @tparam M Matrix rows count.
- * @return The result of multiplication (vector).
+ * Component-wise multiplication of matrix A by matrix B.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply on.
+ * @return Result of component-wise multiplication.
  */
-template<size_t D, size_t M, typename T>
-constexpr std::conditional_t<(M == 1), T, MATH3D_NAMESPACE::Vector<M,T>>
-operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Vector<D,T>& B);
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator ^ (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+
+/**
+ * Component-wise multiplication of matrix A by matrix B and store result in A.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply by.
+ */
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>&
+operator ^= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
 
 /* ####################################################################################### */
 /* Component wise division */
 /* ####################################################################################### */
 
 /**
- * Divide each matrix component by a scalar and return copy.
+ * Component-wise division of matrix A by matrix B.
+ * @param A Matrix to division.
+ * @param B Matrix to division by.
+ * @return Result of component-wise division.
+ */
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator | (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+
+/**
+ * Component-wise division of matrix A by matrix B and store result in A.
+ * @param A Matrix to division.
+ * @param B Matrix to division by.
+ * @return Result of component-wise division.
+ */
+template<size_t M, size_t N, typename T>
+constexpr MATH3D_NAMESPACE::Matrix<M,N,T>
+operator |= (MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::Matrix<M,N,T>& B);
+
+/**
+ * Component-wise division of matrix A by scalar.
  * @param matrix Matrix to division to.
  * @param scalar Value to division.
  * @return New copy of the result matrix.

@@ -166,8 +166,15 @@ public: /* Components accessing */
      * Get raw pointer at the first component.
      * @param first component raw pointer.
      */
-    constexpr pointer
+    constexpr FORCEINLINE pointer
     data();
+
+    /**
+     * Get const raw pointer at the first component.
+     * @param first component raw const pointer.
+     */
+    constexpr FORCEINLINE const_pointer
+    data() const;
 
     /**
      * Gets a reference to a specific component of the matrix by row and column.
@@ -175,7 +182,7 @@ public: /* Components accessing */
      * @param column Column of matrix.
      * @return reference to a component.
      */
-    constexpr reference
+    constexpr FORCEINLINE reference
     operator()(size_t row, size_t column);
 
     /**
@@ -184,7 +191,7 @@ public: /* Components accessing */
      * @param column Column of matrix.
      * @return const reference to a component.
      */
-    constexpr const_reference
+    constexpr FORCEINLINE const_reference
     operator()(size_t row, size_t column) const;
 
     /**
@@ -194,7 +201,7 @@ public: /* Components accessing */
      * @param index Index of component.
      * @return reference to a component.
      */
-    constexpr reference
+    constexpr FORCEINLINE reference
     operator[](size_t index);
 
     /**
@@ -204,7 +211,7 @@ public: /* Components accessing */
      * @param index Index of component.
      * @return reference to a component.
      */
-    constexpr const_reference
+    constexpr FORCEINLINE const_reference
     operator[](size_t index) const;
 
 /* ####################################################################################### */

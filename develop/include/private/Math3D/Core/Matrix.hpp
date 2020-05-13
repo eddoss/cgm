@@ -83,16 +83,25 @@ Matrix<M,N,T>::operator = (T scalar)
 /* ####################################################################################### */
 
 template<size_t M, size_t N, typename T>
-constexpr typename Matrix<M,N,T>::pointer
+constexpr FORCEINLINE typename Matrix<M,N,T>::pointer
 Matrix<M,N,T>::data()
 {
-    return &m_data[0][0];
+    return &m_data;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-constexpr typename Matrix<M,N,T>::reference
+constexpr FORCEINLINE typename Matrix<M,N,T>::const_pointer
+Matrix<M,N,T>::data() const
+{
+    return &m_data;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr FORCEINLINE typename Matrix<M,N,T>::reference
 Matrix<M,N,T>::operator () (size_t row, size_t column)
 {
 #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
@@ -105,7 +114,7 @@ Matrix<M,N,T>::operator () (size_t row, size_t column)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-constexpr typename Matrix<M,N,T>::const_reference
+constexpr FORCEINLINE typename Matrix<M,N,T>::const_reference
 Matrix<M,N,T>::operator () (size_t row, size_t column) const
 {
 #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
@@ -118,19 +127,19 @@ Matrix<M,N,T>::operator () (size_t row, size_t column) const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-constexpr typename Matrix<M,N,T>::reference
+constexpr FORCEINLINE typename Matrix<M,N,T>::reference
 Matrix<M,N,T>::operator [] (size_t index)
 {
-    return *(&m_data[0][0] + index);
+    return *(&**m_data + index);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-constexpr typename Matrix<M,N,T>::const_reference
+constexpr FORCEINLINE typename Matrix<M,N,T>::const_reference
 Matrix<M,N,T>::operator [] (size_t index) const
 {
-    return *(&m_data[0][0] + index);
+    return *(&**m_data + index);
 }
 
 /* ####################################################################################### */
@@ -141,7 +150,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::begin()
 {
-    return iterator {&m_data[0][0], 0};
+    return iterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -150,7 +159,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::iterator
 Matrix<M,N,T>::end()
 {
-    return iterator {&m_data[0][0], M*N};
+    return iterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -159,16 +168,16 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::begin() const
 {
-    return const_iterator {&m_data[0][0], 0};
+    return const_iterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::const_iterator
-Matrix<M,N,T>::end() const {return const_iterator
+Matrix<M,N,T>::end() const
 {
-    &m_data[0][0], M*N};
+    return const_iterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -177,7 +186,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cbegin() const
 {
-    return const_iterator {&m_data[0][0], 0};
+    return const_iterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -186,7 +195,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::const_iterator
 Matrix<M,N,T>::cend() const
 {
-    return const_iterator {&m_data[0][0], M*N};
+    return const_iterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -251,7 +260,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::IndirectIterator
 Matrix<M,N,T>::beginIndirect()
 {
-    return IndirectIterator {&m_data[0][0], 0};
+    return IndirectIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -260,7 +269,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::IndirectIterator
 Matrix<M,N,T>::endIndirect()
 {
-    return IndirectIterator {&m_data[0][0], M*N};
+    return IndirectIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -269,7 +278,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstIndirectIterator
 Matrix<M,N,T>::beginIndirect() const
 {
-    return ConstIndirectIterator {&m_data[0][0], 0};
+    return ConstIndirectIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -278,7 +287,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstIndirectIterator
 Matrix<M,N,T>::endIndirect() const
 {
-    return ConstIndirectIterator {&m_data[0][0], M*N};
+    return ConstIndirectIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -287,7 +296,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstIndirectIterator
 Matrix<M,N,T>::cbeginIndirect() const
 {
-    return ConstIndirectIterator {&m_data[0][0], 0};
+    return ConstIndirectIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -296,7 +305,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstIndirectIterator
 Matrix<M,N,T>::cendIndirect() const
 {
-    return ConstIndirectIterator {&m_data[0][0], M*N};
+    return ConstIndirectIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -361,7 +370,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::RowDirIterator
 Matrix<M,N,T>::beginRowDir()
 {
-    return RowDirIterator {&m_data[0][0], 0};
+    return RowDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -370,7 +379,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::RowDirIterator
 Matrix<M,N,T>::endRowDir()
 {
-    return RowDirIterator {&m_data[0][0], M*N};
+    return RowDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -379,7 +388,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowDirIterator
 Matrix<M,N,T>::beginRowDir() const
 {
-    return ConstRowDirIterator {&m_data[0][0], 0};
+    return ConstRowDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -388,7 +397,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowDirIterator
 Matrix<M,N,T>::endRowDir() const
 {
-    return ConstRowDirIterator {&m_data[0][0], M*N};
+    return ConstRowDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -397,7 +406,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowDirIterator
 Matrix<M,N,T>::cbeginRowDir() const
 {
-    return ConstRowDirIterator {&m_data[0][0], 0};
+    return ConstRowDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -406,7 +415,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowDirIterator
 Matrix<M,N,T>::cendRowDir() const
 {
-    return ConstRowDirIterator {&m_data[0][0], M*N};
+    return ConstRowDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -471,7 +480,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ColumnDirIterator
 Matrix<M,N,T>::beginColumnDir()
 {
-    return ColumnDirIterator {&m_data[0][0], 0};
+    return ColumnDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -480,7 +489,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ColumnDirIterator
 Matrix<M,N,T>::endColumnDir()
 {
-    return ColumnDirIterator {&m_data[0][0], M*N};
+    return ColumnDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -489,7 +498,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
 Matrix<M,N,T>::beginColumnDir() const
 {
-    return ConstColumnDirIterator {&m_data[0][0], 0};
+    return ConstColumnDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -498,7 +507,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
 Matrix<M,N,T>::endColumnDir() const
 {
-    return ConstColumnDirIterator {&m_data[0][0], M*N};
+    return ConstColumnDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -507,7 +516,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
 Matrix<M,N,T>::cbeginColumnDir() const
 {
-    return ConstColumnDirIterator {&m_data[0][0], 0};
+    return ConstColumnDirIterator {&**m_data, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -516,7 +525,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnDirIterator
 Matrix<M,N,T>::cendColumnDir() const
 {
-    return ConstColumnDirIterator {&m_data[0][0], M*N};
+    return ConstColumnDirIterator {&**m_data, M*N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -581,7 +590,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::RowIterator
 Matrix<M,N,T>::beginRow(size_type row)
 {
-    return RowIterator {&m_data[0][0], row, 0};
+    return RowIterator {&**m_data, row, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -590,7 +599,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::RowIterator
 Matrix<M,N,T>::endRow(size_type row)
 {
-    return RowIterator {&m_data[0][0], row, N};
+    return RowIterator {&**m_data, row, N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -599,7 +608,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowIterator
 Matrix<M,N,T>::beginRow(size_type row) const
 {
-    return ConstRowIterator {&m_data[0][0], row, 0};
+    return ConstRowIterator {&**m_data, row, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -608,7 +617,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowIterator
 Matrix<M,N,T>::endRow(size_type row) const
 {
-    return ConstRowIterator {&m_data[0][0], row, N};
+    return ConstRowIterator {&**m_data, row, N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -617,7 +626,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowIterator
 Matrix<M,N,T>::cbeginRow(size_type row) const
 {
-    return ConstRowIterator {&m_data[0][0], row, 0};
+    return ConstRowIterator {&**m_data, row, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -626,7 +635,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstRowIterator
 Matrix<M,N,T>::cendRow(size_type row) const
 {
-    return ConstRowIterator {&m_data[0][0], row, N};
+    return ConstRowIterator {&**m_data, row, N};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -691,7 +700,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ColumnIterator
 Matrix<M,N,T>::beginColumn(size_type column)
 {
-    return ColumnIterator {&m_data[0][0], column, 0};
+    return ColumnIterator {&**m_data, column, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -700,7 +709,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ColumnIterator
 Matrix<M,N,T>::endColumn(size_type column)
 {
-    return ColumnIterator {&m_data[0][0], column, M};
+    return ColumnIterator {&**m_data, column, M};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -709,7 +718,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::beginColumn(size_type column) const
 {
-    return ConstColumnIterator {&m_data[0][0], column, 0};
+    return ConstColumnIterator {&**m_data, column, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -718,7 +727,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::endColumn(size_type column) const
 {
-    return ConstColumnIterator {&m_data[0][0], column, M};
+    return ConstColumnIterator {&**m_data, column, M};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -727,7 +736,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::cbeginColumn(size_type column) const
 {
-    return ConstColumnIterator {&m_data[0][0], column, 0};
+    return ConstColumnIterator {&**m_data, column, 0};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -736,7 +745,7 @@ template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::ConstColumnIterator
 Matrix<M,N,T>::cendColumn(size_type column) const
 {
-    return ConstColumnIterator {&m_data[0][0], column, M};
+    return ConstColumnIterator {&**m_data, column, M};
 }
 
 /* --------------------------------------------------------------------------------------- */
