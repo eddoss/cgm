@@ -142,7 +142,7 @@ constexpr T
 operator | (const MATH3D_NAMESPACE::Quaternion<T>& A, const MATH3D_NAMESPACE::Quaternion<T>& B);
 
 
-#include <private/Math3D/Core/Quaternion/Operators.hpp>
+#include <private/Math3D/Core/Operators/Quaternion.hpp>
 
 
 #endif // MATH3D_QUATERNION_OPERATORS_HPP

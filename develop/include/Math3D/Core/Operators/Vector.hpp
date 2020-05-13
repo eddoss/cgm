@@ -346,7 +346,7 @@ constexpr MATH3D_NAMESPACE::Vector<3,T>
 operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector<3,T>& B);
 
 
-#include <private/Math3D/Core/Vector/Operators.hpp>
+#include <private/Math3D/Core/Operators/Vector.hpp>
 
 
 #endif // MATH3D_VECTOR_OPERATORS_HPP

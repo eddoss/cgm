@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Matrix/Operators.hpp>
+#include <Math3D/Core/Functions/Matrix.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

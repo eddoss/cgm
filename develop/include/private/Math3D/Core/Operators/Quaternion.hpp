@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Quaternion/Operators.hpp>
+#include <Math3D/Core/Operators/Quaternion.hpp>
 
 
 template<typename T>
