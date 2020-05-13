@@ -6,8 +6,8 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Quaternion/Functions.hpp>
-#include <Math3D/Core/Quaternion/Operators.hpp>
+#include <Math3D/Core/Functions/Quaternion.hpp>
+#include <Math3D/Core/Operators/Quaternion.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -108,7 +108,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/Functions/BasisCreators.hpp>
+#include <private/Math3D/Cartesian/Functions/Basis.hpp>
 
 
 #endif // MATH3D_XYZ_FUNCTIONS_BASIS_CREATORS_HPP
