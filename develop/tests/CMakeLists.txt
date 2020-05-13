@@ -25,19 +25,17 @@ project(UnitTests LANGUAGES CXX)
 find_package(GTest REQUIRED)
 
 # ####################################################################################### #
-# Tests suites sources
+# SUITES | Core
 # ####################################################################################### #
 
-set(CORE_VECTOR_TEST_SUITE
-    run.cpp
+set(TS_CORE_VECTOR
     Core/Vector/Functions.cpp
     Core/Vector/Arithmetic.cpp
     Core/Vector/ComparisonWithOther.cpp
     Core/Vector/ComparisonWithScalar.cpp
 )
 
-set(CORE_MATRIX_TEST_SUITE
-    run.cpp
+set(TS_CORE_MATRIX
     Core/Matrix/Functions.cpp
     Core/Matrix/Arithmetic/Plus.cpp
     Core/Matrix/Arithmetic/Minus.cpp
@@ -57,39 +55,34 @@ set(CORE_MATRIX_TEST_SUITE
     Core/Matrix/Iterators/Column.cpp
 )
 
-set(CORE_QUATERNION_TEST_SUITE
-    run.cpp
+set(TS_CORE_QUATERNION
     Core/Quaternion/Operators.cpp
     Core/Quaternion/Functions.cpp
 )
 
-set(CORE_COORDINATES_TEST_SUITE
-    run.cpp
+set(TS_CORE_COORDINATES
     Core/Coordinates.cpp
 )
 
-set(MODULE_CORE_TEST_SUITE
-    run.cpp
-    "${CORE_VECTOR_TEST_SUITE}"
-    "${CORE_MATRIX_TEST_SUITE}"
-    "${CORE_QUATERNION_TEST_SUITE}"
-    "${CORE_COORDINATES_TEST_SUITE}"
+set(TS_MODULE_CORE
+    "${TS_CORE_VECTOR}"
+    "${TS_CORE_MATRIX}"
+    "${TS_CORE_QUATERNION}"
+    "${TS_CORE_COORDINATES}"
 )
 
-set(ALL_MODULES_TEST_SUITES
-    ${CORE_VECTOR_TEST_SUITE}
-    ${CORE_MATRIX_TEST_SUITE}
-    ${CORE_QUATERNION_TEST_SUITE}
-    ${CORE_COORDINATES_TEST_SUITE}
+math3d_add_test(ModuleCoreTestSuite         "run.cpp;${MODULE_CORE_TEST_SUITE}")
+math3d_add_test(Core-VectorTestSuite        "run.cpp;${CORE_VECTOR_TEST_SUITE}")
+math3d_add_test(Core-MatrixTestSuite        "run.cpp;${CORE_MATRIX_TEST_SUITE}")
+math3d_add_test(Core-QuaternionTestSuite    "run.cpp;${CORE_QUATERNION_TEST_SUITE}")
+math3d_add_test(Core-CoordinatesTestSuite   "run.cpp;${CORE_COORDINATES_TEST_SUITE}")
+
+# ####################################################################################### #
+# SUITES | All modules
+# ####################################################################################### #
+
+set(TS_ALL_MODULES
+    ${TS_MODULE_CORE}
 )
 
-# ####################################################################################### #
-# Setup tests suites
-# ####################################################################################### #
-
-math3d_add_test(AllTestSuites           "${ALL_MODULES_TEST_SUITES}")
-math3d_add_test(ModuleCoreTestSuite     "${MODULE_CORE_TEST_SUITE}")
-math3d_add_test(VectorTestSuite         "${CORE_VECTOR_TEST_SUITE}")
-math3d_add_test(MatrixTestSuite         "${CORE_MATRIX_TEST_SUITE}")
-math3d_add_test(QuaternionTestSuite     "${CORE_QUATERNION_TEST_SUITE}")
-math3d_add_test(CoordinatesTestSuite    "${CORE_COORDINATES_TEST_SUITE}")
+math3d_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")
