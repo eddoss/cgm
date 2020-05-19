@@ -89,7 +89,7 @@ public: /* Components accessing */
      * @return Imaginary coefficients.
      */
     constexpr FORCEINLINE Vector<3,T>
-    xyz() const;
+    imaginary() const;
 };
 
 MATH3D_NAMESPACE_END

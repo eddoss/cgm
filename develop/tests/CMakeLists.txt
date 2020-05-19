@@ -60,10 +60,6 @@ set(TS_CORE_QUATERNION
     Core/Quaternion/Functions.cpp
 )
 
-set(TS_CORE_COORDINATES
-    Core/Coordinates.cpp
-)
-
 set(TS_MODULE_CORE
     "${TS_CORE_VECTOR}"
     "${TS_CORE_MATRIX}"
@@ -78,11 +74,32 @@ math3d_add_test(Core-QuaternionTestSuite    "run.cpp;${CORE_QUATERNION_TEST_SUIT
 math3d_add_test(Core-CoordinatesTestSuite   "run.cpp;${CORE_COORDINATES_TEST_SUITE}")
 
 # ####################################################################################### #
+# SUITES | Coordinates
+# ####################################################################################### #
+
+set(TS_MODULE_COORDINATES
+    Coordinates.cpp
+)
+
+math3d_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
+
+# ####################################################################################### #
+# SUITES | Cartesian
+# ####################################################################################### #
+
+set(TS_MODULE_CARTESIAN
+    Cartesian/Axes.cpp
+)
+
+math3d_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
+
+# ####################################################################################### #
 # SUITES | All modules
 # ####################################################################################### #
 
 set(TS_ALL_MODULES
     ${TS_MODULE_CORE}
+    ${TS_MODULE_COORDINATES}
 )
 
 math3d_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")

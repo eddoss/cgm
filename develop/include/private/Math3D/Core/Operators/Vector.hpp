@@ -313,7 +313,7 @@ operator+(T scalar, const MATH3D_NAMESPACE::Vector<D,T>& vector)
 
 template<size_t D, typename T>
 constexpr FORCEINLINE MATH3D_NAMESPACE::Vector<D,T>
-operator-(MATH3D_NAMESPACE::Vector<D,T>& vector)
+operator-(const MATH3D_NAMESPACE::Vector<D,T>& vector)
 {
     auto copy {vector};
 

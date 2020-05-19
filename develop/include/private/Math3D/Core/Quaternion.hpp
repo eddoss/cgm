@@ -79,7 +79,7 @@ Quaternion<T, enable_if_floating<T,void>>::data() const
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-Quaternion<T, enable_if_floating<T,void>>::xyz() const
+Quaternion<T, enable_if_floating<T,void>>::imaginary() const
 {
     return {x,y,z};
 }
