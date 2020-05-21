@@ -14,7 +14,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 getX(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_2d_basis_x(basis);
+    return _internal_get_basis_x(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -23,7 +23,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 getY(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_2d_basis_y(basis);
+    return _internal_get_basis_y(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -32,7 +32,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setX(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-    _internal_set_2d_basis_x(basis, value);
+    _internal_set_basis_x(basis, value);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,7 +41,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setY(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-    _internal_set_2d_basis_y(basis, value);
+    _internal_set_basis_y(basis, value);
 }
 
 /* ####################################################################################### */
@@ -52,7 +52,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
 getUp(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_3d_basis_up(basis);
+    return _internal_get_basis_up(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -61,7 +61,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
 getRight(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_3d_basis_right(basis);
+    return _internal_get_basis_right(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -70,7 +70,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
 getDown(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_3d_basis_down(basis);
+    return _internal_get_basis_down(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -79,7 +79,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
 getLeft(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_3d_basis_left(basis);
+    return _internal_get_basis_left(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -88,7 +88,7 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-    _internal_set_2d_basis_up(basis, value);
+    _internal_set_basis_up(basis, value);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -108,7 +108,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<2,T>
 getPosition(const Matrix<3,3,T>& basis)
 {
-    return _internal_get_2d_basis_position(basis);
+    return _internal_get_basis_position(basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -128,7 +128,7 @@ template<typename T>
 constexpr FORCEINLINE Matrix<2,2,T>
 extractOrientation(const Matrix<3,3,T>& basis)
 {
-    return _internal_extract_orientation_from_3x3_matrix(basis);
+    return _internal_get_orientation_matrix2x2_from_matrix3x3(basis);
 }
 
 MATH3D_XYZ_NAMESPACE_END

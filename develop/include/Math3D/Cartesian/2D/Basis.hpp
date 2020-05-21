@@ -32,6 +32,27 @@ public: /* Aliases */
     using BaseOnType = Matrix<2,2,T>;
 
 /* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Creates basis manually.
+     * @param x Basis X axis.
+     * @param y Basis Y axis.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
+
+    /**
+     * Creates basis from 2x2 orientation matrix and position.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
+
+/* ####################################################################################### */
 public: /* Getters */
 /* ####################################################################################### */
 
@@ -156,6 +177,27 @@ public: /* Aliases */
 /* ####################################################################################### */
 
     using BaseOnType = Matrix<3,3,T>;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Creates basis manually.
+     * @param x Basis X axis.
+     * @param y Basis Y axis.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
+
+    /**
+     * Creates basis from 2x2 orientation matrix and position.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
 /* ####################################################################################### */
 public: /* Getters */

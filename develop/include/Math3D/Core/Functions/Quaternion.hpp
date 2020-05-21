@@ -103,6 +103,28 @@ template<typename T=FLOAT>
 constexpr Quaternion<T>
 identity();
 
+/**
+ * Compare quaternion A and B (floating point based).
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
+
+/**
+ * Compare quaternion A and B (floating point based).
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
+
 MATH3D_NAMESPACE_END
 
 

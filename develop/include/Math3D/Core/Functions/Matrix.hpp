@@ -115,6 +115,28 @@ template<size_t S, typename T=FLOAT>
 constexpr FORCEINLINE Matrix<S,S,T>
 identity();
 
+/**
+ * Compare matrix A and B (floating point based).
+ * @param A First matrix.
+ * @param B Second matrix.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
+template<size_t M, size_t N, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance);
+
+/**
+ * Compare matrix A and B (floating point based).
+ * @param A First matrix.
+ * @param B Second matrix.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
+template<size_t M, size_t N, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance);
+
 MATH3D_NAMESPACE_END
 
 

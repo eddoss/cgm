@@ -139,4 +139,30 @@ identity()
     };
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
+{
+    return
+    MATH3D_NAMESPACE::equal(A.s, B.s, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.x, B.x, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.y, B.y, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.z, B.z, tolerance);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
+{
+    return
+    MATH3D_NAMESPACE::notEqual(A.s, B.s, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.x, B.x, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.y, B.y, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.z, B.z, tolerance);
+}
+
 MATH3D_NAMESPACE_END

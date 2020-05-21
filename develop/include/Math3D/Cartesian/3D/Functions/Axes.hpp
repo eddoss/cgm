@@ -1,5 +1,5 @@
-#ifndef MATH3D_XYZ_FUNCTIONS_AXES_CREATORS_HPP
-#define MATH3D_XYZ_FUNCTIONS_AXES_CREATORS_HPP
+#ifndef MATH3D_XYZ_FUNCTIONS_AXES_HPP
+#define MATH3D_XYZ_FUNCTIONS_AXES_HPP
 
 
 #include <Math3D/Global.hpp>
@@ -17,14 +17,14 @@ MATH3D_XYZ_NAMESPACE_BEGIN
 /**
  * Gets Cartesian x axis.
  */
-template<typename T>
+template<typename T=FLOAT>
 constexpr FORCEINLINE Vector<3,T>
 x();
 
 /**
  * Gets Cartesian Y axis.
  */
-template<typename T>
+template<typename T=FLOAT>
 constexpr FORCEINLINE Vector<3,T>
 y();
 
@@ -85,7 +85,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/Functions/Axes.hpp>
+#include <private/Math3D/Cartesian/3D/Functions/Axes.hpp>
 
 
-#endif // MATH3D_XYZ_FUNCTIONS_AXES_CREATORS_HPP
+#endif // MATH3D_XYZ_FUNCTIONS_AXES_HPP

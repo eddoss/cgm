@@ -10,7 +10,7 @@ MATH3D_XYZ_NAMESPACE_BEGIN
 /* X, Y, Z axes */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
+template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 x()
 {
@@ -19,7 +19,7 @@ x()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t D, typename T>
+template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 y()
 {

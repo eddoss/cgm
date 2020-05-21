@@ -83,11 +83,11 @@ localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
     Vector<3,T> oriented
     {
-        vector * _internal_get_3d_basis_x(localSpace),
-        vector * _internal_get_3d_basis_y(localSpace),
-        vector * _internal_get_3d_basis_z(localSpace)
+        vector * _internal_get_basis_x(localSpace),
+        vector * _internal_get_basis_y(localSpace),
+        vector * _internal_get_basis_z(localSpace)
     };
-    return oriented + _internal_get_3d_basis_position(localSpace);
+    return oriented + _internal_get_basis_position(localSpace);
 }
 
 /* --------------------------------------------------------------------------------------- */

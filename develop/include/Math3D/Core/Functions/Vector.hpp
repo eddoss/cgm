@@ -94,6 +94,28 @@ template<typename TResult=FLOAT, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
+/**
+ * Compare vector A and B (floating point based).
+ * @param A First vector.
+ * @param B Second vector.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance);
+
+/**
+ * Compare vector A and B (floating point based).
+ * @param A First vector.
+ * @param B Second vector.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance);
+
 MATH3D_NAMESPACE_END
 
 

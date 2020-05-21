@@ -480,4 +480,355 @@ identity()
     }
 }
 
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
+{
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance);
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance);
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,3), B(0,3), tolerance);
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance);
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance);
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,0), B(3,0), tolerance);
+    }
+    else if constexpr (M == 2 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,3), B(0,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,3), B(1,3), tolerance);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,2), B(2,2), tolerance);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,3), B(0,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,3), B(1,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,2), B(2,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,3), B(2,3), tolerance);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,0), B(3,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,1), B(3,1), tolerance);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,2), B(2,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,0), B(3,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,1), B(3,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,2), B(3,2), tolerance);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::equal(A(0,0), B(0,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,1), B(0,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,2), B(0,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(0,3), B(0,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,0), B(1,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,1), B(1,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,2), B(1,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(1,3), B(1,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,0), B(2,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,1), B(2,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,2), B(2,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(2,3), B(2,3), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,0), B(3,0), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,1), B(3,1), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,2), B(3,2), tolerance) &&
+        MATH3D_NAMESPACE::equal(A(3,3), B(3,3), tolerance);
+    }
+    else
+    {
+        for (auto i = 0; i < MATH3D_NAMESPACE::Matrix<M,N,T>::size; ++i)
+        {
+            if (MATH3D_NAMESPACE::notEqual(A[i], B[i]), tolerance) return false;
+        }
+        return true;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
+{
+    if constexpr (M == 1 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance);
+    }
+    else if constexpr (M == 1 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance);
+    }
+    else if constexpr (M == 1 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,3), B(0,3), tolerance);
+    }
+    else if constexpr (M == 2 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance);
+    }
+    else if constexpr (M == 3 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance);
+    }
+    else if constexpr (M == 4 && N == 1)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,0), B(3,0), tolerance);
+    }
+    else if constexpr (M == 2 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance);
+    }
+    else if constexpr (M == 2 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance);
+    }
+    else if constexpr (M == 2 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,3), B(0,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,3), B(1,3), tolerance);
+    }
+    else if constexpr (M == 3 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance);
+    }
+    else if constexpr (M == 3 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,2), B(2,2), tolerance);
+    }
+    else if constexpr (M == 3 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,3), B(0,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,3), B(1,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,2), B(2,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,3), B(2,3), tolerance);
+    }
+    else if constexpr (M == 4 && N == 2)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,0), B(3,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,1), B(3,1), tolerance);
+    }
+    else if constexpr (M == 4 && N == 3)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,2), B(2,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,0), B(3,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,1), B(3,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,2), B(3,2), tolerance);
+    }
+    else if constexpr (M == 4 && N == 4)
+    {
+        return
+        MATH3D_NAMESPACE::notEqual(A(0,0), B(0,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,1), B(0,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,2), B(0,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(0,3), B(0,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,0), B(1,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,1), B(1,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,2), B(1,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(1,3), B(1,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,0), B(2,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,1), B(2,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,2), B(2,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(2,3), B(2,3), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,0), B(3,0), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,1), B(3,1), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,2), B(3,2), tolerance) ||
+        MATH3D_NAMESPACE::notEqual(A(3,3), B(3,3), tolerance);
+    }
+    else
+    {
+        for (auto i = 0; i < MATH3D_NAMESPACE::Matrix<M,N,T>::size; ++i)
+        {
+            if (MATH3D_NAMESPACE::notEqual(A[i], B[i]), tolerance) return true;
+        }
+        return false;
+    }
+}
+
 MATH3D_NAMESPACE_END

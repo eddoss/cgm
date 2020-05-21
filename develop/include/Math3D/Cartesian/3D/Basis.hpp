@@ -15,7 +15,7 @@
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
 
-template <EBasisBase Base, typename T, typename = void> struct Basis;
+template <EBasisBase Base, typename T=FLOAT, typename = void> struct Basis;
 
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 /* /////////////////////////////////////////////////////////////////////////////////////// */
@@ -31,6 +31,36 @@ public: /* Aliases */
 /* ####################################################################################### */
 
     using BaseOnType = Matrix<3,3,T>;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Creates basis manually.
+     * @param x Basis X axis.
+     * @param y Basis Y axis.
+     * @param z Basis Z axis.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 3x3 orientation matrix and position.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis orientated by quaternion.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 public: /* Getters */
@@ -195,6 +225,36 @@ public: /* Aliases */
     using BaseOnType = Matrix<4,4,T>;
 
 /* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Creates basis manually.
+     * @param x Basis X axis.
+     * @param y Basis Y axis.
+     * @param z Basis Z axis.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 3x3 orientation matrix and position.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis orientated by quaternion.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+/* ####################################################################################### */
 public: /* Getters */
 /* ####################################################################################### */
 
@@ -352,6 +412,36 @@ public: /* Aliases */
 /* ####################################################################################### */
 
     using BaseOnType = Quaternion<T>;
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Creates basis manually.
+     * @param x Basis X axis.
+     * @param y Basis Y axis.
+     * @param z Basis Z axis.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 3x3 orientation matrix and position.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis orientated by quaternion.
+     * @param orientation Basis orientation.
+     * @param position Basis position.
+     */
+    constexpr
+    Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 public: /* Getters */

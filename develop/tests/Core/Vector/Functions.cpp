@@ -5,7 +5,6 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Operators/Vector.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Cartesian/Functions/Axes.hpp>
 
 
 using namespace std;
@@ -398,25 +397,25 @@ TEST(Vector_Functions, Angle)
 
 TEST(Vector_Functions, Cross)
 {
-    auto i = MATH3D_XYZ_NAMESPACE::right();
-    auto j = MATH3D_XYZ_NAMESPACE::up();
-    auto k = MATH3D_XYZ_NAMESPACE::forward();
+    Vector<3,int> x {1,0,0};
+    Vector<3,int> y {0,1,0};
+    Vector<3,int> z {0,0,1};
 
 #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    ASSERT_TRUE(cross(i,j) == -k);
-    ASSERT_TRUE(cross(j,k) == -i);
-    ASSERT_TRUE(cross(k,i) == -j);
+    ASSERT_TRUE(cross(x,y) == -z);
+    ASSERT_TRUE(cross(y,z) == -x);
+    ASSERT_TRUE(cross(z,x) == -y);
 
-    ASSERT_TRUE(cross(j,i) == k);
-    ASSERT_TRUE(cross(k,j) == i);
-    ASSERT_TRUE(cross(i,k) == j);
+    ASSERT_TRUE(cross(y,x) == z);
+    ASSERT_TRUE(cross(z,y) == x);
+    ASSERT_TRUE(cross(x,z) == y);
 #else
-    ASSERT_TRUE(cross(i,j) == k);
-    ASSERT_TRUE(cross(j,k) == i);
-    ASSERT_TRUE(cross(k,i) == j);
+    ASSERT_TRUE(cross(x,y) == z);
+    ASSERT_TRUE(cross(y,z) == x);
+    ASSERT_TRUE(cross(z,x) == y);
 
-    ASSERT_TRUE(cross(j,i) == -k);
-    ASSERT_TRUE(cross(k,j) == -i);
-    ASSERT_TRUE(cross(i,k) == -j);
+    ASSERT_TRUE(cross(y,x) == -z);
+    ASSERT_TRUE(cross(z,y) == -x);
+    ASSERT_TRUE(cross(x,z) == -y);
 #endif
 }

@@ -1,6 +1,6 @@
 
 
-#include <Math3D/Core/Operators/Vector.hpp>
+#include <Math3D/Core/Functions/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -178,6 +178,68 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     return std::acos(A | B);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+equal(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
+{
+    if constexpr (D == 2)
+    {
+        return  MATH3D_NAMESPACE::equal(A.x, B.x, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y, tolerance);
+    }
+    else if constexpr (D == 3)
+    {
+        return  MATH3D_NAMESPACE::equal(A.x, B.x, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.z, B.z, tolerance);
+    }
+    else if constexpr (D == 4)
+    {
+        return  MATH3D_NAMESPACE::equal(A.x, B.x, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.y, B.y, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.z, B.z, tolerance) &&
+                MATH3D_NAMESPACE::equal(A.w, B.w, tolerance);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i]), tolerance) return false;
+        return true;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T,bool>
+notEqual(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
+{
+    if constexpr (D == 2)
+    {
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y, tolerance);
+    }
+    else if constexpr (D == 3)
+    {
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.z, B.z, tolerance);
+    }
+    else if constexpr (D == 4)
+    {
+        return  MATH3D_NAMESPACE::notEqual(A.x, B.x, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.y, B.y, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.z, B.z, tolerance) ||
+                MATH3D_NAMESPACE::notEqual(A.w, B.w, tolerance);
+    }
+    else
+    {
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i]), tolerance) return true;
+        return false;
+    }
 }
 
 MATH3D_NAMESPACE_END
