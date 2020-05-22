@@ -6,6 +6,7 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
+#include <Math3D/Cartesian/3D/Basis.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 
@@ -35,6 +36,15 @@ constexpr FORCEINLINE Vector<3,T>
 getX(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis X axis.
+ * @param basis Basis to extract axis from.
+ * @return X axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getX(const Basis<Base,T>& basis);
+
+/**
  * Gets basis Y axis.
  * @param basis Basis to extract axis from.
  * @return Y axis value.
@@ -53,6 +63,15 @@ constexpr FORCEINLINE Vector<3,T>
 getY(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Y axis.
+ * @param basis Basis to extract axis from.
+ * @return Y axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getY(const Basis<Base,T>& basis);
+
+/**
  * Gets basis Z axis.
  * @param basis Basis to extract axis from.
  * @return Z axis value.
@@ -69,6 +88,15 @@ getZ(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 getZ(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Z axis.
+ * @param basis Basis to extract axis from.
+ * @return Z axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getZ(const Basis<Base,T>& basis);
 
 /**
  * Set basis X axis.
@@ -120,6 +148,15 @@ constexpr FORCEINLINE Vector<3,T>
 getUp(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Up axis.
+ * @param basis Basis to extract axis from.
+ * @return Up axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getUp(const Basis<Base,T>& basis);
+
+/**
  * Gets basis Right axis.
  * @param basis Basis to extract axis from.
  * @return Right axis value.
@@ -136,6 +173,15 @@ getRight(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 getRight(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Right axis.
+ * @param basis Basis to extract axis from.
+ * @return Right axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getRight(const Basis<Base,T>& basis);
 
 /**
  * Gets basis Forward axis.
@@ -156,6 +202,15 @@ constexpr FORCEINLINE Vector<3,T>
 getForward(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Forward axis.
+ * @param basis Basis to extract axis from.
+ * @return Forward axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getForward(const Basis<Base,T>& basis);
+
+/**
  * Gets basis Down axis.
  * @param basis Basis to extract axis from.
  * @return Down axis value.
@@ -172,6 +227,15 @@ getDown(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 getDown(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Down axis.
+ * @param basis Basis to extract axis from.
+ * @return Down axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getDown(const Basis<Base,T>& basis);
 
 /**
  * Gets basis Left axis.
@@ -192,6 +256,15 @@ constexpr FORCEINLINE Vector<3,T>
 getLeft(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Left axis.
+ * @param basis Basis to extract axis from.
+ * @return Left axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getLeft(const Basis<Base,T>& basis);
+
+/**
  * Gets basis Backward axis.
  * @param basis Basis to extract axis from.
  * @return Backward axis value.
@@ -208,6 +281,15 @@ getBackward(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 getBackward(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Backward axis.
+ * @param basis Basis to extract axis from.
+ * @return Backward axis value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getBackward(const Basis<Base,T>& basis);
 
 /**
  * Set basis Up axis.
@@ -249,6 +331,14 @@ constexpr FORCEINLINE Vector<3,T>
 getPosition(const Matrix<4,4,T>& basis);
 
 /**
+ * Gets basis position.
+ * @return Basis position.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getPosition(const Basis<Base,T>& basis);
+
+/**
  * Set basis position.
  * @param basis Basis to set position to.
  * @param value New position value.
@@ -256,6 +346,15 @@ getPosition(const Matrix<4,4,T>& basis);
 template<typename T>
 constexpr FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
+
+/**
+ * Set basis position.
+ * @param basis Basis to set position to.
+ * @param value New position value.
+ */
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE void
+setPosition(Basis<Base,T>& basis, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 /* Orientation */
@@ -269,6 +368,37 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
 template<typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
 getOrientation(const Matrix<4,4,T>& basis);
+
+/**
+ * Set 3x3 orientation matrix to 4x4 matrix.
+ * @param basis Basis to set to.
+ * @param orientation 3x3 orientation matrix.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation);
+
+/**
+ * Set orientation axes to basis (3x3 matrix).
+ * @param basis Basis to set to.
+ * @param x X orientation axis.
+ * @param y Y orientation axis.
+ * @param z Z orientation axis.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<3,3,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
+
+/**
+ * Set orientation axes to basis (4x4 matrix).
+ * @param basis Basis to set to.
+ * @param x X orientation axis.
+ * @param y Y orientation axis.
+ * @param z Z orientation axis.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END

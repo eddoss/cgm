@@ -28,6 +28,15 @@ getX(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getX(const Basis<Base,T>& basis)
+{
+    return basis.x();
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getY(const Matrix<S,S,T>& basis)
@@ -39,9 +48,18 @@ getY(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-get3DBasisY(const Quaternion<T>& orientation)
+getY(const Quaternion<T>& orientation)
 {
     return _internal_get_basis_y(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getY(const Basis<Base,T>& basis)
+{
+    return basis.y();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -60,6 +78,15 @@ constexpr FORCEINLINE Vector<3,T>
 getZ(const Quaternion<T>& orientation)
 {
     return _internal_get_basis_z(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getZ(const Basis<Base,T>& basis)
+{
+    return basis.z();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -106,7 +133,16 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getUp(const Quaternion<T>& orientation)
 {
-return _internal_get_basis_up(orientation);
+    return _internal_get_basis_up(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getUp(const Basis<Base,T>& basis)
+{
+    return basis.up();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -129,6 +165,15 @@ getRight(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getRight(const Basis<Base,T>& basis)
+{
+    return basis.right();
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getForward(const Matrix<S,S,T>& basis)
@@ -143,6 +188,15 @@ constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getForward(const Quaternion<T>& orientation)
 {
     return _internal_get_basis_forward(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getForward(const Basis<Base,T>& basis)
+{
+    return basis.forward();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -165,6 +219,15 @@ getDown(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getDown(const Basis<Base,T>& basis)
+{
+    return basis.down();
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getLeft(const Matrix<S,S,T>& basis)
@@ -183,6 +246,15 @@ getLeft(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getLeft(const Basis<Base,T>& basis)
+{
+    return basis.left();
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getBackward(const Matrix<S,S,T>& basis)
@@ -197,6 +269,15 @@ constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 getBackward(const Quaternion<T>& orientation)
 {
     return _internal_get_basis_backward(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getBackward(const Basis<Base,T>& basis)
+{
+    return basis.backward();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -220,7 +301,7 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
+constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
     _internal_set_basis_forward(basis, value);
@@ -232,9 +313,18 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-setPosition(const Matrix<4,4,T>& basis)
+getPosition(const Matrix<4,4,T>& basis)
 {
     return _internal_get_basis_position(basis);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE Vector<3,T>
+getPosition(const Basis<Base,T>& basis)
+{
+    return basis.position();
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -246,6 +336,15 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
     _internal_set_basis_position(basis, position);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<EBasisBase Base, typename T>
+constexpr FORCEINLINE void
+setPosition(Basis<Base,T>& basis, const Vector<3,T>& position)
+{
+    basis.setPosition(position);
+}
+
 /* ####################################################################################### */
 /* Orientation */
 /* ####################################################################################### */
@@ -255,6 +354,35 @@ constexpr FORCEINLINE Matrix<3,3,T>
 getOrientation(const Matrix<4,4,T>& basis)
 {
     return _internal_get_orientation_matrix3x3_from_matrix4x4(basis);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation)
+{
+    _internal_set_orientation_matrix3x3_to_matrix4x4(basis, orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
+{
+    _internal_set_orientation_matrix3x3_to_matrix4x4(basis, x, y, z);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setOrientation(Matrix<3,3,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
+{
+    _internal_set_basis_x(basis, x);
+    _internal_set_basis_y(basis, y);
+    _internal_set_basis_z(basis, z);
 }
 
 MATH3D_XYZ_NAMESPACE_END
