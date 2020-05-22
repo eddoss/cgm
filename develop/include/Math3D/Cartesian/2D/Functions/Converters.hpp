@@ -5,7 +5,6 @@
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Core/Operators/MatrixVectorMultiplication.hpp>
 #include <Math3D/Core/Functions/Matrix.hpp>
 

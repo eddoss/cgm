@@ -130,7 +130,6 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& A, const Matrix<3,3
 
 /* --------------------------------------------------------------------------------------- */
 
-
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& A, const Matrix<4,4,T>& B)
