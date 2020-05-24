@@ -71,7 +71,7 @@ public: /* Assignment operator */
 /* ####################################################################################### */
 
     /**
-     * Assign all components by single value.
+     * Assigns all components by single value.
      */
     constexpr FORCEINLINE Vector&
     operator = (value_type value);
@@ -81,14 +81,14 @@ public: /* Raw data */
 /* ####################################################################################### */
 
     /**
-     * Get raw pointer at the first component.
+     * Gets raw pointer at the first component.
      * @param first component raw pointer.
      */
     constexpr FORCEINLINE pointer
     data();
 
     /**
-     * Get const raw pointer at the first component.
+     * Gets const raw pointer at the first component.
      * @param first component const raw pointer.
      */
     constexpr FORCEINLINE const_pointer
@@ -161,28 +161,35 @@ public: /* Assignment operator */
 /* ####################################################################################### */
 
     /**
-     * Assign all components by single value.
+     * Assigns all components by single value.
      */
     constexpr FORCEINLINE Vector&
     operator = (value_type value);
 
 /* ####################################################################################### */
-public: /* Raw data */
+public: /* Getters */
 /* ####################################################################################### */
 
     /**
-     * Get raw pointer at the first component.
+     * Gets raw pointer at the first component.
      * @param first component raw pointer.
      */
     constexpr FORCEINLINE pointer
     data();
 
     /**
-     * Get const raw pointer at the first component.
+     * Gets const raw pointer at the first component.
      * @param first component const raw pointer.
      */
     constexpr FORCEINLINE const_pointer
     data() const;
+
+    /**
+     * Gets 2D vector (without Z component).
+     * @return 2D Vector.
+     */
+    constexpr FORCEINLINE Vector<2,T>
+    xy() const;
 };
 
 /* ####################################################################################### */
@@ -258,28 +265,42 @@ public: /* Assignment operator */
 /* ####################################################################################### */
 
     /**
-     * Assign all components by single value.
+     * Assigns all components by single value.
      */
     constexpr FORCEINLINE Vector&
     operator = (value_type value);
 
 /* ####################################################################################### */
-public: /* Raw data */
+public: /* Getters */
 /* ####################################################################################### */
 
     /**
-     * Get raw pointer at the first component.
+     * Gets raw pointer at the first component.
      * @param first component raw pointer.
      */
     constexpr FORCEINLINE pointer
     data();
 
     /**
-     * Get const raw pointer at the first component.
+     * Gets const raw pointer at the first component.
      * @param first component const raw pointer.
      */
     constexpr FORCEINLINE const_pointer
     data() const;
+
+    /**
+     * Gets 2D vector (without Z and W components).
+     * @return 2D Vector.
+     */
+    constexpr FORCEINLINE Vector<2,T>
+    xy() const;
+
+    /**
+     * Gets 3D vector (without W component).
+     * @return 3D Vector.
+     */
+    constexpr FORCEINLINE Vector<3,T>
+    xyz() const;
 };
 
 /* ####################################################################################### */
@@ -369,6 +390,20 @@ public: /* Components accessing */
      */
     constexpr FORCEINLINE const_pointer
     data() const;
+
+    /**
+     * Gets 2D vector XY.
+     * @return 2D Vector.
+     */
+    constexpr FORCEINLINE Vector<2,T>
+    xy() const;
+
+    /**
+     * Gets 3D vector XYZ.
+     * @return 3D Vector.
+     */
+    constexpr FORCEINLINE Vector<3,T>
+    xyz() const;
 
 /* ####################################################################################### */
 public: /* Iterators */

@@ -29,6 +29,7 @@ find_package(GTest REQUIRED)
 # ####################################################################################### #
 
 set(TS_CORE_VECTOR
+    Core/Vector/Getters.cpp
     Core/Vector/Functions.cpp
     Core/Vector/Arithmetic.cpp
     Core/Vector/ComparisonWithOther.cpp
@@ -68,10 +69,9 @@ set(TS_MODULE_CORE
 )
 
 math3d_add_test(ModuleCoreTestSuite         "run.cpp;${MODULE_CORE_TEST_SUITE}")
-math3d_add_test(Core-VectorTestSuite        "run.cpp;${CORE_VECTOR_TEST_SUITE}")
-math3d_add_test(Core-MatrixTestSuite        "run.cpp;${CORE_MATRIX_TEST_SUITE}")
-math3d_add_test(Core-QuaternionTestSuite    "run.cpp;${CORE_QUATERNION_TEST_SUITE}")
-math3d_add_test(Core-CoordinatesTestSuite   "run.cpp;${CORE_COORDINATES_TEST_SUITE}")
+math3d_add_test(Core-VectorTestSuite        "run.cpp;${TS_CORE_VECTOR}")
+math3d_add_test(Core-MatrixTestSuite        "run.cpp;${TS_CORE_MATRIX}")
+math3d_add_test(Core-QuaternionTestSuite    "run.cpp;${TS_CORE_QUATERNION}")
 
 # ####################################################################################### #
 # SUITES | Coordinates
@@ -91,6 +91,7 @@ set(TS_MODULE_CARTESIAN
     Cartesian/3D/Basis.cpp
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/RawBasis.cpp
+    Cartesian/3D/Functions/Converters.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
 

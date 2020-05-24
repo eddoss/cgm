@@ -51,39 +51,81 @@ constexpr T
 length(const Quaternion<T>& quaternion);
 
 /**
- * Normalize the quaternion if it is large enough.
- * If it is too small, returns an no changed quaternion.
+ * Safely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @param lengthTolerance If quaternion length less than this parameter, normalization will failed.
+ * @return False if normalization failed, true otherwise.
  */
 template<typename T>
-constexpr Quaternion<T>&
-normalize(Quaternion<T>& quaternion);
+constexpr bool
+normalize(Quaternion<T>& quaternion, T lengthTolerance=T(0.000001));
 
 /**
- * Return normalized copy of the quaternion if it is large enough.
- * If it is too small, returns an no changed copy.
- * @return normalized quternion.
+ * Safely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @param lengthTolerance If quaternion length less than this parameter, normalization will failed.
+ * @param success Change this flag false if normalization failed, true otherwise.
+ * @return Normalized copy of the quaternion.
  */
 template<typename T>
 constexpr Quaternion<T>
-normalized(const Quaternion<T>& quaternion);
+normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance=T(0.000001));
 
 /**
- * Invert the quaternion if it is large enough.
- * If it is too small, returns an no changed quaternion.
- * @return Inverted quaternion.
+ * Unsafely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
  */
 template<typename T>
-constexpr Quaternion<T>&
-invert(Quaternion<T>& quaternion);
+constexpr FORCEINLINE void
+normalizeForce(Quaternion<T>& quaternion);
 
 /**
- * Get inverted copy of the quaternion if it is large enough.
+ * Unsafely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @return Normalized copy of the quaternion.
+ */
+template<typename T>
+constexpr FORCEINLINE Quaternion<T>
+normalizedForce(const Quaternion<T>& quaternion);
+
+/**
+ * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
+ * @param normTolerance If quaternion norm less than this parameter, inverting will failed.
+ * @param quaternion Quaternion for which it is necessary to calculate the inverse.
+ * @return False if cant calculate inverse matrix. true otherwise.
+ */
+template<typename T>
+constexpr bool
+invert(Quaternion<T>& quaternion, T normTolerance=T(0.000001));
+
+/**
+ * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
+ * @param[in] quaternion Quaternion for which it is necessary to calculate the inverse.
+ * @param[out] success Set this false if cant calculate inverse quaternion.
+ * @return Inverse quaternion if could calculate, trash otherwise.
+ */
+template<typename T>
+constexpr Quaternion<T>
+inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance=T(0.000001));
+
+/**
+ * Unsafely calculate inverse quaternion.
+ * @param[in] quaternion Quaternion to calculate.
+ * @param[out] success Set this false if cant calculate inverse quaternion.
+ * @return Inverted copy of the quaternion if could calculate, trash otherwise.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+invertForce(Quaternion<T>& quaternion);
+
+/**
+ * Get inverse copy of the quaternion if it is large enough.
  * If it is too small, returns an no changed copy.
  * @return Inverted quaternion.
  */
 template<typename T>
 constexpr Quaternion<T>
-inverted(const Quaternion<T>& quaternion);
+inverseForce(const Quaternion<T>& quaternion);
 
 /**
  * Get angle between two quaternions.

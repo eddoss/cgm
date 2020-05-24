@@ -489,137 +489,129 @@ TEST(Matrix_Functions, Cofactors)
 TEST(Matrix_Functions, Inverse)
 {
     {
-        Matrix<2,2,FLOAT> a
+        Matrix<2,2,double> mat
         {
             1, 2,
             3, 4
         };
 
-        Matrix<2,2,FLOAT> b
+        Matrix<2,2,double> inv
         {
             -2, 1,
-            1.5f, -0.5f
+            1.5, -0.5
         };
 
-        bool success = false;
-        auto inv = inverted(a, success);
+        {
+            auto res = mat;
+            bool suc = invert(res);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
 
-        ASSERT_TRUE(inv == b);
+        {
+            auto res = mat;
+            bool suc = false;
+            res = inverse(res, suc);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
+
+        {
+            auto res = mat;
+            invertForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
+
+        {
+            auto res = mat;
+            res = inverseForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
     }
 
     /* -------------- */
 
     {
-        Matrix<3,3,FLOAT> a
+        Matrix<3,3,double> mat
         {
             1, 2, 3,
             4, 3, 2,
             6, 7, 3
         };
 
-        Matrix<3,3,FLOAT> b
+        Matrix<3,3,double> inv
         {
-            -0.2f, 0.6f, -0.2f,
-            0, -0.6f, 0.4f,
-            0.4f, 0.2f, -0.2f
+            -0.2, 0.6, -0.2,
+            0, -0.6, 0.4,
+            0.4, 0.2, -0.2
         };
 
-        bool success = false;
-        auto inv = inverted(a, success);
+        {
+            auto res = mat;
+            bool suc = invert(res);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
 
-        ASSERT_TRUE(inv == b);
+        {
+            auto res = mat;
+            bool suc = false;
+            res = inverse(res, suc);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
+
+        {
+            auto res = mat;
+            invertForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
+
+        {
+            auto res = mat;
+            res = inverseForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
     }
 
     /* -------------- */
 
     {
-        Matrix<4,4,FLOAT> a
+        Matrix<4,4,double> mat
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2,
             1, 2, 3, 2
         };
-        Matrix<4,4,FLOAT> b
+        Matrix<4,4,double> inv
         {
-            -0.5f, 0.75f, -0.5f, 0.75,
-            0.5f, -0.75f, 1.0f, -1.25f,
-            -0.5f, 0.25f, -0.5f, 1.25f,
-            0.5, 0.0f, 0.0f, -0.5f
+            -0.5, 0.75, -0.5, 0.75,
+            0.5, -0.75, 1.0, -1.25,
+            -0.5, 0.25, -0.5, 1.25,
+            0.5, 0.0, 0.0f, -0.5
         };
 
-        bool success = false;
-        auto inv = inverted(a, success);
-
-        ASSERT_TRUE(inv == b);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Matrix_Functions, InverseForce)
-{
-    {
-        Matrix<2,2,FLOAT> a
         {
-            1, 2,
-            3, 4
-        };
+            auto res = mat;
+            bool suc = invert(res);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
 
-        Matrix<2,2,FLOAT> b
         {
-            -2, 1,
-            1.5f, -0.5f
-        };
+            auto res = mat;
+            bool suc = false;
+            res = inverse(res, suc);
+            ASSERT_TRUE(equal(res, inv, 0.001) && suc);
+        }
 
-        auto inv = invertedForce(a);
-
-        ASSERT_TRUE(inv == b);
-    }
-
-    /* -------------- */
-
-    {
-        Matrix<3,3,FLOAT> a
         {
-            1, 2, 3,
-            4, 3, 2,
-            6, 7, 3
-        };
+            auto res = mat;
+            invertForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
 
-        Matrix<3,3,FLOAT> b
         {
-            -0.2f, 0.6f, -0.2f,
-            0, -0.6f, 0.4f,
-            0.4f, 0.2f, -0.2f
-        };
-
-        auto inv = invertedForce(a);
-
-        ASSERT_TRUE(inv == b);
-    }
-
-    /* -------------- */
-
-    {
-        Matrix<4,4,FLOAT> a
-        {
-            1, 2, 3, 4,
-            3, 2, 1, 2,
-            3, 4, 3, 2,
-            1, 2, 3, 2
-        };
-        Matrix<4,4,FLOAT> b
-        {
-            -0.5f, 0.75f, -0.5f, 0.75,
-            0.5f, -0.75f, 1.0f, -1.25f,
-            -0.5f, 0.25f, -0.5f, 1.25f,
-            0.5, 0.0f, 0.0f, -0.5f
-        };
-
-        auto inv = invertedForce(a);
-
-        ASSERT_TRUE(inv == b);
+            auto res = mat;
+            res = inverseForce(res);
+            ASSERT_TRUE(equal(res, inv, 0.001));
+        }
     }
 }
 

@@ -19,134 +19,129 @@ using Vec5 = Vector<5,float>;
 TEST(Vector_Functions, Normalize)
 {
     {
-        Vec2 vec {0.122f, 0.728f};
-        Vec2 nrm {0.165f, 0.986f};
+        Vector<2,double> vec {0.122, 0.728};
+        Vector<2,double> nrm {0.165, 0.986};
 
-        normalize(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec3 vec {7.897f, 3.119f, 3.880f};
-        Vec3 nrm {0.846f, 0.334f, 0.416f};
-
-        normalize(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec4 vec {4.043f, 5.403f, 2.650f, 8.516f};
-        Vec4 nrm {0.362f, 0.483f, 0.237f, 0.761f};
-
-        normalize(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
-        ASSERT_TRUE(equal(vec.w,nrm.w,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec5 vec {1.761f, 5.609f, 6.016f, 0.368f, 8.103f};
-        Vec5 nrm {0.151f, 0.480f, 0.515f, 0.032f, 0.693f};
-
-        normalize(vec);
-
-        for (size_t i = 0; i < 2; ++i)
         {
-            ASSERT_TRUE(equal(vec[i],nrm[i],0.001f));
+            auto res = vec;
+            auto suc = normalize(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
+
+        {
+            auto res = vec;
+            bool suc = false;
+            res = normalized(res, suc);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
+
+        {
+            auto res = vec;
+            normalizeForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
+        }
+
+        {
+            auto res = vec;
+            res = normalizedForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
         }
     }
 
     /* -------------- */
 
     {
-        Vec2 vec (0);
-        Vec2 nrm (0);
+        Vector<3,double> vec {7.897, 3.119, 3.880};
+        Vector<3,double> nrm {0.846, 0.334, 0.416};
 
-        normalize(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Vector_Functions, Normalized)
-{
-    {
-        Vec2 vec {6.953f, 4.964f};
-        Vec2 nrm {0.814f, 0.581f};
-
-        vec = normalized(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec3 vec {5.187f, 5.811f, 3.600f};
-        Vec3 nrm {0.604f, 0.677f, 0.420f};
-
-        vec = normalized(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec4 vec {5.595f, 9.761f, 0.291f, 6.147f};
-        Vec4 nrm {0.436f, 0.761f, 0.023f, 0.479f};
-
-        vec = normalized(vec);
-
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
-        ASSERT_TRUE(equal(vec.z,nrm.z,0.001f));
-        ASSERT_TRUE(equal(vec.w,nrm.w,0.001f));
-    }
-
-    /* -------------- */
-
-    {
-        Vec5 vec {4.062f, 4.346f, 8.863f, 9.318f, 9.677f};
-        Vec5 nrm {0.237f, 0.253f, 0.517f, 0.543f, 0.564f};
-
-        vec = normalized(vec);
-
-        for (size_t i = 0; i < 2; ++i)
         {
-            ASSERT_TRUE(equal(vec[i],nrm[i],0.001f));
+            auto res = vec;
+            auto suc = normalize(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
+
+        {
+            auto res = vec;
+            bool suc = false;
+            res = normalized(res, suc);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
+
+        {
+            auto res = vec;
+            normalizeForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
+        }
+
+        {
+            auto res = vec;
+            res = normalizedForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
         }
     }
 
     /* -------------- */
 
     {
-        Vec2 vec (0);
-        Vec2 nrm (0);
+        Vector<4,double> vec {4.043, 5.403, 2.650, 8.516};
+        Vector<4,double> nrm {0.362, 0.483, 0.237, 0.761};
 
-        vec = normalized(vec);
+        {
+            auto res = vec;
+            auto suc = normalize(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
 
-        ASSERT_TRUE(equal(vec.x,nrm.x,0.001f));
-        ASSERT_TRUE(equal(vec.y,nrm.y,0.001f));
+        {
+            auto res = vec;
+            bool suc = false;
+            res = normalized(res, suc);
+            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        }
+
+        {
+            auto res = vec;
+            normalizeForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
+        }
+
+        {
+            auto res = vec;
+            res = normalizedForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.001));
+        }
+    }
+
+    /* -------------- */
+
+    {
+        Vector<5,double> vec {1, 5, 6, 0, 0.7};
+        Vector<5,double> nrm {0.126, 0.632, 0.759, 0.0, 0.088};
+
+        {
+            auto res = vec;
+            auto suc = normalize(res);
+            ASSERT_TRUE(MATH3D_NAMESPACE::equal(res, nrm, 0.01) && suc);
+        }
+
+        {
+            auto res = vec;
+            bool suc = false;
+            res = normalized(res, suc);
+            ASSERT_TRUE(equal(res, nrm, 0.01) && suc);
+        }
+
+        {
+            auto res = vec;
+            normalizeForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.01));
+        }
+
+        {
+            auto res = vec;
+            res = normalizedForce(res);
+            ASSERT_TRUE(equal(res, nrm, 0.01));
+        }
     }
 }
 

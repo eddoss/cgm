@@ -277,34 +277,64 @@ cofactors(const Matrix<S,S,T>& matrix)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t S, typename T>
-constexpr Matrix<S,S,TResult>
-inverted(const Matrix<S,S,T>& matrix, bool& success)
+template<size_t S, typename T>
+constexpr enable_if_floating<T,bool>
+invert(Matrix<S,S,T>& matrix, T determinantTolerance)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrix more than 4x4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
 
     T det {determinant(matrix)};
 
-    if (equal(det, zero<T>))
+    if (std::abs(det) >= determinantTolerance)
     {
-        success = false;
-        return Matrix<S,S,TResult>();
+        matrix = transposed(cofactors(matrix)) / det;
+        return true;
     }
     else
     {
-        success = true;
-        return transposed(cofactors(matrix)) / det;
+        return false;
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t S, typename T>
-constexpr FORCEINLINE Matrix<S,S,TResult>
-invertedForce(const Matrix<S,S,T>& matrix)
+template<size_t S, typename T>
+constexpr enable_if_floating<T,Matrix<S,S,T>>
+inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
 {
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverted matrix more than 4x4 size.");
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
 
+    T det {determinant(matrix)};
+
+    if (std::abs(det) >= determinantTolerance)
+    {
+        success = true;
+        return transposed(cofactors(matrix)) / det;
+    }
+    else
+    {
+        success = false;
+        return Matrix<S,S,T>();
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr FORCEINLINE enable_if_floating<T,void>
+invertForce(Matrix<S,S,T>& matrix)
+{
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
+    matrix = transposed(cofactors(matrix)) / determinant(matrix);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr FORCEINLINE enable_if_floating<T,Matrix<S,S,T>>
+inverseForce(const Matrix<S,S,T>& matrix)
+{
+    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
     return transposed(cofactors(matrix)) / determinant(matrix);
 }
 
@@ -427,7 +457,7 @@ constexpr T
 orthogonal(const Matrix<S,S,T>& matrix)
 {
     bool existInverse {false};
-    auto inverse {inverted(matrix, existInverse)};
+    auto inverseMatrix {inverse(matrix, existInverse)};
 
     if (!existInverse)
     {
@@ -435,7 +465,7 @@ orthogonal(const Matrix<S,S,T>& matrix)
     }
     else
     {
-        return transposed(matrix) == inverse;
+        return transposed(matrix) == inverseMatrix;
     }
 }
 

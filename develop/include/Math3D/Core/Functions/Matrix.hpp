@@ -4,6 +4,7 @@
 
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Operators/Matrix.hpp>
+#include <Math3D/Global.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -45,23 +46,43 @@ constexpr Matrix<S,S,T>
 cofactors(const Matrix<S,S,T>& matrix);
 
 /**
- * Safely calculate inverse matrix. Change flag to false, if cant calculate.
- * @param[in] matrix Matrix to calculate.
- * @param[out] success Set this false if cant calculate inverted matrix.
- * @return inverted matrix if could calculate, trash otherwise.
+ * Safely invert matrix. Change flag to false, if cant calculate inverse.
+ * @param matrix Matrix for which it is necessary to calculate the inverse.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ * @return False if cant calculate inverse matrix. true otherwise.
  */
-template<typename TResult=FLOAT, size_t S, typename T>
-constexpr Matrix<S,S,TResult>
-inverted(const Matrix<S,S,T>& matrix, bool& success);
+template<size_t S, typename T>
+constexpr enable_if_floating<T,bool>
+invert(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
+
+/**
+ * Safely calculate inverse matrix. Change flag to false, if cant calculate.
+ * @param[in] matrix Matrix for which it is necessary to calculate the inverse.
+ * @param[out] success Set this false if cant calculate inverse matrix.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ * @return Inverse matrix if could calculate, trash otherwise.
+ */
+template<size_t S, typename T>
+constexpr enable_if_floating<T,Matrix<S,S,T>>
+inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance=T(0.000001));
 
 /**
  * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
  * @param matrix Matrix to calculate.
- * @return inverted matrix if could calculate, trash otherwise.
+ * @return Inverse matrix if could calculate, trash otherwise.
  */
-template<typename TResult=FLOAT, size_t S, typename T>
-constexpr FORCEINLINE Matrix<S,S,TResult>
-invertedForce(const Matrix<S,S,T>& matrix);
+template<size_t S, typename T>
+constexpr enable_if_floating<T,void>
+invertForce(Matrix<S,S,T>& matrix);
+
+/**
+ * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
+ * @param matrix Matrix to calculate.
+ * @return Inverse matrix if could calculate, trash otherwise.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE enable_if_floating<T,Matrix<S,S,T>>
+inverseForce(const Matrix<S,S,T>& matrix);
 
 /**
  * Calculate matrix trace - sum of diagonal elements.
@@ -100,7 +121,7 @@ diagonal(const Matrix<S,S,T>& matrix);
 
 /**
  * Check if matrix is orthogonal (a matrix is orthogonal if its transpose
- * is also its inverse, i.e., transposed(M) = inverted(M)).
+ * is also its inverse, i.e., transposed(M) = inverse(M)).
  * @return True if matrix is orthogonal, false otherwise.
  */
 template<size_t S, typename T>

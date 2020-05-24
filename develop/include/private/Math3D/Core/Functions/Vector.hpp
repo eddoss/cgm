@@ -6,12 +6,15 @@
 MATH3D_NAMESPACE_BEGIN
 
 template<size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<T>, Vector<D,T>&>
-normalize(Vector<D,T>& vector)
+constexpr enable_if_floating<T, bool>
+normalize(Vector<D,T>& vector, T lengthTolerance)
 {
     T len {length<T>(vector)};
 
-    if (equal(len, zero<T>)) return vector;
+    if (std::abs(len) < lengthTolerance)
+    {
+        return false;
+    }
 
     if constexpr (D == 2)
     {
@@ -42,46 +45,52 @@ normalize(Vector<D,T>& vector)
         }
     }
 
-    return vector;
+    return true;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, Vector<D,TResult>>
-normalized(const Vector<D,T>& vector)
+template<size_t D, typename T>
+constexpr enable_if_floating<T, Vector<D,T>>
+normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance)
 {
     T len {length<T>(vector)};
 
-    if (equal(len, zero<T>)) return vector;
+    if (std::abs(len) < lengthTolerance)
+    {
+        success = false;
+        return vector;
+    }
+
+    success = true;
 
     if constexpr (D == 2)
     {
-        return Vector<D,T>
+        return
         {
-            vector.x/len,
-            vector.y/len
+            vector.x / len,
+            vector.y / len
         };
     }
 
     if constexpr (D == 3)
     {
-        return Vector<D,T>
+        return
         {
-            vector.x/len,
-            vector.y/len,
-            vector.z/len
+            vector.x / len,
+            vector.y / len,
+            vector.z / len
         };
     }
 
     if constexpr (D == 4)
     {
-        return Vector<D,T>
+        return
         {
-            vector.x/len,
-            vector.y/len,
-            vector.z/len,
-            vector.w/len
+            vector.x / len,
+            vector.y / len,
+            vector.z / len,
+            vector.w / len
         };
     }
 
@@ -90,7 +99,94 @@ normalized(const Vector<D,T>& vector)
         Vector<D,T> vec;
         for (size_t i = 0; i < D; ++i)
         {
-            vec[i] = vector[i]/len;
+            vec[i] = vector[i] / len;
+        }
+        return vec;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T, void>
+normalizeForce(Vector<D,T>& vector)
+{
+    T len {length<T>(vector)};
+
+    if constexpr (D == 2)
+    {
+        vector.x /= len;
+        vector.y /= len;
+    }
+
+    if constexpr (D == 3)
+    {
+        vector.x /= len;
+        vector.y /= len;
+        vector.z /= len;
+    }
+
+    if constexpr (D == 4)
+    {
+        vector.x /= len;
+        vector.y /= len;
+        vector.z /= len;
+        vector.w /= len;
+    }
+
+    if constexpr (D > 4)
+    {
+        for (size_t i = 0; i < D; ++i)
+        {
+            vector[i] /= len;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T, Vector<D,T>>
+normalizedForce(const Vector<D,T>& vector)
+{
+    T len {length<T>(vector)};
+
+    if constexpr (D == 2)
+    {
+        return
+        {
+            vector.x / len,
+            vector.y / len
+        };
+    }
+
+    if constexpr (D == 3)
+    {
+        return
+        {
+            vector.x / len,
+            vector.y / len,
+            vector.z / len
+        };
+    }
+
+    if constexpr (D == 4)
+    {
+        return
+        {
+            vector.x / len,
+            vector.y / len,
+            vector.z / len,
+            vector.w / len
+        };
+    }
+
+    if constexpr (D > 4)
+    {
+        Vector<D,T> vec;
+        for (size_t i = 0; i < D; ++i)
+        {
+            vec[i] = vector[i] / len;
         }
         return vec;
     }
@@ -206,7 +302,7 @@ equal(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i]), tolerance) return false;
+        for (auto i = 0; i < D; ++i) if (MATH3D_NAMESPACE::notEqual(A[i], B[i], tolerance)) return false;
         return true;
     }
 }

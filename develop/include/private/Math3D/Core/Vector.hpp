@@ -121,7 +121,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::operator = (typename Vector <D, T, st
 }
 
 /* ####################################################################################### */
-/* Raw data */
+/* Getters */
 /* ####################################################################################### */
 
 template<size_t D, typename T>
@@ -138,6 +138,15 @@ constexpr FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_
 Vector <D, T, std::enable_if_t<(D == 3)>>::data() const
 {
     return &x;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<2,T>
+Vector <D, T, std::enable_if_t<(D == 3)>>::xy() const
+{
+    return {x,y};
 }
 
 /* ####################################################################################### */
@@ -213,7 +222,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::operator = (typename Vector <D, T, st
 }
 
 /* ####################################################################################### */
-/* Raw data */
+/* Getters */
 /* ####################################################################################### */
 
 template<size_t D, typename T>
@@ -230,6 +239,24 @@ constexpr FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_
 Vector <D, T, std::enable_if_t<(D == 4)>>::data() const
 {
     return &x;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<2,T>
+Vector <D, T, std::enable_if_t<(D == 4)>>::xy() const
+{
+    return {x,y};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<3,T>
+Vector <D, T, std::enable_if_t<(D == 4)>>::xyz() const
+{
+    return {x,y,z};
 }
 
 /* ####################################################################################### */
@@ -292,6 +319,24 @@ Vector <D, T, std::enable_if_t<(D > 4)>>::operator = (typename Vector <D, T, std
     }
 
     return *this;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<2,T>
+Vector <D, T, std::enable_if_t<(D > 4)>>::xy() const
+{
+    return {m_data[0], m_data[1]};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr FORCEINLINE Vector<3,T>
+Vector <D, T, std::enable_if_t<(D > 4)>>::xyz() const
+{
+    return {m_data[0], m_data[1], m_data[2]};
 }
 
 /* ####################################################################################### */

@@ -73,46 +73,114 @@ length(const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Quaternion<T>&
-normalize(Quaternion<T>& quaternion)
+constexpr bool
+normalize(Quaternion<T>& quaternion, T lengthTolerance)
 {
     T len {length<T>(quaternion)};
 
-    if (notEqual(len, zero<T>))
+    if (len >= lengthTolerance)
     {
         quaternion /= len;
+        return true;
     }
 
-    return quaternion;
+    return false;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr Quaternion<T>
-normalized(const Quaternion<T>& quaternion)
+normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance)
 {
-    auto copy {quaternion};
-    normalize(copy);
-    return copy;
+    T len {length<T>(quaternion)};
+
+    if (len >= lengthTolerance)
+    {
+        success = true;
+        return quaternion / len;
+    }
+    else
+    {
+        success = false;
+        return quaternion;
+    }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
-constexpr Quaternion<T>&
-invert(Quaternion<T>& quaternion)
+constexpr FORCEINLINE void
+normalizeForce(Quaternion<T>& quaternion)
 {
-    return conjugate(quaternion) /= norm(quaternion);
+    quaternion /= length(quaternion);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Quaternion<T>
+normalizedForce(const Quaternion<T>& quaternion)
+{
+    return quaternion / length(quaternion);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr bool
+invert(Quaternion<T>& quaternion, T normTolerance)
+{
+    auto nrm {norm(quaternion)};
+
+    if (std::abs(nrm) >= normTolerance)
+    {
+        quaternion = conjugate(quaternion) /= nrm;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr Quaternion<T>
-inverted(const Quaternion<T>& quaternion)
+inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance)
 {
-    auto copy {quaternion};
-    invert(copy);
-    return copy;
+    auto nrm {norm(quaternion)};
+
+    if (std::abs(nrm) >= normTolerance)
+    {
+        success = true;
+        return conjugated(quaternion) / nrm;
+    }
+    else
+    {
+        success = false;
+        return quaternion;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+invertForce(Quaternion<T>& quaternion)
+{
+    conjugate(quaternion);
+    quaternion /= norm(quaternion);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Quaternion<T>
+inverseForce(const Quaternion<T>& quaternion)
+{
+    return conjugated(quaternion) / norm(quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */

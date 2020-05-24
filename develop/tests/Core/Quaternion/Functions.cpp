@@ -69,60 +69,66 @@ TEST(Quaternion_Functions, Norm)
 
 TEST(Quaternion_Functions, Normalize)
 {
-    Quaternion<float> qat {4.043f, 5.403f, 2.650f, 8.516f};
-    Quaternion<float> nrm {0.362f, 0.483f, 0.237f, 0.761f};
+    Quaternion<double> qtr {4.043, 5.403, 2.650, 8.516};
+    Quaternion<double> nrm {0.362, 0.483, 0.237, 0.761};
 
-    normalize(qat);
+    {
+        auto res = qtr;
+        auto suc = normalize(res);
+        ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+    }
 
-    ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equal(qat.x, nrm.x, 0.001f));
-    ASSERT_TRUE(equal(qat.y, nrm.y, 0.001f));
-    ASSERT_TRUE(equal(qat.z, nrm.z, 0.001f));
+    {
+        auto res = qtr;
+        bool suc = false;
+        res = normalized(res, suc);
+        ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+    }
+
+    {
+        auto res = qtr;
+        normalizeForce(res);
+        ASSERT_TRUE(equal(res, nrm, 0.001));
+    }
+
+    {
+        auto res = qtr;
+        res = normalizedForce(res);
+        ASSERT_TRUE(equal(res, nrm, 0.001));
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Normalized)
+TEST(Quaternion_Functions, Inverse)
 {
-    Quaternion<float> qat {4.043f, 5.403f, 2.650f, 8.516f};
-    Quaternion<float> nrm {0.362f, 0.483f, 0.237f, 0.761f};
-
-    qat = normalized(qat);
-
-    ASSERT_TRUE(equal(qat.s,nrm.s,0.001f));
-    ASSERT_TRUE(equal(qat.x, nrm.x, 0.001f));
-    ASSERT_TRUE(equal(qat.y, nrm.y, 0.001f));
-    ASSERT_TRUE(equal(qat.z, nrm.z, 0.001f));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Quaternion_Functions, Invert)
-{
-    Quaternion<double> qat {1.22, 4.34, 5.11, 12.7};
+    Quaternion<double> qtr {1.22, 4.34, 5.11, 12.7};
     Quaternion<double> inv {0.0058731,-0.0208929,-0.0245997,-0.0611382};
 
-    invert(qat);
+    {
+        auto res = qtr;
+        invert(res);
+        ASSERT_TRUE(equal(res, inv, 0.001));
+    }
 
-    ASSERT_TRUE(equal(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equal(qat.x, inv.x, 0.001));
-    ASSERT_TRUE(equal(qat.y, inv.y, 0.001));
-    ASSERT_TRUE(equal(qat.z, inv.z, 0.001));
-}
+    {
+        auto res = qtr;
+        bool success = false;
+        res = inverse(res, success);
+        ASSERT_TRUE(equal(res, inv, 0.001));
+    }
 
-/* --------------------------------------------------------------------------------------- */
+    {
+        auto res = qtr;
+        invertForce(res);
+        ASSERT_TRUE(equal(res, inv, 0.001));
+    }
 
-TEST(Quaternion_Functions, Inverted)
-{
-    Quaternion<double> qat {1.22, 4.34, 5.11, 12.7};
-    Quaternion<double> inv {0.0058731,-0.0208929,-0.0245997,-0.0611382};
-
-    qat = inverted(qat);
-
-    ASSERT_TRUE(equal(qat.s,inv.s,0.001));
-    ASSERT_TRUE(equal(qat.x, inv.x, 0.001));
-    ASSERT_TRUE(equal(qat.y, inv.y, 0.001));
-    ASSERT_TRUE(equal(qat.z, inv.z, 0.001));
+    {
+        auto res = qtr;
+        res = inverseForce(res);
+        ASSERT_TRUE(equal(res, inv, 0.001));
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */

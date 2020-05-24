@@ -12,24 +12,42 @@
 MATH3D_NAMESPACE_BEGIN
 
 /**
- * Normalize vectors. If given vector length equal to zero,
- * return given vector, normalized otherwise.
+ * Safely normalize vector.
  * @param vector Vector to normalize.
- * @return Normalized vector.
+ * @param lengthTolerance If vector length less than this parameter, normalization will failed.
+ * @return False if normalization failed, true otherwise.
  */
 template<size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<T>, Vector<D,T>&>
-normalize(Vector<D,T>& vector);
+constexpr enable_if_floating<T, bool>
+normalize(Vector<D,T>& vector, T lengthTolerance=T(0.000001));
 
 /**
- * Get normalized copy of vector. For more details see normalize().
+ * Safely normalize vector.
  * @param vector Vector to normalize.
- * @tparam TResult Type of result. It must be float or double.
- * @return Normalized vector.
+ * @param lengthTolerance If vector length less than this parameter, normalization will failed.
+ * @param success Change this flag false if normalization failed, true otherwise.
+ * @return Normalized copy of the vector.
  */
-template<typename TResult=FLOAT, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, Vector<D,TResult>>
-normalized(const Vector<D,T>& vector);
+template<size_t D, typename T>
+constexpr enable_if_floating<T, Vector<D,T>>
+normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance=T(0.000001));
+
+/**
+ * Unsafely normalize vector.
+ * @param vector Vector to normalize.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T, void>
+normalizeForce(Vector<D,T>& vector);
+
+/**
+ * Unsafely normalize vector.
+ * @param vector Vector to normalize.
+ * @return Normalized copy of the vector.
+ */
+template<size_t D, typename T>
+constexpr FORCEINLINE enable_if_floating<T, Vector<D,T>>
+normalizedForce(const Vector<D,T>& vector);
 
 /**
  * Calculates dot product of two vectors.
