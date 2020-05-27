@@ -24,42 +24,42 @@ TEST(Cartesian_3D_Basis, Matrix3)
 
     MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis {X,Y,Z,P};
 
-    ASSERT_TRUE(basis.x() == X);
-    ASSERT_TRUE(basis.y() == Y);
-    ASSERT_TRUE(basis.z() == Z);
+    ASSERT_TRUE(equal(basis.x(), X, 0.0001));
+    ASSERT_TRUE(equal(basis.y(), Y, 0.0001));
+    ASSERT_TRUE(equal(basis.z(), Z, 0.0001));
 
 #ifdef MATH3D_CARTESIAN_UP_X
-    ASSERT_TRUE(basis.up() == X);
+    ASSERT_TRUE(equal(basis.up(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Y
-    ASSERT_TRUE(basis.up() == Y);
+    ASSERT_TRUE(equal(basis.up(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Z
-    ASSERT_TRUE(basis.up() == Z);
+    ASSERT_TRUE(equal(basis.up(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_RIGHT_X
-    ASSERT_TRUE(basis.right() == X);
+    ASSERT_TRUE(equal(basis.right(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Y
-    ASSERT_TRUE(basis.right() == Y);
+    ASSERT_TRUE(equal(basis.right(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Z
-    ASSERT_TRUE(basis.right() == Z);
+    ASSERT_TRUE(equal(basis.right(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_FORWARD_X
-    ASSERT_TRUE(basis.forward() == X);
+    ASSERT_TRUE(equal(basis.forward(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Y
-    ASSERT_TRUE(basis.forward() == Y);
+    ASSERT_TRUE(equal(basis.forward(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Z
-    ASSERT_TRUE(basis.forward() == Z);
+    ASSERT_TRUE(equal(basis.forward(), Z, 0.0001));
 #endif
 
     ASSERT_TRUE(basis.position() == P);
@@ -79,42 +79,42 @@ TEST(Cartesian_3D_Basis, Matrix4)
 
     MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix4,double> basis {X,Y,Z,P};
 
-    ASSERT_TRUE(basis.x() == X);
-    ASSERT_TRUE(basis.y() == Y);
-    ASSERT_TRUE(basis.z() == Z);
+    ASSERT_TRUE(equal(basis.x(), X, 0.0001));
+    ASSERT_TRUE(equal(basis.y(), Y, 0.0001));
+    ASSERT_TRUE(equal(basis.z(), Z, 0.0001));
 
 #ifdef MATH3D_CARTESIAN_UP_X
-    ASSERT_TRUE(basis.up() == X);
+    ASSERT_TRUE(equal(basis.up(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Y
-    ASSERT_TRUE(basis.up() == Y);
+    ASSERT_TRUE(equal(basis.up(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Z
-    ASSERT_TRUE(basis.up() == Z);
+    ASSERT_TRUE(equal(basis.up(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_RIGHT_X
-    ASSERT_TRUE(basis.right() == X);
+    ASSERT_TRUE(equal(basis.right(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Y
-    ASSERT_TRUE(basis.right() == Y);
+    ASSERT_TRUE(equal(basis.right(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Z
-    ASSERT_TRUE(basis.right() == Z);
+    ASSERT_TRUE(equal(basis.right(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_FORWARD_X
-    ASSERT_TRUE(basis.forward() == X);
+    ASSERT_TRUE(equal(basis.forward(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Y
-    ASSERT_TRUE(basis.forward() == Y);
+    ASSERT_TRUE(equal(basis.forward(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Z
-    ASSERT_TRUE(basis.forward() == Z);
+    ASSERT_TRUE(equal(basis.forward(), Z, 0.0001));
 #endif
 
     ASSERT_TRUE(basis.position() == P);
@@ -134,42 +134,42 @@ TEST(Cartesian_3D_Basis, Quaternion)
 
     MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Quaternion,double> basis {X,Y,Z,P};
 
-    ASSERT_TRUE(basis.x() == X);
-    ASSERT_TRUE(basis.y() == Y);
-    ASSERT_TRUE(basis.z() == Z);
+    ASSERT_TRUE(equal(basis.x(), X, 0.0001));
+    ASSERT_TRUE(equal(basis.y(), Y, 0.0001));
+    ASSERT_TRUE(equal(basis.z(), Z, 0.0001));
 
 #ifdef MATH3D_CARTESIAN_UP_X
-    ASSERT_TRUE(basis.up() == X);
+    ASSERT_TRUE(equal(basis.up(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Y
-    ASSERT_TRUE(basis.up() == Y);
+    ASSERT_TRUE(equal(basis.up(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Z
-    ASSERT_TRUE(basis.up() == Z);
+    ASSERT_TRUE(equal(basis.up(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_RIGHT_X
-    ASSERT_TRUE(basis.right() == X);
+    ASSERT_TRUE(equal(basis.right(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Y
-    ASSERT_TRUE(basis.right() == Y);
+    ASSERT_TRUE(equal(basis.right(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Z
-    ASSERT_TRUE(basis.right() == Z);
+    ASSERT_TRUE(equal(basis.right(), Z, 0.0001));
 #endif
 
 // ------------------------------
 
 #ifdef MATH3D_CARTESIAN_FORWARD_X
-    ASSERT_TRUE(basis.forward() == X);
+    ASSERT_TRUE(equal(basis.forward(), X, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Y
-    ASSERT_TRUE(basis.forward() == Y);
+    ASSERT_TRUE(equal(basis.forward(), Y, 0.0001));
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Z
-    ASSERT_TRUE(basis.forward() == Z);
+    ASSERT_TRUE(equal(basis.forward(), Z, 0.0001));
 #endif
 
     ASSERT_TRUE(basis.position() == P);
