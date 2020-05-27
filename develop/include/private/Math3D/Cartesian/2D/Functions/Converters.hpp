@@ -15,9 +15,9 @@ constexpr FORCEINLINE Vector<2,T>
 globalToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& localSpace)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return invertedForce(localSpace) * vector;
+    return inverseForce(localSpace) * vector;
 #else
-    return vector * invertedForce(localSpace);
+    return vector * inverseForce(localSpace);
 #endif
 }
 
@@ -28,9 +28,9 @@ constexpr FORCEINLINE Vector<2,T>
 globalToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return invertedForce(localSpace) * vector;
+    return inverseForce(localSpace) * vector;
 #else
-    return vector * invertedForce(localSpace);
+    return vector * inverseForce(localSpace);
 #endif
 }
 

@@ -10,8 +10,8 @@
 #include <Math3D/Core/Functions/Matrix.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
 #include <Math3D/Cartesian/3D/Functions/RawBasis.hpp>
+#include <Math3D/Cartesian/3D/Basis.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
-#include <private/Math3D/Cartesian/3D/Basis.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
