@@ -22,7 +22,7 @@ template <EBasisBase Base, typename T=FLOAT, typename = void> struct Basis;
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
 template <EBasisBase Base, typename T>
-struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>
+struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>
 {
     MATH3D_RULE_OF_FIVE(Basis)
 
@@ -214,7 +214,7 @@ private: /* Private members */
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
 template <EBasisBase Base, typename T>
-struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>
+struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>
 {
     MATH3D_RULE_OF_FIVE(Basis)
 
@@ -403,7 +403,7 @@ private: /* Private members */
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
 template <EBasisBase Base, typename T>
-struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>
+struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>
 {
     MATH3D_RULE_OF_FIVE(Basis)
 

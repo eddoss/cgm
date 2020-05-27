@@ -12,7 +12,7 @@ MATH3D_XYZ_NAMESPACE_BEGIN
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
     : m_position(position)
 {
     _internal_set_basis_x(m_orientation, x);
@@ -24,7 +24,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
     : m_orientation(orientation)
     , m_position(position)
 {
@@ -35,7 +35,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
     : m_orientation(_internal_convert_quaternion_to_matrix3x3(orientation))
     , m_position(position)
 {
@@ -48,7 +48,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::x() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::x() const
 {
     return _internal_get_basis_x(m_orientation);
 }
@@ -57,7 +57,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::x() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::y() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::y() const
 {
     return _internal_get_basis_y(m_orientation);
 }
@@ -66,7 +66,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::y() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::z() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::z() const
 {
     return _internal_get_basis_z(m_orientation);
 }
@@ -75,7 +75,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::z() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::up() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::up() const
 {
     return _internal_get_basis_up(m_orientation);
 }
@@ -84,7 +84,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::up() cons
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::right() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::right() const
 {
     return _internal_get_basis_right(m_orientation);
 }
@@ -93,7 +93,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::right() c
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::forward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::forward() const
 {
     return _internal_get_basis_forward(m_orientation);
 }
@@ -102,7 +102,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::forward()
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::down() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::down() const
 {
     return _internal_get_basis_down(m_orientation);
 }
@@ -111,7 +111,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::down() co
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::left() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::left() const
 {
     return _internal_get_basis_left(m_orientation);
 }
@@ -120,7 +120,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::left() co
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::backward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::backward() const
 {
     return _internal_get_basis_backward(m_orientation);
 }
@@ -129,7 +129,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::backward(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::position() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::position() const
 {
     return m_position;
 }
@@ -138,7 +138,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::position(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE const Matrix<3,3,T>&
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::orientationMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::orientationMatrix() const
 {
     return m_orientation;
 }
@@ -147,7 +147,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::orientati
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Quaternion<T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::orientationQuaternion() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::orientationQuaternion() const
 {
     return _internal_convert_matrix3x3_to_quaternion(m_orientation);
 }
@@ -156,7 +156,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::orientati
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<4,4,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::spaceMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::spaceMatrix() const
 {
     return rawBasis(m_orientation, m_position);
 }
@@ -167,7 +167,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::spaceMatr
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setPosition(const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::setPosition(const Vector<3,T>& position)
 {
     m_position = position;
 }
@@ -176,7 +176,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setPositi
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
     _internal_set_basis_x(m_orientation, x);
     _internal_set_basis_y(m_orientation, y);
@@ -187,7 +187,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Matrix<3,3,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::setOrientation(const Matrix<3,3,T>& orientation)
 {
     m_orientation = orientation;
 }
@@ -196,7 +196,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Matrix<4,4,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::setOrientation(const Matrix<4,4,T>& orientation)
 {
     m_orientation = _internal_convert_matrix4x4_to_quaternion(orientation);
 }
@@ -205,7 +205,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Quaternion<T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::setOrientation(const Quaternion<T>& orientation)
 {
     m_orientation = rawBasis(orientation);
 }
@@ -220,7 +220,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
 {
     _internal_set_basis_x(m_basis, x);
     _internal_set_basis_y(m_basis, y);
@@ -244,7 +244,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
     _internal_set_basis_position(position);
     _internal_set_orientation_matrix3x3_to_matrix4x4(m_basis, orientation);
@@ -266,7 +266,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
     : m_basis(_internal_convert_quaternion_to_matrix4x4(orientation))
 {
     _internal_set_basis_position(m_basis, position);
@@ -278,7 +278,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::Basis(con
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::x() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::x() const
 {
     return _internal_get_basis_x(m_basis);
 }
@@ -287,7 +287,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::x() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::y() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::y() const
 {
     return _internal_get_basis_y(m_basis);
 }
@@ -296,7 +296,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::y() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::z() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::z() const
 {
     return _internal_get_basis_z(m_basis);
 }
@@ -305,7 +305,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::z() const
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::up() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::up() const
 {
     return _internal_get_basis_up(m_basis);
 }
@@ -314,7 +314,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::up() cons
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::right() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::right() const
 {
     return _internal_get_basis_right(m_basis);
 }
@@ -323,7 +323,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::right() c
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::forward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::forward() const
 {
     return _internal_get_basis_forward(m_basis);
 }
@@ -332,7 +332,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::forward()
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::down() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::down() const
 {
     return _internal_get_basis_down(m_basis);
 }
@@ -341,7 +341,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::down() co
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::left() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::left() const
 {
     return _internal_get_basis_left(m_basis);
 }
@@ -350,7 +350,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::left() co
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::backward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::backward() const
 {
     return _internal_get_basis_backward(m_basis);
 }
@@ -359,7 +359,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::backward(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::position() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::position() const
 {
     return _internal_get_basis_position(m_basis);
 }
@@ -368,7 +368,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::position(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::orientationMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::orientationMatrix() const
 {
     return _internal_get_orientation_matrix3x3_from_matrix4x4(m_basis);
 }
@@ -377,7 +377,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::orientati
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Quaternion<T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::orientationQuaternion() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::orientationQuaternion() const
 {
     return _internal_convert_matrix4x4_to_quaternion(m_basis);
 }
@@ -386,7 +386,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::orientati
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE const Matrix<4,4,T>&
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::spaceMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::spaceMatrix() const
 {
     return m_basis;
 }
@@ -397,7 +397,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::spaceMatr
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setPosition(const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setPosition(const Vector<3,T>& position)
 {
     _internal_set_basis_position(m_basis, position);
 }
@@ -406,7 +406,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setPositi
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
     _internal_set_basis_x(m_basis, x);
     _internal_set_basis_y(m_basis, y);
@@ -417,7 +417,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrientation(const Matrix<3,3,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setOrientation(const Matrix<3,3,T>& orientation)
 {
     _internal_set_orientation_matrix3x3_to_matrix4x4(m_basis, orientation);
 }
@@ -426,7 +426,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrientation(const Matrix<4,4,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setOrientation(const Matrix<4,4,T>& orientation)
 {
     m_basis(0,0) = orientation(0,0);
     m_basis(0,1) = orientation(0,1);
@@ -443,7 +443,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrientation(const Quaternion<T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setOrientation(const Quaternion<T>& orientation)
 {
     auto conj = conjugated(orientation);
     _internal_set_basis_x(m_basis, (orientation * Quaternion<T>{0,T(1),0,0} * conj).imaginary());
@@ -461,7 +461,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4),void>>::setOrient
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
     : m_orientation(_internal_convert_xyz_to_quaternion(x,y,z))
     , m_position(position)
 {
@@ -472,7 +472,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
     : m_orientation(_internal_convert_matrix3x3_to_quaternion(orientation))
     , m_position(position)
 {
@@ -483,7 +483,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(
 
 template <EBasisBase Base, typename T>
 constexpr
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
     : m_orientation(orientation)
     , m_position(position)
 {
@@ -496,34 +496,40 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::Basis(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::x() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::x() const
 {
-    return (m_orientation * Quaternion<T>{0,T(1),0,0} * conjugated(m_orientation)).imaginary();
+    Vector<3,T> vec {T(1),T(0),T(0)};
+    _internal_rotate_vector3_by_quaternion(vec, m_orientation);
+    return vec;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::y() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::y() const
 {
-    return (m_orientation * Quaternion<T>{0,0,T(1),0} * conjugated(m_orientation)).imaginary();
+    Vector<3,T> vec {T(0),T(1),T(0)};
+    _internal_rotate_vector3_by_quaternion(vec, m_orientation);
+    return vec;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::z() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::z() const
 {
-    return (m_orientation * Quaternion<T>{0,0,0,T(1)} * conjugated(m_orientation)).imaginary();
+    Vector<3,T> vec {T(0),T(0),T(1)};
+    _internal_rotate_vector3_by_quaternion(vec, m_orientation);
+    return vec;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::up() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::up() const
 {
 #ifdef MATH3D_CARTESIAN_UP_X
     return this->x();
@@ -540,7 +546,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::up() c
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::right() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::right() const
 {
 #ifdef MATH3D_CARTESIAN_RIGHT_X
     return this->x();
@@ -557,7 +563,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::right(
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::forward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::forward() const
 {
 #ifdef MATH3D_CARTESIAN_FORWARD_X
     return this->x();
@@ -574,7 +580,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::forwar
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::down() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::down() const
 {
     return -this->up();
 }
@@ -583,7 +589,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::down()
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::left() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::left() const
 {
     return -this->right();
 }
@@ -592,7 +598,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::left()
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::backward() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::backward() const
 {
     return -this->forward();
 }
@@ -601,7 +607,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::backwa
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::position() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::position() const
 {
     return m_position;
 }
@@ -610,7 +616,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::positi
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::orientationMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::orientationMatrix() const
 {
     return _internal_convert_quaternion_to_matrix3x3(m_orientation);
 }
@@ -619,7 +625,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::orient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE const Quaternion<T>&
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::orientationQuaternion() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::orientationQuaternion() const
 {
     return m_orientation;
 }
@@ -628,7 +634,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::orient
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<4,4,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::spaceMatrix() const
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::spaceMatrix() const
 {
     return rawBasis(m_orientation, m_position);
 }
@@ -639,7 +645,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::spaceM
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setPosition(const Vector<3,T>& position)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::setPosition(const Vector<3,T>& position)
 {
     m_position = position;
 }
@@ -648,7 +654,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setPos
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::setOrientation(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
     m_orientation = _internal_convert_xyz_to_quaternion(x, y, z);
 }
@@ -657,7 +663,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOri
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOrientation(const Matrix<3,3,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::setOrientation(const Matrix<3,3,T>& orientation)
 {
     m_orientation = _internal_convert_matrix3x3_to_quaternion(orientation);
 }
@@ -666,7 +672,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOri
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOrientation(const Matrix<4,4,T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::setOrientation(const Matrix<4,4,T>& orientation)
 {
     m_orientation = _internal_convert_matrix4x4_to_quaternion(orientation);
 }
@@ -675,7 +681,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOri
 
 template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion),void>>::setOrientation(const Quaternion<T>& orientation)
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::setOrientation(const Quaternion<T>& orientation)
 {
     m_orientation = orientation;
 }
