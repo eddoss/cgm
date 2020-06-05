@@ -8,8 +8,7 @@
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Cartesian/Enums.hpp>
-#include <Math3D/Cartesian/3D/Functions/RawBasis.hpp>
-#include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
+#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

@@ -9,8 +9,7 @@
 #include <Math3D/Core/Operators/Quaternion.hpp>
 #include <Math3D/Cartesian/Enums.hpp>
 #include <Math3D/Cartesian/3D/Basis.hpp>
-#include <Math3D/Cartesian/3D/Functions/RawBasis.hpp>
-#include <Math3D/IO.hpp>
+#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
 
 using namespace std;
 using namespace MATH3D_NAMESPACE;
@@ -63,8 +62,8 @@ TEST(Cartesian_3D_Basis, Matrix3)
 #endif
 
     ASSERT_TRUE(basis.position() == P);
-    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z,P), 0.0001));
-    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z), 0.0001));
+    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::space(X,Y,Z,P), 0.0001));
+    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::orientationMatrix(X,Y,Z), 0.0001));
     ASSERT_TRUE(equal(basis.orientationQuaternion(), {0.965926, 0.149429, 0.149429, 0.149429}, 0.0001));
 }
 
@@ -118,8 +117,8 @@ TEST(Cartesian_3D_Basis, Matrix4)
 #endif
 
     ASSERT_TRUE(basis.position() == P);
-    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z,P), 0.0001));
-    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z), 0.0001));
+    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::space(X,Y,Z,P), 0.0001));
+    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::orientationMatrix(X,Y,Z), 0.0001));
     ASSERT_TRUE(equal(basis.orientationQuaternion(), {0.965926, 0.149429, 0.149429, 0.149429}, 0.0001));
 }
 
@@ -173,7 +172,7 @@ TEST(Cartesian_3D_Basis, Quaternion)
 #endif
 
     ASSERT_TRUE(basis.position() == P);
-    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z,P), 0.0001));
-    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::rawBasis(X,Y,Z), 0.0001));
+    ASSERT_TRUE(equal(basis.spaceMatrix(), MATH3D_XYZ_NAMESPACE::space(X,Y,Z,P), 0.0001));
+    ASSERT_TRUE(equal(basis.orientationMatrix(), MATH3D_XYZ_NAMESPACE::orientationMatrix(X,Y,Z), 0.0001));
     ASSERT_TRUE(equal(basis.orientationQuaternion(), {0.965926, 0.149429, 0.149429, 0.149429}, 0.0001));
 }

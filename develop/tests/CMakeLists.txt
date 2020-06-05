@@ -90,7 +90,7 @@ math3d_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
 set(TS_MODULE_CARTESIAN
     Cartesian/3D/Basis.cpp
     Cartesian/3D/Functions/Axes.cpp
-    Cartesian/3D/Functions/RawBasis.cpp
+    Cartesian/3D/Functions/Utils.cpp
     Cartesian/3D/Functions/Converters.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
