@@ -7,8 +7,8 @@
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
 #include <Math3D/Cartesian/3D/Basis.hpp>
-#include <Math3D/Cartesian/3D/Functions/RawBasis.hpp>
 #include <Math3D/Cartesian/3D/Functions/Converters.hpp>
+#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 using namespace std;
@@ -23,7 +23,7 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Vec3_Mat3)
     Quaternion<double> Q {0.965926, 0.149429, 0.149429, 0.149429};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q);
+    auto basis = MATH3D_XYZ_NAMESPACE::orientationMatrix(Q);
     auto reslt = MATH3D_XYZ_NAMESPACE::globalToLocal(coord, basis);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -43,7 +43,7 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Vec3_Mat3WithPos)
     Vector<3,double> P {3.2, 6.3, 4.1};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q);
+    auto basis = MATH3D_XYZ_NAMESPACE::orientationMatrix(Q);
     auto reslt = MATH3D_XYZ_NAMESPACE::globalToLocal(coord, basis, P);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -63,7 +63,7 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Vec3_Mat4)
     Vector<3,double> P {3.2, 6.3, 4.1};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q,P);
+    auto basis = MATH3D_XYZ_NAMESPACE::space(Q,P);
     auto reslt = MATH3D_XYZ_NAMESPACE::globalToLocal(coord, basis);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -158,7 +158,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Vec3_Mat3)
     Quaternion<double> Q {0.965926, 0.149429, 0.149429, 0.149429};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q);
+    auto basis = MATH3D_XYZ_NAMESPACE::orientationMatrix(Q);
     auto reslt = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, basis);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -178,7 +178,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Vec3_Mat3WithPos)
     Vector<3,double> P {3.2, 6.3, 4.1};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q);
+    auto basis = MATH3D_XYZ_NAMESPACE::orientationMatrix(Q);
     auto reslt = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, basis, P);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -198,7 +198,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Vec3_Mat4)
     Vector<3,double> P {3.2, 6.3, 4.1};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basis = MATH3D_XYZ_NAMESPACE::rawBasis(Q,P);
+    auto basis = MATH3D_XYZ_NAMESPACE::space(Q,P);
     auto reslt = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, basis);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
