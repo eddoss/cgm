@@ -41,7 +41,7 @@ globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation);
  * @param position Local space position.
  * @return Vector converted to local space.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
@@ -53,7 +53,7 @@ globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const
  * @param localSpace Local space represented as 4x4 matrix.
  * @return Vector converted to local space.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
 
@@ -78,7 +78,7 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation);
  * @param position Position of local space.
  * @return Vector converted to local space.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const Vector<3,T>& position);
 
@@ -90,7 +90,7 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
  * @param localSpace Local space to convert to.
  * @return Vector converted to local space.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Basis<Base,T>& localSpace);
 
@@ -119,7 +119,7 @@ localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation);
  * @param position Local space position.
  * @return Converted to global space vector.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
@@ -131,7 +131,7 @@ localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const
  * @param localSpace Local space represented as 4x4 matrix.
  * @return Converted to global space vector.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace);
 
@@ -156,7 +156,7 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation);
  * @tparam position Position of local space.
  * @return Converted to global space vector.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const Vector<3,T>& position);
 
@@ -168,7 +168,7 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
  * @param localSpace Local space to convert from.
  * @return Converted to global space vector.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Basis<Base,T>& localSpace);
 
@@ -199,7 +199,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -212,7 +212,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB);
 
@@ -239,7 +239,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -252,7 +252,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Basis<Base,T>& spaceB);
 
@@ -270,7 +270,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
@@ -285,7 +285,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -299,7 +299,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
@@ -313,7 +313,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
@@ -328,7 +328,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -342,7 +342,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Basis<Base,T>& spaceB);
 
@@ -359,7 +359,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
 
@@ -373,7 +373,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matri
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -386,7 +386,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matri
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB);
 
@@ -399,7 +399,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matri
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
 
@@ -413,7 +413,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quate
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -426,7 +426,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quate
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Basis<Base,T>& spaceB);
 
@@ -457,7 +457,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -470,7 +470,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB);
 
@@ -497,7 +497,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -510,7 +510,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Basis<Base,T>& spaceB);
 
@@ -528,7 +528,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
@@ -543,7 +543,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -557,7 +557,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
@@ -571,7 +571,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
@@ -586,7 +586,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -600,7 +600,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Basis<Base,T>& spaceB);
 
@@ -617,7 +617,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB);
 
@@ -631,7 +631,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matri
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB);
 
@@ -644,7 +644,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matri
  * @param spaceB 4x4 matrix of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<4,4,T>& spaceB);
 
@@ -657,7 +657,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matri
  * @param orientationB Orientation of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quaternion<T>& orientationB);
 
@@ -671,7 +671,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quate
  * @param positionB Position of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase Base, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
@@ -684,7 +684,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quate
  * @param spaceB Basis of B space.
  * @return Converted vector from space A to B.
  */
-template<EBasisBase BaseA, EBasisBase BaseB, typename T>
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase BaseA, EBasisBase BaseB, typename T>
 constexpr FORCEINLINE Vector<3,T>
 localToLocal(const Vector<3,T>& vector, const Basis<BaseA,T>& spaceA, const Basis<BaseB,T>& spaceB);
 

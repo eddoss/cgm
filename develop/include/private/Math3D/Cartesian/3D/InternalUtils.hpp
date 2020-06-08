@@ -6,9 +6,8 @@
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Quaternion.hpp>
 #include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Core/Operators/Quaternion.hpp>
+#include <Math3D/Cartesian/Enums.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -44,30 +43,54 @@ _internal_rotated_vector3_by_quaternion(const Vector<3,T>& vec, const Quaternion
 
 /* --------------------------------------------------------------------------------------- */
 
-template <typename T>
+template <EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
 _internal_multiply_matrix4x4_on_vector3(const Matrix<4,4,T>& mat, const Vector<3,T>& vec)
 {
-    return
+    if constexpr (Representation == EVectorRepresentation::Point)
     {
-        mat(0,0) * vec.x + mat(0,1) * vec.y + mat(0,2) * vec.z + mat(0,3),
-        mat(1,0) * vec.x + mat(1,1) * vec.y + mat(1,2) * vec.z + mat(1,3),
-        mat(2,0) * vec.x + mat(2,1) * vec.y + mat(2,2) * vec.z + mat(2,3)
-    };
+        return
+        {
+            mat(0,0) * vec.x + mat(0,1) * vec.y + mat(0,2) * vec.z + mat(0,3),
+            mat(1,0) * vec.x + mat(1,1) * vec.y + mat(1,2) * vec.z + mat(1,3),
+            mat(2,0) * vec.x + mat(2,1) * vec.y + mat(2,2) * vec.z + mat(2,3)
+        };
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return
+        {
+            mat(0,0) * vec.x + mat(0,1) * vec.y + mat(0,2) * vec.z,
+            mat(1,0) * vec.x + mat(1,1) * vec.y + mat(1,2) * vec.z,
+            mat(2,0) * vec.x + mat(2,1) * vec.y + mat(2,2) * vec.z
+        };
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template <typename T>
+template <EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
 _internal_multiply_vector3_on_matrix4x4(const Vector<3,T>& vec, const Matrix<4,4,T>& mat)
 {
-    return
+    if constexpr (Representation == EVectorRepresentation::Point)
     {
-        mat(0,0) * vec.x + mat(1,0) * vec.y + mat(2,0) * vec.z + mat(3,0),
-        mat(0,1) * vec.x + mat(1,1) * vec.y + mat(2,1) * vec.z + mat(3,1),
-        mat(0,2) * vec.x + mat(1,2) * vec.y + mat(2,2) * vec.z + mat(3,2)
-    };
+        return
+        {
+            mat(0,0) * vec.x + mat(1,0) * vec.y + mat(2,0) * vec.z + mat(3,0),
+            mat(0,1) * vec.x + mat(1,1) * vec.y + mat(2,1) * vec.z + mat(3,1),
+            mat(0,2) * vec.x + mat(1,2) * vec.y + mat(2,2) * vec.z + mat(3,2)
+        };
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return
+        {
+            mat(0,0) * vec.x + mat(1,0) * vec.y + mat(2,0) * vec.z,
+            mat(0,1) * vec.x + mat(1,1) * vec.y + mat(2,1) * vec.z,
+            mat(0,2) * vec.x + mat(1,2) * vec.y + mat(2,2) * vec.z
+        };
+    }
 }
 
 MATH3D_XYZ_NAMESPACE_END

@@ -104,6 +104,7 @@ math3d_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
 set(TS_ALL_MODULES
     ${TS_MODULE_CORE}
     ${TS_MODULE_COORDINATES}
+    ${TS_MODULE_CARTESIAN}
 )
 
 math3d_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")

@@ -6,6 +6,7 @@
 #include <Math3D/Core/Operators/Matrix.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Functions/Matrix.hpp>
+#include <Math3D/Core/Functions/Quaternion.hpp>
 #include <Math3D/Core/Operators/Quaternion.hpp>
 #include <Math3D/Cartesian/Enums.hpp>
 #include <Math3D/Cartesian/3D/Basis.hpp>
