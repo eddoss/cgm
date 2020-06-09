@@ -251,7 +251,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
 
 template<EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -328,7 +328,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
 
 template<EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -419,7 +419,7 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matri
 
 template<EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -489,7 +489,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
 
 template<EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -566,7 +566,7 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
 
 template<EVectorRepresentation Representation, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -657,7 +657,7 @@ localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matri
 
 template<EVectorRepresentation Representation, EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB, const Matrix<3,3,T>& positionB)
+localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
