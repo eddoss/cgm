@@ -227,11 +227,11 @@ localToGlobal(const Vector<3,T>& vector, const Basis<Base,T>& localSpace)
     {
         if constexpr (Representation == EVectorRepresentation::Point)
         {
-            return localToGlobal(vector, localSpace.orientationQuaternion());
+            return localToGlobal<Representation>(vector, localSpace.orientationQuaternion(), localSpace.position());
         }
         else if constexpr (Representation == EVectorRepresentation::Direction)
         {
-            return localToGlobal(vector, localSpace.orientationQuaternion(), localSpace.position());
+            return localToGlobal(vector, localSpace.orientationQuaternion());
         }
     }
 }

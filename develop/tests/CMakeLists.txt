@@ -94,6 +94,7 @@ set(TS_MODULE_CARTESIAN
     Cartesian/3D/Functions/Converters/GlobalToLocal.cpp
     Cartesian/3D/Functions/Converters/LocalToGlobal.cpp
     Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3.cpp
+    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3WithPosition.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
 
