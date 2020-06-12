@@ -9,6 +9,8 @@
 #include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Cartesian/Enums.hpp>
 #include <Math3D/Cartesian/3D/Functions/Utils.hpp>
+#include <Math3D/Cartesian/3D/Functions/Space.hpp>
+#include <Math3D/Cartesian/3D/Functions/Orientation.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
