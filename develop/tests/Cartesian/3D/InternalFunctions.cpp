@@ -32,7 +32,7 @@ TEST(Cartesian_3D_InternalFunctions, rotate_vector3_by_quaternion)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_point3)
+TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_vector3)
 {
     {
         Vector<3,int> vec {2,3,4};
