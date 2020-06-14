@@ -15,8 +15,8 @@ constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::Basis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position)
     : m_position(position)
 {
-    _internal_set_basis_x(m_orientation, x);
-    _internal_set_basis_y(m_orientation, y);
+    MATH3D_XY_NAMESPACE::setX(m_orientation, x);
+    MATH3D_XY_NAMESPACE::setY(m_orientation, y);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -38,7 +38,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::x() const
 {
-    return _internal_get_basis_x<T>(m_orientation);
+    return MATH3D_XY_NAMESPACE::getX(m_orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -47,43 +47,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::y() const
 {
-    return _internal_get_basis_y<T>(m_orientation);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::up() const
-{
-    return _internal_get_basis_up<T>(m_orientation);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::right() const
-{
-    return _internal_get_basis_right<T>(m_orientation);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::down() const
-{
-    return _internal_get_basis_down<T>(m_orientation);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::left() const
-{
-    return _internal_get_basis_left<T>(m_orientation);
+    return MATH3D_XY_NAMESPACE::getY(m_orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -110,7 +74,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::spaceMatrix() const
 {
-    return rawBasis(m_orientation, m_position);
+    return MATH3D_XY_NAMESPACE::space(m_orientation, m_position);
 }
 
 /* ####################################################################################### */
@@ -130,8 +94,8 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>::setOrientation(const Vector<2,T>& x, const Vector<2,T>& y)
 {
-    _internal_get_basis_x<T>(m_orientation, x);
-    _internal_get_basis_y<T>(m_orientation, y);
+    MATH3D_XY_NAMESPACE::getX(m_orientation, x);
+    MATH3D_XY_NAMESPACE::getY(m_orientation, y);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -167,9 +131,9 @@ template <EBasisBase Base, typename T>
 constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position)
 {
-    _internal_set_basis_x(m_basis, x);
-    _internal_set_basis_y(m_basis, y);
-    _internal_set_basis_position(m_basis, position);
+    MATH3D_XY_NAMESPACE::setX(m_basis, x);
+    MATH3D_XY_NAMESPACE::setY(m_basis, y);
+    MATH3D_XY_NAMESPACE::setPosition(m_basis, position);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     m_basis(2,0) = zero<T>;
@@ -188,8 +152,8 @@ template <EBasisBase Base, typename T>
 constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::Basis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
 {
-    _internal_set_orientation_matrix2x2_to_matrix3x3(m_basis, orientation);
-    _internal_set_basis_position(m_basis, position);
+    MATH3D_XY_NAMESPACE::setOrientation(m_basis, orientation);
+    MATH3D_XY_NAMESPACE::setPosition(m_basis, position);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     m_basis(2,0) = zero<T>;
@@ -210,7 +174,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::x() const
 {
-    return _internal_get_basis_x<T>(m_basis);
+    return MATH3D_XY_NAMESPACE::getX(m_basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -219,43 +183,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::y() const
 {
-    return _internal_get_basis_y<T>(m_basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::up() const
-{
-    return _internal_get_basis_up<T>(m_basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::right() const
-{
-    return _internal_get_basis_right<T>(m_basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::down() const
-{
-    return _internal_get_basis_down<T>(m_basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <EBasisBase Base, typename T>
-constexpr FORCEINLINE Vector<2,T>
-Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::left() const
-{
-    return _internal_get_basis_left<T>(m_basis);
+    return MATH3D_XY_NAMESPACE::getY(m_basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -264,7 +192,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Vector<2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::position() const
 {
-    return _internal_get_basis_position<T>(m_basis);
+    return MATH3D_XY_NAMESPACE::getPosition(m_basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -273,7 +201,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE Matrix<2,2,T>
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::orientationMatrix() const
 {
-    return _internal_get_orientation_matrix2x2_from_matrix3x3<T>(m_basis);
+    return MATH3D_XY_NAMESPACE::getOrientation(m_basis);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -293,7 +221,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setPosition(const Vector<2,T>& position)
 {
-    _internal_set_basis_position(m_basis, position);
+    MATH3D_XY_NAMESPACE::setPosition(m_basis, position);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -302,8 +230,8 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Vector<2,T>& x, const Vector<2,T>& y)
 {
-    _internal_get_basis_x<T>(m_basis, x);
-    _internal_get_basis_y<T>(m_basis, y);
+    MATH3D_XY_NAMESPACE::getX(m_basis, x);
+    MATH3D_XY_NAMESPACE::getY(m_basis, y);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -312,7 +240,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>::setOrientation(const Matrix<2,2,T>& orientation)
 {
-    _internal_set_orientation_matrix2x2_to_matrix3x3(m_basis, orientation);
+    MATH3D_XY_NAMESPACE::setOrientation(m_basis, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */

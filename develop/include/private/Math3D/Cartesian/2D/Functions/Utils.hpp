@@ -14,7 +14,27 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 getX(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_basis_x(basis);
+    return
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    {
+        basis(0,0),
+        basis(0,1)
+    };
+#else
+    {
+        basis(0,0),
+        basis(1,0)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+getX(const AxesTuple<T>& axes)
+{
+    return std::get<0>(axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -23,7 +43,27 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 getY(const Matrix<S,S,T>& basis)
 {
-    return _internal_get_basis_y(basis);
+    return
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    {
+        basis(1,0),
+        basis(1,1)
+    };
+#else
+    {
+        basis(0,1),
+        basis(1,1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+getY(const AxesTuple<T>& axes)
+{
+    return std::get<1>(axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -32,7 +72,22 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setX(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-    _internal_set_basis_x(basis, value);
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    basis(0,0) = value.x;
+    basis(0,1) = value.y;
+#else
+    basis(0,0) = value.x;
+    basis(1,0) = value.y;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setX(AxesTuple<T>& axes, const Vector<2,T>& value)
+{
+    std::get<0>(axes) = value;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,63 +96,22 @@ template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setY(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-    _internal_set_basis_y(basis, value);
-}
-
-/* ####################################################################################### */
-/* Up, Right axes */
-/* ####################################################################################### */
-
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
-getUp(const Matrix<S,S,T>& basis)
-{
-    return _internal_get_basis_up(basis);
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    basis(1,0) = value.x;
+    basis(1,1) = value.y;
+#else
+    basis(0,1) = value.x;
+    basis(1,1) = value.y;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
-getRight(const Matrix<S,S,T>& basis)
+template<typename T>
+constexpr FORCEINLINE void
+setY(AxesTuple<T>& axes, const Vector<2,T>& value)
 {
-    return _internal_get_basis_right(basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
-getDown(const Matrix<S,S,T>& basis)
-{
-    return _internal_get_basis_down(basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<3,T>>
-getLeft(const Matrix<S,S,T>& basis)
-{
-    return _internal_get_basis_left(basis);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
-setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
-{
-    _internal_set_basis_up(basis, value);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t S, typename T>
-constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
-setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value)
-{
-    _internal_set_2d_basis_right(basis, value);
+    std::get<1>(axes) = value;
 }
 
 /* ####################################################################################### */
@@ -108,7 +122,18 @@ template<typename T>
 constexpr FORCEINLINE Vector<2,T>
 getPosition(const Matrix<3,3,T>& basis)
 {
-    return _internal_get_basis_position(basis);
+    return
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    {
+        basis(0,2),
+        basis(1,2)
+    };
+#else
+    {
+        basis(2,0),
+        basis(2,1)
+    };
+#endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -117,7 +142,13 @@ template<typename T>
 constexpr FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 {
-    _internal_set_2d_basis_(basis, position);
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    basis(0,2) = position.x;
+    basis(1,2) = position.y;
+#else
+    basis(2,0) = position.x;
+    basis(2,1) = position.y;
+#endif
 }
 
 /* ####################################################################################### */
@@ -126,9 +157,86 @@ setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 
 template<typename T>
 constexpr FORCEINLINE Matrix<2,2,T>
-extractOrientation(const Matrix<3,3,T>& basis)
+getOrientation(const Matrix<3,3,T>& basis)
 {
-    return _internal_get_orientation_matrix2x2_from_matrix3x3(basis);
+    return
+    {
+        basis(0,0), basis(0,1),
+        basis(1,0), basis(1,1)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<2,2,T>& orientation, const Vector<2,T>& x, const Vector<2,T>& y)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    basis(0,0) = x.x;
+    basis(0,1) = x.y;
+    basis(1,0) = y.x;
+    basis(1,1) = y.y;
+#else
+    basis(0,0) = x.x;
+    basis(1,0) = x.y;
+    basis(0,1) = y.x;
+    basis(1,1) = y.y;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<3,3,T>& basis, const Vector<2,T>& x, const Vector<2,T>& y)
+{
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    basis(0,0) = x.x;
+    basis(0,1) = x.y;
+    basis(1,0) = y.x;
+    basis(1,1) = y.y;
+#else
+    basis(0,0) = x.x;
+    basis(1,0) = x.y;
+    basis(0,1) = y.x;
+    basis(1,1) = y.y;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<3,3,T>& basis, const Matrix<2,2,T>& orientation)
+{
+    basis(0,0) = orientation(0,0);
+    basis(0,1) = orientation(0,1);
+    basis(1,0) = orientation(1,0);
+    basis(1,1) = orientation(1,1);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<3,3,T>& basis, const Matrix<3,3,T>& other)
+{
+    basis(0,0) = other(0,0);
+    basis(0,1) = other(0,1);
+    basis(1,0) = other(1,0);
+    basis(1,1) = other(1,1);
+}
+
+/* ####################################################################################### */
+/* Space */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr FORCEINLINE SpaceTuple<T>
+unpackSpace(const Matrix<3,3,T>& matrix)
+{
+    return std::make_tuple(getX(matrix), getY(matrix), getPosition(matrix));
 }
 
 MATH3D_XYZ_NAMESPACE_END

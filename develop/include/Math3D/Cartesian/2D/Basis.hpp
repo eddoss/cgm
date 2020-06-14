@@ -6,9 +6,9 @@
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Cartesian/Enums.hpp>
-#include <private/Math3D/Cartesian/2D/InternalUtils.hpp>
+#include <Math3D/Cartesian/2D/Functions/Utils.hpp>
+#include <Math3D/Cartesian/2D/Functions/Space.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -69,34 +69,6 @@ public: /* Getters */
      */
     constexpr FORCEINLINE Vector<2,T>
     y() const;
-
-    /**
-     * Gets basis Up axis.
-     * @return Up axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    up() const;
-
-    /**
-     * Gets basis Right axis.
-     * @return Right axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    right() const;
-
-    /**
-     * Gets basis Down axis.
-     * @return Down axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    down() const;
-
-    /**
-     * Gets basis Left axis.
-     * @return Left axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    left() const;
 
     /**
      * Gets basis position.
@@ -216,34 +188,6 @@ public: /* Getters */
      */
     constexpr FORCEINLINE Vector<2,T>
     y() const;
-
-    /**
-     * Gets basis Up axis.
-     * @return Up axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    up() const;
-
-    /**
-     * Gets basis Right axis.
-     * @return Right axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    right() const;
-
-    /**
-     * Gets basis Down axis.
-     * @return Down axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    down() const;
-
-    /**
-     * Gets basis Left axis.
-     * @return Left axis value.
-     */
-    constexpr FORCEINLINE Vector<2,T>
-    left() const;
 
     /**
      * Gets basis position.
