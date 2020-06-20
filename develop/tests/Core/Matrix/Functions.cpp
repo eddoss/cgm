@@ -36,8 +36,41 @@ using Mat54 = Matrix<5,4,int>;
 using Mat55 = Matrix<5,5,int>;
 
 
+template <typename T>
+struct Bas
+{
+    Matrix<4,4,T> f;
+    Vector<3,T> position() { return {*this(0,3), *this(1,3), *this(2,3),};}
+};
+
 TEST(Matrix_Functions, Transpose)
 {
+//    Matrix<4,4,double> space
+//    {
+//        +0.996772, +0.069409, -0.040354, +4.000000,
+//        -0.040354, +0.867639, +0.495554, +7.000000,
+//        +0.069409, -0.492325, +0.867639, +2.000000,
+//        +0.000000, +0.000000, +0.000000, +1.000000
+//    };
+//
+//    Matrix<3,3,double> orientation
+//    {
+//        +0.996772, +0.069409, -0.040354,
+//        -0.040354, +0.867639, +0.495554,
+//        +0.069409, -0.492325, +0.867639
+//    };
+//
+//    auto s = sizeof(Bas<float>);
+//
+//    auto is = inverseForce(space);
+//    auto ts = transposed(space);
+//    auto io = inverseForce(orientation);
+//    auto to = transposed(orientation);
+//    std::cout << is << std::endl;
+//    std::cout << ts << std::endl;
+//    std::cout << io << std::endl;
+//    std::cout << to << std::endl;
+
     {
         Mat22 a
         {
@@ -848,6 +881,36 @@ TEST(Matrix_Functions, Diagonal)
 
         ASSERT_TRUE(diagonal(mat));
         ASSERT_FALSE(diagonal(Mat55(2)));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Matrix_Functions, Orthogonal)
+{
+    {
+        Matrix<2,2,double> mat
+        {
+            0.958072, -0.286529,
+            0.286529, 0.958072
+        };
+
+        ASSERT_TRUE(orthogonal(mat, 0.0001));
+        ASSERT_FALSE(orthogonal(Matrix<2,2,double>(2.0), 0.0001));
+    }
+
+    /* -------------- */
+
+    {
+        Matrix<3,3,double> mat
+        {
+            0.589794, -0.57689, 0.565102,
+            0.180624, 0.776281, 0.603956,
+            -0.787094, -0.254139, 0.562046
+        };
+
+        ASSERT_TRUE(orthogonal(mat, 0.0001));
+        ASSERT_FALSE(orthogonal(Matrix<2,2,double>(2.0), 0.0001));
     }
 }
 

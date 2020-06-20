@@ -95,38 +95,76 @@ trace(const Matrix<S,S,T>& matrix);
 /**
  * Check if matrix is symmetric (a symmetric matrix is a square matrix
  * that equals its transpose: i.e., M = transposed(M)).
+ * @param matrix Matrix to check.
  * @return True if matrix is symmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr FORCEINLINE T
+constexpr FORCEINLINE enable_if_integral<T,T>
 symmetric(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is symmetric (a symmetric matrix is a square matrix
+ * that equals its transpose: i.e., M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is symmetric, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE enable_if_floating<T,T>
+symmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
  * Check if matrix is antisymmetric (an antisymmetric matrix is a matrix
  * whose transpose is its own negative: i.e., -M = transposed(M)).
+ * @param matrix Matrix to check.
  * @return True if matrix is antisymmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr FORCEINLINE T
+constexpr FORCEINLINE enable_if_integral<T,T>
 antisymmetric(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is antisymmetric (an antisymmetric matrix is a matrix
+ * whose transpose is its own negative: i.e., -M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is antisymmetric, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr FORCEINLINE enable_if_floating<T,T>
+antisymmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
  * Check if matrix is diagonal (a diagonal matrix is a square matrix
  * whose elements are zero, apart from its diagonal).
+ * @param matrix Matrix to check.
  * @return True if matrix is diagonal, false otherwise.
  */
 template<size_t S, typename T>
-constexpr T
+constexpr enable_if_integral<T,T>
 diagonal(const Matrix<S,S,T>& matrix);
+
+/**
+ * Check if matrix is diagonal (a diagonal matrix is a square matrix
+ * whose elements are zero, apart from its diagonal).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is diagonal, false otherwise.
+ */
+template<size_t S, typename T>
+constexpr enable_if_floating<T,T>
+diagonal(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
  * Check if matrix is orthogonal (a matrix is orthogonal if its transpose
  * is also its inverse, i.e., transposed(M) = inverse(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
  * @return True if matrix is orthogonal, false otherwise.
  */
 template<size_t S, typename T>
-constexpr T
-orthogonal(const Matrix<S,S,T>& matrix);
+constexpr enable_if_floating<T,T>
+orthogonal(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
  * Create identity matrix.
