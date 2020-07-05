@@ -16,22 +16,6 @@
 using namespace std;
 using namespace MATH3D_NAMESPACE;
 
-
-TEST(Cartesian_3D_InternalFunctions, rotate_vector3_by_quaternion)
-{
-    // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
-
-    Vector<3,double> vec {1.0, 0.0, 0.0};
-    Vector<3,double> exp {0.910683, 0.333334, -0.244017};
-
-    MATH3D_XYZ_NAMESPACE::_internal_rotate_vector3_by_quaternion(vec, quat);
-
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(vec, exp, 0.00001));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_vector3)
 {
     {
@@ -99,4 +83,37 @@ TEST(Cartesian_3D_InternalFunctions, multiply_vector3_on_matrix4x4)
         Vector<3,int> exp {28,19,17};
         ASSERT_TRUE(res == exp);
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_InternalFunctions, fast_inverse_matrix4x4)
+{
+    Vector<3,double> x { 0.910683,  0.333334, -0.244017};
+    Vector<3,double> y {-0.244017,  0.910683,  0.333334};
+    Vector<3,double> z { 0.333334, -0.244017,  0.910683};
+    Vector<3,double> p {      0.2,     -0.53,      0.91};
+
+#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    Matrix<4,4,double> input
+    {
+        x.x, x.y, x.z, p.x,
+        y.x, y.y, y.z, p.y,
+        z.x, z.y, z.z, p.z,
+        0.0, 0.0, 0.0, 1.0
+    };
+#else
+    Matrix<4,4,double> input
+    {
+        x.x, y.x, z.x, 0.0,
+        x.y, y.y, z.y, 0.0,
+        x.z, y.z, z.z, 0.0,
+        p.x, p.y, p.z, 1.0
+    };
+#endif
+
+    auto res = MATH3D_XYZ_NAMESPACE::_internal_fast_inverse_matrix4x4(input);
+    auto exp = inverseForce(input);
+
+    ASSERT_TRUE(MATH3D_NAMESPACE::equal(res, exp, 0.00001));
 }
