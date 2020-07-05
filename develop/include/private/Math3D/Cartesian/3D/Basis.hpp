@@ -14,10 +14,9 @@ template <EBasisBase Base, typename T>
 constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
     : m_position(position)
+    , m_orientation(MATH3D_XYZ_NAMESPACE::orientationMatrix(x,y,z))
 {
-    MATH3D_XYZ_NAMESPACE::setX(m_orientation, x);
-    MATH3D_XYZ_NAMESPACE::setY(m_orientation, y);
-    MATH3D_XYZ_NAMESPACE::setZ(m_orientation, z);
+
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -407,13 +406,7 @@ template <EBasisBase Base, typename T>
 constexpr FORCEINLINE void
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::setOrientation(const Quaternion<T>& orientation)
 {
-    MATH3D_XYZ_NAMESPACE::setOrientation
-    (
-        m_basis,
-        _internal_rotated_vector3_by_quaternion({T(1),0,0}, orientation),
-        _internal_rotated_vector3_by_quaternion({0,T(1),0}, orientation),
-        _internal_rotated_vector3_by_quaternion({0,0,T(1)}, orientation)
-    );
+    MATH3D_XYZ_NAMESPACE::setOrientation(m_basis, MATH3D_XYZ_NAMESPACE::orientationMatrix(orientation));
 }
 
 /* /////////////////////////////////////////////////////////////////////////////////////// */
