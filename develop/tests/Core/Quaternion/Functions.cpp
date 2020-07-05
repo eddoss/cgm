@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 #include <Math3D/Common.hpp>
 #include <Math3D/Core/Quaternion.hpp>
+#include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
 
 
@@ -129,6 +130,20 @@ TEST(Quaternion_Functions, Inverse)
         res = inverseForce(res);
         ASSERT_TRUE(equal(res, inv, 0.001));
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Quaternion_Functions, Orient)
+{
+    Quaternion<double> quat {-0.140680, 0.968583, 0.175850, 0.105510};
+    Vector<3,double> vec {1.0, 0.0, 0.0};
+
+    Vector<3,double> exp {0.915888, 0.310964, 0.253868};
+
+    orient(vec, quat);
+
+    ASSERT_TRUE(MATH3D_NAMESPACE::equal(vec, exp, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */

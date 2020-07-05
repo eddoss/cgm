@@ -128,6 +128,25 @@ constexpr Quaternion<T>
 inverseForce(const Quaternion<T>& quaternion);
 
 /**
+ * Orients vector by Quaternion.
+ * @param vector Vector to orient.
+ * @param quaternion Quaternion to orient by (must be normalized).
+ */
+template<typename T>
+constexpr void
+orient(Vector<3,T>& vector, const Quaternion<T>& quaternion);
+
+/**
+ * Orients vector by Quaternion.
+ * @param vector Vector to orient.
+ * @param quaternion Quaternion to orient by (must be normalized).
+ * @return Oriented vector.
+ */
+template<typename T>
+constexpr Vector<3,T>
+oriented(const Vector<3,T>& vector, const Quaternion<T>& quaternion);
+
+/**
  * Get angle between two quaternions.
  * @param A First quaternion.
  * @param B Second quaternion.

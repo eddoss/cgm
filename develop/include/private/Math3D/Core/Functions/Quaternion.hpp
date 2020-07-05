@@ -186,6 +186,29 @@ inverseForce(const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
+constexpr void
+orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
+{
+    auto img = quaternion.imaginary();
+    auto imt = static_cast<T>(2) * MATH3D_NAMESPACE::cross(vector, img);
+    vector += MATH3D_NAMESPACE::cross(imt, img);
+    vector += quaternion.s * imt;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Vector<3,T>
+oriented(const Vector<3,T>& vector, const Quaternion<T>& quaternion)
+{
+    Vector<3,T> result {vector};
+    orient(result, quaternion);
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
 constexpr T
 angle(const Quaternion<T>& A, const Quaternion<T>& B)
 {
