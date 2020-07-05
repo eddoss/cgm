@@ -21,9 +21,9 @@ orientationAxes(const Quaternion<T>& orientation)
 {
     return std::make_tuple
     (
-        _internal_rotated_vector3_by_quaternion({T(1),0,0}, orientation),
-        _internal_rotated_vector3_by_quaternion({0,T(1),0}, orientation),
-        _internal_rotated_vector3_by_quaternion({0,0,T(1)}, orientation)
+        oriented({T(1),0,0}, orientation),
+        oriented({0,T(1),0}, orientation),
+        oriented({0,0,T(1)}, orientation)
     );
 }
 
@@ -44,9 +44,41 @@ orientationMatrix(const Quaternion<T>& orientation)
 {
     Matrix<3,3,T> mat;
 
-    setX(mat, _internal_rotated_vector3_by_quaternion({T(1),T(0),T(0)}, orientation));
-    setY(mat, _internal_rotated_vector3_by_quaternion({T(0),T(1),T(0)}, orientation));
-    setZ(mat, _internal_rotated_vector3_by_quaternion({T(0),T(0),T(1)}, orientation));
+    T qxx(orientation.x * orientation.x);
+    T qyy(orientation.y * orientation.y);
+    T qzz(orientation.z * orientation.z);
+    T qxz(orientation.x * orientation.z);
+    T qxy(orientation.x * orientation.y);
+    T qyz(orientation.y * orientation.z);
+    T qsx(orientation.s * orientation.x);
+    T qsy(orientation.s * orientation.y);
+    T qsz(orientation.s * orientation.z);
+
+    #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        mat(0,0) = number<T>(1) - number<T>(2) * (qyy +  qzz);
+        mat(0,1) = number<T>(2) * (qxy - qsz);
+        mat(0,2) = number<T>(2) * (qxz + qsy);
+
+        mat(1,0) = number<T>(2) * (qxy + qsz);
+        mat(1,1) = number<T>(1) - number<T>(2) * (qxx +  qzz);
+        mat(1,2) = number<T>(2) * (qyz - qsx);
+
+        mat(2,0) = number<T>(2) * (qxz - qsy);
+        mat(2,1) = number<T>(2) * (qyz + qsx);
+        mat(2,2) = number<T>(1) - number<T>(2) * (qxx +  qyy);
+    #else
+        mat(0,0) = number<T>(1) - number<T>(2) * (qyy +  qzz);
+        mat(1,0) = number<T>(2) * (qxy - qsz);
+        mat(2,0) = number<T>(2) * (qxz + qsy);
+
+        mat(0,1) = number<T>(2) * (qxy + qsz);
+        mat(1,1) = number<T>(1) - number<T>(2) * (qxx +  qzz);
+        mat(2,1) = number<T>(2) * (qyz - qsx);
+
+        mat(0,2) = number<T>(2) * (qxz - qsy);
+        mat(1,2) = number<T>(2) * (qyz + qsx);
+        mat(2,2) = number<T>(1) - number<T>(2) * (qxx +  qyy);
+    #endif
 
     return mat;
 }
@@ -107,12 +139,12 @@ orientationQuaternion(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3
         if (X.x > Y.y)
         {
             t = 1 + X.x - Y.y - Z.z;
-            q = {Y.z - Z.y, t, X.y + Y.x, Z.x + X.z};
+            q = {Z.y - Y.z, t, Y.x + X.y, X.z + Z.x};
         }
         else
         {
             t = 1 - X.x + Y.y - Z.z;
-            q = {Z.x - X.z, X.y + Y.x, t, Y.z + Z.y};
+            q = {X.z - Z.x, Y.x + X.y, t, Z.y + Y.z};
         }
     }
     else
@@ -120,16 +152,16 @@ orientationQuaternion(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3
         if (X.x < -Y.y)
         {
             t = 1 - X.x - Y.y + Z.z;
-            q = {X.y - Y.x, Z.x + X.z, Y.z + Z.y, t};
+            q = {Y.x - X.y, X.z + Z.x, Z.y + Y.z, t};
         }
         else
         {
             t = 1 + X.x + Y.y + Z.z;
-            q = {t, Y.z - Z.y, Z.x - X.z, X.y - Y.x};
+            q = {t, Z.y - Y.z, X.z - Z.x, Y.x - X.y};
         }
     }
 
-    return q *= 0.5 / std::sqrt(t);
+    return q *= T(0.5) / std::sqrt(t);
 }
 
 MATH3D_XYZ_NAMESPACE_END
