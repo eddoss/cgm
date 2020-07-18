@@ -8,9 +8,7 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/3D/Functions/Orientation.hpp>
-
+#include <Math3D/Core/Functions/Quaternion.hpp>
 
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
@@ -24,8 +22,8 @@ MATH3D_XYZ_NAMESPACE_BEGIN
  * @return 3D space represented by 4x4 matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
-space(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+constexpr FORCEINLINE Matrix<4,4,T>
+packBasis(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
 
 /**
  * Creates 3D space from orientation matrix and position.
@@ -34,8 +32,8 @@ space(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Ve
  * @return 3D basis represented by 4x4 matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
-space(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+constexpr FORCEINLINE Matrix<4,4,T>
+packBasis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
  * Creates 3D space from Quaternion and position.
@@ -45,13 +43,22 @@ space(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
  */
 template<typename T>
 constexpr Matrix<4,4,T>
-space(const Quaternion<T>& orientation, const Vector<3,T>& position);
+packBasis(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+/**
+ * Unpack 4x4 matrix to X,Y,Z axes and position.
+ * @param matrix Matrix to unpack.
+ * @return Tuple of space orientation axes and space position.
+ */
+template<typename T>
+constexpr FORCEINLINE SpaceTuple<T>
+unpackBasis(const Matrix<4,4,T>& matrix);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/3D/Functions/Space.hpp>
+#include <private/Math3D/Cartesian/3D/Functions/BasisPackers.hpp>
 
 
 #endif // MATH3D_XYZ_FUNCTIONS_UTILS_HPP

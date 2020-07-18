@@ -15,9 +15,9 @@ constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return inverseForce(orientation) * vector;
+    return transposed(orientation) * vector;
 #else
-    return vector * inverseForce(orientation);
+    return vector * transposed(orientation);
 #endif
 }
 
@@ -30,20 +30,20 @@ globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return inverseForce(orientation) * vector + position;
+        return transposed(orientation) * (vector - position);
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return inverseForce(orientation) * vector;
+        return transposed(orientation) * vector;
     }
 #else
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return vector * inverseForce(orientation) + position;
+        return (vector - position) * transposed(orientation);
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return vector * inverseForce(orientation);
+        return vector * transposed(orientation);
     }
 #endif
 }
@@ -55,9 +55,9 @@ constexpr FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return _internal_multiply_matrix4x4_on_vector3<Representation>(inverseForce(localSpace), vector);
+    return _internal_multiply_matrix4x4_on_vector3<Representation>(_internal_fast_inverse_matrix4x4(localSpace), vector);
 #else
-    return _internal_multiply_vector3_on_matrix4x4<Representation>(vector, inverseForce(localSpace));
+    return _internal_multiply_vector3_on_matrix4x4<Representation>(vector, _internal_fast_inverse_matrix4x4(localSpace));
 #endif
 }
 
@@ -68,7 +68,7 @@ constexpr Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
     Vector<3,T> vec {vector};
-    _internal_rotate_vector3_by_quaternion(vec, inverseForce(orientation));
+    orient(vec, inverseForce(orientation));
     return vec;
 }
 
@@ -80,11 +80,11 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return _internal_rotated_vector3_by_quaternion(vector, inverseForce(orientation)) + position;
+        return oriented(vector - position, inverseForce(orientation));
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return _internal_rotated_vector3_by_quaternion(vector, inverseForce(orientation));
+        return oriented(vector, inverseForce(orientation));
     }
 }
 
@@ -183,7 +183,7 @@ template<typename T>
 constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    return _internal_rotated_vector3_by_quaternion(vector, orientation);
+    return oriented(vector, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -194,11 +194,11 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return _internal_rotated_vector3_by_quaternion(vector, orientation) + position;
+        return oriented(vector, orientation) + position;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return _internal_rotated_vector3_by_quaternion(vector, orientation);
+        return oriented(vector, orientation);
     }
 }
 

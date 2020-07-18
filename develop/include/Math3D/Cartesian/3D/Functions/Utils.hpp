@@ -8,19 +8,14 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Core/Functions/Quaternion.hpp>
+#include <Math3D/Cartesian/3D/Types/Enums.hpp>
+#include <Math3D/Cartesian/3D/Types/Typedefs.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
-
-/* ####################################################################################### */
-/* Aliases */
-/* ####################################################################################### */
-
-template<typename T> using AxesTuple    = std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>>;
-template<typename T> using SpaceTuple   = std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>;
 
 /* ####################################################################################### */
 /* X, Y, Z axes */
@@ -33,7 +28,16 @@ template<typename T> using SpaceTuple   = std::tuple<Vector<3,T>, Vector<3,T>, V
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getX(const Matrix<S,S,T>& basis);
+x(const Matrix<S,S,T>& basis);
+
+/**
+ * Gets basis X axis.
+ * @param axes Axes tuple to extract from.
+ * @return X axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+x(const AxesTuple<T>& axes);
 
 /**
  * Gets basis X axis.
@@ -42,7 +46,7 @@ getX(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getX(const Quaternion<T>& orientation);
+x(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Y axis.
@@ -51,7 +55,16 @@ getX(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getY(const Matrix<S,S,T>& basis);
+y(const Matrix<S,S,T>& basis);
+
+/**
+ * Gets basis Y axis.
+ * @param axes Axes tuple to extract from.
+ * @return Y axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+y(const AxesTuple<T>& axes);
 
 /**
  * Gets basis Y axis.
@@ -60,7 +73,7 @@ getY(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getY(const Quaternion<T>& orientation);
+y(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Z axis.
@@ -69,7 +82,16 @@ getY(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getZ(const Matrix<S,S,T>& basis);
+z(const Matrix<S,S,T>& basis);
+
+/**
+ * Gets basis Z axis.
+ * @param axes Axes tuple to extract from.
+ * @return Z axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+z(const AxesTuple<T>& axes);
 
 /**
  * Gets basis Z axis.
@@ -78,7 +100,7 @@ getZ(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getZ(const Quaternion<T>& orientation);
+z(const Quaternion<T>& orientation);
 
 /**
  * Set basis X axis.
@@ -118,7 +140,7 @@ setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getUp(const Matrix<S,S,T>& basis);
+up(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Up axis.
@@ -127,7 +149,7 @@ getUp(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getUp(const Quaternion<T>& orientation);
+up(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Right axis.
@@ -136,7 +158,7 @@ getUp(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getRight(const Matrix<S,S,T>& basis);
+right(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Right axis.
@@ -145,7 +167,7 @@ getRight(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getRight(const Quaternion<T>& orientation);
+right(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Forward axis.
@@ -154,7 +176,7 @@ getRight(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getForward(const Matrix<S,S,T>& basis);
+forward(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Forward axis.
@@ -163,7 +185,11 @@ getForward(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getForward(const Quaternion<T>& orientation);
+forward(const Quaternion<T>& orientation);
+
+/* ####################################################################################### */
+/* Down, Left, backward axes */
+/* ####################################################################################### */
 
 /**
  * Gets basis Down axis.
@@ -172,7 +198,7 @@ getForward(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getDown(const Matrix<S,S,T>& basis);
+down(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Down axis.
@@ -181,7 +207,7 @@ getDown(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getDown(const Quaternion<T>& orientation);
+down(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Left axis.
@@ -190,7 +216,7 @@ getDown(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getLeft(const Matrix<S,S,T>& basis);
+left(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Left axis.
@@ -199,7 +225,7 @@ getLeft(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getLeft(const Quaternion<T>& orientation);
+left(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Backward axis.
@@ -208,7 +234,7 @@ getLeft(const Quaternion<T>& orientation);
  */
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
-getBackward(const Matrix<S,S,T>& basis);
+backward(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Backward axis.
@@ -217,7 +243,7 @@ getBackward(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getBackward(const Quaternion<T>& orientation);
+backward(const Quaternion<T>& orientation);
 
 /**
  * Set basis Up axis.
@@ -256,7 +282,7 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value);
  */
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
-getPosition(const Matrix<4,4,T>& basis);
+position(const Matrix<4,4,T>& basis);
 
 /**
  * Set basis position.
@@ -273,23 +299,12 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
 
 /**
  * Extract 3x3 orientation matrix from 4x4 matrix.
- * @param basis Basis to extract from.
+ * @param basis 4x4 matrix to extract from.
  * @returb 3x3 orientation matrix.
  */
 template<typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
-getOrientation(const Matrix<4,4,T>& basis);
-
-/**
- * Set orientation axes to basis (3x3 matrix).
- * @param orientation 3x3 orientation to set to.
- * @param x X orientation axis.
- * @param y Y orientation axis.
- * @param z Z orientation axis.
- */
-template<typename T>
-constexpr void
-setOrientation(Matrix<3,3,T>& orientation, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
+orientation(const Matrix<4,4,T>& basis);
 
 /**
  * Set orientation axes to basis (4x4 matrix).
@@ -328,19 +343,6 @@ setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation);
 template<typename T>
 constexpr void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
-
-/* ####################################################################################### */
-/* Space */
-/* ####################################################################################### */
-
-/**
- * Unpack 4x4 matrix to X,Y,Z axes and position.
- * @param matrix Matrix to unpack.
- * @return Tuple of space orientation axes and space position.
- */
-template<typename T>
-constexpr FORCEINLINE SpaceTuple<T>
-unpackSpace(const Matrix<4,4,T>& matrix);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END

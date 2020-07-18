@@ -7,9 +7,9 @@
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Cartesian/3D/Types/Enums.hpp>
 #include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/3D/Functions/Space.hpp>
+#include <Math3D/Cartesian/3D/Functions/BasisPackers.hpp>
 #include <Math3D/Cartesian/3D/Functions/Orientation.hpp>
 
 
@@ -595,7 +595,7 @@ MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/3D/Basis.hpp>
+#include <private/Math3D/Cartesian/3D/Types/Basis.hpp>
 
 
 #endif // MATH3D_XYZ_BASIS_HPP

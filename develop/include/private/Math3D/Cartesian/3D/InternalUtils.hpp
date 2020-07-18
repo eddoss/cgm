@@ -6,7 +6,7 @@
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Cartesian/3D/Types/Enums.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

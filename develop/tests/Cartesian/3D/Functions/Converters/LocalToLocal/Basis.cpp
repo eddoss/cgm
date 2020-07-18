@@ -6,10 +6,10 @@
 #include <Math3D/Core/Functions/Matrix.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Basis.hpp>
+#include <Math3D/Cartesian/3D/Types/Basis.hpp>
 #include <Math3D/Cartesian/3D/Functions/Converters.hpp>
 #include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Cartesian/3D/Types/Enums.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 using namespace std;
@@ -88,7 +88,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat4)
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
     auto basisA = QA;
-    auto basisB = MATH3D_XYZ_NAMESPACE::space(QB, PB);
+    auto basisB = MATH3D_XYZ_NAMESPACE::packSpace(QB, PB);
 
     {
         auto reslt = MATH3D_XYZ_NAMESPACE::localToLocal<POINT>(coord, basisA, PA, basisB);

@@ -90,36 +90,35 @@ math3d_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
 set(TS_CARTESIAN_2D
     Cartesian/2D/Basis.cpp
     Cartesian/2D/Functions/Axes.cpp
-    Cartesian/2D/Functions/Space.cpp
+    Cartesian/2D/Functions/BasisPackers.cpp
     Cartesian/2D/Functions/Utils.cpp
     Cartesian/2D/Functions/Orientation.cpp
     Cartesian/2D/InternalFunctions.cpp
 )
 
 set(TS_CARTESIAN_3D
-    Cartesian/3D/Basis.cpp
     Cartesian/3D/Functions/Axes.cpp
-    Cartesian/3D/Functions/Space.cpp
     Cartesian/3D/Functions/Utils.cpp
+    Cartesian/3D/Functions/BasisPackers.cpp
     Cartesian/3D/Functions/Orientation.cpp
     Cartesian/3D/Functions/Converters/GlobalToLocal.cpp
     Cartesian/3D/Functions/Converters/LocalToGlobal.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/Basis.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix4.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/Quaternion.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3WithPosition.cpp
-    Cartesian/3D/Functions/Converters/LocalToLocal/QuaternionWithPosition.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/Basis.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix4.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/Quaternion.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/Matrix3WithPosition.cpp
+#    Cartesian/3D/Functions/Converters/LocalToLocal/QuaternionWithPosition.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
 
 set(TS_MODULE_CARTESIAN
-    ${TS_CARTESIAN_2D}
+#    ${TS_CARTESIAN_2D}
     ${TS_CARTESIAN_3D}
 )
 
-math3d_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
-math3d_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
+#math3d_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
+#math3d_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
 math3d_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 
 # ####################################################################################### #
@@ -127,8 +126,8 @@ math3d_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 # ####################################################################################### #
 
 set(TS_ALL_MODULES
-    ${TS_MODULE_CORE}
-    ${TS_MODULE_COORDINATES}
+#    ${TS_MODULE_CORE}
+#    ${TS_MODULE_COORDINATES}
     ${TS_MODULE_CARTESIAN}
 )
 

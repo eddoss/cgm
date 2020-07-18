@@ -6,10 +6,10 @@
 #include <Math3D/Core/Functions/Matrix.hpp>
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Basis.hpp>
+#include <Math3D/Cartesian/3D/Types/Basis.hpp>
 #include <Math3D/Cartesian/3D/Functions/Converters.hpp>
 #include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Cartesian/3D/Types/Enums.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 using namespace std;
@@ -165,7 +165,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Basis_Mat4)
     Vector<3,double> PB {4.1, 7.22, 14.4};
 
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto basisB = MATH3D_XYZ_NAMESPACE::space(QB, PB);
+    auto basisB = MATH3D_XYZ_NAMESPACE::packSpace(QB, PB);
 
     {
         auto basisA = MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double>(QA,PA);

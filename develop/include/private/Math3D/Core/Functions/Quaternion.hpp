@@ -190,8 +190,8 @@ constexpr void
 orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
 {
     auto img = quaternion.imaginary();
-    auto imt = static_cast<T>(2) * MATH3D_NAMESPACE::cross(vector, img);
-    vector += MATH3D_NAMESPACE::cross(imt, img);
+    auto imt = static_cast<T>(2) * cross(vector, img);
+    vector += cross(imt, img);
     vector += quaternion.s * imt;
 }
 
