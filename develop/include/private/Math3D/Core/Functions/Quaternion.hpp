@@ -9,7 +9,11 @@ template<typename T>
 constexpr FORCEINLINE T
 dot(const Quaternion<T> &A, const Quaternion<T> &B)
 {
-    return A | B;
+    return
+    A.vector.x * B.vector.x +
+    A.vector.y * B.vector.y +
+    A.vector.z * B.vector.z +
+    A.scalar * B.scalar;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -18,10 +22,11 @@ template<typename T>
 constexpr T
 norm(const Quaternion<T>& quaternion)
 {
-    return quaternion.x * quaternion.x +
-           quaternion.y * quaternion.y +
-           quaternion.z * quaternion.z +
-           quaternion.s * quaternion.s;
+    return
+    quaternion.vector.x * quaternion.vector.x +
+    quaternion.vector.y * quaternion.vector.y +
+    quaternion.vector.z * quaternion.vector.z +
+    quaternion.scalar * quaternion.scalar;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -30,9 +35,9 @@ template<typename T>
 constexpr Quaternion<T>&
 conjugate(Quaternion<T>& quaternion)
 {
-    quaternion.x *= -1;
-    quaternion.y *= -1;
-    quaternion.z *= -1;
+    quaternion.vector.x *= -1;
+    quaternion.vector.y *= -1;
+    quaternion.vector.z *= -1;
 
     return quaternion;
 }
@@ -43,13 +48,7 @@ template<typename T>
 constexpr FORCEINLINE Quaternion<T>
 conjugated(const Quaternion<T>& quaternion)
 {
-    return Quaternion<T>
-    {
-        quaternion.s,
-        -quaternion.x,
-        -quaternion.y,
-        -quaternion.z
-    };
+    return Quaternion<T> {-quaternion.vector, quaternion.scalar};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -60,13 +59,13 @@ length(const Quaternion<T>& quaternion)
 {
     T nrm {norm(quaternion)};
 
-    if (equal(nrm, zero<T>))
+    if (MATH3D_NAMESPACE::equal(nrm, zero<T>))
     {
         return zero<T>;
     }
     else
     {
-        return sqrt(nrm);
+        return std::sqrt(nrm);
     }
 }
 
@@ -189,10 +188,9 @@ template<typename T>
 constexpr void
 orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
 {
-    auto img = quaternion.imaginary();
-    auto imt = static_cast<T>(2) * cross(vector, img);
-    vector += cross(imt, img);
-    vector += quaternion.s * imt;
+    auto t = static_cast<T>(2) * cross(vector, quaternion.vector);
+    vector += cross(t, quaternion.vector);
+    vector += quaternion.scalar * t;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -221,13 +219,7 @@ template<typename T>
 constexpr Quaternion<T>
 identity()
 {
-    return Quaternion<T>
-    {
-        number<T>(1),
-        zero<T>,
-        zero<T>,
-        zero<T>
-    };
+    return Quaternion<T> {zero<T>, number<T>(1)};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -237,10 +229,10 @@ constexpr FORCEINLINE enable_if_floating<T,bool>
 equal(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
 {
     return
-    MATH3D_NAMESPACE::equal(A.s, B.s, tolerance) &&
-    MATH3D_NAMESPACE::equal(A.x, B.x, tolerance) &&
-    MATH3D_NAMESPACE::equal(A.y, B.y, tolerance) &&
-    MATH3D_NAMESPACE::equal(A.z, B.z, tolerance);
+    MATH3D_NAMESPACE::equal(A.vector.x, B.vector.x, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.vector.y, B.vector.y, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.vector.z, B.vector.z, tolerance) &&
+    MATH3D_NAMESPACE::equal(A.scalar, B.scalar, tolerance);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -250,10 +242,10 @@ constexpr FORCEINLINE enable_if_floating<T,bool>
 notEqual(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
 {
     return
-    MATH3D_NAMESPACE::notEqual(A.s, B.s, tolerance) ||
-    MATH3D_NAMESPACE::notEqual(A.x, B.x, tolerance) ||
-    MATH3D_NAMESPACE::notEqual(A.y, B.y, tolerance) ||
-    MATH3D_NAMESPACE::notEqual(A.z, B.z, tolerance);
+    MATH3D_NAMESPACE::notEqual(A.vector.x, B.vector.x, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.vector.y, B.vector.y, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.vector.z, B.vector.z, tolerance) ||
+    MATH3D_NAMESPACE::notEqual(A.scalar, B.scalar, tolerance);
 }
 
 MATH3D_NAMESPACE_END

@@ -37,7 +37,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::x(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::x(mat4);
@@ -82,7 +82,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::y(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::y(mat4);
@@ -127,7 +127,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::z(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::z(mat4);
@@ -228,7 +228,7 @@ TEST(Cartesian_3D_Functions_Utils, GetUp)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::up(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::up(mat4);
@@ -275,7 +275,7 @@ TEST(Cartesian_3D_Functions_Utils, GetRight)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::right(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::right(mat4);
@@ -322,7 +322,7 @@ TEST(Cartesian_3D_Functions_Utils, GetForward)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::forward(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::forward(mat4);
@@ -369,7 +369,7 @@ TEST(Cartesian_3D_Functions_Utils, GetDown)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::down(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::down(mat4);
@@ -404,7 +404,7 @@ TEST(Cartesian_3D_Functions_Utils, GetLeft)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::left(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::left(mat4);
@@ -439,7 +439,7 @@ TEST(Cartesian_3D_Functions_Utils, GetBackward)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::backward(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::backward(mat4);
@@ -605,7 +605,7 @@ TEST(Cartesian_3D_Functions_Utils, GetOrientation)
 }
 
 /* --------------------------------------------------------------------------------------- */
-
+#include <Math3D/IO.hpp>
 TEST(Cartesian_3D_Functions_Utils, SetOrientation)
 {
     {
@@ -686,7 +686,7 @@ TEST(Cartesian_3D_Functions_Utils, SetOrientation)
         Vector<3,double> expec_z {0.333334, -0.244017, 0.910683};
     #endif
 
-        Quaternion<double> orientation {0.965926, 0.149429, 0.149429, 0.149429};
+        Quaternion<double> orientation {0.149429, 0.149429, 0.149429, 0.965926};
 
         MATH3D_XYZ_NAMESPACE::setOrientation(mat, orientation);
 

@@ -61,13 +61,12 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
-    stream << typeid(quat).name() << "\n{\n";
+    stream << typeid(quat).name() << "{ [x]: ";
     stream << std::fixed << std::left << std::setprecision(6);
-    stream << "    s = " << quat.s << "\n";
-    stream << "    x = " << quat.x << "\n";
-    stream << "    y = " << quat.y << "\n";
-    stream << "    z = " << quat.z << "\n";
-    stream << "}";
+    stream << quat.vector.x << ", [y]: ";
+    stream << quat.vector.y << ", [z]: ";
+    stream << quat.vector.z << ", [w]: ";
+    stream << quat.scalar << " }";
     stream.setf(old_flags);
     return stream;
 }

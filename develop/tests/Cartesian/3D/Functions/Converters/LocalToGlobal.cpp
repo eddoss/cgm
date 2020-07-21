@@ -96,7 +96,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat4)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Quat)
 {
-    auto orientation = Quaternion<double> {-0.14068, 0.96858, 0.17585, 0.10551};
+    auto orientation = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
 
     auto result = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, orientation);
@@ -116,7 +116,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_QuatWithPos)
     constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
     constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
 
-    auto orientation = Quaternion<double> {-0.14068, 0.96858, 0.17585, 0.10551};
+    auto orientation = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
     auto position = Vector<3,double> {3.2, 6.3, 4.1};
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
 
@@ -155,7 +155,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Basis)
     auto z = Vector<3,double> { +0.154913, +0.309629, -0.938153 };
     auto coord = Vector<3,double> {1.2, 2.2, 1.7};
     auto position = Vector<3,double> {3.2, 6.3, 4.1};
-    auto quatOrient = Quaternion<double> {-0.14068, 0.96858, 0.17585, 0.10551};
+    auto quatOrient = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
     auto expectPoint = Vector<3,double> {5.41476, 4.36734, 3.37221};
     auto expectDirection = Vector<3,double> {2.21476, -1.93265, -0.72778};
 

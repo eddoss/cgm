@@ -93,13 +93,17 @@ TEST(Quaternion_Operators, OutplaceScalarMultiplication)
 
 TEST(Quaternion_Operators, OutplaceOtherMultiplication)
 {
-    Quaternion<double> a { 2, 3, 1, 5 };
-    Quaternion<double> b { 7, 9, 1, 3 };
-    Quaternion<double> e { -29,37,45,35 };
+    Quaternion<double> a { 3, 1, 5, 2 };
+    Quaternion<double> b { 9, 1, 3, 7 };
 
-    a = a * b;
+    Quaternion<double> result = a * b;
+#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    Quaternion<double> expect {41, -27, 47, -29};
+#else
+    Quaternion<double> expect {37, 45, 35, -29};
+#endif
 
-    ASSERT_TRUE(a == e);
+    ASSERT_TRUE(result == expect);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -110,19 +114,6 @@ TEST(Quaternion_Operators, InplaceScalarMultiplication)
     Quaternion<double> e { 2, 4, 6, 8 };
 
     a *= 2;
-
-    ASSERT_TRUE(a == e);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Quaternion_Operators, InplaceOtherMultiplication)
-{
-    Quaternion<double> a { 2, 3, 1, 5 };
-    Quaternion<double> b { 7, 9, 1, 3 };
-    Quaternion<double> e { -29,37,45,35 };
-
-    a *= b;
 
     ASSERT_TRUE(a == e);
 }

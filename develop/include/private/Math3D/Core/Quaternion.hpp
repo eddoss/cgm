@@ -7,11 +7,9 @@ MATH3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr
-Quaternion<T, enable_if_floating<T,void>>::Quaternion(T S, T X, T Y, T Z)
-    : s(S)
-    , x(X)
-    , y(Y)
-    , z(Z)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(T x, T y, T z, T w)
+    : vector(x,y,z)
+    , scalar(w)
 {
 
 }
@@ -20,11 +18,9 @@ Quaternion<T, enable_if_floating<T,void>>::Quaternion(T S, T X, T Y, T Z)
 
 template<typename T>
 constexpr
-Quaternion<T, enable_if_floating<T,void>>::Quaternion(T scalar, T coefficients)
-    : s(scalar)
-    , x(coefficients)
-    , y(coefficients)
-    , z(coefficients)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(T coefficientsValue, T scalarValue)
+    : vector(coefficientsValue, coefficientsValue, coefficientsValue)
+    , scalar(scalarValue)
 {
 
 }
@@ -33,11 +29,9 @@ Quaternion<T, enable_if_floating<T,void>>::Quaternion(T scalar, T coefficients)
 
 template<typename T>
 constexpr
-Quaternion<T, enable_if_floating<T,void>>::Quaternion(T scalar, const Vector<3,T>& coefficients)
-    : s(scalar)
-    , x(coefficients.x)
-    , y(coefficients.y)
-    , z(coefficients.z)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(const VectorType& coefficients, T scalarValue)
+    : vector(coefficients)
+    , scalar(scalarValue)
 {
 
 }
@@ -47,10 +41,8 @@ Quaternion<T, enable_if_floating<T,void>>::Quaternion(T scalar, const Vector<3,T
 template<typename T>
 constexpr
 Quaternion<T, enable_if_floating<T,void>>::Quaternion(const Vector<4,T>& values)
-    : s(values.w)
-    , x(values.x)
-    , y(values.y)
-    , z(values.z)
+    : vector(values.xyz())
+    , scalar(values.w)
 {
 
 }
@@ -63,7 +55,7 @@ template<typename T>
 constexpr FORCEINLINE T*
 Quaternion<T, enable_if_floating<T,void>>::data()
 {
-    return &s;
+    return &vector.x;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -72,16 +64,8 @@ template<typename T>
 constexpr FORCEINLINE const T*
 Quaternion<T, enable_if_floating<T,void>>::data() const
 {
-    return &s;
+    return &vector.x;
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr FORCEINLINE Vector<3,T>
-Quaternion<T, enable_if_floating<T,void>>::imaginary() const
-{
-    return {x,y,z};
-}
 
 MATH3D_NAMESPACE_END

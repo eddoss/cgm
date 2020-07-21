@@ -77,7 +77,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
     Vector<3,double> expec_z {0.154913, 0.309628, -0.938141};
 #endif
 
-    Quaternion<double> quat {-0.14068, 0.96858, 0.17585, 0.10551};
+    Quaternion<double> quat {0.96858, 0.17585, 0.10551, -0.14068};
     auto [x, y, z] = MATH3D_XYZ_NAMESPACE::orientationAxes(quat);
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(expec_x, x, 0.00001));
@@ -210,7 +210,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
     };
 #endif
 
-    Quaternion<double> quat {-0.14068, 0.96858, 0.17585, 0.10551};
+    Quaternion<double> quat {0.96858, 0.17585, 0.10551, -0.14068};
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(quat);
 
@@ -261,7 +261,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
     Vector<3,double> z {0.154913, 0.309628, -0.938141};
 #endif
 
-    auto expect = Quaternion<double>{-0.14068, 0.96858, 0.17585, 0.10551};
+    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(x,y,z);
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
@@ -288,7 +288,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 #endif
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(axes);
-    auto expect = Quaternion<double>{-0.14068, 0.96858, 0.17585, 0.10551};
+    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }
@@ -313,7 +313,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
     MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
-    auto expect = Quaternion<double>{-0.14068, 0.96858, 0.17585, 0.10551};
+    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }
@@ -338,7 +338,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
     MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
-    auto expect = Quaternion<double>{-0.14068, 0.96858, 0.17585, 0.10551};
+    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }

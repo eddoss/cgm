@@ -85,7 +85,7 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromMatrix3AndPosition)
 
 TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
 {
-    Quaternion<double> quaternion {0.965926, 0.149429, 0.149429, 0.149429};
+    Quaternion<double> quaternion {0.149429, 0.149429, 0.149429, 0.965926};
     Vector<3,double> position {0.7, 1.3, 4.0};
 
     auto basis = MATH3D_XYZ_NAMESPACE::packBasis(quaternion, position);

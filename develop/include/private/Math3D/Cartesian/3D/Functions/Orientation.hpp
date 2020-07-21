@@ -88,7 +88,9 @@ orientationAxes(const Quaternion<T>& orientation)
 //
 //    return std::make_tuple(x,y,z);
 
-    auto quat = Quaternion<T>(-orientation.s, orientation.x, orientation.y, orientation.z);
+    auto quat = orientation;
+    quat.scalar = -quat.scalar;
+
     return std::make_tuple
     (
         oriented({T(1),T(0),T(0)}, quat),
@@ -197,12 +199,12 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
         if (x.x > y.y)
         {
             t = 1 + x.x - y.y - z.z;
-            q = {z.y - y.z, t, y.x + x.y, x.z + z.x};
+            q = {t, y.x + x.y, x.z + z.x, z.y - y.z};
         }
         else
         {
             t = 1 - x.x + y.y - z.z;
-            q = {x.z - z.x, y.x + x.y, t, z.y + y.z};
+            q = {y.x + x.y, t, z.y + y.z, x.z - z.x};
         }
     }
     else
@@ -210,19 +212,19 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
         if (x.x < -y.y)
         {
             t = 1 - x.x - y.y + z.z;
-            q = {y.x - x.y, x.z + z.x, z.y + y.z, t};
+            q = {x.z + z.x, z.y + y.z, t, y.x - x.y};
         }
         else
         {
             t = 1 + x.x + y.y + z.z;
-            q = {t, z.y - y.z, x.z - z.x, y.x - x.y};
+            q = {z.y - y.z, x.z - z.x, y.x - x.y, t};
         }
     }
 
     q *= static_cast<T>(0.5) / std::sqrt(t);
 
 #ifndef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    q.s = -q.s;
+    q.scalar = -q.scalar;
 #endif
 
     return q;

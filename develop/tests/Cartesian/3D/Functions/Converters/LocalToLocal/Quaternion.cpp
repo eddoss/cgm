@@ -17,10 +17,9 @@ using namespace MATH3D_NAMESPACE;
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Quaternion_Mat3)
 {
-    Quaternion<double> QA {0.965926, 0.149429, 0.149429, 0.149429};
-    Quaternion<double> QB {0.095490, -0.143236, -0.477452, 0.861629};
-
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
+    auto in_quat_a = Quaternion<double> {0.149429, 0.149429, 0.149429, 0.965926};
+    auto in_quat_b = Quaternion<double> {-0.143236, -0.477452, 0.861629, 0.095490};
+    auto in_coord = Vector<3,double> {1.2, 2.2, 1.7};
     auto basisA = QA;
     auto basisB = MATH3D_XYZ_NAMESPACE::orientationMatrix(QB);
 

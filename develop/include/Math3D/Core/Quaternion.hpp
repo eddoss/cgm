@@ -18,15 +18,23 @@ struct Quaternion <T, enable_if_floating<T,void>>
     MATH3D_RULE_OF_FIVE(Quaternion)
 
 /* ####################################################################################### */
+public: /* Typedefs */
+/* ####################################################################################### */
+
+    using value_type        = T;
+    using pointer           = T*;
+    using reference         = T&;
+    using const_pointer     = const T*;
+    using const_reference   = const T&;
+    using VectorType        = Vector<3,T>;
+    using ScalarType        = T;
+
+/* ####################################################################################### */
 public: /* Components */
 /* ####################################################################################### */
 
-    // Quaternion equation: Q = s + xi + yj + zk
-
-    T s; ///< scalar component.
-    T x; ///< i imaginary component coefficient.
-    T y; ///< j imaginary component coefficient.
-    T z; ///< k imaginary component coefficient.
+    VectorType vector;
+    ScalarType scalar;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -34,29 +42,29 @@ public: /* Constructors */
 
     /**
      * Separately initialize the i,j,k coefficients and the scalar component.
-     * @param S Scalar component value.
-     * @param X i imaginary component coefficient.
-     * @param Y j imaginary component coefficient.
-     * @param Z k imaginary component coefficient.
+     * @param x i imaginary component coefficient.
+     * @param y j imaginary component coefficient.
+     * @param z k imaginary component coefficient.
+     * @param w Scalar component value.
      */
     constexpr
-    Quaternion(T S, T X, T Y, T Z);
+    Quaternion(T x, T y, T z, T w);
 
     /**
      * Initialize scalar component and the i,j,k coefficients to a single value.
-     * @param scalar Scalar component value.
+     * @param scalarValue Scalar component value.
      * @param coefficients Imaginary components coefficients.
      */
     constexpr
-    Quaternion(T scalar, T coefficients);
+    Quaternion(T coefficientsValue, T scalarValue);
 
     /**
      * Initialize scalar component and the i,j,k coefficients from 3D vector..
-     * @param scalar Scalar component value.
+     * @param scalarValue Scalar component value.
      * @param coefficients Imaginary components coefficients.
      */
     constexpr
-    Quaternion(T scalar, const Vector<3,T>& coefficients);
+    Quaternion(const VectorType& coefficients, T scalarValue);
 
     /**
      * Initialize from 4D vector.
@@ -74,22 +82,15 @@ public: /* Components accessing */
      * Gets a raw data.
      * @return pointer to a components.
      */
-    constexpr FORCEINLINE T*
+    constexpr FORCEINLINE pointer
     data();
 
     /**
      * Gets a raw data.
      * @return const pointer to a components.
      */
-    constexpr FORCEINLINE const T*
+    constexpr FORCEINLINE const_pointer
     data() const;
-
-    /**
-     * Gets a imaginary coefficients.
-     * @return Imaginary coefficients.
-     */
-    constexpr FORCEINLINE Vector<3,T>
-    imaginary() const;
 };
 
 MATH3D_NAMESPACE_END

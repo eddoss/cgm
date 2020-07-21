@@ -6,6 +6,8 @@
 #include <type_traits>
 #include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Core/Operators/Quaternion.hpp>
+#include <Math3D/Core/Functions/Vector.hpp>
+#include <Math3D/Core/Operators/Vector.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN

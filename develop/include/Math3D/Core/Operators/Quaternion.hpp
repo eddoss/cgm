@@ -3,6 +3,7 @@
 
 
 #include <Math3D/Core/Quaternion.hpp>
+#include <Math3D/Core/Functions/Vector.hpp>
 
 
 /* ####################################################################################### */

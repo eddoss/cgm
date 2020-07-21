@@ -28,26 +28,16 @@ TEST(Quaternion_Functions, Dot)
 TEST(Quaternion_Functions, Conjugate)
 {
     Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
-    Quaternion<float> b {6.f, -5.f, -8.f, -3.f};
+    Quaternion<float> b {-6.f, -5.f, -8.f, 3.f};
 
     ASSERT_TRUE(conjugate(a) == b);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Conjugated)
-{
-    Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
-    Quaternion<float> b {6.f, -5.f, -8.f, -3.f};
-
-    ASSERT_TRUE(conjugated(a) == b);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 TEST(Quaternion_Functions, Length)
 {
-    Quaternion<float> q {9.487f, 9.632f, 1.152f, 1.088f};
+    Quaternion<float> q {9.632f, 1.152f, 1.088f, 9.487f};
     float len = length(q);
     float exp = 13.612f;
 
@@ -58,7 +48,7 @@ TEST(Quaternion_Functions, Length)
 
 TEST(Quaternion_Functions, Norm)
 {
-    Quaternion<float> q {9.678f, 1.690f, 8.336f, 2.821f};
+    Quaternion<float> q {1.690f, 8.336f, 2.821f, 9.678f};
 
     float len = norm(q);
     float exp = 173.973f;
@@ -70,8 +60,8 @@ TEST(Quaternion_Functions, Norm)
 
 TEST(Quaternion_Functions, Normalize)
 {
-    Quaternion<double> qtr {4.043, 5.403, 2.650, 8.516};
-    Quaternion<double> nrm {0.362, 0.483, 0.237, 0.761};
+    Quaternion<double> qtr {5.403, 2.650, 8.516, 4.043};
+    Quaternion<double> nrm {0.483, 0.237, 0.761, 0.362};
 
     {
         auto res = qtr;
@@ -103,8 +93,8 @@ TEST(Quaternion_Functions, Normalize)
 
 TEST(Quaternion_Functions, Inverse)
 {
-    Quaternion<double> qtr {1.22, 4.34, 5.11, 12.7};
-    Quaternion<double> inv {0.0058731,-0.0208929,-0.0245997,-0.0611382};
+    Quaternion<double> qtr {4.34, 5.11, 12.7, 1.22};
+    Quaternion<double> inv {-0.0208929, -0.0245997, -0.0611382, 0.0058731};
 
     {
         auto res = qtr;
@@ -136,22 +126,25 @@ TEST(Quaternion_Functions, Inverse)
 
 TEST(Quaternion_Functions, Orient)
 {
-    Quaternion<double> quat {-0.140680, 0.968583, 0.175850, 0.105510};
+    Quaternion<double> quat {0.968583, 0.175850, 0.105510, -0.140680};
     Vector<3,double> vec {1.0, 0.0, 0.0};
 
-    Vector<3,double> exp {0.915888, 0.310964, 0.253868};
+    Vector<3,double> result = oriented(vec, quat);
+#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    Vector<3,double> expect {0.915889 , 0.310964 , 0.253868 };
+#else
+    Vector<3,double> expect {0.915888, 0.370337, 0.154913};
+#endif
 
-    orient(vec, quat);
-
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(vec, exp, 0.00001));
+    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Quaternion_Functions, Angle)
 {
-    Quaternion<float> a {1.22f, 4.34f, 5.11f, 3.74f};
-    Quaternion<float> b {0.25f, 2.16f, 1.45f, 2.47f};
+    Quaternion<float> a {4.34f, 5.11f, 3.74f, 1.22f};
+    Quaternion<float> b {2.16f, 1.45f, 2.47f, 0.25f};
 
     normalize(a);
     normalize(b);
@@ -166,10 +159,10 @@ TEST(Quaternion_Functions, Angle)
 TEST(Quaternion_Functions, Identity)
 {
     Quaternion<float> idn = identity<float>();
-    Quaternion<float> exp = {1.0f, 0.f, 0.f, 0.f};
+    Quaternion<float> exp = {0.f, 1.0f};
 
-    ASSERT_TRUE(idn.s == exp.s);
-    ASSERT_TRUE(idn.x == exp.x);
-    ASSERT_TRUE(idn.y == exp.y);
-    ASSERT_TRUE(idn.z == exp.z);
+    ASSERT_TRUE(idn.vector.x == exp.vector.x);
+    ASSERT_TRUE(idn.vector.y == exp.vector.y);
+    ASSERT_TRUE(idn.vector.z == exp.vector.z);
+    ASSERT_TRUE(idn.scalar == exp.scalar);
 }

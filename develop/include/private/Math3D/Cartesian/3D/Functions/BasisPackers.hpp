@@ -60,7 +60,9 @@ template<typename T>
 constexpr Matrix<4,4,T>
 packBasis(const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
-    auto quat = Quaternion<T>(-orientation.s, orientation.x, orientation.y, orientation.z);
+    auto quat = orientation;
+    quat.scalar = -quat.scalar;
+
     return packBasis
     (
         oriented({T(1), T(0), T(0)}, quat),
