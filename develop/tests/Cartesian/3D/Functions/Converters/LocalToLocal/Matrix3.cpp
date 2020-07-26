@@ -119,7 +119,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3_Mat4)
 }
 
 /* --------------------------------------------------------------------------------------- */
-//#include <Math3D/IO.hpp>
+
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3_Quat)
 {
     auto a_x = Vector<3,double> { +0.980518, -0.102133, -0.167786 };

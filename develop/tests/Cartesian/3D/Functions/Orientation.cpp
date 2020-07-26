@@ -11,6 +11,7 @@
 #include <Math3D/Core/Operators/Quaternion.hpp>
 #include <Math3D/Cartesian/3D/Functions/Utils.hpp>
 #include <Math3D/Cartesian/3D/Functions/Orientation.hpp>
+#include <Math3D/IO.hpp>
 
 using namespace std;
 using namespace MATH3D_NAMESPACE;
@@ -67,17 +68,11 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
 
 TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> expec_x {0.915889, 0.370336, 0.154913};
-    Vector<3,double> expec_y {0.310963, -0.898559, 0.309628};
-    Vector<3,double> expec_z {0.253867, -0.235412, -0.938141};
-#else
-    Vector<3,double> expec_x {0.915889, 0.310963, 0.253867};
-    Vector<3,double> expec_y {0.370336, -0.898559, -0.235412};
-    Vector<3,double> expec_z {0.154913, 0.309628, -0.938141};
-#endif
+    Vector<3,double> expec_x {0.559270,0.302442,-0.771846};
+    Vector<3,double> expec_y {-0.313298,0.939132,0.140980};
+    Vector<3,double> expec_z {0.767503,0.162971,0.619983};
 
-    Quaternion<double> quat {0.96858, 0.17585, 0.10551, -0.14068};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
     auto [x, y, z] = MATH3D_XYZ_NAMESPACE::orientationAxes(quat);
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(expec_x, x, 0.00001));
@@ -184,15 +179,9 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesTuple)
 
 TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> x {0.915889, 0.370336, 0.154913};
-    Vector<3,double> y {0.310963, -0.898559, 0.309628};
-    Vector<3,double> z {0.253867, -0.235412, -0.938141};
-#else
-    Vector<3,double> x {0.915889, 0.310963, 0.253867};
-    Vector<3,double> y {0.370336, -0.898559, -0.235412};
-    Vector<3,double> z {0.154913, 0.309628, -0.938141};
-#endif
+    Vector<3,double> x {0.559270,0.302442,-0.771846};
+    Vector<3,double> y {-0.313298,0.939132,0.140980};
+    Vector<3,double> z {0.767503,0.162971,0.619983};
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,double> expect
@@ -210,7 +199,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
     };
 #endif
 
-    Quaternion<double> quat {0.96858, 0.17585, 0.10551, -0.14068};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(quat);
 
@@ -251,17 +240,11 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromMatrix4x4)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> x {0.915889, 0.370336, 0.154913};
-    Vector<3,double> y {0.310963, -0.898559, 0.309628};
-    Vector<3,double> z {0.253867, -0.235412, -0.938141};
-#else
-    Vector<3,double> x {0.915889, 0.310963, 0.253867};
-    Vector<3,double> y {0.370336, -0.898559, -0.235412};
-    Vector<3,double> z {0.154913, 0.309628, -0.938141};
-#endif
+    Vector<3,double> x {0.559270,0.302442,-0.771846};
+    Vector<3,double> y {-0.313298,0.939132,0.140980};
+    Vector<3,double> z {0.767503,0.162971,0.619983};
 
-    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
+    auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(x,y,z);
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
@@ -271,24 +254,15 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
     MATH3D_XYZ_NAMESPACE::AxesTuple<double> axes
     {
-        Vector<3,double> {0.915889, 0.370336, 0.154913},
-        Vector<3,double> {0.310963, -0.898559, 0.309628},
-        Vector<3,double> {0.253867, -0.235412, -0.938141}
+        Vector<3,double> {0.559270,0.302442,-0.771846},
+        Vector<3,double> {-0.313298,0.939132,0.140980},
+        Vector<3,double> {0.767503,0.162971,0.619983}
     };
-#else
-    MATH3D_XYZ_NAMESPACE::AxesTuple<double> axes
-    {
-        Vector<3,double> {0.915889, 0.310963, 0.253867},
-        Vector<3,double> {0.370336, -0.898559, -0.235412},
-        Vector<3,double> {0.154913, 0.309628, -0.938141}
-    };
-#endif
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(axes);
-    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
+    auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }
@@ -297,15 +271,9 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> x {0.915889, 0.370336, 0.154913};
-    Vector<3,double> y {0.310963, -0.898559, 0.309628};
-    Vector<3,double> z {0.253867, -0.235412, -0.938141};
-#else
-    Vector<3,double> x {0.915889, 0.310963, 0.253867};
-    Vector<3,double> y {0.370336, -0.898559, -0.235412};
-    Vector<3,double> z {0.154913, 0.309628, -0.938141};
-#endif
+    Vector<3,double> x {0.559270,0.302442,-0.771846};
+    Vector<3,double> y {-0.313298,0.939132,0.140980};
+    Vector<3,double> z {0.767503,0.162971,0.619983};
 
     Matrix<3,3,double> matrix {};
     MATH3D_XYZ_NAMESPACE::setX(matrix, x);
@@ -313,7 +281,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
     MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
-    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
+    auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }
@@ -322,15 +290,9 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
 {
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> x {0.915889, 0.370336, 0.154913};
-    Vector<3,double> y {0.310963, -0.898559, 0.309628};
-    Vector<3,double> z {0.253867, -0.235412, -0.938141};
-#else
-    Vector<3,double> x {0.915889, 0.310963, 0.253867};
-    Vector<3,double> y {0.370336, -0.898559, -0.235412};
-    Vector<3,double> z {0.154913, 0.309628, -0.938141};
-#endif
+    Vector<3,double> x {0.559270,0.302442,-0.771846};
+    Vector<3,double> y {-0.313298,0.939132,0.140980};
+    Vector<3,double> z {0.767503,0.162971,0.619983};
 
     Matrix<4,4,double> matrix {};
     MATH3D_XYZ_NAMESPACE::setX(matrix, x);
@@ -338,7 +300,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
     MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
 
     auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
-    auto expect = Quaternion<double>{0.96858, 0.17585, 0.10551, -0.14068};
+    auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
 }

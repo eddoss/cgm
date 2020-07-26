@@ -67,9 +67,7 @@ template<typename T>
 constexpr Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    Vector<3,T> vec {vector};
-    orient(vec, inverseForce(orientation));
-    return vec;
+    return oriented(vector, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -80,11 +78,11 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return oriented(vector - position, inverseForce(orientation));
+        return oriented(vector - position, orientation);
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return oriented(vector, inverseForce(orientation));
+        return oriented(vector, orientation);
     }
 }
 
@@ -183,7 +181,7 @@ template<typename T>
 constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    return oriented(vector, orientation);
+    return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar});
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -194,11 +192,11 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return oriented(vector, orientation) + position;
+        return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar}) + position;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return oriented(vector, orientation);
+        return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar});
     }
 }
 

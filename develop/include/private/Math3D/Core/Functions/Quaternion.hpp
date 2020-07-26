@@ -188,8 +188,14 @@ template<typename T>
 constexpr void
 orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
 {
+#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
     auto t = static_cast<T>(2) * cross(vector, quaternion.vector);
     vector += cross(t, quaternion.vector);
+#else
+    auto t = static_cast<T>(2) * cross(quaternion.vector, vector);
+    vector += cross(quaternion.vector, t);
+#endif
+
     vector += quaternion.scalar * t;
 }
 

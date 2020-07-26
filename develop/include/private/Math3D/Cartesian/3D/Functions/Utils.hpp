@@ -45,7 +45,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 x(const Quaternion<T>& orientation)
 {
-    return oriented({T(1),T(0),T(0)}, Quaternion<T>{orientation.vector, -orientation.scalar});
+    return oriented({T(1),T(0),T(0)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -85,7 +85,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 y(const Quaternion<T>& orientation)
 {
-    return oriented({T(0),T(1),T(0)}, Quaternion<T>{orientation.vector, -orientation.scalar});
+    return oriented({T(0),T(1),T(0)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -125,7 +125,7 @@ template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 z(const Quaternion<T>& orientation)
 {
-    return oriented({T(0),T(0),T(1)}, Quaternion<T>{orientation.vector, -orientation.scalar});
+    return oriented({T(0),T(0),T(1)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -481,12 +481,9 @@ template<typename T>
 constexpr void
 setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation)
 {
-    auto quat = orientation;
-    quat.scalar = -quat.scalar;
-
-    setX(basis, oriented({T(1), T(0), T(0)}, quat));
-    setY(basis, oriented({T(0), T(1), T(0)}, quat));
-    setZ(basis, oriented({T(0), T(0), T(1)}, quat));
+    setX(basis, x(orientation));
+    setY(basis, y(orientation));
+    setZ(basis, z(orientation));
 }
 
 /* --------------------------------------------------------------------------------------- */

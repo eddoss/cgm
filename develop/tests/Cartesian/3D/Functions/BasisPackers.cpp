@@ -85,20 +85,14 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromMatrix3AndPosition)
 
 TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
 {
-    Quaternion<double> quaternion {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quaternion {-0.006227,0.435855,0.174342,0.882948};
     Vector<3,double> position {0.7, 1.3, 4.0};
 
-    auto basis = MATH3D_XYZ_NAMESPACE::packBasis(quaternion, position);
+    auto result = MATH3D_XYZ_NAMESPACE::packBasis(quaternion, position);
 
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> ex {0.910683, -0.244016, 0.333334};
-    Vector<3,double> ey {0.333332, 0.910683, -0.244016};
-    Vector<3,double> ez {-0.244017, 0.333332, 0.910683};
-#else
-    Vector<3,double> ex {0.910683, 0.333332, -0.244017};
-    Vector<3,double> ey {-0.244017, 0.910683, 0.333334};
-    Vector<3,double> ez {0.333334, -0.244017, 0.910683};
-#endif
+    Vector<3,double> ex {0.559270,0.302442,-0.771846};
+    Vector<3,double> ey {-0.313298,0.939132,0.140980};
+    Vector<3,double> ez {0.767503,0.162971,0.619983};
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<4,4,double> expec
@@ -118,7 +112,7 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
     };
 #endif
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(basis, expec, 0.0001));
+    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expec, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */

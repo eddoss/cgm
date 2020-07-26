@@ -19,14 +19,14 @@ using namespace MATH3D_NAMESPACE;
 
 TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat3)
 {
-    auto x = Vector<3,double> { +0.915889, +0.310965, +0.253868 };
-    auto y = Vector<3,double> { +0.370337, -0.898572, -0.235413 };
-    auto z = Vector<3,double> { +0.154913, +0.309629, -0.938153 };
+    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
+    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
+    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
+    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
 
     auto orientation = MATH3D_XYZ_NAMESPACE::orientationMatrix(x,y,z);
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
 
-    auto expect = Vector<3,double> {2.21476, -1.93265, -0.72778};
+    auto expect = Vector<3,double> {1.103751,1.325136,3.814793};
     auto result = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, orientation);
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
@@ -39,24 +39,24 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat3WithPos)
     constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
     constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
 
-    auto x = Vector<3,double> { +0.915889, +0.310965, +0.253868 };
-    auto y = Vector<3,double> { +0.370337, -0.898572, -0.235413 };
-    auto z = Vector<3,double> { +0.154913, +0.309629, -0.938153 };
-    auto p = Vector<3,double> {3.2, 6.3, 4.1};
+    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
+    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
+    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
+    auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
+    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
 
     auto orientation = MATH3D_XYZ_NAMESPACE::orientationMatrix(x,y,z);
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, orientation, p);
-        auto expect = Vector<3,double> {5.41476, 4.36734, 3.37221};
+        auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, orientation, p);
-        auto expect = Vector<3,double> {2.21476, -1.93265, -0.72778};
+        auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
@@ -69,24 +69,24 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat4)
     constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
     constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
 
-    auto x = Vector<3,double> { +0.915889, +0.310965, +0.253868 };
-    auto y = Vector<3,double> { +0.370337, -0.898572, -0.235413 };
-    auto z = Vector<3,double> { +0.154913, +0.309629, -0.938153 };
-    auto p = Vector<3,double> {3.2, 6.3, 4.1};
+    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
+    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
+    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
+    auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
+    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
     auto basis = MATH3D_XYZ_NAMESPACE::packBasis(x,y,z,p);
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis);
-        auto expect = Vector<3,double> {5.41476, 4.36734, 3.37221};
+        auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis);
-        auto expect = Vector<3,double> {2.21476, -1.93265, -0.72778};
+        auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
@@ -96,15 +96,11 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat4)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Quat)
 {
-    auto orientation = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
+    auto orientation = Quaternion<double> {-0.006227,0.435855,0.174342,0.882948};
+    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
     auto result = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, orientation);
-    #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        Vector<3,double> expect {2.17715, -1.07730, -1.80810};
-    #else
-        Vector<3,double> expect {2.21475, -1.93262, -0.72776};
-    #endif
+    auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
     ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
 }
@@ -116,28 +112,20 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_QuatWithPos)
     constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
     constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
 
-    auto orientation = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
-    auto position = Vector<3,double> {3.2, 6.3, 4.1};
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
+    auto orientation = Quaternion<double> {-0.006227,0.435855,0.174342,0.882948};
+    auto position = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
+    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, orientation, position);
-    #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        Vector<3,double> expect {5.37715, 5.22269, 2.29189};
-    #else
-        Vector<3,double> expect {5.41475, 4.36737, 3.37223};
-    #endif
+        auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
 
     {
         auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, orientation, position);
-    #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        Vector<3,double> expect {2.17715, -1.07730, -1.80810};
-    #else
-        Vector<3,double> expect {2.21475, -1.93262, -0.72776};
-    #endif
+        auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
     }
@@ -150,40 +138,34 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Basis)
     constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
     constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
 
-    auto x = Vector<3,double> { +0.915889, +0.310965, +0.253868 };
-    auto y = Vector<3,double> { +0.370337, -0.898572, -0.235413 };
-    auto z = Vector<3,double> { +0.154913, +0.309629, -0.938153 };
-    auto coord = Vector<3,double> {1.2, 2.2, 1.7};
-    auto position = Vector<3,double> {3.2, 6.3, 4.1};
-    auto quatOrient = Quaternion<double> {0.96858, 0.17585, 0.10551, -0.14068};
-    auto expectPoint = Vector<3,double> {5.41476, 4.36734, 3.37221};
-    auto expectDirection = Vector<3,double> {2.21476, -1.93265, -0.72778};
+    auto x = Vector<3,double>{ +0.559270, +0.302442, -0.77184 };
+    auto y = Vector<3,double>{ -0.313298, +0.939132, +0.14098 };
+    auto z = Vector<3,double>{ +0.767503, +0.162971, +0.61998 };
+    auto p = Vector<3,double>{ -1.200000, -0.600000, +4.40000 };
+    auto q = Quaternion<double>{ -0.006227, 0.435855, 0.174342, 0.882948 };
+
+    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
+    auto expectPoint = Vector<3,double>{ -0.096249, +0.725136, +8.214793 };
+    auto expectDirection = Vector<3,double>{ +1.103751, +1.325136, +3.814793 };
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x, y, z, position);
+        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x,y,z,p);
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x, y, z, position);
+        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x,y,z,p);
 
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
         ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Quaternion,double> basis(quatOrient, position);
-    #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        Vector<3,double> qexpectPoint {5.37715, 5.22269, 2.29189};
-        Vector<3,double> qexpectDirection {2.17715, -1.07730, -1.80810};
-    #else
-        Vector<3,double> qexpectPoint {5.41475, 4.36737, 3.37223};
-        Vector<3,double> qexpectDirection {2.21475, -1.93262, -0.72776};
-    #endif
+        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Quaternion,double> basis(q,p);
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), qexpectPoint, 0.0001));
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), qexpectDirection, 0.0001));
+        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
+        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 }

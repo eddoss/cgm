@@ -6,22 +6,48 @@
 
 
 template<size_t D, typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::Vector<D,T>& vec)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
-    stream << typeid(vec).name() << "\n{";
-    stream << std::fixed;
-    for (size_t i = 0; i < D; ++i)
+    stream << std::fixed << std::left << std::setprecision(6);
+
+    if constexpr (D == 2)
     {
-        stream  << "\n    "
-                << std::setw(10)
-                << std::left
-                << std::setprecision(6)
-                << *(vec.data()+i);
+        stream << typeid(vec).name() << "{ ";
+        stream << vec.x << ", ";
+        stream << vec.y << " }";
     }
-    stream << "\n}";
+    else if constexpr (D == 3)
+    {
+        stream << typeid(vec).name() << "{ ";
+        stream << vec.x << ", ";
+        stream << vec.y << ", ";
+        stream << vec.z << " }";
+    }
+    else if constexpr (D == 4)
+    {
+        stream << typeid(vec).name() << "{ ";
+        stream << vec.x << ", ";
+        stream << vec.y << ", ";
+        stream << vec.z << ", ";
+        stream << vec.w << " }";
+    }
+    else
+    {
+        stream << typeid(vec).name() << "\n{";
+        for (size_t i = 0; i < D; ++i)
+        {
+            stream  << "\n    "
+                    << std::setw(10)
+                    << std::left
+                    << std::setprecision(6)
+                    << *(vec.data()+i);
+        }
+        stream << "\n}";
+    }
+
     stream.setf(old_flags);
     return stream;
 }
@@ -29,7 +55,7 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Vector<D,T>& vec)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t M, size_t N, typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::Matrix<M,N,T>& mat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
@@ -56,7 +82,7 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Matrix<M,N,T>& mat)
 /* --------------------------------------------------------------------------------------- */
 
 template <typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
@@ -74,7 +100,7 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::Quaternion<T>& quat)
 /* --------------------------------------------------------------------------------------- */
 
 template <typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Polar<T>& polarCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
@@ -91,7 +117,7 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPAC
 /* --------------------------------------------------------------------------------------- */
 
 template <typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Spherical<T>& sphericalCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
@@ -109,7 +135,7 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPAC
 /* --------------------------------------------------------------------------------------- */
 
 template <typename T>
-std::ostream&
+constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& cylindricalCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};

@@ -46,56 +46,11 @@ template<typename T>
 constexpr FORCEINLINE AxesTuple<T>
 orientationAxes(const Quaternion<T>& orientation)
 {
-//    T qxx(orientation.x * orientation.x);
-//    T qyy(orientation.y * orientation.y);
-//    T qzz(orientation.z * orientation.z);
-//    T qxz(orientation.x * orientation.z);
-//    T qxy(orientation.x * orientation.y);
-//    T qyz(orientation.y * orientation.z);
-//    T qsx(orientation.s * orientation.x);
-//    T qsy(orientation.s * orientation.y);
-//    T qsz(orientation.s * orientation.z);
-//
-//    Vector<3,T> x;
-//    Vector<3,T> y;
-//    Vector<3,T> z;
-//
-//#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-//    x.x = number<T>(1) - number<T>(2) * (qyy +  qzz);
-//    x.y = number<T>(2) * (qxy - qsz);
-//    x.z = number<T>(2) * (qxz + qsy);
-//
-//    y.x = number<T>(2) * (qxy + qsz);
-//    y.y = number<T>(1) - number<T>(2) * (qxx +  qzz);
-//    y.z = number<T>(2) * (qyz - qsx);
-//
-//    z.x = number<T>(2) * (qxz - qsy);
-//    z.y = number<T>(2) * (qyz + qsx);
-//    z.z = number<T>(1) - number<T>(2) * (qxx +  qyy);
-//#else
-//    x.x = number<T>(1) - number<T>(2) * (qyy +  qzz);
-//    x.y = number<T>(2) * (qxy - qsz);
-//    x.z = number<T>(2) * (qxz + qsy);
-//
-//    y.x = number<T>(2) * (qxy + qsz);
-//    y.y = number<T>(1) - number<T>(2) * (qxx +  qzz);
-//    y.z = number<T>(2) * (qyz - qsx);
-//
-//    z.x = number<T>(2) * (qxz - qsy);
-//    z.y = number<T>(2) * (qyz + qsx);
-//    z.z = number<T>(1) - number<T>(2) * (qxx +  qyy);
-//#endif
-//
-//    return std::make_tuple(x,y,z);
-
-    auto quat = orientation;
-    quat.scalar = -quat.scalar;
-
     return std::make_tuple
     (
-        oriented({T(1),T(0),T(0)}, quat),
-        oriented({T(0),T(1),T(0)}, quat),
-        oriented({T(0),T(0),T(1)}, quat)
+        oriented({T(1),T(0),T(0)}, orientation),
+        oriented({T(0),T(1),T(0)}, orientation),
+        oriented({T(0),T(0),T(1)}, orientation)
     );
 }
 
@@ -200,13 +155,12 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
         {
             t = 1 + x.x - y.y - z.z;
             q = {t, y.x + x.y, x.z + z.x, z.y - y.z};
-        }
-        else
+        } else
         {
             t = 1 - x.x + y.y - z.z;
             q = {y.x + x.y, t, z.y + y.z, x.z - z.x};
         }
-    }
+    } 
     else
     {
         if (x.x < -y.y)
@@ -222,10 +176,6 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
     }
 
     q *= static_cast<T>(0.5) / std::sqrt(t);
-
-#ifndef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    q.scalar = -q.scalar;
-#endif
 
     return q;
 }

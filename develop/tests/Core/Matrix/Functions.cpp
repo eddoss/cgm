@@ -5,11 +5,9 @@
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Operators/Matrix.hpp>
 #include <Math3D/Core/Functions/Matrix.hpp>
-#include <Math3D/IO.hpp>
 
 
 using namespace MATH3D_NAMESPACE;
-
 using namespace std;
 
 using Mat12 = Matrix<1,2,int>;

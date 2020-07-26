@@ -37,7 +37,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::x(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::x(mat4);
@@ -51,11 +51,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     Vector<3,double> expec4 {2,3,0};
 #endif
 
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> expecQ {0.910683, -0.244016, 0.333334};
-#else
-    Vector<3,double> expecQ {0.910683, 0.333332, -0.244017};
-#endif
+    Vector<3,double> expecQ {0.559270,0.302442,-0.771846};
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
@@ -82,7 +78,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::y(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::y(mat4);
@@ -96,11 +92,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     Vector<3,double> expec4 {4,6,9};
 #endif
 
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> expecQ {0.333332, 0.910683, -0.244016};
-#else
-    Vector<3,double> expecQ {-0.244017, 0.910683, 0.333334};
-#endif
+    Vector<3,double> expecQ {-0.313298,0.939132,0.140980};
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
@@ -127,7 +119,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::z(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::z(mat4);
@@ -141,11 +133,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     Vector<3,double> expec4 {5,7,8};
 #endif
 
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Vector<3,double> expecQ {-0.244017, 0.333332, 0.910683};
-#else
-    Vector<3,double> expecQ {0.333334, -0.244017, 0.910683};
-#endif
+    Vector<3,double> expecQ {0.767503,0.162971,0.619983};
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
@@ -228,7 +216,7 @@ TEST(Cartesian_3D_Functions_Utils, GetUp)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::up(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::up(mat4);
@@ -275,7 +263,7 @@ TEST(Cartesian_3D_Functions_Utils, GetRight)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::right(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::right(mat4);
@@ -322,7 +310,7 @@ TEST(Cartesian_3D_Functions_Utils, GetForward)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::forward(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::forward(mat4);
@@ -369,7 +357,7 @@ TEST(Cartesian_3D_Functions_Utils, GetDown)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::down(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::down(mat4);
@@ -404,7 +392,7 @@ TEST(Cartesian_3D_Functions_Utils, GetLeft)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::left(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::left(mat4);
@@ -439,7 +427,7 @@ TEST(Cartesian_3D_Functions_Utils, GetBackward)
     };
 
     // axis = normalized(1,1,1), angle = 30 (deg)
-    Quaternion<double> quat {0.149429, 0.149429, 0.149429, 0.965926};
+    Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
     auto value3 = MATH3D_XYZ_NAMESPACE::backward(mat3);
     auto value4 = MATH3D_XYZ_NAMESPACE::backward(mat4);
@@ -605,7 +593,7 @@ TEST(Cartesian_3D_Functions_Utils, GetOrientation)
 }
 
 /* --------------------------------------------------------------------------------------- */
-#include <Math3D/IO.hpp>
+
 TEST(Cartesian_3D_Functions_Utils, SetOrientation)
 {
     {
@@ -676,17 +664,11 @@ TEST(Cartesian_3D_Functions_Utils, SetOrientation)
             0, 0, 0, 1.0
         };
 
-    #ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        Vector<3,double> expec_x {0.910683, -0.244016, 0.333334};
-        Vector<3,double> expec_y {0.333332, 0.910683, -0.244016};
-        Vector<3,double> expec_z {-0.244017, 0.333332, 0.910683};
-    #else
-        Vector<3,double> expec_x {0.910683, 0.333332, -0.244017};
-        Vector<3,double> expec_y {-0.244017, 0.910683, 0.333334};
-        Vector<3,double> expec_z {0.333334, -0.244017, 0.910683};
-    #endif
+        Vector<3,double> expec_x {0.559270,0.302442,-0.771846};
+        Vector<3,double> expec_y {-0.313298,0.939132,0.140980};
+        Vector<3,double> expec_z {0.767503,0.162971,0.619983};
 
-        Quaternion<double> orientation {0.149429, 0.149429, 0.149429, 0.965926};
+        Quaternion<double> orientation {-0.006227,0.435855,0.174342,0.882948};
 
         MATH3D_XYZ_NAMESPACE::setOrientation(mat, orientation);
 
