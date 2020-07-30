@@ -9,6 +9,7 @@
 #include <Math3D/Core/Functions/Matrix.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
 #include <Math3D/Cartesian/3D/Types/Basis.hpp>
+#include <Math3D/Cartesian/Common.hpp>
 #include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
 
 

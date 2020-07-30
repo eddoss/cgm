@@ -7,7 +7,7 @@
 #include <Math3D/Core/Functions/Vector.hpp>
 #include <Math3D/Core/Operators/Vector.hpp>
 #include <Math3D/Cartesian/3D/Types/Enums.hpp>
-
+#include <Math3D/Cartesian/Common.hpp>
 
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
