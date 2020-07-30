@@ -32,6 +32,15 @@ constexpr FORCEINLINE AxesTuple<T>
 orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
 /**
+ * Extract orientation axes from Space tuple.
+ * @param space Space tuple.
+ * @return Tuple of orientation axes.
+ */
+template<typename T>
+constexpr FORCEINLINE AxesTuple<T>
+orientationAxes(const SpaceTuple<T>& space);
+
+/**
  * Make axes tuple from 3x3 orientation matrix.
  * @param orientation 3x3 orientation matrix to extract axes from.
  * @return Tuple of axes.
@@ -81,6 +90,15 @@ constexpr FORCEINLINE Matrix<3,3,T>
 orientationMatrix(const AxesTuple<T>& axes);
 
 /**
+ * Extract orientation matrix from Space tuple.
+ * @param space Space tuple.
+ * @return Tuple of orientation axes.
+ */
+template<typename T>
+constexpr FORCEINLINE Matrix<3,3,T>
+orientationMatrix(const SpaceTuple<T>& space);
+
+/**
  * Convert orientation quaternion to 3x3 orientation matrix.
  * @param orientation Orientation quaternion to convert.
  * @return 3x3 orientation matrix.
@@ -121,6 +139,15 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
 template<typename T>
 constexpr FORCEINLINE Quaternion<T>
 orientationQuaternion(const AxesTuple<T>& axes);
+
+/**
+ * Extract orientation matrix from Space tuple.
+ * @param space Space tuple.
+ * @return Tuple of orientation axes.
+ */
+template<typename T>
+constexpr FORCEINLINE Quaternion<T>
+orientationQuaternion(const SpaceTuple<T>& space);
 
 /**
  * Convert 3x3 orientation matrix to orientation quaternion.

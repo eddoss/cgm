@@ -21,6 +21,20 @@ orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z
 
 template<typename T>
 constexpr FORCEINLINE AxesTuple<T>
+orientationAxes(const SpaceTuple<T>& space)
+{
+    return std::make_tuple
+    (
+        x(space),
+        y(space),
+        z(space)
+    );
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE AxesTuple<T>
 orientationAxes(const Matrix<3,3,T>& orientation)
 {
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -120,6 +134,20 @@ orientationMatrix(const AxesTuple<T>& axes)
 
 template<typename T>
 constexpr FORCEINLINE Matrix<3,3,T>
+orientationMatrix(const SpaceTuple<T>& space)
+{
+    return orientationMatrix
+    (
+        x(space),
+        y(space),
+        z(space)
+    );
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Matrix<3,3,T>
 orientationMatrix(const Quaternion<T>& orientation)
 {
     return orientationMatrix(orientationAxes(orientation));
@@ -191,6 +219,20 @@ orientationQuaternion(const AxesTuple<T>& axes)
         x(axes),
         y(axes),
         z(axes)
+    );
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Quaternion<T>
+orientationQuaternion(const SpaceTuple<T>& space)
+{
+    return orientationQuaternion
+    (
+        x(space),
+        y(space),
+        z(space)
     );
 }
 
