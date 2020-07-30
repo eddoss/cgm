@@ -9,6 +9,7 @@
 #include <Math3D/Core/Quaternion.hpp>
 #include <Math3D/Core/Functions/Quaternion.hpp>
 
+
 MATH3D_NAMESPACE_BEGIN
 MATH3D_XYZ_NAMESPACE_BEGIN
 

@@ -2,6 +2,7 @@
 
 
 #include <Math3D/Global.hpp>
+#include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Operators/Vector.hpp>
 
