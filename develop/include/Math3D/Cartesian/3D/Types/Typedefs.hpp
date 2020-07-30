@@ -1,5 +1,4 @@
-#ifndef MATH3D_XYZ_TYPEDEFS_HPP
-#define MATH3D_XYZ_TYPEDEFS_HPP
+#pragma once
 
 
 #include <tuple>
@@ -14,5 +13,3 @@ template<typename T=FLOAT> using SpaceTuple   = std::tuple<Vector<3,T>, Vector<3
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
-
-#endif //MATH3D_XYZ_TYPEDEFS_HPP

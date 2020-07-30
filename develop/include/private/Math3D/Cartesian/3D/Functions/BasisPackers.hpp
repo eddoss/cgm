@@ -41,7 +41,7 @@ packBasis(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
         orientation(0,0), orientation(0,1), orientation(0,2), position.x,
         orientation(1,0), orientation(1,1), orientation(1,2), position.y,
         orientation(2,0), orientation(2,1), orientation(2,2), position.z,
-        zero<T>, zero<T>, zero<T>, numer<T>(1)
+        zero<T>, zero<T>, zero<T>, number<T>(1)
     };
 #else
     return

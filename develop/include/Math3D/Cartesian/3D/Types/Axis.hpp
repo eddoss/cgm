@@ -1,5 +1,4 @@
-#ifndef MATH3D_XYZ_AXIS_HPP
-#define MATH3D_XYZ_AXIS_HPP
+#pragma once
 
 
 #include <type_traits>
@@ -20,5 +19,3 @@ struct Axis <D, T, std::enable_if_t<(D == 2 || D == 3)>>
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_XYZ_AXIS_HPP

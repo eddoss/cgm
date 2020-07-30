@@ -1,5 +1,4 @@
-#ifndef MATH3D_XYZ_ENUMS_HPP
-#define MATH3D_XYZ_ENUMS_HPP
+#pragma once
 
 
 #include <Math3D/Global.hpp>
@@ -105,5 +104,3 @@ enum class EBasisBase
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_XYZ_ENUMS_HPP

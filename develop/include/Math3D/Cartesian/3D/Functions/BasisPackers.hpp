@@ -1,5 +1,4 @@
-#ifndef MATH3D_XYZ_FUNCTIONS_SPACE_HPP
-#define MATH3D_XYZ_FUNCTIONS_SPACE_HPP
+#pragma once
 
 
 #include <tuple>
@@ -59,6 +58,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Cartesian/3D/Functions/BasisPackers.hpp>
-
-
-#endif // MATH3D_XYZ_FUNCTIONS_UTILS_HPP

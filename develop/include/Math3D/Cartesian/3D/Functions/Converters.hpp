@@ -1,5 +1,4 @@
-#ifndef MATH3D_XYZ_FUNCTIONS_CONVERTERS_HPP
-#define MATH3D_XYZ_FUNCTIONS_CONVERTERS_HPP
+#pragma once
 
 
 #include <Math3D/Global.hpp>
@@ -693,6 +692,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Cartesian/3D/Functions/Converters.hpp>
-
-
-#endif // MATH3D_XYZ_FUNCTIONS_CONVERTERS_HPP
