@@ -1,14 +1,14 @@
-#ifndef MATH3D_XY_BASIS_HPP
-#define MATH3D_XY_BASIS_HPP
+#pragma once
 
 
 #include <type_traits>
 #include <Math3D/Global.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Cartesian/Enums.hpp>
+#include <Math3D/Cartesian/2D/Types/Enums.hpp>
 #include <Math3D/Cartesian/2D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/2D/Functions/Space.hpp>
+#include <Math3D/Cartesian/2D/Functions/BasisPackers.hpp>
+#include <Math3D/Cartesian/2D/Functions/Orientation.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -52,6 +52,13 @@ public: /* Constructors */
     constexpr
     Basis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
+    /**
+     * Creates basis from 3x3 matrix.
+     * @param matrix 3x3 basis matrix.
+     */
+    constexpr
+    Basis(const Matrix<3,3,T>& matrix);
+
 /* ####################################################################################### */
 public: /* Getters */
 /* ####################################################################################### */
@@ -85,8 +92,8 @@ public: /* Getters */
     orientationMatrix() const;
 
     /**
-     * Gets 3x3 matrix is describe this basis.
-     * @return 3x3 basis matrix.
+     * Gets 2x2 matrix is describe this basis.
+     * @return 2x2 basis matrix.
      */
     constexpr FORCEINLINE Matrix<3,3,T>
     spaceMatrix() const;
@@ -119,7 +126,7 @@ public: /* Setters */
 
     /**
      * Sets basis orientation.
-     * @param orientation Extracts orientation 3x3 matrix from this matrix and apply to basis.
+     * @param orientation Extracts orientation 2x2 matrix from this matrix and apply to basis.
      */
     constexpr FORCEINLINE void
     setOrientation(const Matrix<3,3,T>& orientation);
@@ -148,7 +155,7 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Matrix<3,3,T>;
+    using BaseOnType = Matrix<2,2,T>;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -170,6 +177,13 @@ public: /* Constructors */
      */
     constexpr
     Basis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
+
+    /**
+     * Creates basis from 3x3 matrix.
+     * @param matrix 3x3 basis matrix.
+     */
+    constexpr
+    Basis(const Matrix<3,3,T>& matrix);
 
 /* ####################################################################################### */
 public: /* Getters */
@@ -204,8 +218,8 @@ public: /* Getters */
     orientationMatrix() const;
 
     /**
-     * Gets 3x3 matrix is describe this basis.
-     * @return 3x3 basis matrix.
+     * Gets 2x2 matrix is describe this basis.
+     * @return 2x2 basis matrix.
      */
     constexpr FORCEINLINE const Matrix<3,3,T>&
     spaceMatrix() const;
@@ -238,7 +252,7 @@ public: /* Setters */
 
     /**
      * Sets basis orientation.
-     * @param orientation Extracts orientation 3x3 matrix from this matrix and apply to basis.
+     * @param orientation Extracts orientation 2x2 matrix from this matrix and apply to basis.
      */
     constexpr FORCEINLINE void
     setOrientation(const Matrix<3,3,T>& orientation);
@@ -247,7 +261,7 @@ public: /* Setters */
 private: /* Private members */
 /* ####################################################################################### */
 
-    Matrix<3,3,T>
+    Matrix<2,2,T>
     m_basis;
 };
 
@@ -256,6 +270,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Cartesian/2D/Basis.hpp>
-
-
-#endif // MATH3D_XY_BASIS_HPP
