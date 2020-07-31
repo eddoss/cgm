@@ -20,7 +20,7 @@ enum class EAxes
 /* --------------------------------------------------------------------------------------- */
 
 /**
- * Describe 2D basis base.
+ * Describe 3D basis base.
  */
 enum class EBasisBase
 {
