@@ -40,6 +40,15 @@ x(const AxesTuple<T>& axes);
 
 /**
  * Gets basis X axis.
+ * @param space Space tuple to extract from.
+ * @return X axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+x(const SpaceTuple<T>& space);
+
+/**
+ * Gets basis X axis.
  * @param orientation Quaternion that orients space.
  * @return X axis value.
  */
@@ -64,6 +73,15 @@ y(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 y(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Y axis.
+ * @param space Space tuple to extract from.
+ * @return Y axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+y(const SpaceTuple<T>& space);
 
 /**
  * Gets basis Y axis.
@@ -94,6 +112,15 @@ z(const AxesTuple<T>& axes);
 
 /**
  * Gets basis Z axis.
+ * @param space Space tuple to extract from.
+ * @return Z axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+z(const SpaceTuple<T>& axes);
+
+/**
+ * Gets basis Z axis.
  * @param orientation Quaternion that orients space.
  * @return Z axis value.
  */
@@ -111,6 +138,24 @@ constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setX(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
+ * Set basis X axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setX(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis X axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setX(SpaceTuple<T>& space, const Vector<3,T>& value);
+
+/**
  * Set basis Y axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -120,6 +165,24 @@ constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setY(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
+ * Set basis Y axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setY(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis Y axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setY(SpaceTuple<T>& space, const Vector<3,T>& value);
+
+/**
  * Set basis Z axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -127,6 +190,24 @@ setY(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value);
+
+/**
+ * Set basis Z axis.
+ * @param space Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setZ(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis Z axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setZ(SpaceTuple<T>& space, const Vector<3,T>& value);
 
 /* ####################################################################################### */
 /* Up, Right, Forward axes */
@@ -151,6 +232,24 @@ constexpr FORCEINLINE Vector<3,T>
 up(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Up axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Up axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+up(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Up axis.
+ * @param space Space tuple to extract axis from.
+ * @return Up axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+up(const SpaceTuple<T>& space);
+
+/**
  * Gets basis Right axis.
  * @param basis Basis to extract axis from.
  * @return Right axis value.
@@ -169,6 +268,24 @@ constexpr FORCEINLINE Vector<3,T>
 right(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Right axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Right axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+right(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Right axis.
+ * @param space Space tuple to extract axis from.
+ * @return Right axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+right(const SpaceTuple<T>& space);
+
+/**
  * Gets basis Forward axis.
  * @param basis Basis to extract axis from.
  * @return Forward axis value.
@@ -185,6 +302,24 @@ forward(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 forward(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Forward axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Forward axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+forward(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Forward axis.
+ * @param space Space tuple to extract axis from.
+ * @return Forward axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+forward(const SpaceTuple<T>& space);
 
 /* ####################################################################################### */
 /* Down, Left, backward axes */
@@ -209,6 +344,24 @@ constexpr FORCEINLINE Vector<3,T>
 down(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Down axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Down axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+down(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Down axis.
+ * @param space Space tuple to extract axis from.
+ * @return Down axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+down(const SpaceTuple<T>& space);
+
+/**
  * Gets basis Left axis.
  * @param basis Basis to extract axis from.
  * @return Left axis value.
@@ -225,6 +378,24 @@ left(const Matrix<S,S,T>& basis);
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 left(const Quaternion<T>& orientation);
+
+/**
+ * Gets basis Left axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Left axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+left(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Left axis.
+ * @param space Space tuple to extract axis from.
+ * @return Left axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+left(const SpaceTuple<T>& space);
 
 /**
  * Gets basis Backward axis.
@@ -245,6 +416,24 @@ constexpr FORCEINLINE Vector<3,T>
 backward(const Quaternion<T>& orientation);
 
 /**
+ * Gets basis Backward axis.
+ * @param axes Axes tuple to extract axis from.
+ * @return Backward axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+backward(const AxesTuple<T>& axes);
+
+/**
+ * Gets basis Backward axis.
+ * @param space Space tuple to extract axis from.
+ * @return Backward axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+backward(const SpaceTuple<T>& space);
+
+/**
  * Set basis Up axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -252,6 +441,24 @@ backward(const Quaternion<T>& orientation);
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value);
+
+/**
+ * Set basis Up axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setUp(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis Up axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setUp(SpaceTuple<T>& space, const Vector<3,T>& value);
 
 /**
  * Set basis Right axis.
@@ -263,6 +470,24 @@ constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
+ * Set basis Right axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setRight(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis Right axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setRight(SpaceTuple<T>& space, const Vector<3,T>& value);
+
+/**
  * Set basis Forward axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -270,6 +495,24 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value);
+
+/**
+ * Set basis Forward axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setForward(AxesTuple<T>& axes, const Vector<3,T>& value);
+
+/**
+ * Set basis Forward axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setForward(SpaceTuple<T>& space, const Vector<3,T>& value);
 
 /* ####################################################################################### */
 /* Basis position */
@@ -284,6 +527,14 @@ constexpr FORCEINLINE Vector<3,T>
 position(const Matrix<4,4,T>& basis);
 
 /**
+ * Gets basis position.
+ * @return Basis position.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+position(const SpaceTuple<T>& space);
+
+/**
  * Set basis position.
  * @param basis Basis to set position to.
  * @param value New position value.
@@ -291,6 +542,15 @@ position(const Matrix<4,4,T>& basis);
 template<typename T>
 constexpr FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
+
+/**
+ * Set basis position.
+ * @param basis Basis to set position to.
+ * @param value New position value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setPosition(SpaceTuple<T>& space, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 /* Basis orientation */
@@ -342,6 +602,24 @@ setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation);
 template<typename T>
 constexpr void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
+
+/**
+ * Set orientation axes to basis (4x4 matrix).
+ * @param basis Basis to set to.
+ * @param axes Orientation axes.
+ */
+template<typename T>
+constexpr void
+setOrientation(Matrix<4,4,T>& basis, const AxesTuple<T>& axes);
+
+/**
+ * Extracts orientation axes and set it to 'basis'.
+ * @param basis Basis to set orientation to.
+ * @param space Space tuple to extract orientation axes from.
+ */
+template<typename T>
+constexpr void
+setOrientation(Matrix<4,4,T>& basis, const SpaceTuple<T>& space);
 
 MATH3D_XYZ_NAMESPACE_END
 MATH3D_NAMESPACE_END

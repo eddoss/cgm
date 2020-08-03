@@ -43,6 +43,15 @@ x(const AxesTuple<T>& axes)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
+x(const SpaceTuple<T>& axes)
+{
+    return std::get<0>(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
 x(const Quaternion<T>& orientation)
 {
     return oriented({T(1),T(0),T(0)}, orientation);
@@ -75,6 +84,15 @@ y(const Matrix<S,S,T>& basis)
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
 y(const AxesTuple<T>& axes)
+{
+    return std::get<1>(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+y(const SpaceTuple<T>& axes)
 {
     return std::get<1>(axes);
 }
@@ -123,6 +141,15 @@ z(const AxesTuple<T>& axes)
 
 template<typename T>
 constexpr FORCEINLINE Vector<3,T>
+z(const SpaceTuple<T>& axes)
+{
+    return std::get<2>(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
 z(const Quaternion<T>& orientation)
 {
     return oriented({T(0),T(0),T(1)}, orientation);
@@ -147,6 +174,24 @@ setX(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE void
+setX(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+    std::get<0>(axes) = value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setX(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+    std::get<0>(space) = value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setY(Matrix<S,S,T>& basis, const Vector<3,T>& value)
@@ -164,6 +209,24 @@ setY(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE void
+setY(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+    std::get<1>(axes) = value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setY(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+    std::get<1>(space) = value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value)
@@ -177,6 +240,24 @@ setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value)
     basis(1,2) = value.y;
     basis(2,2) = value.z;
 #endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setZ(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+    std::get<2>(axes) = value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setZ(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+    std::get<2>(space) = value;
 }
 
 /* ####################################################################################### */
@@ -217,6 +298,40 @@ up(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+up(const AxesTuple<T>& axes)
+{
+#ifdef MATH3D_CARTESIAN_UP_X
+    return x(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Y
+    return y(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Z
+    return z(axes);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+up(const SpaceTuple<T>& space)
+{
+#ifdef MATH3D_CARTESIAN_UP_X
+    return x(space);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Y
+    return y(space);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Z
+    return z(space);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 right(const Matrix<S,S,T>& basis)
@@ -246,6 +361,40 @@ right(const Quaternion<T>& orientation)
 #endif
 #ifdef MATH3D_CARTESIAN_RIGHT_Z
     return z(orientation);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+right(const AxesTuple<T>& axes)
+{
+#ifdef MATH3D_CARTESIAN_RIGHT_X
+    return x(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Y
+    return y(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Z
+    return z(axes);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+right(const SpaceTuple<T>& space)
+{
+#ifdef MATH3D_CARTESIAN_RIGHT_X
+    return x(space);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Y
+    return y(space);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Z
+    return z(space);
 #endif
 }
 
@@ -283,6 +432,40 @@ forward(const Quaternion<T>& orientation)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+forward(const AxesTuple<T>& axes)
+{
+#ifdef MATH3D_CARTESIAN_FORWARD_X
+    return x(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Y
+    return y(axes);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Z
+    return z(axes);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+forward(const SpaceTuple<T>& space)
+{
+#ifdef MATH3D_CARTESIAN_FORWARD_X
+    return x(space);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Y
+    return y(space);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Z
+    return z(space);
+#endif
+}
+
 /* ####################################################################################### */
 /* Down, Left, backward axes */
 /* ####################################################################################### */
@@ -305,6 +488,24 @@ down(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+down(const AxesTuple<T>& axes)
+{
+    return -up(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+down(const SpaceTuple<T>& space)
+{
+    return -up(space);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 left(const Matrix<S,S,T>& basis)
@@ -319,6 +520,24 @@ constexpr FORCEINLINE Vector<3,T>
 left(const Quaternion<T>& orientation)
 {
     return -right(orientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+left(const AxesTuple<T>& axes)
+{
+    return -right(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+left(const SpaceTuple<T>& space)
+{
+    return -right(space);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -341,6 +560,24 @@ backward(const Quaternion<T>& orientation)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+backward(const AxesTuple<T>& axes)
+{
+    return -forward(axes);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+backward(const SpaceTuple<T>& space)
+{
+    return -forward(space);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
@@ -353,6 +590,40 @@ setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 #endif
 #ifdef MATH3D_CARTESIAN_UP_Z
     return setZ(basis, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setUp(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_UP_X
+    return setX(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Y
+    return setY(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Z
+    return setZ(axes, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setUp(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_UP_X
+    return setX(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Y
+    return setY(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_UP_Z
+    return setZ(space, value);
 #endif
 }
 
@@ -375,6 +646,40 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setRight(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_RIGHT_X
+    return setX(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Y
+    return setY(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Z
+    return setZ(axes, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setRight(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_RIGHT_X
+    return setX(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Y
+    return setY(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_RIGHT_Z
+    return setZ(space, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
@@ -387,6 +692,40 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 #endif
 #ifdef MATH3D_CARTESIAN_FORWARD_Z
     return setZ(basis, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setForward(AxesTuple<T>& axes, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_FORWARD_X
+    return setX(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Y
+    return setY(axes, value);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Z
+    return setZ(axes, value);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+setForward(SpaceTuple<T>& space, const Vector<3,T>& value)
+{
+#ifdef MATH3D_CARTESIAN_FORWARD_X
+    return setX(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Y
+    return setY(space, value);
+#endif
+#ifdef MATH3D_CARTESIAN_FORWARD_Z
+    return setZ(space, value);
 #endif
 }
 
@@ -417,6 +756,15 @@ position(const Matrix<4,4,T>& basis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
+constexpr FORCEINLINE Vector<3,T>
+position(const SpaceTuple<T>& space)
+{
+    return std::get<3>(space);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
 constexpr FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
 {
@@ -429,6 +777,15 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
     basis(3,1) = position.y;
     basis(3,2) = position.z;
 #endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr FORCEINLINE void
+setPosition(SpaceTuple<T>& space, const Vector<3,T>& position)
+{
+    std::get<3>(space) = position;
 }
 
 /* ####################################################################################### */
@@ -501,6 +858,28 @@ setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other)
     basis(2,0) = other(2,0);
     basis(2,1) = other(2,1);
     basis(2,2) = other(2,2);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<4,4,T>& basis, const AxesTuple<T>& axes)
+{
+    setX(basis, x(axes));
+    setY(basis, y(axes));
+    setZ(basis, z(axes));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+setOrientation(Matrix<4,4,T>& basis, const SpaceTuple<T>& space)
+{
+    setX(basis, x(space));
+    setY(basis, y(space));
+    setZ(basis, z(space));
 }
 
 MATH3D_XYZ_NAMESPACE_END
