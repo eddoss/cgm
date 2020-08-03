@@ -2,6 +2,7 @@
 #define MATH3D_VECTOR_HPP
 
 
+#include <iterator>
 #include <type_traits>
 #include <initializer_list>
 #include <Math3D/Global.hpp>
