@@ -72,6 +72,7 @@ _internal_fast_invert_matrix4x4(Matrix<4,4,T>& mat)
     std::swap(mat(0,2), mat(2,0));
     std::swap(mat(1,2), mat(2,1));
 
+    // position = -(position * orientation)
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     T px = -(mat(0,0) * mat(0,3) + mat(0,1) * mat(1,3) + mat(0,2) * mat(2,3));
     T py = -(mat(1,0) * mat(0,3) + mat(1,1) * mat(1,3) + mat(1,2) * mat(2,3));

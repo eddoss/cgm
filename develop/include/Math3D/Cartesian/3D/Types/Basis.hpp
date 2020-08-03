@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <Math3D/Global.hpp>
+#include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Core/Quaternion.hpp>
@@ -30,7 +31,13 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Matrix<3,3,T>;
+    using BasedOnType = Matrix<3,3,T>;
+
+/* ####################################################################################### */
+public: /* Statics */
+/* ####################################################################################### */
+
+    constexpr static const EBasisBase base {Base};
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -61,6 +68,13 @@ public: /* Constructors */
      */
     constexpr
     Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 4x4 matrix.
+     * @param matrix 4x4 basis matrix.
+     */
+    constexpr explicit
+    Basis(const Matrix<4,4,T>& matrix);
 
 /* ####################################################################################### */
 public: /* Getters */
@@ -222,7 +236,13 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Matrix<4,4,T>;
+    using BasedOnType = Matrix<4,4,T>;
+
+/* ####################################################################################### */
+public: /* Statics */
+/* ####################################################################################### */
+
+    constexpr static const EBasisBase base {Base};
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -253,6 +273,13 @@ public: /* Constructors */
      */
     constexpr
     Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 4x4 matrix.
+     * @param matrix 4x4 basis matrix.
+     */
+    constexpr explicit
+    Basis(const Matrix<4,4,T>& matrix);
 
 /* ####################################################################################### */
 public: /* Getters */
@@ -411,7 +438,13 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Quaternion<T>;
+    using BasedOnType = Quaternion<T>;
+
+/* ####################################################################################### */
+public: /* Statics */
+/* ####################################################################################### */
+
+    constexpr static const EBasisBase base {Base};
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -442,6 +475,13 @@ public: /* Constructors */
      */
     constexpr
     Basis(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+    /**
+     * Creates basis from 4x4 matrix.
+     * @param matrix 4x4 basis matrix.
+     */
+    constexpr explicit
+    Basis(const Matrix<4,4,T>& matrix);
 
 /* ####################################################################################### */
 public: /* Getters */

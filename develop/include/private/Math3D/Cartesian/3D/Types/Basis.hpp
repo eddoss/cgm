@@ -41,6 +41,17 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Qu
 
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template <EBasisBase Base, typename T>
+constexpr
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3)>>::Basis(const Matrix<4,4,T>& matrix)
+    : m_orientation(MATH3D_XYZ_NAMESPACE::orientationMatrix(matrix))
+    , m_position(MATH3D_XYZ_NAMESPACE::position(matrix))
+{
+
+}
+
 /* ####################################################################################### */
 /* Getters */
 /* ####################################################################################### */
@@ -239,6 +250,16 @@ template <EBasisBase Base, typename T>
 constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
     : m_basis(MATH3D_XYZ_NAMESPACE::packBasis(orientation, position))
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <EBasisBase Base, typename T>
+constexpr
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix4)>>::Basis(const Matrix<4,4,T>& matrix)
+    : m_basis(matrix)
 {
 
 }
@@ -444,6 +465,17 @@ constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Quaternion<T>& orientation, const Vector<3,T>& position)
     : m_orientation(orientation)
     , m_position(position)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <EBasisBase Base, typename T>
+constexpr
+Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Matrix<4,4,T>& matrix)
+    : m_orientation(MATH3D_XYZ_NAMESPACE::orientationMatrix(matrix))
+    , m_position(MATH3D_XYZ_NAMESPACE::position(matrix))
 {
 
 }
