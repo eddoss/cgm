@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_OPERATORS_MATRIX_VECTOR_MULTIPLICATION_HPP
-#define MATH3D_CORE_OPERATORS_MATRIX_VECTOR_MULTIPLICATION_HPP
+#pragma once
 
 
 #include <Math3D/Core/Vector.hpp>
@@ -28,6 +27,3 @@ operator * (const MATH3D_NAMESPACE::Matrix<M,D,T>& A, const MATH3D_NAMESPACE::Ve
 
 
 #include <private/Math3D/Core/Operators/MatrixVectorMultiplication.hpp>
-
-
-#endif //MATH3D_CORE_OPERATORS_MATRIX_VECTOR_MULTIPLICATION_HPP

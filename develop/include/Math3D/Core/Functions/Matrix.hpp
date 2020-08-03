@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_FUNCTIONS_MATRIX_HPP
-#define MATH3D_CORE_FUNCTIONS_MATRIX_HPP
+#pragma once
 
 
 #include <Math3D/Core/Matrix.hpp>
@@ -200,6 +199,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Core/Functions/Matrix.hpp>
-
-
-#endif //MATH3D_CORE_FUNCTIONS_MATRIX_HPP

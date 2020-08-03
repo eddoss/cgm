@@ -1,5 +1,3 @@
-#ifndef MATH3D_PRIVATE_IO_HPP
-#define MATH3D_PRIVATE_IO_HPP
 
 
 #include <Math3D/IO.hpp>
@@ -149,5 +147,3 @@ operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPAC
     stream.setf(old_flags);
     return stream;
 }
-
-#endif //MATH3D_PRIVATE_IO_HPP

@@ -1,5 +1,4 @@
-#ifndef MATH3D_VECTOR_HPP
-#define MATH3D_VECTOR_HPP
+#pragma once
 
 
 #include <iterator>
@@ -493,6 +492,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Core/Vector.hpp>
-
-
-#endif // MATH3D_VECTOR_HPP

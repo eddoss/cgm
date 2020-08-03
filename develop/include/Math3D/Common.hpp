@@ -1,5 +1,4 @@
-#ifndef MATH3D_COMMON_HPP
-#define MATH3D_COMMON_HPP
+#pragma once
 
 
 #include <cstdint>
@@ -128,6 +127,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Common.hpp>
-
-
-#endif // MATH3D_COMMON_HPP

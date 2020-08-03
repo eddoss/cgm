@@ -1,5 +1,4 @@
-#ifndef MATH3D_GLOBAL_HPP
-#define MATH3D_GLOBAL_HPP
+#pragma once
 
 
 #include <type_traits>
@@ -66,5 +65,3 @@ using enable_if_floating = std::enable_if_t<std::is_floating_point_v<T>, TOut>;
 
 template <typename T, typename TOut>
 using enable_if_integral = std::enable_if_t<std::is_integral_v<T>, TOut>;
-
-#endif // MATH3D_GLOBAL_HPP

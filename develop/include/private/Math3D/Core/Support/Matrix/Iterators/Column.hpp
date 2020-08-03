@@ -1,11 +1,12 @@
-#ifndef MATH3D_MATRIX_COLUMN_ITERATOR_HPP
-#define MATH3D_MATRIX_COLUMN_ITERATOR_HPP
+#pragma once
+
 
 #include <Math3D/Global.hpp>
 #include <iterator>
 #ifdef NDEBUG
     #include <stdexcept>
 #endif
+
 
 MATH3D_NAMESPACE_BEGIN
 
@@ -509,5 +510,3 @@ public: /* Difference */
 };
 
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_MATRIX_COLUMN_ITERATOR_HPP

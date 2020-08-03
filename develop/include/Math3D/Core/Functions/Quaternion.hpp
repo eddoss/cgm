@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_FUNCTIONS_QUATERNION_HPP
-#define MATH3D_CORE_FUNCTIONS_QUATERNION_HPP
+#pragma once
 
 
 #include <cmath>
@@ -192,6 +191,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Core/Functions/Quaternion.hpp>
-
-
-#endif // MATH3D_CORE_FUNCTIONS_QUATERNION_HPP

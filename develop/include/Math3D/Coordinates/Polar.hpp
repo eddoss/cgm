@@ -1,5 +1,4 @@
-#ifndef MATH3D_COORDINATES_SYSTEMS_POLAR_HPP
-#define MATH3D_COORDINATES_SYSTEMS_POLAR_HPP
+#pragma once
 
 
 #include <Math3D/Global.hpp>
@@ -72,6 +71,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Coordinates/Polar.hpp>
-
-
-#endif // MATH3D_COORDINATES_SYSTEMS_POLAR_HPP

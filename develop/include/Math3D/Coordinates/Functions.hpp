@@ -1,6 +1,4 @@
-#ifndef MATH3D_COORDINATE_SYSTEMS_FUNCTIONS_HPP
-#define MATH3D_COORDINATE_SYSTEMS_FUNCTIONS_HPP
-
+#pragma once
 
 #include <cmath>
 #include <Math3D/Core/Vector.hpp>
@@ -167,6 +165,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Coordinates/Functions.hpp>
-
-
-#endif // MATH3D_COORDINATES_SYSTEMS_FUNCTIONS_HPP

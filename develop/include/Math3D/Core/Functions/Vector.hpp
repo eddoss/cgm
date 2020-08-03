@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_FUNCTIONS_VECTOR_HPP
-#define MATH3D_CORE_FUNCTIONS_VECTOR_HPP
+#pragma once
 
 
 #include <cmath>
@@ -138,6 +137,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Core/Functions/Vector.hpp>
-
-
-#endif // MATH3D_CORE_FUNCTIONS_VECTOR_HPP

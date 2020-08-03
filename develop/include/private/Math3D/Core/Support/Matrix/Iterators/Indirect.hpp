@@ -1,5 +1,4 @@
-#ifndef MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
-#define MATH3D_MATRIX_INDIRECT_ITERATOR_HPP
+#pragma once
 
 
 #include <Math3D/Global.hpp>
@@ -515,5 +514,3 @@ public: /* Difference */
 };
 
 MATH3D_NAMESPACE_END
-
-#endif // MATH3D_MATRIX_INDIRECT_ITERATOR_HPP

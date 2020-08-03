@@ -1,5 +1,4 @@
-#ifndef MATH3D_COORDINATE_SYSTEMS_OPERATORS_HPP
-#define MATH3D_COORDINATE_SYSTEMS_OPERATORS_HPP
+#pragma once
 
 
 #include <Math3D/Common.hpp>
@@ -82,6 +81,3 @@ operator != (const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& A, 
 
 
 #include <private/Math3D/Coordinates/Operators.hpp>
-
-
-#endif // MATH3D_COORDINATE_SYSTEMS_OPERATORS_HPP

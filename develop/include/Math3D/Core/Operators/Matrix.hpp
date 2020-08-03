@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_OPERATORS_MATRIX_HPP
-#define MATH3D_CORE_OPERATORS_MATRIX_HPP
+#pragma once
 
 
 #include <Math3D/Common.hpp>
@@ -329,6 +328,3 @@ operator != (const MATH3D_NAMESPACE::Matrix<M,N,T>& A, const MATH3D_NAMESPACE::M
 
 
 #include <private/Math3D/Core/Operators/Matrix.hpp>
-
-
-#endif // MATH3D_CORE_OPERATORS_MATRIX_HPP

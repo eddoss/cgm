@@ -1,5 +1,4 @@
-#ifndef MATH3D_IO_HPP
-#define MATH3D_IO_HPP
+#pragma once
 
 
 #include <iomanip>
@@ -37,6 +36,3 @@ constexpr std::ostream&
 operator << (std::ostream& stream, const MATH3D_NAMESPACE::MATH3D_COORD_NAMESPACE::Cylindrical<T>& cylindricalCoord);
 
 #include <private/Math3D/IO.hpp>
-
-
-#endif //MATH3D_IO_HPP

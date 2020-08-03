@@ -1,5 +1,4 @@
-#ifndef MATH3D_QUATERNION_HPP
-#define MATH3D_QUATERNION_HPP
+#pragma once
 
 
 #include <type_traits>
@@ -97,6 +96,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Core/Quaternion.hpp>
-
-
-#endif // MATH3D_QUATERNION_HPP

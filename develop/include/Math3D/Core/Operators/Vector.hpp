@@ -1,5 +1,4 @@
-#ifndef MATH3D_CORE_OPERATORS_VECTOR_HPP
-#define MATH3D_CORE_OPERATORS_VECTOR_HPP
+#pragma once
 
 
 #include <type_traits>
@@ -333,6 +332,3 @@ operator^(const MATH3D_NAMESPACE::Vector<3,T>& A, const MATH3D_NAMESPACE::Vector
 
 
 #include <private/Math3D/Core/Operators/Vector.hpp>
-
-
-#endif // MATH3D_CORE_OPERATORS_VECTOR_HPP

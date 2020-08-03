@@ -1,5 +1,4 @@
-#ifndef MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
-#define MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
+#pragma once
 
 
 #include <Math3D/Global.hpp>
@@ -90,6 +89,3 @@ MATH3D_NAMESPACE_END
 
 
 #include <private/Math3D/Coordinates/Spherical.hpp>
-
-
-#endif // MATH3D_COORDINATES_SYSTEMS_SPHERICAL_HPP
