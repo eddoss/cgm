@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Coordinates/Functions.hpp>
-#include <Math3D/Coordinates/Operators.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Coordinates/Functions.hpp>
+#include <CGM/Coordinates/Operators.hpp>
 
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 TEST(Coordinates, Spherical_Cartesian)
 {

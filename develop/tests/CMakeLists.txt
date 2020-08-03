@@ -10,7 +10,7 @@
 # SOURCES   - tests list
 # ##################################################################################### #
 
-function(math3d_add_test TARGET SOURCES)
+function(cgm_add_test TARGET SOURCES)
     add_executable(${TARGET} ${SOURCES})
     target_include_directories(${TARGET} PRIVATE ../include)
     target_link_libraries(${TARGET} PRIVATE GTest::GTest GTest::Main)
@@ -68,10 +68,10 @@ set(TS_MODULE_CORE
     "${TS_CORE_COORDINATES}"
 )
 
-math3d_add_test(ModuleCoreTestSuite         "run.cpp;${MODULE_CORE_TEST_SUITE}")
-math3d_add_test(Core-VectorTestSuite        "run.cpp;${TS_CORE_VECTOR}")
-math3d_add_test(Core-MatrixTestSuite        "run.cpp;${TS_CORE_MATRIX}")
-math3d_add_test(Core-QuaternionTestSuite    "run.cpp;${TS_CORE_QUATERNION}")
+cgm_add_test(ModuleCoreTestSuite         "run.cpp;${MODULE_CORE_TEST_SUITE}")
+cgm_add_test(Core-VectorTestSuite        "run.cpp;${TS_CORE_VECTOR}")
+cgm_add_test(Core-MatrixTestSuite        "run.cpp;${TS_CORE_MATRIX}")
+cgm_add_test(Core-QuaternionTestSuite    "run.cpp;${TS_CORE_QUATERNION}")
 
 # ####################################################################################### #
 # SUITES | Coordinates
@@ -81,7 +81,7 @@ set(TS_MODULE_COORDINATES
     Coordinates.cpp
 )
 
-math3d_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
+cgm_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
 
 # ####################################################################################### #
 # SUITES | Cartesian
@@ -122,9 +122,9 @@ set(TS_MODULE_CARTESIAN
     ${TS_CARTESIAN_3D}
 )
 
-math3d_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
-math3d_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
-math3d_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
+cgm_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
+cgm_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
+cgm_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 
 # ####################################################################################### #
 # SUITES | All modules
@@ -136,4 +136,4 @@ set(TS_ALL_MODULES
     ${TS_MODULE_CARTESIAN}
 )
 
-math3d_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")
+cgm_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")

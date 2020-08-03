@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Quaternion.hpp>
+#include <CGM/Common.hpp>
+#include <CGM/Core/Quaternion.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Quaternion.hpp>
 
 
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 using namespace std;
 
@@ -130,12 +130,12 @@ TEST(Quaternion_Functions, Orient)
     Vector<3,double> vec {1.0, 0.0, 0.0};
 
     Vector<3,double> result = oriented(vec, quat);
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
     Vector<3,double> expect {0.915889 , 0.310964 , 0.253868 };
 #else
     Vector<3,double> expect {0.915888, 0.370337, 0.154913};
 #endif
-    //ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    //ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */

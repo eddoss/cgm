@@ -2,20 +2,20 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Core/Functions/Matrix.hpp>
-#include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Types/Basis.hpp>
-#include <Math3D/Cartesian/3D/Functions/Converters.hpp>
-#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/3D/Types/Enums.hpp>
-#include <private/Math3D/Cartesian/3D/InternalUtils.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Quaternion.hpp>
+#include <CGM/Cartesian/3D/Types/Basis.hpp>
+#include <CGM/Cartesian/3D/Functions/Converters.hpp>
+#include <CGM/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Cartesian/3D/Types/Enums.hpp>
+#include <private/CGM/Cartesian/3D/InternalUtils.hpp>
 
-#include <Math3D/IO.hpp>
+#include <CGM/IO.hpp>
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat3)
 {
@@ -24,12 +24,12 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat3)
     auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
     auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
 
-    auto orientation = MATH3D_XYZ_NAMESPACE::orientationMatrix(x,y,z);
+    auto orientation = CGM_XYZ::orientationMatrix(x,y,z);
 
     auto expect = Vector<3,double> {1.103751,1.325136,3.814793};
-    auto result = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, orientation);
+    auto result = CGM_XYZ::localToGlobal(coord, orientation);
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -45,20 +45,20 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat3WithPos)
     auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
     auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
 
-    auto orientation = MATH3D_XYZ_NAMESPACE::orientationMatrix(x,y,z);
+    auto orientation = CGM_XYZ::orientationMatrix(x,y,z);
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, orientation, p);
+        auto result = CGM_XYZ::localToGlobal<POINT>(coord, orientation, p);
         auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, orientation, p);
+        auto result = CGM_XYZ::localToGlobal<DIRECTION>(coord, orientation, p);
         auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 }
 
@@ -75,20 +75,20 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Mat4)
     auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
     auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
-    auto basis = MATH3D_XYZ_NAMESPACE::packBasis(x,y,z,p);
+    auto basis = CGM_XYZ::packBasis(x,y,z,p);
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis);
+        auto result = CGM_XYZ::localToGlobal<POINT>(coord, basis);
         auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis);
+        auto result = CGM_XYZ::localToGlobal<DIRECTION>(coord, basis);
         auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 }
 
@@ -99,10 +99,10 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Quat)
     auto orientation = Quaternion<double> {-0.006227,0.435855,0.174342,0.882948};
     auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
-    auto result = MATH3D_XYZ_NAMESPACE::localToGlobal(coord, orientation);
+    auto result = CGM_XYZ::localToGlobal(coord, orientation);
     auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -117,17 +117,17 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_QuatWithPos)
     auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, orientation, position);
+        auto result = CGM_XYZ::localToGlobal<POINT>(coord, orientation, position);
         auto expect = Vector<3,double> {-0.096249, +0.725136, +8.214793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 
     {
-        auto result = MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, orientation, position);
+        auto result = CGM_XYZ::localToGlobal<DIRECTION>(coord, orientation, position);
         auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.0001));
+        ASSERT_TRUE(CGM::equal(result, expect, 0.0001));
     }
 }
 
@@ -149,23 +149,23 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Basis)
     auto expectDirection = Vector<3,double>{ +1.103751, +1.325136, +3.814793 };
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x,y,z,p);
+        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix3,double> basis(x,y,z,p);
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Matrix3,double> basis(x,y,z,p);
+        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix3,double> basis(x,y,z,p);
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 
     {
-        MATH3D_XYZ_NAMESPACE::Basis<MATH3D_XYZ_NAMESPACE::EBasisBase::Quaternion,double> basis(q,p);
+        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Quaternion,double> basis(q,p);
 
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(MATH3D_NAMESPACE::equal(MATH3D_XYZ_NAMESPACE::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
+        ASSERT_TRUE(CGM::equal(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 }

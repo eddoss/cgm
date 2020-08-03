@@ -22,19 +22,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Promoted cmake options
 # ####################################################################################### #
 
-option(MATH3D_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
-option(MATH3D_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
-option(MATH3D_USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)." OFF)
-option(MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM "Use left handed Cartesian system. Right handed is default." OFF)
-set(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS "XYZ" CACHE STRING "Chose 'Right', 'Up', 'Forward' vectors of Cartesian system. By default its XYZ.")
-set(MATH3D_VECTOR_REPRESENTATION "Column-Major" CACHE STRING "Chose a vector representation to multiply by the matrix.")
+option(CGM_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
+option(CGM_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
+option(CGM_USE_ROW_WISE_MATRIX_STORING "Store matrix components by row-wise (in default by column-wise)." OFF)
+option(CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM "Use left handed Cartesian system. Right handed is default." OFF)
+set(CGM_RIGHT_UP_FORWARD_AXES_LABELS "XYZ" CACHE STRING "Chose 'Right', 'Up', 'Forward' vectors of Cartesian system. By default its XYZ.")
+set(CGM_VECTOR_REPRESENTATION "Column-Major" CACHE STRING "Chose a vector representation to multiply by the matrix.")
 
 # ####################################################################################### #
 # Promoted cmake options constraints
 # ####################################################################################### #
 
-set_property(CACHE MATH3D_RIGHT_UP_FORWARD_AXES_LABELS PROPERTY STRINGS "XYZ;YXZ;ZYX;YZX;XZY;ZXY")
-set_property(CACHE MATH3D_VECTOR_REPRESENTATION PROPERTY STRINGS "Column-Major;Row-Major")
+set_property(CACHE CGM_RIGHT_UP_FORWARD_AXES_LABELS PROPERTY STRINGS "XYZ;YXZ;ZYX;YZX;XZY;ZXY")
+set_property(CACHE CGM_VECTOR_REPRESENTATION PROPERTY STRINGS "Column-Major;Row-Major")
 
 # ####################################################################################### #
 # Setup shared and static libraries output dir
@@ -56,62 +56,62 @@ target_include_directories(${PROJECT_NAME} INTERFACE
 
 # --------------------------------------------------------------------------------------- #
 
-if(MATH3D_USE_DOUBLE_PRECISION)
-    add_definitions(-DMATH3D_USE_DOUBLE_PRECISION)
+if(CGM_USE_DOUBLE_PRECISION)
+    add_definitions(-DCGM_USE_DOUBLE_PRECISION)
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(MATH3D_USE_ROW_WISE_MATRIX_STORING)
-    add_definitions(-DMATH3D_USE_ROW_WISE_MATRIX_STORING)
+if(CGM_USE_ROW_WISE_MATRIX_STORING)
+    add_definitions(-DCGM_USE_ROW_WISE_MATRIX_STORING)
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM)
-    add_definitions(-DMATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM)
+if(CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM)
+    add_definitions(-DCGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM)
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZXY)
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Z)
-    add_definitions(-DMATH3D_CARTESIAN_UP_X)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Y)
-    add_definitions(-DMATH3D_CARTESIAN_ZXY)
-elseif(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YXZ)
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Y)
-    add_definitions(-DMATH3D_CARTESIAN_UP_X)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Z)
-    add_definitions(-DMATH3D_CARTESIAN_YXZ)
-elseif(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZYX)
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Z)
-    add_definitions(-DMATH3D_CARTESIAN_UP_Y)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_X)
-    add_definitions(-DMATH3D_CARTESIAN_ZYX)
-elseif(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YZX)
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_Y)
-    add_definitions(-DMATH3D_CARTESIAN_UP_Z)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_X)
-    add_definitions(-DMATH3D_CARTESIAN_YZX)
-elseif(MATH3D_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL XZY)
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_X)
-    add_definitions(-DMATH3D_CARTESIAN_UP_Z)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Y)
-    add_definitions(-DMATH3D_CARTESIAN_XZY)
+if(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZXY)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_Z)
+    add_definitions(-DCGM_CARTESIAN_UP_X)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_Y)
+    add_definitions(-DCGM_CARTESIAN_ZXY)
+elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YXZ)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_Y)
+    add_definitions(-DCGM_CARTESIAN_UP_X)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_Z)
+    add_definitions(-DCGM_CARTESIAN_YXZ)
+elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZYX)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_Z)
+    add_definitions(-DCGM_CARTESIAN_UP_Y)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_X)
+    add_definitions(-DCGM_CARTESIAN_ZYX)
+elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YZX)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_Y)
+    add_definitions(-DCGM_CARTESIAN_UP_Z)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_X)
+    add_definitions(-DCGM_CARTESIAN_YZX)
+elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL XZY)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_X)
+    add_definitions(-DCGM_CARTESIAN_UP_Z)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_Y)
+    add_definitions(-DCGM_CARTESIAN_XZY)
 else()
-    add_definitions(-DMATH3D_CARTESIAN_RIGHT_X)
-    add_definitions(-DMATH3D_CARTESIAN_UP_Y)
-    add_definitions(-DMATH3D_CARTESIAN_FORWARD_Z)
-    add_definitions(-DMATH3D_CARTESIAN_XYZ)
+    add_definitions(-DCGM_CARTESIAN_RIGHT_X)
+    add_definitions(-DCGM_CARTESIAN_UP_Y)
+    add_definitions(-DCGM_CARTESIAN_FORWARD_Z)
+    add_definitions(-DCGM_CARTESIAN_XYZ)
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(MATH3D_VECTOR_REPRESENTATION STREQUAL Column-Major)
-    add_definitions(-DMATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION)
-elseif(MATH3D_VECTOR_REPRESENTATION STREQUAL Row-Major)
-    add_definitions(-DMATH3D_USE_ROW_MAJOR_VECTOR_REPRESENTATION)
+if(CGM_VECTOR_REPRESENTATION STREQUAL Column-Major)
+    add_definitions(-DCGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION)
+elseif(CGM_VECTOR_REPRESENTATION STREQUAL Row-Major)
+    add_definitions(-DCGM_USE_ROW_MAJOR_VECTOR_REPRESENTATION)
 else()
     message(FATAL_ERROR "Invalid value of <VECTOR_REPRESENTATION> parameter. It must be <Column-Major> or <Row-Major>.")
 endif()
@@ -129,7 +129,7 @@ install(
 # Testing
 # ####################################################################################### #
 
-if(${MATH3D_BUILD_UNIT_TESTS})
+if(${CGM_BUILD_UNIT_TESTS})
     enable_testing()
     add_subdirectory(develop/tests)
 endif()

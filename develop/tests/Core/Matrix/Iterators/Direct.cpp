@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Matrix.hpp>
+#include <CGM/Core/Matrix.hpp>
 
 
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 using namespace std;
 using Mat22 = Matrix<2,2,int>;
@@ -36,7 +36,7 @@ TEST(Matrix_DirectIterator, Plus)
     auto it1 = input.begin() + 2;
     auto it2 = input.begin() + 3;
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*it0 == 2);
         ASSERT_TRUE(*it1 == 3);
         ASSERT_TRUE(*it2 == 4);
@@ -63,7 +63,7 @@ TEST(Matrix_DirectIterator, Minus)
     auto it1 = input.end() - 2;
     auto it2 = input.end() - 3;
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*it0 == 9);
         ASSERT_TRUE(*it1 == 8);
         ASSERT_TRUE(*it2 == 7);
@@ -87,7 +87,7 @@ TEST(Matrix_DirectIterator, PreIncrement)
 
     auto it = input.begin();
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(++it) == 2);
         ASSERT_TRUE(*(++it) == 3);
     #else
@@ -110,7 +110,7 @@ TEST(Matrix_DirectIterator, PostIncrement)
     auto it = input.begin();
     it++;
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(it++) == 2);
         ASSERT_TRUE(*(it++) == 3);
     #else
@@ -132,7 +132,7 @@ TEST(Matrix_DirectIterator, PreDecrement)
 
     auto it = input.end();
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(--it) == 9);
         ASSERT_TRUE(*(--it) == 8);
     #else
@@ -155,7 +155,7 @@ TEST(Matrix_DirectIterator, PostDecrement)
     auto it = input.end();
     it--;
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(it--) == 9);
         ASSERT_TRUE(*(it--) == 8);
     #else
@@ -193,7 +193,7 @@ TEST(Matrix_DirectIterator, RowsColumns_MidComponent)
 
     auto it {input.begin() + 5};
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(it.row() == 1);
         ASSERT_TRUE(it.column() == 1);
     #else
@@ -351,7 +351,7 @@ TEST(Matrix_DirectIterator, Reverse)
     auto c = input.rbegin() + 2;
     auto d = input.rbegin() + 3;
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*a == 5);
         ASSERT_TRUE(*b == 4);
         ASSERT_TRUE(*c == 2);
@@ -410,7 +410,7 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbegin() + 5};
 
-    #ifdef MATH3D_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(it.row() == 0);
         ASSERT_TRUE(it.column() == 2);
     #else
@@ -456,7 +456,7 @@ TEST(Matrix_DirectIterator, Exception_Dereference)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't dereference out of range matrix iterator.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't dereference out of range matrix iterator.");
     }
 }
 
@@ -477,7 +477,7 @@ TEST(Matrix_DirectIterator, Exception_PreIncrement)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment matrix iterator after end.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't pre-increment matrix iterator after end.");
     }
 }
 
@@ -498,7 +498,7 @@ TEST(Matrix_DirectIterator, Exception_PostIncrement)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-increment matrix iterator after end.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't pre-increment matrix iterator after end.");
     }
 }
 
@@ -520,7 +520,7 @@ TEST(Matrix_DirectIterator, Exception_PlusEqual)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix iterator forward after end.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't move matrix iterator forward after end.");
     }
 }
 
@@ -542,7 +542,7 @@ TEST(Matrix_DirectIterator, Exception_Plus)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix iterator forward after end.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't move matrix iterator forward after end.");
     }
 }
 
@@ -563,7 +563,7 @@ TEST(Matrix_DirectIterator, Exception_PreDecrement)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-decrement matrix iterator before begin.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't pre-decrement matrix iterator before begin.");
     }
 }
 
@@ -584,7 +584,7 @@ TEST(Matrix_DirectIterator, Exception_PostDecrement)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't pre-decrement matrix iterator before begin.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't pre-decrement matrix iterator before begin.");
     }
 }
 
@@ -606,7 +606,7 @@ TEST(Matrix_DirectIterator, Exception_MinusEqual)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix iterator backward before begin.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't move matrix iterator backward before begin.");
     }
 }
 
@@ -628,7 +628,7 @@ TEST(Matrix_DirectIterator, Exception_Minus)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't move matrix iterator backward before begin.");
+        ASSERT_STREQ(excep.what(), "(CGM) can't move matrix iterator backward before begin.");
     }
 }
 
@@ -650,7 +650,7 @@ TEST(Matrix_DirectIterator, Exception_Row)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't get row from matrix iterator (out of range).");
+        ASSERT_STREQ(excep.what(), "(CGM) can't get row from matrix iterator (out of range).");
     }
 }
 
@@ -672,7 +672,7 @@ TEST(Matrix_DirectIterator, Exception_Column)
     }
     catch (const std::runtime_error& excep)
     {
-        ASSERT_STREQ(excep.what(), "(Math3D) can't get column from matrix iterator (out of range).");
+        ASSERT_STREQ(excep.what(), "(CGM) can't get column from matrix iterator (out of range).");
     }
 }
 

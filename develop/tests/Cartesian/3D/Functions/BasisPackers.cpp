@@ -2,19 +2,19 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Matrix.hpp>
-#include <Math3D/Core/Functions/Quaternion.hpp>
-#include <Math3D/Core/Operators/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/3D/Functions/BasisPackers.hpp>
-#include <Math3D/IO.hpp>
+#include <CGM/Common.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Core/Functions/Quaternion.hpp>
+#include <CGM/Core/Operators/Quaternion.hpp>
+#include <CGM/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Cartesian/3D/Functions/BasisPackers.hpp>
+#include <CGM/IO.hpp>
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 TEST(Cartesian_3D_Functions_BasisPackers, FromXYZP)
 {
@@ -23,9 +23,9 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromXYZP)
     Vector<3,int> Z {7,9,2};
     Vector<3,int> P {1,2,3};
 
-    auto basis = MATH3D_XYZ_NAMESPACE::packBasis(X,Y,Z,P);
+    auto basis = CGM_XYZ::packBasis(X,Y,Z,P);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<4,4,int> expec
     {
         2,1,3,1,
@@ -58,9 +58,9 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromMatrix3AndPosition)
         7,9,2
     };
 
-    auto basis = MATH3D_XYZ_NAMESPACE::packBasis(orientation, position);
+    auto basis = CGM_XYZ::packBasis(orientation, position);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<4,4,int> expec
     {
         2,1,3,5,
@@ -88,13 +88,13 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
     Quaternion<double> quaternion {-0.006227,0.435855,0.174342,0.882948};
     Vector<3,double> position {0.7, 1.3, 4.0};
 
-    auto result = MATH3D_XYZ_NAMESPACE::packBasis(quaternion, position);
+    auto result = CGM_XYZ::packBasis(quaternion, position);
 
     Vector<3,double> ex {0.559270,0.302442,-0.771846};
     Vector<3,double> ey {-0.313298,0.939132,0.140980};
     Vector<3,double> ez {0.767503,0.162971,0.619983};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<4,4,double> expec
     {
         ex.x, ex.y, ex.z, position.x,
@@ -112,7 +112,7 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
     };
 #endif
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expec, 0.0001));
+    ASSERT_TRUE(CGM::equal(result, expec, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -127,9 +127,9 @@ TEST(Cartesian_3D_Functions_BasisPackers, Unpack)
         0,0,0,1
     };
 
-    auto [x,y,z,p] = MATH3D_XYZ_NAMESPACE::unpackBasis(basis);
+    auto [x,y,z,p] = CGM_XYZ::unpackBasis(basis);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<3,int> expec_x {2,1,3};
     Vector<3,int> expec_y {4,3,6};
     Vector<3,int> expec_z {7,9,2};

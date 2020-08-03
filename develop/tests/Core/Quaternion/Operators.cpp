@@ -2,11 +2,11 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Quaternion.hpp>
-#include <Math3D/Core/Operators/Quaternion.hpp>
+#include <CGM/Core/Quaternion.hpp>
+#include <CGM/Core/Operators/Quaternion.hpp>
 
 
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 using namespace std;
 
@@ -97,7 +97,7 @@ TEST(Quaternion_Operators, OutplaceOtherMultiplication)
     Quaternion<double> b { 9, 1, 3, 7 };
 
     Quaternion<double> result = a * b;
-#ifdef MATH3D_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
     Quaternion<double> expect {41, -27, 47, -29};
 #else
     Quaternion<double> expect {37, 45, 35, -29};

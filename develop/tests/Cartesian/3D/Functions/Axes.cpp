@@ -2,16 +2,16 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Cartesian/3D/Functions/Axes.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Cartesian/3D/Functions/Axes.hpp>
 
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 TEST(Cartesian_3D_Functions_Axes, X)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::x<int>();
+    auto value = CGM_XYZ::x<int>();
     auto expec = Vector<3,int>(1,0,0);
 
     ASSERT_TRUE(value == expec);
@@ -21,7 +21,7 @@ TEST(Cartesian_3D_Functions_Axes, X)
 
 TEST(Cartesian_3D_Functions_Axes, Y)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::y<int>();
+    auto value = CGM_XYZ::y<int>();
     auto expec = Vector<3,int>(0,1,0);
 
     ASSERT_TRUE(value == expec);
@@ -31,7 +31,7 @@ TEST(Cartesian_3D_Functions_Axes, Y)
 
 TEST(Cartesian_3D_Functions_Axes, Z)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::z<int>();
+    auto value = CGM_XYZ::z<int>();
     auto expec = Vector<3,int>(0,0,1);
 
     ASSERT_TRUE(value == expec);
@@ -41,15 +41,15 @@ TEST(Cartesian_3D_Functions_Axes, Z)
 
 TEST(Cartesian_3D_Functions_Axes, Up)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::up<int>();
+    auto value = CGM_XYZ::up<int>();
 
-#ifdef MATH3D_CARTESIAN_UP_X
+#ifdef CGM_CARTESIAN_UP_X
     auto expec = Vector<3,int>(1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_UP_Y
+#ifdef CGM_CARTESIAN_UP_Y
     auto expec = Vector<3,int>(0,1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_UP_Z
+#ifdef CGM_CARTESIAN_UP_Z
     auto expec = Vector<3,int>(0,0,1);
 #endif
 
@@ -60,15 +60,15 @@ TEST(Cartesian_3D_Functions_Axes, Up)
 
 TEST(Cartesian_3D_Functions_Axes, Right)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::right<int>();
+    auto value = CGM_XYZ::right<int>();
 
-#ifdef MATH3D_CARTESIAN_RIGHT_X
+#ifdef CGM_CARTESIAN_RIGHT_X
     auto expec = Vector<3,int>(1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_RIGHT_Y
+#ifdef CGM_CARTESIAN_RIGHT_Y
     auto expec = Vector<3,int>(0,1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_RIGHT_Z
+#ifdef CGM_CARTESIAN_RIGHT_Z
     auto expec = Vector<3,int>(0,0,1);
 #endif
 
@@ -79,15 +79,15 @@ TEST(Cartesian_3D_Functions_Axes, Right)
 
 TEST(Cartesian_3D_Functions_Axes, Forward)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::forward<int>();
+    auto value = CGM_XYZ::forward<int>();
 
-#ifdef MATH3D_CARTESIAN_FORWARD_X
+#ifdef CGM_CARTESIAN_FORWARD_X
     auto expec = Vector<3,int>(1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_FORWARD_Y
+#ifdef CGM_CARTESIAN_FORWARD_Y
     auto expec = Vector<3,int>(0,1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_FORWARD_Z
+#ifdef CGM_CARTESIAN_FORWARD_Z
     auto expec = Vector<3,int>(0,0,1);
 #endif
 
@@ -98,15 +98,15 @@ TEST(Cartesian_3D_Functions_Axes, Forward)
 
 TEST(Cartesian_3D_Functions_Axes, Down)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::down<int>();
+    auto value = CGM_XYZ::down<int>();
 
-#ifdef MATH3D_CARTESIAN_UP_X
+#ifdef CGM_CARTESIAN_UP_X
     auto expec = Vector<3,int>(-1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_UP_Y
+#ifdef CGM_CARTESIAN_UP_Y
     auto expec = Vector<3,int>(0,-1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_UP_Z
+#ifdef CGM_CARTESIAN_UP_Z
     auto expec = Vector<3,int>(0,0,-1);
 #endif
 
@@ -117,15 +117,15 @@ TEST(Cartesian_3D_Functions_Axes, Down)
 
 TEST(Cartesian_3D_Functions_Axes, Left)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::left<int>();
+    auto value = CGM_XYZ::left<int>();
 
-#ifdef MATH3D_CARTESIAN_RIGHT_X
+#ifdef CGM_CARTESIAN_RIGHT_X
     auto expec = Vector<3,int>(-1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_RIGHT_Y
+#ifdef CGM_CARTESIAN_RIGHT_Y
     auto expec = Vector<3,int>(0,-1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_RIGHT_Z
+#ifdef CGM_CARTESIAN_RIGHT_Z
     auto expec = Vector<3,int>(0,0,-1);
 #endif
 
@@ -136,15 +136,15 @@ TEST(Cartesian_3D_Functions_Axes, Left)
 
 TEST(Cartesian_3D_Functions_Axes, Backward)
 {
-    auto value = MATH3D_XYZ_NAMESPACE::backward<int>();
+    auto value = CGM_XYZ::backward<int>();
 
-#ifdef MATH3D_CARTESIAN_FORWARD_X
+#ifdef CGM_CARTESIAN_FORWARD_X
     auto expec = Vector<3,int>(-1,0,0);
 #endif
-#ifdef MATH3D_CARTESIAN_FORWARD_Y
+#ifdef CGM_CARTESIAN_FORWARD_Y
     auto expec = Vector<3,int>(0,-1,0);
 #endif
-#ifdef MATH3D_CARTESIAN_FORWARD_Z
+#ifdef CGM_CARTESIAN_FORWARD_Z
     auto expec = Vector<3,int>(0,0,-1);
 #endif
 

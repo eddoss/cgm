@@ -2,19 +2,19 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Matrix.hpp>
-#include <Math3D/Core/Functions/Quaternion.hpp>
-#include <Math3D/Core/Operators/Quaternion.hpp>
-#include <Math3D/Cartesian/3D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/3D/Functions/Orientation.hpp>
-#include <Math3D/IO.hpp>
+#include <CGM/Common.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Core/Functions/Quaternion.hpp>
+#include <CGM/Core/Operators/Quaternion.hpp>
+#include <CGM/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/IO.hpp>
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 /* ####################################################################################### */
 /* Axes */
@@ -26,11 +26,11 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromXYZ)
     Vector<3,int> y {4, 5, 6};
     Vector<3,int> z {7, 8, 9};
 
-    auto axes = MATH3D_XYZ_NAMESPACE::orientationAxes(x, y, z);
+    auto axes = CGM_XYZ::orientationAxes(x, y, z);
 
-    ASSERT_TRUE(MATH3D_XYZ_NAMESPACE::x(axes) == x);
-    ASSERT_TRUE(MATH3D_XYZ_NAMESPACE::y(axes) == y);
-    ASSERT_TRUE(MATH3D_XYZ_NAMESPACE::z(axes) == z);
+    ASSERT_TRUE(CGM_XYZ::x(axes) == x);
+    ASSERT_TRUE(CGM_XYZ::y(axes) == y);
+    ASSERT_TRUE(CGM_XYZ::z(axes) == z);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,7 +41,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
     Vector<3,int> in_y {4, 5, 6};
     Vector<3,int> in_z {7, 8, 9};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> mat
     {
         in_x.x, in_x.y, in_x.z,
@@ -57,7 +57,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
     };
 #endif
 
-    auto [x, y, z] = MATH3D_XYZ_NAMESPACE::orientationAxes(mat);
+    auto [x, y, z] = CGM_XYZ::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -73,11 +73,11 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
     Vector<3,double> expec_z {0.767503,0.162971,0.619983};
 
     Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
-    auto [x, y, z] = MATH3D_XYZ_NAMESPACE::orientationAxes(quat);
+    auto [x, y, z] = CGM_XYZ::orientationAxes(quat);
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(expec_x, x, 0.00001));
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(expec_y, y, 0.00001));
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(expec_z, z, 0.00001));
+    ASSERT_TRUE(CGM::equal(expec_x, x, 0.00001));
+    ASSERT_TRUE(CGM::equal(expec_y, y, 0.00001));
+    ASSERT_TRUE(CGM::equal(expec_z, z, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -88,7 +88,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
     Vector<3,int> in_y {4, 5, 6};
     Vector<3,int> in_z {7, 8, 9};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<4,4,int> mat
     {
         in_x.x, in_x.y, in_x.z, 0,
@@ -106,7 +106,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
     };
 #endif
 
-    auto [x, y, z] = MATH3D_XYZ_NAMESPACE::orientationAxes(mat);
+    auto [x, y, z] = CGM_XYZ::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -123,7 +123,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
     Vector<3,int> y {4, 5, 6};
     Vector<3,int> z {7, 8, 9};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> expect
     {
         x.x, x.y, x.z,
@@ -139,7 +139,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
     };
 #endif
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(x, y, z);
+    auto result = CGM_XYZ::orientationMatrix(x, y, z);
 
     ASSERT_TRUE(result == expect);
 }
@@ -152,9 +152,9 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesTuple)
     Vector<3,int> y {4, 5, 6};
     Vector<3,int> z {7, 8, 9};
 
-    auto axes = MATH3D_XYZ_NAMESPACE::orientationAxes(x,y,z);
+    auto axes = CGM_XYZ::orientationAxes(x,y,z);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> expect
     {
         x.x, x.y, x.z,
@@ -170,7 +170,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesTuple)
     };
 #endif
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(axes);
+    auto result = CGM_XYZ::orientationMatrix(axes);
 
     ASSERT_TRUE(result == expect);
 }
@@ -183,7 +183,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
     Vector<3,double> y {-0.313298,0.939132,0.140980};
     Vector<3,double> z {0.767503,0.162971,0.619983};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,double> expect
     {
         x.x, x.y, x.z,
@@ -201,9 +201,9 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 
     Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(quat);
+    auto result = CGM_XYZ::orientationMatrix(quat);
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -229,7 +229,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromMatrix4x4)
         x.z, y.z, z.z
     };
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationMatrix(mat);
+    auto result = CGM_XYZ::orientationMatrix(mat);
 
     ASSERT_TRUE(result == expect);
 }
@@ -245,26 +245,26 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
     Vector<3,double> z {0.767503,0.162971,0.619983};
 
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
-    auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(x,y,z);
+    auto result = CGM_XYZ::orientationQuaternion(x,y,z);
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 {
-    MATH3D_XYZ_NAMESPACE::AxesTuple<double> axes
+    CGM_XYZ::AxesTuple<double> axes
     {
         Vector<3,double> {0.559270,0.302442,-0.771846},
         Vector<3,double> {-0.313298,0.939132,0.140980},
         Vector<3,double> {0.767503,0.162971,0.619983}
     };
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(axes);
+    auto result = CGM_XYZ::orientationQuaternion(axes);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -276,14 +276,14 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
     Vector<3,double> z {0.767503,0.162971,0.619983};
 
     Matrix<3,3,double> matrix {};
-    MATH3D_XYZ_NAMESPACE::setX(matrix, x);
-    MATH3D_XYZ_NAMESPACE::setY(matrix, y);
-    MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
+    CGM_XYZ::setX(matrix, x);
+    CGM_XYZ::setY(matrix, y);
+    CGM_XYZ::setZ(matrix, z);
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
+    auto result = CGM_XYZ::orientationQuaternion(matrix);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -295,12 +295,12 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
     Vector<3,double> z {0.767503,0.162971,0.619983};
 
     Matrix<4,4,double> matrix {};
-    MATH3D_XYZ_NAMESPACE::setX(matrix, x);
-    MATH3D_XYZ_NAMESPACE::setY(matrix, y);
-    MATH3D_XYZ_NAMESPACE::setZ(matrix, z);
+    CGM_XYZ::setX(matrix, x);
+    CGM_XYZ::setY(matrix, y);
+    CGM_XYZ::setZ(matrix, z);
 
-    auto result = MATH3D_XYZ_NAMESPACE::orientationQuaternion(matrix);
+    auto result = CGM_XYZ::orientationQuaternion(matrix);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(MATH3D_NAMESPACE::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
 }

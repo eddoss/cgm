@@ -2,16 +2,16 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Core/Functions/Vector.hpp>
-#include <Math3D/Core/Functions/Matrix.hpp>
-#include <Math3D/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Common.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Cartesian/2D/Functions/Utils.hpp>
 
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 /* ####################################################################################### */
 /* X, Y axes */
@@ -32,10 +32,10 @@ TEST(Cartesian_2D_Functions_Utils, GetX)
         0, 9, 8
     };
 
-    auto value2 = MATH3D_XY_NAMESPACE::x(mat2);
-    auto value3 = MATH3D_XY_NAMESPACE::x(mat3);
+    auto value2 = CGM_XY::x(mat2);
+    auto value3 = CGM_XY::x(mat3);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<2,int> expec {2,4};
 #else
     Vector<2,int> expec {2,3};
@@ -62,10 +62,10 @@ TEST(Cartesian_2D_Functions_Utils, GetY)
         0, 9, 8
     };
 
-    auto value2 = MATH3D_XY_NAMESPACE::y(mat2);
-    auto value3 = MATH3D_XY_NAMESPACE::y(mat3);
+    auto value2 = CGM_XY::y(mat2);
+    auto value3 = CGM_XY::y(mat3);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<2,int> expec {3,6};
 #else
     Vector<2,int> expec {4,6};
@@ -82,7 +82,7 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
     Vector<2,int> x {2,4};
     Vector<2,int> y {3,6};
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<2,2,int> expec2
     {
         2, 4,
@@ -111,12 +111,12 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
 #endif
 
     Matrix<2,2,int> mat2(0);
-    MATH3D_XY_NAMESPACE::setX(mat2, x);
-    MATH3D_XY_NAMESPACE::setY(mat2, y);
+    CGM_XY::setX(mat2, x);
+    CGM_XY::setY(mat2, y);
 
     Matrix<3,3,int> mat3(0);
-    MATH3D_XY_NAMESPACE::setX(mat3, x);
-    MATH3D_XY_NAMESPACE::setY(mat3, y);
+    CGM_XY::setX(mat3, x);
+    CGM_XY::setY(mat3, y);
 
     ASSERT_TRUE(mat2 == expec2);
     ASSERT_TRUE(mat3 == expec3);
@@ -135,8 +135,8 @@ TEST(Cartesian_2D_Functions_Utils, GetPosition)
         0, 9, 1
     };
 
-    auto value = MATH3D_XY_NAMESPACE::position(mat);
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    auto value = CGM_XY::position(mat);
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     auto expec = Vector<2,int>{5,7};
 #else
     auto expec = Vector<2,int>{0,9};
@@ -156,9 +156,9 @@ TEST(Cartesian_2D_Functions_Utils, SetPosition)
         0, 0, 1
     };
 
-    MATH3D_XY_NAMESPACE::setPosition(mat, {2,3});
+    CGM_XY::setPosition(mat, {2,3});
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> expec
     {
         1, 0, 2,
@@ -196,7 +196,7 @@ TEST(Cartesian_2D_Functions_Utils, GetOrientation)
         3, 6
     };
 
-    auto res = MATH3D_XY_NAMESPACE::orientation(mat);
+    auto res = CGM_XY::orientation(mat);
 
     ASSERT_TRUE(res == expec);
 }
@@ -216,7 +216,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
         Vector<2,int> x {1,2};
         Vector<2,int> y {4,5};
 
-        MATH3D_XY_NAMESPACE::setOrientation(mat, x, y);
+        CGM_XY::setOrientation(mat, x, y);
 
         Matrix<3,3,int> expec
         {
@@ -225,8 +225,8 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        MATH3D_XY_NAMESPACE::setX(expec, x);
-        MATH3D_XY_NAMESPACE::setY(expec, y);
+        CGM_XY::setX(expec, x);
+        CGM_XY::setY(expec, y);
 
         ASSERT_TRUE(mat == expec);
     }
@@ -252,7 +252,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        MATH3D_XY_NAMESPACE::setOrientation(mat, orient);
+        CGM_XY::setOrientation(mat, orient);
 
         ASSERT_TRUE(mat == expec);
     }
@@ -279,7 +279,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        MATH3D_XY_NAMESPACE::setOrientation(mat, basis);
+        CGM_XY::setOrientation(mat, basis);
 
         ASSERT_TRUE(mat == expec);
     }

@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Matrix.hpp>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Core/Functions/Matrix.hpp>
+#include <CGM/Core/Matrix.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
 
 
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 using namespace std;
 
 using Mat12 = Matrix<1,2,int>;

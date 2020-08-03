@@ -2,15 +2,15 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
-#include <Math3D/Core/Operators/Matrix.hpp>
-#include <Math3D/Cartesian/2D/Functions/Utils.hpp>
-#include <Math3D/Cartesian/2D/Functions/BasisPackers.hpp>
+#include <CGM/Common.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
+#include <CGM/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Cartesian/2D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 TEST(Cartesian_2D_Functions_BasisPackers, XYZ)
 {
@@ -18,9 +18,9 @@ TEST(Cartesian_2D_Functions_BasisPackers, XYZ)
     Vector<2,int> Y {4,3};
     Vector<2,int> P {1,2};
 
-    auto basis = MATH3D_XY_NAMESPACE::packBasis(X,Y,P);
+    auto basis = CGM_XY::packBasis(X,Y,P);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> expec
     {
         2,1,1,
@@ -50,9 +50,9 @@ TEST(Cartesian_2D_Functions_BasisPackers, Matrix2)
         4,3
     };
 
-    auto basis = MATH3D_XY_NAMESPACE::packBasis(orientation, position);
+    auto basis = CGM_XY::packBasis(orientation, position);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Matrix<3,3,int> expec
     {
         2,1,5,
@@ -82,9 +82,9 @@ TEST(Cartesian_2D_Functions_BasisPackers, UnpackSpace)
         0,0,1
     };
 
-    auto [x,y,p] = MATH3D_XY_NAMESPACE::unpackBasis(basis);
+    auto [x,y,p] = CGM_XY::unpackBasis(basis);
 
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<2,int> expec_x {2,1};
     Vector<2,int> expec_y {4,3};
     Vector<2,int> expec_p {3,6};

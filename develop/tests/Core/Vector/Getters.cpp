@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
+#include <CGM/Core/Vector.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
 
 
 using namespace std;
-using namespace MATH3D_NAMESPACE;
+using namespace CGM;
 
 using Vec2 = Vector<2,float>;
 using Vec3 = Vector<3,float>;
