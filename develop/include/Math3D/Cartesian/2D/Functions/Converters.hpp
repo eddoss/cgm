@@ -352,7 +352,7 @@ template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBas
 constexpr FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Basis<BaseA,T>& spaceA, const Basis<BaseB,T>& spaceB);
 
-MATH3D_XYZ_NAMESPACE_END
+MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 

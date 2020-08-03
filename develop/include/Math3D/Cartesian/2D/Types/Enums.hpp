@@ -27,5 +27,5 @@ enum class EBasisBase
     Matrix3,        /**< Based on 2x2 matrix, position store in matrix. */
 };
 
-MATH3D_XYZ_NAMESPACE_END
+MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END

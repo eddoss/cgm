@@ -37,6 +37,15 @@ constexpr FORCEINLINE Vector<2,T>
 x(const AxesTuple<T>& axes);
 
 /**
+ * Gets basis X axis.
+ * @param space Space tuple to extract from.
+ * @return X axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+x(const SpaceTuple<T>& axes);
+
+/**
  * Gets basis Y axis.
  * @param basis Basis to extract axis from.
  * @return Y axis value.
@@ -55,6 +64,15 @@ constexpr FORCEINLINE Vector<2,T>
 y(const AxesTuple<T>& axes);
 
 /**
+ * Gets basis Y axis.
+ * @param space Space tuple to extract from.
+ * @return Y axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+y(const SpaceTuple<T>& axes);
+
+/**
  * Set basis X axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -64,6 +82,24 @@ constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setX(Matrix<S,S,T>& basis, const Vector<2,T>& value);
 
 /**
+ * Set basis X axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setX(AxesTuple<T>& axes, const Vector<2,T>& value);
+
+/**
+ * Set basis X axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setX(SpaceTuple<T>& space, const Vector<2,T>& value);
+
+/**
  * Set basis Y axis.
  * @param basis Basis to set axis to.
  * @param value New axis value.
@@ -71,6 +107,24 @@ setX(Matrix<S,S,T>& basis, const Vector<2,T>& value);
 template<size_t S, typename T>
 constexpr FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setY(Matrix<S,S,T>& basis, const Vector<2,T>& value);
+
+/**
+ * Set basis Y axis.
+ * @param axes Axes tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setY(AxesTuple<T>& axes, const Vector<2,T>& value);
+
+/**
+ * Set basis Y axis.
+ * @param space Space tuple to set axis to.
+ * @param value New axis value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setY(SpaceTuple<T>& space, const Vector<2,T>& value);
 
 /* ####################################################################################### */
 /* Basis position */
@@ -85,6 +139,14 @@ constexpr FORCEINLINE Vector<2,T>
 position(const Matrix<3,3,T>& basis);
 
 /**
+ * Gets basis position.
+ * @return Basis position.
+ */
+template<typename T>
+constexpr FORCEINLINE Vector<2,T>
+position(const SpaceTuple<T>& space);
+
+/**
  * Set basis position.
  * @param basis Basis to set position to.
  * @param value New position value.
@@ -92,6 +154,15 @@ position(const Matrix<3,3,T>& basis);
 template<typename T>
 constexpr FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position);
+
+/**
+ * Set basis position.
+ * @param basis Basis to set position to.
+ * @param value New position value.
+ */
+template<typename T>
+constexpr FORCEINLINE void
+setPosition(SpaceTuple<T>& space, const Vector<2,T>& position);
 
 /* ####################################################################################### */
 /* Basis orientation */
@@ -111,7 +182,6 @@ orientation(const Matrix<3,3,T>& basis);
  * @param basis Basis to set to.
  * @param x X orientation axis.
  * @param y Y orientation axis.
- * @param z Z orientation axis.
  */
 template<typename T>
 constexpr void
@@ -135,7 +205,25 @@ template<typename T>
 constexpr void
 setOrientation(Matrix<3,3,T>& basis, const Matrix<3,3,T>& other);
 
-MATH3D_XYZ_NAMESPACE_END
+/**
+ * Set orientation axes to basis (3x3 matrix).
+ * @param basis Basis to set to.
+ * @param axes Orientation axes.
+ */
+template<typename T>
+constexpr void
+setOrientation(Matrix<3,3,T>& basis, const AxesTuple<T>& axes);
+
+/**
+ * Extracts orientation axes and set it to 'basis'.
+ * @param basis Basis to set orientation to.
+ * @param space Space tuple to extract orientation axes from.
+ */
+template<typename T>
+constexpr void
+setOrientation(Matrix<3,3,T>& basis, const SpaceTuple<T>& space);
+
+MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 

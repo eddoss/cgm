@@ -1,10 +1,6 @@
-#pragma once
 
 
-#include <Math3D/Global.hpp>
-#include <Math3D/Common.hpp>
-#include <Math3D/Core/Vector.hpp>
-#include <Math3D/Core/Operators/Vector.hpp>
+#include <Math3D/Cartesian/2D/Functions/Axes.hpp>
 
 
 MATH3D_NAMESPACE_BEGIN
@@ -14,22 +10,21 @@ MATH3D_XY_NAMESPACE_BEGIN
 /* X, Y axes */
 /* ####################################################################################### */
 
-/**
- * Gets Cartesian X axis.
- */
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-x();
+x()
+{
+    return {T(1), T(0)};
+}
 
-/**
- * Gets Cartesian Y axis.
- */
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr FORCEINLINE Vector<2,T>
-y();
+y()
+{
+    return {T(0), T(1)};
+}
 
 MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END
-
-
-#include <private/Math3D/Cartesian/2D/Functions/Axes.hpp>
