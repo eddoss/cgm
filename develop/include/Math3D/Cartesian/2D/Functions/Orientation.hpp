@@ -95,7 +95,7 @@ template<typename T>
 constexpr FORCEINLINE Matrix<2,2,T>
 orientationMatrix(const Matrix<3,3,T>& space);
 
-MATH3D_XYZ_NAMESPACE_END
+MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 

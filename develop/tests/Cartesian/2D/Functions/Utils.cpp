@@ -32,8 +32,8 @@ TEST(Cartesian_2D_Functions_Utils, GetX)
         0, 9, 8
     };
 
-    auto value2 = MATH3D_XY_NAMESPACE::getX(mat2);
-    auto value3 = MATH3D_XY_NAMESPACE::getX(mat3);
+    auto value2 = MATH3D_XY_NAMESPACE::x(mat2);
+    auto value3 = MATH3D_XY_NAMESPACE::x(mat3);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<2,int> expec {2,4};
@@ -62,8 +62,8 @@ TEST(Cartesian_2D_Functions_Utils, GetY)
         0, 9, 8
     };
 
-    auto value2 = MATH3D_XY_NAMESPACE::getY(mat2);
-    auto value3 = MATH3D_XY_NAMESPACE::getY(mat3);
+    auto value2 = MATH3D_XY_NAMESPACE::y(mat2);
+    auto value3 = MATH3D_XY_NAMESPACE::y(mat3);
 
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     Vector<2,int> expec {3,6};
@@ -135,7 +135,7 @@ TEST(Cartesian_2D_Functions_Utils, GetPosition)
         0, 9, 1
     };
 
-    auto value = MATH3D_XY_NAMESPACE::getPosition(mat);
+    auto value = MATH3D_XY_NAMESPACE::position(mat);
 #ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     auto expec = Vector<2,int>{5,7};
 #else
@@ -196,7 +196,7 @@ TEST(Cartesian_2D_Functions_Utils, GetOrientation)
         3, 6
     };
 
-    auto res = MATH3D_XY_NAMESPACE::getOrientation(mat);
+    auto res = MATH3D_XY_NAMESPACE::orientation(mat);
 
     ASSERT_TRUE(res == expec);
 }
@@ -283,34 +283,4 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
 
         ASSERT_TRUE(mat == expec);
     }
-}
-
-/* ####################################################################################### */
-/* Space */
-/* ####################################################################################### */
-
-TEST(Cartesian_2D_Functions_Utils, UnpackSpace)
-{
-    Matrix<3,3,int> basis
-    {
-        2,1,3,
-        4,3,6,
-        0,0,1
-    };
-
-    auto [x,y,p] = MATH3D_XY_NAMESPACE::unpackSpace(basis);
-
-#ifdef MATH3D_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    Vector<2,int> expec_x {2,1};
-    Vector<2,int> expec_y {4,3};
-    Vector<2,int> expec_p {3,6};
-#else
-    Vector<2,int> expec_x {2,4};
-    Vector<2,int> expec_y {1,3};
-    Vector<2,int> expec_p {0,0};
-#endif
-
-    ASSERT_TRUE(x == expec_x);
-    ASSERT_TRUE(y == expec_y);
-    ASSERT_TRUE(p == expec_p);
 }

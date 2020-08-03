@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <Math3D/Global.hpp>
+#include <Math3D/Common.hpp>
 #include <Math3D/Core/Vector.hpp>
 #include <Math3D/Core/Matrix.hpp>
 #include <Math3D/Cartesian/2D/Types/Enums.hpp>
@@ -29,7 +30,7 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix2),void>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Matrix<2,2,T>;
+    using BasedOnType = Matrix<2,2,T>;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -56,7 +57,7 @@ public: /* Constructors */
      * Creates basis from 3x3 matrix.
      * @param matrix 3x3 basis matrix.
      */
-    constexpr
+    constexpr explicit
     Basis(const Matrix<3,3,T>& matrix);
 
 /* ####################################################################################### */
@@ -92,8 +93,8 @@ public: /* Getters */
     orientationMatrix() const;
 
     /**
-     * Gets 2x2 matrix is describe this basis.
-     * @return 2x2 basis matrix.
+     * Gets 3x3 matrix is describe this basis.
+     * @return 3x3 basis matrix.
      */
     constexpr FORCEINLINE Matrix<3,3,T>
     spaceMatrix() const;
@@ -155,7 +156,7 @@ struct Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Matrix3),void>>
 public: /* Aliases */
 /* ####################################################################################### */
 
-    using BaseOnType = Matrix<2,2,T>;
+    using BasedOnType = Matrix<2,2,T>;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -167,7 +168,7 @@ public: /* Constructors */
      * @param y Basis Y axis.
      * @param position Basis position.
      */
-    constexpr
+    constexpr explicit
     Basis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
 
     /**
@@ -182,7 +183,7 @@ public: /* Constructors */
      * Creates basis from 3x3 matrix.
      * @param matrix 3x3 basis matrix.
      */
-    constexpr
+    constexpr explicit
     Basis(const Matrix<3,3,T>& matrix);
 
 /* ####################################################################################### */
@@ -218,8 +219,8 @@ public: /* Getters */
     orientationMatrix() const;
 
     /**
-     * Gets 2x2 matrix is describe this basis.
-     * @return 2x2 basis matrix.
+     * Gets 3x3 matrix is describe this basis.
+     * @return 3x3 basis matrix.
      */
     constexpr FORCEINLINE const Matrix<3,3,T>&
     spaceMatrix() const;
@@ -261,7 +262,7 @@ public: /* Setters */
 private: /* Private members */
 /* ####################################################################################### */
 
-    Matrix<2,2,T>
+    Matrix<3,3,T>
     m_basis;
 };
 
@@ -269,4 +270,4 @@ MATH3D_XY_NAMESPACE_END
 MATH3D_NAMESPACE_END
 
 
-#include <private/Math3D/Cartesian/2D/Basis.hpp>
+#include <private/Math3D/Cartesian/2D/Types/Basis.hpp>
