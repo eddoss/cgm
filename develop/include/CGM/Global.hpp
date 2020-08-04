@@ -5,29 +5,12 @@
 
 
 /* ####################################################################################### */
-/* Library namespace */
-/* ####################################################################################### */
-
-#define CGM        cgm
-#define CGM_XY     xy
-#define CGM_XYZ    xyz
-#define CGM_COORD  coord
-
-/* ####################################################################################### */
 /* Library namespaces macro */
 /* ####################################################################################### */
 
-#define CGM_NAMESPACE_BEGIN          namespace CGM {
-#define CGM_NAMESPACE_END            }
-
-#define CGM_XY_NAMESPACE_BEGIN       namespace CGM_XY {
-#define CGM_XY_NAMESPACE_END         }
-
-#define CGM_XYZ_NAMESPACE_BEGIN      namespace CGM_XYZ {
-#define CGM_XYZ_NAMESPACE_END        }
-
-#define CGM_COORD_NAMESPACE_BEGIN    namespace CGM_COORD {
-#define CGM_COORD_NAMESPACE_END      }
+#define CGM                 cgm
+#define CGM_NAMESPACE_BEGIN namespace CGM {
+#define CGM_NAMESPACE_END   }
 
 /* ####################################################################################### */
 /* Platform */

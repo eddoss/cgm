@@ -1,6 +1,6 @@
 
 
-#include <CGM/Coordinates/Spherical.hpp>
+#include <CGM/Coordinates/Types/Spherical.hpp>
 
 
 CGM_NAMESPACE_BEGIN

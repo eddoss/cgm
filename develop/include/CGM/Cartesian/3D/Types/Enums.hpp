@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Global.hpp>
+#include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN

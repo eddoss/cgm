@@ -9,7 +9,7 @@
 
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& B)
+operator == (const CGM_COORD::Polar<T>& A, const CGM_COORD::Polar<T>& B)
 {
     return  CGM::eq(A.angle(), B.angle()) &&
             CGM::eq(A.radius(), B.radius());
@@ -19,7 +19,7 @@ operator == (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& 
 
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& B)
+operator != (const CGM_COORD::Polar<T>& A, const CGM_COORD::Polar<T>& B)
 {
     return  CGM::neq(A.angle(), B.angle()) ||
             CGM::neq(A.radius(), B.radius());
@@ -31,7 +31,7 @@ operator != (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& 
 
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spherical<T>& B)
+operator == (const CGM_COORD::Spherical<T>& A, const CGM_COORD::Spherical<T>& B)
 {
     return  CGM::eq(A.radius(), B.radius())       &&
             CGM::eq(A.latitude(), B.latitude())   &&
@@ -42,7 +42,7 @@ operator == (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spheri
 
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spherical<T>& B)
+operator != (const CGM_COORD::Spherical<T>& A, const CGM_COORD::Spherical<T>& B)
 {
     return  CGM::neq(A.radius(), B.radius())       ||
             CGM::neq(A.latitude(), B.latitude())   ||
@@ -55,7 +55,7 @@ operator != (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spheri
 
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cylindrical<T>& B)
+operator == (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B)
 {
     return  CGM::eq(A.angle(), B.angle())     &&
             CGM::eq(A.radius(), B.radius())   &&
@@ -66,7 +66,7 @@ operator == (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cyli
 
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cylindrical<T>& B)
+operator != (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B)
 {
     return  CGM::neq(A.angle(), B.angle())      ||
             CGM::neq(A.radius(), B.radius())    ||

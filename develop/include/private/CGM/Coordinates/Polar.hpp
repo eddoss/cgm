@@ -1,6 +1,6 @@
 
 
-#include <CGM/Coordinates/Polar.hpp>
+#include <CGM/Coordinates/Types/Polar.hpp>
 
 
 CGM_NAMESPACE_BEGIN

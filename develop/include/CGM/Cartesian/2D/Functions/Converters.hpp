@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include <CGM/Global.hpp>
 #include <CGM/Core/Vector.hpp>
 #include <CGM/Core/Matrix.hpp>
 #include <CGM/Core/Operators/MatrixVectorMultiplication.hpp>
 #include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/2D/Types/Basis.hpp>
 #include <private/CGM/Cartesian/2D/InternalUtils.hpp>

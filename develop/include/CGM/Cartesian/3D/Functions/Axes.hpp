@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include <CGM/Global.hpp>
 #include <CGM/Common.hpp>
 #include <CGM/Core/Vector.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN

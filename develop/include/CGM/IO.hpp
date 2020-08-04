@@ -6,9 +6,9 @@
 #include <CGM/Core/Vector.hpp>
 #include <CGM/Core/Matrix.hpp>
 #include <CGM/Core/Quaternion.hpp>
-#include <CGM/Coordinates/Polar.hpp>
-#include <CGM/Coordinates/Spherical.hpp>
-#include <CGM/Coordinates/Cylindrical.hpp>
+#include <CGM/Coordinates/Types/Polar.hpp>
+#include <CGM/Coordinates/Types/Spherical.hpp>
+#include <CGM/Coordinates/Types/Cylindrical.hpp>
 
 
 template <size_t D, typename T>
@@ -25,14 +25,14 @@ operator << (std::ostream& stream, const CGM::Quaternion<T>& quat);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Polar<T>& polarCoord);
+operator << (std::ostream& stream, const CGM_COORD::Polar<T>& polarCoord);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Spherical<T>& sphericalCoord);
+operator << (std::ostream& stream, const CGM_COORD::Spherical<T>& sphericalCoord);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Cylindrical<T>& cylindricalCoord);
+operator << (std::ostream& stream, const CGM_COORD::Cylindrical<T>& cylindricalCoord);
 
 #include <private/CGM/IO.hpp>
