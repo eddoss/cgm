@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Matrix.hpp>
+#include <CGM/Modules/Core/Types/Matrix.hpp>
 
 
 using namespace CGM;

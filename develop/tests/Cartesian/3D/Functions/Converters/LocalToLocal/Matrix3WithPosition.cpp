@@ -2,16 +2,16 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Core/Functions/Matrix.hpp>
-#include <CGM/Core/Functions/Vector.hpp>
-#include <CGM/Core/Functions/Quaternion.hpp>
-#include <CGM/Cartesian/3D/Types/Basis.hpp>
-#include <CGM/Cartesian/3D/Functions/Converters.hpp>
-#include <CGM/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
-#include <private/CGM/Cartesian/3D/InternalUtils.hpp>
-#include <CGM/IO.hpp>
+#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Vector.hpp>
+#include <CGM/Modules/Core/Functions/Quaternion.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Basis.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
+
 
 using namespace std;
 using namespace CGM;

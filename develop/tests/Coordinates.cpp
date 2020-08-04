@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Operators/Vector.hpp>
-#include <CGM/Coordinates/Functions.hpp>
-#include <CGM/Coordinates/Operators.hpp>
+#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/Modules/Coordinates/Functions/Converters.hpp>
+#include <CGM/Modules/Coordinates/Operators.hpp>
 
 
 using namespace std;

@@ -1,0 +1,13 @@
+#include <CGM/Modules/Cartesian/Common.hpp>
+#include <CGM/Modules/Cartesian/ModuleGlobals.hpp>
+#include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
+
+#include <CGM/Modules/Cartesian/2D/Types/Basis.hpp>
+#include <CGM/Modules/Cartesian/2D/Types/Enums.hpp>
+#include <CGM/Modules/Cartesian/2D/Types/Typedefs.hpp>
+
+#include <CGM/Modules/Cartesian/2D/Functions/Axes.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/BasisPackers.hpp>
