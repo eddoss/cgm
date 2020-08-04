@@ -99,7 +99,7 @@ operator << (std::ostream& stream, const CGM::Quaternion<T>& quat)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Polar<T>& polarCoord)
+operator << (std::ostream& stream, const CGM_COORD::Polar<T>& polarCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
@@ -116,7 +116,7 @@ operator << (std::ostream& stream, const CGM::CGM_COORD::Polar<T>& polarCoord)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Spherical<T>& sphericalCoord)
+operator << (std::ostream& stream, const CGM_COORD::Spherical<T>& sphericalCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
@@ -134,7 +134,7 @@ operator << (std::ostream& stream, const CGM::CGM_COORD::Spherical<T>& spherical
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::CGM_COORD::Cylindrical<T>& cylindricalCoord)
+operator << (std::ostream& stream, const CGM_COORD::Cylindrical<T>& cylindricalCoord)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);

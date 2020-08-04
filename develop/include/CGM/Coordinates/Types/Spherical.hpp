@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Global.hpp>
 #include <CGM/Common.hpp>
+#include <CGM/Coordinates/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN

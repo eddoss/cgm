@@ -2,9 +2,10 @@
 
 
 #include <CGM/Common.hpp>
-#include <CGM/Coordinates/Polar.hpp>
-#include <CGM/Coordinates/Spherical.hpp>
-#include <CGM/Coordinates/Cylindrical.hpp>
+#include <CGM/Coordinates/ModuleGlobals.hpp>
+#include <CGM/Coordinates/Types/Polar.hpp>
+#include <CGM/Coordinates/Types/Spherical.hpp>
+#include <CGM/Coordinates/Types/Cylindrical.hpp>
 
 
 /* ####################################################################################### */
@@ -19,7 +20,7 @@
  */
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& B);
+operator == (const CGM_COORD::Polar<T>& A, const CGM_COORD::Polar<T>& B);
 
 /**
  * Checking the components of a Polar coord for inequality.
@@ -29,7 +30,7 @@ operator == (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& 
  */
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& B);
+operator != (const CGM_COORD::Polar<T>& A, const CGM_COORD::Polar<T>& B);
 
 /* ####################################################################################### */
 /* Spherical */
@@ -43,7 +44,7 @@ operator != (const CGM::CGM_COORD::Polar<T>& A, const CGM::CGM_COORD::Polar<T>& 
  */
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spherical<T>& B);
+operator == (const CGM_COORD::Spherical<T>& A, const CGM_COORD::Spherical<T>& B);
 
 /**
  * Checking the components of a Spherical coord for inequality.
@@ -53,7 +54,7 @@ operator == (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spheri
  */
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spherical<T>& B);
+operator != (const CGM_COORD::Spherical<T>& A, const CGM_COORD::Spherical<T>& B);
 
 /* ####################################################################################### */
 /* Cylindrical */
@@ -67,7 +68,7 @@ operator != (const CGM::CGM_COORD::Spherical<T>& A, const CGM::CGM_COORD::Spheri
  */
 template<typename T>
 constexpr bool
-operator == (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cylindrical<T>& B);
+operator == (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B);
 
 /**
  * Checking the components of a Cylindrical coord for inequality.
@@ -77,7 +78,7 @@ operator == (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cyli
  */
 template<typename T>
 constexpr bool
-operator != (const CGM::CGM_COORD::Cylindrical<T>& A, const CGM::CGM_COORD::Cylindrical<T>& B);
+operator != (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B);
 
 
 #include <private/CGM/Coordinates/Operators.hpp>

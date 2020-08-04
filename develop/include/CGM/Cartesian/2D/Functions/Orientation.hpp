@@ -3,9 +3,9 @@
 
 #include <tuple>
 #include <type_traits>
-#include <CGM/Global.hpp>
 #include <CGM/Core/Vector.hpp>
 #include <CGM/Core/Matrix.hpp>
+#include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Cartesian/2D/Types/Enums.hpp>
 #include <CGM/Cartesian/2D/Types/Typedefs.hpp>
 #include <CGM/Cartesian/2D/Functions/Utils.hpp>

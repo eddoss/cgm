@@ -2,8 +2,8 @@
 
 
 #include <tuple>
-#include <CGM/Global.hpp>
 #include <CGM/Core/Vector.hpp>
+#include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN

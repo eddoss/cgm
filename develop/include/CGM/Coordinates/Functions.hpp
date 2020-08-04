@@ -2,9 +2,10 @@
 
 #include <cmath>
 #include <CGM/Core/Vector.hpp>
-#include <CGM/Coordinates/Polar.hpp>
-#include <CGM/Coordinates/Spherical.hpp>
-#include <CGM/Coordinates/Cylindrical.hpp>
+#include <CGM/Coordinates/ModuleGlobals.hpp>
+#include <CGM/Coordinates/Types/Polar.hpp>
+#include <CGM/Coordinates/Types/Spherical.hpp>
+#include <CGM/Coordinates/Types/Cylindrical.hpp>
 
 
 CGM_NAMESPACE_BEGIN
