@@ -2,15 +2,15 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Common.hpp>
-#include <CGM/Core/Operators/Vector.hpp>
-#include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Core/Functions/Vector.hpp>
-#include <CGM/Core/Functions/Matrix.hpp>
-#include <CGM/Core/Functions/Quaternion.hpp>
-#include <CGM/Core/Operators/Quaternion.hpp>
-#include <CGM/Cartesian/3D/Functions/Utils.hpp>
-#include <private/CGM/Cartesian/3D/InternalUtils.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Vector.hpp>
+#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Quaternion.hpp>
+#include <CGM/Modules/Core/Operators/Quaternion.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
 
 
 using namespace std;
@@ -28,7 +28,7 @@ TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_vector3)
             0,0,0,1
         };
 
-        auto res = CGM_XYZ::_internal_multiply_matrix4x4_on_vector3<EVectorRepresentation::Point>(mat, vec);
+        auto res = CGM_XYZ::detail::internal_multiply_matrix4x4_on_vector3<EVectorRepresentation::Point>(mat, vec);
         Vector<3,int> exp {29,21,20};
         ASSERT_TRUE(res == exp);
     }
@@ -43,7 +43,7 @@ TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_vector3)
             0,0,0,1
         };
 
-        auto res = CGM_XYZ::_internal_multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(mat, vec);
+        auto res = CGM_XYZ::detail::internal_multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(mat, vec);
         Vector<3,int> exp {28,19,17};
         ASSERT_TRUE(res == exp);
     }
@@ -64,7 +64,7 @@ TEST(Cartesian_3D_InternalFunctions, multiply_vector3_on_matrix4x4)
             1,2,3,1
         };
 
-        auto res = CGM_XYZ::_internal_multiply_vector3_on_matrix4x4<EVectorRepresentation::Point>(vec, mat);
+        auto res = CGM_XYZ::detail::internal_multiply_vector3_on_matrix4x4<EVectorRepresentation::Point>(vec, mat);
         Vector<3,int> exp {29,21,20};
         ASSERT_TRUE(res == exp);
     }
@@ -79,7 +79,7 @@ TEST(Cartesian_3D_InternalFunctions, multiply_vector3_on_matrix4x4)
             1,2,3,1
         };
 
-        auto res = CGM_XYZ::_internal_multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vec, mat);
+        auto res = CGM_XYZ::detail::internal_multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vec, mat);
         Vector<3,int> exp {28,19,17};
         ASSERT_TRUE(res == exp);
     }
@@ -112,7 +112,7 @@ TEST(Cartesian_3D_InternalFunctions, fast_inverse_matrix4x4)
     };
 #endif
 
-    auto res = CGM_XYZ::_internal_fast_inverse_matrix4x4(input);
+    auto res = CGM_XYZ::detail::internal_fast_inverse_matrix4x4(input);
     auto exp = inverseForce(input);
 
     ASSERT_TRUE(CGM::eq(res, exp, 0.00001));

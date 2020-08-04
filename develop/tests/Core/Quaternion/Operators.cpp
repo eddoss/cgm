@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Quaternion.hpp>
-#include <CGM/Core/Operators/Quaternion.hpp>
+#include <CGM/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/Modules/Core/Operators/Quaternion.hpp>
 
 
 using namespace CGM;

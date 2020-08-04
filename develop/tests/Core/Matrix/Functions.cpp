@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Matrix.hpp>
-#include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Modules/Core/Types/Matrix.hpp>
+#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Matrix.hpp>
 
 
 using namespace CGM;
@@ -43,32 +43,6 @@ struct Bas
 
 TEST(Matrix_Functions, Transpose)
 {
-//    Matrix<4,4,double> space
-//    {
-//        +0.996772, +0.069409, -0.040354, +4.000000,
-//        -0.040354, +0.867639, +0.495554, +7.000000,
-//        +0.069409, -0.492325, +0.867639, +2.000000,
-//        +0.000000, +0.000000, +0.000000, +1.000000
-//    };
-//
-//    Matrix<3,3,double> orientation
-//    {
-//        +0.996772, +0.069409, -0.040354,
-//        -0.040354, +0.867639, +0.495554,
-//        +0.069409, -0.492325, +0.867639
-//    };
-//
-//    auto s = sizeof(Bas<float>);
-//
-//    auto is = inverseForce(space);
-//    auto ts = transposed(space);
-//    auto io = inverseForce(orientation);
-//    auto to = transposed(orientation);
-//    std::cout << is << std::endl;
-//    std::cout << ts << std::endl;
-//    std::cout << io << std::endl;
-//    std::cout << to << std::endl;
-
     {
         Mat22 a
         {
