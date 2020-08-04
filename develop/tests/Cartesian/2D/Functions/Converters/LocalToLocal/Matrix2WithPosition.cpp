@@ -41,12 +41,12 @@ TEST(Cartesian_2D_Functions_Converters, LocalToLocal_Mat2WithPos_Mat2)
 {
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_POINT>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT2);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_PT_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_PT_DIR, 0.0001));
     }
 
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_DIRECTION>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT2);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
     }
 }
 
@@ -56,12 +56,12 @@ TEST(Cartesian_2D_Functions_Converters, LocalToLocal_Mat2WithPos_Mat2WithPos)
 {
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_POINT>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT2, L2L2DMAT2P_B_P);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
     }
 
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_DIRECTION>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT2, L2L2DMAT2P_B_P);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
     }
 }
 
@@ -71,12 +71,12 @@ TEST(Cartesian_2D_Functions_Converters, LocalToLocal_Mat2WithPos_Mat3)
 {
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_POINT>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT3);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
     }
 
     {
         auto result = CGM_XY::localToLocal<L2L2DMAT2P_DIRECTION>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_MAT3);
-        ASSERT_TRUE(CGM::equal(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
     }
 }
 
@@ -87,14 +87,14 @@ TEST(Cartesian_2D_Functions_Converters, LocalToLocal_Mat2WithPos_Basis)
     {
         auto result_p = CGM_XY::localToLocal<L2L2DMAT2P_POINT>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_BASIS_M2);
         auto result_d = CGM_XY::localToLocal<L2L2DMAT2P_DIRECTION>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_BASIS_M2);
-        ASSERT_TRUE(CGM::equal(result_p, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
-        ASSERT_TRUE(CGM::equal(result_d, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result_p, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
+        ASSERT_TRUE(CGM::eq(result_d, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
     }
 
     {
         auto result_p = CGM_XY::localToLocal<L2L2DMAT2P_POINT>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_BASIS_M3);
         auto result_d = CGM_XY::localToLocal<L2L2DMAT2P_DIRECTION>(L2L2DMAT2P_A_COORD, L2L2DMAT2P_A_MAT2, L2L2DMAT2P_A_P, L2L2DMAT2P_B_BASIS_M3);
-        ASSERT_TRUE(CGM::equal(result_p, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
-        ASSERT_TRUE(CGM::equal(result_d, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
+        ASSERT_TRUE(CGM::eq(result_p, L2L2DMAT2P_B_COORD_PT_PT, 0.0001));
+        ASSERT_TRUE(CGM::eq(result_d, L2L2DMAT2P_B_COORD_DIR_DIR, 0.0001));
     }
 }

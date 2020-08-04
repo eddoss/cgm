@@ -115,5 +115,5 @@ TEST(Cartesian_3D_InternalFunctions, fast_inverse_matrix4x4)
     auto res = CGM_XYZ::_internal_fast_inverse_matrix4x4(input);
     auto exp = inverseForce(input);
 
-    ASSERT_TRUE(CGM::equal(res, exp, 0.00001));
+    ASSERT_TRUE(CGM::eq(res, exp, 0.00001));
 }

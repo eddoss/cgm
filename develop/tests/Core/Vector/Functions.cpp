@@ -25,26 +25,26 @@ TEST(Vector_Functions, Normalize)
         {
             auto res = vec;
             auto suc = normalize(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
             res = normalized(res, suc);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             normalizeForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
             res = normalizedForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
 
@@ -57,26 +57,26 @@ TEST(Vector_Functions, Normalize)
         {
             auto res = vec;
             auto suc = normalize(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
             res = normalized(res, suc);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             normalizeForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
             res = normalizedForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
 
@@ -89,26 +89,26 @@ TEST(Vector_Functions, Normalize)
         {
             auto res = vec;
             auto suc = normalize(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
             res = normalized(res, suc);
-            ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             normalizeForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
             res = normalizedForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.001));
+            ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
 
@@ -121,26 +121,26 @@ TEST(Vector_Functions, Normalize)
         {
             auto res = vec;
             auto suc = normalize(res);
-            ASSERT_TRUE(CGM::equal(res, nrm, 0.01) && suc);
+            ASSERT_TRUE(CGM::eq(res, nrm, 0.01) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
             res = normalized(res, suc);
-            ASSERT_TRUE(equal(res, nrm, 0.01) && suc);
+            ASSERT_TRUE(eq(res, nrm, 0.01) && suc);
         }
 
         {
             auto res = vec;
             normalizeForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.01));
+            ASSERT_TRUE(eq(res, nrm, 0.01));
         }
 
         {
             auto res = vec;
             res = normalizedForce(res);
-            ASSERT_TRUE(equal(res, nrm, 0.01));
+            ASSERT_TRUE(eq(res, nrm, 0.01));
         }
     }
 }
@@ -154,7 +154,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 5.064f;
 
-        ASSERT_TRUE(equal(len,exp,0.001f));
+        ASSERT_TRUE(eq(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -164,7 +164,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 7.872f;
 
-        ASSERT_TRUE(equal(len,exp,0.001f));
+        ASSERT_TRUE(eq(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -174,7 +174,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 13.612f;
 
-        ASSERT_TRUE(equal(len,exp,0.001f));
+        ASSERT_TRUE(eq(len,exp,0.001f));
     }
 
     /* -------------- */
@@ -184,7 +184,7 @@ TEST(Vector_Functions, Length)
         float len = length<float>(vec);
         float exp = 12.833f;
 
-        ASSERT_TRUE(equal(len,exp,0.001f));
+        ASSERT_TRUE(eq(len,exp,0.001f));
     }
 }
 
@@ -198,7 +198,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 50.267f;
 
-        ASSERT_TRUE(equal(len,exp,0.01f));
+        ASSERT_TRUE(eq(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -209,7 +209,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 158.169f;
 
-        ASSERT_TRUE(equal(len,exp,0.01f));
+        ASSERT_TRUE(eq(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -220,7 +220,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 173.973f;
 
-        ASSERT_TRUE(equal(len,exp,0.01f));
+        ASSERT_TRUE(eq(len,exp,0.01f));
     }
 
     /* -------------- */
@@ -231,7 +231,7 @@ TEST(Vector_Functions, LengthSquared)
         float len = lengthSquared(vec);
         float exp = 47.912f;
 
-        ASSERT_TRUE(equal(len,exp,0.01f));
+        ASSERT_TRUE(eq(len,exp,0.01f));
     }
 }
 
@@ -246,7 +246,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 7.913f;
 
-        ASSERT_TRUE(equal(dtp,exp,0.01f));
+        ASSERT_TRUE(eq(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -258,7 +258,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 56.273f;
 
-        ASSERT_TRUE(equal(dtp,exp,0.01f));
+        ASSERT_TRUE(eq(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -270,7 +270,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 116.179f;
 
-        ASSERT_TRUE(equal(dtp,exp,0.01f));
+        ASSERT_TRUE(eq(dtp,exp,0.01f));
     }
 
     /* -------------- */
@@ -282,7 +282,7 @@ TEST(Vector_Functions, Dot)
         float dtp = dot(a,b);
         float exp = 158.500f;
 
-        ASSERT_TRUE(equal(dtp,exp,0.01f));
+        ASSERT_TRUE(eq(dtp,exp,0.01f));
     }
 }
 
@@ -297,7 +297,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 7.380f;
 
-        ASSERT_TRUE(equal(dst,exp,0.01f));
+        ASSERT_TRUE(eq(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -309,7 +309,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 3.715f;
 
-        ASSERT_TRUE(equal(dst,exp,0.01f));
+        ASSERT_TRUE(eq(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -321,7 +321,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 9.429f;
 
-        ASSERT_TRUE(equal(dst,exp,0.01f));
+        ASSERT_TRUE(eq(dst,exp,0.01f));
     }
 
     /* -------------- */
@@ -333,7 +333,7 @@ TEST(Vector_Functions, Distance)
         float dst = distance(a,b);
         float exp = 8.083f;
 
-        ASSERT_TRUE(equal(dst,exp,0.01f));
+        ASSERT_TRUE(eq(dst,exp,0.01f));
     }
 }
 
@@ -348,7 +348,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.497f;
 
-        ASSERT_TRUE(equal(ang,exp,0.01f));
+        ASSERT_TRUE(eq(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -360,7 +360,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 1.128f;
 
-        ASSERT_TRUE(equal(ang,exp,0.01f));
+        ASSERT_TRUE(eq(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -372,7 +372,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.589f;
 
-        ASSERT_TRUE(equal(ang,exp,0.01f));
+        ASSERT_TRUE(eq(ang,exp,0.01f));
     }
 
     /* -------------- */
@@ -384,7 +384,7 @@ TEST(Vector_Functions, Angle)
         float ang = angle<float>(a,b);
         float exp = 0.637f;
 
-        ASSERT_TRUE(equal(ang,exp,0.01f));
+        ASSERT_TRUE(eq(ang,exp,0.01f));
     }
 }
 

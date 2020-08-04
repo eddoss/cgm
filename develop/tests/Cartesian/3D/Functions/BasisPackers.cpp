@@ -112,7 +112,7 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
     };
 #endif
 
-    ASSERT_TRUE(CGM::equal(result, expec, 0.0001));
+    ASSERT_TRUE(CGM::eq(result, expec, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */

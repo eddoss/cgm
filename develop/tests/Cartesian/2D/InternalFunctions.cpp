@@ -88,5 +88,5 @@ TEST(Cartesian_2D_InternalFunctions, fast_inverse_matrix3x3)
     auto res = CGM_XY::_internal_fast_inverse_matrix3x3(input);
     auto exp = inverseForce(input);
 
-    ASSERT_TRUE(CGM::equal(res, exp, 0.00001));
+    ASSERT_TRUE(CGM::eq(res, exp, 0.00001));
 }

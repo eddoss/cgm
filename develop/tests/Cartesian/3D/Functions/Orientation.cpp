@@ -75,9 +75,9 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
     Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
     auto [x, y, z] = CGM_XYZ::orientationAxes(quat);
 
-    ASSERT_TRUE(CGM::equal(expec_x, x, 0.00001));
-    ASSERT_TRUE(CGM::equal(expec_y, y, 0.00001));
-    ASSERT_TRUE(CGM::equal(expec_z, z, 0.00001));
+    ASSERT_TRUE(CGM::eq(expec_x, x, 0.00001));
+    ASSERT_TRUE(CGM::eq(expec_y, y, 0.00001));
+    ASSERT_TRUE(CGM::eq(expec_z, z, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -203,7 +203,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 
     auto result = CGM_XYZ::orientationMatrix(quat);
 
-    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -247,7 +247,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
     auto result = CGM_XYZ::orientationQuaternion(x,y,z);
 
-    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -264,7 +264,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
     auto result = CGM_XYZ::orientationQuaternion(axes);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -283,7 +283,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
     auto result = CGM_XYZ::orientationQuaternion(matrix);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -302,5 +302,5 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
     auto result = CGM_XYZ::orientationQuaternion(matrix);
     auto expect = Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM::equal(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }

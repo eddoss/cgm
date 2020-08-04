@@ -20,7 +20,7 @@ TEST(Quaternion_Functions, Dot)
     float dtp = dot(a,b);
     float exp = 116.179f;
 
-    ASSERT_TRUE(equal(dtp,exp,0.01f));
+    ASSERT_TRUE(eq(dtp,exp,0.01f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -41,7 +41,7 @@ TEST(Quaternion_Functions, Length)
     float len = length(q);
     float exp = 13.612f;
 
-    ASSERT_TRUE(equal(len,exp,0.001f));
+    ASSERT_TRUE(eq(len,exp,0.001f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -53,7 +53,7 @@ TEST(Quaternion_Functions, Norm)
     float len = norm(q);
     float exp = 173.973f;
 
-    ASSERT_TRUE(equal(len,exp,0.01f));
+    ASSERT_TRUE(eq(len,exp,0.01f));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -66,26 +66,26 @@ TEST(Quaternion_Functions, Normalize)
     {
         auto res = qtr;
         auto suc = normalize(res);
-        ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
     }
 
     {
         auto res = qtr;
         bool suc = false;
         res = normalized(res, suc);
-        ASSERT_TRUE(equal(res, nrm, 0.001) && suc);
+        ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
     }
 
     {
         auto res = qtr;
         normalizeForce(res);
-        ASSERT_TRUE(equal(res, nrm, 0.001));
+        ASSERT_TRUE(eq(res, nrm, 0.001));
     }
 
     {
         auto res = qtr;
         res = normalizedForce(res);
-        ASSERT_TRUE(equal(res, nrm, 0.001));
+        ASSERT_TRUE(eq(res, nrm, 0.001));
     }
 }
 
@@ -99,26 +99,26 @@ TEST(Quaternion_Functions, Inverse)
     {
         auto res = qtr;
         invert(res);
-        ASSERT_TRUE(equal(res, inv, 0.001));
+        ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
         bool success = false;
         res = inverse(res, success);
-        ASSERT_TRUE(equal(res, inv, 0.001));
+        ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
         invertForce(res);
-        ASSERT_TRUE(equal(res, inv, 0.001));
+        ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
         res = inverseForce(res);
-        ASSERT_TRUE(equal(res, inv, 0.001));
+        ASSERT_TRUE(eq(res, inv, 0.001));
     }
 }
 
@@ -150,7 +150,7 @@ TEST(Quaternion_Functions, Angle)
 
     float ang = angle(a,b);
 
-    ASSERT_TRUE(equal(ang, 0.6855f, 0.0001f));
+    ASSERT_TRUE(eq(ang, 0.6855f, 0.0001f));
 }
 
 /* --------------------------------------------------------------------------------------- */

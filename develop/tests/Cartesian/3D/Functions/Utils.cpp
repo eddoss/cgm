@@ -55,7 +55,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -96,7 +96,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -137,7 +137,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -240,7 +240,7 @@ TEST(Cartesian_3D_Functions_Utils, GetUp)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -287,7 +287,7 @@ TEST(Cartesian_3D_Functions_Utils, GetRight)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -334,7 +334,7 @@ TEST(Cartesian_3D_Functions_Utils, GetForward)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -369,7 +369,7 @@ TEST(Cartesian_3D_Functions_Utils, GetDown)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -404,7 +404,7 @@ TEST(Cartesian_3D_Functions_Utils, GetLeft)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -439,7 +439,7 @@ TEST(Cartesian_3D_Functions_Utils, GetBackward)
 
     ASSERT_TRUE(value3 == expec3);
     ASSERT_TRUE(value4 == expec4);
-    ASSERT_TRUE(CGM::equal(valueQ, expecQ, 0.0001));
+    ASSERT_TRUE(CGM::eq(valueQ, expecQ, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -672,9 +672,9 @@ TEST(Cartesian_3D_Functions_Utils, SetOrientation)
 
         CGM_XYZ::setOrientation(mat, orientation);
 
-        ASSERT_TRUE(CGM::equal(CGM_XYZ::x(mat), expec_x, 0.0001));
-        ASSERT_TRUE(CGM::equal(CGM_XYZ::y(mat), expec_y, 0.0001));
-        ASSERT_TRUE(CGM::equal(CGM_XYZ::z(mat), expec_z, 0.0001));
+        ASSERT_TRUE(CGM::eq(CGM_XYZ::x(mat), expec_x, 0.0001));
+        ASSERT_TRUE(CGM::eq(CGM_XYZ::y(mat), expec_y, 0.0001));
+        ASSERT_TRUE(CGM::eq(CGM_XYZ::z(mat), expec_z, 0.0001));
     }
 
     {
