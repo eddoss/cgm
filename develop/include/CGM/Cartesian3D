@@ -6,6 +6,7 @@
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 
+#include <CGM/Modules/Cartesian/3D/Functions/IO.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Axes.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>

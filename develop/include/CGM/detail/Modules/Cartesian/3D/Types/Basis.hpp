@@ -474,7 +474,7 @@ Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const
 template <EBasisBase Base, typename T>
 constexpr
 Basis <Base, T, std::enable_if_t<(Base == EBasisBase::Quaternion)>>::Basis(const Matrix<4,4,T>& matrix)
-    : m_orientation(CGM_XYZ::orientationMatrix(matrix))
+    : m_orientation(CGM_XYZ::orientationQuaternion(matrix))
     , m_position(CGM_XYZ::position(matrix))
 {
 
