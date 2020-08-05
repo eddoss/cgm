@@ -10,7 +10,7 @@ operator << (std::ostream& stream, const CGM::Vector<D,T>& vec)
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
     stream << std::fixed << std::left << std::setprecision(6);
-    stream << "CGM::Vector<" << D << "," << typeid(CGM::Vector<D,T>::value_type).name() << ">{ ";
+    stream << "CGM::Vector<" << D << ", " << typeid(T).name() << ">{ ";
 
     if constexpr (D == 2)
     {
@@ -56,7 +56,7 @@ operator << (std::ostream& stream, const CGM::Matrix<M,N,T>& mat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
-    stream << "CGM::Matrix<" << M << "," << N << "," << typeid(CGM::Matrix<M,N,T>::value_type).name() << ">\n{";
+    stream << "CGM::Matrix<" << M << ", " << N << ", " << typeid(T).name() << ">\n{";
     stream << std::fixed;
     for (size_t r = 0; r < M; ++r)
     {
@@ -83,7 +83,7 @@ operator << (std::ostream& stream, const CGM::Quaternion<T>& quat)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
     stream.setf(std::ios::showpos);
-    stream << "CGM::Quaternion<" << typeid(CGM::Quaternion<T>::value_type).name() << ">{ ";
+    stream << "CGM::Quaternion<" << typeid(T).name() << ">{ ";
     stream << std::fixed << std::left << std::setprecision(6);
     stream << quat.vector.x << " ";
     stream << quat.vector.y << " ";
