@@ -48,7 +48,7 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
 /**
@@ -94,7 +94,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 translate(SpaceTuple<T>& space, const Vector<3,T>& value);
 
 /**
@@ -118,7 +118,7 @@ translate(SpaceTuple<T>& space, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<ESpace Space = ESpace::Local, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 translate(Basis<Base,T>& basis, const Vector<3,T>& value);
 
 /**
@@ -133,3 +133,6 @@ translate(Basis<Base,T>& basis, const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Translate.hpp>
