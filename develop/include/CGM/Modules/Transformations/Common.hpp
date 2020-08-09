@@ -1,19 +1,10 @@
-#ifndef MATH3D_XFORM_COMMON_HPP
-#define MATH3D_XFORM_COMMON_HPP
+#pragma once
 
 
-#include <Math3D/Global.hpp>
+#include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 
 
-MATH3D_NAMESPACE_BEGIN
-MATH3D_XFORM_NAMESPACE_BEGIN
-
-/* ####################################################################################### */
-/* 2D and 3D structs pre-definitions */
-/* ####################################################################################### */
-
-template<size_t D, typename T=FLOAT, typename = void> struct Pivot;
-template<size_t D, typename T=FLOAT, typename = void> struct Transforms;
+CGM_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Enums */
@@ -45,7 +36,4 @@ enum class ESpace
     World         /**< Transform in world space. */
 };
 
-MATH3D_XFORM_NAMESPACE_END
-MATH3D_NAMESPACE_END
-
-#endif // MATH3D_XFORM_COMMON_HPP
+CGM_NAMESPACE_END
