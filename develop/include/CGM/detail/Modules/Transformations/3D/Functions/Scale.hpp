@@ -339,7 +339,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(AxesTuple<T>& axes, const Transforms<T>& transforms)
 {
-    scale(axes, transforms.scales * transforms.uniformScale, transforms.pivot);
+    scale<Space>(axes, transforms.scales * transforms.uniformScale, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -422,7 +422,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(SpaceTuple<T>& space, const Transforms<T>& transforms)
 {
-    scale(space, transforms.scales * transforms.uniformScale, transforms.pivot);
+    scale<Space>(space, transforms.scales * transforms.uniformScale, transforms.pivot);
 }
 
 CGM_XFORM3D_NAMESPACE_END
