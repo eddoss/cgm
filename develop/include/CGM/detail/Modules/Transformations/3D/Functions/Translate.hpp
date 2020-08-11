@@ -70,7 +70,7 @@ template<ESpace Space, typename T>
 constexpr void
 translate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
-    translate(matrix, transforms.translations);
+    translate<Space>(matrix, transforms.translations);
 }
 
 /* ####################################################################################### */
@@ -123,7 +123,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 translate(SpaceTuple<T>& space, const Transforms<T>& transforms)
 {
-    translate(space, transforms.translations);
+    translate<Space>(space, transforms.translations);
 }
 
 /* ####################################################################################### */
@@ -158,7 +158,7 @@ template<ESpace Space, EBasisBase Base, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Basis<Base,T>& basis, const Transforms<T>& transforms)
 {
-    translate(basis, transforms.translations);
+    translate<Space>(basis, transforms.translations);
 }
 
 CGM_XFORM3D_NAMESPACE_END
