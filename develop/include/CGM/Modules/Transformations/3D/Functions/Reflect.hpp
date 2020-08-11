@@ -161,3 +161,6 @@ reflect(Basis<Base,T>& basis, const Vector<3,T>& planeNormal, const Vector<3,T>&
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Reflect.hpp>
