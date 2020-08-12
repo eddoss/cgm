@@ -10,6 +10,7 @@
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Transformations/3D/InternalUtils.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -50,15 +51,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
 
-/**
- * Applies transformations to 3x3 matrix.
- * @param matrix Matrix to apply transformations to.
- * @param transforms 4x4 transformation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& transforms);
-
 /* ####################################################################################### */
 /* Matrix4 */
 /* ####################################################################################### */
@@ -94,15 +86,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(AxesTuple<T>& axes, const Matrix<3,3,T>& transforms);
 
-/**
- * Applies transformations to axes tuple.
- * @param axes Axes tuple to apply transformations to.
- * @param transforms 4x4 transformation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(AxesTuple<T>& axes, const Matrix<4,4,T>& transforms);
-
 /* ####################################################################################### */
 /* Space tuple */
 /* ####################################################################################### */
@@ -127,3 +110,6 @@ apply(SpaceTuple<T>& space, const Matrix<4,4,T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Apply.hpp>
