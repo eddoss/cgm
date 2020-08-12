@@ -23,13 +23,13 @@ TEST(Cartesian_2D_InternalFunctions, multiply_matrix3x3_on_vector2)
     };
 
     {
-        auto res = CGM_XY::detail::internal_multiply_matrix3x3_on_vector2<EVectorRepresentation::Point>(mat, vec);
+        auto res = CGM_XY::detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Point>(mat, vec);
         auto exp = Vector<2,int> {15,26};
         ASSERT_TRUE(res == exp);
     }
 
     {
-        auto res = CGM_XY::detail::internal_multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(mat, vec);
+        auto res = CGM_XY::detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(mat, vec);
         auto exp = Vector<2,int> {11,23};
         ASSERT_TRUE(res == exp);
     }
@@ -49,13 +49,13 @@ TEST(Cartesian_2D_InternalFunctions, multiply_vector2_on_matrix3x3)
     };
 
     {
-        auto res = CGM_XY::detail::internal_multiply_vector2_on_matrix3x3<EVectorRepresentation::Point>(vec, mat);
+        auto res = CGM_XY::detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Point>(vec, mat);
         auto exp = Vector<2,int> {15,26};
         ASSERT_TRUE(res == exp);
     }
 
     {
-        auto res = CGM_XY::detail::internal_multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vec, mat);
+        auto res = CGM_XY::detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vec, mat);
         auto exp = Vector<2,int> {11,23};
         ASSERT_TRUE(res == exp);
     }
@@ -85,7 +85,7 @@ TEST(Cartesian_2D_InternalFunctions, fast_inverse_matrix3x3)
     };
 #endif
 
-    auto res = CGM_XY::detail::internal_fast_inverse_matrix3x3(input);
+    auto res = CGM_XY::detail::fast_inverse_matrix3x3(input);
     auto exp = inverseForce(input);
 
     ASSERT_TRUE(CGM::eq(res, exp, 0.00001));

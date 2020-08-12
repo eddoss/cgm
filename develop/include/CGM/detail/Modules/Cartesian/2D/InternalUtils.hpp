@@ -14,7 +14,7 @@ CGM_XY_NAMESPACE_BEGIN namespace detail {
 
 template <EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-internal_multiply_matrix3x3_on_vector2(const Matrix<3,3,T>& mat, const Vector<2,T>& vec)
+multiply_matrix3x3_on_vector2(const Matrix<3,3,T>& mat, const Vector<2,T>& vec)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -38,7 +38,7 @@ internal_multiply_matrix3x3_on_vector2(const Matrix<3,3,T>& mat, const Vector<2,
 
 template <EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-internal_multiply_vector2_on_matrix3x3(const Vector<2,T>& vec, const Matrix<3,3,T>& mat)
+multiply_vector2_on_matrix3x3(const Vector<2,T>& vec, const Matrix<3,3,T>& mat)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -62,7 +62,7 @@ internal_multiply_vector2_on_matrix3x3(const Vector<2,T>& vec, const Matrix<3,3,
 
 template <typename T>
 constexpr void
-internal_fast_invert_matrix3x3(Matrix<3,3,T>& mat)
+fast_invert_matrix3x3(Matrix<3,3,T>& mat)
 {
     std::swap(mat(0,1), mat(1,0));
 
@@ -86,10 +86,10 @@ internal_fast_invert_matrix3x3(Matrix<3,3,T>& mat)
 
 template <typename T>
 constexpr Matrix<3,3,T>
-internal_fast_inverse_matrix3x3(const Matrix<3,3,T>& mat)
+fast_inverse_matrix3x3(const Matrix<3,3,T>& mat)
 {
     Matrix<3,3,T> inv {mat};
-    detail::internal_fast_invert_matrix3x3(inv);
+    detail::fast_invert_matrix3x3(inv);
     return inv;
 }
 

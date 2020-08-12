@@ -14,7 +14,7 @@ CGM_XYZ_NAMESPACE_BEGIN namespace detail {
 
 template <EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-internal_multiply_matrix4x4_on_vector3(const Matrix<4,4,T>& mat, const Vector<3,T>& vec)
+multiply_matrix4x4_on_vector3(const Matrix<4,4,T>& mat, const Vector<3,T>& vec)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -40,7 +40,7 @@ internal_multiply_matrix4x4_on_vector3(const Matrix<4,4,T>& mat, const Vector<3,
 
 template <EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-internal_multiply_vector3_on_matrix4x4(const Vector<3,T>& vec, const Matrix<4,4,T>& mat)
+multiply_vector3_on_matrix4x4(const Vector<3,T>& vec, const Matrix<4,4,T>& mat)
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
@@ -66,7 +66,7 @@ internal_multiply_vector3_on_matrix4x4(const Vector<3,T>& vec, const Matrix<4,4,
 
 template <typename T>
 constexpr void
-internal_fast_invert_matrix4x4(Matrix<4,4,T>& mat)
+fast_invert_matrix4x4(Matrix<4,4,T>& mat)
 {
     std::swap(mat(0,1), mat(1,0));
     std::swap(mat(0,2), mat(2,0));
@@ -96,10 +96,10 @@ internal_fast_invert_matrix4x4(Matrix<4,4,T>& mat)
 
 template <typename T>
 constexpr Matrix<4,4,T>
-internal_fast_inverse_matrix4x4(const Matrix<4,4,T>& mat)
+fast_inverse_matrix4x4(const Matrix<4,4,T>& mat)
 {
     Matrix<4,4,T> inv {mat};
-    detail::internal_fast_invert_matrix4x4(inv);
+    detail::fast_invert_matrix4x4(inv);
     return inv;
 }
 

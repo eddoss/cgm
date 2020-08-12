@@ -55,9 +55,9 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::internal_multiply_matrix4x4_on_vector3<Representation>(detail::internal_fast_inverse_matrix4x4(localSpace), vector);
+    return detail::multiply_matrix4x4_on_vector3<Representation>(detail::fast_inverse_matrix4x4(localSpace), vector);
 #else
-    return detail::internal_multiply_vector3_on_matrix4x4<Representation>(vector, detail::internal_fast_inverse_matrix4x4(localSpace));
+    return detail::multiply_vector3_on_matrix4x4<Representation>(vector, detail::fast_inverse_matrix4x4(localSpace));
 #endif
 }
 
@@ -169,9 +169,9 @@ constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::internal_multiply_matrix4x4_on_vector3<Representation>(localSpace, vector);
+    return detail::multiply_matrix4x4_on_vector3<Representation>(localSpace, vector);
 #else
-    return detail::internal_multiply_vector3_on_matrix4x4<Representation>(vector, localSpace);
+    return detail::multiply_vector3_on_matrix4x4<Representation>(vector, localSpace);
 #endif
 }
 
