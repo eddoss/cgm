@@ -76,7 +76,7 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XYZ::SpaceTuple<T>& space)
 {
-        std::ios_base::fmtflags old_flags {stream.flags()};
+    std::ios_base::fmtflags old_flags {stream.flags()};
 
     stream.setf(std::ios::showpos);
     stream << "CGM::XYZ::SpaceTuple<" << typeid(T).name() << ">\n{";
