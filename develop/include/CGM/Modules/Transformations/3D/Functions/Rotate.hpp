@@ -471,3 +471,6 @@ rotate(Basis<Base,T>& basis, const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Rotate.hpp>
