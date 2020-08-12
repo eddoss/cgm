@@ -22,7 +22,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Rotates 3D vector around default Cartesian axis.
+ * Rotates vector around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
  * @param vector Vector to rotate.
  * @param angle Rotation angle.
@@ -32,7 +32,7 @@ constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, T angle);
 
 /**
- * Rotates 3D vector around arbitrary axis.
+ * Rotates vector around arbitrary axis.
  * @param vector Vector to rotate.
  * @param axis Arbitrary axis to rotate around.
  * @param angle Rotation angle.
@@ -42,18 +42,28 @@ constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, T angle, const Axis<T>& axis);
 
 /**
- * Rotates 3D vector around each axis of pivot on angle contained in "angles".
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @param vector Vector to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
- * Rotates 3D vector by Quaternion.
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+
+/**
+ * Rotates vector by Quaternion.
  * @param vector Vector to rotate.
  * @param quaternion Quaternion to rotate by.
  */
@@ -62,7 +72,7 @@ constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
 /**
- * Rotates 3D vector around each axis of pivot on angle contained in "transform.rotations".
+ * Rotates vector around each axis of pivot on angle contained in "transform.rotations".
  * @param vector Vector to rotate.
  * @param transforms Transformations parameters.
  */
@@ -96,16 +106,27 @@ constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, T angle, const Axis<T>& axis);
 
 /**
- * Rotates 3D orientation matrix around each axis of pivot on angle contained in "angles".
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates 3x3 matrix by Quaternion.
@@ -153,16 +174,27 @@ constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis);
 
 /**
- * Rotates 3D orientation matrix around each axis of pivot on angle contained in "angles".
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates 4x4 matrix by Quaternion.
@@ -209,15 +241,25 @@ constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle, const Axis<T>& axis);
 
 /**
- * Rotates pivot around each axis of pivot point on angle contained in "angles".
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
  * @param pivot Pivot to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in given rotation order).
+ * @param pivot Pivot to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates pivot by Quaternion.
@@ -264,16 +306,27 @@ constexpr CGM_FORCEINLINE void
 rotate(AxesTuple<T>& axes, T angle, const Axis<T>& axis);
 
 /**
- * Rotates axes tuple around each axis of pivot on angle contained in "angles".
+ * Rotates axes tuple around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param axes Axes tuple to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(AxesTuple<T>& axes, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates axes tuple around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param axes Axes tuple to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(AxesTuple<T>& axes, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates axes tuple by Quaternion.
@@ -322,16 +375,27 @@ constexpr CGM_FORCEINLINE void
 rotate(SpaceTuple<T>& space, T angle, const Axis<T>& axis);
 
 /**
- * Rotates space tuple around each axis of pivot on angle contained in "angles".
+ * Rotates space tuple around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param space Space tuple to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(SpaceTuple<T>& space, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates space tuple around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param space Space tuple to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(SpaceTuple<T>& space, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates space tuple by Quaternion.
@@ -380,16 +444,27 @@ constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle, const Axis<T>& axis);
 
 /**
- * Rotates quaternion around each axis of pivot on angle contained in "angles".
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates quaternion by Quaternion.
@@ -438,16 +513,27 @@ constexpr CGM_FORCEINLINE void
 rotate(Basis<Base,T>& basis, T angle, const Axis<T>& axis);
 
 /**
- * Rotates quaternion around each axis of pivot on angle contained in "angles".
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
  * @tparam Space In which space to transform.
  * @param basis Basis struct to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
- * @param rotationOrder Rotation order. By default is "XYZ".
  */
 template<ESpace Space = ESpace::Local, EBasisBase Base, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder = ERotationOrder::XYZ);
+rotate(Basis<Base,T>& basis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param basis Basis struct to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::Local, EBasisBase Base, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Basis<Base,T>& basis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates quaternion by Quaternion.
