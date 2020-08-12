@@ -11,7 +11,7 @@
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
-template<typename T>
+template<typename T=FLOAT>
 struct Transforms
 {
     /**

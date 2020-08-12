@@ -21,4 +21,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms);
 
 
-#include <CGM/detail/Modules/Core/Functions/IO.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Functions/IO.hpp>
