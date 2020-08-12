@@ -3,7 +3,7 @@
 #include <CGM/Modules/Transformations/3D/Functions/IO.hpp>
 
 
-template <size_t D, typename T>
+template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Axis<T>& axis)
 {
@@ -24,7 +24,7 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Axis<T>& axis)
 
 /* --------------------------------------------------------------------------------------- */
 
-template <size_t M, size_t N, typename T>
+template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot)
 {
@@ -102,6 +102,56 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
 
     stream << "\n}";
     stream.setf(old_flags);
+
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder)
+{
+    switch (rotationOrder)
+    {
+        case CGM_XFORM3D::ERotationOrder::XYZ: stream << "CGM::XYZ::ERotationOrder::XYZ"; break;
+        case CGM_XFORM3D::ERotationOrder::XZY: stream << "CGM::XYZ::ERotationOrder::XZY"; break;
+        case CGM_XFORM3D::ERotationOrder::YXZ: stream << "CGM::XYZ::ERotationOrder::YXZ"; break;
+        case CGM_XFORM3D::ERotationOrder::YZX: stream << "CGM::XYZ::ERotationOrder::YZX"; break;
+        case CGM_XFORM3D::ERotationOrder::ZXY: stream << "CGM::XYZ::ERotationOrder::ZXY"; break;
+        case CGM_XFORM3D::ERotationOrder::ZYX: stream << "CGM::XYZ::ERotationOrder::ZYX"; break;
+    }
+
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ESpace space)
+{
+    switch (space)
+    {
+        case CGM::ESpace::World: stream << "CGM::ESpace::World"; break;
+        case CGM::ESpace::Local: stream << "CGM::ESpace::Local"; break;
+    }
+
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ETransformOrder transformOrder)
+{
+    switch (transformOrder)
+    {
+        case CGM::ETransformOrder::RST: stream << "CGM::ETransformOrder::RST"; break;
+        case CGM::ETransformOrder::RTS: stream << "CGM::ETransformOrder::RTS"; break;
+        case CGM::ETransformOrder::SRT: stream << "CGM::ETransformOrder::SRT"; break;
+        case CGM::ETransformOrder::STR: stream << "CGM::ETransformOrder::STR"; break;
+        case CGM::ETransformOrder::TRS: stream << "CGM::ETransformOrder::TRS"; break;
+        case CGM::ETransformOrder::TSR: stream << "CGM::ETransformOrder::TSR"; break;
+    }
 
     return stream;
 }
