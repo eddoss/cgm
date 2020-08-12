@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <tuple>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Quaternion.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
@@ -17,7 +18,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
  * @param Constructed quaternion.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Quaternion<T>
+constexpr Quaternion<T>
 quaternion(const Vector<3,T>& axis, T angle);
 
 /**
@@ -44,7 +45,7 @@ axisAngle(const Vector<3,T>& axis, T angle);
  * @param Rotation axis and angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxisAngle<T>
+constexpr AxisAngle<T>
 axisAngle(const Quaternion<T>& quaternion);
 
 /**
@@ -62,7 +63,7 @@ axis(const AxisAngle<T>& axisAngle);
  * @param Rotation axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr Vector<3,T>
 axis(const Quaternion<T>& quaternion);
 
 /**
