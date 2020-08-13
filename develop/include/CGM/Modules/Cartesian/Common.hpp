@@ -15,4 +15,7 @@ enum class EVectorRepresentation
     Direction     /**< Direction vector. Infinite length of vector, homogeneous component equal to 0. */
 };
 
+#define CGM_POINT       CGM::EVectorRepresentation::Point
+#define CGM_DIRECTION   CGM::EVectorRepresentation::Direction
+
 CGM_NAMESPACE_END
