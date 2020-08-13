@@ -6,11 +6,11 @@
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Basis.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
-#include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -31,9 +31,6 @@ static const auto L2LQUATP_B_P = Vector<3,double>{ +4.030000, +1.700000, +2.2000
 static const auto L2LQUATP_B_QUAT = Quaternion<double>{ -0.068998, 0.068998, -0.193196, 0.976296 };
 static const auto L2LQUATP_B_MAT4 = CGM_XYZ::packBasis(L2LQUATP_B_X, L2LQUATP_B_Y, L2LQUATP_B_Z, L2LQUATP_B_P);
 static const auto L2LQUATP_B_MAT3 = CGM_XYZ::orientationMatrix(L2LQUATP_B_X, L2LQUATP_B_Y, L2LQUATP_B_Z);
-static const auto L2LQUATP_B_BASIS_Q = CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Quaternion,double>(L2LQUATP_B_QUAT, L2LQUATP_B_P);
-static const auto L2LQUATP_B_BASIS_M3 = CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix3,double>(L2LQUATP_B_MAT3, L2LQUATP_B_P);
-static const auto L2LQUATP_B_BASIS_M4 = CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix4,double>(L2LQUATP_B_MAT3, L2LQUATP_B_P);
 static const auto L2LQUATP_B_COORD_PT_PT = Vector<3,double>{ -3.166704, +1.353024, +6.503487 };
 static const auto L2LQUATP_B_COORD_PT_DIR = Vector<3,double>{ +1.504246, +1.589060, +7.951732 };
 static const auto L2LQUATP_B_COORD_DIR_DIR = Vector<3,double>{ +2.113769, +1.198966, +3.409012 };
@@ -108,31 +105,5 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_QuatWithPos)
     {
         auto result = CGM_XYZ::localToLocal<L2LQUATP_DIRECTION>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_QUAT, L2LQUATP_B_P);
         ASSERT_TRUE(CGM::eq(result, L2LQUATP_B_COORD_DIR_DIR, 0.0001));
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Basis)
-{
-    {
-        auto result_p = CGM_XYZ::localToLocal<L2LQUATP_POINT>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_Q);
-        auto result_d = CGM_XYZ::localToLocal<L2LQUATP_DIRECTION>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_Q);
-        ASSERT_TRUE(CGM::eq(result_p, L2LQUATP_B_COORD_PT_PT, 0.0001));
-        ASSERT_TRUE(CGM::eq(result_d, L2LQUATP_B_COORD_DIR_DIR, 0.0001));
-    }
-
-    {
-        auto result_p = CGM_XYZ::localToLocal<L2LQUATP_POINT>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_M3);
-        auto result_d = CGM_XYZ::localToLocal<L2LQUATP_DIRECTION>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_M3);
-        ASSERT_TRUE(CGM::eq(result_p, L2LQUATP_B_COORD_PT_PT, 0.0001));
-        ASSERT_TRUE(CGM::eq(result_d, L2LQUATP_B_COORD_DIR_DIR, 0.0001));
-    }
-
-    {
-        auto result_p = CGM_XYZ::localToLocal<L2LQUATP_POINT>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_M4);
-        auto result_d = CGM_XYZ::localToLocal<L2LQUATP_DIRECTION>(L2LQUATP_A_COORD, L2LQUATP_A_QUAT, L2LQUATP_A_P, L2LQUATP_B_BASIS_M4);
-        ASSERT_TRUE(CGM::eq(result_p, L2LQUATP_B_COORD_PT_PT, 0.0001));
-        ASSERT_TRUE(CGM::eq(result_d, L2LQUATP_B_COORD_DIR_DIR, 0.0001));
     }
 }

@@ -86,40 +86,6 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-globalToLocal(const Vector<3,T>& vector, const Basis<Base,T>& localSpace)
-{
-    if constexpr (Base == EBasisBase::Matrix3)
-    {
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            return globalToLocal<Representation>(vector, localSpace.orientationMatrix(), localSpace.position());
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            return globalToLocal(vector, localSpace.orientationMatrix());
-        }
-    }
-    else if constexpr (Base == EBasisBase::Matrix4)
-    {
-        return globalToLocal<Representation>(vector, localSpace.spaceMatrix());
-    }
-    else if constexpr (Base == EBasisBase::Quaternion)
-    {
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            return globalToLocal<Representation>(vector, localSpace.orientationQuaternion(), localSpace.position());
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            return globalToLocal(vector, localSpace.orientationQuaternion());
-        }
-    }
-}
-
 /* ####################################################################################### */
 /* Local to global */
 /* ####################################################################################### */
@@ -200,40 +166,6 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToGlobal(const Vector<3,T>& vector, const Basis<Base,T>& localSpace)
-{
-    if constexpr (Base == EBasisBase::Matrix3)
-    {
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            return localToGlobal(vector, localSpace.orientationMatrix(), localSpace.position());
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            return localToGlobal(vector, localSpace.orientationMatrix());
-        }
-    }
-    else if constexpr (Base == EBasisBase::Matrix4)
-    {
-        return localToGlobal<Representation>(vector, localSpace.spaceMatrix());
-    }
-    else if constexpr (Base == EBasisBase::Quaternion)
-    {
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            return localToGlobal<Representation>(vector, localSpace.orientationQuaternion(), localSpace.position());
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            return localToGlobal(vector, localSpace.orientationQuaternion());
-        }
-    }
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 */
 /* ####################################################################################### */
@@ -293,15 +225,6 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
     {
         return globalToLocal(localToGlobal(vector, orientationA), orientationB);
     }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Basis<Base,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
 }
 
 /* ####################################################################################### */
@@ -386,22 +309,6 @@ localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Basis<Base,T>& spaceB)
-{
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, orientationA, positionA), spaceB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
-    }
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix4 */
 /* ####################################################################################### */
@@ -463,15 +370,6 @@ localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quate
     }
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Basis<Base,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), spaceB);
-}
-
 /* ####################################################################################### */
 /* Local to local: Quaternion */
 /* ####################################################################################### */
@@ -531,15 +429,6 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
     {
         return globalToLocal(localToGlobal(vector, orientationA), orientationB);
     }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Basis<Base,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
 }
 
 /* ####################################################################################### */
@@ -622,92 +511,6 @@ localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const
     {
         return globalToLocal(localToGlobal(vector, orientationA), orientationB);
     }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Basis<Base,T>& spaceB)
-{
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, orientationA, positionA), spaceB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
-    }
-}
-
-/* ####################################################################################### */
-/* Local to local: Basis */
-/* ####################################################################################### */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB)
-{
-    return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), orientationB, positionB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Matrix<4,4,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), spaceB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quaternion<T>& orientationB)
-{
-    return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<Base,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), orientationB, positionB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, EBasisBase BaseA, EBasisBase BaseB, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-localToLocal(const Vector<3,T>& vector, const Basis<BaseA,T>& spaceA, const Basis<BaseB,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), spaceB);
 }
 
 CGM_XYZ_NAMESPACE_END

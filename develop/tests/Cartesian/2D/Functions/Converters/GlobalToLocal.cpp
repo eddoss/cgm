@@ -5,8 +5,9 @@
 #include <CGM/Modules/Core/Operators/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Basis.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -24,8 +25,6 @@ static const auto G2L2DMAT2_Y = Vector<2,double>{ -0.257534, +0.966269 };
 static const auto G2L2DMAT2_P = Vector<2,double>{ +0.220015, +0.163540 };
 static const auto G2L2DMAT2_MAT2 = CGM_XY::orientationMatrix(G2L2DMAT2_X, G2L2DMAT2_Y);
 static const auto G2L2DMAT2_MAT3 = CGM_XY::packBasis(G2L2DMAT2_X, G2L2DMAT2_Y, G2L2DMAT2_P);
-static const auto G2L2DMAT2_BASIS_M2 = CGM_XY::Basis<CGM_XY::EBasisBase::Matrix2,double>(G2L2DMAT2_MAT3);
-static const auto G2L2DMAT2_BASIS_M3 = CGM_XY::Basis<CGM_XY::EBasisBase::Matrix3,double>(G2L2DMAT2_MAT3);
 
 
 TEST(Cartesian_2D_Functions_Converters, LocalToGlobal_Mat3_Mat3)
@@ -61,24 +60,5 @@ TEST(Cartesian_2D_Functions_Converters, LocalToGlobal_Mat2_Mat3)
     {
         auto result = CGM_XY::localToGlobal<G2L2DMAT3_DIRECTION>(G2L2DMAT2_COORD, G2L2DMAT2_MAT3);
         ASSERT_TRUE(CGM::eq(result, G2L2DMAT2_EXPEC_DIR, 0.0001));
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_2D_Functions_Converters, LocalToGlobal_Mat2_Basis)
-{
-    {
-        auto result_p = CGM_XY::localToGlobal<G2L2DMAT3_POINT>(G2L2DMAT2_COORD, G2L2DMAT2_BASIS_M2);
-        auto result_d = CGM_XY::localToGlobal<G2L2DMAT3_DIRECTION>(G2L2DMAT2_COORD, G2L2DMAT2_BASIS_M2);
-        ASSERT_TRUE(CGM::eq(result_p, G2L2DMAT2_EXPEC_PT, 0.0001));
-        ASSERT_TRUE(CGM::eq(result_d, G2L2DMAT2_EXPEC_DIR, 0.0001));
-    }
-
-    {
-        auto result_p = CGM_XY::localToGlobal<G2L2DMAT3_POINT>(G2L2DMAT2_COORD, G2L2DMAT2_BASIS_M3);
-        auto result_d = CGM_XY::localToGlobal<G2L2DMAT3_DIRECTION>(G2L2DMAT2_COORD, G2L2DMAT2_BASIS_M3);
-        ASSERT_TRUE(CGM::eq(result_p, G2L2DMAT2_EXPEC_PT, 0.0001));
-        ASSERT_TRUE(CGM::eq(result_d, G2L2DMAT2_EXPEC_DIR, 0.0001));
     }
 }

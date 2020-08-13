@@ -5,8 +5,6 @@
 #include <CGM/Modules/Common.hpp>
 #include <CGM/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Core/Functions/Vector.hpp>
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
 
 

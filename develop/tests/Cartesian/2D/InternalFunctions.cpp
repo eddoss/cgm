@@ -4,7 +4,6 @@
 #include <gtest/gtest.h>
 #include <CGM/Modules/Common.hpp>
 #include <CGM/Modules/Core/Operators/Vector.hpp>
-#include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
 
