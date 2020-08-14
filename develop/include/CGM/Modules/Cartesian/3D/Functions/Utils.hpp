@@ -1,15 +1,14 @@
 #pragma once
 
 
-#include <tuple>
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
 #include <CGM/Modules/Core/Types/Quaternion.hpp>
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/ModuleGlobals.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 #include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
 
 
@@ -31,21 +30,12 @@ x(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis X axis.
- * @param axes Axes tuple to extract from.
+ * @param axes Axes struct to extract from.
  * @return X axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-x(const AxesTuple<T>& axes);
-
-/**
- * Gets basis X axis.
- * @param space Space tuple to extract from.
- * @return X axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-x(const SpaceTuple<T>& space);
+x(const Axes<T>& axes);
 
 /**
  * Gets basis X axis.
@@ -67,21 +57,12 @@ y(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Y axis.
- * @param axes Axes tuple to extract from.
+ * @param axes Axes struct to extract from.
  * @return Y axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-y(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Y axis.
- * @param space Space tuple to extract from.
- * @return Y axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-y(const SpaceTuple<T>& space);
+y(const Axes<T>& axes);
 
 /**
  * Gets basis Y axis.
@@ -103,21 +84,12 @@ z(const Matrix<S,S,T>& basis);
 
 /**
  * Gets basis Z axis.
- * @param axes Axes tuple to extract from.
+ * @param axes Axes struct to extract from.
  * @return Z axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-z(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Z axis.
- * @param space Space tuple to extract from.
- * @return Z axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-z(const SpaceTuple<T>& axes);
+z(const Axes<T>& axes);
 
 /**
  * Gets basis Z axis.
@@ -139,21 +111,12 @@ setX(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis X axis.
- * @param axes Axes tuple to set axis to.
+ * @param axes Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setX(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis X axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setX(SpaceTuple<T>& space, const Vector<3,T>& value);
+setX(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
  * Set basis Y axis.
@@ -166,21 +129,12 @@ setY(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Y axis.
- * @param axes Axes tuple to set axis to.
+ * @param axes Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setY(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis Y axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setY(SpaceTuple<T>& space, const Vector<3,T>& value);
+setY(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
  * Set basis Z axis.
@@ -193,21 +147,12 @@ setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Z axis.
- * @param space Axes tuple to set axis to.
+ * @param space Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setZ(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis Z axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setZ(SpaceTuple<T>& space, const Vector<3,T>& value);
+setZ(Axes<T>& axes, const Vector<3,T>& value);
 
 /* ####################################################################################### */
 /* Up, Right, Forward axes */
@@ -233,21 +178,12 @@ up(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Up axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Up axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-up(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Up axis.
- * @param space Space tuple to extract axis from.
- * @return Up axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-up(const SpaceTuple<T>& space);
+up(const Axes<T>& axes);
 
 /**
  * Gets basis Right axis.
@@ -269,21 +205,12 @@ right(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Right axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Right axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-right(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Right axis.
- * @param space Space tuple to extract axis from.
- * @return Right axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-right(const SpaceTuple<T>& space);
+right(const Axes<T>& axes);
 
 /**
  * Gets basis Forward axis.
@@ -305,21 +232,12 @@ forward(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Forward axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Forward axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-forward(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Forward axis.
- * @param space Space tuple to extract axis from.
- * @return Forward axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-forward(const SpaceTuple<T>& space);
+forward(const Axes<T>& axes);
 
 /* ####################################################################################### */
 /* Down, Left, backward axes */
@@ -345,21 +263,12 @@ down(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Down axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Down axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-down(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Down axis.
- * @param space Space tuple to extract axis from.
- * @return Down axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-down(const SpaceTuple<T>& space);
+down(const Axes<T>& axes);
 
 /**
  * Gets basis Left axis.
@@ -381,21 +290,12 @@ left(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Left axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Left axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-left(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Left axis.
- * @param space Space tuple to extract axis from.
- * @return Left axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-left(const SpaceTuple<T>& space);
+left(const Axes<T>& axes);
 
 /**
  * Gets basis Backward axis.
@@ -417,21 +317,12 @@ backward(const Quaternion<T>& orientation);
 
 /**
  * Gets basis Backward axis.
- * @param axes Axes tuple to extract axis from.
+ * @param axes Axes struct to extract axis from.
  * @return Backward axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-backward(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Backward axis.
- * @param space Space tuple to extract axis from.
- * @return Backward axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-backward(const SpaceTuple<T>& space);
+backward(const Axes<T>& axes);
 
 /**
  * Set basis Up axis.
@@ -444,21 +335,12 @@ setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Up axis.
- * @param axes Axes tuple to set axis to.
+ * @param axes Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setUp(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis Up axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setUp(SpaceTuple<T>& space, const Vector<3,T>& value);
+setUp(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
  * Set basis Right axis.
@@ -471,21 +353,12 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Right axis.
- * @param axes Axes tuple to set axis to.
+ * @param axes Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setRight(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis Right axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setRight(SpaceTuple<T>& space, const Vector<3,T>& value);
+setRight(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
  * Set basis Forward axis.
@@ -498,21 +371,12 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value);
 
 /**
  * Set basis Forward axis.
- * @param axes Axes tuple to set axis to.
+ * @param axes Axes struct to set axis to.
  * @param value New axis value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setForward(AxesTuple<T>& axes, const Vector<3,T>& value);
-
-/**
- * Set basis Forward axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setForward(SpaceTuple<T>& space, const Vector<3,T>& value);
+setForward(Axes<T>& axes, const Vector<3,T>& value);
 
 /* ####################################################################################### */
 /* Basis position */
@@ -527,14 +391,6 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 position(const Matrix<4,4,T>& basis);
 
 /**
- * Gets basis position.
- * @return Basis position.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-position(const SpaceTuple<T>& space);
-
-/**
  * Set basis position.
  * @param basis Basis to set position to.
  * @param value New position value.
@@ -542,15 +398,6 @@ position(const SpaceTuple<T>& space);
 template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
-
-/**
- * Set basis position.
- * @param basis Basis to set position to.
- * @param value New position value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setPosition(SpaceTuple<T>& space, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 /* Basis orientation */
@@ -603,23 +450,41 @@ template<typename T>
 constexpr void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
 
-/**
- * Set orientation axes to basis (4x4 matrix).
- * @param basis Basis to set to.
- * @param axes Orientation axes.
- */
-template<typename T>
-constexpr void
-setOrientation(Matrix<4,4,T>& basis, const AxesTuple<T>& axes);
+/* ####################################################################################### */
+/* Space matrix */
+/* ####################################################################################### */
 
 /**
- * Extracts orientation axes and set it to 'basis'.
- * @param basis Basis to set orientation to.
- * @param space Space tuple to extract orientation axes from.
+ * Creates 3D space matrix from axes and position.
+ * @param x Basis X axis.
+ * @param y Basis Y axis.
+ * @param z Basis Z axis.
+ * @param position Basis position.
+ * @return 3D space represented by 4x4 matrix.
  */
 template<typename T>
-constexpr void
-setOrientation(Matrix<4,4,T>& basis, const SpaceTuple<T>& space);
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+/**
+ * Creates 3D space matrix from orientation matrix and position.
+ * @param orientation Space orientation.
+ * @param position Space position.
+ * @return 3D basis represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+
+/**
+ * Creates 3D space matrix from Quaternion and position.
+ * @param orientation Space orientation.
+ * @param position Space position.
+ * @return 3D Space represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -5,12 +5,8 @@
 #include <CGM/Modules/Common.hpp>
 #include <CGM/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/Modules/Core/Functions/Quaternion.hpp>
-#include <CGM/Modules/Core/Operators/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
 
 
 using namespace std;

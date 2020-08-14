@@ -8,7 +8,6 @@
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
-#include <CGM/Modules/Core/Operators/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
 
@@ -146,7 +145,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesTuple)
+TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
 {
     Vector<3,int> x {1, 2, 3};
     Vector<3,int> y {4, 5, 6};
@@ -254,7 +253,7 @@ TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 {
-    CGM_XYZ::AxesTuple<double> axes
+    CGM_XYZ::Axes<double> axes
     {
         Vector<3,double> {0.559270,0.302442,-0.771846},
         Vector<3,double> {-0.313298,0.939132,0.140980},

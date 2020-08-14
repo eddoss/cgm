@@ -34,18 +34,9 @@ x(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-x(const AxesTuple<T>& axes)
+x(const Axes<T>& axes)
 {
-    return std::get<0>(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-x(const SpaceTuple<T>& axes)
-{
-    return std::get<0>(axes);
+    return axes.x;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -54,7 +45,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 x(const Quaternion<T>& orientation)
 {
-    return oriented({T(1),T(0),T(0)}, orientation);
+    return oriented({number<T>(1),zero<T>,zero<T>}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -83,18 +74,9 @@ y(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-y(const AxesTuple<T>& axes)
+y(const Axes<T>& axes)
 {
-    return std::get<1>(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-y(const SpaceTuple<T>& axes)
-{
-    return std::get<1>(axes);
+    return axes.y;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -103,7 +85,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 y(const Quaternion<T>& orientation)
 {
-    return oriented({T(0),T(1),T(0)}, orientation);
+    return oriented({zero<T>,number<T>(1),zero<T>}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -132,18 +114,9 @@ z(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-z(const AxesTuple<T>& axes)
+z(const Axes<T>& axes)
 {
-    return std::get<2>(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-z(const SpaceTuple<T>& axes)
-{
-    return std::get<2>(axes);
+    return axes.z;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -152,7 +125,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 z(const Quaternion<T>& orientation)
 {
-    return oriented({T(0),T(0),T(1)}, orientation);
+    return oriented({zero<T>,zero<T>,number<T>(1)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -176,20 +149,10 @@ setX(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setX(AxesTuple<T>& axes, const Vector<3,T>& value)
+setX(Axes<T>& axes, const Vector<3,T>& value)
 {
-    std::get<0>(axes) = value;
+    axes.x = value;
 }
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setX(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-    std::get<0>(space) = value;
-}
-
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
@@ -211,18 +174,9 @@ setY(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setY(AxesTuple<T>& axes, const Vector<3,T>& value)
+setY(Axes<T>& axes, const Vector<3,T>& value)
 {
-    std::get<1>(axes) = value;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setY(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-    std::get<1>(space) = value;
+    axes.y = value;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -246,18 +200,9 @@ setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setZ(AxesTuple<T>& axes, const Vector<3,T>& value)
+setZ(Axes<T>& axes, const Vector<3,T>& value)
 {
-    std::get<2>(axes) = value;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setZ(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-    std::get<2>(space) = value;
+    axes.z = value;
 }
 
 /* ####################################################################################### */
@@ -300,7 +245,7 @@ up(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-up(const AxesTuple<T>& axes)
+up(const Axes<T>& axes)
 {
 #ifdef CGM_CARTESIAN_UP_X
     return x(axes);
@@ -310,23 +255,6 @@ up(const AxesTuple<T>& axes)
 #endif
 #ifdef CGM_CARTESIAN_UP_Z
     return z(axes);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-up(const SpaceTuple<T>& space)
-{
-#ifdef CGM_CARTESIAN_UP_X
-    return x(space);
-#endif
-#ifdef CGM_CARTESIAN_UP_Y
-    return y(space);
-#endif
-#ifdef CGM_CARTESIAN_UP_Z
-    return z(space);
 #endif
 }
 
@@ -368,7 +296,7 @@ right(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-right(const AxesTuple<T>& axes)
+right(const Axes<T>& axes)
 {
 #ifdef CGM_CARTESIAN_RIGHT_X
     return x(axes);
@@ -378,23 +306,6 @@ right(const AxesTuple<T>& axes)
 #endif
 #ifdef CGM_CARTESIAN_RIGHT_Z
     return z(axes);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-right(const SpaceTuple<T>& space)
-{
-#ifdef CGM_CARTESIAN_RIGHT_X
-    return x(space);
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
-    return y(space);
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
-    return z(space);
 #endif
 }
 
@@ -436,7 +347,7 @@ forward(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-forward(const AxesTuple<T>& axes)
+forward(const Axes<T>& axes)
 {
 #ifdef CGM_CARTESIAN_FORWARD_X
     return x(axes);
@@ -446,23 +357,6 @@ forward(const AxesTuple<T>& axes)
 #endif
 #ifdef CGM_CARTESIAN_FORWARD_Z
     return z(axes);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-forward(const SpaceTuple<T>& space)
-{
-#ifdef CGM_CARTESIAN_FORWARD_X
-    return x(space);
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
-    return y(space);
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
-    return z(space);
 #endif
 }
 
@@ -490,18 +384,9 @@ down(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-down(const AxesTuple<T>& axes)
+down(const Axes<T>& axes)
 {
     return -up(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-down(const SpaceTuple<T>& space)
-{
-    return -up(space);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -526,18 +411,9 @@ left(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-left(const AxesTuple<T>& axes)
+left(const Axes<T>& axes)
 {
     return -right(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-left(const SpaceTuple<T>& space)
-{
-    return -right(space);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -562,18 +438,9 @@ backward(const Quaternion<T>& orientation)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-backward(const AxesTuple<T>& axes)
+backward(const Axes<T>& axes)
 {
     return -forward(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-backward(const SpaceTuple<T>& space)
-{
-    return -forward(space);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -597,7 +464,7 @@ setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setUp(AxesTuple<T>& axes, const Vector<3,T>& value)
+setUp(Axes<T>& axes, const Vector<3,T>& value)
 {
 #ifdef CGM_CARTESIAN_UP_X
     return setX(axes, value);
@@ -607,23 +474,6 @@ setUp(AxesTuple<T>& axes, const Vector<3,T>& value)
 #endif
 #ifdef CGM_CARTESIAN_UP_Z
     return setZ(axes, value);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setUp(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-#ifdef CGM_CARTESIAN_UP_X
-    return setX(space, value);
-#endif
-#ifdef CGM_CARTESIAN_UP_Y
-    return setY(space, value);
-#endif
-#ifdef CGM_CARTESIAN_UP_Z
-    return setZ(space, value);
 #endif
 }
 
@@ -648,7 +498,7 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setRight(AxesTuple<T>& axes, const Vector<3,T>& value)
+setRight(Axes<T>& axes, const Vector<3,T>& value)
 {
 #ifdef CGM_CARTESIAN_RIGHT_X
     return setX(axes, value);
@@ -658,23 +508,6 @@ setRight(AxesTuple<T>& axes, const Vector<3,T>& value)
 #endif
 #ifdef CGM_CARTESIAN_RIGHT_Z
     return setZ(axes, value);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setRight(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-#ifdef CGM_CARTESIAN_RIGHT_X
-    return setX(space, value);
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
-    return setY(space, value);
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
-    return setZ(space, value);
 #endif
 }
 
@@ -699,7 +532,7 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-setForward(AxesTuple<T>& axes, const Vector<3,T>& value)
+setForward(Axes<T>& axes, const Vector<3,T>& value)
 {
 #ifdef CGM_CARTESIAN_FORWARD_X
     return setX(axes, value);
@@ -709,23 +542,6 @@ setForward(AxesTuple<T>& axes, const Vector<3,T>& value)
 #endif
 #ifdef CGM_CARTESIAN_FORWARD_Z
     return setZ(axes, value);
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-setForward(SpaceTuple<T>& space, const Vector<3,T>& value)
-{
-#ifdef CGM_CARTESIAN_FORWARD_X
-    return setX(space, value);
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
-    return setY(space, value);
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
-    return setZ(space, value);
 #endif
 }
 
@@ -756,15 +572,6 @@ position(const Matrix<4,4,T>& basis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-position(const SpaceTuple<T>& space)
-{
-    return std::get<3>(space);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
 {
@@ -777,15 +584,6 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
     basis(3,1) = position.y;
     basis(3,2) = position.z;
 #endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setPosition(SpaceTuple<T>& space, const Vector<3,T>& position)
-{
-    std::get<3>(space) = position;
 }
 
 /* ####################################################################################### */
@@ -860,26 +658,71 @@ setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other)
     basis(2,2) = other(2,2);
 }
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+/* Space matrix */
+/* ####################################################################################### */
 
 template<typename T>
-constexpr void
-setOrientation(Matrix<4,4,T>& basis, const AxesTuple<T>& axes)
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
 {
-    setX(basis, x(axes));
-    setY(basis, y(axes));
-    setZ(basis, z(axes));
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        x.x, x.y, x.z, position.x,
+        y.x, y.y, y.z, position.y,
+        z.x, z.y, z.z, position.z,
+        zero<T>, zero<T>, zero<T>, number<T>(1)
+    };
+#else
+    return
+    {
+        x.x, y.x, z.x, zero<T>,
+        x.y, y.y, z.y, zero<T>,
+        x.z, y.z, z.z, zero<T>,
+        position.x, position.y, position.z, number<T>(1)
+    };
+#endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
-setOrientation(Matrix<4,4,T>& basis, const SpaceTuple<T>& space)
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
-    setX(basis, x(space));
-    setY(basis, y(space));
-    setZ(basis, z(space));
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        orientation(0,0), orientation(0,1), orientation(0,2), position.x,
+        orientation(1,0), orientation(1,1), orientation(1,2), position.y,
+        orientation(2,0), orientation(2,1), orientation(2,2), position.z,
+        zero<T>, zero<T>, zero<T>, number<T>(1)
+    };
+#else
+    return
+    {
+        orientation(0,0), orientation(0,1), orientation(0,2), zero<T>,
+        orientation(1,0), orientation(1,1), orientation(1,2), zero<T>,
+        orientation(2,0), orientation(2,1), orientation(2,2), zero<T>,
+        position.x, position.y, position.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position)
+{
+    return spaceMatrix
+    (
+        oriented({number<T>(1),zero<T>,zero<T>}, orientation),
+        oriented({zero<T>,number<T>(1),zero<T>}, orientation),
+        oriented({zero<T>,zero<T>,number<T>(1)}, orientation),
+        position
+    );
 }
 
 CGM_XYZ_NAMESPACE_END

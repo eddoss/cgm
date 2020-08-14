@@ -17,7 +17,7 @@
  * @param B Pivot to compare with.
  * @return true if the pivots are equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
 
@@ -27,7 +27,7 @@ operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
  * @param B Pivot to compare with.
  * @return true if the pivots are not equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
 
@@ -41,7 +41,7 @@ operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
  * @param B Transforms to compare with.
  * @return true if the transforms are equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B);
 
@@ -51,7 +51,7 @@ operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  * @param B Transforms to compare with.
  * @return true if the transforms are not equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B);
 
@@ -65,7 +65,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  * @param B Axis to compare with.
  * @return true if the axis are equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator == (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
 
@@ -75,9 +75,9 @@ operator == (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
  * @param B Axis to compare with.
  * @return true if the axis are not equal, false otherwise.
  */
-template<size_t D, typename T>
+template<typename T>
 constexpr bool
 operator != (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
 
 
-#include <private/CGM/XForm/Operators.hpp>
+#include <CGM/detail/Modules/Transformations/3D/>

@@ -5,8 +5,9 @@
 #include <CGM/Modules/Core/Operators/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Basis.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -123,44 +124,5 @@ TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_QuatWithPos)
         auto expect = Vector<3,double> {+1.103751, +1.325136, +3.814793};
 
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_3D_Functions_Converters, LocalToGlobal_Basis)
-{
-    constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
-    constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
-
-    auto x = Vector<3,double>{ +0.559270, +0.302442, -0.77184 };
-    auto y = Vector<3,double>{ -0.313298, +0.939132, +0.14098 };
-    auto z = Vector<3,double>{ +0.767503, +0.162971, +0.61998 };
-    auto p = Vector<3,double>{ -1.200000, -0.600000, +4.40000 };
-    auto q = Quaternion<double>{ -0.006227, 0.435855, 0.174342, 0.882948 };
-
-    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
-    auto expectPoint = Vector<3,double>{ -0.096249, +0.725136, +8.214793 };
-    auto expectDirection = Vector<3,double>{ +1.103751, +1.325136, +3.814793 };
-
-    {
-        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix3,double> basis(x,y,z,p);
-
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
-    }
-
-    {
-        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Matrix3,double> basis(x,y,z,p);
-
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
-    }
-
-    {
-        CGM_XYZ::Basis<CGM_XYZ::EBasisBase::Quaternion,double> basis(q,p);
-
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<POINT>(coord, basis), expectPoint, 0.0001));
-        ASSERT_TRUE(CGM::eq(CGM_XYZ::localToGlobal<DIRECTION>(coord, basis), expectDirection, 0.0001));
     }
 }

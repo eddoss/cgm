@@ -11,39 +11,26 @@ CGM_XY_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Vector<2,T>& x, const Vector<2,T>& y)
 {
-    return std::make_tuple(x,y);
+    return Axes<T>(x,y);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
-orientationAxes(const SpaceTuple<T>& space)
-{
-    return std::make_tuple
-    (
-        x(space),
-        y(space)
-    );
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<2,2,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<2,T>{orientation(0,0), orientation(0,1)},
         Vector<2,T>{orientation(1,0), orientation(1,1)}
     );
 #else
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<2,T>{orientation(0,0), orientation(1,0)},
         Vector<2,T>{orientation(0,1), orientation(1,1)}
@@ -54,17 +41,17 @@ orientationAxes(const Matrix<2,2,T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& space)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<2,T>{space(0,0), space(0,1)},
         Vector<2,T>{space(1,0), space(1,1)}
     );
 #else
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<2,T>{space(0,0), space(1,0)},
         Vector<2,T>{space(0,1), space(1,1)}
@@ -99,25 +86,12 @@ orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const AxesTuple<T>& axes)
+orientationMatrix(const Axes<T>& axes)
 {
     return orientationMatrix
     (
         x(axes),
         y(axes)
-    );
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const SpaceTuple<T>& space)
-{
-    return orientationMatrix
-    (
-        x(space),
-        y(space)
     );
 }
 

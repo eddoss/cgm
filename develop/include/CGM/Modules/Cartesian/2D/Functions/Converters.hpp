@@ -7,7 +7,6 @@
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Cartesian/Common.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Basis.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
 
 
@@ -55,18 +54,6 @@ template<EVectorRepresentation Representation=EVectorRepresentation::Point, type
 constexpr CGM_FORCEINLINE Vector<2,T>
 globalToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
 
-/**
- * Translates 2D vector from global space to local space. The "physically"
- * position of the vector does not change, only recalculation to the local
- * system occurs.
- * @param vector Vector in global space.
- * @param localSpace Local space to convert to.
- * @return Vector converted to local space.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-globalToLocal(const Vector<2,T>& vector, const Basis<Base,T>& localSpace);
-
 /* ####################################################################################### */
 /* Local to global */
 /* ####################################################################################### */
@@ -107,18 +94,6 @@ localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const
 template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr Vector<2,T>
 localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace);
-
-/**
- * Translates 2D vector from local space to global space. The "physically"
- * position of the vector does not change, only recalculation to the global
- * system occurs.
- * @param vector Vector in local space.
- * @param localSpace Local space to convert from.
- * @return Converted to global space vector.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToGlobal(const Vector<2,T>& vector, const Basis<Base,T>& localSpace);
 
 /* ####################################################################################### */
 /* Local to local: Matrix2 */
@@ -163,19 +138,6 @@ localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const
 template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param orientationA Orientation of A space.
- * @param spaceB Basis of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Basis<Base,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix2 with Position */
@@ -224,20 +186,6 @@ template<EVectorRepresentation Representation=EVectorRepresentation::Point, type
 constexpr CGM_FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB);
 
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param spaceB Basis of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Basis<Base,T>& spaceB);
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 */
 /* ####################################################################################### */
@@ -281,76 +229,6 @@ localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matri
 template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param spaceA Basis of A space.
- * @param spaceB Basis of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Basis<Base,T>& spaceB);
-
-/* ####################################################################################### */
-/* Local to local: Basis */
-/* ####################################################################################### */
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Basis<Base,T>& spaceA, const Matrix<2,2,T>& orientationB);
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Basis<Base,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param spaceA Basis of A space.
- * @param spaceB 2x2 matrix of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Basis<Base,T>& spaceA, const Matrix<3,3,T>& spaceB);
-
-/**
- * Translates 3D vector from space A to space B (A and B are in one space).
- * The "physically" position of the vector does not change, only recalculation
- * to the B system occurs.
- * @param vector Vector in A space.
- * @param spaceA Basis of A space.
- * @param spaceB Basis of B space.
- * @return Converted vector from space A to B.
- */
-template<EVectorRepresentation Representation=EVectorRepresentation::Point, EBasisBase BaseA, EBasisBase BaseB, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Basis<BaseA,T>& spaceA, const Basis<BaseB,T>& spaceB);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
