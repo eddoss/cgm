@@ -50,28 +50,5 @@ packBasis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
 #endif
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE SpaceTuple<T>
-unpackBasis(const Matrix<3,3,T>& matrix)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return std::make_tuple
-    (
-        Vector<2,T>{matrix(0,0), matrix(0,1)},
-        Vector<2,T>{matrix(1,0), matrix(1,1)},
-        Vector<2,T>{matrix(0,2), matrix(1,2)}
-    );
-#else
-    return std::make_tuple
-    (
-        Vector<2,T>{matrix(0,0), matrix(1,0)},
-        Vector<2,T>{matrix(0,1), matrix(1,1)},
-        Vector<2,T>{matrix(2,0), matrix(2,1)}
-    );
-#endif
-}
-
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

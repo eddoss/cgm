@@ -822,20 +822,20 @@ operator!=(const CGM::Vector<D,T>& vector, T scalar)
 {
     if constexpr (D == 2)
     {
-        return  CGM::neq(vector.x, scalar) &&
+        return  CGM::neq(vector.x, scalar) ||
                 CGM::neq(vector.y, scalar);
     }
     else if constexpr (D == 3)
     {
-        return  CGM::neq(vector.x, scalar) &&
-                CGM::neq(vector.y, scalar) &&
+        return  CGM::neq(vector.x, scalar) ||
+                CGM::neq(vector.y, scalar) ||
                 CGM::neq(vector.z, scalar);
     }
     else if constexpr (D == 4)
     {
-        return  CGM::neq(vector.x, scalar) &&
-                CGM::neq(vector.y, scalar) &&
-                CGM::neq(vector.z, scalar) &&
+        return  CGM::neq(vector.x, scalar) ||
+                CGM::neq(vector.y, scalar) ||
+                CGM::neq(vector.z, scalar) ||
                 CGM::neq(vector.w, scalar);
     }
     else

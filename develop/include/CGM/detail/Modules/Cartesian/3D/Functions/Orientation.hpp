@@ -11,41 +11,27 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
-    return std::make_tuple(x,y,z);
+    return Axes<T>(x,y,z);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
-orientationAxes(const SpaceTuple<T>& space)
-{
-    return std::make_tuple
-    (
-        x(space),
-        y(space),
-        z(space)
-    );
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<3,T>{orientation(0,0), orientation(0,1), orientation(0,2)},
         Vector<3,T>{orientation(1,0), orientation(1,1), orientation(1,2)},
         Vector<3,T>{orientation(2,0), orientation(2,1), orientation(2,2)}
     );
 #else
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<3,T>{orientation(0,0), orientation(1,0), orientation(2,0)},
         Vector<3,T>{orientation(0,1), orientation(1,1), orientation(2,1)},
@@ -57,10 +43,10 @@ orientationAxes(const Matrix<3,3,T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Quaternion<T>& orientation)
 {
-    return std::make_tuple
+    return Axes<T>
     (
         oriented({T(1),T(0),T(0)}, orientation),
         oriented({T(0),T(1),T(0)}, orientation),
@@ -71,18 +57,18 @@ orientationAxes(const Quaternion<T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<4,4,T>& space)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<3,T>{space(0,0), space(0,1), space(0,2)},
         Vector<3,T>{space(1,0), space(1,1), space(1,2)},
         Vector<3,T>{space(2,0), space(2,1), space(2,2)}
     );
 #else
-    return std::make_tuple
+    return Axes<T>
     (
         Vector<3,T>{space(0,0), space(1,0), space(2,0)},
         Vector<3,T>{space(0,1), space(1,1), space(2,1)},
@@ -120,27 +106,13 @@ orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>&
 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const AxesTuple<T>& axes)
+orientationMatrix(const Axes<T>& axes)
 {
     return orientationMatrix
     (
-        x(axes),
-        y(axes),
-        z(axes)
-    );
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const SpaceTuple<T>& space)
-{
-    return orientationMatrix
-    (
-        x(space),
-        y(space),
-        z(space)
+        axes.x,
+        axes.y,
+        axes.z
     );
 }
 
@@ -212,27 +184,13 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
 
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const AxesTuple<T>& axes)
+orientationQuaternion(const Axes<T>& axes)
 {
     return orientationQuaternion
     (
-        x(axes),
-        y(axes),
-        z(axes)
-    );
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const SpaceTuple<T>& space)
-{
-    return orientationQuaternion
-    (
-        x(space),
-        y(space),
-        z(space)
+        axes.x,
+        axes.y,
+        axes.z
     );
 }
 

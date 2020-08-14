@@ -3,17 +3,13 @@
 
 #include <iomanip>
 #include <iostream>
+#include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::AxesTuple<T>& axes);
-
-template <typename T>
-constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::SpaceTuple<T>& space);
+operator << (std::ostream& stream, const CGM_XYZ::Axes<T>& axes);
 
 constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XYZ::EAxes axis);

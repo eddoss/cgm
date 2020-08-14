@@ -5,10 +5,10 @@
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Cartesian/2D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Typedefs.hpp>
+#include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -25,17 +25,8 @@ CGM_XY_NAMESPACE_BEGIN
  * @return Tuple of axes.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Vector<2,T>& x, const Vector<2,T>& y);
-
-/**
- * Extract orientation axes from Space tuple.
- * @param space Space tuple.
- * @return Tuple of orientation axes.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
-orientationAxes(const SpaceTuple<T>& space);
 
 /**
  * Make axes tuple from 2x2 orientation matrix.
@@ -43,7 +34,7 @@ orientationAxes(const SpaceTuple<T>& space);
  * @return Tuple of axes.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<2,2,T>& orientation);
 
 /**
@@ -52,7 +43,7 @@ orientationAxes(const Matrix<2,2,T>& orientation);
  * @return Tuple of axes.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
@@ -75,7 +66,7 @@ orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const AxesTuple<T>& axes);
+orientationMatrix(const Axes<T>& axes);
 
 /**
  * Extract orientation matrix from Space tuple.
@@ -84,7 +75,7 @@ orientationMatrix(const AxesTuple<T>& axes);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const SpaceTuple<T>& space);
+orientationMatrix(const Axes<T>& space);
 
 /**
  * Extract 2x2 orientation matrix from 3x3 space matrix.

@@ -5,7 +5,6 @@
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Typedefs.hpp>
 #include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 
 
@@ -32,15 +31,6 @@ packBasis(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& positio
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 packBasis(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
-
-/**
- * Unpack 3x3 matrix to X,Y axes and position.
- * @param matrix Matrix to unpack.
- * @return Tuple of space orientation axes and space position.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE SpaceTuple<T>
-unpackBasis(const Matrix<3,3,T>& matrix);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -5,49 +5,17 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::AxesTuple<T>& axes)
+operator << (std::ostream& stream, const CGM_XYZ::Axes<T>& axes)
 {
     std::ios_base::fmtflags old_flags {stream.flags()};
 
     stream.setf(std::ios::showpos);
-    stream << "CGM::XYZ::AxesTuple<" << typeid(T).name() << ">\n{";
+    stream << "CGM::XYZ::Axes<" << typeid(T).name() << ">\n{";
     stream << std::fixed << std::left << std::setprecision(6);
 
-    const auto& x = std::get<0>(axes);
-    const auto& y = std::get<1>(axes);
-    const auto& z = std::get<2>(axes);
-
-    stream << "\n    X " << x.x << " " << x.y << " " << x.z;
-    stream << "\n    Y " << y.x << " " << y.y << " " << y.z;
-    stream << "\n    Z " << z.x << " " << z.y << " " << z.z;
-
-    stream << "\n}";
-    stream.setf(old_flags);
-
-    return stream;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <typename T>
-constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::SpaceTuple<T>& space)
-{
-    std::ios_base::fmtflags old_flags {stream.flags()};
-
-    stream.setf(std::ios::showpos);
-    stream << "CGM::XYZ::SpaceTuple<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
-    const auto& x = std::get<0>(space);
-    const auto& y = std::get<1>(space);
-    const auto& z = std::get<2>(space);
-    const auto& p = std::get<3>(space);
-
-    stream << "\n    X " << x.x << " " << x.y << " " << x.z;
-    stream << "\n    Y " << y.x << " " << y.y << " " << y.z;
-    stream << "\n    Z " << z.x << " " << z.y << " " << z.z;
-    stream << "\n    P " << p.x << " " << p.y << " " << p.z;
+    stream << "\n    X " << axes.x.x << " " << axes.x.y << " " << axes.x.z;
+    stream << "\n    Y " << axes.y.x << " " << axes.y.y << " " << axes.y.z;
+    stream << "\n    Z " << axes.z.x << " " << axes.z.y << " " << axes.z.z;
 
     stream << "\n}";
     stream.setf(old_flags);

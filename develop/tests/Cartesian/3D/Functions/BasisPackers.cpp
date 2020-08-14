@@ -113,35 +113,3 @@ TEST(Cartesian_3D_Functions_BasisPackers, FromQuaternionAndPosition)
 
     ASSERT_TRUE(CGM::eq(result, expec, 0.0001));
 }
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_3D_Functions_BasisPackers, Unpack)
-{
-    Matrix<4,4,int> basis
-    {
-        2,1,3,1,
-        4,3,6,2,
-        7,9,2,3,
-        0,0,0,1
-    };
-
-    auto [x,y,z,p] = CGM_XYZ::unpackBasis(basis);
-
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    Vector<3,int> expec_x {2,1,3};
-    Vector<3,int> expec_y {4,3,6};
-    Vector<3,int> expec_z {7,9,2};
-    Vector<3,int> expec_p {1,2,3};
-#else
-    Vector<3,int> expec_x {2,4,7};
-    Vector<3,int> expec_y {1,3,9};
-    Vector<3,int> expec_z {3,6,2};
-    Vector<3,int> expec_p {0,0,0};
-#endif
-
-    ASSERT_TRUE(x == expec_x);
-    ASSERT_TRUE(y == expec_y);
-    ASSERT_TRUE(z == expec_z);
-    ASSERT_TRUE(p == expec_p);
-}

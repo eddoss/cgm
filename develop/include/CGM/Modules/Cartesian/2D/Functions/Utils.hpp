@@ -5,9 +5,9 @@
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
+#include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/2D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Typedefs.hpp>
+#include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
 
 
@@ -34,16 +34,7 @@ x(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-x(const AxesTuple<T>& axes);
-
-/**
- * Gets basis X axis.
- * @param space Space tuple to extract from.
- * @return X axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-x(const SpaceTuple<T>& axes);
+x(const Axes<T>& axes);
 
 /**
  * Gets basis Y axis.
@@ -61,16 +52,7 @@ y(const Matrix<S,S,T>& basis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-y(const AxesTuple<T>& axes);
-
-/**
- * Gets basis Y axis.
- * @param space Space tuple to extract from.
- * @return Y axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-y(const SpaceTuple<T>& axes);
+y(const Axes<T>& axes);
 
 /**
  * Set basis X axis.
@@ -88,16 +70,7 @@ setX(Matrix<S,S,T>& basis, const Vector<2,T>& value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setX(AxesTuple<T>& axes, const Vector<2,T>& value);
-
-/**
- * Set basis X axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setX(SpaceTuple<T>& space, const Vector<2,T>& value);
+setX(Axes<T>& axes, const Vector<2,T>& value);
 
 /**
  * Set basis Y axis.
@@ -115,16 +88,7 @@ setY(Matrix<S,S,T>& basis, const Vector<2,T>& value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setY(AxesTuple<T>& axes, const Vector<2,T>& value);
-
-/**
- * Set basis Y axis.
- * @param space Space tuple to set axis to.
- * @param value New axis value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setY(SpaceTuple<T>& space, const Vector<2,T>& value);
+setY(Axes<T>& axes, const Vector<2,T>& value);
 
 /* ####################################################################################### */
 /* Basis position */
@@ -139,14 +103,6 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 position(const Matrix<3,3,T>& basis);
 
 /**
- * Gets basis position.
- * @return Basis position.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-position(const SpaceTuple<T>& space);
-
-/**
  * Set basis position.
  * @param basis Basis to set position to.
  * @param value New position value.
@@ -154,15 +110,6 @@ position(const SpaceTuple<T>& space);
 template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position);
-
-/**
- * Set basis position.
- * @param basis Basis to set position to.
- * @param value New position value.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setPosition(SpaceTuple<T>& space, const Vector<2,T>& position);
 
 /* ####################################################################################### */
 /* Basis orientation */
@@ -212,16 +159,7 @@ setOrientation(Matrix<3,3,T>& basis, const Matrix<3,3,T>& other);
  */
 template<typename T>
 constexpr void
-setOrientation(Matrix<3,3,T>& basis, const AxesTuple<T>& axes);
-
-/**
- * Extracts orientation axes and set it to 'basis'.
- * @param basis Basis to set orientation to.
- * @param space Space tuple to extract orientation axes from.
- */
-template<typename T>
-constexpr void
-setOrientation(Matrix<3,3,T>& basis, const SpaceTuple<T>& space);
+setOrientation(Matrix<3,3,T>& basis, const Axes<T>& axes);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

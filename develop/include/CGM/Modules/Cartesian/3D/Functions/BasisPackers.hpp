@@ -45,15 +45,6 @@ template<typename T>
 constexpr Matrix<4,4,T>
 packBasis(const Quaternion<T>& orientation, const Vector<3,T>& position);
 
-/**
- * Unpack 4x4 matrix to X,Y,Z axes and position.
- * @param matrix Matrix to unpack.
- * @return Tuple of space orientation axes and space position.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE SpaceTuple<T>
-unpackBasis(const Matrix<4,4,T>& matrix);
-
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 

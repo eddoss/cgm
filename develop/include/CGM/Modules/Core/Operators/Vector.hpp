@@ -28,7 +28,7 @@ operator--(CGM::Vector<D,T>& vector);
 /**
  * Increase all components of vector by 1 and returns unchanged copy of it.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr CGM::Vector<D,T>
 operator++(CGM::Vector<D,T>& vector, int);
 
@@ -69,7 +69,7 @@ operator+=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
  * @param B Right vector.
  * @return New copy of the result vector.
  */
-template<size_t D, typename T=FLOAT>
+template<size_t D, typename T>
 constexpr CGM::Vector<D,T>
 operator+(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 

@@ -70,31 +70,3 @@ TEST(Cartesian_2D_Functions_BasisPackers, Matrix2)
 
     ASSERT_TRUE(basis == expec);
 }
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_2D_Functions_BasisPackers, UnpackSpace)
-{
-    Matrix<3,3,int> basis
-    {
-        2,1,3,
-        4,3,6,
-        0,0,1
-    };
-
-    auto [x,y,p] = CGM_XY::unpackBasis(basis);
-
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    Vector<2,int> expec_x {2,1};
-    Vector<2,int> expec_y {4,3};
-    Vector<2,int> expec_p {3,6};
-#else
-    Vector<2,int> expec_x {2,4};
-    Vector<2,int> expec_y {1,3};
-    Vector<2,int> expec_p {0,0};
-#endif
-
-    ASSERT_TRUE(x == expec_x);
-    ASSERT_TRUE(y == expec_y);
-    ASSERT_TRUE(p == expec_p);
-}

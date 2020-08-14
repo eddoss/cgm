@@ -32,18 +32,9 @@ x(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-x(const AxesTuple<T>& axes)
+x(const Axes<T>& axes)
 {
-    return std::get<0>(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-x(const SpaceTuple<T>& axes)
-{
-    return std::get<0>(axes);
+    return axes.x;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -70,18 +61,9 @@ y(const Matrix<S,S,T>& basis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-y(const AxesTuple<T>& axes)
+y(const Axes<T>& axes)
 {
-    return std::get<1>(axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-y(const SpaceTuple<T>& axes)
-{
-    return std::get<1>(axes);
+    return axes.y;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -103,18 +85,9 @@ setX(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setX(AxesTuple<T>& axes, const Vector<2,T>& value)
+setX(Axes<T>& axes, const Vector<2,T>& value)
 {
-    std::get<0>(axes) = value;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setX(SpaceTuple<T>& space, const Vector<2,T>& value)
-{
-    std::get<0>(space) = value;
+    axes.x = value;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -136,18 +109,9 @@ setY(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-setY(AxesTuple<T>& axes, const Vector<2,T>& value)
+setY(Axes<T>& axes, const Vector<2,T>& value)
 {
-    std::get<1>(axes) = value;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setY(SpaceTuple<T>& space, const Vector<2,T>& value)
-{
-    std::get<1>(space) = value;
+    axes.y = value;
 }
 
 /* ####################################################################################### */
@@ -175,15 +139,6 @@ position(const Matrix<3,3,T>& basis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-position(const SpaceTuple<T>& space)
-{
-    return std::get<3>(space);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 {
@@ -194,15 +149,6 @@ setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
     basis(2,0) = position.x;
     basis(2,1) = position.y;
 #endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-setPosition(SpaceTuple<T>& space, const Vector<2,T>& position)
-{
-    std::get<3>(space) = position;
 }
 
 /* ####################################################################################### */
@@ -258,20 +204,10 @@ setOrientation(Matrix<3,3,T>& basis, const Matrix<3,3,T>& other)
 
 template<typename T>
 constexpr void
-setOrientation(Matrix<3,3,T>& basis, const AxesTuple<T>& axes)
+setOrientation(Matrix<3,3,T>& basis, const Axes<T>& axes)
 {
     setX(basis, x(axes));
     setY(basis, y(axes));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr void
-setOrientation(Matrix<3,3,T>& basis, const SpaceTuple<T>& space)
-{
-    setX(basis, x(space));
-    setY(basis, y(space));
 }
 
 CGM_XY_NAMESPACE_END

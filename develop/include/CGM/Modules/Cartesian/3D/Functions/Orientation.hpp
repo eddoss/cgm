@@ -1,15 +1,14 @@
 #pragma once
 
 
-#include <tuple>
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
 #include <CGM/Modules/Core/Types/Quaternion.hpp>
-#include <CGM/Modules/Cartesian/3D/ModuleGlobals.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/3D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -20,50 +19,41 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Make axes tuple from X,Y,Z.
+ * Make axes struct from X,Y,Z.
  * @param x X axis.
  * @param y Y axis.
  * @param z Z axis.
- * @return Tuple of axes.
+ * @return Axes struct.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
 /**
- * Extract orientation axes from Space tuple.
- * @param space Space tuple.
- * @return Tuple of orientation axes.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
-orientationAxes(const SpaceTuple<T>& space);
-
-/**
- * Make axes tuple from 3x3 orientation matrix.
+ * Make axes struct from 3x3 orientation matrix.
  * @param orientation 3x3 orientation matrix to extract axes from.
- * @return Tuple of axes.
+ * @return Axes struct.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& orientation);
 
 /**
- * Make axes tuple from orientation quaternion.
+ * Make axes struct from orientation quaternion.
  * @param orientation Orientation quaternion to extract axes from.
- * @return Tuple of axes.
+ * @return Axes struct.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Quaternion<T>& orientation);
 
 /**
- * Make axes tuple from space.
+ * Make axes struct from space.
  * @param space Space to extract axes from.
- * @return Tuple of axes.
+ * @return Axes struct.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE AxesTuple<T>
+constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
@@ -86,16 +76,7 @@ orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>&
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const AxesTuple<T>& axes);
-
-/**
- * Extract orientation matrix from Space tuple.
- * @param space Space tuple.
- * @return Tuple of orientation axes.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const SpaceTuple<T>& space);
+orientationMatrix(const Axes<T>& axes);
 
 /**
  * Convert orientation quaternion to 3x3 orientation matrix.
@@ -137,16 +118,7 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const AxesTuple<T>& axes);
-
-/**
- * Extract orientation matrix from Space tuple.
- * @param space Space tuple.
- * @return Tuple of orientation axes.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const SpaceTuple<T>& space);
+orientationQuaternion(const Axes<T>& axes);
 
 /**
  * Convert 3x3 orientation matrix to orientation quaternion.
