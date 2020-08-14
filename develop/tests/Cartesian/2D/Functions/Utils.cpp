@@ -282,3 +282,66 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
         ASSERT_TRUE(mat == expec);
     }
 }
+
+/* ####################################################################################### */
+/* Space matrix */
+/* ####################################################################################### */
+
+TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromAxes)
+{
+    Vector<2,int> X {2,1};
+    Vector<2,int> Y {4,3};
+    Vector<2,int> P {1,2};
+
+    auto basis = CGM_XY::spaceMatrix(X,Y,P);
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    Matrix<3,3,int> expec
+    {
+        2,1,1,
+        4,3,2,
+        0,0,1
+    };
+#else
+    Matrix<3,3,int> expec
+    {
+        2,4,0,
+        1,3,0,
+        1,2,1
+    };
+#endif
+
+    ASSERT_TRUE(basis == expec);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromMatrixAndPosition)
+{
+    Vector<2,int> position {5,1};
+    Matrix<2,2,int> orientation
+    {
+        2,1,
+        4,3
+    };
+
+    auto basis = CGM_XY::spaceMatrix(orientation, position);
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    Matrix<3,3,int> expec
+    {
+        2,1,5,
+        4,3,1,
+        0,0,1
+    };
+#else
+    Matrix<3,3,int> expec
+    {
+        2,1,0,
+        4,3,0,
+        5,1,1
+    };
+#endif
+
+    ASSERT_TRUE(basis == expec);
+}

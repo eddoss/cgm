@@ -7,7 +7,6 @@
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Converters.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -24,7 +23,7 @@ static const auto G2L2DMAT2_X = Vector<2,double>{ +0.966269, +0.257534 };
 static const auto G2L2DMAT2_Y = Vector<2,double>{ -0.257534, +0.966269 };
 static const auto G2L2DMAT2_P = Vector<2,double>{ +0.220015, +0.163540 };
 static const auto G2L2DMAT2_MAT2 = CGM_XY::orientationMatrix(G2L2DMAT2_X, G2L2DMAT2_Y);
-static const auto G2L2DMAT2_MAT3 = CGM_XY::packBasis(G2L2DMAT2_X, G2L2DMAT2_Y, G2L2DMAT2_P);
+static const auto G2L2DMAT2_MAT3 = CGM_XY::spaceMatrix(G2L2DMAT2_X, G2L2DMAT2_Y, G2L2DMAT2_P);
 
 
 TEST(Cartesian_2D_Functions_Converters, LocalToGlobal_Mat3_Mat3)

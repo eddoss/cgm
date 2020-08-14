@@ -450,6 +450,42 @@ template<typename T>
 constexpr void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
 
+/* ####################################################################################### */
+/* Space matrix */
+/* ####################################################################################### */
+
+/**
+ * Creates 3D space matrix from axes and position.
+ * @param x Basis X axis.
+ * @param y Basis Y axis.
+ * @param z Basis Z axis.
+ * @param position Basis position.
+ * @return 3D space represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+/**
+ * Creates 3D space matrix from orientation matrix and position.
+ * @param orientation Space orientation.
+ * @param position Space position.
+ * @return 3D basis represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+
+/**
+ * Creates 3D space matrix from Quaternion and position.
+ * @param orientation Space orientation.
+ * @param position Space position.
+ * @return 3D Space represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 

@@ -161,6 +161,27 @@ template<typename T>
 constexpr void
 setOrientation(Matrix<3,3,T>& basis, const Axes<T>& axes);
 
+/**
+ * Creates 2D space matrix from axes and position.
+ * @param x Basis X axis.
+ * @param y Basis Y axis.
+ * @param position Basis position.
+ * @return 2D space represented by 3x3 matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+spaceMatrix(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
+
+/**
+ * Creates 2D space matrix from orientation matrix and position.
+ * @param orientation Space orientation.
+ * @param position Space position.
+ * @return 2D space represented by 3x3 matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+spaceMatrix(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
+
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
 

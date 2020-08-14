@@ -89,7 +89,6 @@ cgm_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
 
 set(TS_CARTESIAN_2D
     Cartesian/2D/Functions/Axes.cpp
-    Cartesian/2D/Functions/BasisPackers.cpp
     Cartesian/2D/Functions/Utils.cpp
     Cartesian/2D/Functions/Orientation.cpp
     Cartesian/2D/InternalFunctions.cpp
@@ -103,7 +102,6 @@ set(TS_CARTESIAN_2D
 set(TS_CARTESIAN_3D
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/Utils.cpp
-    Cartesian/3D/Functions/BasisPackers.cpp
     Cartesian/3D/Functions/Orientation.cpp
     Cartesian/3D/Functions/Converters/GlobalToLocal.cpp
     Cartesian/3D/Functions/Converters/LocalToGlobal.cpp
