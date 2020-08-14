@@ -182,6 +182,15 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 spaceMatrix(const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
+/**
+ * Unpack 3x3 space matrix.
+ * @param space 3x3 space matrix.
+ * @return tuple of X, Y axes and position of space.
+ */
+template<typename T>
+constexpr std::tuple<Vector<2,T>, Vector<2,T>, Vector<2,T>>
+unpackSpace(const Matrix<3,3,T>& space);
+
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
 

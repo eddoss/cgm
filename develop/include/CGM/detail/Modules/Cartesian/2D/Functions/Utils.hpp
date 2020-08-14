@@ -258,5 +258,19 @@ spaceMatrix(const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr std::tuple<Vector<2,T>, Vector<2,T>, Vector<2,T>>
+unpackSpace(const Matrix<3,3,T>& space)
+{
+    return std::make_tuple
+    (
+        x(space),
+        y(space),
+        position(space)
+    );
+}
+
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

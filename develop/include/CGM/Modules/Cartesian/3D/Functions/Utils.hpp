@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <tuple>
 #include <type_traits>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
@@ -485,6 +486,15 @@ spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 template<typename T>
 constexpr Matrix<4,4,T>
 spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position);
+
+/**
+ * Unpack 4x4 space matrix.
+ * @param space 4x4 space matrix.
+ * @return tuple of X, Y, Z axes and position of space.
+ */
+template<typename T>
+constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
+unpackSpace(const Matrix<4,4,T>& space);
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

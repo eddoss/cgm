@@ -725,5 +725,20 @@ spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position)
     );
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
+unpackSpace(const Matrix<4,4,T>& space)
+{
+    return std::make_tuple
+    (
+        x(space),
+        y(space),
+        z(space),
+        position(space)
+    );
+}
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
