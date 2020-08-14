@@ -29,15 +29,15 @@ template<typename T>
 constexpr void
 refract(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal, T ior)
 {
-    auto [x,y,z] = orientationAxes(matrix);
+    auto axes = orientationAxes(matrix);
 
-    refract(x, planeNormal, ior);
-    refract(y, planeNormal, ior);
-    refract(z, planeNormal, ior);
+    refract(axes.x, planeNormal, ior);
+    refract(axes.y, planeNormal, ior);
+    refract(axes.z, planeNormal, ior);
 
-    setX(matrix, x);
-    setY(matrix, y);
-    setZ(matrix, z);
+    setX(matrix, axes.x);
+    setY(matrix, axes.y);
+    setZ(matrix, axes.z);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -46,7 +46,7 @@ template<typename T>
 constexpr void
 refract(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, T ior)
 {
-    auto [x,y,z,p] = unpackBasis(matrix);
+    auto [x,y,z,p] = unpackSpace(matrix);
 
     refract(x, planeNormal, ior);
     refract(y, planeNormal, ior);
@@ -65,9 +65,9 @@ template<typename T>
 constexpr void
 refract(Pivot<T>& pivot, Vector<3,T>& planeNormal, T ior)
 {
-    refract(pivot.x, planeNormal, ior);
-    refract(pivot.y, planeNormal, ior);
-    refract(pivot.z, planeNormal, ior);
+    refract(pivot.axes.x, planeNormal, ior);
+    refract(pivot.axes.y, planeNormal, ior);
+    refract(pivot.axes.z, planeNormal, ior);
     reflect(pivot.position, planeNormal, ior);
 }
 

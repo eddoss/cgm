@@ -43,15 +43,15 @@ template<typename T>
 constexpr void
 reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 {
-    auto [x,y,z] = orientationAxes(matrix);
+    auto axes = orientationAxes(matrix);
 
-    reflect(x, planeNormal);
-    reflect(y, planeNormal);
-    reflect(z, planeNormal);
+    reflect(axes.x, planeNormal);
+    reflect(axes.y, planeNormal);
+    reflect(axes.z, planeNormal);
 
-    setX(matrix, x);
-    setY(matrix, y);
-    setZ(matrix, z);
+    setX(matrix, axes.x);
+    setY(matrix, axes.y);
+    setZ(matrix, axes.z);
 }
 
 /* ####################################################################################### */
@@ -62,7 +62,7 @@ template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
 {
-    auto [x,y,z,p] = unpackBasis(matrix);
+    auto [x,y,z,p] = unpackSpace(matrix);
 
     reflect(x, planeNormal);
     reflect(y, planeNormal);
@@ -81,7 +81,7 @@ template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
-    auto [x,y,z,p] = unpackBasis(matrix);
+    auto [x,y,z,p] = unpackSpace(matrix);
 
     reflect(x, planeNormal);
     reflect(y, planeNormal);
@@ -118,133 +118,6 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
     reflect(pivot.y, planeNormal);
     reflect(pivot.z, planeNormal);
     reflect(pivot.position, planeNormal, planeCenter);
-}
-
-/* ####################################################################################### */
-/* Axes tuple */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr void
-reflect(AxesTuple<T>& axes, const Vector<3,T>& planeNormal)
-{
-    auto& [x,y,z] = axes;
-
-    reflect(x, planeNormal);
-    reflect(y, planeNormal);
-    reflect(z, planeNormal);
-}
-
-/* ####################################################################################### */
-/* Space tuple */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr void
-reflect(SpaceTuple<T>& space, const Vector<3,T>& planeNormal)
-{
-    auto& [x,y,z,p] = space;
-
-    reflect(x, planeNormal);
-    reflect(y, planeNormal);
-    reflect(z, planeNormal);
-    reflect(p, planeNormal);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr void
-reflect(SpaceTuple<T>& space, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto& [x,y,z,p] = space;
-
-    reflect(x, planeNormal);
-    reflect(y, planeNormal);
-    reflect(z, planeNormal);
-    reflect(p, planeNormal, planeCenter);
-}
-
-/* ####################################################################################### */
-/* Basis struct */
-/* ####################################################################################### */
-
-template<EBasisBase Base, typename T>
-constexpr void
-reflect(Basis<Base,T>& basis, const Vector<3,T>& planeNormal)
-{
-    if constexpr (Base == EBasisBase::Matrix3 || Base == EBasisBase::Matrix4)
-    {
-        auto x = basis.x();
-        auto y = basis.y();
-        auto z = basis.z();
-        auto p = basis.position();
-
-        reflect(x, planeNormal);
-        reflect(y, planeNormal);
-        reflect(z, planeNormal);
-        reflect(p, planeNormal);
-
-        basis.setOrientation(orientationMatrix(x,y,z));
-        basis.setPosition(p);
-    }
-    else
-    {
-        auto quat = basis.orientationQuaternion();
-        auto pos = basis.position();
-
-        auto angle = std::acos(quat.scalar) * 2;
-        auto sin = std::sin(angle / 2);
-        auto axis = quat.vector / sin;
-
-        reflect(axis, planeNormal);
-        reflect(pos, planeNormal);
-
-        quat.vector = axis * sin;
-
-        basis.setOrientation(quat);
-        basis.setPosition(pos);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EBasisBase Base, typename T>
-constexpr void
-reflect(Basis<Base,T>& basis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    if constexpr (Base == EBasisBase::Matrix3 || Base == EBasisBase::Matrix4)
-    {
-        auto x = basis.x();
-        auto y = basis.y();
-        auto z = basis.z();
-        auto p = basis.position();
-
-        reflect(x, planeNormal);
-        reflect(y, planeNormal);
-        reflect(z, planeNormal);
-        reflect(p, planeNormal, planeCenter);
-
-        basis.setOrientation(orientationMatrix(x,y,z));
-        basis.setPosition(p);
-    }
-    else
-    {
-        auto quat = basis.orientationQuaternion();
-        auto pos = basis.position();
-
-        auto angle = std::acos(quat.scalar) * 2;
-        auto sin = std::sin(angle / 2);
-        auto axis = quat.vector / sin;
-
-        reflect(axis, planeNormal);
-        reflect(pos, planeNormal, planeCenter);
-
-        quat.vector = axis * sin;
-
-        basis.setOrientation(quat);
-        basis.setPosition(pos);
-    }
 }
 
 CGM_XFORM3D_NAMESPACE_END

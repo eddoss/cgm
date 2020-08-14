@@ -118,17 +118,15 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     }
     else
     {
-        auto X = x(matrix);
-        auto Y = y(matrix);
-        auto Z = z(matrix);
+        auto axes = orientationAxes(matrix);
 
-        scale(X, values, pivotPoint);
-        scale(Y, values, pivotPoint);
-        scale(Z, values, pivotPoint);
+        scale(axes.x, values, pivotPoint);
+        scale(axes.y, values, pivotPoint);
+        scale(axes.z, values, pivotPoint);
 
-        setX(matrix, X);
-        setY(matrix, Y);
-        setZ(matrix, Z);
+        setX(matrix, axes.x);
+        setY(matrix, axes.y);
+        setZ(matrix, axes.z);
     }
 }
 
@@ -215,17 +213,15 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     }
     else
     {
-        auto X = x(matrix);
-        auto Y = y(matrix);
-        auto Z = z(matrix);
+        auto axes = orientationAxes(matrix);
 
-        scale(X, values, pivotPoint);
-        scale(Y, values, pivotPoint);
-        scale(Z, values, pivotPoint);
+        scale(axes.x, values, pivotPoint);
+        scale(axes.y, values, pivotPoint);
+        scale(axes.z, values, pivotPoint);
 
-        setX(matrix, X);
-        setY(matrix, Y);
-        setZ(matrix, Z);
+        setX(matrix, axes.x);
+        setY(matrix, axes.y);
+        setZ(matrix, axes.z);
     }
 }
 

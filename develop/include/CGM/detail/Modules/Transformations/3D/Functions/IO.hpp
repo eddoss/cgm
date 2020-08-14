@@ -34,9 +34,9 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot)
     stream << "CGM::XYZ::Pivot<" << typeid(T).name() << ">\n{";
     stream << std::fixed << std::left << std::setprecision(6);
 
-    auto x = pivot.x;
-    auto y = pivot.y;
-    auto z = pivot.z;
+    auto x = pivot.axes.x;
+    auto y = pivot.axes.y;
+    auto z = pivot.axes.z;
     auto p = pivot.position;
 
     stream << "\n    X " << x.x << " " << x.y << " " << x.z;
