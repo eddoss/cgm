@@ -10,7 +10,6 @@
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -28,7 +27,7 @@ static const auto L2LQUAT_B_Y = Vector<3,double>{ +0.367711, +0.915829, -0.16138
 static const auto L2LQUAT_B_Z = Vector<3,double>{ +0.161386, +0.108065, +0.980957 };
 static const auto L2LQUAT_B_P = Vector<3,double>{ +4.030000, +1.700000, +2.200000 };
 static const auto L2LQUAT_B_QUAT = Quaternion<double>{ -0.068998, 0.068998, -0.193196, 0.976296 };
-static const auto L2LQUAT_B_MAT4 = CGM_XYZ::packBasis(L2LQUAT_B_X, L2LQUAT_B_Y, L2LQUAT_B_Z, L2LQUAT_B_P);
+static const auto L2LQUAT_B_MAT4 = CGM_XYZ::spaceMatrix(L2LQUAT_B_X, L2LQUAT_B_Y, L2LQUAT_B_Z, L2LQUAT_B_P);
 static const auto L2LQUAT_B_MAT3 = CGM_XYZ::orientationMatrix(L2LQUAT_B_X, L2LQUAT_B_Y, L2LQUAT_B_Z);
 static const auto L2LQUAT_B_COORD_PT = Vector<3,double>{ -2.557181, +0.962929, +1.960766 };
 static const auto L2LQUAT_B_COORD_DIR = Vector<3,double>{ +2.113769, +1.198966, +3.409012 };

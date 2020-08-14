@@ -16,11 +16,11 @@ axis()
 {
     if constexpr (Axis == EAxes::X)
     {
-        return {T(1), T(0)};
+        return {number<T>(1), zero<T>};
     }
     else
     {
-        return {T(0), T(1)};
+        return {zero<T>, number<T>(1)};
     }
 }
 
@@ -30,7 +30,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 x()
 {
-    return {T(1), T(0)};
+    return {number<T>(1), zero<T>};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -39,7 +39,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 y()
 {
-    return {T(0), T(1)};
+    return {zero<T>, number<T>(1)};
 }
 
 CGM_XY_NAMESPACE_END

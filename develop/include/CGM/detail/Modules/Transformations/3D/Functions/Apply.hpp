@@ -50,7 +50,7 @@ constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& transforms)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    matrix = packBasis(transforms, {zero<T>, zero<T>, zero<T>}) * matrix;
+    matrix = spaceMatrix(transforms, {zero<T>, zero<T>, zero<T>}) * matrix;
 #else
     detail::multiply_matrix4x4_on_matrix3x3(matrix, transforms);
 #endif

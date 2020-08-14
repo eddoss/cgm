@@ -11,4 +11,3 @@
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/BasisPackers.hpp>

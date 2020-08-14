@@ -7,7 +7,6 @@
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/BasisPackers.hpp>
 
 
 using namespace std;
@@ -71,7 +70,7 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat4)
     auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
     auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
 
-    auto basis = CGM_XYZ::packBasis(x,y,z,p);
+    auto basis = CGM_XYZ::spaceMatrix(x,y,z,p);
 
     {
         auto result = CGM_XYZ::globalToLocal<POINT>(coord, basis);

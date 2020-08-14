@@ -121,7 +121,7 @@ number(BT value);
  */
 template<typename T>
 constexpr enable_if_floating_or_integral<T,T>
-zero = T(0);
+zero = static_cast<T>(0);
 
 
 #include <CGM/detail/Modules/Common.hpp>
