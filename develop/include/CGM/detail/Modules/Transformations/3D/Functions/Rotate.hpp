@@ -14,36 +14,17 @@ template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, T angle)
 {
-    const auto src = vector;
-    const T cos = std::cos(angle);
-    const T sin = std::sin(angle);
-
     if constexpr (Axis == EAxes::X)
     {
-        const auto y = Vector<3,T>{ zero<T>, cos, sin };
-        const auto z = Vector<3,T>{ zero<T>, -sin, cos };
-
-        vector = y * src.y;
-        vector += z * src.z;
-        vector.x = src.x;
+        orient(vector, quaternion(x(), angle));
     }
     else if constexpr (Axis == EAxes::Y)
     {
-        const auto x = Vector<3,T>(cos, zero<T>, -sin);
-        const auto z = Vector<3,T>(sin, zero<T>, cos);
-
-        vector = x * src.x;
-        vector += z * src.z;
-        vector.y = src.y;
+        orient(vector, quaternion(y(), angle));
     }
     else
     {
-        const auto x = Vector<3,T>(cos, sin, zero<T>);
-        const auto y = Vector<3,T>(-sin, cos, zero<T>);
-
-        vector = x * src.x;
-        vector += y * src.y;
-        vector.z = src.z;
+        orient(vector, quaternion(z(), angle));
     }
 }
 
@@ -66,9 +47,9 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoin
 {
     vector -= pivotPoint.position;
 
-    orient(vector, quaternion(pivotPoint.x, angles.x));
-    orient(vector, quaternion(pivotPoint.y, angles.y));
-    orient(vector, quaternion(pivotPoint.z, angles.z));
+    orient(vector, quaternion(pivotPoint.axes.x, angles.x));
+    orient(vector, quaternion(pivotPoint.axes.y, angles.y));
+    orient(vector, quaternion(pivotPoint.axes.z, angles.z));
 
     vector += pivotPoint.position;
 }
@@ -85,44 +66,44 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoin
     {
         case ERotationOrder::XYZ:
         {
-            orient(vector, quaternion(pivotPoint.x, angles.x));
-            orient(vector, quaternion(pivotPoint.y, angles.y));
-            orient(vector, quaternion(pivotPoint.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
             break;
         }
         case ERotationOrder::XZY:
         {
-            orient(vector, quaternion(pivotPoint.x, angles.x));
-            orient(vector, quaternion(pivotPoint.z, angles.z));
-            orient(vector, quaternion(pivotPoint.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
             break;
         }
         case ERotationOrder::YXZ:
         {
-            orient(vector, quaternion(pivotPoint.y, angles.y));
-            orient(vector, quaternion(pivotPoint.x, angles.x));
-            orient(vector, quaternion(pivotPoint.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
             break;
         }
         case ERotationOrder::YZX:
         {
-            orient(vector, quaternion(pivotPoint.y, angles.y));
-            orient(vector, quaternion(pivotPoint.z, angles.z));
-            orient(vector, quaternion(pivotPoint.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
             break;
         }
         case ERotationOrder::ZXY:
         {
-            orient(vector, quaternion(pivotPoint.z, angles.z));
-            orient(vector, quaternion(pivotPoint.x, angles.x));
-            orient(vector, quaternion(pivotPoint.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
             break;
         }
         case ERotationOrder::ZYX:
         {
-            orient(vector, quaternion(pivotPoint.z, angles.z));
-            orient(vector, quaternion(pivotPoint.y, angles.y));
-            orient(vector, quaternion(pivotPoint.x, angles.x));
+            orient(vector, quaternion(pivotPoint.axes.z, angles.z));
+            orient(vector, quaternion(pivotPoint.axes.y, angles.y));
+            orient(vector, quaternion(pivotPoint.axes.x, angles.x));
             break;
         }
     }
@@ -359,9 +340,9 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
-    rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
-    rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+    rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+    rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+    rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -374,39 +355,39 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
     {
         case ERotationOrder::XYZ:
         {
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
         }
         case ERotationOrder::XZY:
         {
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
         }
         case ERotationOrder::YXZ:
         {
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
         }
         case ERotationOrder::YZX:
         {
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
         }
         case ERotationOrder::ZXY:
         {
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
         }
         case ERotationOrder::ZYX:
         {
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
         }
     }
 }
@@ -464,9 +445,9 @@ template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle)
 {
-    rotate<Axis>(pivot.x, angle);
-    rotate<Axis>(pivot.y, angle);
-    rotate<Axis>(pivot.z, angle);
+    rotate<Axis>(pivot.axes.x, angle);
+    rotate<Axis>(pivot.axes.y, angle);
+    rotate<Axis>(pivot.axes.z, angle);
     rotate<Axis>(pivot.position, angle);
 }
 
@@ -476,10 +457,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle, const Axis<T>& axis)
 {
-    rotate<Axis>(pivot.x, angle, axis);
-    rotate<Axis>(pivot.y, angle, axis);
-    rotate<Axis>(pivot.z, angle, axis);
-    rotate<Axis>(pivot.position, angle);
+    rotate(pivot.axes.x, angle, axis);
+    rotate(pivot.axes.y, angle, axis);
+    rotate(pivot.axes.z, angle, axis);
+    rotate(pivot.position, angle);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -488,10 +469,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate<Axis>(pivot.x, angles, pivotPoint);
-    rotate<Axis>(pivot.y, angles, pivotPoint);
-    rotate<Axis>(pivot.z, angles, pivotPoint);
-    rotate<Axis>(pivot.position, angles, pivotPoint);
+    rotate(pivot.axes.x, angles, pivotPoint);
+    rotate(pivot.axes.y, angles, pivotPoint);
+    rotate(pivot.axes.z, angles, pivotPoint);
+    rotate(pivot.position, angles, pivotPoint);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -500,10 +481,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
-    rotate<Axis>(pivot.x, angles, pivotPoint, rotationOrder);
-    rotate<Axis>(pivot.y, angles, pivotPoint, rotationOrder);
-    rotate<Axis>(pivot.z, angles, pivotPoint, rotationOrder);
-    rotate<Axis>(pivot.position, angles, pivotPoint, rotationOrder);
+    rotate(pivot.axes.x, angles, pivotPoint, rotationOrder);
+    rotate(pivot.axes.y, angles, pivotPoint, rotationOrder);
+    rotate(pivot.axes.z, angles, pivotPoint, rotationOrder);
+    rotate(pivot.position, angles, pivotPoint, rotationOrder);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -512,10 +493,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion)
 {
-    rotate<Axis>(pivot.x, quaternion);
-    rotate<Axis>(pivot.y, quaternion);
-    rotate<Axis>(pivot.z, quaternion);
-    rotate<Axis>(pivot.position, quaternion);
+    rotate(pivot.axes.x, quaternion);
+    rotate(pivot.axes.y, quaternion);
+    rotate(pivot.axes.z, quaternion);
+    rotate(pivot.position, quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -524,10 +505,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    rotate<Axis>(pivot.x, transforms);
-    rotate<Axis>(pivot.y, transforms);
-    rotate<Axis>(pivot.z, transforms);
-    rotate<Axis>(pivot.position, transforms);
+    rotate(pivot.axes.x, transforms);
+    rotate(pivot.axes.y, transforms);
+    rotate(pivot.axes.z, transforms);
+    rotate(pivot.position, transforms);
 }
 
 /* ####################################################################################### */
@@ -574,7 +555,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
 {
-    quaternion *= quat;
+
 }
 
 /* --------------------------------------------------------------------------------------- */
