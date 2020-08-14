@@ -163,7 +163,7 @@ rotate(Matrix<4,4,T>& matrix, T angle);
  * @param angle Rotation angle.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis);
 
 /**
@@ -186,7 +186,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param rotationOrder Rotation order.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -196,7 +196,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param quaternion Quaternion to rotate by.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
@@ -296,7 +296,7 @@ rotate(Quaternion<T>& quaternion, T angle);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, T angle, const Axis<T>& axis);
+rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -318,7 +318,7 @@ rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& piv
  * @param rotationOrder Rotation order.
  */
 template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
