@@ -286,7 +286,27 @@ template<EAxes Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle)
 {
-    
+    Vector<3,T> axis;
+
+    if constexpr (Axis == EAxes::X)
+    {
+        axis = x();
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        axis = y();
+    }
+    else
+    {
+        axis = z();
+    }
+
+    if constexpr (Space == ESpace::Local)
+    {
+        axis = localToGlobal<EVectorRepresentation::Direction>(axis, matrix);
+    }
+
+    rotate<ESpace::World>(matrix, quaternion(axis,angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -295,7 +315,42 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis)
 {
-    
+    auto X = x(matrix);
+    auto Y = y(matrix);
+    auto Z = z(matrix);
+    auto P = position(matrix);
+
+    if constexpr (Space == ESpace::World)
+    {
+        auto quat = quaternion(axis.direction, angle);
+
+        orient(X, quat);
+        orient(Y, quat);
+        orient(Z, quat);
+
+        P -= axis.origin;
+        orient(P, quat);
+        P += axis.origin;
+    }
+    else
+    {
+        auto worldSpaceAxisDir = localToGlobal<EVectorRepresentation::Direction>(axis.direction, matrix);
+        auto worldSpaceAxisPos = localToGlobal<EVectorRepresentation::Point>(axis.origin, matrix);
+        auto worldSpaceQuat = CGM_XFORM3D::quaternion(worldSpaceAxisDir, angle);
+
+        orient(X, worldSpaceQuat);
+        orient(Y, worldSpaceQuat);
+        orient(Z, worldSpaceQuat);
+
+        P -= worldSpaceAxisPos;
+        orient(P, worldSpaceQuat);
+        P += worldSpaceAxisPos;
+    }
+
+    setX(matrix, X);
+    setY(matrix, Y);
+    setZ(matrix, Z);
+    setPosition(matrix, P);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -304,7 +359,9 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-
+    rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+    rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+    rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -313,7 +370,45 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
-    
+    switch (rotationOrder)
+    {
+        case ERotationOrder::XYZ:
+        {
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+        }
+        case ERotationOrder::XZY:
+        {
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+        }
+        case ERotationOrder::YXZ:
+        {
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+        }
+        case ERotationOrder::YZX:
+        {
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+        }
+        case ERotationOrder::ZXY:
+        {
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+        }
+        case ERotationOrder::ZYX:
+        {
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.x, pivotPoint.position));
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -322,7 +417,34 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
 {
-    
+    auto X = x(matrix);
+    auto Y = y(matrix);
+    auto Z = z(matrix);
+    auto P = position(matrix);
+
+    if constexpr (Space == ESpace::World)
+    {
+        orient(X, quaternion);
+        orient(Y, quaternion);
+        orient(Z, quaternion);
+        orient(P, quaternion);
+    }
+    else
+    {
+        auto [localSpaceAxis, angle] = axisAngle(quaternion);
+        auto worldSpaceAxis = localToGlobal<EVectorRepresentation::Direction>(localSpaceAxis, matrix);
+        auto worldSpaceQuat = CGM_XFORM3D::quaternion(worldSpaceAxis, angle);
+
+        orient(X, worldSpaceQuat);
+        orient(Y, worldSpaceQuat);
+        orient(Z, worldSpaceQuat);
+        orient(P, worldSpaceQuat);
+    }
+
+    setX(matrix, X);
+    setY(matrix, Y);
+    setZ(matrix, Z);
+    setPosition(matrix, P);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -331,7 +453,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
-    
+    rotate<Space>(matrix, transforms.rotations, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -342,7 +464,10 @@ template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle)
 {
-    
+    rotate<Axis>(pivot.x, angle);
+    rotate<Axis>(pivot.y, angle);
+    rotate<Axis>(pivot.z, angle);
+    rotate<Axis>(pivot.position, angle);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -351,7 +476,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle, const Axis<T>& axis)
 {
-    
+    rotate<Axis>(pivot.x, angle, axis);
+    rotate<Axis>(pivot.y, angle, axis);
+    rotate<Axis>(pivot.z, angle, axis);
+    rotate<Axis>(pivot.position, angle);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -360,7 +488,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-
+    rotate<Axis>(pivot.x, angles, pivotPoint);
+    rotate<Axis>(pivot.y, angles, pivotPoint);
+    rotate<Axis>(pivot.z, angles, pivotPoint);
+    rotate<Axis>(pivot.position, angles, pivotPoint);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -369,7 +500,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
-    
+    rotate<Axis>(pivot.x, angles, pivotPoint, rotationOrder);
+    rotate<Axis>(pivot.y, angles, pivotPoint, rotationOrder);
+    rotate<Axis>(pivot.z, angles, pivotPoint, rotationOrder);
+    rotate<Axis>(pivot.position, angles, pivotPoint, rotationOrder);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -378,7 +512,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion)
 {
-    
+    rotate<Axis>(pivot.x, quaternion);
+    rotate<Axis>(pivot.y, quaternion);
+    rotate<Axis>(pivot.z, quaternion);
+    rotate<Axis>(pivot.position, quaternion);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -387,119 +524,10 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    
-}
-
-/* ####################################################################################### */
-/* AxesTuple */
-/* ####################################################################################### */
-
-template<EAxes Axis, ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, T angle)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, T angle, const Axis<T>& axis)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, const Quaternion<T>& quaternion)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(AxesTuple<T>& axes, const Transforms<T>& transforms)
-{
-    
-}
-
-/* ####################################################################################### */
-/* AxesTuple */
-/* ####################################################################################### */
-
-template<EAxes Axis, ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, T angle)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, T angle, const Axis<T>& axis)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, const Quaternion<T>& quaternion)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(SpaceTuple<T>& space, const Transforms<T>& transforms)
-{
-    
+    rotate<Axis>(pivot.x, transforms);
+    rotate<Axis>(pivot.y, transforms);
+    rotate<Axis>(pivot.z, transforms);
+    rotate<Axis>(pivot.position, transforms);
 }
 
 /* ####################################################################################### */
@@ -517,7 +545,7 @@ rotate(Quaternion<T>& quaternion, T angle)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, T angle, const Axis<T>& axis)
+rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis)
 {
     
 }
@@ -546,7 +574,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
 {
-    
+    quaternion *= quat;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -554,62 +582,6 @@ rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms)
-{
-    
-}
-
-/* ####################################################################################### */
-/* Basis struct */
-/* ####################################################################################### */
-
-template<EAxes Axis, ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, T angle)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, T angle, const Axis<T>& axis)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, const Quaternion<T>& quat)
-{
-    
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EBasisBase Base, typename T>
-constexpr CGM_FORCEINLINE void
-rotate(Basis<Base,T>& basis, const Transforms<T>& transforms)
 {
     
 }

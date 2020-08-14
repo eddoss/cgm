@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 
 
@@ -17,10 +17,13 @@ struct Pivot
 /* Attributes */
 /* ####################################################################################### */
 
-    Vector<3,T> x;           ///< X axes.
-    Vector<3,T> y;           ///< Y axes.
-    Vector<3,T> z;           ///< Z axes.
-    Vector<3,T> position;    ///< Pivot position.
+    /** Orientation axes. */
+    Axes<T>
+    axes;
+
+    /** Pivot position. */
+    Vector<3,T>
+    position;
 
 /* ####################################################################################### */
 /* Constructors */
@@ -35,6 +38,12 @@ struct Pivot
     Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z);
 
     /**
+     * Initialize all axes. Position is {0,0,0}.
+     * @param orientationAxes Pivot orientation axes.
+     */
+    Pivot(const Axes<T>& orientationAxes);
+
+    /**
      * Initialize all axes and position.
      * @param X Pivot X axis.
      * @param Y Pivot Y axis.
@@ -42,6 +51,13 @@ struct Pivot
      * @param P Pivot position.
      */
     Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z, const Vector<3,T>& P);
+
+    /**
+     * Initialize all axes and position.
+     * @param orientationAxes Pivot orientation axes.
+     * @param P Pivot position.
+     */
+    Pivot(const Axes<T>& orientationAxes, const Vector<3,T>& P);
 };
 
 CGM_XFORM3D_NAMESPACE_END

@@ -8,10 +8,18 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 Pivot<T>::Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z)
-    : x(X)
-    , y(Y)
-    , z(Z)
-    , position(Vector<T>{0,0,0})
+    : axes(X, Y, Z)
+    , position(0,0,0)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+Pivot<T>::Pivot(const Axes<T>& orientationAxes)
+    : axes(orientationAxes)
+    , position(0,0,0)
 {
 
 }
@@ -20,9 +28,17 @@ Pivot<T>::Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z
 
 template<typename T>
 Pivot<T>::Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z, const Vector<3,T>& P)
-    : x(X)
-    , y(Y)
-    , z(Z)
+    : axes(X, Y, Z)
+    , position(P)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+Pivot<T>::Pivot(const Axes<T>& orientationAxes, const Vector<3,T>& P)
+    : axes(orientationAxes)
     , position(P)
 {
 

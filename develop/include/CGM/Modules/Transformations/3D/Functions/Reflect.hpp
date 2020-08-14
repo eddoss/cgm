@@ -3,8 +3,6 @@
 
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Basis.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
@@ -98,66 +96,6 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal);
 template<typename T>
 constexpr void
 reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
-
-/* ####################################################################################### */
-/* Axes tuple */
-/* ####################################################################################### */
-
-/**
- * Reflects axes tuple from a plane.
- * @tparam Space In which space to transform.
- * @param axes Axes tuple to reflect.
- * @param planeNormal Plane normal.
- */
-template<typename T>
-constexpr void
-reflect(AxesTuple<T>& axes, const Vector<3,T>& planeNormal);
-
-/* ####################################################################################### */
-/* Space tuple */
-/* ####################################################################################### */
-
-/**
- * Reflects space tuple from a plane.
- * @param matrix Matrix to reflect.
- * @param planeNormal Plane normal.
- */
-template<typename T>
-constexpr void
-reflect(SpaceTuple<T>& space, const Vector<3,T>& planeNormal);
-
-/**
- * Reflects space tuple from a plane.
- * @param space Space tuple to reflect.
- * @param planeNormal Plane normal.
- * @param planeCenter Plane origin.
- */
-template<typename T>
-constexpr void
-reflect(SpaceTuple<T>& space, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
-
-/* ####################################################################################### */
-/* Basis struct */
-/* ####################################################################################### */
-
-/**
- * Reflects basis struct from a plane.
- * @param basis Basis struct tuple to reflect.
- * @param planeNormal Plane normal.
- */
-template<EBasisBase Base, typename T>
-constexpr void
-reflect(Basis<Base,T>& basis, const Vector<3,T>& planeNormal);
-
-/**
- * Reflects basis struct from a plane.
- * @param basis Basis struct to reflect.
- * @param planeNormal Plane normal.
- * @param planeCenter Plane origin.
- */
-template<EBasisBase Base, typename T>
-constexpr void
-reflect(Basis<Base,T>& basis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

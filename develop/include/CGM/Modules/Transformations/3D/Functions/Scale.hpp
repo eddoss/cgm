@@ -4,8 +4,6 @@
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Basis.hpp>
-#include <CGM/Modules/Cartesian/3D/Types/Typedefs.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
@@ -152,76 +150,6 @@ scale(Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
 template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, const Transforms<T>& transforms);
-
-/* ####################################################################################### */
-/* AxesTuple */
-/* ####################################################################################### */
-
-/**
- * Scales axes tuple related to local/world center.
- * @tparam Space In which space to scale.
- * @param axes Axes tuple to scale.
- * @param values How much to scale.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr void
-scale(AxesTuple<T>& axes, const Vector<3,T>& values);
-
-/**
- * Scales axes tuple related to pivot point.
- * @tparam Space In which space to scale.
- * @param axes Axes tuple to scale.
- * @param values How much to scale.
- * @param pivotPoint Pivot point position.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr void
-scale(AxesTuple<T>& axes, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
-
-/**
- * Scales axes tuple related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
- * @param axes Axes tuple to scale.
- * @param transforms Transformations parameters.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
-scale(AxesTuple<T>& axes, const Transforms<T>& transforms);
-
-/* ####################################################################################### */
-/* SpaceTuple */
-/* ####################################################################################### */
-
-/**
- * Scales space tuple related to local/world center.
- * @tparam Space In which space to scale.
- * @param space Space tuple to scale.
- * @param values How much to scale.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr void
-scale(SpaceTuple<T>& space, const Vector<3,T>& values);
-
-/**
- * Scales space tuple related to pivot point.
- * @tparam Space In which space to scale.
- * @param space Space tuple to scale.
- * @param value How much to scale.
- * @param pivotPoint Pivot point position.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr void
-scale(SpaceTuple<T>& space, const Vector<3,T>& value, const Pivot<T>& pivot);
-
-/**
- * Scales space tuple related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
- * @param space Space tuple to scale.
- * @param transforms Transformations parameters.
- */
-template<ESpace Space = ESpace::Local, typename T>
-constexpr CGM_FORCEINLINE void
-scale(SpaceTuple<T>& space, const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

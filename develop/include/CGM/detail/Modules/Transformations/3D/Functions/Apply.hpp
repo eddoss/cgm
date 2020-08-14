@@ -6,10 +6,6 @@
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
-/* ####################################################################################### */
-/* Vector */
-/* ####################################################################################### */
-
 template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, const Matrix<3,3,T>& transforms)
@@ -34,9 +30,7 @@ apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
 #endif
 }
 
-/* ####################################################################################### */
-/* Matrix3 */
-/* ####################################################################################### */
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
@@ -49,9 +43,7 @@ apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 #endif
 }
 
-/* ####################################################################################### */
-/* Matrix4 */
-/* ####################################################################################### */
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
@@ -75,64 +67,6 @@ apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
 #else
     matrix = matrix * transforms;
 #endif
-}
-
-/* ####################################################################################### */
-/* Axes tuple */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(AxesTuple<T>& axes, const Matrix<3,3,T>& transforms)
-{
-    auto& [x,y,z] = axes;
-
-    apply(x, transforms);
-    apply(y, transforms);
-    apply(z, transforms);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(AxesTuple<T>& axes, const Matrix<4,4,T>& transforms)
-{
-    auto& [x,y,z] = axes;
-
-    apply(x, transforms);
-    apply(y, transforms);
-    apply(z, transforms);
-}
-
-/* ####################################################################################### */
-/* Space tuple */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(SpaceTuple<T>& space, const Matrix<3,3,T>& transforms)
-{
-    auto& [x,y,z,p] = space;
-
-    apply(x, transforms);
-    apply(y, transforms);
-    apply(z, transforms);
-    apply(p, transforms);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(SpaceTuple<T>& space, const Matrix<4,4,T>& transforms)
-{
-    auto& [x,y,z,p] = space;
-
-    apply(x, transforms);
-    apply(y, transforms);
-    apply(z, transforms);
-    apply(p, transforms);
 }
 
 CGM_XFORM3D_NAMESPACE_END

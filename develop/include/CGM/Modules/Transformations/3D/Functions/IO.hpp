@@ -3,8 +3,8 @@
 
 #include <iomanip>
 #include <iostream>
-#include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
