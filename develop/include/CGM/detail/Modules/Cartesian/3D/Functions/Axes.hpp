@@ -10,6 +10,26 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* X, Y, Z axes */
 /* ####################################################################################### */
 
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+axis()
+{
+    if constexpr (Axis == EAxes::X)
+    {
+        return {T(1), T(0), T(0)};
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        return {T(0), T(1), T(0)};
+    }
+    else
+    {
+        return {T(0), T(0), T(1)};
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 x()
