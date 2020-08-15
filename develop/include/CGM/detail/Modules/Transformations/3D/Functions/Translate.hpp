@@ -48,19 +48,13 @@ translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value)
     }
     else
     {
-        const auto xOffset = x(matrix) * value.x;
-        const auto yOffset = y(matrix) * value.y;
-        const auto zOffset = z(matrix) * value.z;
+        auto pos = position(matrix);
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix(0,3) += xOffset;
-        matrix(1,3) += yOffset;
-        matrix(2,3) += zOffset;
-    #else
-        matrix(3,0) += xOffset.x + yOffset.x + zOffset.x;
-        matrix(3,1) += xOffset.y + yOffset.y + zOffset.y;
-        matrix(3,2) += xOffset.z + yOffset.z + zOffset.z;
-    #endif
+        pos += x(matrix) * value.x;
+        pos += y(matrix) * value.y;
+        pos += z(matrix) * value.z;
+
+        setPosition(matrix, pos);
     }
 }
 

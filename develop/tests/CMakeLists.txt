@@ -123,6 +123,21 @@ cgm_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
 cgm_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 
 # ####################################################################################### #
+# SUITES | Cartesian
+# ####################################################################################### #
+
+set(TS_TRANSFORMATION_3D
+    Transformations/3D/Translation.cpp
+)
+
+set(TS_MODULE_TRANSFORMATION
+    ${TS_TRANSFORMATION_3D}
+)
+
+cgm_add_test(ModuleTransformationTestSuite "run.cpp;${TS_MODULE_TRANSFORMATION}")
+cgm_add_test(Transformation3DTestSuite "run.cpp;${TS_TRANSFORMATION_3D}")
+
+# ####################################################################################### #
 # SUITES | All modules
 # ####################################################################################### #
 
@@ -130,6 +145,7 @@ set(TS_ALL_MODULES
     ${TS_MODULE_CORE}
     ${TS_MODULE_COORDINATES}
     ${TS_MODULE_CARTESIAN}
+    ${TS_MODULE_TRANSFORMATION}
 )
 
 cgm_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")
