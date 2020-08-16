@@ -85,9 +85,9 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     }
     stream << " ]\n";
 
-    auto x = transforms.pivot.x;
-    auto y = transforms.pivot.y;
-    auto z = transforms.pivot.z;
+    auto x = transforms.pivot.axes.x;
+    auto y = transforms.pivot.axes.y;
+    auto z = transforms.pivot.axes.z;
     auto p = transforms.pivot.position;
 
     stream << "\n      Pivot.x " << x.x << " " << x.y << " " << x.z;
@@ -101,6 +101,26 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     stream << "\n       UScale " << transforms.uniformScale;
 
     stream << "\n}";
+    stream.setf(old_flags);
+
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+constexpr std::ostream&
+operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle)
+{
+    std::ios_base::fmtflags old_flags {stream.flags()};
+
+    stream.setf(std::ios::showpos);
+    stream << "CGM::XYZ::AxisAngle<" << typeid(T).name() << ">{";
+    stream << std::fixed << std::left << std::setprecision(6);
+
+    stream << " " << axisAngle.axis.x << " " << axisAngle.axis.y << " " << axisAngle.axis.z;
+    stream << " | " << axisAngle.angle << " }";
+
     stream.setf(old_flags);
 
     return stream;

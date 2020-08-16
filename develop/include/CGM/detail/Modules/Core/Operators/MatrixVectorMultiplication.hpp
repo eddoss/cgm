@@ -390,3 +390,13 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
         }
     }
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N > 1), CGM::Vector<N,T>&>
+operator *= (CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
+{
+    A = A * B;
+    return A;
+}

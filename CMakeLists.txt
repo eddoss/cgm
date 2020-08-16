@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.12)
 # Init project
 # ####################################################################################### #
 
-project(Math3D
+project(ComputerGraphixMath
     LANGUAGES CXX
     VERSION 0.0.1
 )

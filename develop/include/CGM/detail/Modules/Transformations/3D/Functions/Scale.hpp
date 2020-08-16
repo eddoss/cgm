@@ -27,13 +27,13 @@ scale(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint
 {
     auto p = vector - pivotPoint.position;
 
-    auto sdx = dot(p, pivotPoint.x); // short dist to pivot XZ plane
-    auto sdy = dot(p, pivotPoint.y); // short dist to pivot YZ plane
-    auto sdz = dot(p, pivotPoint.z); // short dist to pivot XY plane
+    auto sdx = shortestDistance(p, pivotPoint.axes.x);
+    auto sdy = shortestDistance(p, pivotPoint.axes.y);
+    auto sdz = shortestDistance(p, pivotPoint.axes.z);
 
-    vector += pivotPoint.x * (values.x - 1) * sdx;
-    vector += pivotPoint.y * (values.y - 1) * sdy;
-    vector += pivotPoint.z * (values.z - 1) * sdz;
+    vector += pivotPoint.axes.x * (values.x - 1) * sdx;
+    vector += pivotPoint.axes.y * (values.y - 1) * sdy;
+    vector += pivotPoint.axes.z * (values.z - 1) * sdz;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -108,9 +108,9 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     {
         auto worldSpacePivot = Pivot<T>
         {
-            localToGlobal(pivotPoint.x, matrix),
-            localToGlobal(pivotPoint.y, matrix),
-            localToGlobal(pivotPoint.z, matrix),
+            localToGlobal(pivotPoint.axes.x, matrix),
+            localToGlobal(pivotPoint.axes.y, matrix),
+            localToGlobal(pivotPoint.axes.z, matrix),
             localToGlobal(pivotPoint.position, matrix)
         };
 
@@ -203,9 +203,9 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     {
         auto worldSpacePivot = Pivot<T>
         {
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.x, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.y, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.z, matrix),
+            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
+            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
+            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
             localToGlobal<EVectorRepresentation::Point>(pivotPoint.position, matrix)
         };
 

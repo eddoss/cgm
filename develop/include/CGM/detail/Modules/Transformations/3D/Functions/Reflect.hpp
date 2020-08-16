@@ -102,9 +102,9 @@ template<typename T>
 constexpr void
 reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal)
 {
-    reflect(pivot.x, planeNormal);
-    reflect(pivot.y, planeNormal);
-    reflect(pivot.z, planeNormal);
+    reflect(pivot.axes.x, planeNormal);
+    reflect(pivot.axes.y, planeNormal);
+    reflect(pivot.axes.z, planeNormal);
     reflect(pivot.position, planeNormal);
 }
 
@@ -114,9 +114,9 @@ template<typename T>
 constexpr void
 reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
 {
-    reflect(pivot.x, planeNormal);
-    reflect(pivot.y, planeNormal);
-    reflect(pivot.z, planeNormal);
+    reflect(pivot.axes.x, planeNormal);
+    reflect(pivot.axes.y, planeNormal);
+    reflect(pivot.axes.z, planeNormal);
     reflect(pivot.position, planeNormal, planeCenter);
 }
 

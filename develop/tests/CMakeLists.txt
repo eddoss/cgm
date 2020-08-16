@@ -45,7 +45,7 @@ set(TS_CORE_MATRIX
     Core/Matrix/Arithmetic/MultiplicationToScalar.cpp
     Core/Matrix/Arithmetic/MatrixMultiplication1NxN1.cpp
     Core/Matrix/Arithmetic/MatrixMultiplication.cpp
-    Core/Matrix/Arithmetic/MatrixVectorMultiplication.cpp
+    Core/MatrixVectorMultiplication.cpp
     Core/Matrix/Comparison/WithOther.cpp
     Core/Matrix/Comparison/WithScalar.cpp
     Core/Matrix/Iterators/Direct.cpp
@@ -127,7 +127,8 @@ cgm_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 # ####################################################################################### #
 
 set(TS_TRANSFORMATION_3D
-    Transformations/3D/Translation.cpp
+    #Transformations/3D/Translation.cpp
+    Transformations/3D/Scale.cpp
 )
 
 set(TS_MODULE_TRANSFORMATION
