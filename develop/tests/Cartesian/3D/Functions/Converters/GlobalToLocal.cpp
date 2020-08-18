@@ -12,48 +12,36 @@
 using namespace std;
 using namespace CGM;
 
+static const auto G2L_X = Vector<3,double>{ 0.86603, 0.00000, -0.50000 };
+static const auto G2L_Y = Vector<3,double>{ 0.00000, 1.00000, 0.00000 };
+static const auto G2L_Z = Vector<3,double>{ 0.50000, 0.00000, 0.86603 };
+static const auto G2L_P = Vector<3,double>{ +0.2, +1.16, -0.6 };
+static const auto G2L_MAT3 = CGM_XYZ::orientationMatrix(G2L_X, G2L_Y, G2L_Z);
+static const auto G2L_MAT4 = CGM_XYZ::spaceMatrix(G2L_X, G2L_Y, G2L_Z, G2L_P);
+static const auto G2L_QUAT = Quaternion<double>{ 0.00000, 0.25882, 0.00000, 0.96593 };
+
+static const auto G2L_EXPEC = Vector<3,double>{ 1.0, 0.0, 0.0 };
+static const auto G2L_COORD_P = Vector<3,double>{ 1.066025, 1.16, -1.1 }; // for point representation
+static const auto G2L_COORD_D = Vector<3,double>{ 0.866025, 0.0, -0.5 }; // for direction representation
+
 TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat3)
 {
-    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
-    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
-    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
-    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
-
-    auto orientation = CGM_XYZ::orientationMatrix(x,y,z);
-
-    auto expect = Vector<3,double> {+2.366018, +3.289785, -1.051749};
-    auto result = CGM_XYZ::globalToLocal(coord, orientation);
-
-    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    auto result = CGM_XYZ::globalToLocal(G2L_COORD_D, G2L_MAT3);
+    ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat3WithPos)
 {
-    constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
-    constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
-
-    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
-    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
-    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
-    auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
-    auto coord = Vector<3,double>{ 3.13, 2.2, 1.7 };
-
-    auto orientation = CGM_XYZ::orientationMatrix(x,y,z);
-
     {
-        auto result = CGM_XYZ::globalToLocal<POINT>(coord, orientation, p);
-        auto expect = Vector<3,double> {-0.527851, +3.499122, -4.621301};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_POINT>(G2L_COORD_P, G2L_MAT3, G2L_P);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 
     {
-        auto result = CGM_XYZ::globalToLocal<DIRECTION>(coord, orientation, p);
-        auto expect = Vector<3,double> {+2.366018, +3.289785, -1.051749};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_DIRECTION>(G2L_COORD_D, G2L_MAT3, G2L_P);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 }
 
@@ -61,29 +49,14 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat3WithPos)
 
 TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat4)
 {
-    constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
-    constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
-
-    auto x = Vector<3,double> { +0.559270, +0.302442, -0.77184 };
-    auto y = Vector<3,double> { -0.313298, +0.939132, +0.14098 };
-    auto z = Vector<3,double> { +0.767503, +0.162971, +0.61998 };
-    auto p = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
-    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
-
-    auto basis = CGM_XYZ::spaceMatrix(x,y,z,p);
-
     {
-        auto result = CGM_XYZ::globalToLocal<POINT>(coord, basis);
-        auto expect = Vector<3,double> {-0.527851, +3.499122, -4.621301};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_POINT>(G2L_COORD_P, G2L_MAT4);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 
     {
-        auto result = CGM_XYZ::globalToLocal<DIRECTION>(coord, basis);
-        auto expect = Vector<3,double> {+2.366018, +3.289785, -1.051749};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_DIRECTION>(G2L_COORD_D, G2L_MAT4);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 }
 
@@ -91,37 +64,21 @@ TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Mat4)
 
 TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_Quat)
 {
-    auto orientation = Quaternion<double> {-0.006227,0.435855,0.174342,0.882948};
-    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
-
-    auto result = CGM_XYZ::globalToLocal(coord, orientation);
-    auto expect = Vector<3,double> {+2.366018, +3.289785, -1.051749};
-
-    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    auto result = CGM_XYZ::globalToLocal(G2L_COORD_D, G2L_QUAT);
+    ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_Converters, GlobalToLocal_QuatWithPos)
 {
-    constexpr EVectorRepresentation POINT = EVectorRepresentation::Point;
-    constexpr EVectorRepresentation DIRECTION = EVectorRepresentation::Direction;
-
-    auto orientation = Quaternion<double> {-0.006227,0.435855,0.174342,0.882948};
-    auto position = Vector<3,double> { -1.200000, -0.600000, 4.400000 };
-    auto coord = Vector<3,double> { 3.13, 2.2, 1.7 };
-
     {
-        auto result = CGM_XYZ::globalToLocal<POINT>(coord, orientation, position);
-        auto expect = Vector<3,double> {-0.527851, +3.499122, -4.621301};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_POINT>(G2L_COORD_P, G2L_QUAT, G2L_P);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 
     {
-        auto result = CGM_XYZ::globalToLocal<DIRECTION>(coord, orientation, position);
-        auto expect = Vector<3,double> {+2.366018, +3.289785, -1.051749};
-
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        auto result = CGM_XYZ::globalToLocal<CGM_DIRECTION>(G2L_COORD_D, G2L_QUAT, G2L_P);
+        ASSERT_TRUE(CGM::eq(result, G2L_EXPEC, 0.0001));
     }
 }

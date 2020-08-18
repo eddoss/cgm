@@ -9,6 +9,7 @@
 #include <CGM/Modules/Core/Functions/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/Common.hpp>
 #include <CGM/Modules/Cartesian/3D/ModuleGlobals.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
 #include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
 
 

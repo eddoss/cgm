@@ -15,9 +15,9 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return transposed(orientation) * vector;
+    return orientation * vector;
 #else
-    return vector * transposed(orientation);
+    return vector * orientation;
 #endif
 }
 
@@ -30,20 +30,20 @@ globalToLocal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return transposed(orientation) * (vector - position);
+        return orientation * (vector - position);
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return transposed(orientation) * vector;
+        return orientation * vector;
     }
 #else
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return (vector - position) * transposed(orientation);
+        return (vector - position) * orientation;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return vector * transposed(orientation);
+        return vector * orientation;
     }
 #endif
 }
@@ -55,9 +55,23 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::multiply_matrix4x4_on_vector3<Representation>(detail::fast_inverse_matrix4x4(localSpace), vector);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(localSpace, vector - position(localSpace));
+    }
+    else
+    {
+        return detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(localSpace, vector);
+    }
 #else
-    return detail::multiply_vector3_on_matrix4x4<Representation>(vector, detail::fast_inverse_matrix4x4(localSpace));
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector - position(localSpace), localSpace);
+    }
+    else
+    {
+        return detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, localSpace);
+    }
 #endif
 }
 
@@ -67,7 +81,7 @@ template<typename T>
 constexpr Vector<3,T>
 globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    return oriented(vector, orientation);
+    return oriented(vector, inverseForce(orientation));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -78,11 +92,11 @@ globalToLocal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return oriented(vector - position, orientation);
+        return oriented(vector - position, inverseForce(orientation));
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return oriented(vector, orientation);
+        return oriented(vector, inverseForce(orientation));
     }
 }
 
@@ -95,9 +109,9 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return orientation * vector;
-#else
     return vector * orientation;
+#else
+    return orientation * vector;
 #endif
 }
 
@@ -110,20 +124,20 @@ localToGlobal(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return orientation * vector + position;
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return orientation * vector;
-    }
-#else
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
         return vector * orientation + position;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
         return vector * orientation;
+    }
+#else
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return orientation * vector + position;
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return orientation * vector;
     }
 #endif
 }
@@ -135,9 +149,23 @@ constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Matrix<4,4,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::multiply_matrix4x4_on_vector3<Representation>(localSpace, vector);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, localSpace) + position(localSpace);
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, localSpace);
+    }
 #else
-    return detail::multiply_vector3_on_matrix4x4<Representation>(vector, localSpace);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(localSpace, vector) + position(localSpace);
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(localSpace, vector);
+    }
 #endif
 }
 
@@ -147,7 +175,7 @@ template<typename T>
 constexpr Vector<3,T>
 localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar});
+    return oriented(vector, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -158,11 +186,11 @@ localToGlobal(const Vector<3,T>& vector, const Quaternion<T>& orientation, const
 {
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar}) + position;
+        return oriented(vector, orientation) + position;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return oriented(vector, Quaternion<T>{orientation.vector, -orientation.scalar});
+        return oriented(vector, orientation);
     }
 }
 

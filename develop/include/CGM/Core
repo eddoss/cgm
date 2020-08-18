@@ -1,3 +1,5 @@
+#include <CGM/Modules/Common.hpp>
+
 #include <CGM/Modules/Core/ModuleGlobals.hpp>
 
 #include <CGM/Modules/Core/Types/Matrix.hpp>
