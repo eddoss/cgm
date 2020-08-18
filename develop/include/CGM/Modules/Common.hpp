@@ -105,7 +105,7 @@ constexpr CGM_FORCEINLINE enable_if_integral<T,bool>
 neq(T A, T B);
 
 /* ####################################################################################### */
-/* Number converter */
+/* Number converters */
 /* ####################################################################################### */
 
 /**
@@ -122,6 +122,26 @@ number(BT value);
 template<typename T>
 constexpr enable_if_floating_or_integral<T,T>
 zero = static_cast<T>(0);
+
+/* ####################################################################################### */
+/* Angle converters */
+/* ####################################################################################### */
+
+/**
+ * Convert degrees to radians.
+ * @param angle Angle to convert.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+radians(T angle);
+
+/**
+ * Convert radians to degrees.
+ * @param angle Angle to convert.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+degrees(T angle);
 
 
 #include <CGM/detail/Modules/Common.hpp>
