@@ -7,6 +7,8 @@
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Cartesian/Common.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
 
 

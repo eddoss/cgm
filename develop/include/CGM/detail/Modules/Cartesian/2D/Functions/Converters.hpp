@@ -15,9 +15,9 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 globalToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return transposed(orientation) * vector;
+    return orientation * vector;
 #else
-    return vector * transposed(orientation);
+    return vector * orientation;
 #endif
 }
 
@@ -30,20 +30,20 @@ globalToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return transposed(orientation) * (vector - position);
+        return orientation * (vector - position);
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return transposed(orientation) * vector;
+        return orientation * vector;
     }
 #else
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return (vector - position) * transposed(orientation);
+        return (vector - position) * orientation;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
-        return vector * transposed(orientation);
+        return vector * orientation;
     }
 #endif
 }
@@ -55,9 +55,23 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 globalToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::multiply_matrix3x3_on_vector2<Representation>(detail::fast_inverse_matrix3x3(localSpace), vector);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector - position(localSpace));
+    }
+    else
+    {
+        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector);
+    }
 #else
-    return detail::multiply_vector2_on_matrix3x3<Representation>(vector, detail::fast_inverse_matrix3x3(localSpace));
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector - position(localSpace), localSpace);
+    }
+    else
+    {
+        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace);
+    }
 #endif
 }
 
@@ -70,9 +84,9 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return orientation * vector;
-#else
     return vector * orientation;
+#else
+    return orientation * vector;
 #endif
 }
 
@@ -85,20 +99,20 @@ localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     if constexpr (Representation == EVectorRepresentation::Point)
     {
-        return orientation * vector + position;
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return orientation * vector;
-    }
-#else
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
         return vector * orientation + position;
     }
     else if constexpr (Representation == EVectorRepresentation::Direction)
     {
         return vector * orientation;
+    }
+#else
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return orientation * vector + position;
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return orientation * vector;
     }
 #endif
 }
@@ -110,9 +124,23 @@ constexpr Vector<2,T>
 localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return detail::multiply_matrix3x3_on_vector2<Representation>(localSpace, vector);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace) + position(localSpace);
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace);
+    }
 #else
-    return detail::multiply_vector2_on_matrix3x3<Representation>(vector, localSpace);
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector) + position(localSpace);
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector);
+    }
 #endif
 }
 
