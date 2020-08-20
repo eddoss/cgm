@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
-#include "Input.hpp"
+#include "../Input.hpp"
 
 
 using namespace std;
