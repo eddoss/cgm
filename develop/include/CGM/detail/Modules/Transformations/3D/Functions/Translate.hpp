@@ -87,5 +87,77 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
     pivot += transforms.translations;
 }
 
+/* ####################################################################################### */
+/* Vector (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+translated(Vector<3,T>& vector, const Vector<3,T>& value)
+{
+    auto copy = vector;
+    translate(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+translated(Vector<3,T>& vector, const Transforms<T>& transforms)
+{
+    auto copy = vector;
+    translate(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Matrix4 (outplace) */
+/* ####################################################################################### */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translated(Matrix<4,4,T>& matrix, const Vector<3,T>& value)
+{
+    auto copy = matrix;
+    translate<Space>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translated(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
+{
+    auto copy = matrix;
+    translate<Space>(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Pivot (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+translated(Pivot<T>& pivot, const Vector<3,T>& value)
+{
+    auto copy = pivot;
+    translate(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+translated(Pivot<T>& pivot, const Transforms<T>& transforms)
+{
+    auto copy = pivot;
+    translate(copy, transforms);
+    return copy;
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
