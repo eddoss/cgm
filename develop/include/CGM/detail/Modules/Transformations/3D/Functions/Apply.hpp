@@ -2,6 +2,9 @@
 
 #include <CGM/Modules/Transformations/3D/Functions/Apply.hpp>
 
+/* ####################################################################################### */
+/* Inplace */
+/* ####################################################################################### */
 
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
@@ -99,6 +102,63 @@ apply(Axes<T>& axes, const Matrix<4,4,T>& transforms)
     axes.y = detail::multiply_vector3_on_matrix4x4<Representation>(axes.y, transforms);
     axes.z = detail::multiply_vector3_on_matrix4x4<Representation>(axes.z, transforms);
 #endif
+}
+
+/* ####################################################################################### */
+/* Outplace */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, const Matrix<3,3,T>& transforms)
+{
+    auto copy = vector;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
+{
+    auto copy = vector;
+    apply<Representation>(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
+{
+    auto copy = matrix;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+applied(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& transforms)
+{
+    auto copy = matrix;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+applied(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
+{
+    auto copy = matrix;
+    apply(copy, transforms);
+    return copy;
 }
 
 CGM_XFORM3D_NAMESPACE_END

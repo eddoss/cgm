@@ -503,7 +503,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Vector<3,T>& values)
+scaled(const Vector<3,T>& vector, const Vector<3,T>& values)
 {
     auto copy = vector;
     scale(copy, values);
@@ -514,7 +514,7 @@ scaled(Vector<3,T>& vector, const Vector<3,T>& values)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction)
+scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction)
 {
     auto copy = vector;
     scale(copy, value, direction);
@@ -525,7 +525,7 @@ scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
+scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
 {
     auto copy = vector;
     scale(copy, value, direction, origin);
@@ -536,7 +536,7 @@ scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<
 
 template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Axis<T>& axis)
+scaled(const Vector<3,T>& vector, T value, const Axis<T>& axis)
 {
     auto copy = vector;
     scale<Representation>(copy, value, axis);
@@ -547,7 +547,7 @@ scaled(Vector<3,T>& vector, T value, const Axis<T>& axis)
 
 template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+scaled(const Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
     auto copy = vector;
     scale<Representation>(copy, values, pivotPoint);
@@ -558,7 +558,7 @@ scaled(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoin
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Transforms<T>& transforms)
+scaled(const Vector<3,T>& vector, const Transforms<T>& transforms)
 {
     auto copy = vector;
     scale(copy, transforms);
@@ -571,7 +571,7 @@ scaled(Vector<3,T>& vector, const Transforms<T>& transforms)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
+scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values)
 {
     auto copy = matrix;
     scale<Space>(copy, values);
@@ -582,7 +582,7 @@ scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
+scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
 {
     auto copy = matrix;
     scale<Space>(copy, value, direction);
@@ -593,7 +593,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
+scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
 {
     auto copy = matrix;
     scale<Space>(copy, value, direction, origin);
@@ -604,7 +604,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vecto
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis)
+scaled(const Matrix<3,3,T>& matrix, T value, const Axis<T>& axis)
 {
     auto copy = matrix;
     scale<Space>(copy, value, axis);
@@ -615,7 +615,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
+scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto copy = matrix;
     scale<Space>(copy, values, pivot);
@@ -626,7 +626,7 @@ scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
+scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
     scale<Space>(copy, transforms);
@@ -639,7 +639,7 @@ scaled(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
+scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values)
 {
     auto copy = matrix;
     scale<Space>(copy, values);
@@ -650,7 +650,7 @@ scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
+scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
 {
     auto copy = matrix;
     scale<Space>(copy, value, direction);
@@ -661,7 +661,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
+scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
 {
     auto copy = matrix;
     scale<Space>(copy, value, direction, origin);
@@ -672,7 +672,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vecto
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis)
+scaled(const Matrix<4,4,T>& matrix, T value, const Axis<T>& axis)
 {
     auto copy = matrix;
     scale<Space>(copy, value, axis);
@@ -683,7 +683,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
+scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto copy = matrix;
     scale<Space>(copy, values, pivot);
@@ -694,7 +694,7 @@ scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
+scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
     scale<Space>(copy, transforms);
@@ -707,7 +707,7 @@ scaled(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Vector<3,T>& values)
+scaled(const Pivot<T>& pivot, const Vector<3,T>& values)
 {
     auto copy = pivot;
     scale(copy, values);
@@ -718,7 +718,7 @@ scaled(Pivot<T>& pivot, const Vector<3,T>& values)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction)
+scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction)
 {
     auto copy = pivot;
     scale(copy, value, direction);
@@ -729,7 +729,7 @@ scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
+scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
 {
     auto copy = pivot;
     scale(copy, value, direction, origin);
@@ -740,7 +740,7 @@ scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Axis<T>& axis)
+scaled(const Pivot<T>& pivot, T value, const Axis<T>& axis)
 {
     auto copy = pivot;
     scale(copy, value, axis);
@@ -751,7 +751,7 @@ scaled(Pivot<T>& pivot, T value, const Axis<T>& axis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+scaled(const Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
     auto copy = pivot;
     scale(copy, values, pivot);
@@ -762,7 +762,7 @@ scaled(Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Transforms<T>& transforms)
+scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
     scale(copy, transforms);

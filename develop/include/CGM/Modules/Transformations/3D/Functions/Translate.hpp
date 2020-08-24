@@ -93,7 +93,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-translated(Vector<3,T>& vector, const Vector<3,T>& value);
+translated(const Vector<3,T>& vector, const Vector<3,T>& value);
 
 /**
  * Translates 3D vector using "transforms.translations".
@@ -102,7 +102,7 @@ translated(Vector<3,T>& vector, const Vector<3,T>& value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-translated(Vector<3,T>& vector, const Transforms<T>& transforms);
+translated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix4 (outplace) */
@@ -116,7 +116,7 @@ translated(Vector<3,T>& vector, const Transforms<T>& transforms);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translated(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
+translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
 /**
  * Translates 3D transform matrix using "transforms.translations".
@@ -126,7 +126,7 @@ translated(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translated(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
+translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Pivot (outplace) */
@@ -139,7 +139,7 @@ translated(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-translated(Pivot<T>& pivot, const Vector<3,T>& value);
+translated(const Pivot<T>& pivot, const Vector<3,T>& value);
 
 /**
  * Translates 3D pivot using "transforms.translations".
@@ -148,7 +148,7 @@ translated(Pivot<T>& pivot, const Vector<3,T>& value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-translated(Pivot<T>& pivot, const Transforms<T>& transforms);
+translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

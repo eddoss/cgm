@@ -7,7 +7,7 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Vector */
+/* Vector (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -27,7 +27,7 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
-/* Matrix4 */
+/* Matrix4 (inplace) */
 /* ####################################################################################### */
 
 template<ESpace Space, typename T>
@@ -68,7 +68,7 @@ translate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
-/* Pivot */
+/* Pivot (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -93,7 +93,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-translated(Vector<3,T>& vector, const Vector<3,T>& value)
+translated(const Vector<3,T>& vector, const Vector<3,T>& value)
 {
     auto copy = vector;
     translate(copy, value);
@@ -104,7 +104,7 @@ translated(Vector<3,T>& vector, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-translated(Vector<3,T>& vector, const Transforms<T>& transforms)
+translated(const Vector<3,T>& vector, const Transforms<T>& transforms)
 {
     auto copy = vector;
     translate(copy, transforms);
@@ -117,7 +117,7 @@ translated(Vector<3,T>& vector, const Transforms<T>& transforms)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translated(Matrix<4,4,T>& matrix, const Vector<3,T>& value)
+translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value)
 {
     auto copy = matrix;
     translate<Space>(copy, value);
@@ -128,7 +128,7 @@ translated(Matrix<4,4,T>& matrix, const Vector<3,T>& value)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translated(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
+translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
     translate<Space>(copy, transforms);
@@ -141,7 +141,7 @@ translated(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-translated(Pivot<T>& pivot, const Vector<3,T>& value)
+translated(const Pivot<T>& pivot, const Vector<3,T>& value)
 {
     auto copy = pivot;
     translate(copy, value);
@@ -152,7 +152,7 @@ translated(Pivot<T>& pivot, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-translated(Pivot<T>& pivot, const Transforms<T>& transforms)
+translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
     translate(copy, transforms);

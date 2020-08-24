@@ -7,7 +7,7 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Vector */
+/* Vector (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -36,7 +36,7 @@ reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& 
 }
 
 /* ####################################################################################### */
-/* Matrix3 */
+/* Matrix3 (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -55,7 +55,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 }
 
 /* ####################################################################################### */
-/* Matrix4 */
+/* Matrix4 (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -95,7 +95,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>
 }
 
 /* ####################################################################################### */
-/* Pivot */
+/* Pivot (inplace) */
 /* ####################################################################################### */
 
 template<typename T>
@@ -118,6 +118,91 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
     reflect(pivot.axes.y, planeNormal);
     reflect(pivot.axes.z, planeNormal);
     reflect(pivot.position, planeNormal, planeCenter);
+}
+
+/* ####################################################################################### */
+/* Vector (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr Vector<3,T>
+reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal)
+{
+    auto copy = vector;
+    reflect(copy, planeNormal);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Vector<3,T>
+reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+{
+    auto copy = vector;
+    reflect(copy, planeNormal, planeCenter);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Matrix3 (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr Matrix<3,3,T>
+reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
+{
+    auto copy = matrix;
+    reflect(copy, planeNormal);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Matrix4 (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
+{
+    auto copy = matrix;
+    reflect(copy, planeNormal);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+{
+    auto copy = matrix;
+    reflect(copy, planeNormal, planeCenter);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Pivot (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr Pivot<T>
+reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal)
+{
+    auto copy = pivot;
+    reflect(copy, planeNormal);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Pivot<T>
+reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
+{
+    auto copy = pivot;
+    reflect(copy, planeNormal, planeCenter);
+    return copy;
 }
 
 CGM_XFORM3D_NAMESPACE_END

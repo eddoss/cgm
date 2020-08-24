@@ -6,6 +6,10 @@
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
+/* ####################################################################################### */
+/* Inplace */
+/* ####################################################################################### */
+
 template<typename T>
 constexpr void
 refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
@@ -69,6 +73,52 @@ refract(Pivot<T>& pivot, Vector<3,T>& planeNormal, T ior)
     refract(pivot.axes.y, planeNormal, ior);
     refract(pivot.axes.z, planeNormal, ior);
     reflect(pivot.position, planeNormal, ior);
+}
+
+/* ####################################################################################### */
+/* Outplace */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr Vector<3,T>
+refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
+{
+    auto copy = vector;
+    refract(copy, planeNormal, ior);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<3,3,T>
+refracted(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal, T ior)
+{
+    auto copy = matrix;
+    refract(copy, planeNormal, ior);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+refracted(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, T ior)
+{
+    auto copy = matrix;
+    refract(copy, planeNormal, ior);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Pivot<T>
+refracted(const Pivot<T>& pivot, Vector<3,T>& planeNormal, T ior)
+{
+    auto copy = pivot;
+    refract(copy, planeNormal, ior);
+    return copy;
 }
 
 CGM_XFORM3D_NAMESPACE_END

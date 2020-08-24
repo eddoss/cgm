@@ -579,5 +579,334 @@ rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms)
     rotate<Space>(quaternion, transforms.rotations, transforms.pivot, transforms.rotationOrder);
 }
 
+/* ####################################################################################### */
+/* Vector (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, T angle)
+{
+    auto copy = vector;
+    rotate<Axis>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, T angle, const Axis<T>& axis)
+{
+    auto copy = vector;
+    rotate(copy, angle, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto copy = vector;
+    rotate(copy, angle, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto copy = vector;
+    rotate(copy, angle, pivotPoint, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Quaternion<T>& quaternion)
+{
+    auto copy = vector;
+    rotate(copy, angle, quaternion);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Transforms<T>& transforms)
+{
+    auto copy = vector;
+    rotate(copy, angle, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Matrix3 (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, T angle)
+{
+    auto copy = matrix;
+    rotate<Axis, Space>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, quaternion);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Matrix4 (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, T angle)
+{
+    auto copy = matrix;
+    rotate<Axis, Space>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angle, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, quaternion);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Pivot (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, T angle)
+{
+    auto copy = pivot;
+    rotate<Axis>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, T angle, const Axis<T>& axis)
+{
+    auto copy = pivot;
+    rotate(copy, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto copy = pivot;
+    rotate(copy, angles, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto copy = pivot;
+    rotate(copy, angles, pivotPoint, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion)
+{
+    auto copy = pivot;
+    rotate(copy, quaternion);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+rotated(const Pivot<T>& pivot, const Transforms<T>& transforms)
+{
+    auto copy = pivot;
+    rotate(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Quaternion (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+rotated(const Quaternion<T>& quaternion, T angle)
+{
+    auto copy = quaternion;
+    rotate<Axis, Space>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+rotated(const Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis)
+{
+    auto copy = quaternion;
+    rotate<Space>(copy, angle, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto copy = quaternion;
+    rotate<Space>(copy, angles, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Quaternion<T>
+rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto copy = quaternion;
+    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+rotated(const Quaternion<T>& quaternion, const Quaternion<T>& quat)
+{
+    auto copy = quaternion;
+    rotate<Space>(copy, quat);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms)
+{
+    auto copy = quaternion;
+    rotate<Space>(copy, transforms);
+    return copy;
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

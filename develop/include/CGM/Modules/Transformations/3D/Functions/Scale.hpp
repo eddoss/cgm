@@ -304,7 +304,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Vector<3,T>& values);
+scaled(const Vector<3,T>& vector, const Vector<3,T>& values);
 
 /**
  * Scales vector along to arbitrary axis.
@@ -315,7 +315,7 @@ scaled(Vector<3,T>& vector, const Vector<3,T>& values);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction);
+scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction);
 
 /**
  * Scales vector along to arbitrary axis.
@@ -327,7 +327,7 @@ scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
+scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
 
 /**
  * Scales vector along to arbitrary axis.
@@ -340,7 +340,7 @@ scaled(Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<
  */
 template<EVectorRepresentation Representation = EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, T value, const Axis<T>& axis);
+scaled(const Vector<3,T>& vector, T value, const Axis<T>& axis);
 
 /**
  * Scales vector related to pivot point.
@@ -353,7 +353,7 @@ scaled(Vector<3,T>& vector, T value, const Axis<T>& axis);
  */
 template<EVectorRepresentation Representation = EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+scaled(const Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
 
 /**
  * Scales vector related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -364,7 +364,7 @@ scaled(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoin
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(Vector<3,T>& vector, const Transforms<T>& transforms);
+scaled(const Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix3 (outplace) */
@@ -379,7 +379,7 @@ scaled(Vector<3,T>& vector, const Transforms<T>& transforms);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values);
+scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values);
 
 /**
  * Scales 3x3 matrix along to arbitrary axis.
@@ -390,7 +390,7 @@ scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
+scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 3x3 matrix along to arbitrary axis.
@@ -404,7 +404,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
+scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
 
 /**
  * Scales 3x3 matrix along to arbitrary axis.
@@ -417,7 +417,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vecto
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis);
+scaled(const Matrix<3,3,T>& matrix, T value, const Axis<T>& axis);
 
 /**
  * Scales 3x3 matrix related to pivot point.
@@ -429,7 +429,7 @@ scaled(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
+scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 3x3 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -440,7 +440,7 @@ scaled(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
+scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix4 (outplace) */
@@ -455,7 +455,7 @@ scaled(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
+scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
@@ -466,7 +466,7 @@ scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
+scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
@@ -480,7 +480,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
+scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
@@ -493,7 +493,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vecto
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis);
+scaled(const Matrix<4,4,T>& matrix, T value, const Axis<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
@@ -505,7 +505,7 @@ scaled(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
+scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 4x4 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -516,7 +516,7 @@ scaled(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
  */
 template<ESpace Space = ESpace::Local, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
+scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Pivot (outplace) */
@@ -530,7 +530,7 @@ scaled(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Vector<3,T>& values);
+scaled(const Pivot<T>& pivot, const Vector<3,T>& values);
 
  /**
  * Scales pivot along to arbitrary axis.
@@ -541,7 +541,7 @@ scaled(Pivot<T>& pivot, const Vector<3,T>& values);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction);
+scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction);
 
 /**
  * Scales pivot along to arbitrary axis.
@@ -553,7 +553,7 @@ scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
+scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
 
 /**
  * Scales pivot along to arbitrary axis.
@@ -566,7 +566,7 @@ scaled(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, T value, const Axis<T>& axis);
+scaled(const Pivot<T>& pivot, T value, const Axis<T>& axis);
 
 /**
  * Scales pivot position related to pivot point.
@@ -577,7 +577,7 @@ scaled(Pivot<T>& pivot, T value, const Axis<T>& axis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+scaled(const Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
 
 /**
  * Scales pivot position related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -587,7 +587,7 @@ scaled(Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(Pivot<T>& pivot, const Transforms<T>& transforms);
+scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

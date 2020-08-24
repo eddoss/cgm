@@ -13,6 +13,9 @@
 #include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
 #include <CGM/detail/Modules/Transformations/3D/InternalUtils.hpp>
 
+/* ####################################################################################### */
+/* Inplace */
+/* ####################################################################################### */
 
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
@@ -79,6 +82,60 @@ apply(Axes<T>& axes, const Matrix<3,3,T>& transforms);
 template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 apply(Axes<T>& axes, const Matrix<4,4,T>& transforms);
+
+/* ####################################################################################### */
+/* Outplace */
+/* ####################################################################################### */
+
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ * @return Copy of transformed vector.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, const Matrix<3,3,T>& transforms);
+
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ * @return Copy of transformed vector.
+ */
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms);
+
+/**
+ * Applies transformations to 3x3 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ * @return Copy of transformed matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
+
+/**
+ * Applies transformations to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ * @return Copy of transformed matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+applied(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& transforms);
+
+/**
+ * Applies transformations to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ * @return Copy of transformed matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+applied(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
