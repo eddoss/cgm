@@ -20,5 +20,15 @@ enum class ERotationOrder
     ZYX         /**< Rotate around Z, around Y, around X */
 };
 
+/**
+ * Describe default Cartesian planes.
+ */
+enum class EPlane
+{
+    XY = 0,    /**< XY plane */
+    YZ,        /**< YZ plane */
+    ZX,        /**< ZX plane */
+};
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

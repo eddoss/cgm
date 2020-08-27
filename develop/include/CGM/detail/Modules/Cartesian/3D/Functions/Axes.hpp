@@ -16,15 +16,15 @@ axis()
 {
     if constexpr (Axis == EAxes::X)
     {
-        return {number<T>(1), zero<T>, zero<T>};
+        return Vector<3,T>{number<T>(1), zero<T>, zero<T>};
     }
     else if constexpr (Axis == EAxes::Y)
     {
-        return {zero<T>, number<T>(1), zero<T>};
+        return Vector<3,T>{zero<T>, number<T>(1), zero<T>};
     }
     else
     {
-        return {zero<T>, zero<T>, number<T>(1)};
+        return Vector<3,T>{zero<T>, zero<T>, number<T>(1)};
     }
 }
 

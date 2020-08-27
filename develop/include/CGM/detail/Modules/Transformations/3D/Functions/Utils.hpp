@@ -11,14 +11,14 @@ constexpr Quaternion<T>
 orientationQuaternion(const Vector<3,T>& axis, T angle)
 {
     T ang = angle * number<T>(0.5);
-    T sin = std::sin(ang);
+    T sin = T(std::sin(ang));
 
     return Quaternion<T>
     {
         axis.x * sin,
         axis.y * sin,
         axis.z * sin,
-        std::cos(ang)
+        T(std::cos(ang))
     };
 }
 

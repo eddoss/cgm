@@ -10,6 +10,26 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Vector<3,T>& vector, T value)
+{
+    if constexpr (Axis == EAxes::X)
+    {
+        vector.x += vector.x * (value - number<T>(1));
+    }
+    if constexpr (Axis == EAxes::X)
+    {
+        vector.y += vector.y * (value - number<T>(1));
+    }
+    else
+    {
+        vector.z += vector.z * (value - number<T>(1));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, const Vector<3,T>& values)
@@ -25,7 +45,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction)
 {
-    vector = direction * (value - number<T>(1)) * shortestDistance(vector, direction);
+    vector += direction * (value - number<T>(1)) * shortestDistance(vector, direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -34,7 +54,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
 {
-    vector = direction * (value - number<T>(1)) * shortestDistance(vector - origin, direction);
+    vector += direction * (value - number<T>(1)) * shortestDistance(vector - origin, direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -56,15 +76,15 @@ scale(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint
     {
         auto vec = vector - pivotPoint.position;
 
-        vector += scaled(vec, values.x, pivotPoint.axes.x);
-        vector += scaled(vec, values.y, pivotPoint.axes.y);
-        vector += scaled(vec, values.z, pivotPoint.axes.z);
+        vector += pivotPoint.axes.x * (values.x - number<T>(1)) * shortestDistance(vec, pivotPoint.axes.x);
+        vector += pivotPoint.axes.y * (values.y - number<T>(1)) * shortestDistance(vec, pivotPoint.axes.y);
+        vector += pivotPoint.axes.z * (values.z - number<T>(1)) * shortestDistance(vec, pivotPoint.axes.z);
     }
     else
     {
-        vector += scaled(vector, values.x, pivotPoint.axes.x);
-        vector += scaled(vector, values.y, pivotPoint.axes.y);
-        vector += scaled(vector, values.z, pivotPoint.axes.z);
+        vector += pivotPoint.axes.x * (values.x - number<T>(1)) * shortestDistance(vector, pivotPoint.axes.x);
+        vector += pivotPoint.axes.y * (values.y - number<T>(1)) * shortestDistance(vector, pivotPoint.axes.y);
+        vector += pivotPoint.axes.z * (values.z - number<T>(1)) * shortestDistance(vector, pivotPoint.axes.z);
     }
 }
 
@@ -80,6 +100,41 @@ scale(Vector<3,T>& vector, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Matrix3 (inplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Matrix<3,3,T>& matrix, T value)
+{
+    if constexpr (Space == ESpace::World)
+    {
+        auto axes = orientationAxes(matrix);
+
+        scale<Axis>(axes.x, value);
+        scale<Axis>(axes.y, value);
+        scale<Axis>(axes.z, value);
+
+        setX(matrix, axes.x);
+        setY(matrix, axes.y);
+        setZ(matrix, axes.z);
+    }
+    else
+    {
+        if constexpr (Axis == EAxes::X)
+        {
+            scale<ESpace::World>(matrix, value, x(matrix));
+        }
+        else if constexpr (Axis == EAxes::Y)
+        {
+            scale<ESpace::World>(matrix, value, y(matrix));
+        }
+        else
+        {
+            scale<ESpace::World>(matrix, value, z(matrix));
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
 constexpr void
@@ -150,7 +205,7 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
     }
     else
     {
-        scale(matrix, value, localToGlobal(direction, matrix));
+        scale<ESpace::World>(matrix, value, localToGlobal(direction, matrix));
     }
 }
 
@@ -176,7 +231,7 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector
     }
     else
     {
-        scale(matrix, value, localToGlobal(direction, matrix), localToGlobal(origin, matrix));
+        scale<ESpace::World>(matrix, value, localToGlobal(direction, matrix), localToGlobal(origin, matrix));
     }
 }
 
@@ -200,7 +255,7 @@ scale(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis)
     }
     else
     {
-        scale(matrix, value, localToGlobal(axis.direction, matrix), localToGlobal(axis.origin, matrix));
+        scale<ESpace::World>(matrix, value, localToGlobal(axis.direction, matrix), localToGlobal(axis.origin, matrix));
     }
 }
 
@@ -248,6 +303,44 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Matrix<4,4,T>& matrix, T value)
+{
+    if constexpr (Space == ESpace::World)
+    {
+        auto axes = orientationAxes(matrix);
+        auto pos = position(matrix);
+
+        scale<Axis>(axes.x, value);
+        scale<Axis>(axes.y, value);
+        scale<Axis>(axes.z, value);
+        scale<Axis>(pos, value);
+
+        setX(matrix, axes.x);
+        setY(matrix, axes.y);
+        setZ(matrix, axes.z);
+        setPosition(matrix, pos);
+    }
+    else
+    {
+        if constexpr (Axis == EAxes::X)
+        {
+            scale<ESpace::World>(matrix, value, x(matrix));
+        }
+        else if constexpr (Axis == EAxes::Y)
+        {
+            scale<ESpace::World>(matrix, value, y(matrix));
+        }
+        else
+        {
+            scale<ESpace::World>(matrix, value, z(matrix));
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
@@ -445,6 +538,15 @@ scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Pivot<T>& pivot, T value)
+{
+    scale<Axis>(pivot.position, value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, const Vector<3,T>& values)
@@ -500,6 +602,17 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+scaled(const Vector<3,T>& vector, T value)
+{
+    auto copy = vector;
+    scale<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -569,6 +682,17 @@ scaled(const Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+scaled(const Matrix<3,3,T>& matrix, T value)
+{
+    auto copy = matrix;
+    scale<Axis,Space>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values)
@@ -637,6 +761,17 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+scaled(Matrix<4,4,T>& matrix, T value)
+{
+    auto copy = matrix;
+    scale<Axis,Space>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values)
@@ -704,6 +839,17 @@ scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Pivot (outplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+scaled(const Pivot<T>& pivot, T value)
+{
+    auto copy = pivot;
+    scale<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>

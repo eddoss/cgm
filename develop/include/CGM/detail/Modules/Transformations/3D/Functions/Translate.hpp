@@ -10,6 +10,26 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(Vector<3,T>& vector, T value)
+{
+    if constexpr (Axis == EAxes::X)
+    {
+        vector.x += value;
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        vector.y += value;
+    }
+    else
+    {
+        vector.z += value;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Vector<3,T>& vector, const Vector<3,T>& value)
@@ -29,6 +49,33 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, ESpace Space, typename T>
+constexpr void
+translate(Matrix<4,4,T>& matrix, T value)
+{
+    Vector<3,T> axs;
+
+    if constexpr (Axis == EAxes::X)
+    {
+        axs = x(matrix);
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        axs = y(matrix);
+    }
+    else
+    {
+        axs = z(matrix);
+    }
+
+    auto pos = position(matrix);
+    pos += value * axs;
+
+    setPosition(matrix, pos);
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
 constexpr void
@@ -71,6 +118,15 @@ translate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(Pivot<T>& pivot, T value)
+{
+    translate<Axis>(pivot.position, value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, const Vector<3,T>& value)
@@ -90,6 +146,17 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+translated(const Vector<3,T>& vector, T value)
+{
+    auto copy = vector;
+    translate<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -115,6 +182,17 @@ translated(const Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
+template<EAxes Axis, ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translated(const Matrix<4,4,T>& matrix, T value)
+{
+    auto copy = matrix;
+    translate<Axis,Space>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value)
@@ -138,6 +216,17 @@ translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* ####################################################################################### */
 /* Pivot (outplace) */
 /* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+translated(const Pivot<T>& pivot, T value)
+{
+    auto copy = pivot;
+    translate<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>

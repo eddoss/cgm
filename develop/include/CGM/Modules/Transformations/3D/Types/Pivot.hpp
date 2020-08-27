@@ -41,6 +41,7 @@ struct Pivot
      * Initialize all axes. Position is {0,0,0}.
      * @param orientationAxes Pivot orientation axes.
      */
+    explicit
     Pivot(const Axes<T>& orientationAxes);
 
     /**

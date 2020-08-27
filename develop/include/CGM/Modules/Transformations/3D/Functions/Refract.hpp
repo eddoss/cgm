@@ -15,11 +15,21 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Inplace */
+/* Vector (inplace) */
 /* ####################################################################################### */
 
 /**
- * Refracts vector from a plane.
+ * Refracts the vector through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param vector Vector to reflect.
+ * @param ior Index of refraction.
+ */
+template<EPlane Plane, typename T>
+constexpr void
+refract(Vector<3,T>& vector, T ior);
+
+/**
+ * Refracts the vector through a plane.
  * @param vector Vector to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
@@ -28,29 +38,71 @@ template<typename T>
 constexpr void
 refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Matrix3 (inplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts 3x3 matrix from a plane.
+ * Refracts the 3x3 matrix through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param matrix Matrix to reflect.
+ * @param ior Index of refraction.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+constexpr void
+refract(Matrix<3,3,T>& matrix, T ior);
+
+/**
+ * Refracts the 3x3 matrix through a plane.
  * @tparam Space In which space to transform.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
  */
-template<typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
 refract(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Matrix4 (inplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts 4x4 matrix from a plane.
+ * Refracts the 4x4 matrix through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param matrix Matrix to reflect.
+ * @param ior Index of refraction.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+constexpr void
+refract(Matrix<4,4,T>& matrix, T ior);
+
+/**
+ * Refracts the 4x4 matrix through a plane.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
  */
-template<typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
 refract(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Pivot (inplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts pivot through plane.
+ * Refracts the pivot through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param pivot Pivot to reflect.
+ * @param ior Index of refraction.
+ */
+template<EPlane Plane, typename T>
+constexpr void
+refract(Pivot<T>& pivot, T ior);
+
+/**
+ * Refracts the pivot through plane.
  * @param pivot Pivot to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
@@ -60,11 +112,22 @@ constexpr void
 refract(Pivot<T>& pivot, Vector<3,T>& planeNormal, T ior);
 
 /* ####################################################################################### */
-/* Outplace */
+/* Vector (outplace) */
 /* ####################################################################################### */
 
 /**
- * Refracts vector from a plane.
+ * Refracts the vector through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param vector Vector to reflect.
+ * @param ior Index of refraction.
+ * @return Copy of refracted vector.
+ */
+template<EPlane Plane, typename T>
+constexpr Vector<3,T>
+refracted(const Vector<3,T>& vector, T ior);
+
+/**
+ * Refracts the vector through a plane.
  * @param vector Vector to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
@@ -74,8 +137,23 @@ template<typename T>
 constexpr Vector<3,T>
 refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Matrix3 (outplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts 3x3 matrix from a plane.
+ * Refracts the 3x3 matrix through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param matrix Matrix to reflect.
+ * @param ior Index of refraction.
+ * @return Copy of refracted matrix.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+constexpr Matrix<3,3,T>
+refracted(const Matrix<3,3,T>& matrix, T ior);
+
+/**
+ * Refracts the 3x3 matrix through a plane.
  * @tparam Space In which space to transform.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
@@ -86,8 +164,23 @@ template<typename T>
 constexpr Matrix<3,3,T>
 refracted(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Matrix4 (outplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts 4x4 matrix from a plane.
+ * Refracts the 4x4 matrix through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param matrix Matrix to reflect.
+ * @param ior Index of refraction.
+ * @return Copy of refracted matrix.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+constexpr Matrix<4,4,T>
+refracted(const Matrix<4,4,T>& matrix, T ior);
+
+/**
+ * Refracts the 4x4 matrix through a plane.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.
@@ -97,8 +190,23 @@ template<typename T>
 constexpr Matrix<4,4,T>
 refracted(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, T ior);
 
+/* ####################################################################################### */
+/* Pivot (outplace) */
+/* ####################################################################################### */
+
 /**
- * Refracts pivot through plane.
+ * Refracts the pivot through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param pivot Pivot to reflect.
+ * @param ior Index of refraction.
+ * @return Copy of refracted pivot.
+ */
+template<EPlane Plane, typename T>
+constexpr Pivot<T>
+refracted(const Pivot<T>& pivot, T ior);
+
+/**
+ * Refracts the pivot through plane.
  * @param pivot Pivot to reflect.
  * @param planeNormal Plane normal.
  * @param ior Index of refraction.

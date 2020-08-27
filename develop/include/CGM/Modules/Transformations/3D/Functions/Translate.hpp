@@ -19,6 +19,16 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
+ * Translate 3D vector along default Cartesian axis.
+ * @tparam Axis Cartesian axis to translate along which.
+ * @param vector Vector to translate.
+ * @param value How much to translate.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(Vector<3,T>& vector, T value);
+
+/**
  * Translate 3D vector.
  * @param vector Vector to translate.
  * @param value How much to translate.
@@ -41,12 +51,23 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Translates 3D transform matrix by vector.
+ * Translates 3D transform matrix along default Cartesian axis.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<ESpace Space = ESpace::Local, typename T>
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+constexpr void
+translate(Matrix<4,4,T>& matrix, T value);
+
+/**
+ * Translates 3D transform matrix by vector.
+ * @tparam Axis Cartesian axis to translate along which.
+ * @tparam Space In which space to translate.
+ * @param matrix Matrix to translate.
+ * @param value How much to translate.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
 translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
@@ -56,13 +77,23 @@ translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::Local, typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Pivot (inplace) */
 /* ####################################################################################### */
+
+/**
+ * Translates 3D pivot along default Cartesian axis.
+ * @tparam Space In which space to translate.
+ * @param pivot Pivot to translate.
+ * @param value How much to translate.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(Pivot<T>& pivot, T value);
 
 /**
  * Translate 3D pivot.
@@ -87,9 +118,21 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
+ * Translate 3D vector along default Cartesian axis.
+ * @tparam Axis Cartesian axis to translate along which.
+ * @param vector Vector to translate.
+ * @param value How much to translate.
+ * @return Translated vector.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+translated(const Vector<3,T>& vector, T value);
+
+/**
  * Translate 3D vector.
  * @param vector Vector to translate.
  * @param value How much to translate.
+ * @return Translated vector.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -99,6 +142,7 @@ translated(const Vector<3,T>& vector, const Vector<3,T>& value);
  * Translates 3D vector using "transforms.translations".
  * @param vector Vector to translate.
  * @param transforms Transformations parameters.
+ * @return Translated vector.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -109,12 +153,24 @@ translated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
+ * Translates 3D transform matrix along default Cartesian axis.
+ * @tparam Space In which space to translate.
+ * @param matrix Matrix to translate.
+ * @param value How much to translate.
+ * @return Translated matrix.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translated(const Matrix<4,4,T>& matrix, T value);
+
+/**
  * Translates 3D transform matrix by vector.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
+ * @return Translated matrix.
  */
-template<ESpace Space = ESpace::Local, typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
@@ -123,8 +179,9 @@ translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value);
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
+ * @return Translated matrix.
  */
-template<ESpace Space = ESpace::Local, typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
@@ -133,9 +190,21 @@ translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
+ * Translates 3D pivot along default Cartesian axis.
+ * @tparam Space In which space to translate.
+ * @param pivot Pivot to translate.
+ * @param value How much to translate.
+ * @return Translated pivot.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Pivot<T>
+translated(const Pivot<T>& pivot, T value);
+
+/**
  * Translate 3D pivot.
  * @param pivot Pivot to translate.
  * @param value How much to translate.
+ * @return Translated pivot.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
@@ -145,6 +214,7 @@ translated(const Pivot<T>& pivot, const Vector<3,T>& value);
  * Translates 3D pivot using "transforms.translations".
  * @param pivot Pivot to translate.
  * @param transforms Transformations parameters.
+ * @return Translated pivot.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>

@@ -17,5 +17,9 @@ enum class EAxes
     Z       ///< Z axis.
 };
 
+#define CGM_3D_AXIS_X   CGM_XYZ::EAxes::X
+#define CGM_3D_AXIS_Y   CGM_XYZ::EAxes::Y
+#define CGM_3D_AXIS_Z   CGM_XYZ::EAxes::Z
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
