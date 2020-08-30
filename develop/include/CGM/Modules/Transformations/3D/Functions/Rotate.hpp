@@ -37,6 +37,27 @@ constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, T angle);
 
 /**
+ * Rotates vector around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles);
+
+/**
+ * Rotates vector around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
  * Rotates vector around arbitrary direction.
  * @param vector Vector to rotate.
  * @param direction Direction to rotate around.
@@ -169,12 +190,33 @@ rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * Rotates 4x4 matrix around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
  * @tparam Space In which space to rotate.
- * @param matrix Orientation matrix to rotate.
+ * @param matrix Space matrix to rotate.
  * @param angle Rotation angle.
  */
 template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle);
+
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr void
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
+
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr void
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates 4x4 matrix around arbitrary direction.
@@ -397,6 +439,29 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 rotated(const Vector<3,T>& vector, T angle);
 
 /**
+ * Rotates vector around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of vector.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles);
+
+/**
+ * Rotates vector around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of vector.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
  * Rotates vector around arbitrary direction.
  * @param vector Vector to rotate.
  * @param direction Direction to rotate around.
@@ -548,6 +613,29 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle);
+
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
+
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr Matrix<4,4,T>
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates 4x4 matrix around arbitrary direction.

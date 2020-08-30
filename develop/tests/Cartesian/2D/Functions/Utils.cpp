@@ -179,28 +179,6 @@ TEST(Cartesian_2D_Functions_Utils, SetPosition)
 /* Orientation */
 /* ####################################################################################### */
 
-TEST(Cartesian_2D_Functions_Utils, GetOrientation)
-{
-    Matrix<3,3,int> mat
-    {
-        2, 4, 5,
-        3, 6, 7,
-        0, 9, 8
-    };
-
-    Matrix<2,2,int> expec
-    {
-        2, 4,
-        3, 6
-    };
-
-    auto res = CGM_XY::orientation(mat);
-
-    ASSERT_TRUE(res == expec);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 TEST(Cartesian_2D_Functions_Utils, SetOrientation)
 {
     {

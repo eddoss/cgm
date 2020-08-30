@@ -156,19 +156,6 @@ setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientation(const Matrix<3,3,T>& basis)
-{
-    return
-    {
-        basis(0,0), basis(0,1),
-        basis(1,0), basis(1,1)
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
 constexpr void
 setOrientation(Matrix<3,3,T>& basis, const Vector<2,T>& x, const Vector<2,T>& y)
 {

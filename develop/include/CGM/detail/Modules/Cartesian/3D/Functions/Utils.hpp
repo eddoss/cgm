@@ -591,21 +591,7 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientation(const Matrix<4,4,T>& basis)
-{
-    return
-    {
-        basis(0,0), basis(0,1), basis(0,2),
-        basis(1,0), basis(1,1), basis(1,2),
-        basis(2,0), basis(2,1), basis(2,2)
-    };
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
     setX(basis, x);
@@ -616,7 +602,18 @@ setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y,
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Axes<T>& axes)
+{
+    setX(basis, axes.x);
+    setY(basis, axes.y);
+    setZ(basis, axes.z);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation)
 {
     basis(0,0) = orientation(0,0);
@@ -633,7 +630,7 @@ setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation)
 {
     setX(basis, x(orientation));
@@ -644,7 +641,7 @@ setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other)
 {
     basis(0,0) = other(0,0);

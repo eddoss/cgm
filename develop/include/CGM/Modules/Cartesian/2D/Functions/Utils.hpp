@@ -116,15 +116,6 @@ setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position);
 /* ####################################################################################### */
 
 /**
- * Extract 2x2 orientation matrix from 3x3 matrix.
- * @param basis 3x3 matrix to extract from.
- * @returb 2x2 orientation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientation(const Matrix<3,3,T>& basis);
-
-/**
  * Set orientation axes to basis (3x3 matrix).
  * @param basis Basis to set to.
  * @param x X orientation axis.

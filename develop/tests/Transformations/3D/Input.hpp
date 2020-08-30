@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <gtest/gtest.h>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
@@ -9,23 +10,25 @@
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/Modules/Core/Functions/IO.hpp>
+
 
 using namespace std;
 using namespace CGM;
-
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
-
-namespace cgm_xyz_xform_tests_data::rotate
+namespace cgm_xyz_xform_tests_data
 {
-    const auto angle = 0.383972; // 22 deg
-    const auto angles = Vector<3,double> {+0.383972, +0.523599, -0.296706}; // 22, 30, -17 deg
+    // Direction - X axes from 'pivot'
+    // Position - from 'pivot' position
     const auto axis = CGM_XFORM3D::Axis<double>
     (
-        Vector<3,double>{+1.119520, -0.163025, -0.759512},
-        Vector<3,double>{0.339356, 0.888266, 0.309551}
+        Vector<3,double>{+0.40000, -0.30000, +0.20000},
+        Vector<3,double>{+0.94943, +0.15037, -0.27564}
     );
 
-    const auto pivot = CGM_XFORM3D::Pivot<double>   // R: {28, 16, 9} in deg
+    // Rotated on {28, 16, 9} deg
+    // Translated in {0.4, -0.3, 0.2}
+    const auto pivot = CGM_XFORM3D::Pivot<double>
     (
         Vector<3,double>{+0.94943, +0.15037, -0.27564},
         Vector<3,double>{-0.01031, +0.89232, +0.45129},
@@ -33,18 +36,33 @@ namespace cgm_xyz_xform_tests_data::rotate
         Vector<3,double>{+0.40000, -0.30000, +0.20000}
     );
 
-    const auto orient = CGM_XYZ::orientationMatrix  // R: {12, 0, 28} in deg
+    // Rotated {12, 0, 28} deg
+    const auto orientation = CGM_XYZ::orientationMatrix
     (
-        Vector<3,double>{+0.88295, -0.45921, +0.09761},
-        Vector<3,double>{+0.46947, +0.86365, -0.18358},
-        Vector<3,double>{+0.00000, +0.20791, +0.97815}
+        Vector<3,double>{+0.88295, +0.46947, +0.00000},
+        Vector<3,double>{-0.45921, +0.86365, +0.20791},
+        Vector<3,double>{+0.09761, -0.18358, +0.97815}
     );
 
+    // Orientation from 'orientation'
+    // Position {0.25, 1.2, -1.3}
     const auto space = CGM_XYZ::spaceMatrix
     (
-        orient,
+        orientation,
         Vector<3,double>{+0.25000, +1.20000, -1.30000}
     );
 
-    const auto vec = Vector<3,double>{+0.25000, +1.20000, -1.30000};
+    const auto vector = Vector<3,double>{+0.25000, +1.20000, -1.30000};
+
+    namespace rotate
+    {
+        const auto value = 0.383972; // 22 deg
+        const auto values = Vector<3,double> {+0.383972, +0.523599, -0.296706}; // 22, 30, -17 deg
+    }
+
+    namespace scale
+    {
+        const auto value = -0.7;
+        const auto values = Vector<3,double> {-0.7, 2.1, 0.3};
+    }
 }

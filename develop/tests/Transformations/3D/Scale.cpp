@@ -1,10 +1,6 @@
 
 
-#include <iostream>
-#include <gtest/gtest.h>
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include "Input.hpp"
 #include <CGM/Modules/Transformations/3D/Functions/Scale.hpp>
 
 

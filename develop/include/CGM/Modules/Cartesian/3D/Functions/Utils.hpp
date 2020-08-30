@@ -405,15 +405,6 @@ setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position);
 /* ####################################################################################### */
 
 /**
- * Extract 3x3 orientation matrix from 4x4 matrix.
- * @param basis 4x4 matrix to extract from.
- * @returb 3x3 orientation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientation(const Matrix<4,4,T>& basis);
-
-/**
  * Set orientation axes to basis (4x4 matrix).
  * @param basis Basis to set to.
  * @param x X orientation axis.
@@ -421,8 +412,17 @@ orientation(const Matrix<4,4,T>& basis);
  * @param z Z orientation axis.
  */
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
+
+/**
+ * Set orientation axes to basis (4x4 matrix).
+ * @param basis Basis to set to.
+ * @param axes Orientation axes to set.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+setOrientation(Matrix<4,4,T>& basis, const Axes<T>& axes);
 
 /**
  * Set 3x3 orientation matrix to 4x4 matrix.
@@ -430,7 +430,7 @@ setOrientation(Matrix<4,4,T>& basis, const Vector<3,T>& x, const Vector<3,T>& y,
  * @param orientation 3x3 orientation matrix.
  */
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation);
 
 /**
@@ -439,7 +439,7 @@ setOrientation(Matrix<4,4,T>& basis, const Matrix<3,3,T>& orientation);
  * @param orientation Orientation quaternion.
  */
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation);
 
 /**
@@ -448,7 +448,7 @@ setOrientation(Matrix<4,4,T>& basis, const Quaternion<T>& orientation);
  * @param other Basis to extract orientation from.
  */
 template<typename T>
-constexpr void
+constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
 
 /* ####################################################################################### */
