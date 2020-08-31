@@ -7,17 +7,14 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XY::Axes<T>& axes)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream.setf(std::ios::showpos);
     stream << "CGM::XY::Axes<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
     stream << "\n    X " << axes.x.x << " " << axes.x.y;
     stream << "\n    Y " << axes.y.x << " " << axes.y.y;
-
     stream << "\n}";
-    stream.setf(old_flags);
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -27,14 +24,10 @@ operator << (std::ostream& stream, const CGM_XY::Axes<T>& axes)
 constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XY::EAxes axis)
 {
-    if (axis == CGM_XY::EAxes::X)
+    switch (axis)
     {
-        stream << "CGM::XY::EAxes::X";
+        case CGM_XY::EAxes::X: stream << "CGM::XY::EAxes::X"; break;
+        case CGM_XY::EAxes::Y: stream << "CGM::XY::EAxes::Y"; break;
     }
-    else
-    {
-        stream << "CGM::XY::EAxes::Y";
-    }
-
     return stream;
 }

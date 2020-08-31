@@ -31,6 +31,19 @@
 /* Utils */
 /* ####################################################################################### */
 
+#define CGM_PREPARE_IO_STREAM_FLAGS(strm)       \
+    const auto cgm_old_flags {strm.flags()};    \
+    strm << std::fixed;                         \
+    strm << std::left;                          \
+    strm << std::showpos;                       \
+    strm << std::setprecision(6);
+
+/* --------------------------------------------------------------------------------------- */
+
+#define CGM_RESTORE_IO_STREAM_FLAGS(strm) strm.flags(cgm_old_flags);
+
+/* --------------------------------------------------------------------------------------- */
+
 #define CGM_RULE_OF_FIVE(className) \
     ~className()                                            = default; \
     constexpr className()                                   = default; \

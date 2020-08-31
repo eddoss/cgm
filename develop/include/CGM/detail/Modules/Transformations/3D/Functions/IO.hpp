@@ -7,17 +7,14 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Axis<T>& axis)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream.setf(std::ios::showpos);
     stream << "CGM::XYZ::Axis<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
     stream << "\n    Origin   : " << axis.origin.x << " " << axis.origin.y << " " << axis.origin.z;
     stream << "\n    Direction: " << axis.direction.x << " " << axis.direction.y << " " << axis.direction.z;
-
     stream << "\n}";
-    stream.setf(old_flags);
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -28,24 +25,22 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
-
-    stream.setf(std::ios::showpos);
-    stream << "CGM::XYZ::Pivot<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
 
     auto x = pivot.axes.x;
     auto y = pivot.axes.y;
     auto z = pivot.axes.z;
     auto p = pivot.position;
 
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
+
+    stream << "CGM::XYZ::Pivot<" << typeid(T).name() << ">\n{";
     stream << "\n    X " << x.x << " " << x.y << " " << x.z;
     stream << "\n    Y " << y.x << " " << y.y << " " << y.z;
     stream << "\n    Z " << z.x << " " << z.y << " " << z.z;
     stream << "\n    P " << p.x << " " << p.y << " " << p.z;
-
     stream << "\n}";
-    stream.setf(old_flags);
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -56,13 +51,11 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream.setf(std::ios::showpos);
     stream << "CGM::XYZ::Transforms<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
     stream << "\n       Orders [ ";
+
     switch (transforms.transformOrder)
     {
         case CGM::ETransformOrder::RST: stream << "Rotate Scale Translate"; break;
@@ -99,9 +92,9 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     stream << "\n       Rotate " << transforms.rotations.x << " " << transforms.rotations.y << " " << transforms.rotations.z;
     stream << "\n        Scale " << transforms.scales.x << " " << transforms.scales.y << " " << transforms.scales.z;
     stream << "\n       UScale " << transforms.uniformScale;
-
     stream << "\n}";
-    stream.setf(old_flags);
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -112,16 +105,13 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream.setf(std::ios::showpos);
     stream << "CGM::XYZ::AxisAngle<" << typeid(T).name() << ">{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
     stream << " " << axisAngle.axis.x << " " << axisAngle.axis.y << " " << axisAngle.axis.z;
     stream << " | " << axisAngle.angle << " }";
 
-    stream.setf(old_flags);
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -139,20 +129,6 @@ operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder)
         case CGM_XFORM3D::ERotationOrder::YZX: stream << "CGM::XYZ::ERotationOrder::YZX"; break;
         case CGM_XFORM3D::ERotationOrder::ZXY: stream << "CGM::XYZ::ERotationOrder::ZXY"; break;
         case CGM_XFORM3D::ERotationOrder::ZYX: stream << "CGM::XYZ::ERotationOrder::ZYX"; break;
-    }
-
-    return stream;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ESpace space)
-{
-    switch (space)
-    {
-        case CGM::ESpace::World: stream << "CGM::ESpace::World"; break;
-        case CGM::ESpace::Local: stream << "CGM::ESpace::Local"; break;
     }
 
     return stream;

@@ -7,18 +7,15 @@ template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XYZ::Axes<T>& axes)
 {
-    std::ios_base::fmtflags old_flags {stream.flags()};
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream.setf(std::ios::showpos);
     stream << "CGM::XYZ::Axes<" << typeid(T).name() << ">\n{";
-    stream << std::fixed << std::left << std::setprecision(6);
-
     stream << "\n    X " << axes.x.x << " " << axes.x.y << " " << axes.x.z;
     stream << "\n    Y " << axes.y.x << " " << axes.y.y << " " << axes.y.z;
     stream << "\n    Z " << axes.z.x << " " << axes.z.y << " " << axes.z.z;
-
     stream << "\n}";
-    stream.setf(old_flags);
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }
@@ -28,17 +25,25 @@ operator << (std::ostream& stream, const CGM_XYZ::Axes<T>& axes)
 constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XYZ::EAxes axis)
 {
-    if (axis == CGM_XYZ::EAxes::X)
+    switch (axis)
     {
-        stream << "CGM::XYZ::EAxes::X";
+        case CGM_XYZ::EAxes::X: stream << "CGM::XYZ::EAxes::X"; break;
+        case CGM_XYZ::EAxes::Y: stream << "CGM::XYZ::EAxes::Y"; break;
+        case CGM_XYZ::EAxes::Z: stream << "CGM::XYZ::EAxes::Z"; break;
     }
-    else if (axis == CGM_XYZ::EAxes::Y)
+
+    return stream;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ESpace space)
+{
+    switch (space)
     {
-        stream << "CGM::XYZ::EAxes::Y";
-    }
-    else
-    {
-        stream << "CGM::XYZ::EAxes::Z";
+        case CGM::ESpace::World: stream << "CGM::ESpace::World"; break;
+        case CGM::ESpace::Local: stream << "CGM::ESpace::Local"; break;
     }
 
     return stream;

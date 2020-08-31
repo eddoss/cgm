@@ -30,9 +30,6 @@ constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder);
 
 constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ESpace space);
-
-constexpr std::ostream&
 operator << (std::ostream& stream, CGM::ETransformOrder transformOrder);
 
 
