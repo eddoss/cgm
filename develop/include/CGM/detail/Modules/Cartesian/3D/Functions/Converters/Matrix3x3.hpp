@@ -14,7 +14,14 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation)
 {
+    if constexpr (Space == ESpace::World)
+    {
 
+    }
+    else
+    {
+
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -23,7 +30,14 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
 {
+    if constexpr (Space == ESpace::World)
+    {
 
+    }
+    else
+    {
+
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -32,7 +46,14 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Quaternion<T>& orientation)
 {
+    if constexpr (Space == ESpace::World)
+    {
 
+    }
+    else
+    {
+
+    }
 }
 
 /* ####################################################################################### */
