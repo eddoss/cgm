@@ -17,6 +17,10 @@ enum class EAxes
     Z       ///< Z axis.
 };
 
+/* ####################################################################################### */
+/* Macro */
+/* ####################################################################################### */
+
 #define CGM_3D_AXIS_X   CGM_XYZ::EAxes::X
 #define CGM_3D_AXIS_Y   CGM_XYZ::EAxes::Y
 #define CGM_3D_AXIS_Z   CGM_XYZ::EAxes::Z
