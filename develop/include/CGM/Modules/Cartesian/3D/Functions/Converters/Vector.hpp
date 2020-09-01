@@ -22,8 +22,8 @@ CGM_XYZ_NAMESPACE_BEGIN
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The physically position 
- * of the vector does not change, only recalculation to the local system occurs.
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
@@ -34,9 +34,8 @@ convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The 
- * physically position  of the vector does not change, only recalculation to the local 
- * system occurs.
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
@@ -48,9 +47,8 @@ convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vector<3,T>
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The 
- * physically position  of the vector does not change, only recalculation to the local 
- * system occurs.
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param space Local space represented by 4x4 matrix.
@@ -61,9 +59,8 @@ convert(Vector<3,T>& vector, const Matrix<4,4,T>& space);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The 
- * physically position  of the vector does not change, only recalculation to the local 
- * system occurs.
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation orientation Local space orientation represented by quaternion.
@@ -74,9 +71,8 @@ convert(Vector<3,T>& vector, const Quaternion<T>& orientation);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The 
- * physically position  of the vector does not change, only recalculation to the local 
- * system occurs.
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by quaternion.
@@ -407,7 +403,7 @@ convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The physically position
+ * will be converted to from local to world (and vice versa). The physically position
  * of the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
@@ -420,7 +416,7 @@ converted(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The
+ * will be converted to from local to world (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -435,7 +431,7 @@ converted(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vec
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The
+ * will be converted to from local to world (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -449,7 +445,7 @@ converted(const Vector<3,T>& vector, const Matrix<4,4,T>& space);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The
+ * will be converted to from local to world (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -463,7 +459,7 @@ converted(const Vector<3,T>& vector, const Quaternion<T>& orientation);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). 'Space' is 'World'. The
+ * will be converted to from local to world (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
