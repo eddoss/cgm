@@ -452,6 +452,52 @@ constexpr CGM_FORCEINLINE void
 setOrientation(Matrix<4,4,T>& basis, const Matrix<4,4,T>& other);
 
 /* ####################################################################################### */
+/* Setup all */
+/* ####################################################################################### */
+
+/**
+ * Set X,Y,Z axes to 3x3 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param x X axis.
+ * @param y Y axis.
+ * @param z Z axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
+
+/**
+ * Set X,Y,Z axes to 3x3 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param axes Axes to set.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Axes<T>& axes);
+
+/**
+ * Set X,Y,Z axes and position to 4x4 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param x X axis.
+ * @param y Y axis.
+ * @param z Z axis.
+ * @param position Basis position.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<4,4,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& position);
+
+/**
+ * Set X,Y,Z axes and position to 4x4 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param axes Axes to set.
+ * @param position Basis position.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<4,4,T>& matrix, const Axes<T>& axes, const Vector<3,T>& position);
+
+/* ####################################################################################### */
 /* Space matrix */
 /* ####################################################################################### */
 

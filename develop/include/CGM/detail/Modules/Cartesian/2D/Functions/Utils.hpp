@@ -152,6 +152,50 @@ setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 }
 
 /* ####################################################################################### */
+/* Setup all */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<2,2,T>& matrix, const Vector<2,T>& x, const Vector<2,T>& y)
+{
+    setX(matrix, x);
+    setY(matrix, y);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<2,2,T>& matrix, const Axes<T>& axes)
+{
+    setX(matrix, axes.x);
+    setY(matrix, axes.y);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position)
+{
+    setX(matrix, x);
+    setY(matrix, y);
+    setPosition(matrix, position);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Axes<T>& axes, const Vector<2,T>& position)
+{
+    setX(matrix, axes.x);
+    setY(matrix, axes.y);
+    setPosition(matrix, position);
+}
+
+/* ####################################################################################### */
 /* Orientation */
 /* ####################################################################################### */
 

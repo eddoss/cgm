@@ -112,6 +112,50 @@ constexpr CGM_FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position);
 
 /* ####################################################################################### */
+/* Setup all */
+/* ####################################################################################### */
+
+/**
+ * Set X,Y axes to 2x2 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param x X axis.
+ * @param y Y axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<2,2,T>& matrix, const Vector<2,T>& x, const Vector<2,T>& y);
+
+/**
+ * Set X,Y axes to 2x2 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param axes Axes to set.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<2,2,T>& matrix, const Axes<T>& axes);
+
+/**
+ * Set X,Y axes and position to 3x3 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param x X axis.
+ * @param y Y axis.
+ * @param position Basis position.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position);
+
+/**
+ * Set X,Y axes and position to 3x3 orientation matrix.
+ * @param matrix Matrix to set axes to.
+ * @param axes Axes to set.
+ * @param position Basis position.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<3,3,T>& matrix, const Axes<T>& axes, const Vector<2,T>& position);
+
+/* ####################################################################################### */
 /* Basis orientation */
 /* ####################################################################################### */
 
