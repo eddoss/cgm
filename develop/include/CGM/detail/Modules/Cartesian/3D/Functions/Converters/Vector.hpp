@@ -17,9 +17,9 @@ convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
     if constexpr (Space == ESpace::World)
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = vector * orientation;
+        vector = inverseForce(orientation) * vector;
     #else
-        vector = orientation * vector;
+        vector = vector * inverseForce(orientation);
     #endif
     }
     else
@@ -41,9 +41,9 @@ convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vector<3,T>
     if constexpr (Space == ESpace::World)
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = vector * orientation + position;
+        vector = inverseForce(orientation) * vector + position;
     #else
-        vector = orientation * vector + position;
+        vector = vector * inverseForce(orientation) + position;
     #endif
     }
     else
@@ -67,20 +67,20 @@ convert(Vector<3,T>& vector, const Matrix<4,4,T>& space)
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         if constexpr (Representation == EVectorRepresentation::Point)
         {
-            vector = detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, space) + position(space);
+            vector = inverseForce(orientationMatrix(space)) * vector + position(space);
         }
         else if constexpr (Representation == EVectorRepresentation::Direction)
         {
-            vector = detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, space);
+            vector = inverseForce(orientationMatrix(space)) * vector;
         }
     #else
         if constexpr (Representation == EVectorRepresentation::Point)
         {
-            vector = detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(space, vector) + position(space);
+            vector = vector * inverseForce(orientationMatrix(space)) + position(space);
         }
         else if constexpr (Representation == EVectorRepresentation::Direction)
         {
-            vector = detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(space, vector);
+            vector = vector * inverseForce(orientationMatrix(space));
         }
     #endif
     }
@@ -89,20 +89,20 @@ convert(Vector<3,T>& vector, const Matrix<4,4,T>& space)
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         if constexpr (Representation == EVectorRepresentation::Point)
         {
-            vector = detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(space, vector - position(space));
+            vector = orientationMatrix(space) * (vector - position(space));
         }
         else
         {
-            vector = detail::multiply_matrix4x4_on_vector3<EVectorRepresentation::Direction>(space, vector);
+            vector = orientationMatrix(space) * vector;
         }
     #else
         if constexpr (Representation == EVectorRepresentation::Point)
         {
-            vector = detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector - position(space), space);
+            vector = (vector - position(space)) * orientationMatrix(space);
         }
         else
         {
-            vector = detail::multiply_vector3_on_matrix4x4<EVectorRepresentation::Direction>(vector, space);
+            vector = vector * orientationMatrix(space);
         }
     #endif
     }
@@ -148,8 +148,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -158,8 +158,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -168,8 +168,8 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL,Representation>(vector, spaceB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -178,8 +178,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -188,8 +188,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* ####################################################################################### */
@@ -200,8 +200,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -210,8 +210,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -220,8 +220,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL,EVectorRepresentation::Point>(vector, spaceB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local,EVectorRepresentation::Point>(vector, spaceB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -230,8 +230,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -240,8 +240,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* ####################################################################################### */
@@ -252,8 +252,8 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
 {
-    convert<CGM_WORLD,Representation>(vector, spaceA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -262,8 +262,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD,EVectorRepresentation::Point>(vector, spaceA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World,EVectorRepresentation::Point>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -272,8 +272,8 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 {
-    convert<CGM_WORLD,Representation>(vector, spaceA);
-    convert<CGM_LOCAL,Representation>(vector, spaceB);
+    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -282,8 +282,8 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
 {
-    convert<CGM_WORLD,Representation>(vector, spaceA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -292,8 +292,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD,EVectorRepresentation::Point>(vector, spaceA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World,EVectorRepresentation::Point>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* ####################################################################################### */
@@ -304,8 +304,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -314,8 +314,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -324,8 +324,8 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL,Representation>(vector, spaceB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -334,8 +334,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -344,8 +344,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* ####################################################################################### */
@@ -356,8 +356,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -366,8 +366,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -376,8 +376,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL,EVectorRepresentation::Point>(vector, spaceB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local,EVectorRepresentation::Point>(vector, spaceB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -386,8 +386,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -396,8 +396,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
-    convert<CGM_WORLD>(vector, orientationA, positionA);
-    convert<CGM_LOCAL>(vector, orientationB, positionB);
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* ####################################################################################### */

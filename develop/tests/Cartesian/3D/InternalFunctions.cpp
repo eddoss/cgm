@@ -83,6 +83,132 @@ TEST(Cartesian_3D_InternalFunctions, multiply_vector3_on_matrix4x4)
 
 /* --------------------------------------------------------------------------------------- */
 
+TEST(Cartesian_3D_InternalFunctions, multiply_matrix3x3_on_matrix4x4_res3x3)
+{
+    Matrix<3,3,int> expect
+    {
+         58,  37,   39,
+         99,  62,   48,
+        121,  66,   76
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        4,2,5,
+        3,6,7,
+        9,8,5
+    };
+
+    Matrix<4,4,int> mat4
+    {
+        3,1,5,5,
+        8,4,2,9,
+        6,5,3,8,
+        2,4,7,3
+    };
+
+    auto result = CGM_XYZ::detail::multiply_matrix3x3_on_matrix4x4_res3x3(mat3, mat4);
+
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_InternalFunctions, multiply_matrix3x3_on_matrix4x4_res4x4)
+{
+    Matrix<4,4,int> expect
+    {
+         58,  37,   39,   78,
+         99,  62,   48,  125,
+        121,  66,   76,  157,
+          2,   4,    7,    3
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        4,2,5,
+        3,6,7,
+        9,8,5
+    };
+
+    Matrix<4,4,int> mat4
+    {
+        3,1,5,5,
+        8,4,2,9,
+        6,5,3,8,
+        2,4,7,3
+    };
+
+    auto result = CGM_XYZ::detail::multiply_matrix3x3_on_matrix4x4_res4x4(mat3, mat4);
+
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_matrix3x3_res3x3)
+{
+    Matrix<3,3,int> expect
+    {
+        60,  52,  47,
+        62,  56,  78,
+        66,  66,  80
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        4,2,5,
+        3,6,7,
+        9,8,5
+    };
+
+    Matrix<4,4,int> mat4
+    {
+        3,1,5,5,
+        8,4,2,9,
+        6,5,3,8,
+        2,4,7,3
+    };
+
+    auto result = CGM_XYZ::detail::multiply_matrix4x4_on_matrix3x3_res3x3(mat4, mat3);
+
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_InternalFunctions, multiply_matrix4x4_on_matrix3x3_res4x4)
+{
+    Matrix<4,4,int> expect
+    {
+        60,  52,  47,  5,
+        62,  56,  78,  9,
+        66,  66,  80,  8,
+        83,  84,  73,  3
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        4,2,5,
+        3,6,7,
+        9,8,5
+    };
+
+    Matrix<4,4,int> mat4
+    {
+        3,1,5,5,
+        8,4,2,9,
+        6,5,3,8,
+        2,4,7,3
+    };
+
+    auto result = CGM_XYZ::detail::multiply_matrix4x4_on_matrix3x3_res4x4(mat4, mat3);
+
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 TEST(Cartesian_3D_InternalFunctions, fast_inverse_matrix4x4)
 {
     Vector<3,double> x { 0.910683,  0.333334, -0.244017};

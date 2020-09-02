@@ -542,6 +542,48 @@ template<typename T>
 constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
 unpackSpace(const Matrix<4,4,T>& space);
 
+/* ####################################################################################### */
+/* Invert orientation */
+/* ####################################################################################### */
+
+/**
+ * Safely invert orientation of 4x4 basis matrix.
+ * @param basis Matrix to invert.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ */
+template<typename T>
+constexpr bool
+invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance=T(0.000001));
+
+/**
+ * Safely calculates inverse orientation of 4x4 basis matrix.
+ * @param[in] basis Matrix to invert.
+ * @param[out] success Set this false if cant calculate inverse matrix.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance=T(0.000001));
+
+/**
+ * Unsafely invert orientation of 4x4 basis matrix. Does not check the determinants for equality to 0.
+ * @param basis Matrix to invert.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ */
+template<typename T>
+constexpr void
+invertOrientationForce(Matrix<4,4,T>& basis);
+
+/**
+ * Unsafely calculates inverse orientation of 4x4 basis matrix. Does not check the determinants for
+ * equality to 0.
+ * @param basis Matrix to invert.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+inverseOrientationForce(const Matrix<4,4,T>& basis);
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 

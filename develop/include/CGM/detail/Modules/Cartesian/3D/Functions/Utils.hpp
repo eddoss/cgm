@@ -785,5 +785,149 @@ unpackSpace(const Matrix<4,4,T>& space)
     );
 }
 
+/* ####################################################################################### */
+/* Invert orientation */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr bool
+invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance)
+{
+    Matrix<3,3,T> orient
+    {
+        basis(0,0), basis(0,1), basis(0,2),
+        basis(1,0), basis(1,1), basis(1,2),
+        basis(2,0), basis(2,1), basis(2,2)
+    };
+
+    if (invert(orient, determinantTolerance))
+    {
+        basis(0,0) = orient(0,0);
+        basis(0,1) = orient(0,1);
+        basis(0,2) = orient(0,2);
+        basis(1,0) = orient(1,0);
+        basis(1,1) = orient(1,1);
+        basis(1,2) = orient(1,2);
+        basis(2,0) = orient(2,0);
+        basis(2,1) = orient(2,1);
+        basis(2,2) = orient(2,2);
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance)
+{
+    Matrix<3,3,T> orient
+    {
+        basis(0,0), basis(0,1), basis(0,2),
+        basis(1,0), basis(1,1), basis(1,2),
+        basis(2,0), basis(2,1), basis(2,2)
+    };
+
+    success = invert(orient, determinantTolerance);
+
+    if (success)
+    {
+        Matrix<4,4,T> mat;
+
+        mat(0,0) = orient(0,0);
+        mat(0,1) = orient(0,1);
+        mat(0,2) = orient(0,2);
+        mat(1,0) = orient(1,0);
+        mat(1,1) = orient(1,1);
+        mat(1,2) = orient(1,2);
+        mat(2,0) = orient(2,0);
+        mat(2,1) = orient(2,1);
+        mat(2,2) = orient(2,2);
+
+        mat(3,0) = basis(3,0);
+        mat(3,1) = basis(3,1);
+        mat(3,2) = basis(3,2);
+        mat(0,3) = basis(0,3);
+        mat(1,3) = basis(1,3);
+        mat(2,3) = basis(2,3);
+        mat(3,3) = basis(3,3);
+
+        return mat;
+    }
+    else
+    {
+        return basis;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+invertOrientationForce(Matrix<4,4,T>& basis)
+{
+    Matrix<3,3,T> orient
+    {
+        basis(0,0), basis(0,1), basis(0,2),
+        basis(1,0), basis(1,1), basis(1,2),
+        basis(2,0), basis(2,1), basis(2,2)
+    };
+
+    invertForce(orient);
+
+    basis(0,0) = orient(0,0);
+    basis(0,1) = orient(0,1);
+    basis(0,2) = orient(0,2);
+    basis(1,0) = orient(1,0);
+    basis(1,1) = orient(1,1);
+    basis(1,2) = orient(1,2);
+    basis(2,0) = orient(2,0);
+    basis(2,1) = orient(2,1);
+    basis(2,2) = orient(2,2);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+inverseOrientationForce(const Matrix<4,4,T>& basis)
+{
+    Matrix<3,3,T> orient
+    {
+        basis(0,0), basis(0,1), basis(0,2),
+        basis(1,0), basis(1,1), basis(1,2),
+        basis(2,0), basis(2,1), basis(2,2)
+    };
+
+    invertForce(orient);
+
+    Matrix<4,4,T> mat;
+
+    mat(0,0) = orient(0,0);
+    mat(0,1) = orient(0,1);
+    mat(0,2) = orient(0,2);
+    mat(1,0) = orient(1,0);
+    mat(1,1) = orient(1,1);
+    mat(1,2) = orient(1,2);
+    mat(2,0) = orient(2,0);
+    mat(2,1) = orient(2,1);
+    mat(2,2) = orient(2,2);
+
+    mat(3,0) = basis(3,0);
+    mat(3,1) = basis(3,1);
+    mat(3,2) = basis(3,2);
+    mat(0,3) = basis(0,3);
+    mat(1,3) = basis(1,3);
+    mat(2,3) = basis(2,3);
+    mat(3,3) = basis(3,3);
+
+    return mat;
+}
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

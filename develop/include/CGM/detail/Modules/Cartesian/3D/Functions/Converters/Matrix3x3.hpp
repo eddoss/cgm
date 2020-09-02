@@ -41,17 +41,17 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
     if constexpr (Space == ESpace::World)
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = matrix * orientationMatrix(space);
+        matrix = detail::multiply_matrix3x3_on_matrix4x4_res3x3(matrix, space);
     #else
-        matrix = orientationMatrix(space) * matrix;
+        matrix = detail::multiply_matrix4x4_on_matrix3x3_res3x3(space, matrix);
     #endif
     }
     else
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = orientationMatrix(space) * matrix;
+        matrix = detail::multiply_matrix4x4_on_matrix3x3_res3x3(space, matrix);
     #else
-        matrix = matrix * orientationMatrix(space);
+        matrix = detail::multiply_matrix3x3_on_matrix4x4_res3x3(matrix, space);
     #endif
     }
 }
@@ -59,7 +59,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 convert(Matrix<3,3,T>& matrix, const Quaternion<T>& orientation)
 {
     auto axes = orientationAxes(matrix);

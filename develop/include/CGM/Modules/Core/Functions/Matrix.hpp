@@ -45,7 +45,7 @@ constexpr Matrix<S,S,T>
 cofactors(const Matrix<S,S,T>& matrix);
 
 /**
- * Safely invert matrix. Change flag to false, if cant calculate inverse.
+ * Safely invert matrix.
  * @param matrix Matrix for which it is necessary to calculate the inverse.
  * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  * @return False if cant calculate inverse matrix. true otherwise.

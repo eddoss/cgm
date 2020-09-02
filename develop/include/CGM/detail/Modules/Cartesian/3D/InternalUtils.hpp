@@ -10,7 +10,10 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN namespace detail {
+CGM_XYZ_NAMESPACE_BEGIN
+
+namespace detail
+{
 
 template <EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -64,6 +67,124 @@ multiply_vector3_on_matrix4x4(const Vector<3,T>& vec, const Matrix<4,4,T>& mat)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+multiply_matrix3x3_on_matrix4x4_res3x3(const Matrix<3,3,T>& A, const Matrix<4,4,T>& B)
+{
+    return
+    {
+        // row 0
+        A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+        A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+        A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+        // row 1
+        A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+        A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+        A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+        // row 2
+        A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+        A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+        A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+multiply_matrix3x3_on_matrix4x4_res4x4(const Matrix<3,3,T>& A, const Matrix<4,4,T>& B)
+{
+    return
+    {
+        // row 0
+        A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+        A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+        A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+        A(0,0)*B(0,3) + A(0,1)*B(1,3) + A(0,2)*B(2,3),
+
+        // row 1
+        A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+        A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+        A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+        A(1,0)*B(0,3) + A(1,1)*B(1,3) + A(1,2)*B(2,3),
+
+        // row 2
+        A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+        A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+        A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+        A(2,0)*B(0,3) + A(2,1)*B(1,3) + A(2,2)*B(2,3),
+
+        // row 3
+        B(3,0),
+        B(3,1),
+        B(3,2),
+        B(3,3)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+multiply_matrix4x4_on_matrix3x3_res3x3(const Matrix<4,4,T>& A, const Matrix<3,3,T>& B)
+{
+    return
+    {
+        // row 0
+        A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+        A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+        A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+
+        // row 1
+        A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+        A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+        A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+
+        // row 2
+        A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+        A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+        A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+multiply_matrix4x4_on_matrix3x3_res4x4(const Matrix<4,4,T>& A, const Matrix<3,3,T>& B)
+{
+    return
+    {
+        // row 0
+        A(0,0)*B(0,0) + A(0,1)*B(1,0) + A(0,2)*B(2,0),
+        A(0,0)*B(0,1) + A(0,1)*B(1,1) + A(0,2)*B(2,1),
+        A(0,0)*B(0,2) + A(0,1)*B(1,2) + A(0,2)*B(2,2),
+        A(0,3),
+
+        // row 1
+        A(1,0)*B(0,0) + A(1,1)*B(1,0) + A(1,2)*B(2,0),
+        A(1,0)*B(0,1) + A(1,1)*B(1,1) + A(1,2)*B(2,1),
+        A(1,0)*B(0,2) + A(1,1)*B(1,2) + A(1,2)*B(2,2),
+        A(1,3),
+
+        // row 2
+        A(2,0)*B(0,0) + A(2,1)*B(1,0) + A(2,2)*B(2,0),
+        A(2,0)*B(0,1) + A(2,1)*B(1,1) + A(2,2)*B(2,1),
+        A(2,0)*B(0,2) + A(2,1)*B(1,2) + A(2,2)*B(2,2),
+        A(2,3),
+
+        // row 3
+        A(3,0)*B(0,0) + A(3,1)*B(1,0) + A(3,2)*B(2,0),
+        A(3,0)*B(0,1) + A(3,1)*B(1,1) + A(3,2)*B(2,1),
+        A(3,0)*B(0,2) + A(3,1)*B(1,2) + A(3,2)*B(2,2),
+        A(3,3)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template <typename T>
 constexpr void
 fast_invert_matrix4x4(Matrix<4,4,T>& mat)
@@ -103,5 +224,7 @@ fast_inverse_matrix4x4(const Matrix<4,4,T>& mat)
     return inv;
 }
 
-}CGM_XYZ_NAMESPACE_END
+}
+
+CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

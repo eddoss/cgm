@@ -50,7 +50,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space);
  * @param orientation orientation Local space orientation represented by quaternion.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 convert(Matrix<3,3,T>& matrix, const Quaternion<T>& orientation);
 
 /* ####################################################################################### */
