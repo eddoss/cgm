@@ -10,7 +10,7 @@
 using namespace std;
 
 
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat3)
+TEST(Cartesian_3D_Functions_Vector_Converters, LocalToLocal_Mat3WithPos_Mat3)
 {
     using namespace cgm_xyz_vector_converters_tests_data;
 
@@ -20,7 +20,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat3)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat3WithPos)
+TEST(Cartesian_3D_Functions_Vector_Converters, LocalToLocal_Mat3WithPos_Mat3WithPos)
 {
     using namespace cgm_xyz_vector_converters_tests_data;
 
@@ -30,7 +30,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat3WithPos)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat4)
+TEST(Cartesian_3D_Functions_Vector_Converters, LocalToLocal_Mat3WithPos_Mat4)
 {
     using namespace cgm_xyz_vector_converters_tests_data;
 
@@ -47,7 +47,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Mat4)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Quat)
+TEST(Cartesian_3D_Functions_Vector_Converters, LocalToLocal_Mat3WithPos_Quat)
 {
     using namespace cgm_xyz_vector_converters_tests_data;
 
@@ -57,7 +57,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_Quat)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Converters, LocalToLocal_Mat3WithPos_QuatWithPos)
+TEST(Cartesian_3D_Functions_Vector_Converters, LocalToLocal_Mat3WithPos_QuatWithPos)
 {
     using namespace cgm_xyz_vector_converters_tests_data;
 
