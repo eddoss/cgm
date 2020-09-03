@@ -110,6 +110,11 @@ set(TS_CARTESIAN_3D
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Quaternion.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix3WithPosition.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/QuaternionWithPosition.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/GlobalToLocal.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToGlobal.cpp
+    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix4.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToLocal/Matrix3.cpp
+    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Quaternion.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
 

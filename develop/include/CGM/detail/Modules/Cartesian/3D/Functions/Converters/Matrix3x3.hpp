@@ -25,9 +25,9 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation)
     else
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = orientation * matrix;
+        matrix = matrix * inverseForce(orientation);
     #else
-        matrix = matrix * orientation;
+        matrix = inverseForce(orientation) * matrix;
     #endif
     }
 }
@@ -49,9 +49,9 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
     else
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = detail::multiply_matrix4x4_on_matrix3x3_res3x3(space, matrix);
+        matrix = detail::multiply_matrix3x3_on_matrix4x4_res3x3(matrix, inverseOrientationForce(space));
     #else
-        matrix = detail::multiply_matrix3x3_on_matrix4x4_res3x3(matrix, space);
+        matrix = detail::multiply_matrix4x4_on_matrix3x3_res3x3(inverseOrientationForce(space), matrix);
     #endif
     }
 }
