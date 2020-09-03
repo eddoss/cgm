@@ -11,7 +11,7 @@ using namespace std;
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat3)
 {
-    using namespace cgm_xyz_converters_tests_data;
+    using namespace cgm_xyz_vector_converters_tests_data;
 
     auto result = CGM_XYZ::converted(A_LOCAL_COORD, A_QUAT, A_P, B_MAT3);
     ASSERT_TRUE(CGM::eq(result, A_LOCAL_COORD_CONVERTED_TO_LOCAL_B__SPACE_2_ORIENT, 0.0001));
@@ -21,7 +21,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat3)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat3WithPos)
 {
-    using namespace cgm_xyz_converters_tests_data;
+    using namespace cgm_xyz_vector_converters_tests_data;
 
     auto result = CGM_XYZ::converted(A_LOCAL_COORD, A_QUAT, A_P, B_MAT3, B_P);
     ASSERT_TRUE(CGM::eq(result, A_LOCAL_COORD_CONVERTED_TO_LOCAL_B__SPACE_2_SPACE, 0.0001));
@@ -31,7 +31,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat3WithPos)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat4)
 {
-    using namespace cgm_xyz_converters_tests_data;
+    using namespace cgm_xyz_vector_converters_tests_data;
 
     {
         auto result = CGM_XYZ::converted(A_LOCAL_COORD, A_QUAT, A_P, B_MAT4);
@@ -48,7 +48,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Mat4)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Quat)
 {
-    using namespace cgm_xyz_converters_tests_data;
+    using namespace cgm_xyz_vector_converters_tests_data;
 
     auto result = CGM_XYZ::converted(A_LOCAL_COORD, A_QUAT, A_P, B_QUAT);
     ASSERT_TRUE(CGM::eq(result, A_LOCAL_COORD_CONVERTED_TO_LOCAL_B__SPACE_2_ORIENT, 0.0001));
@@ -58,7 +58,7 @@ TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_Quat)
 
 TEST(Cartesian_3D_Functions_Converters, LocalToLocal_QuatWithPos_QuatWithPos)
 {
-    using namespace cgm_xyz_converters_tests_data;
+    using namespace cgm_xyz_vector_converters_tests_data;
 
     auto result = CGM_XYZ::converted(A_LOCAL_COORD, A_QUAT, A_P, B_QUAT, B_P);
     ASSERT_TRUE(CGM::eq(result, A_LOCAL_COORD_CONVERTED_TO_LOCAL_B__SPACE_2_SPACE, 0.0001));

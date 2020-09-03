@@ -6,7 +6,7 @@
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
 
-namespace cgm_xyz_converters_tests_data
+namespace cgm_xyz_vector_converters_tests_data
 {
 
 // ------------- A ------------- //
