@@ -61,6 +61,116 @@ TEST(Cartesian_2D_InternalFunctions, multiply_vector2_on_matrix3x3)
 }
 
 /* --------------------------------------------------------------------------------------- */
+#include <CGM/Modules/Core/Functions/IO.hpp>
+TEST(Cartesian_2D_InternalFunctions, multiply_matrix2x2_on_matrix3x3_res2x2)
+{
+    Matrix<2,2,int> expect
+    {
+        28,  12,
+        57,  27
+    };
+
+    Matrix<2,2,int> mat2
+    {
+        4,2,
+        3,6
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        3,1,5,
+        8,4,2,
+        6,5,3
+    };
+
+    auto result = CGM_XY::detail::multiply_matrix2x2_on_matrix3x3_res2x2(mat2, mat3);
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_InternalFunctions, multiply_matrix2x2_on_matrix3x3_res3x3)
+{
+    Matrix<3,3,int> expect
+    {
+        28,  12,  24,
+        57,  27,  27,
+         6,   5,   3
+    };
+
+    Matrix<2,2,int> mat2
+    {
+        4,2,
+        3,6
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        3,1,5,
+        8,4,2,
+        6,5,3
+    };
+
+    auto result = CGM_XY::detail::multiply_matrix2x2_on_matrix3x3_res3x3(mat2, mat3);
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_InternalFunctions, multiply_matrix3x3_on_matrix2x2_res2x2)
+{
+    Matrix<2,2,int> expect
+    {
+        15,  12,
+        44,  40
+    };
+
+    Matrix<2,2,int> mat2
+    {
+        4,2,
+        3,6
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        3,1,5,
+        8,4,2,
+        6,5,3
+    };
+
+    auto result = CGM_XY::detail::multiply_matrix3x3_on_matrix2x2_res2x2(mat3, mat2);
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_InternalFunctions, multiply_matrix3x3_on_matrix2x2_res3x3)
+{
+    Matrix<3,3,int> expect
+    {
+        15,  12,  5,
+        44,  40,  2,
+        39,  42,  3
+    };
+
+    Matrix<2,2,int> mat2
+    {
+        4,2,
+        3,6
+    };
+
+    Matrix<3,3,int> mat3
+    {
+        3,1,5,
+        8,4,2,
+        6,5,3
+    };
+
+    auto result = CGM_XY::detail::multiply_matrix3x3_on_matrix2x2_res3x3(mat3, mat2);
+    ASSERT_TRUE(result == expect);
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_2D_InternalFunctions, fast_inverse_matrix3x3)
 {

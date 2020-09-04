@@ -14,11 +14,22 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return orientation * vector;
-#else
-    return vector * orientation;
-#endif
+    if constexpr (Space == ESpace::World)
+    {
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        vector = inverseForce(orientation) * vector;
+    #else
+        vector = vector * inverseForce(orientation);
+    #endif
+    }
+    else
+    {
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        vector = orientation * vector;
+    #else
+        vector = vector * orientation;
+    #endif
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -27,107 +38,74 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return orientation * (vector - position);
-#else
-    return (vector - position) * orientation;
-#endif
+    if constexpr (Space == ESpace::World)
+    {
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        vector = inverseForce(orientation) * vector + position;
+    #else
+        vector = vector * inverseForce(orientation) + position;
+    #endif
+    }
+    else
+    {
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        vector = orientation * (vector - position);
+    #else
+        vector = (vector - position) * orientation;
+    #endif
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
+template<ESpace Space, EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<3,3,T>& space)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    if constexpr (Representation == EVectorRepresentation::Point)
+    if constexpr (Space == ESpace::World)
     {
-        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector - position(localSpace));
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        if constexpr (Representation == EVectorRepresentation::Point)
+        {
+            vector = inverseForce(orientationMatrix(space)) * vector + position(space);
+        }
+        else if constexpr (Representation == EVectorRepresentation::Direction)
+        {
+            vector = inverseForce(orientationMatrix(space)) * vector;
+        }
+    #else
+        if constexpr (Representation == EVectorRepresentation::Point)
+        {
+            vector = vector * inverseForce(orientationMatrix(space)) + position(space);
+        }
+        else if constexpr (Representation == EVectorRepresentation::Direction)
+        {
+            vector = vector * inverseForce(orientationMatrix(space));
+        }
+    #endif
     }
     else
     {
-        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector);
+    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+        if constexpr (Representation == EVectorRepresentation::Point)
+        {
+            vector = orientationMatrix(space) * (vector - position(space));
+        }
+        else
+        {
+            vector = orientationMatrix(space) * vector;
+        }
+    #else
+        if constexpr (Representation == EVectorRepresentation::Point)
+        {
+            vector = (vector - position(space)) * orientationMatrix(space);
+        }
+        else
+        {
+            vector = vector * orientationMatrix(space);
+        }
+    #endif
     }
-#else
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector - position(localSpace), localSpace);
-    }
-    else
-    {
-        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace);
-    }
-#endif
-}
-
-/* ####################################################################################### */
-/* Local to global */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return vector * orientation;
-#else
-    return orientation * vector;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToGlobal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return vector * orientation + position;
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return vector * orientation;
-    }
-#else
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return orientation * vector + position;
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return orientation * vector;
-    }
-#endif
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
-constexpr Vector<2,T>
-localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace) + position(localSpace);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return detail::multiply_vector2_on_matrix3x3<EVectorRepresentation::Direction>(vector, localSpace);
-    }
-#else
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector) + position(localSpace);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return detail::multiply_matrix3x3_on_vector2<EVectorRepresentation::Direction>(localSpace, vector);
-    }
-#endif
 }
 
 /* ####################################################################################### */
@@ -135,85 +113,63 @@ localToGlobal(const Vector<2,T>& vector, const Matrix<3,3,T>& localSpace)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
 {
-    return globalToLocal(localToGlobal(vector, orientationA), orientationB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+{
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
 {
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal(vector, orientationA), orientationB, positionB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-       return globalToLocal(localToGlobal(vector, orientationA), orientationB);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
+    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
 /* ####################################################################################### */
 /* Local to local: Matrix2 with Position */
 /* ####################################################################################### */
 
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
+template<typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
 {
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal(localToGlobal<Representation>(vector, orientationA, positionA), orientationB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal(localToGlobal(vector, orientationA), orientationB);
-    }
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+template<typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
 {
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, orientationA, positionA), orientationB, positionB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal(localToGlobal(vector, orientationA), orientationB);
-    }
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
+template<typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
 {
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, orientationA, positionA), spaceB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal<Representation>(localToGlobal(vector, orientationA), spaceB);
-    }
+    convert<ESpace::World>(vector, orientationA, positionA);
+    convert<ESpace::Local>(vector, spaceB);
 }
 
 /* ####################################################################################### */
@@ -221,36 +177,173 @@ localToLocal(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const
 /* ####################################################################################### */
 
 template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
 {
-    return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
+    convert<ESpace::World>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+{
+    convert<ESpace::World>(vector, spaceA);
+    convert<ESpace::Local>(vector, orientationB, positionB);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE void
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
+{
+    convert<ESpace::World>(vector, spaceA);
+    convert<ESpace::Local>(vector, spaceB);
+}
+
+/* ####################################################################################### */
+/* Global to local (outplace) */
+/* ####################################################################################### */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
+{
+    auto copy = vector;
+    convert<Space>(copy, orientation);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
+{
+    auto copy = vector;
+    convert<Space>(copy, orientation, position);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& space)
+{
+    auto copy = vector;
+    convert<Space,Representation>(copy, space);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Local to local: Matrix2 (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
+{
+    auto copy = vector;
+    convert(copy, orientationA, orientationB);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+{
+    auto copy = vector;
+    convert(copy, orientationA, orientationB, positionB);
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
 {
-    if constexpr (Representation == EVectorRepresentation::Point)
-    {
-        return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), orientationB, positionB);
-    }
-    else if constexpr (Representation == EVectorRepresentation::Direction)
-    {
-        return globalToLocal(localToGlobal<Representation>(vector, spaceA), orientationB);
-    }
+    auto copy = vector;
+    convert<Representation>(copy, orientationA, spaceB);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Local to local: Matrix2 with Position (outplace) */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
+{
+    auto copy = vector;
+    convert(copy, orientationA, positionA, orientationB);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+{
+    auto copy = vector;
+    convert(copy, orientationA, positionA, orientationB, positionB);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
+{
+    auto copy = vector;
+    convert(copy, orientationA, positionA, spaceB);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Local to local: Matrix3 (outplace) */
+/* ####################################################################################### */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
+{
+    auto copy = vector;
+    convert<Representation>(copy, spaceA, orientationB);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
+{
+    auto copy = vector;
+    convert(copy, spaceA, orientationB, positionB);
+    return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-localToLocal(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
 {
-    return globalToLocal<Representation>(localToGlobal<Representation>(vector, spaceA), spaceB);
+    auto copy = vector;
+    convert<Representation>(copy, spaceA, spaceB);
+    return copy;
 }
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
+
