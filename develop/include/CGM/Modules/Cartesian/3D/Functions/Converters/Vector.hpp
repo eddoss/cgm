@@ -408,7 +408,7 @@ convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Vector<3,T
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
- * @return Vector Converted vector.
+ * @return Converted vector.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -423,7 +423,7 @@ converted(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation);
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
  * @param position Local space position.
- * @return Vector Converted vector.
+ * @return Converted vector.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -437,7 +437,7 @@ converted(const Vector<3,T>& vector, const Matrix<3,3,T>& orientation, const Vec
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param space Local space represented by 4x4 matrix.
- * @return Vector Converted vector.
+ * @return Converted vector.
  */
 template<ESpace Space, EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -451,7 +451,7 @@ converted(const Vector<3,T>& vector, const Matrix<4,4,T>& space);
  * @tparam Space Space to convert to.
  * @param vector Vector to convert.
  * @param orientation orientation Local space orientation represented by quaternion.
- * @return Vector Converted vector.
+ * @return Converted vector.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
@@ -466,7 +466,7 @@ converted(const Vector<3,T>& vector, const Quaternion<T>& orientation);
  * @param vector Vector to convert.
  * @param orientation Local space orientation represented by quaternion.
  * @param position Position of local space.
- * @return Vector Converted vector.
+ * @return Converted vector.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>

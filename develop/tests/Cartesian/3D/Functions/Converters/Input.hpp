@@ -83,6 +83,73 @@ static const auto EXPECT_MAT3_A2B = CGM_XYZ::orientationMatrix
     CGM::Vector<3, double>{ +0.426270, +0.357682, +0.830878 }
 );
 
+/* ####################################################################################### */
+/* Expect 4x4 matrix */
+/* ####################################################################################### */
+
+static const auto EXPECT_MAT4_TO_WORLD_BY_MAT3 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.469470, -0.301988 },
+    CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 },
+    CGM::Vector<3, double>{ +0.426272, -0.183580, +0.885778 },
+    CGM::Vector<3, double>{ -0.209705, +1.200000, -1.307109 }
+);
+
+static const auto EXPECT_MAT4_TO_WORLD_BY_MAT4 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.469470, -0.301988 },
+    CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 },
+    CGM::Vector<3, double>{ +0.426272, -0.183580, +0.885778 },
+    CGM::Vector<3, double>{ -0.609705, +2.200000, -0.707109 }
+);
+
+static const auto EXPECT_MAT4_TO_LOCAL_BY_MAT3 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829699, +0.469470, +0.301987 },
+    CGM::Vector<3, double>{ -0.502624, +0.863650, +0.038312 },
+    CGM::Vector<3, double>{ -0.242824, -0.183580, +0.952542 },
+    CGM::Vector<3, double>{ +0.679548, +1.200000, -1.136092 }
+);
+
+static const auto EXPECT_MAT4_TO_LOCAL_BY_MAT4 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829699, +0.469470, +0.301987 },
+    CGM::Vector<3, double>{ -0.502624, +0.863650, +0.038312 },
+    CGM::Vector<3, double>{ -0.242824, -0.183580, +0.952542 },
+    CGM::Vector<3, double>{ +1.260636, +0.200000, -1.563098 }
+);
+
+static const auto EXPECT_MAT4_A2B_MAT3_TO_MAT3 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.211352, -0.516652 },
+    CGM::Vector<3, double>{ -0.360407, +0.909607, -0.206678 },
+    CGM::Vector<3, double>{ +0.426272, +0.357685, +0.830883 },
+    CGM::Vector<3, double>{ -0.209705, +0.233249, -1.759014 }
+);
+
+static const auto EXPECT_MAT4_A2B_MAT3_TO_MAT4 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.211352, -0.516652 },
+    CGM::Vector<3, double>{ -0.360407, +0.909607, -0.206678 },
+    CGM::Vector<3, double>{ +0.426272, +0.357685, +0.830883 },
+    CGM::Vector<3, double>{ -0.409705, +0.642824, -2.045804 }
+);
+
+static const auto EXPECT_MAT4_A2B_MAT4_TO_MAT3 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.211352, -0.516652 },
+    CGM::Vector<3, double>{ -0.360407, +0.909607, -0.206678 },
+    CGM::Vector<3, double>{ +0.426272, +0.357685, +0.830883 },
+    CGM::Vector<3, double>{ -0.609705, +1.396547, -1.841104 }
+);
+
+static const auto EXPECT_MAT4_A2B_MAT4_TO_MAT4 = CGM_XYZ::spaceMatrix
+(
+    CGM::Vector<3, double>{ +0.829703, +0.211352, -0.516652 },
+    CGM::Vector<3, double>{ -0.360407, +0.909607, -0.206678 },
+    CGM::Vector<3, double>{ +0.426272, +0.357685, +0.830883 },
+    CGM::Vector<3, double>{ -0.809705, +1.806122, -2.127894 }
+);
 }
 
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;

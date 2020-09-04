@@ -18,16 +18,22 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation)
     {
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         matrix = detail::multiply_matrix4x4_on_matrix3x3_res4x4(matrix, orientation);
+        setPosition(matrix, position(matrix) * orientation);
     #else
         matrix = detail::multiply_matrix3x3_on_matrix4x4_res4x4(orientation, matrix);
+        setPosition(matrix, orientation * position(matrix));
     #endif
     }
     else
     {
+        const auto orient = inverseForce(orientation);
+
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = detail::multiply_matrix3x3_on_matrix4x4_res4x4(orientation, matrix);
+        matrix = detail::multiply_matrix4x4_on_matrix3x3_res4x4(matrix, orient);
+        setPosition(matrix, position(matrix) * orient);
     #else
-        matrix = detail::multiply_matrix4x4_on_matrix3x3_res4x4(matrix, orientation);
+        matrix = detail::multiply_matrix3x3_on_matrix4x4_res4x4(orient, matrix);
+        setPosition(matrix, orient * position(matrix));
     #endif
     }
 }
@@ -43,12 +49,13 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,
 
     if constexpr (Space == ESpace::World)
     {
-        const auto invorient = invertForce(orientation);
+        const auto invorient = inverseForce(orientation);
 
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         axs.x = invorient * axs.x;
         axs.y = invorient * axs.y;
         axs.z = invorient * axs.z;
+        pos = invorient * pos;
     #else
         axs.x = axs.x * invorient;
         axs.y = axs.y * invorient;
@@ -64,7 +71,7 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,
         axs.x = orientation * axs.x;
         axs.y = orientation * axs.y;
         axs.z = orientation * axs.z;
-        pos = pos * orientation;
+        pos = orientation * pos;
     #else
         axs.x = axs.x * orientation;
         axs.y = axs.y * orientation;
@@ -87,30 +94,31 @@ convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space)
 
     if constexpr (Space == ESpace::World)
     {
-        const auto invorient = invertForce(orientationMatrix(space));
+        const auto invorient = inverseForce(orientationMatrix(space));
 
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         axs.x = invorient * axs.x;
         axs.y = invorient * axs.y;
         axs.z = invorient * axs.z;
+        pos = invorient * pos;
     #else
         axs.x = axs.x * invorient;
         axs.y = axs.y * invorient;
         axs.z = axs.z * invorient;
         pos = pos * invorient;
     #endif
-        pos += position(matrix);
+        pos += position(space);
     }
     else
     {
         const auto orient = orientationMatrix(space);
 
-        pos -= position(matrix);
+        pos -= position(space);
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         axs.x = orient * axs.x;
         axs.y = orient * axs.y;
         axs.z = orient * axs.z;
-        pos = pos * orient;
+        pos = orient * pos;
     #else
         axs.x = axs.x * orient;
         axs.y = axs.y * orient;
@@ -140,7 +148,7 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation)
     }
     else
     {
-        const auto quat = invertForce(orientation);
+        const auto quat = inverseForce(orientation);
 
         orient(axs.x, quat);
         orient(axs.y, quat);
@@ -170,7 +178,7 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,
     }
     else
     {
-        const auto quat = invertForce(orientation);
+        const auto quat = inverseForce(orientation);
 
         pos -= position;
         orient(axs.x, quat);

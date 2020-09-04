@@ -408,7 +408,7 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
- * @return Vector Converted vector.
+ * @return Converted matrix.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
@@ -423,7 +423,7 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation);
  * @param matrix 4x4 basis matrix to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
  * @param position Local space position.
- * @return Vector Converted vector.
+ * @return Converted matrix.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
@@ -437,7 +437,7 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const V
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
  * @param space Local space represented by 4x4 matrix.
- * @return Vector Converted vector.
+ * @return Converted matrix.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
@@ -451,7 +451,7 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space);
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
  * @param orientation orientation Local space orientation represented by quaternion.
- * @return Vector Converted vector.
+ * @return Converted matrix.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
@@ -466,7 +466,7 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation);
  * @param matrix 4x4 basis matrix to convert.
  * @param orientation Local space orientation represented by quaternion.
  * @param position Position of local space.
- * @return Vector Converted vector.
+ * @return Converted matrix.
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
@@ -816,4 +816,4 @@ CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Matrix4x4.hpp>
