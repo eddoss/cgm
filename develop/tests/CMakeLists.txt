@@ -103,18 +103,18 @@ set(TS_CARTESIAN_3D
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/Utils.cpp
     Cartesian/3D/Functions/Orientation.cpp
-    Cartesian/3D/Functions/Converters/Vector/GlobalToLocal.cpp
-    Cartesian/3D/Functions/Converters/Vector/LocalToGlobal.cpp
-    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix4.cpp
+    Cartesian/3D/Functions/Converters/Vector/WorldToLocal.cpp
+    Cartesian/3D/Functions/Converters/Vector/LocalToWorld.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix3.cpp
+    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix4.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Quaternion.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix3WithPosition.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/QuaternionWithPosition.cpp
-    Cartesian/3D/Functions/Converters/Matrix3x3/GlobalToLocal.cpp
-    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToGlobal.cpp
-    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix4.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/WorldToLocal.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToWorld.cpp
     Cartesian/3D/Functions/Converters/Matrix3x3/LocalToLocal/Matrix3.cpp
-    Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Quaternion.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToLocal/Matrix4.cpp
+    Cartesian/3D/Functions/Converters/Matrix3x3/LocalToLocal/Quaternion.cpp
     Cartesian/3D/InternalFunctions.cpp
 )
 
