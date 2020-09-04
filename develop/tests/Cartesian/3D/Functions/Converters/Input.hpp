@@ -1,10 +1,12 @@
 #pragma once
 
+
 #include <gtest/gtest.h>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+
 
 namespace cgm_xyz_converters_tests_data
 {
@@ -151,5 +153,3 @@ static const auto EXPECT_MAT4_A2B_MAT4_TO_MAT4 = CGM_XYZ::spaceMatrix
     CGM::Vector<3, double>{ -0.809705, +1.806122, -2.127894 }
 );
 }
-
-#define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;

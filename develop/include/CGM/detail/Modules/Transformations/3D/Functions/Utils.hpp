@@ -42,9 +42,9 @@ axisAngle(const Quaternion<T>& quaternion)
 
     auto axs = Vector<3,T>
     {
-        quaternion.x * isn,
-        quaternion.y * isn,
-        quaternion.z * isn
+        quaternion.vector.x * isn,
+        quaternion.vector.y * isn,
+        quaternion.vector.z * isn
     };
 
     return AxisAngle<T>(axs, ang);
@@ -61,9 +61,9 @@ axis(const Quaternion<T>& quaternion)
 
     auto axs = Vector<3,T>
     {
-        quaternion.x * isn,
-        quaternion.y * isn,
-        quaternion.z * isn
+        quaternion.vector.x * isn,
+        quaternion.vector.y * isn,
+        quaternion.vector.z * isn
     };
 
     return axs;
@@ -75,7 +75,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE T
 angle(const Quaternion<T>& quaternion)
 {
-    return std::acos(quaternion.w) * 2;
+    return std::acos(quaternion.scalar) * 2;
 }
 
 /* --------------------------------------------------------------------------------------- */
