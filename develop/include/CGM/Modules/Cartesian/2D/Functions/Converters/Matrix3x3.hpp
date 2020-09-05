@@ -348,4 +348,4 @@ CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Matrix3x3.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Matrix3x3.hpp>

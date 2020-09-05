@@ -84,57 +84,57 @@ static const auto EXPECT_MAT2_A2B = CGM_XY::orientationMatrix
 
 static const auto EXPECT_MAT3_TO_WORLD_BY_MAT2 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.469470 },
-    CGM::Vector<2, double>{ -0.360407, +0.863650 },
-    CGM::Vector<2, double>{ +0.426272, -0.183580 }
+    CGM::Vector<2, double>{ -0.087152, +0.996191 },
+    CGM::Vector<2, double>{ -0.996191, -0.087152 },
+    CGM::Vector<2, double>{ -1.006918, +0.699001 }
 );
 
 static const auto EXPECT_MAT3_TO_WORLD_BY_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.469470 },
-    CGM::Vector<2, double>{ -0.360407, +0.863650 },
-    CGM::Vector<2, double>{ +0.426272, -0.183580 }
+    CGM::Vector<2, double>{ -0.087153, +0.996201 },
+    CGM::Vector<2, double>{ -0.996201, -0.087153 },
+    CGM::Vector<2, double>{ -1.406927, +0.699008 }
 );
 
 static const auto EXPECT_MAT3_TO_LOCAL_BY_MAT2 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829699, +0.469470 },
-    CGM::Vector<2, double>{ -0.502624, +0.863650 },
-    CGM::Vector<2, double>{ -0.242824, -0.183580 }
+    CGM::Vector<2, double>{ +0.777150, -0.629326 },
+    CGM::Vector<2, double>{ +0.629326, +0.777150 },
+    CGM::Vector<2, double>{ +1.202294, +0.238753 }
 );
 
 static const auto EXPECT_MAT3_TO_LOCAL_BY_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829699, +0.469470 },
-    CGM::Vector<2, double>{ -0.502624, +0.863650 },
-    CGM::Vector<2, double>{ -0.242824, -0.183580 }
+    CGM::Vector<2, double>{ +0.777142, -0.629319 },
+    CGM::Vector<2, double>{ +0.629319, +0.777142 },
+    CGM::Vector<2, double>{ +1.358575, -0.129449 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT2_TO_MAT2 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.211352 },
-    CGM::Vector<2, double>{ -0.360407, +0.909607 },
-    CGM::Vector<2, double>{ +0.426272, +0.357685 }
+    CGM::Vector<2, double>{ -0.743144, +0.669129 },
+    CGM::Vector<2, double>{ -0.669129, -0.743144 },
+    CGM::Vector<2, double>{ -1.213132, -0.175504 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT2_TO_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.211352 },
-    CGM::Vector<2, double>{ -0.360407, +0.909607 },
-    CGM::Vector<2, double>{ +0.426272, +0.357685 }
+    CGM::Vector<2, double>{ -0.743141, +0.669127 },
+    CGM::Vector<2, double>{ -0.669127, -0.743141 },
+    CGM::Vector<2, double>{ -1.700398, +0.053772 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT3_TO_MAT2 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.211352 },
-    CGM::Vector<2, double>{ -0.360407, +0.909607 },
-    CGM::Vector<2, double>{ +0.426272, +0.357685 }
+    CGM::Vector<2, double>{ -0.743151, +0.669136 },
+    CGM::Vector<2, double>{ -0.669136, -0.743151 },
+    CGM::Vector<2, double>{ -1.505684, -0.448307 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT3_TO_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.211352 },
-    CGM::Vector<2, double>{ -0.360407, +0.909607 },
-    CGM::Vector<2, double>{ +0.426272, +0.357685 }
+    CGM::Vector<2, double>{ -0.743149, +0.669133 },
+    CGM::Vector<2, double>{ -0.669133, -0.743149 },
+    CGM::Vector<2, double>{ -1.992950, -0.219030 }
 );
 }

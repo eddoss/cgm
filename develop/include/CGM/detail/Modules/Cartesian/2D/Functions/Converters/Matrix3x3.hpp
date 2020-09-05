@@ -319,7 +319,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 converted(const Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
 {
     auto copy = matrix;
-    convert(copy, orientationA, spaceB);
+    convert(copy, orientationA, positionA, spaceB);
     return copy;
 }
 
@@ -360,6 +360,3 @@ converted(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
-
-
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Matrix3x3.hpp>
