@@ -62,20 +62,20 @@ static const auto EXPECT_VEC_A2B_MAT3_TO_MAT3       = CGM::Vector<2, double>{ -1
 
 static const auto EXPECT_MAT2_TO_WORLD = CGM_XY::orientationMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.469470 },
-    CGM::Vector<2, double>{ -0.360407, +0.863650 }
+    CGM::Vector<2, double>{ -0.087152, +0.996191 },
+    CGM::Vector<2, double>{ -0.996191, -0.087152 }
 );
 
 static const auto EXPECT_MAT2_TO_LOCAL = CGM_XY::orientationMatrix
 (
-    CGM::Vector<2, double>{ +0.829703, +0.469470 },
-    CGM::Vector<2, double>{ -0.502627, +0.863650 }
+    CGM::Vector<2, double>{ +0.777150, -0.629326 },
+    CGM::Vector<2, double>{ +0.629326, +0.777150 }
 );
 
 static const auto EXPECT_MAT2_A2B = CGM_XY::orientationMatrix
 (
-    CGM::Vector<2, double>{ +0.829699, +0.211353 },
-    CGM::Vector<2, double>{ -0.360406, +0.909605 }
+    CGM::Vector<2, double>{ -0.743144, +0.669129 },
+    CGM::Vector<2, double>{ -0.669129, -0.743144 }
 );
 
 /* ####################################################################################### */
