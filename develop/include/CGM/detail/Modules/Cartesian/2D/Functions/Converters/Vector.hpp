@@ -7,7 +7,7 @@ CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Global to local */
+/* Global to local / local to global */
 /* ####################################################################################### */
 
 template<ESpace Space, typename T>

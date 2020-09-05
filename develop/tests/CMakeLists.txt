@@ -92,11 +92,11 @@ set(TS_CARTESIAN_2D
     Cartesian/2D/Functions/Utils.cpp
     Cartesian/2D/Functions/Orientation.cpp
     Cartesian/2D/InternalFunctions.cpp
-    Cartesian/2D/Functions/Converters/GlobalToLocal.cpp
-    Cartesian/2D/Functions/Converters/LocalToGlobal.cpp
-    Cartesian/2D/Functions/Converters/LocalToLocal/Matrix3.cpp
-    Cartesian/2D/Functions/Converters/LocalToLocal/Matrix2.cpp
-    Cartesian/2D/Functions/Converters/LocalToLocal/Matrix2WithPosition.cpp
+    Cartesian/2D/Functions/Converters/Vector/WorldToLocal.cpp
+    Cartesian/2D/Functions/Converters/Vector/LocalToWorld.cpp
+    Cartesian/2D/Functions/Converters/Vector/LocalToLocal/Matrix3.cpp
+    Cartesian/2D/Functions/Converters/Vector/LocalToLocal/Matrix2.cpp
+    Cartesian/2D/Functions/Converters/Vector/LocalToLocal/Matrix2WithPosition.cpp
 )
 
 set(TS_CARTESIAN_3D
