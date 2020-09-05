@@ -16,6 +16,11 @@
 using namespace std;
 using namespace CGM;
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
+#define CGM_PRINT_BASIS(b) \
+    std::cout << "\n\n" << CGM_XYZ::x(b) << std::endl; \
+    std::cout << CGM_XYZ::y(b) << std::endl; \
+    std::cout << CGM_XYZ::z(b) << std::endl; \
+    std::cout << CGM_XYZ::position(b) << std::endl;
 namespace cgm_xyz_xform_tests_data
 {
     // Direction - X axes from 'pivot'

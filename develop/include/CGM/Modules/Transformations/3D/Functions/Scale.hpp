@@ -6,7 +6,7 @@
 #include <CGM/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Core/Operators/MatrixVectorMultiplication.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Converters.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>

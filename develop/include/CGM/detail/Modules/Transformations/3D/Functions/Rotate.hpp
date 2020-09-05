@@ -230,7 +230,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
     }
     else
     {
-        quat = orientationQuaternion(localToGlobal(direction, matrix), angle);
+        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
     }
 
     orient(axes.x, quat);
@@ -266,36 +266,42 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
             rotate<EAxes::X, Space>(matrix, angles.x);
             rotate<EAxes::Y, Space>(matrix, angles.y);
             rotate<EAxes::Z, Space>(matrix, angles.z);
+            break;
         }
         case ERotationOrder::XZY:
         {
             rotate<EAxes::X, Space>(matrix, angles.x);
             rotate<EAxes::Z, Space>(matrix, angles.z);
             rotate<EAxes::Y, Space>(matrix, angles.y);
+            break;
         }
         case ERotationOrder::YXZ:
         {
             rotate<EAxes::Y, Space>(matrix, angles.y);
             rotate<EAxes::X, Space>(matrix, angles.x);
             rotate<EAxes::Z, Space>(matrix, angles.z);
+            break;
         }
         case ERotationOrder::YZX:
         {
             rotate<EAxes::Y, Space>(matrix, angles.y);
             rotate<EAxes::Z, Space>(matrix, angles.z);
             rotate<EAxes::X, Space>(matrix, angles.x);
+            break;
         }
         case ERotationOrder::ZXY:
         {
             rotate<EAxes::Z, Space>(matrix, angles.z);
             rotate<EAxes::X, Space>(matrix, angles.x);
             rotate<EAxes::Y, Space>(matrix, angles.y);
+            break;
         }
         case ERotationOrder::ZYX:
         {
             rotate<EAxes::Z, Space>(matrix, angles.z);
             rotate<EAxes::Y, Space>(matrix, angles.y);
             rotate<EAxes::X, Space>(matrix, angles.x);
+            break;
         }
     }
 }
@@ -317,7 +323,7 @@ rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
     else
     {
         auto axsang = axisAngle(quaternion);
-        auto wsAxis = localToGlobal(axsang.axis, matrix);
+        auto wsAxis = converted<ESpace::World>(axsang.axis, matrix);
         auto wsQuat = CGM_XFORM3D::orientationQuaternion(wsAxis, angle);
 
         orient(axes.x, wsQuat);
@@ -446,36 +452,42 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
+            break;
         }
         case ERotationOrder::XZY:
         {
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
+            break;
         }
         case ERotationOrder::YXZ:
         {
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
+            break;
         }
         case ERotationOrder::YZX:
         {
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
+            break;
         }
         case ERotationOrder::ZXY:
         {
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
+            break;
         }
         case ERotationOrder::ZYX:
         {
             orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
             orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
             orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
+            break;
         }
     }
 
@@ -490,36 +502,42 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
                 orient(pos, qx);
                 orient(pos, qy);
                 orient(pos, qz);
+                break;
             }
             case ERotationOrder::XZY:
             {
                 orient(pos, qx);
                 orient(pos, qz);
                 orient(pos, qy);
+                break;
             }
             case ERotationOrder::YXZ:
             {
                 orient(pos, qy);
                 orient(pos, qx);
                 orient(pos, qz);
+                break;
             }
             case ERotationOrder::YZX:
             {
                 orient(pos, qy);
                 orient(pos, qz);
                 orient(pos, qx);
+                break;
             }
             case ERotationOrder::ZXY:
             {
                 orient(pos, qz);
                 orient(pos, qx);
                 orient(pos, qy);
+                break;
             }
             case ERotationOrder::ZYX:
             {
                 orient(pos, qz);
                 orient(pos, qy);
                 orient(pos, qx);
+                break;
             }
         }
 
@@ -545,7 +563,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
     }
     else
     {
-        quat = orientationQuaternion(localToGlobal(direction, matrix), angle);
+        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
     }
 
     orient(axes.x, quat);
@@ -553,10 +571,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
     orient(axes.z, quat);
     orient(pos, quat);
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -570,35 +585,37 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis)
 
     if constexpr (Space == ESpace::World)
     {
-        auto quat = orientationQuaternion(axis.direction, angle);
+//        auto quat = orientationQuaternion(axis.direction, angle);
+//
+//        orient(axes.x, quat);
+//        orient(axes.y, quat);
+//        orient(axes.z, quat);
+//
+//        pos -= axis.origin;
+//        orient(pos, quat);
+//        pos += axis.origin;
 
-        orient(axes.x, quat);
-        orient(axes.y, quat);
-        orient(axes.z, quat);
-
-        pos -= axis.origin;
-        orient(pos, quat);
-        pos += axis.origin;
+        rotate(axes.x, angle, axis.direction);
+        rotate(axes.y, angle, axis.direction);
+        rotate(axes.z, angle, axis.direction);
+        rotate(pos, angle, axis);
     }
     else
     {
-        auto worldSpaceAxisDir = localToGlobal<EVectorRepresentation::Direction>(axis.direction, matrix);
-        auto worldSpaceAxisPos = localToGlobal<EVectorRepresentation::Point>(axis.origin, matrix);
-        auto worldSpaceQuat = CGM_XFORM3D::orientationQuaternion(worldSpaceAxisDir, angle);
+        auto wsAxisDir = converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix);
+        auto wsAxisPos = converted<ESpace::World,EVectorRepresentation::Point>(axis.origin, matrix);
+        auto wsQuat = orientationQuaternion(wsAxisDir, angle);
 
-        orient(axes.x, worldSpaceQuat);
-        orient(axes.y, worldSpaceQuat);
-        orient(axes.z, worldSpaceQuat);
+        orient(axes.x, wsQuat);
+        orient(axes.y, wsQuat);
+        orient(axes.z, wsQuat);
 
-        pos -= worldSpaceAxisPos;
-        orient(pos, worldSpaceQuat);
-        pos += worldSpaceAxisPos;
+        pos -= wsAxisPos;
+        orient(pos, wsQuat);
+        pos += wsAxisPos;
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -607,9 +624,9 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
-    rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
-    rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+    rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+    rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+    rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -622,39 +639,45 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
     {
         case ERotationOrder::XYZ:
         {
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            break;
         }
         case ERotationOrder::XZY:
         {
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            break;
         }
         case ERotationOrder::YXZ:
         {
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            break;
         }
         case ERotationOrder::YZX:
         {
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            break;
         }
         case ERotationOrder::ZXY:
         {
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            break;
         }
         case ERotationOrder::ZYX:
         {
-            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate<Space>(matrix, angles.z, Axis<T>(pivotPoint.position, pivotPoint.axes.z));
+            rotate<Space>(matrix, angles.y, Axis<T>(pivotPoint.position, pivotPoint.axes.y));
+            rotate<Space>(matrix, angles.x, Axis<T>(pivotPoint.position, pivotPoint.axes.x));
+            break;
         }
     }
 }
@@ -686,7 +709,7 @@ rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
         auto axs = Axis<T>
         (
             pos,
-            localToGlobal<EVectorRepresentation::Direction>(axsang.axis, matrix)
+            convert<ESpace::World,EVectorRepresentation::Direction>(axsang.axis, matrix)
         );
 
         rotate<ESpace::World>(matrix, axs);
@@ -881,7 +904,7 @@ rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
     else
     {
         auto [axs, ang] = axisAngle(quat);
-        auto worldSpaceAxis = localToGlobal(axs, quat);
+        auto worldSpaceAxis = converted<ESpace::World>(axs, quat);
         quaternion *= CGM_XFORM3D::orientationQuaternion(worldSpaceAxis, angle);
     }
 }

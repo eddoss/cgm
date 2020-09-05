@@ -132,7 +132,7 @@ refract(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal, T ior)
     }
     else
     {
-        auto pn = localToGlobal(planeNormal, matrix);
+        auto pn = converted<ESpace::World>(planeNormal, matrix);
 
         refract(axes.x, pn, ior);
         refract(axes.y, pn, ior);
@@ -209,7 +209,7 @@ refract(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, T ior)
     }
     else
     {
-        auto pn = localToGlobal(planeNormal, matrix);
+        auto pn = converted<ESpace::World>(planeNormal, matrix);
 
         refract(axes.x, pn, ior);
         refract(axes.y, pn, ior);

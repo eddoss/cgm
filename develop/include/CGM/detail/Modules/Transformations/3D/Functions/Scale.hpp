@@ -113,9 +113,7 @@ scale(Matrix<3,3,T>& matrix, T value)
         scale<Axis>(axes.y, value);
         scale<Axis>(axes.z, value);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
+        set(matrix, axes);
     }
     else
     {
@@ -199,13 +197,11 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
         scale(axes.y, value, direction);
         scale(axes.z, value, direction);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
+        set(matrix, axes);
     }
     else
     {
-        scale<ESpace::World>(matrix, value, localToGlobal(direction, matrix));
+        scale<ESpace::World>(matrix, value, converted<ESpace::World>(direction, matrix));
     }
 }
 
@@ -225,13 +221,11 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector
         scale(axes.y, value, direction, origin);
         scale(axes.z, value, direction, origin);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
+        set(matrix, axes);
     }
     else
     {
-        scale<ESpace::World>(matrix, value, localToGlobal(direction, matrix), localToGlobal(origin, matrix));
+        scale<ESpace::World>(matrix, value, converted<ESpace::World>(direction, matrix), converted<ESpace::World>(origin, matrix));
     }
 }
 
@@ -249,13 +243,11 @@ scale(Matrix<3,3,T>& matrix, T value, const Axis<T>& axis)
         scale(axes.y, value, axis);
         scale(axes.z, value, axis);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
+        set(matrix, axes);
     }
     else
     {
-        scale<ESpace::World>(matrix, value, localToGlobal(axis.direction, matrix), localToGlobal(axis.origin, matrix));
+        scale<ESpace::World>(matrix, value, converted<ESpace::World>(axis.direction, matrix), converted<ESpace::World>(axis.origin, matrix));
     }
 }
 
@@ -273,21 +265,19 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
         scale<EVectorRepresentation::Direction>(axes.y, values, pivotPoint);
         scale<EVectorRepresentation::Direction>(axes.z, values, pivotPoint);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
+        set(matrix, axes);
     }
     else
     {
-        auto worldSpacePivot = Pivot<T>
+        auto wsPivot = Pivot<T>
         {
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
-            localToGlobal<EVectorRepresentation::Point>(pivotPoint.position, matrix)
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
+            converted<ESpace::World,EVectorRepresentation::Point>(pivotPoint.position, matrix)
         };
 
-        scale<ESpace::World>(matrix, values, worldSpacePivot);
+        scale<ESpace::World>(matrix, values, wsPivot);
     }
 }
 
@@ -318,10 +308,7 @@ scale(Matrix<4,4,T>& matrix, T value)
         scale<Axis>(axes.z, value);
         scale<Axis>(pos, value);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
-        setPosition(matrix, pos);
+        set(matrix, axes, pos);
     }
     else
     {
@@ -415,14 +402,11 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
         scale(axes.z, value, direction);
         scale(pos, value, direction);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
-        setPosition(matrix, pos);
+        set(matrix, axes, pos);
     }
     else
     {
-        scale(matrix, value, localToGlobal<EVectorRepresentation::Direction>(direction, matrix));
+        scale(matrix, value, converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix));
     }
 }
 
@@ -442,18 +426,15 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector
         scale(axes.z, value, direction, origin);
         scale(pos, value, direction, origin);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
-        setPosition(matrix, pos);
+        set(matrix, axes, pos);
     }
     else
     {
         scale
         (
             matrix, value,
-            localToGlobal<EVectorRepresentation::Direction>(direction, matrix),
-            localToGlobal<EVectorRepresentation::Point>(origin, matrix)
+            converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix),
+            converted<ESpace::World,EVectorRepresentation::Point>(origin, matrix)
         );
     }
 }
@@ -474,18 +455,15 @@ scale(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis)
         scale(axes.z, value, axis);
         scale(pos, value, axis);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
-        setPosition(matrix, pos);
+        set(matrix, axes, pos);
     }
     else
     {
         scale
         (
             matrix, value,
-            localToGlobal<EVectorRepresentation::Direction>(axis.direction, matrix),
-            localToGlobal<EVectorRepresentation::Point>(axis.origin, matrix)
+            converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix),
+            converted<ESpace::World,EVectorRepresentation::Point>(axis.origin, matrix)
         );
     }
 }
@@ -506,19 +484,16 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
         scale<EVectorRepresentation::Direction>(axes.z, values, pivotPoint);
         scale<EVectorRepresentation::Point>(pos, values, pivotPoint);
 
-        setX(matrix, axes.x);
-        setY(matrix, axes.y);
-        setZ(matrix, axes.z);
-        setPosition(matrix, pos);
+        set(matrix, axes, pos);
     }
     else
     {
         auto worldSpacePivot = Pivot<T>
         {
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
-            localToGlobal<EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
-            localToGlobal<EVectorRepresentation::Point>(pivotPoint.position, matrix)
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
+            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
+            converted<ESpace::World,EVectorRepresentation::Point>(pivotPoint.position, matrix)
         };
 
         scale<ESpace::World>(matrix, values, worldSpacePivot);

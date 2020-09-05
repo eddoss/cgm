@@ -114,7 +114,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
     }
     else
     {
-        auto pn = localToGlobal(planeNormal, matrix);
+        auto pn = converted<ESpace::World>(planeNormal, matrix);
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
@@ -191,7 +191,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
     }
     else
     {
-        auto pn = localToGlobal(planeNormal, matrix);
+        auto pn = converted<ESpace::World>(planeNormal, matrix);
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
@@ -223,8 +223,8 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>
     }
     else
     {
-        auto pn = localToGlobal(planeNormal, matrix);
-        auto pc = localToGlobal(planeCenter, matrix);
+        auto pn = converted<ESpace::World>(planeNormal, matrix);
+        auto pc = converted<ESpace::World>(planeCenter, matrix);
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
