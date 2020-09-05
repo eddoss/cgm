@@ -49,8 +49,8 @@ static const auto B_MAT3    = CGM_XY::spaceMatrix(B_X, B_Y, B_P);
 
 static const auto EXPECT_VEC_TO_WORLD_REORIENTED    = CGM::Vector<2, double>{ -0.996201, -0.087153 };
 static const auto EXPECT_VEC_TO_WORLD_REBASED       = CGM::Vector<2, double>{ -1.396201, -0.087153 };
-static const auto EXPECT_VEC_TO_LOCAL_REORIENTED    = CGM::Vector<2, double>{ -0.996201, -0.087153 };
-static const auto EXPECT_VEC_TO_LOCAL_REBASED       = CGM::Vector<2, double>{ -1.396201, -0.087153 };
+static const auto EXPECT_VEC_TO_LOCAL_REORIENTED    = CGM::Vector<2, double>{ +0.629319, +0.777142 };
+static const auto EXPECT_VEC_TO_LOCAL_REBASED       = CGM::Vector<2, double>{ +0.785611, +0.408942 };
 static const auto EXPECT_VEC_A2B_MAT2_TO_MAT2       = CGM::Vector<2, double>{ -0.669133, -0.743149 };
 static const auto EXPECT_VEC_A2B_MAT2_TO_MAT3       = CGM::Vector<2, double>{ -1.156403, -0.513874 };
 static const auto EXPECT_VEC_A2B_MAT3_TO_MAT2       = CGM::Vector<2, double>{ -0.961673, -1.015949 };
