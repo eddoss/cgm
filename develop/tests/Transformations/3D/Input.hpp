@@ -70,4 +70,10 @@ namespace cgm_xyz_xform_tests_data
         const auto value = -0.7;
         const auto values = Vector<3,double> {-0.7, 2.1, 0.3};
     }
+
+    namespace reflect
+    {
+        const auto normal = Vector<3,double> {+0.453188, +0.200645, +0.868540};
+        const auto origin = Vector<3,double> {+0.400000, -0.300000, +0.200000};
+    }
 }

@@ -16,15 +16,15 @@ reflect(Vector<3,T>& vector)
 {
     if constexpr (Plane == EPlane::XY)
     {
-        return vector - Vector<3,T>{zero<T>, zero<T>, 2 * vector.z};
+        vector.z = -vector.z;
     }
-    if constexpr (Plane == EPlane::YZ)
+    else if constexpr (Plane == EPlane::YZ)
     {
-        return vector - Vector<3,T>{2 * vector.x, zero<T>, zero<T>};
+        vector.x = -vector.x;
     }
     else
     {
-        return vector - Vector<3,T>{zero<T>, 2 * vector.y, zero<T>};
+        vector.y = -vector.y;
     }
 }
 
@@ -34,10 +34,7 @@ template<typename T>
 constexpr void
 reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal)
 {
-    auto projected = dot(vector, planeNormal) * planeNormal;
-    auto reflected = vector - projected - projected;
-
-    return reflected;
+    vector -= number<T>(2) * dot(vector, planeNormal) * planeNormal;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -49,10 +46,10 @@ reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& 
     auto projected = dot(vector, planeNormal) * planeNormal;
     auto reflected = vector - projected - projected;
 
-    T dist = dot(planeNormal + planeCenter, planeNormal);
+    T dist = dot(planeCenter, planeNormal);
     reflected += planeNormal * dist * number<T>(2);
 
-    return reflected;
+    vector = reflected;
 }
 
 /* ####################################################################################### */
@@ -93,9 +90,7 @@ reflect(Matrix<3,3,T>& matrix)
         reflect(axes.z, planeNormal);
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
+    set(matrix, axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -121,9 +116,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
         reflect(axes.z, pn);
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
+    set(matrix, axes);
 }
 
 /* ####################################################################################### */
@@ -167,10 +160,7 @@ reflect(Matrix<4,4,T>& matrix)
         reflect(pos, planeNormal);
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -199,10 +189,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
         reflect(pos, pn);
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -232,10 +219,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>
         reflect(pos, pn, pc);
     }
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* ####################################################################################### */
