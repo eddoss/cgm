@@ -76,4 +76,10 @@ namespace cgm_xyz_xform_tests_data
         const auto normal = Vector<3,double> {+0.453188, +0.200645, +0.868540};
         const auto origin = Vector<3,double> {+0.400000, -0.300000, +0.200000};
     }
+
+    namespace refract
+    {
+        const auto normal = Vector<3,double> {+0.765511, +0.630287, +0.129351};
+        const auto ior = 0.25;
+    }
 }
