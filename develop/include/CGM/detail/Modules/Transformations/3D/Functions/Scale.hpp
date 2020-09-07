@@ -890,5 +890,170 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
     return copy;
 }
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+template<EAxes Axis, size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value)
+{
+    if constexpr (N == 3)
+    {
+        if constexpr (Axis == EAxes::X)
+        {
+            return inverseForce
+            ({
+                value, number<T>(0), number<T>(0),
+                number<T>(0), number<T>(1), number<T>(0),
+                number<T>(0), number<T>(0), number<T>(1)
+            });
+        }
+        else if constexpr (Axis == EAxes::Y)
+        {
+            return inverseForce
+            ({
+                number<T>(1), number<T>(0), number<T>(0),
+                number<T>(0), value, number<T>(0),
+                number<T>(0), number<T>(0), number<T>(1)
+            });
+        }
+        else
+        {
+            return inverseForce
+            ({
+                number<T>(1), number<T>(0), number<T>(0),
+                number<T>(0), number<T>(1), number<T>(0),
+                number<T>(0), number<T>(0), value
+            });
+        }
+    }
+    else
+    {
+        if constexpr (Axis == EAxes::X)
+        {
+            return inverseForce
+            ({
+                value, number<T>(0), number<T>(0), number<T>(0),
+                number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+                number<T>(0), number<T>(0), number<T>(1), number<T>(0),
+                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+            });
+        }
+        else if constexpr (Axis == EAxes::Y)
+        {
+            return inverseForce
+            ({
+                number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+                number<T>(0), value, number<T>(0), number<T>(0),
+                number<T>(0), number<T>(0), number<T>(1), number<T>(0),
+                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+            });
+        }
+        else
+        {
+            return inverseForce
+            ({
+                number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+                number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+                number<T>(0), number<T>(0), value, number<T>(0),
+                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+            });
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Vector<3,T>& values)
+{
+    if constexpr (N == 3)
+    {
+        return inverseForce
+        ({
+            values.x, number<T>(0), number<T>(0),
+            number<T>(0), values.y, number<T>(0),
+            number<T>(0), number<T>(0), values.z
+        });
+    }
+    else
+    {
+        return inverseForce
+        ({
+            values.x, number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), values.y, number<T>(0), number<T>(0),
+            number<T>(0), number<T>(0), values.z, number<T>(0),
+            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+        });
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Vector<3,T>& direction)
+{
+    auto mat = identity<N,T>();
+    scale(mat, value, direction);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Vector<3,T>& direction, const Vector<3,T>& origin)
+{
+    auto mat = identity<N,T>();
+    scale(mat, value, direction, origin);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Axis<T>& axis)
+{
+    auto mat = identity<N,T>();
+    scale(mat, value, axis);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+{
+    auto mat = identity<N,T>();
+    scale(mat, values, pivotPoint);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Transforms<T>& transforms)
+{
+    auto mat = identity<N,T>();
+    scale(mat, transforms);
+    invertForce(mat);
+
+    return mat;
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

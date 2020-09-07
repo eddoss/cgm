@@ -674,6 +674,87 @@ template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+/**
+ * Create scaling matrix (along default Cartesian axes).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to scale along which.
+ * @param value How much to scale.
+ * @return Scaling matrix.
+ */
+template<EAxes Axis, size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value);
+
+/**
+ * Create scaling matrix (related to world center).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param values How much to scale (value per axis).
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Vector<3,T>& values);
+
+/**
+ * Create scaling matrix (along to arbitrary axis).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param value How much to scale.
+ * @param direction Axis direction.
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Vector<3,T>& direction);
+
+/**
+ * Create scaling matrix (along to arbitrary axis).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param value How much to scale.
+ * @param origin Axis origin.
+ * @param direction Axis direction.
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
+
+/**
+ * Create scaling matrix (along to arbitrary axis).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param value How much to scale.
+ * @param axis The axis along which to scale.
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(T value, const Axis<T>& axis);
+
+/**
+ * Create scaling matrix (related to pivot point).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param value How much to scale (value per axis).
+ * @param pivot Pivot point.
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+
+/**
+ * Create scaling matrix (related to "transform.pivot" on "transform.scale" and "transform.uniformScale").
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param value How much to scale.
+ * @param transforms Transformations parameters.
+ * @return Scaling matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+scalingMatrix(const Transforms<T>& transforms);
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 

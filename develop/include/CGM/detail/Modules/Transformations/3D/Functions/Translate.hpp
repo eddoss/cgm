@@ -248,5 +248,264 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
     return copy;
 }
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(T value)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    if constexpr (Axis == EAxes::X)
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), value,
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+        };
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), value,
+            number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+        };
+    }
+    else
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(1), number<T>(0), number<T>(1), value,
+            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+        };
+    }
+#else
+    if constexpr (Axis == EAxes::X)
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+            value, number<T>(0), number<T>(0), number<T>(1)
+        };
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), value, number<T>(0), number<T>(1)
+        };
+    }
+    else
+    {
+        return
+        {
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), number<T>(0), value, number<T>(1)
+        };
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EAxes Axis, typename T>
+constexpr Matrix<4,4,T>
+translationMatrix(T value, const Matrix<3,3,T>& localOrientation)
+{
+    Vector<3,T> pos;
+
+    if constexpr (Axis == EAxes::X)
+    {
+        pos = converted<ESpace::World>({value, number<T>(0), number<T>(0)}, localOrientation);
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        pos = converted<ESpace::World>({number<T>(0), value, number<T>(0)}, localOrientation);
+    }
+    else
+    {
+        pos = converted<ESpace::World>({number<T>(0), number<T>(0), value}, localOrientation);
+    }
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), pos.x,
+        number<T>(0), number<T>(1), number<T>(0), pos.y,
+        number<T>(1), number<T>(0), number<T>(1), pos.z,
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+#else
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+        number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+        pos.x, pos.y, pos.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EAxes Axis, typename T>
+constexpr Matrix<4,4,T>
+translationMatrix(T value, const Matrix<4,4,T>& localSpace)
+{
+    Vector<3,T> pos;
+
+    if constexpr (Axis == EAxes::X)
+    {
+        pos = converted<ESpace::World>({value, number<T>(0), number<T>(0)}, localSpace);
+    }
+    else if constexpr (Axis == EAxes::Y)
+    {
+        pos = converted<ESpace::World>({number<T>(0), value, number<T>(0)}, localSpace);
+    }
+    else
+    {
+        pos = converted<ESpace::World>({number<T>(0), number<T>(0), value}, localSpace);
+    }
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), pos.x,
+        number<T>(0), number<T>(1), number<T>(0), pos.y,
+        number<T>(1), number<T>(0), number<T>(1), pos.z,
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+#else
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+        number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+        pos.x, pos.y, pos.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Vector<3,T>& value)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), value.x,
+        number<T>(0), number<T>(1), number<T>(0), value.y,
+        number<T>(1), number<T>(0), number<T>(1), value.z,
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+#else
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+        number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+        value.x, value.y, value.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Vector<3,T>& value, const Matrix<3,3,T>& localOrientation)
+{
+    auto pos = converted<ESpace::World>(value, localOrientation);
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), pos.x,
+        number<T>(0), number<T>(1), number<T>(0), pos.y,
+        number<T>(1), number<T>(0), number<T>(1), pos.z,
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+#else
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+        number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+        pos.x, pos.y, pos.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Vector<3,T>& value, const Matrix<4,4,T>& localSpace)
+{
+    auto pos = converted<ESpace::World>(value, localSpace);
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), pos.x,
+        number<T>(0), number<T>(1), number<T>(0), pos.y,
+        number<T>(1), number<T>(0), number<T>(1), pos.z,
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+#else
+    return
+    {
+        number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+        number<T>(1), number<T>(0), number<T>(1), number<T>(0),
+        pos.x, pos.y, pos.z, number<T>(1)
+    };
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Transforms<T>& transforms)
+{
+    return translationMatrix(transforms.translations);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Transforms<T>& transforms, const Matrix<3,3,T>& localOrientation)
+{
+    return translationMatrix(transforms.translations, localOrientation);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+translationMatrix(const Transforms<T>& transforms, const Matrix<4,4,T>& localSpace)
+{
+    return translationMatrix(transforms.translations, localSpace);
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

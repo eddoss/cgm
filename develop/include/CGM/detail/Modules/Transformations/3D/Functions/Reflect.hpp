@@ -389,5 +389,46 @@ reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCen
     return copy;
 }
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+template<EPlane Plane, size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix()
+{
+    auto mat = identity<N,T>();
+    reflect<Plane>(mat);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix(const Vector<3,T>& planeNormal)
+{
+    auto mat = identity<N,T>();
+    reflect(mat, planeNormal);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+{
+    auto mat = identity<N,T>();
+    reflect(mat, planeNormal, planeCenter);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

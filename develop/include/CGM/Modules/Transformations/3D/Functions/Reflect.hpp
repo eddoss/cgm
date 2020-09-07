@@ -254,6 +254,39 @@ template<typename T>
 constexpr Pivot<T>
 reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+/**
+ * Create reflection matrix (from a default Cartesian plane).
+ * @tparam Plane Cartesian plane to reflect from.
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @return Reflection matrix.
+ */
+template<EPlane Plane, size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix();
+
+/**
+ * Create reflection matrix (from a plane).
+ * @param planeNormal Plane normal.
+ * @return Reflection matrix.
+ */
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix(const Vector<3,T>& planeNormal);
+
+/**
+ * Create reflection matrix (from a plane).
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflection matrix.
+ */
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 

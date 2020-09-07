@@ -1335,5 +1335,111 @@ rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms)
     return copy;
 }
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+template<EAxes Axis, size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(T angle)
+{
+    auto mat = identity<N,T>();
+    rotate<Axis>(mat, angle);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(const Vector<3,T>& angles)
+{
+    auto mat = identity<N,T>();
+    rotate(mat, angles);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(const Vector<3,T>& angles, ERotationOrder rotationOrder)
+{
+    auto mat = identity<N,T>();
+    rotate(mat, angles, rotationOrder);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(T angle, const Vector<3,T>& direction)
+{
+    auto mat = identity<N,T>();
+    rotate(mat, angle, direction);
+    invertForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(T angle, const Axis<T>& axis)
+{
+    auto mat = identity<4,T>();
+    rotate(mat, axis);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto mat = identity<4,T>();
+    rotate(mat, angles, pivotPoint);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto mat = identity<4,T>();
+    rotate(mat, angles, pivotPoint, rotationOrder);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Transforms<T>& transforms)
+{
+    auto mat = identity<4,T>();
+    rotate(mat, transforms);
+    invertOrientationForce(mat);
+
+    return mat;
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

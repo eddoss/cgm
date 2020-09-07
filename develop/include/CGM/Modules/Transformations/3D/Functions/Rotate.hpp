@@ -861,6 +861,95 @@ template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms);
 
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+/**
+ * Create rotation matrix (around default Cartesian axis).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
+template<EAxes Axis, size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(T angle);
+
+/**
+ * Create rotation matrix (around default Cartesian axes in 'XYZ' rotation order).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(const Vector<3,T>& angles);
+
+/**
+ * Create rotation matrix (around default Cartesian axes (in given rotation order).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
+ * Create rotation matrix (around arbitrary direction).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+rotationMatrix(T angle, const Vector<3,T>& direction);
+
+/**
+ * Create rotation matrix (around arbitrary axis).
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(T angle, const Axis<T>& axis);
+
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained from "angles" in 'XYZ' rotation order).
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotation matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained from "angles" in given rotation order).
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotation matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained in "transform.rotations").
+ * @param transforms Transformations parameters.
+ * @return Rotation matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+rotationMatrix(const Transforms<T>& transforms);
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
