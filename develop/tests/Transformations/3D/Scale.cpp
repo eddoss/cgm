@@ -11,140 +11,198 @@ using namespace CGM;
 /* Vector */
 /* ####################################################################################### */
 
-TEST(Transformations_Scale, Vector_AlongXYZ)
+TEST(Transformations_Scale, Vector_AlongDefaultAxis)
 {
-    auto vec = Vector<3,float> {2.0f, 3.0f, 1.0f};
-    auto scl = Vector<3,float> {3.0f, 1.0f, 0.0f};
-    auto exp = Vector<3,float> {6.0f, 3.0f, 0.0f};
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    CGM_XFORM3D::scale(vec, scl);
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_X>(cgm_test::vector, cgm_test::scale::value);
+        const auto expect = CGM::Vector<3,double>{0.35, 1.2, -1.3};
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Y>(cgm_test::vector, cgm_test::scale::value);
+        const auto expect = CGM::Vector<3,double>{0.25, 1.68, -1.3};
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Z>(cgm_test::vector, cgm_test::scale::value);
+        const auto expect = CGM::Vector<3,double>{0.25, 1.2, -1.82};
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
 
-    ASSERT_TRUE(CGM::eq(vec, exp, 0.00001f));
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Vector_AlongDefaultAxes)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XFORM3D::scaled(cgm_test::vector, cgm_test::scale::values);
+    const auto expect = CGM::Vector<3,double>{0.35, 2.52, -0.39};
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Vector_AlongArbitraryDirection)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XFORM3D::scaled(cgm_test::vector, cgm_test::scale::value, cgm_test::axis.direction);
+    const auto expect = CGM::Vector<3,double>{0.544753, 1.24668, -1.38557};
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Vector_AlongArbitraryAxis)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XFORM3D::scaled(cgm_test::vector, cgm_test::scale::value, cgm_test::axis);
+    const auto expect = CGM::Vector<3,double>{+0.438595, +1.229870, -1.354753};
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Transformations_Scale, Vector_RelatedToPivot)
 {
-    const auto vec = Vector<3,float> {0.3f, 0.1f, 0.2f};
-    const auto scl = Vector<3,float> {2.0f, 1.7f, 0.6f};
-    const auto piv = CGM_XFORM3D::Pivot<float>
-    {
-        {0.910463f, 0.396517f, 0.117603f},
-        {-0.358856f, 0.89873f, -0.252005f},
-        {-0.205618f, 0.187238f, 0.960554f},
-        {0.11f, 0.3f, 0.4f}
-    };
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    {
-        auto pnt = vec;
-        auto exp = Vector<3,float> {0.391407f, 0.0236731f, 0.346308f};
-        CGM_XFORM3D::scale<CGM_POINT>(pnt, scl, piv);
-        ASSERT_TRUE(CGM::eq(pnt, exp, 0.00001f));
-    }
-    {
-        auto dir = vec;
-        auto exp = Vector<3,float> {0.635594f, 0.1792867f, 0.194272f};
-        CGM_XFORM3D::scale<CGM_DIRECTION>(dir, scl, piv);
-        ASSERT_TRUE(CGM::eq(dir, exp, 0.00001f));
-    }
+    const auto result = CGM_XFORM3D::scaled(cgm_test::vector, cgm_test::scale::values, cgm_test::pivot);
+    const auto expect = CGM::Vector<3,double>{0.861329, 1.2972, 0.138074};
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
 
 /* ####################################################################################### */
 /* Matrix3 */
 /* ####################################################################################### */
 
-TEST(Transformations_Scale, Matrix3_AlongXYZ)
+TEST(Transformations_Scale, Matrix3_AlongDefaultAxis)
 {
-    auto scl = Vector<3,float> {1.3f, 0.6f, 1.7f};
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        auto mat = CGM_XYZ::orientationMatrix
-        (
-            Vector<3,float>{0.955793f, 0.000000f, -0.294040f},
-            Vector<3,float>{-0.030736f, 0.994522f, -0.099908f},
-            Vector<3,float>{0.292430f, 0.104528f, 0.950557f}
-        );
-
-        auto exp = CGM_XYZ::orientationMatrix
-        (
-            Vector<3,float>{1.24253f, 0.0f, -0.499869f},
-            Vector<3,float>{-0.0399563f, 0.596713f, -0.169843f},
-            Vector<3,float>{0.380158f, 0.0627171f, 1.61595f}
-        );
-
-        CGM_XFORM3D::scale<CGM_WORLD>(mat, scl);
-
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.00001f));
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_X,CGM_WORLD>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+1.23613, +0.46947, +0.00000},
+                Vector<3,double>{-0.64290, +0.86365, +0.20791},
+                Vector<3,double>{+0.13665, -0.18358, +0.97815}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Y,CGM_WORLD>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.88295, +0.65726, +0.00000},
+                Vector<3,double>{-0.45921, +1.20911, +0.20791},
+                Vector<3,double>{+0.09761, -0.25701, +0.97815}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Z,CGM_WORLD>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.88295, +0.46947, +0.00000},
+                Vector<3,double>{-0.45921, +0.86365, +0.29108},
+                Vector<3,double>{+0.09761, -0.18358, +1.36941}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
     }
-
     {
-        auto mat = CGM_XYZ::orientationMatrix
-        (
-            Vector<3,float>{0.955793f, 0.000000f, -0.294040f},
-            Vector<3,float>{-0.030736f, 0.994522f, -0.099908f},
-            Vector<3,float>{0.292430f, 0.104528f, 0.950557f}
-        );
-
-        auto exp = CGM_XYZ::orientationMatrix
-        (
-            Vector<3,float>{1.24253f, 0.0f, -0.382252f},
-            Vector<3,float>{-0.01844f, 0.596713f, -0.0599446f},
-            Vector<3,float>{0.49713f, 0.177698f, 1.61595f}
-        );
-
-        CGM_XFORM3D::scale<CGM_LOCAL>(mat, scl);
-
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.00001f));
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_X,CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+1.236131, +0.657259, +0.000000},
+                Vector<3,double>{-0.459211, +0.863650, +0.207910},
+                Vector<3,double>{+0.097610, -0.183580, +0.978150}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Y,CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.882950, +0.469469, -0.000000},
+                Vector<3,double>{-0.642892, +1.209107, +0.291073},
+                Vector<3,double>{+0.097611, -0.183582, +0.978150}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Z,CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.882950, +0.469470, -0.000000},
+                Vector<3,double>{-0.459210, +0.863650, +0.207908},
+                Vector<3,double>{+0.136654, -0.257012, +1.369413}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Scale, Matrix3_RelatedPivot)
+TEST(Transformations_Scale, Matrix3_AlongDefaultAxes)
 {
-    const auto scales = Vector<3,float> {1.3f, 0.6f, 1.7f};
-    const auto pivot = CGM_XYZ::Pivot<float>
-    (
-        Vector<3,float>{+0.94943f, +0.15037f, -0.27564f},
-        Vector<3,float>{-0.01031f, +0.89232f, +0.45129f},
-        Vector<3,float>{+0.31382f, -0.42562f, +0.84874f},
-        Vector<3,float>{+0.40000f, -0.30000f, +0.20000f}
-    );
-
-    const auto space = CGM_XYZ::orientationMatrix
-    (
-        Vector<3,float>{+0.88295f, +0.46947f, +0.00000f},
-        Vector<3,float>{-0.45921f, +0.86365f, +0.20791f},
-        Vector<3,float>{+0.09761f, -0.18358f, +0.97815f}
-    );
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        auto exp = CGM_XYZ::orientationMatrix
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::orientation, cgm_test::scale::values);
+        const auto expect = CGM_XYZ::orientationMatrix
         (
-            Vector<3,float>{+1.160494f, +0.341175f, -0.103227f},
-            Vector<3,float>{-0.632783f, +0.636887f, -0.118114f},
-            Vector<3,float>{+0.246755f, -0.571286f, +1.502986f}
+            Vector<3,double>{+1.23613, +0.98589, +0.00000},
+            Vector<3,double>{-0.64290, +1.81367, +0.06237},
+            Vector<3,double>{+0.13665, -0.38551, +0.29344}
         );
-
-        auto mat = space;
-
-        CGM_XFORM3D::scale<CGM_WORLD>(mat, scales, pivot);
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::values);
+        const auto expect = CGM_XYZ::orientationMatrix
+        (
+            Vector<3,double>{+1.236130, +0.657258, +0.000000},
+            Vector<3,double>{-0.964341, +1.813665, +0.436611},
+            Vector<3,double>{+0.029283, -0.055074, +0.293445}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Matrix3_AlongArbitraryDirection)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        auto exp = CGM_XYZ::orientationMatrix
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::orientation, cgm_test::scale::value, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::orientationMatrix
         (
-            Vector<3,float>{+1.147835f, +0.610311f, +0.000000f},
-            Vector<3,float>{-0.275526f, +0.518190f, +0.124746f},
-            Vector<3,float>{+0.165937f, -0.312086f, +1.662855f}
+            Vector<3,double>{+1.22812, +0.52414, -0.10021},
+            Vector<3,double>{-0.59723, +0.84179, +0.24798},
+            Vector<3,double>{+0.01993, -0.19588, +1.00070}
         );
-
-        auto mat = space;
-
-        CGM_XFORM3D::scale<CGM_LOCAL>(mat, scales);
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::value, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::orientationMatrix
+        (
+            Vector<3,double>{+1.164870, +0.707282, -0.090519},
+            Vector<3,double>{-0.414560, +0.901315, +0.193574},
+            Vector<3,double>{+0.015763, -0.252622, +1.004430}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
 }
 
@@ -152,96 +210,220 @@ TEST(Transformations_Scale, Matrix3_RelatedPivot)
 /* Matrix4 */
 /* ####################################################################################### */
 
-TEST(Transformations_Scale, Matrix4_AlongXYZ)
+TEST(Transformations_Scale, Matrix4_AlongDefaultAxis)
 {
-    const auto scl = Vector<3,float> {1.3f, 0.6f, 1.7f};
-    const auto space = CGM_XYZ::spaceMatrix
-    (
-        Vector<3,float>{0.95630f, 0.00000f, -0.29237f},
-        Vector<3,float>{0.00000f, 1.00000f, 0.00000f},
-        Vector<3,float>{0.29237f, 0.00000f, 0.95630f},
-        Vector<3,float>{0.20000f, 0.10000f, -0.25000f}
-    );
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        const auto exp = CGM_XYZ::spaceMatrix
-        (
-            Vector<3,float> {1.24320f, 0.00000f, -0.49703f},
-            Vector<3,float> {0.00000f, 0.60000f, 0.00000f},
-            Vector<3,float> {0.38008f, 0.00000f, 1.62572f},
-            Vector<3,float> {0.26000f, 0.06000f, -0.42500f}
-        );
-
-        auto mat = space;
-        CGM_XFORM3D::scale<CGM_WORLD>(mat, scl);
-
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_X,CGM_WORLD>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+1.23613, +0.46947, +0.00000},
+                Vector<3,double>{-0.64290, +0.86365, +0.20791},
+                Vector<3,double>{+0.13665, -0.18358, +0.97815},
+                Vector<3,double>{+0.35000, +1.20000, -1.30000}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Y,CGM_WORLD>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+0.88295, +0.65726, +0.00000},
+                Vector<3,double>{-0.45921, +1.20911, +0.20791},
+                Vector<3,double>{+0.09761, -0.25701, +0.97815},
+                Vector<3,double>{+0.25000, +1.68000, -1.30000}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Z,CGM_WORLD>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+0.88295, +0.46947, +0.00000},
+                Vector<3,double>{-0.45921, +0.86365, +0.29108},
+                Vector<3,double>{+0.09761, -0.18358, +1.36941},
+                Vector<3,double>{+0.25000, +1.20000, -1.82000}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
     }
-
     {
-        const auto exp = CGM_XYZ::spaceMatrix
-        (
-             Vector<3,float>{1.24320f, 0.00000f, -0.38008f},
-             Vector<3,float>{0.00000f, 0.60000f, 0.00000f},
-             Vector<3,float>{0.49703f, 0.00000f, 1.62572f},
-             Vector<3,float>{0.20000f, 0.10000f, -0.25000f}
-        );
-
-        auto mat = space;
-        CGM_XFORM3D::scale<CGM_LOCAL>(mat, scl);
-
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_X,CGM_LOCAL>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+1.236131, +0.657259, +0.000000},
+                Vector<3,double>{-0.459211, +0.863650, +0.207910},
+                Vector<3,double>{+0.097610, -0.183580, +0.978150},
+                Vector<3,double>{+0.526929, +1.347245, -1.300000}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Y,CGM_LOCAL>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+0.882950, +0.469469, -0.000000},
+                Vector<3,double>{-0.642892, +1.209107, +0.291073},
+                Vector<3,double>{+0.097611, -0.183582, +0.978150},
+                Vector<3,double>{+0.130368, +1.424996, -1.245836}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::scaled<CGM_3D_AXIS_Z,CGM_LOCAL>(cgm_test::space, cgm_test::scale::value);
+            const auto expect = CGM_XYZ::spaceMatrix
+            (
+                Vector<3,double>{+0.882950, +0.469470, -0.000000},
+                Vector<3,double>{-0.459210, +0.863650, +0.207908},
+                Vector<3,double>{+0.136654, -0.257012, +1.369413},
+                Vector<3,double>{+0.192703, +1.307761, -1.874170}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Scale, Matrix4_RelatedPivot)
+TEST(Transformations_Scale, Matrix4_AlongDefaultAxes)
 {
-    const auto scales = Vector<3,float> {1.3f, 0.6f, 1.7f};
-    const auto pivot = CGM_XYZ::Pivot<float>
-    (
-        Vector<3,float>{+0.94943f, +0.15037f, -0.27564f},
-        Vector<3,float>{-0.01031f, +0.89232f, +0.45129f},
-        Vector<3,float>{+0.31382f, -0.42562f, +0.84874f},
-        Vector<3,float>{+0.40000f, -0.30000f, +0.20000f}
-    );
-
-    const auto space = CGM_XYZ::spaceMatrix
-    (
-        Vector<3,float>{+0.88295f, +0.46947f, +0.00000f},
-        Vector<3,float>{-0.45921f, +0.86365f, +0.20791f},
-        Vector<3,float>{+0.09761f, -0.18358f, +0.97815f},
-        Vector<3,float>{+0.20000f, +0.00000f, +0.40000f}
-    );
+    namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        auto exp = CGM_XYZ::spaceMatrix
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::space, cgm_test::scale::values);
+        const auto expect = CGM_XYZ::spaceMatrix
         (
-            Vector<3,float>{+1.160494f, +0.341175f, -0.103227f},
-            Vector<3,float>{-0.632783f, +0.636887f, -0.118114f},
-            Vector<3,float>{+0.246755f, -0.571286f, +1.502986f},
-            Vector<3,float>{+0.139999f, -0.131350f, +0.339242f}
+            Vector<3,double>{+1.23613, +0.98589, +0.00000},
+            Vector<3,double>{-0.64290, +1.81367, +0.06237},
+            Vector<3,double>{+0.13665, -0.38551, +0.29344},
+            Vector<3,double>{+0.35000, +2.52000, -0.39000}
         );
-
-        auto mat = space;
-
-        CGM_XFORM3D::scale<CGM_WORLD>(mat, scales, pivot);
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
-
     {
-        auto exp = CGM_XYZ::spaceMatrix
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::space, cgm_test::scale::values);
+        const auto expect = CGM_XYZ::spaceMatrix
         (
-            Vector<3,float>{+1.147835f, +0.610311f, +0.000000f},
-            Vector<3,float>{-0.275526f, +0.518190f, +0.124746f},
-            Vector<3,float>{+0.165937f, -0.312086f, +1.662855f},
-            Vector<3,float>{+0.200000f, +0.000000f, +0.400000f}
+            Vector<3,double>{+1.236130, +0.657258, +0.000000},
+            Vector<3,double>{-0.964341, +1.813665, +0.436611},
+            Vector<3,double>{+0.029283, -0.055074, +0.293445},
+            Vector<3,double>{+0.250000, +1.200000, -1.300000}
         );
-
-        auto mat = space;
-
-        CGM_XFORM3D::scale<CGM_LOCAL>(mat, scales);
-        ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Matrix4_AlongArbitraryDirection)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::space, cgm_test::scale::value, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.22812, +0.52414, -0.10021},
+            Vector<3,double>{-0.59723, +0.84179, +0.24798},
+            Vector<3,double>{+0.01993, -0.19588, +1.00070},
+            Vector<3,double>{+0.54475, +1.24668, -1.38557}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::space, cgm_test::scale::value, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.164870, +0.707282, -0.090519},
+            Vector<3,double>{-0.414560, +0.901315, +0.193574},
+            Vector<3,double>{+0.015763, -0.252622, +1.004430},
+            Vector<3,double>{+0.620243, +1.512317, -1.418878}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Matrix4_AlongArbitraryAxis)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::space, cgm_test::scale::value, cgm_test::axis);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.22812, +0.52414, -0.10021},
+            Vector<3,double>{-0.59723, +0.84179, +0.24798},
+            Vector<3,double>{+0.01993, -0.19588, +1.00070},
+            Vector<3,double>{+0.43860, +1.22987, -1.35475}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::space, cgm_test::scale::value, cgm_test::axis);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.164870, +0.707282, -0.090519},
+            Vector<3,double>{-0.414560, +0.901315, +0.193574},
+            Vector<3,double>{+0.015763, -0.252622, +1.004430},
+            Vector<3,double>{+0.166997, +1.129983, -1.273349}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Matrix4_RelatedToPivot)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::space, cgm_test::scale::values, cgm_test::pivot);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.20649, +0.94942, +0.05732},
+            Vector<3,double>{-0.53345, +1.59510, +0.87864},
+            Vector<3,double>{-0.18947, +0.35538, +0.58016},
+            Vector<3,double>{+0.86133, +1.29720, +0.13807}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::space, cgm_test::scale::values, cgm_test::pivot);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.047118, +0.782149, -0.260561},
+            Vector<3,double>{-0.616996, +1.459645, +1.029940},
+            Vector<3,double>{-0.500265, +0.309847, +0.875006},
+            Vector<3,double>{+0.256570, +1.155044, -0.928538}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
+/* ####################################################################################### */
+/* Transformation makers */
+/* ####################################################################################### */
+
+//TEST(Transformations_ScalingMatrix, AlongXYZ)
+//{
+//    const auto expect = CGM_XYZ::spaceMatrix
+//    (
+//        Vector<3,float> {1.24320f, 0.00000f, -0.49703f},
+//        Vector<3,float> {0.00000f, 0.60000f, 0.00000f},
+//        Vector<3,float> {0.38008f, 0.00000f, 1.62572f},
+//        Vector<3,float> {0.26000f, 0.06000f, -0.42500f}
+//    );
+//
+//    auto mat = space;
+//    CGM_XFORM3D::scale<CGM_WORLD>(mat, scl);
+//
+//    ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
+//}
+
+/* --------------------------------------------------------------------------------------- */

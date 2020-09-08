@@ -23,14 +23,6 @@ using namespace CGM;
     std::cout << CGM_XYZ::position(b) << std::endl;
 namespace cgm_xyz_xform_tests_data
 {
-    // Direction - X axes from 'pivot'
-    // Position - from 'pivot' position
-    const auto axis = CGM_XFORM3D::Axis<double>
-    (
-        Vector<3,double>{+0.40000, -0.30000, +0.20000},
-        Vector<3,double>{+0.94943, +0.15037, -0.27564}
-    );
-
     // Rotated on {28, 16, 9} deg
     // Translated in {0.4, -0.3, 0.2}
     const auto pivot = CGM_XFORM3D::Pivot<double>
@@ -39,6 +31,12 @@ namespace cgm_xyz_xform_tests_data
         Vector<3,double>{-0.01031, +0.89232, +0.45129},
         Vector<3,double>{+0.31382, -0.42562, +0.84874},
         Vector<3,double>{+0.40000, -0.30000, +0.20000}
+    );
+
+    const auto axis = CGM_XFORM3D::Axis<double>
+    (
+        pivot.position,
+        pivot.axes.x
     );
 
     // Rotated {12, 0, 28} deg
@@ -73,8 +71,8 @@ namespace cgm_xyz_xform_tests_data
 
     namespace scale
     {
-        const auto value = -0.7;
-        const auto values = Vector<3,double> {-0.7, 2.1, 0.3};
+        const auto value = 1.4;
+        const auto values = Vector<3,double> {1.4, 2.1, 0.3};
     }
 
     namespace reflect

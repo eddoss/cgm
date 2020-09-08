@@ -61,7 +61,7 @@ TEST(Cartesian_2D_InternalFunctions, multiply_vector2_on_matrix3x3)
 }
 
 /* --------------------------------------------------------------------------------------- */
-#include <CGM/Modules/Core/Functions/IO.hpp>
+
 TEST(Cartesian_2D_InternalFunctions, multiply_matrix2x2_on_matrix3x3_res2x2)
 {
     Matrix<2,2,int> expect

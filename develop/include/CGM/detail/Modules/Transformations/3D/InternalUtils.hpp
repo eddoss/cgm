@@ -32,7 +32,7 @@ multiply_matrix4x4_on_matrix3x3(Matrix<4,4,T>& mat4, const Matrix<3,3,T>& mat3)
         mat3(0,0), mat3(0,1), mat3(0,2), zero<T>,
         mat3(1,0), mat3(1,1), mat3(1,2), zero<T>,
         mat3(2,0), mat3(2,1), mat3(2,2), zero<T>,
-        zero<T>, zero<T>, zero<T>, number<1>(1)
+        zero<T>, zero<T>, zero<T>, number<T>(1)
     };
 }
 

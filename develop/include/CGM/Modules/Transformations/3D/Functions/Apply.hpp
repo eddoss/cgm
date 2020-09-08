@@ -50,38 +50,11 @@ apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
 /**
  * Applies transformations to 4x4 matrix.
  * @param matrix Matrix to apply transformations to.
- * @param transforms 3x3 transformation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& transforms);
-
-/**
- * Applies transformations to 4x4 matrix.
- * @param matrix Matrix to apply transformations to.
  * @param transforms 4x4 transformation matrix.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms);
-
-/**
- * Applies transformations to axes struct.
- * @param axes Axes struct to apply transformations to.
- * @param transforms 3x3 transformation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-apply(Axes<T>& axes, const Matrix<3,3,T>& transforms);
-
-/**
- * Applies transformations to axes struct.
- * @param axes Axes struct to apply transformations to.
- * @param transforms 4x4 transformation matrix.
- */
-template<EVectorRepresentation Representation, typename T>
-constexpr CGM_FORCEINLINE void
-apply(Axes<T>& axes, const Matrix<4,4,T>& transforms);
 
 /* ####################################################################################### */
 /* Outplace */
@@ -116,16 +89,6 @@ applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms);
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
-
-/**
- * Applies transformations to 4x4 matrix.
- * @param matrix Matrix to apply transformations to.
- * @param transforms 3x3 transformation matrix.
- * @return Copy of transformed matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-applied(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& transforms);
 
 /**
  * Applies transformations to 4x4 matrix.
