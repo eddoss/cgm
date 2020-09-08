@@ -304,8 +304,28 @@ unpackSpace(const Matrix<3,3,T>& space)
 }
 
 /* ####################################################################################### */
-/* Invert orientation */
+/* 4x4 orientation manipulations */
 /* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+transposeOrientation(Matrix<3,3,T>& basis)
+{
+    std::swap(matrix(0,1), matrix(1,0));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+transposedOrientation(const Matrix<3,3,T>& basis)
+{
+    auto copy = basis;
+    transposeOrientation(basis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr bool

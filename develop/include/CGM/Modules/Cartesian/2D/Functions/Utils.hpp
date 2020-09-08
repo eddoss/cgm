@@ -227,8 +227,25 @@ constexpr std::tuple<Vector<2,T>, Vector<2,T>, Vector<2,T>>
 unpackSpace(const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
-/* Invert orientation */
+/* 3x3 orientation manipulations */
 /* ####################################################################################### */
+
+/**
+ * Transpose orientation of 3x3 basis matrix.
+ * @param basis Matrix to transpose.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+transposeOrientation(Matrix<3,3,T>& basis);
+
+/**
+ * Transpose orientation of 3x3 basis matrix.
+ * @param basis Matrix to transpose.
+ * @return Transposed matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+transposedOrientation(const Matrix<3,3,T>& basis);
 
 /**
  * Safely invert orientation of 3x3 basis matrix.

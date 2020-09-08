@@ -786,8 +786,30 @@ unpackSpace(const Matrix<4,4,T>& space)
 }
 
 /* ####################################################################################### */
-/* Invert orientation */
+/* 4x4 orientation manipulations */
 /* ####################################################################################### */
+
+template<typename T>
+constexpr void
+transposeOrientation(Matrix<4,4,T>& basis)
+{
+    std::swap(matrix(0,1), matrix(1,0));
+    std::swap(matrix(0,2), matrix(2,0));
+    std::swap(matrix(1,2), matrix(2,1));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+transposedOrientation(const Matrix<4,4,T>& basis)
+{
+    auto copy = basis;
+    transposeOrientation(basis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr bool

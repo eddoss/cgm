@@ -543,8 +543,25 @@ constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
 unpackSpace(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
-/* Invert orientation */
+/* 4x4 orientation manipulations */
 /* ####################################################################################### */
+
+/**
+ * Transpose orientation of 4x4 basis matrix.
+ * @param basis Matrix to transpose.
+ */
+template<typename T>
+constexpr void
+transposeOrientation(Matrix<4,4,T>& basis);
+
+/**
+ * Transpose orientation of 4x4 basis matrix.
+ * @param basis Matrix to transpose.
+ * @return Transposed matrix.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+transposedOrientation(const Matrix<4,4,T>& basis);
 
 /**
  * Safely invert orientation of 4x4 basis matrix.
