@@ -311,7 +311,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 transposeOrientation(Matrix<3,3,T>& basis)
 {
-    std::swap(matrix(0,1), matrix(1,0));
+    std::swap(basis(0,1), basis(1,0));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -321,7 +321,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 transposedOrientation(const Matrix<3,3,T>& basis)
 {
     auto copy = basis;
-    transposeOrientation(basis);
+    transposeOrientation(copy);
     return copy;
 }
 

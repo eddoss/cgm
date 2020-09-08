@@ -793,9 +793,9 @@ template<typename T>
 constexpr void
 transposeOrientation(Matrix<4,4,T>& basis)
 {
-    std::swap(matrix(0,1), matrix(1,0));
-    std::swap(matrix(0,2), matrix(2,0));
-    std::swap(matrix(1,2), matrix(2,1));
+    std::swap(basis(0,1), basis(1,0));
+    std::swap(basis(0,2), basis(2,0));
+    std::swap(basis(1,2), basis(2,1));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -805,7 +805,7 @@ constexpr Matrix<4,4,T>
 transposedOrientation(const Matrix<4,4,T>& basis)
 {
     auto copy = basis;
-    transposeOrientation(basis);
+    transposeOrientation(copy);
     return copy;
 }
 
