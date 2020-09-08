@@ -2134,8 +2134,6 @@ template<size_t S, typename T>
 constexpr CGM::Matrix<S,S,T>&
 operator *= (CGM::Matrix<S,S,T>& A, const CGM::Matrix<S,S,T>& B)
 {
-    CGM::Matrix<S,S,T> result;
-
     if constexpr (S== 2)
     {
         A =
@@ -2200,13 +2198,15 @@ operator *= (CGM::Matrix<S,S,T>& A, const CGM::Matrix<S,S,T>& B)
     }
     else
     {
+        CGM::Matrix<S,S,T> result;
+
         typename CGM::Matrix<S,S,T>::value_type sum;
     
         for (auto c = 0; c < S; ++c)
         {
             for (auto r = 0; r < S; ++r)
             {
-                sum = typename CGM::Matrix<S,S,T>::value_type(0);
+                sum = CGM::zero<T>;
                 for (auto i = 0; i < S; ++i)
                 {
                     sum += A(r,i) * B(i,c);
@@ -2215,8 +2215,9 @@ operator *= (CGM::Matrix<S,S,T>& A, const CGM::Matrix<S,S,T>& B)
             }
         }
         A = result;
-        return A;
     }
+
+    return A;
 }
 
 /* --------------------------------------------------------------------------------------- */
