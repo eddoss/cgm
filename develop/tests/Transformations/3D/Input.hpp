@@ -59,6 +59,12 @@ namespace cgm_xyz_xform_tests_data
 
     const auto vector = Vector<3,double>{+0.25000, +1.20000, -1.30000};
 
+    namespace translate
+    {
+        const auto value = 0.5;
+        const auto values = Vector<3,double> {0.5, -1.4, 2.3};
+    }
+
     namespace rotate
     {
         const auto value = 0.383972; // 22 deg
@@ -81,5 +87,23 @@ namespace cgm_xyz_xform_tests_data
     {
         const auto normal = Vector<3,double> {+0.765511, +0.630287, +0.129351};
         const auto ior = 0.25;
+    }
+
+    namespace apply
+    {
+        const auto mat3 = CGM_XYZ::orientationMatrix
+        (
+            Vector<3,double>{+0.48990, +0.33640, +1.47840},
+            Vector<3,double>{+0.28284, +0.88704, -1.14645},
+            Vector<3,double>{-0.56569, +0.73485, +0.70711}
+        );
+
+        const auto mat4 = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+0.48990, +0.33640, +1.47840},
+            Vector<3,double>{+0.28284, +0.88704, -1.14645},
+            Vector<3,double>{-0.56569, +0.73485, +0.70711},
+            Vector<3,double>{+0.30000, -1.20000, +1.00000}
+        );
     }
 }

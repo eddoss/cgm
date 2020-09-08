@@ -237,55 +237,13 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translationMatrix(T value);
 
 /**
- * Create 4x4 translation matrix (along default Cartesian axis in local space).
- * @tparam Axis Cartesian axis to translate along which.
- * @param value How much to translate.
- * @param localOrientation Local orientation in which to translate.
- * @return Translation matrix.
- */
-template<EAxes Axis, typename T>
-constexpr Matrix<4,4,T>
-translationMatrix(T value, const Matrix<3,3,T>& localOrientation);
-
-/**
- * Create 4x4 translation matrix (along default Cartesian axis in local space).
- * @tparam Axis Cartesian axis to translate along which.
- * @param value How much to translate.
- * @param localSpace Local space in which to translate.
- * @return Translation matrix.
- */
-template<EAxes Axis, typename T>
-constexpr Matrix<4,4,T>
-translationMatrix(T value, const Matrix<4,4,T>& localSpace);
-
-/**
  * Create 4x4 translation matrix (on given value in world space).
- * @param value How much to translate.
+ * @param values How much to translate.
  * @return Translation matrix.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translationMatrix(const Vector<3,T>& value);
-
-/**
- * Create 4x4 translation matrix (on given value in local space).
- * @param value How much to translate.
- * @param localOrientation Local orientation in which to translate.
- * @return Translation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translationMatrix(const Vector<3,T>& value, const Matrix<3,3,T>& localOrientation);
-
-/**
- * Create 4x4 translation matrix (on given value in local space).
- * @param value How much to translate.
- * @param localSpace Local space in which to translate.
- * @return Translation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translationMatrix(const Vector<3,T>& value, const Matrix<4,4,T>& localSpace);
+translationMatrix(const Vector<3,T>& values);
 
 /**
  * Create 4x4 translation matrix (on value from "transforms.translations" in world space).
@@ -295,26 +253,6 @@ translationMatrix(const Vector<3,T>& value, const Matrix<4,4,T>& localSpace);
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translationMatrix(const Transforms<T>& transforms);
-
-/**
- * Create 4x4 translation matrix (on value from "transforms.translations" in local space).
- * @param value How much to translate.
- * @param localOrientation Local orientation in which to translate.
- * @return Translation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translationMatrix(const Transforms<T>& transforms, const Matrix<3,3,T>& localOrientation);
-
-/**
- * Create 4x4 translation matrix (on value from "transforms.translations" in local space).
- * @param value How much to translate.
- * @param localSpace Local space in which to translate.
- * @return Translation matrix.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-translationMatrix(const Transforms<T>& transforms, const Matrix<4,4,T>& localSpace);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
