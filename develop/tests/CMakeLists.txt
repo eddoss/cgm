@@ -148,7 +148,7 @@ cgm_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
 # ####################################################################################### #
 
 set(TS_TRANSFORMATION_3D
-#    Transformations/3D/Apply.cpp
+    Transformations/3D/Apply.cpp
     Transformations/3D/Translation.cpp
     Transformations/3D/Scale.cpp
     Transformations/3D/Rotate.cpp
