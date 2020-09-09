@@ -410,20 +410,110 @@ TEST(Transformations_Scale, Matrix4_RelatedToPivot)
 /* Transformation makers */
 /* ####################################################################################### */
 
-//TEST(Transformations_ScalingMatrix, AlongXYZ)
-//{
-//    const auto expect = CGM_XYZ::spaceMatrix
-//    (
-//        Vector<3,float> {1.24320f, 0.00000f, -0.49703f},
-//        Vector<3,float> {0.00000f, 0.60000f, 0.00000f},
-//        Vector<3,float> {0.38008f, 0.00000f, 1.62572f},
-//        Vector<3,float> {0.26000f, 0.06000f, -0.42500f}
-//    );
-//
-//    auto mat = space;
-//    CGM_XFORM3D::scale<CGM_WORLD>(mat, scl);
-//
-//    ASSERT_TRUE(CGM::eq(mat, exp, 0.0001f));
-//}
+TEST(Transformations_ScalingMatrix, DefaultAxis)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        const auto result = CGM_XYZ::scalingMatrix<CGM_3D_AXIS_X,4>(cgm_test::scale::value);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.40000, +0.00000, +0.00000},
+            Vector<3,double>{+0.00000, +1.00000, +0.00000},
+            Vector<3,double>{+0.00000, +0.00000, +1.00000},
+            Vector<3,double>{+0.00000, +0.00000, +0.00000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XYZ::scalingMatrix<CGM_3D_AXIS_Y,4>(cgm_test::scale::value);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.00000, +0.00000, +0.00000},
+            Vector<3,double>{+0.00000, +1.40000, +0.00000},
+            Vector<3,double>{+0.00000, +0.00000, +1.00000},
+            Vector<3,double>{+0.00000, +0.00000, +0.00000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XYZ::scalingMatrix<CGM_3D_AXIS_Z,4>(cgm_test::scale::value);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            Vector<3,double>{+1.00000, +0.00000, +0.00000},
+            Vector<3,double>{+0.00000, +1.00000, +0.00000},
+            Vector<3,double>{+0.00000, +0.00000, +1.40000},
+            Vector<3,double>{+0.00000, +0.00000, +0.00000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
 
 /* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_ScalingMatrix, DefaultAxes)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XYZ::scalingMatrix<4>(cgm_test::scale::values);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        Vector<3,double>{+1.40000, +0.00000, +0.00000},
+        Vector<3,double>{+0.00000, +2.10000, +0.00000},
+        Vector<3,double>{+0.00000, +0.00000, +0.30000},
+        Vector<3,double>{+0.00000, +0.00000, +0.00000}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_ScalingMatrix, Direction)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XYZ::scalingMatrix<4>(cgm_test::scale::value, cgm_test::axis.direction);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        Vector<3,double>{+1.36056, +0.05711, -0.10468},
+        Vector<3,double>{+0.05711, +1.00904, -0.01658},
+        Vector<3,double>{-0.10468, -0.01658, +1.03039},
+        Vector<3,double>{+0.00000, +0.00000, +0.00000}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_ScalingMatrix, Axis)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XYZ::scalingMatrix(cgm_test::scale::value, cgm_test::axis);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        Vector<3,double>{+1.36056, +0.05711, -0.10468},
+        Vector<3,double>{+0.05711, +1.00904, -0.01658},
+        Vector<3,double>{-0.10468, -0.01658, +1.03039},
+        Vector<3,double>{-0.10616, -0.01681, +0.03082}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+
+TEST(Transformations_ScalingMatrix, Pivot)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    const auto result = CGM_XYZ::scalingMatrix(cgm_test::scale::values, cgm_test::pivot);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        Vector<3,double>{+1.29174, +0.14048, -0.29624},
+        Vector<3,double>{+0.14048, +1.75810, +0.67925},
+        Vector<3,double>{-0.29624, +0.67925, +0.75016},
+        Vector<3,double>{-0.01530, +0.03539, +0.37224}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
