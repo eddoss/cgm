@@ -7,9 +7,9 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
-Axis<T>::Axis(const Vector<3,T>& pos, const Vector<3,T>& dir)
-    : origin(pos)
-    , direction(dir)
+Axis<T>::Axis(const Vector<3,T>& dir, const Vector<3,T>& pos)
+    : direction(dir)
+    , position(pos)
 {
 
 }

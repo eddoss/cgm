@@ -17,8 +17,8 @@ struct Axis
 /* Attributes */
 /* ####################################################################################### */
 
-    Vector<3,T> origin;       ///< axis origin.
     Vector<3,T> direction;    ///< axis direction.
+    Vector<3,T> position;     ///< axis position.
 
 /* ####################################################################################### */
 /* Constructors */
@@ -26,10 +26,10 @@ struct Axis
 
     /**
      * Initialize origin and direction.
-     * @param pos Axis origin.
      * @param dir Axis direction.
+     * @param pos Axis origin.
      */
-    Axis(const Vector<3,T>& pos, const Vector<3,T>& dir);
+    Axis(const Vector<3,T>& dir, const Vector<3,T>& pos);
 };
 
 CGM_XFORM3D_NAMESPACE_END

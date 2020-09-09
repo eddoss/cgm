@@ -8,7 +8,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 AxisAngle<T>::AxisAngle(const Vector<3,T>& dir, T ang)
-    : axis(dir)
+    : direction(dir)
     , angle(ang)
 {
 

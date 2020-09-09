@@ -35,8 +35,8 @@ namespace cgm_xyz_xform_tests_data
 
     const auto axis = CGM_XFORM3D::Axis<double>
     (
-        pivot.position,
-        pivot.axes.x
+        pivot.axes.x,
+        pivot.position
     );
 
     // Rotated {12, 0, 28} deg

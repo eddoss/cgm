@@ -19,7 +19,7 @@ struct AxisAngle
 
     /** Rotation axis direction. */
     Vector<3,T>
-    axis;
+    direction;
 
     /** Rotation angle in radians. */
     T

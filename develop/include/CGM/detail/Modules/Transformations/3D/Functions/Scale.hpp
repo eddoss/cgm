@@ -54,7 +54,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, T value, const Axis<T>& axis)
 {
-    vector += axis.direction * (value - number<T>(1)) * shortestDistance(vector - axis.origin, axis.direction);
+    vector += axis.direction * (value - number<T>(1)) * shortestDistance(vector - axis.position, axis.direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -335,8 +335,8 @@ scale(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis)
             matrix, value,
             Axis<T>
             (
-                converted<ESpace::World,EVectorRepresentation::Point>(axis.origin, matrix),
-                converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix)
+                converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix),
+                converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix)
             )
         );
     }

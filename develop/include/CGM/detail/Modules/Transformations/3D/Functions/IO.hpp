@@ -10,8 +10,8 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Axis<T>& axis)
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
     stream << "CGM::XYZ::Axis<" << typeid(T).name() << ">\n{";
-    stream << "\n    Origin   : " << axis.origin.x << " " << axis.origin.y << " " << axis.origin.z;
     stream << "\n    Direction: " << axis.direction.x << " " << axis.direction.y << " " << axis.direction.z;
+    stream << "\n    Position : " << axis.origin.x << " " << axis.origin.y << " " << axis.origin.z;
     stream << "\n}";
 
     CGM_RESTORE_IO_STREAM_FLAGS(stream)

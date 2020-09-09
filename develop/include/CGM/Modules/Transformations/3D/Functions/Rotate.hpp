@@ -164,11 +164,10 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
 
 /**
  * Rotates 3x3 matrix by Quaternion.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param quaternion Quaternion to rotate by.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
@@ -263,11 +262,10 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
 
 /**
  * Rotates 4x4 matrix by Quaternion.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param quaternion Quaternion to rotate by.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
