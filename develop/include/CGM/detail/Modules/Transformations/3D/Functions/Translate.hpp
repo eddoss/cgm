@@ -144,6 +144,35 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, T value)
+{
+    translate<Axis>(axis.position, value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value)
+{
+    axis.position += value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
+{
+    axis.position += transforms.translations;
+}
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
@@ -244,6 +273,76 @@ constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
+    translate(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Pivot (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translated(const Pivot<T>& pivot, T value)
+{
+    auto copy = pivot;
+    translate<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const Pivot<T>& pivot, const Vector<3,T>& value)
+{
+    auto copy = pivot;
+    translate(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
+{
+    auto copy = pivot;
+    translate(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, T value)
+{
+    auto copy = axis;
+    translate<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value)
+{
+    auto copy = axis;
+    translate(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
+{
+    auto copy = axis;
     translate(copy, transforms);
     return copy;
 }

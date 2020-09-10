@@ -10,6 +10,7 @@
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
@@ -21,7 +22,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Translate 3D vector along default Cartesian axis.
+ * Translate vector along default Cartesian axis.
  * @tparam Axis Cartesian axis to translate along which.
  * @param vector Vector to translate.
  * @param value How much to translate.
@@ -31,7 +32,7 @@ constexpr CGM_FORCEINLINE void
 translate(Vector<3,T>& vector, T value);
 
 /**
- * Translate 3D vector.
+ * Translate vector.
  * @param vector Vector to translate.
  * @param value How much to translate.
  */
@@ -40,7 +41,7 @@ constexpr CGM_FORCEINLINE void
 translate(Vector<3,T>& vector, const Vector<3,T>& value);
 
 /**
- * Translates 3D vector using "transforms.translations".
+ * Translates vector using "transforms.translations".
  * @param vector Vector to translate.
  * @param transforms Transformations parameters.
  */
@@ -53,7 +54,7 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Translates 3D transform matrix along default Cartesian axis.
+ * Translates transform matrix along default Cartesian axis.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
@@ -63,7 +64,7 @@ constexpr void
 translate(Matrix<4,4,T>& matrix, T value);
 
 /**
- * Translates 3D transform matrix by vector.
+ * Translates transform matrix by vector.
  * @tparam Axis Cartesian axis to translate along which.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
@@ -74,7 +75,7 @@ constexpr void
 translate(Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
 /**
- * Translates 3D transform matrix using "transforms.translations".
+ * Translates transform matrix using "transforms.translations".
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
@@ -88,8 +89,7 @@ translate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Translates 3D pivot along default Cartesian axis.
- * @tparam Space In which space to translate.
+ * Translates pivot along default Cartesian axis.
  * @param pivot Pivot to translate.
  * @param value How much to translate.
  */
@@ -98,7 +98,7 @@ constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, T value);
 
 /**
- * Translate 3D pivot.
+ * Translate pivot.
  * @param pivot Pivot to translate.
  * @param value How much to translate.
  */
@@ -107,7 +107,7 @@ constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, const Vector<3,T>& value);
 
 /**
- * Translates 3D pivot using "transforms.translations".
+ * Translates pivot using "transforms.translations".
  * @param pivot Pivot to translate.
  * @param transforms Transformations parameters.
  */
@@ -116,11 +116,42 @@ constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+/**
+ * Translates axis along default Cartesian axis.
+ * @param axis Arbitrary axis to translate.
+ * @param value How much to translate.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, T value);
+
+/**
+ * Translate axis.
+ * @param axis Arbitrary axis to translate.
+ * @param value How much to translate.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value);
+
+/**
+ * Translates axis using "transforms.translations".
+ * @param axis Arbitrary axis to translate.
+ * @param transforms Transformations parameters.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
 /**
- * Translate 3D vector along default Cartesian axis.
+ * Translate vector along default Cartesian axis.
  * @tparam Axis Cartesian axis to translate along which.
  * @param vector Vector to translate.
  * @param value How much to translate.
@@ -131,7 +162,7 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 translated(const Vector<3,T>& vector, T value);
 
 /**
- * Translate 3D vector.
+ * Translate vector.
  * @param vector Vector to translate.
  * @param value How much to translate.
  * @return Translated vector.
@@ -141,7 +172,7 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 translated(const Vector<3,T>& vector, const Vector<3,T>& value);
 
 /**
- * Translates 3D vector using "transforms.translations".
+ * Translates vector using "transforms.translations".
  * @param vector Vector to translate.
  * @param transforms Transformations parameters.
  * @return Translated vector.
@@ -155,7 +186,7 @@ translated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Translates 3D transform matrix along default Cartesian axis.
+ * Translates transform matrix along default Cartesian axis.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
@@ -166,7 +197,7 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, T value);
 
 /**
- * Translates 3D transform matrix by vector.
+ * Translates transform matrix by vector.
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
@@ -177,7 +208,7 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
 /**
- * Translates 3D transform matrix using "transforms.translations".
+ * Translates transform matrix using "transforms.translations".
  * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
@@ -192,35 +223,68 @@ translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Translates 3D pivot along default Cartesian axis.
- * @tparam Space In which space to translate.
+ * Translates pivot along default Cartesian axis.
  * @param pivot Pivot to translate.
  * @param value How much to translate.
  * @return Translated pivot.
  */
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE void
 translated(const Pivot<T>& pivot, T value);
 
 /**
- * Translate 3D pivot.
+ * Translate pivot.
  * @param pivot Pivot to translate.
  * @param value How much to translate.
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE void
 translated(const Pivot<T>& pivot, const Vector<3,T>& value);
 
 /**
- * Translates 3D pivot using "transforms.translations".
+ * Translates pivot using "transforms.translations".
  * @param pivot Pivot to translate.
  * @param transforms Transformations parameters.
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE void
 translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+/**
+ * Translates axis along default Cartesian axis.
+ * @param axis Arbitrary axis to translate.
+ * @param value How much to translate.
+ * @return Translated axis.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, T value);
+
+/**
+ * Translate axis.
+ * @param axis Arbitrary axis to translate.
+ * @param value How much to translate.
+ * @return Translated axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value);
+
+/**
+ * Translates axis using "transforms.translations".
+ * @param axis Arbitrary axis to translate.
+ * @param transforms Transformations parameters.
+ * @return Translated axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Transformation makers */
