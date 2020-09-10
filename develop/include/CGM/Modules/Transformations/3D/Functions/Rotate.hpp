@@ -353,6 +353,98 @@ constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+/**
+ * Rotates arbitrary axis around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle);
+
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
+
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
+ * Rotates arbitrary axis around arbitrary direction.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
+
+/**
+ * Rotates arbitrary axis around arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+
+/**
+ * Rotates arbitrary axis by Quaternion.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param transforms Transformations parameters.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
 /* Quaternion (inplace) */
 /* ####################################################################################### */
 
@@ -783,6 +875,107 @@ rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion);
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+/**
+ * Rotates arbitrary axis around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
+
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
+
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
+ * Rotates arbitrary axis around arbitrary direction.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
+
+/**
+ * Rotates arbitrary axis around arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+
+/**
+ * Rotates arbitrary axis by Quaternion.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
+
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Quaternion (outplace) */

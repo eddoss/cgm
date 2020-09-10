@@ -783,6 +783,98 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle)
+{
+    rotate<Axis>(arbitraryAxis.direction, angle);
+    rotate<Axis>(arbitraryAxis.position, angle);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
+{
+    rotate(arbitraryAxis.direction, angles);
+    rotate(arbitraryAxis.position, angles);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
+{
+    rotate(arbitraryAxis.direction, angles, rotationOrder);
+    rotate(arbitraryAxis.position, angles, rotationOrder);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
+{
+    rotate(arbitraryAxis.direction, angle, direction);
+    rotate(arbitraryAxis.position, angle, direction);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
+{
+    rotate(arbitraryAxis.direction, angle, axis);
+    rotate(arbitraryAxis.position, angle, axis);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    rotate(arbitraryAxis.direction, angles, pivotPoint);
+    rotate(arbitraryAxis.position, angles, pivotPoint);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    rotate(arbitraryAxis.direction, angles, pivotPoint, rotationOrder);
+    rotate(arbitraryAxis.position, angles, pivotPoint, rotationOrder);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
+{
+    rotate(arbitraryAxis.direction, quaternion);
+    rotate(arbitraryAxis.position, quaternion);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+{
+    rotate(arbitraryAxis.direction, transforms);
+    rotate(arbitraryAxis.position, transforms);
+}
+
+/* ####################################################################################### */
 /* Quaternion */
 /* ####################################################################################### */
 
@@ -1232,6 +1324,107 @@ constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
+    rotate(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
+{
+    auto copy = arbitraryAxis;
+    rotate<Axis>(copy, angle);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angles);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angles, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angle, direction);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angle, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angles, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, angles, pivotPoint, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
+{
+    auto copy = arbitraryAxis;
+    rotate(copy, quaternion);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+{
+    auto copy = arbitraryAxis;
     rotate(copy, transforms);
     return copy;
 }
