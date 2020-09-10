@@ -399,7 +399,15 @@ reflectionMatrix()
 {
     auto mat = identity<N,T>();
     reflect<Plane>(mat);
-    invertForce(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
 
     return mat;
 }
@@ -412,7 +420,15 @@ reflectionMatrix(const Vector<3,T>& planeNormal)
 {
     auto mat = identity<N,T>();
     reflect(mat, planeNormal);
-    invertOrientationForce(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
 
     return mat;
 }
@@ -425,7 +441,15 @@ reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
     auto mat = identity<N,T>();
     reflect(mat, planeNormal, planeCenter);
-    invertOrientationForce(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
 
     return mat;
 }
