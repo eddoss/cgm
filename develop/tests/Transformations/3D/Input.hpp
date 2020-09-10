@@ -8,7 +8,7 @@
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Core/Functions/IO.hpp>
 
@@ -33,7 +33,7 @@ namespace cgm_xyz_xform_tests_data
         Vector<3,double>{+0.40000, -0.30000, +0.20000}
     );
 
-    const auto axis = CGM_XFORM3D::Axis<double>
+    const auto axis = CGM_XFORM3D::ArbitraryAxis<double>
     (
         pivot.axes.x,
         pivot.position

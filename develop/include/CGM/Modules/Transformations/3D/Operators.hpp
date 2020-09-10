@@ -2,7 +2,7 @@
 
 
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
@@ -67,7 +67,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
+operator == (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B);
 
 /**
  * Compares two axis for inequality.
@@ -77,7 +77,7 @@ operator == (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Axis<T>& A, const CGM_XFORM3D::Axis<T>& B);
+operator != (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B);
 
 
 #include <CGM/detail/Modules/Transformations/3D/>

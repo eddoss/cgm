@@ -13,7 +13,7 @@
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Utils.hpp>
@@ -75,7 +75,7 @@ rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const Axis<T>& axis);
+rotate(Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -235,7 +235,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  */
 template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis);
+rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -311,7 +311,7 @@ rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle, const Axis<T>& axis);
+rotate(Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
@@ -479,7 +479,7 @@ rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle, const Axis<T>& axis);
+rotated(const Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -655,7 +655,7 @@ rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  */
 template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle, const Axis<T>& axis);
+rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -739,7 +739,7 @@ rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, T angle, const Axis<T>& axis);
+rotated(const Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
@@ -916,7 +916,7 @@ rotationMatrix(T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(T angle, const Axis<T>& axis);
+rotationMatrix(T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Create rotation matrix (around each axis of pivot on angle contained from "angles" in 'XYZ' rotation order).

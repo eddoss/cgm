@@ -12,7 +12,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientation)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation)
 {
     convert<Space>(axis.direction, orientation);
     convert<Space>(axis.position, orientation);
@@ -22,7 +22,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientation)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
     convert<Space>(axis.direction, orientation);
     convert<Space>(axis.position, orientation, position);
@@ -32,7 +32,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& posi
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& space)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space)
 {
     convert<Space,EVectorRepresentation::Direction>(axis.direction, space);
     convert<Space,EVectorRepresentation::Point>(axis.position, space);
@@ -42,7 +42,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& space)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientation)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation)
 {
     convert<Space>(axis.direction, orientation);
     convert<Space>(axis.position, orientation);
@@ -52,7 +52,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientation)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
     convert<Space>(axis.direction, orientation);
     convert<Space>(axis.position, orientation, position);
@@ -64,7 +64,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& posi
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB);
@@ -74,7 +74,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB, positionB);
@@ -84,7 +84,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
     convert<EVectorRepresentation::Point>(axis.position, orientationA, spaceB);
@@ -94,7 +94,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& s
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB);
@@ -104,7 +104,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB, positionB);
@@ -116,7 +116,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB);
@@ -126,7 +126,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB, positionB);
@@ -136,7 +136,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
     convert<EVectorRepresentation::Point>(axis.position, orientationA, positionA, spaceB);
@@ -146,7 +146,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB);
@@ -156,7 +156,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB, positionB);
@@ -168,7 +168,7 @@ convert(Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
     convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB);
@@ -178,7 +178,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orienta
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
     convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB, positionB);
@@ -188,7 +188,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orienta
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, spaceA, spaceB);
     convert<EVectorRepresentation::Point>(axis.position, spaceA, spaceB);
@@ -198,7 +198,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
     convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB);
@@ -208,7 +208,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orienta
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
     convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB, positionB);
@@ -220,7 +220,7 @@ convert(Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orienta
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB);
@@ -230,7 +230,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB, positionB);
@@ -240,7 +240,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
     convert<EVectorRepresentation::Point>(axis.position, orientationA, spaceB);
@@ -250,7 +250,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& s
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB);
@@ -260,7 +260,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, orientationB, positionB);
@@ -272,7 +272,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& o
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB);
@@ -282,7 +282,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB, positionB);
@@ -292,7 +292,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
     convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
     convert<EVectorRepresentation::Point>(axis.position, orientationA, positionA, spaceB);
@@ -302,7 +302,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB);
@@ -312,7 +312,7 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& pos
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     convert(axis.direction, orientationA, orientationB);
     convert(axis.position, orientationA, positionA, orientationB, positionB);
@@ -323,8 +323,8 @@ convert(Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& pos
 /* ####################################################################################### */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientation)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation)
 {
     auto copy = axis;
     convert<Space>(copy, orientation);
@@ -334,8 +334,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
     auto copy = axis;
     convert<Space>(copy, orientation, position);
@@ -345,8 +345,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& space)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space)
 {
     auto copy = axis;
     convert<Space>(copy, space);
@@ -356,8 +356,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& space)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientation)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation)
 {
     auto copy = axis;
     convert<Space>(copy, orientation);
@@ -367,8 +367,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientation)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
     auto copy = axis;
     convert<Space>(copy, orientation, position);
@@ -380,8 +380,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientation, const Vector<3,
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB);
@@ -391,8 +391,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB, positionB);
@@ -402,8 +402,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
     auto copy = axis;
     convert(copy, orientationA, spaceB);
@@ -413,8 +413,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB);
@@ -424,8 +424,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaterni
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB, positionB);
@@ -437,8 +437,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaterni
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB);
@@ -448,8 +448,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB, positionB);
@@ -459,8 +459,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, spaceB);
@@ -470,8 +470,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB);
@@ -481,8 +481,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB, positionB);
@@ -494,8 +494,8 @@ converted(const Axis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
 {
     auto copy = axis;
     convert(copy, spaceA, orientationB);
@@ -505,8 +505,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>&
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, spaceA, orientationB, positionB);
@@ -516,8 +516,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>&
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 {
     auto copy = axis;
     convert(copy, spaceA, spaceB);
@@ -527,8 +527,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>&
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
 {
     auto copy = axis;
     convert(copy, spaceA, orientationB);
@@ -538,8 +538,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>&
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, spaceA, orientationB, positionB);
@@ -551,8 +551,8 @@ converted(const Axis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>&
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB);
@@ -562,8 +562,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB, positionB);
@@ -573,8 +573,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
     auto copy = axis;
     convert(copy, orientationA, spaceB);
@@ -584,8 +584,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB);
@@ -595,8 +595,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Quaterni
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, orientationB, positionB);
@@ -608,8 +608,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Quaterni
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB);
@@ -619,8 +619,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB, positionB);
@@ -630,8 +630,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, spaceB);
@@ -641,8 +641,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB);
@@ -652,8 +652,8 @@ converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Axis<T>
-converted(const Axis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
 {
     auto copy = axis;
     convert(copy, orientationA, positionA, orientationB, positionB);

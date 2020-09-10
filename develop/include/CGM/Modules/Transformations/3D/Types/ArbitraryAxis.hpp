@@ -9,9 +9,9 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
-struct Axis
+struct ArbitraryAxis
 {
-    CGM_RULE_OF_FIVE(Axis)
+    CGM_RULE_OF_FIVE(ArbitraryAxis)
 
 /* ####################################################################################### */
 /* Attributes */
@@ -29,7 +29,7 @@ struct Axis
      * @param dir Axis direction.
      * @param pos Axis origin.
      */
-    Axis(const Vector<3,T>& dir, const Vector<3,T>& pos);
+    ArbitraryAxis(const Vector<3,T>& dir, const Vector<3,T>& pos);
 };
 
 CGM_XFORM3D_NAMESPACE_END

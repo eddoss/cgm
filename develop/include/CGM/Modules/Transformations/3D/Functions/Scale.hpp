@@ -10,7 +10,7 @@
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Utils.hpp>
@@ -60,7 +60,7 @@ scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Vector<3,T>& vector, T value, const Axis<T>& axis);
+scale(Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales vector related to pivot point.
@@ -160,7 +160,7 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
  */
 template<ESpace Space = ESpace::World, typename T>
 constexpr void
-scale(Matrix<4,4,T>& matrix, T value, const Axis<T>& axis);
+scale(Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
@@ -238,7 +238,7 @@ scale(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>&
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Pivot<T>& pivot, T value, const Axis<T>& axis);
+scale(Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales pivot position related to pivot point.
@@ -318,7 +318,7 @@ scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const V
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(const Vector<3,T>& vector, T value, const Axis<T>& axis);
+scaled(const Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales vector related to pivot point.
@@ -406,7 +406,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const
  */
 template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(const Matrix<3,3,T>& matrix, T value, const Axis<T>& axis);
+scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 3x3 matrix related to pivot point.
@@ -493,7 +493,7 @@ scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const
  */
 template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(const Matrix<4,4,T>& matrix, T value, const Axis<T>& axis);
+scaled(const Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
@@ -577,7 +577,7 @@ scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vecto
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(const Pivot<T>& pivot, T value, const Axis<T>& axis);
+scaled(const Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales pivot position related to pivot point.
@@ -645,7 +645,7 @@ scalingMatrix(T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scalingMatrix(T value, const Axis<T>& axis);
+scalingMatrix(T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Create scaling matrix (related to pivot point).

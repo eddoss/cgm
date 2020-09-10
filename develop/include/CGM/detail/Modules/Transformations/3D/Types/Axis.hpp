@@ -1,13 +1,13 @@
 
 
-#include <CGM/Modules/Transformations/3D/Types/Axis.hpp>
+#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
-Axis<T>::Axis(const Vector<3,T>& dir, const Vector<3,T>& pos)
+ArbitraryAxis<T>::ArbitraryAxis(const Vector<3,T>& dir, const Vector<3,T>& pos)
     : direction(dir)
     , position(pos)
 {
