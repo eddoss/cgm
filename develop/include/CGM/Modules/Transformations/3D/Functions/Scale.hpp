@@ -260,6 +260,69 @@ constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+/**
+ * Scales arbitrary axis position along default Cartesian axes.
+ * @tparam Axis Cartesian axis to scale along which.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value);
+
+/**
+ * Scales arbitrary axis position related to world center.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param values How much to scale (value per axis).
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
+
+/**
+ * Scales arbitrary axis position along to arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param direction Axis direction.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
+
+/**
+ * Scales arbitrary axis position along to arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param axis The axis along which to scale.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
+
+/**
+ * Scales arbitrary axis position related to pivot point.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale (value per axis).
+ * @param pivot Pivot point.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+
+/**
+ * Scales arbitrary axis position related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param transforms Transformations parameters.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
@@ -599,6 +662,75 @@ scaled(const Pivot<T>& pivot, const Vector<3,T>& values, const Pivot<T>& pivotPo
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
+
+/* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+/**
+ * Scales arbitrary axis position along default Cartesian axes.
+ * @tparam Axis Cartesian axis to scale along which.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @return Scaled copy of axis.
+ */
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
+
+/**
+ * Scales arbitrary axis position related to world center.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param values How much to scale (value per axis).
+ * @return Scaled copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
+
+/**
+ * Scales arbitrary axis position along to arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param direction Axis direction.
+ * @return Scaled copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
+
+/**
+ * Scales arbitrary axis position along to arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param axis The axis along which to scale.
+ * @return Scaled copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
+
+/**
+ * Scales arbitrary axis position related to pivot point.
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale (value per axis).
+ * @param pivot Pivot point.
+ * @return Scaled copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+
+/**
+ * Scales arbitrary axis position related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
+ * @param arbitraryAxis Arbitrary axis to scale.
+ * @param value How much to scale.
+ * @param transforms Transformations parameters.
+ * @return Scaled copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Transformation makers */

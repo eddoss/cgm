@@ -452,6 +452,62 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value)
+{
+    scale<Axis>(arbitraryAxis.position, value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
+{
+    scale(arbitraryAxis.position, values);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
+{
+    scale(arbitraryAxis.position, value, direction);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis)
+{
+    scale(arbitraryAxis.position, value, axis);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+{
+    scale(arbitraryAxis.position, values, pivotPoint);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+{
+    scale(arbitraryAxis.position, transforms);
+}
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
@@ -763,6 +819,74 @@ constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
+    scale(copy, transforms);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+template<EAxes Axis, typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value)
+{
+    auto copy = arbitraryAxis;
+    scale<Axis>(copy, value);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
+{
+    auto copy = arbitraryAxis;
+    scale(copy, values);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
+{
+    auto copy = arbitraryAxis;
+    scale(copy, value, direction);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis)
+{
+    auto copy = arbitraryAxis;
+    scale(copy, value, axis);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+{
+    auto copy = arbitraryAxis;
+    scale(copy, values, pivotPoint);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+{
+    auto copy = arbitraryAxis;
     scale(copy, transforms);
     return copy;
 }
