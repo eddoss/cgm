@@ -229,7 +229,7 @@ translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @return Translated pivot.
  */
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, T value);
 
 /**
@@ -239,7 +239,7 @@ translated(const Pivot<T>& pivot, T value);
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, const Vector<3,T>& value);
 
 /**
@@ -249,7 +249,7 @@ translated(const Pivot<T>& pivot, const Vector<3,T>& value);
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -263,7 +263,7 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Translated axis.
  */
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, T value);
 
 /**
@@ -273,7 +273,7 @@ translated(const ArbitraryAxis<T>& axis, T value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value);
 
 /**
@@ -283,7 +283,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */

@@ -278,46 +278,11 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 }
 
 /* ####################################################################################### */
-/* Pivot (outplace) */
-/* ####################################################################################### */
-
-template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
-translated(const Pivot<T>& pivot, T value)
-{
-    auto copy = pivot;
-    translate<Axis>(copy, value);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-translated(const Pivot<T>& pivot, const Vector<3,T>& value)
-{
-    auto copy = pivot;
-    translate(copy, value);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
-{
-    auto copy = pivot;
-    translate(copy, transforms);
-    return copy;
-}
-
-/* ####################################################################################### */
 /* Axis (outplace) */
 /* ####################################################################################### */
 
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, T value)
 {
     auto copy = axis;
@@ -328,7 +293,7 @@ translated(const ArbitraryAxis<T>& axis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value)
 {
     auto copy = axis;
@@ -339,7 +304,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 {
     auto copy = axis;
