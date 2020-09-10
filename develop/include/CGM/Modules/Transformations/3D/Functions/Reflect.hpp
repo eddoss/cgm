@@ -135,6 +135,38 @@ constexpr void
 reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+/**
+ * Reflects arbitrary axis from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ */
+template<EPlane Plane, typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis);
+
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
+
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
@@ -253,6 +285,41 @@ reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal);
 template<typename T>
 constexpr Pivot<T>
 reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+/**
+ * Reflects arbitrary axis from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @return Reflected copy of axis.
+ */
+template<EPlane Plane, typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis);
+
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
+
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflected copy of axis.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Transformation makers */

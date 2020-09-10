@@ -261,6 +261,38 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
 }
 
 /* ####################################################################################### */
+/* Axis (inplace) */
+/* ####################################################################################### */
+
+template<EPlane Plane, typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis)
+{
+    reflect<Plane>(arbitraryAxis.direction);
+    reflect<Plane>(arbitraryAxis.position);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
+{
+    reflect(arbitraryAxis.direction, planeNormal);
+    reflect(arbitraryAxis.position, planeNormal);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+{
+    reflect(arbitraryAxis.direction, planeNormal);
+    reflect(arbitraryAxis.position, planeNormal, planeCenter);
+}
+
+/* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
@@ -385,6 +417,41 @@ constexpr Pivot<T>
 reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
 {
     auto copy = pivot;
+    reflect(copy, planeNormal, planeCenter);
+    return copy;
+}
+
+/* ####################################################################################### */
+/* Axis (outplace) */
+/* ####################################################################################### */
+
+template<EPlane Plane, typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis)
+{
+    auto copy = arbitraryAxis;
+    reflect<Plane>(copy);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
+{
+    auto copy = arbitraryAxis;
+    reflect(copy, planeNormal);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+{
+    auto copy = arbitraryAxis;
     reflect(copy, planeNormal, planeCenter);
     return copy;
 }
