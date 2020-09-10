@@ -888,7 +888,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Rotated copy of axis.
  */
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
 
 /**
@@ -898,7 +898,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
 
 /**
@@ -909,7 +909,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -920,7 +920,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotat
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
 /**
@@ -931,7 +931,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direc
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
 
 /**
@@ -942,7 +942,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -954,7 +954,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -964,7 +964,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
 /**
@@ -974,7 +974,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */

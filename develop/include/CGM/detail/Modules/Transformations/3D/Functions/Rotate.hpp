@@ -1333,7 +1333,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<EAxes Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
 {
     auto copy = arbitraryAxis;
@@ -1344,7 +1344,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
 {
     auto copy = arbitraryAxis;
@@ -1355,7 +1355,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
     auto copy = arbitraryAxis;
@@ -1366,7 +1366,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotat
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
 {
     auto copy = arbitraryAxis;
@@ -1377,7 +1377,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direc
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
 {
     auto copy = arbitraryAxis;
@@ -1388,7 +1388,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
     auto copy = arbitraryAxis;
@@ -1399,7 +1399,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
     auto copy = arbitraryAxis;
@@ -1410,7 +1410,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 {
     auto copy = arbitraryAxis;
@@ -1421,7 +1421,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 {
     auto copy = arbitraryAxis;
