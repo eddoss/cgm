@@ -108,6 +108,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values);
 
 /**
  * Scales 3x3 matrix along to arbitrary axis.
+ * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  * @param direction Axis direction.
@@ -115,6 +116,27 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values);
 template<ESpace Space = ESpace::World, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
+
+/**
+ * Scales 3x3 matrix related to pivot point. Pivot position is not taken in account.
+ * @tparam Space In which space to scale.
+ * @param matrix Matrix to scale.
+ * @param values How much to scale.
+ * @param pivotPoint Pivot point position.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr void
+scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
+
+/**
+ * Scales 3x3 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
+ * @tparam Space In which space to scale.
+ * @param vector Vector to scale.
+ * @param transforms Transformations parameters.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix4 (inplace) */
@@ -457,19 +479,6 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
 template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
-
-/**
- * Scales 3x3 matrix along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
- * @param matrix Matrix to scale.
- * @param value How much to scale.
- * @param axis The axis along which to scale.
- * @return Scaled copy of matrix.
- */
-template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 3x3 matrix related to pivot point.

@@ -186,6 +186,48 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr void
+scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
+{
+    auto pivotPoint = pivot;
+    pivotPoint.position = Vector<3,T>(zero<T>);
+
+    if constexpr (Space == ESpace::World)
+    {
+        auto axes = orientationAxes(matrix);
+
+        scale(axes.x, values, pivotPoint);
+        scale(axes.y, values, pivotPoint);
+        scale(axes.z, values, pivotPoint);
+
+        set(matrix, axes);
+    }
+    else
+    {
+        auto wsPivot = Pivot<T>
+        {
+            converted<ESpace::World>(pivotPoint.axes.x, matrix),
+            converted<ESpace::World>(pivotPoint.axes.y, matrix),
+            converted<ESpace::World>(pivotPoint.axes.z, matrix),
+            Vector<3,T>(zero<T>)
+        };
+
+        scale<ESpace::World>(matrix, values, wsPivot);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr CGM_FORCEINLINE void
+scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
+{
+    scale<Space>(matrix, transforms.scales * transforms.uniformScale, transforms.pivot);
+}
+
 /* ####################################################################################### */
 /* Matrix4 (inplace) */
 /* ####################################################################################### */

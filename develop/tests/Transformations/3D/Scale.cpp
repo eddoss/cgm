@@ -206,6 +206,34 @@ TEST(Transformations_Scale, Matrix3_AlongArbitraryDirection)
     }
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Scale, Matrix3_Pivot)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_WORLD>(cgm_test::orientation, cgm_test::scale::values, cgm_test::pivot);
+        const auto expect = CGM_XYZ::orientationMatrix
+        (
+            Vector<3,double>{+1.20649, +0.94942, +0.05732},
+            Vector<3,double>{-0.53345, +1.59510, +0.87864},
+            Vector<3,double>{-0.18947, +0.35538, +0.58016}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::scaled<CGM_LOCAL>(cgm_test::orientation, cgm_test::scale::values, cgm_test::pivot);
+        const auto expect = CGM_XYZ::orientationMatrix
+        (
+            Vector<3,double>{+1.047118, +0.782149, -0.260561},
+            Vector<3,double>{-0.616996, +1.459645, +1.029940},
+            Vector<3,double>{-0.500265, +0.309847, +0.875006}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
 /* ####################################################################################### */
 /* Matrix4 */
 /* ####################################################################################### */
