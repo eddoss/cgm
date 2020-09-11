@@ -1,6 +1,8 @@
 #pragma once
 
 
+#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/Modules/Cartesian/3D/Operators.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
@@ -80,4 +82,4 @@ constexpr bool
 operator != (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B);
 
 
-#include <CGM/detail/Modules/Transformations/3D/>
+#include <CGM/detail/Modules/Transformations/3D/Operators.hpp>
