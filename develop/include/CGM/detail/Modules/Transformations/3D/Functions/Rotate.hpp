@@ -306,6 +306,70 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
 
 /* --------------------------------------------------------------------------------------- */
 
+template<ESpace Space, typename T>
+constexpr void
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
+{
+    rotate<Space>(matrix, angles.x, pivot.axes.x);
+    rotate<Space>(matrix, angles.y, pivot.axes.y);
+    rotate<Space>(matrix, angles.z, pivot.axes.z);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr void
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
+{
+    switch (rotationOrder)
+    {
+        case ERotationOrder::XYZ:
+        {
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            break;
+        }
+        case ERotationOrder::XZY:
+        {
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            break;
+        }
+        case ERotationOrder::YXZ:
+        {
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            break;
+        }
+        case ERotationOrder::YZX:
+        {
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            break;
+        }
+        case ERotationOrder::ZXY:
+        {
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            break;
+        }
+        case ERotationOrder::ZYX:
+        {
+            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            break;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
@@ -1123,6 +1187,28 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder r
 {
     auto copy = matrix;
     rotate<Space>(copy, angles, rotationOrder);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles, pivot);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<ESpace Space, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
+{
+    auto copy = matrix;
+    rotate<Space>(copy, angles, pivot, rotationOrder);
     return copy;
 }
 

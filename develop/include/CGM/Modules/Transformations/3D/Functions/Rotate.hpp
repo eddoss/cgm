@@ -163,6 +163,27 @@ constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
+ * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr void
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
+
+/**
+ * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr void
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
+
+/**
  * Rotates 3x3 matrix by Quaternion.
  * @param matrix Matrix to rotate.
  * @param quaternion Quaternion to rotate by.
@@ -665,6 +686,27 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+
+/**
+ * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
+
+/**
+ * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
+constexpr Matrix<3,3,T>
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
 /**
  * Rotates 3x3 matrix by Quaternion.

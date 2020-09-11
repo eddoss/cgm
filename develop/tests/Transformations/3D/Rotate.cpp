@@ -295,7 +295,7 @@ TEST(Transformations_Rotate, Matrix3_DefaultAxes)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix3_ArbitraryAxis)
+TEST(Transformations_Rotate, Matrix3_ArbitraryDirection)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -319,6 +319,139 @@ TEST(Transformations_Rotate, Matrix3_ArbitraryAxis)
             Vector<3,double>{+0.288663, -0.463506, +0.837760}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations_Rotate, Matrix3_Pivot)
+{
+    namespace cgm_test = cgm_xyz_xform_tests_data;
+
+    {
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::XYZ);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.83215, +0.32006, -0.45287},
+                Vector<3,double>{+0.03046, +0.78903, +0.61360},
+                Vector<3,double>{+0.55372, -0.52440, +0.64684}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::XZY);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.81392, +0.32972, -0.47835},
+                Vector<3,double>{-0.04927, +0.85956, +0.50866},
+                Vector<3,double>{+0.57888, -0.39044, +0.71586}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::YXZ);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.82824, +0.46211, -0.31697},
+                Vector<3,double>{-0.14216, +0.72041, +0.67882},
+                Vector<3,double>{+0.54204, -0.51717, +0.66237}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::YZX);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.76549, +0.51974, -0.37933},
+                Vector<3,double>{-0.12368, +0.69740, +0.70593},
+                Vector<3,double>{+0.63144, -0.49347, +0.59813}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::ZXY);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.74585, +0.38293, -0.54504},
+                Vector<3,double>{-0.04227, +0.84380, +0.53499},
+                Vector<3,double>{+0.66477, -0.37598, +0.64554}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_WORLD>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::ZYX);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.73742, +0.53054, -0.41802},
+                Vector<3,double>{-0.20652, +0.76636, +0.60831},
+                Vector<3,double>{+0.64308, -0.36225, +0.67470}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+    }
+
+    {
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::XYZ);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.619918, +0.556712, -0.552971},
+                Vector<3,double>{-0.384867, +0.829849, +0.404005},
+                Vector<3,double>{+0.683803, -0.037634, +0.728701}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::XZY);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.601158, +0.561339, -0.568779},
+                Vector<3,double>{-0.278183, +0.814223, +0.509556},
+                Vector<3,double>{+0.749152, -0.148104, +0.645634}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::YXZ);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.630617, +0.396290, -0.667293},
+                Vector<3,double>{-0.271165, +0.918120, +0.288991},
+                Vector<3,double>{+0.727185, -0.001301, +0.686445}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::YZX);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.712262, +0.359745, -0.602718},
+                Vector<3,double>{-0.230788, +0.930956, +0.282930},
+                Vector<3,double>{+0.662892, -0.062425, +0.746113}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::ZXY);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.686344, +0.518624, -0.509867},
+                Vector<3,double>{-0.251052, +0.826912, +0.503170},
+                Vector<3,double>{+0.682576, -0.217351, +0.697750}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
+        {
+            const auto result = CGM_XFORM3D::rotated<CGM_LOCAL>(cgm_test::orientation, cgm_test::rotate::values, cgm_test::pivot, CGM_XFORM3D::ERotationOrder::ZYX);
+            const auto expect = CGM_XYZ::orientationMatrix
+            (
+                Vector<3,double>{+0.683861, +0.364222, -0.632202},
+                Vector<3,double>{-0.128339, +0.913022, +0.387184},
+                Vector<3,double>{+0.718240, -0.183650, +0.671126}
+            );
+            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+        }
     }
 }
 
