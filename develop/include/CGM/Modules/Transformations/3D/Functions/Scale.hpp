@@ -467,20 +467,6 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
- * Scales 3x3 matrix along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
- * @param matrix Matrix to scale.
- * @param value How much to scale.
- * @param origin Axis origin.
- * @param direction Axis direction.
- * @return Scaled copy of matrix.
- */
-template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
-
-/**
  * Scales 3x3 matrix related to pivot point.
  * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
