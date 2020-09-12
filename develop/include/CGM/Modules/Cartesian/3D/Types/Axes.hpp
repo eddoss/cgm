@@ -28,6 +28,7 @@ struct Axes
     /**
      * Initialize all axes.
      */
+    constexpr
     Axes(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z);
 };
 

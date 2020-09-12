@@ -34,6 +34,7 @@ struct AxisAngle
      * @param dir Rotation axis direction.
      * @param ang Rotation angle.
      */
+    constexpr
     AxisAngle(const Vector<3,T>& dir, T ang);
 };
 

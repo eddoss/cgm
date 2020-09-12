@@ -87,5 +87,20 @@ shortestDistance(const Vector<3,T>& point, const Vector<3,T>& planeNormal)
     return dot(point, planeNormal);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+zeroPivot()
+{
+    return
+    {
+        x<T>(),
+        y<T>(),
+        z<T>(),
+        Vector<3,T>(zero<T>)
+    };
+}
+
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

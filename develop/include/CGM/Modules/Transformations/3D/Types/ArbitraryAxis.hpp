@@ -29,6 +29,7 @@ struct ArbitraryAxis
      * @param dir Axis direction.
      * @param pos Axis origin.
      */
+    constexpr
     ArbitraryAxis(const Vector<3,T>& dir, const Vector<3,T>& pos);
 };
 

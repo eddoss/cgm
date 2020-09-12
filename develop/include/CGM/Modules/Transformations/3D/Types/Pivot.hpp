@@ -35,13 +35,14 @@ struct Pivot
      * @param Y Pivot Y axis.
      * @param Z Pivot Z axis.
      */
+    constexpr
     Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z);
 
     /**
      * Initialize all axes. Position is {0,0,0}.
      * @param orientationAxes Pivot orientation axes.
      */
-    explicit
+    explicit constexpr
     Pivot(const Axes<T>& orientationAxes);
 
     /**
@@ -51,6 +52,7 @@ struct Pivot
      * @param Z Pivot Z axis.
      * @param P Pivot position.
      */
+    constexpr
     Pivot(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z, const Vector<3,T>& P);
 
     /**
@@ -58,6 +60,7 @@ struct Pivot
      * @param orientationAxes Pivot orientation axes.
      * @param P Pivot position.
      */
+    constexpr
     Pivot(const Axes<T>& orientationAxes, const Vector<3,T>& P);
 };
 

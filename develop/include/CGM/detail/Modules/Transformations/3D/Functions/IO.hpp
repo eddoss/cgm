@@ -54,16 +54,16 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
     stream << "CGM::XYZ::Transforms<" << typeid(T).name() << ">\n{";
-    stream << "\n       Orders [ ";
+    stream << "\n       Orders: [ ";
 
     switch (transforms.transformOrder)
     {
-        case CGM::ETransformOrder::RST: stream << "Rotate Scale Translate"; break;
-        case CGM::ETransformOrder::RTS: stream << "Rotate Translate Scale"; break;
-        case CGM::ETransformOrder::SRT: stream << "Scale Rotate Translate"; break;
-        case CGM::ETransformOrder::STR: stream << "Scale Translate Rotate"; break;
-        case CGM::ETransformOrder::TRS: stream << "Translate Rotate Scale"; break;
-        case CGM::ETransformOrder::TSR: stream << "Translate Scale Rotate"; break;
+        case CGM::ETransformOrder::RST: stream << "Tr Ts Tt"; break;
+        case CGM::ETransformOrder::RTS: stream << "Tr Tt Ts"; break;
+        case CGM::ETransformOrder::SRT: stream << "Ts Tr Tt"; break;
+        case CGM::ETransformOrder::STR: stream << "Ts Tt Tr"; break;
+        case CGM::ETransformOrder::TRS: stream << "Tt Tr Ts"; break;
+        case CGM::ETransformOrder::TSR: stream << "Tt Ts Tr"; break;
     }
 
     stream << " ][ ";
@@ -83,15 +83,15 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     auto z = transforms.pivot.axes.z;
     auto p = transforms.pivot.position;
 
-    stream << "\n      Pivot.x " << x.x << " " << x.y << " " << x.z;
-    stream << "\n      Pivot.y " << y.x << " " << y.y << " " << y.z;
-    stream << "\n      Pivot.z " << z.x << " " << z.y << " " << z.z;
-    stream << "\n      Pivot.p " << p.x << " " << p.y << " " << p.z << "\n";
+    stream << "\n      Pivot.x: " << x.x << " " << x.y << " " << x.z;
+    stream << "\n            y: " << y.x << " " << y.y << " " << y.z;
+    stream << "\n            z: " << z.x << " " << z.y << " " << z.z;
+    stream << "\n            p: " << p.x << " " << p.y << " " << p.z << "\n";
 
-    stream << "\n    Translate " << transforms.translations.x << " " << transforms.translations.y << " " << transforms.translations.z;
-    stream << "\n       Rotate " << transforms.rotations.x << " " << transforms.rotations.y << " " << transforms.rotations.z;
-    stream << "\n        Scale " << transforms.scales.x << " " << transforms.scales.y << " " << transforms.scales.z;
-    stream << "\n       UScale " << transforms.uniformScale;
+    stream << "\n    Translate: " << transforms.translations.x << " " << transforms.translations.y << " " << transforms.translations.z;
+    stream << "\n       Rotate: " << transforms.rotations.x << " " << transforms.rotations.y << " " << transforms.rotations.z;
+    stream << "\n        Scale: " << transforms.scales.x << " " << transforms.scales.y << " " << transforms.scales.z;
+    stream << "\n       UScale: " << transforms.uniformScale;
     stream << "\n}";
 
     CGM_RESTORE_IO_STREAM_FLAGS(stream)
