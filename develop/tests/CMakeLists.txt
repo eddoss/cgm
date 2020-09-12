@@ -154,6 +154,7 @@ set(TS_TRANSFORMATION_3D
     Transformations/3D/Rotate.cpp
     Transformations/3D/Reflect.cpp
     Transformations/3D/Refract.cpp
+    Transformations/3D/Transform.cpp
 )
 
 set(TS_MODULE_TRANSFORMATION

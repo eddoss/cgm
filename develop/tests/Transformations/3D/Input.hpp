@@ -8,19 +8,15 @@
 #include <CGM/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
-#include <CGM/Modules/Core/Functions/IO.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 using namespace std;
 using namespace CGM;
-#define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
-#define CGM_PRINT_BASIS(b) \
-    std::cout << "\n\n" << CGM_XYZ::x(b) << std::endl; \
-    std::cout << CGM_XYZ::y(b) << std::endl; \
-    std::cout << CGM_XYZ::z(b) << std::endl; \
-    std::cout << CGM_XYZ::position(b) << std::endl;
+
 namespace cgm_xyz_xform_tests_data
 {
     // Rotated on {28, 16, 9} deg
@@ -59,21 +55,21 @@ namespace cgm_xyz_xform_tests_data
 
     namespace translate
     {
-        const auto value = 0.5;
         const auto values = Vector<3,double> {0.5, -1.4, 2.3};
-    }
+        const auto value = values.x;
+}
 
     namespace rotate
     {
-        const auto value = 0.383972; // 22 deg
         const auto values = Vector<3,double> {+0.383972, +0.523599, -0.296706}; // 22, 30, -17 deg
+        const auto value = values.x;
     }
 
     namespace scale
     {
-        const auto value = 1.4;
         const auto values = Vector<3,double> {1.4, 2.1, 0.3};
-    }
+        const auto value = values.x;
+}
 
     namespace reflect
     {
@@ -85,6 +81,24 @@ namespace cgm_xyz_xform_tests_data
     {
         const auto normal = Vector<3,double> {+0.765511, +0.630287, +0.129351};
         const auto ior = 0.25;
+    }
+
+    namespace transform
+    {
+        static CGM_XFORM3D::Transforms<double>
+        get(ETransformOrder order)
+        {
+            return
+            {
+                translate::values,
+                scale::values,
+                rotate::values,
+                scale::value,
+                pivot,
+                CGM_XFORM3D::ERotationOrder::XYZ,
+                order
+            };
+        }
     }
 
     namespace apply
