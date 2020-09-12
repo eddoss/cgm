@@ -389,7 +389,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.rotations, transforms.rotationOrder);
+    rotate<Space>(matrix, transforms.rotations, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -840,10 +840,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    rotate(pivot.axes.x, transforms);
-    rotate(pivot.axes.y, transforms);
-    rotate(pivot.axes.z, transforms);
-    rotate(pivot.position, transforms);
+    rotate(pivot, transforms.rotations, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
