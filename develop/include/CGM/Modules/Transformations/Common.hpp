@@ -1,7 +1,10 @@
 #pragma once
 
 
+#include <iomanip>
+#include <iostream>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -22,6 +25,9 @@ enum class ETransformOrder
     RST,        /**< Rotate, scale, translate */
     RTS         /**< Rotate, translate, scale */
 };
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ETransformOrder transformOrder);
 
 CGM_NAMESPACE_END
 

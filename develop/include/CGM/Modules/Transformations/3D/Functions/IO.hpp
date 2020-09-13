@@ -29,8 +29,5 @@ operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle);
 constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder);
 
-constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ETransformOrder transformOrder);
-
 
 #include <CGM/detail/Modules/Transformations/3D/Functions/IO.hpp>
