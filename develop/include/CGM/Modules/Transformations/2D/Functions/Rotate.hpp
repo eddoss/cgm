@@ -437,8 +437,8 @@ rotated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  * @return Rotation matrix.
  */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 rotationMatrix(T angle);
 
 /**
@@ -447,8 +447,8 @@ rotationMatrix(T angle);
  * @param angle Rotation angle.
  * @return Rotation matrix.
  */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 rotationMatrix(T angle, const Vector<2,T>& point);
 
 /**
@@ -457,8 +457,8 @@ rotationMatrix(T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  * @return Rotation matrix.
  */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 rotationMatrix(T angle, const Pivot<T>& pivot);
 
 /**
@@ -466,8 +466,8 @@ rotationMatrix(T angle, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  * @return Rotation matrix.
  */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 rotationMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM2D_NAMESPACE_END

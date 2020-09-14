@@ -8,7 +8,6 @@
 #include <CGM/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
-#include <CGM/Modules/Transformations/2D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>

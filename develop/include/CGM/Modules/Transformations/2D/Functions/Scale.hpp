@@ -9,7 +9,6 @@
 #include <CGM/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
-#include <CGM/Modules/Transformations/2D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
@@ -738,8 +737,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaling matrix.
  */
-template<EAxes Axis, size_t N=4, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+template<EAxes Axis, size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value);
 
 /**
@@ -748,8 +747,8 @@ scalingMatrix(T value);
  * @param values How much to scale (value per axis).
  * @return Scaling matrix.
  */
-template<size_t N=4, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(const Vector<2,T>& values);
 
 /**
@@ -759,8 +758,8 @@ scalingMatrix(const Vector<2,T>& values);
  * @param direction Axis direction.
  * @return Scaling matrix.
  */
-template<size_t N=4, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+template<size_t N=3, typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value, const Vector<2,T>& direction);
 
 /**

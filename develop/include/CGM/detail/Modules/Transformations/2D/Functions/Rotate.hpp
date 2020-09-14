@@ -519,49 +519,85 @@ rotated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 /* Transformation makers */
 /* ####################################################################################### */
 
-template<typename T>
+template<size_t N, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle)
 {
-    auto mat = identity<3,T>();
+    auto mat = identity<N,T>();
     rotate<ESpace::World>(mat, angle);
-    transposeOrientation(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
+
     return mat;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
+template<size_t N, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle, const Vector<2,T>& point)
 {
     auto mat = identity<3,T>();
     rotate<ESpace::World>(mat, angle, point);
-    transposeOrientation(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
+
     return mat;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
+template<size_t N, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle, const Pivot<T>& pivot)
 {
     auto mat = identity<3,T>();
     rotate<ESpace::World>(mat, angle, pivot.position);
-    transposeOrientation(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
+
     return mat;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename T>
+template<size_t N, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(const Transforms<T>& transforms)
 {
     auto mat = identity<3,T>();
     rotate<ESpace::World>(mat, transforms.rotation, transforms.pivot.position);
-    transposeOrientation(mat);
+
+    if constexpr (N == 3)
+    {
+        transpose(mat);
+    }
+    else
+    {
+        transposeOrientation(mat);
+    }
+
     return mat;
 }
 
