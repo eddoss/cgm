@@ -70,7 +70,7 @@ rotate(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param matrix 2x2 orientation matrix.
  * @param angle Rotation angle (in radians).
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<2,2,T>& matrix, T angle);
 
@@ -80,7 +80,7 @@ rotate(Matrix<2,2,T>& matrix, T angle);
  * @param matrix 2x2 orientation matrix.
  * @param angle Rotation angle (in radians).
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
@@ -95,7 +95,7 @@ rotate(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -106,7 +106,7 @@ rotate(Matrix<3,3,T>& matrix, T angle);
  * @param angle Rotation angle.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
 /**
@@ -225,7 +225,7 @@ rotate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Vector<2,T>
 rotated(const Vector<2,T>& vector, T angle);
 
 /**
@@ -236,7 +236,7 @@ rotated(const Vector<2,T>& vector, T angle);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Vector<2,T>
 rotated(const Vector<2,T>& vector, T angle, const Vector<2,T>& point);
 
 /**
@@ -247,7 +247,7 @@ rotated(const Vector<2,T>& vector, T angle, const Vector<2,T>& point);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Vector<2,T>
 rotated(const Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
 
 /**
@@ -257,7 +257,7 @@ rotated(const Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Vector<2,T>
 rotated(const Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -271,8 +271,8 @@ rotated(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  * @return Rotated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<2,2,T>
 rotated(const Matrix<2,2,T>& matrix, T angle);
 
 /**
@@ -283,7 +283,7 @@ rotated(const Matrix<2,2,T>& matrix, T angle);
  * @return Rotated matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<2,2,T>
 rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -298,7 +298,7 @@ rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -310,7 +310,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
 /**
@@ -322,7 +322,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
 
 /**
@@ -333,7 +333,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -347,7 +347,7 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, T angle);
 
 /**
@@ -358,7 +358,7 @@ rotated(const Pivot<T>& pivot, T angle);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, T angle, const Vector<2,T>& point);
 
 /**
@@ -369,7 +369,7 @@ rotated(const Pivot<T>& pivot, T angle, const Vector<2,T>& point);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -379,7 +379,7 @@ rotated(const Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -393,7 +393,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& axis, T angle);
 
 /**
@@ -404,7 +404,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
 
 /**
@@ -415,7 +415,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -425,7 +425,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -438,7 +438,7 @@ rotated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle);
 
 /**
@@ -448,7 +448,7 @@ rotationMatrix(T angle);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle, const Vector<2,T>& point);
 
 /**
@@ -458,7 +458,7 @@ rotationMatrix(T angle, const Vector<2,T>& point);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(T angle, const Pivot<T>& pivot);
 
 /**
@@ -467,7 +467,7 @@ rotationMatrix(T angle, const Pivot<T>& pivot);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotationMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM2D_NAMESPACE_END
