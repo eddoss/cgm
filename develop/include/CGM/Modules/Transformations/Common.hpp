@@ -4,7 +4,6 @@
 #include <iomanip>
 #include <iostream>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 CGM_NAMESPACE_BEGIN
