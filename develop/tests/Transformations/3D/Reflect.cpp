@@ -41,7 +41,7 @@ TEST(Transformations_Reflection, Vector_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto result = CGM_XFORM3D::reflected(cgm_test::vector, cgm_test::reflect::normal);
+    const auto result = CGM_XFORM3D::reflected(cgm_test::vector, cgm_test::normal);
     const auto expect = CGM::Vector<3,double>{0.95247, 1.51101, 0.0462915};
     ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
@@ -52,7 +52,7 @@ TEST(Transformations_Reflection, Vector_PlaneNormalOrigin)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto result = CGM_XFORM3D::reflected(cgm_test::vector, cgm_test::reflect::normal, cgm_test::reflect::origin);
+    const auto result = CGM_XFORM3D::reflected(cgm_test::vector, cgm_test::normal, cgm_test::origin);
     const auto expect = CGM::Vector<3,double>{1.21966, 1.62931, 0.558365};
     ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
@@ -103,7 +103,7 @@ TEST(Transformations_Reflection, Matrix3x3_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto result = CGM_XFORM3D::reflected(cgm_test::orientation, cgm_test::reflect::normal);
+    const auto result = CGM_XFORM3D::reflected(cgm_test::orientation, cgm_test::normal);
     const auto expect = CGM_XYZ::orientationMatrix
     (
         Vector<3,double>{+0.43489, +0.27110, -0.85871},
@@ -162,7 +162,7 @@ TEST(Transformations_Reflection, Matrix4x4_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto result = CGM_XFORM3D::reflected(cgm_test::space, cgm_test::reflect::normal);
+    const auto result = CGM_XFORM3D::reflected(cgm_test::space, cgm_test::normal);
     const auto expect = CGM_XYZ::spaceMatrix
     (
         Vector<3,double>{+0.43489, +0.27110, -0.85871},
@@ -179,7 +179,7 @@ TEST(Transformations_Reflection, Matrix4x4_PlaneNormalOrigin)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto result = CGM_XFORM3D::reflected(cgm_test::space, cgm_test::reflect::normal, cgm_test::reflect::origin);
+    const auto result = CGM_XFORM3D::reflected(cgm_test::space, cgm_test::normal, cgm_test::origin);
     const auto expect = CGM_XYZ::spaceMatrix
     (
         Vector<3,double>{+0.43489, +0.27110, -0.85871},
