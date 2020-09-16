@@ -50,7 +50,6 @@ translate(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     vector += pivot.axes.x * values.x;
     vector += pivot.axes.y * values.y;
-    vector += pivot.axes.z * values.z;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -601,7 +600,7 @@ template<typename T>
 constexpr Matrix<3,3,T>
 translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot)
 {
-    auto mat = identity<4,T>();
+    auto mat = identity<3,T>();
     translate(mat, values, pivot);
     return mat;
 }

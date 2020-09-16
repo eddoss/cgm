@@ -16,5 +16,12 @@ enum class EAxes
     Y       ///< Y axis.
 };
 
+/* ####################################################################################### */
+/* Macro */
+/* ####################################################################################### */
+
+#define CGM_2D_AXIS_X   CGM_XY::EAxes::X
+#define CGM_2D_AXIS_Y   CGM_XY::EAxes::Y
+
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

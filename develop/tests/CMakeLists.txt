@@ -157,12 +157,24 @@ set(TS_TRANSFORMATION_3D
     Transformations/3D/Transform.cpp
 )
 
+set(TS_TRANSFORMATION_2D
+#    Transformations/2D/Apply.cpp
+    Transformations/2D/Translation.cpp
+#    Transformations/2D/Scale.cpp
+#    Transformations/2D/Rotate.cpp
+#    Transformations/2D/Reflect.cpp
+#    Transformations/2D/Refract.cpp
+#    Transformations/2D/Transform.cpp
+)
+
 set(TS_MODULE_TRANSFORMATION
+    ${TS_TRANSFORMATION_2D}
     ${TS_TRANSFORMATION_3D}
 )
 
-cgm_add_test(ModuleTransformationTestSuite "run.cpp;${TS_MODULE_TRANSFORMATION}")
+cgm_add_test(Transformation2DTestSuite "run.cpp;${TS_TRANSFORMATION_2D}")
 cgm_add_test(Transformation3DTestSuite "run.cpp;${TS_TRANSFORMATION_3D}")
+cgm_add_test(ModuleTransformationTestSuite "run.cpp;${TS_MODULE_TRANSFORMATION}")
 
 # ####################################################################################### #
 # SUITES | All modules
