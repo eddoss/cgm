@@ -279,6 +279,94 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
+radians(const Vector<D,T>& angles)
+{
+    if constexpr (D == 2)
+    {
+        return
+        {
+            radians(angles.x),
+            radians(angles.y)
+        };
+    }
+    else if constexpr (D == 3)
+    {
+        return
+        {
+            radians(angles.x),
+            radians(angles.y),
+            radians(angles.z)
+        };
+    }
+    else if constexpr (D == 4)
+    {
+        return
+        {
+            radians(angles.x),
+            radians(angles.y),
+            radians(angles.z),
+            radians(angles.w)
+        };
+    }
+    else
+    {
+        Vector<D,T> res;
+        for (size_t i = 0; i < D; ++i)
+        {
+            res[i] = radians(angles[i]);
+        }
+        return res;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
+degrees(const Vector<D,T>& angles)
+{
+    if constexpr (D == 2)
+    {
+        return
+        {
+            degrees(angles.x),
+            degrees(angles.y)
+        };
+    }
+    else if constexpr (D == 3)
+    {
+        return
+        {
+            degrees(angles.x),
+            degrees(angles.y),
+            degrees(angles.z)
+        };
+    }
+    else if constexpr (D == 4)
+    {
+        return
+        {
+            degrees(angles.x),
+            degrees(angles.y),
+            degrees(angles.z),
+            degrees(angles.w)
+        };
+    }
+    else
+    {
+        Vector<D,T> res;
+        for (size_t i = 0; i < D; ++i)
+        {
+            res[i] = degrees(angles[i]);
+        }
+        return res;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
 eq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
 {

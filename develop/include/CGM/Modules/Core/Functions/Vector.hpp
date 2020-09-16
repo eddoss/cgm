@@ -112,6 +112,24 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
+ * Convert vector of degrees to vector of radians.
+ * @param angles Vector of degrees.
+ * @return Vector of radians.
+ */
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
+radians(const Vector<D,T>& angles);
+
+/**
+ * Convert vector of radians to vector of degrees.
+ * @param angles Vector of radians.
+ * @return Vector of degrees.
+ */
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
+degrees(const Vector<D,T>& angles);
+
+/**
  * Compare vector A and B (floating point based).
  * @param A First vector.
  * @param B Second vector.
