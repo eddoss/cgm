@@ -7,7 +7,6 @@
 #include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
-#include <CGM/Modules/Transformations/2D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>

@@ -72,8 +72,8 @@ namespace cgm_xy_xform_tests_data
 
     const auto mat3 = CGM_XY::spaceMatrix
     (
-        Vector<2,double>{+0.48990, +0.33640},
-        Vector<2,double>{+0.28284, +0.88704},
-        Vector<2,double>{-0.56569, +0.73485}
+        Vector<2,double>{+0.88295, +0.46947},
+        Vector<2,double>{-0.46947, +0.88295},
+        Vector<2,double>{+0.40000, -0.30000}
     );
 }
