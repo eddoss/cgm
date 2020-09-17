@@ -30,13 +30,13 @@ struct Transforms
      * Describe translations.
      */
     Vector<2,T>
-    translations;
+    translation;
 
     /**
      * Describe scales.
      */
     Vector<2,T>
-    scales;
+    scale;
 
     /**
      * Describe uniform scale.

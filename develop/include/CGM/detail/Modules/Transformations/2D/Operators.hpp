@@ -32,8 +32,8 @@ constexpr bool
 operator == (const CGM_XFORM2D::Transforms<T>& A, const CGM_XFORM2D::Transforms<T>& B)
 {
     return
-    A.translations      == B.translations
-    && A.scales         == B.scales
+    A.translation       == B.translation
+    && A.scale          == B.scale
     && A.rotations      == B.rotations
     && A.pivot          == B.pivot
     && A.uniformScale   == B.uniformScale
@@ -47,8 +47,8 @@ constexpr bool
 operator != (const CGM_XFORM2D::Transforms<T>& A, const CGM_XFORM2D::Transforms<T>& B)
 {
     return
-    A.translations      != B.translations
-    || A.scales         != B.scales
+    A.translation       != B.translation
+    || A.scale          != B.scale
     || A.rotations      != B.rotations
     || A.pivot          != B.pivot
     || A.uniformScale   != B.uniformScale

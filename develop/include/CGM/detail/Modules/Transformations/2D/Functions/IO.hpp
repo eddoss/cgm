@@ -74,9 +74,9 @@ operator << (std::ostream& stream, const CGM_XFORM2D::Transforms<T>& transforms)
     stream << "\n            y: " << y.x << " " << y.y;
     stream << "\n            p: " << p.x << " " << p.y << "\n";
 
-    stream << "\n    Translate: " << transforms.translations.x << " " << transforms.translations.y;
-    stream << "\n       Rotate: " << transforms.rotations.x << " " << transforms.rotations.y;
-    stream << "\n        Scale: " << transforms.scales.x << " " << transforms.scales.y;
+    stream << "\n    Translate: " << transforms.translation.x << " " << transforms.translation.y;
+    stream << "\n       Rotate: " << transforms.rotation.x << " " << transforms.rotation.y;
+    stream << "\n        Scale: " << transforms.scale.x << " " << transforms.scale.y;
     stream << "\n       UScale: " << transforms.uniformScale;
     stream << "\n}";
 

@@ -99,14 +99,14 @@ transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters)
             case ETransformOrder::RST:
             case ETransformOrder::TSR:
             {
-                scale<Space>(matrix, parameters.scales * parameters.uniformScale, pivot);
+                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
                 rotate<Space>(matrix, parameters.rotations, pivot, parameters.rotationOrder);
                 break;
             }
             default:
             {
                 rotate<Space>(matrix, parameters.rotations, pivot, parameters.rotationOrder);
-                scale<Space>(matrix, parameters.scales * parameters.uniformScale, pivot);
+                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
                 break;
             }
         }
