@@ -11,7 +11,7 @@ using namespace CGM;
 /* Vector */
 /* ####################################################################################### */
 
-TEST(Transformations_Translation, Vector_DefaultAxis)
+TEST(Transformations2D_Translation, Vector_DefaultAxis)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -30,7 +30,7 @@ TEST(Transformations_Translation, Vector_DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Vector_ArbitraryOffset)
+TEST(Transformations2D_Translation, Vector_ArbitraryOffset)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -42,7 +42,7 @@ TEST(Transformations_Translation, Vector_ArbitraryOffset)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Vector_AlongVector)
+TEST(Transformations2D_Translation, Vector_AlongVector)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -54,7 +54,7 @@ TEST(Transformations_Translation, Vector_AlongVector)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Vector_AlongPivotAxes)
+TEST(Transformations2D_Translation, Vector_AlongPivotAxes)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -69,7 +69,7 @@ TEST(Transformations_Translation, Vector_AlongPivotAxes)
 /* Matrix3 */
 /* ####################################################################################### */
 
-TEST(Transformations_Translation, Matrix3_DefaultAxis)
+TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -118,7 +118,7 @@ TEST(Transformations_Translation, Matrix3_DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Matrix3_ArbitraryOffset)
+TEST(Transformations2D_Translation, Matrix3_ArbitraryOffset)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -145,7 +145,7 @@ TEST(Transformations_Translation, Matrix3_ArbitraryOffset)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Matrix3_AlongVector)
+TEST(Transformations2D_Translation, Matrix3_AlongVector)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -194,7 +194,7 @@ TEST(Transformations_Translation, Matrix3_AlongVector)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Translation, Matrix3_AlongPivotAxes)
+TEST(Transformations2D_Translation, Matrix3_AlongPivotAxes)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -223,7 +223,7 @@ TEST(Transformations_Translation, Matrix3_AlongPivotAxes)
 /* Transformation makers */
 /* ####################################################################################### */
 
-TEST(Transformations_TranslationMatrix, DefaultAxis)
+TEST(Transformations2D_TranslationMatrix, DefaultAxis)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -252,7 +252,7 @@ TEST(Transformations_TranslationMatrix, DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_TranslationMatrix, ArbitraryOffset)
+TEST(Transformations2D_TranslationMatrix, ArbitraryOffset)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -269,7 +269,7 @@ TEST(Transformations_TranslationMatrix, ArbitraryOffset)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_TranslationMatrix, AlongVector)
+TEST(Transformations2D_TranslationMatrix, AlongVector)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
@@ -286,7 +286,7 @@ TEST(Transformations_TranslationMatrix, AlongVector)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_TranslationMatrix, AlongPivotAxes)
+TEST(Transformations2D_TranslationMatrix, AlongPivotAxes)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
     const auto values = cgm_xy_xform_tests_data::get();
