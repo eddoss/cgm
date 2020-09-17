@@ -75,7 +75,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, const Transforms<T>& transforms)
 {
-    scale(vector, transforms.scales * transforms.uniformScale, transforms.pivot);
+    scale(vector, transforms.scale * transforms.uniformScale, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -225,7 +225,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
-    scale<Space>(matrix, transforms.scales * transforms.uniformScale, transforms.pivot);
+    scale<Space>(matrix, transforms.scale * transforms.uniformScale, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -425,7 +425,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
-    scale<Space>(matrix, transforms.scales * transforms.uniformScale, transforms.pivot);
+    scale<Space>(matrix, transforms.scale * transforms.uniformScale, transforms.pivot);
 }
 
 /* ####################################################################################### */

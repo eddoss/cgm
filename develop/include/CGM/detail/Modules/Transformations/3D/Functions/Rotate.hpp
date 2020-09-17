@@ -188,7 +188,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, const Transforms<T>& transforms)
 {
-    rotate(vector, transforms.rotations, transforms.pivot, transforms.rotationOrder);
+    rotate(vector, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -389,7 +389,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.rotations, transforms.pivot, transforms.rotationOrder);
+    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -755,7 +755,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.rotations, transforms.pivot, transforms.rotationOrder);
+    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -840,7 +840,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    rotate(pivot, transforms.rotations, transforms.pivot, transforms.rotationOrder);
+    rotate(pivot, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -1037,7 +1037,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms)
 {
-    rotate<Space>(quaternion, transforms.rotations, transforms.pivot, transforms.rotationOrder);
+    rotate<Space>(quaternion, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */

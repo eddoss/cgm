@@ -31,19 +31,19 @@ struct Transforms
      * Describe translations.
      */
     Vector<3,T>
-    translations;
+    translation;
 
     /**
      * Describe Rotations (in radians).
      */
     Vector<3,T>
-    rotations;
+    rotation;
 
     /**
      * Describe scales.
      */
     Vector<3,T>
-    scales;
+    scale;
 
     /**
      * Describe uniform scale.

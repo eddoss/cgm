@@ -63,7 +63,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Vector<3,T>& vector, const Transforms<T>& transforms)
 {
-    translate(vector, transforms.translations, transforms.pivot);
+    translate(vector, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -189,7 +189,7 @@ template<ESpace Space, typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, const Transforms<T>& transforms)
 {
-    translate<Space>(basis, transforms.translations, transforms.pivot);
+    translate<Space>(basis, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -238,7 +238,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    translate(pivot, transforms.translations, transforms.pivot);
+    translate(pivot, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -287,7 +287,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 {
-    translate(axis, transforms.translations, transforms.pivot);
+    translate(axis, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -658,7 +658,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translationMatrix(const Transforms<T>& transforms)
 {
-    return translationMatrix(transforms.translations, transforms.pivot);
+    return translationMatrix(transforms.translation, transforms.pivot);
 }
 
 CGM_XFORM3D_NAMESPACE_END

@@ -25,10 +25,10 @@ namespace cgm_xyz_xform_tests_data
         // Pivot rotated on {28, 16, 9} deg and translated in {0.4, -0.3, 0.2}.
 
         CGM_XFORM3D::Transforms<double> values {};
-        values.translations     = {+0.5, -1.4, +2.3};
-        values.scales           = {+1.4, +2.1, +0.3};
-        values.rotations        = CGM::radians(Vector<3,double>{22.0, 30.0, -17.0});
-        values.uniformScale     = values.scales.x;
+        values.translation      = {+0.5, -1.4, +2.3};
+        values.scale            = {+1.4, +2.1, +0.3};
+        values.rotation         = CGM::radians(Vector<3,double>{22.0, 30.0, -17.0});
+        values.uniformScale     = values.scale.x;
         values.transformOrder   = order;
         values.rotationOrder    = CGM_XFORM3D::ERotationOrder::XYZ;
         values.pivot            = CGM_XFORM3D::Pivot<double>

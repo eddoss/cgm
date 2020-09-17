@@ -88,9 +88,9 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     stream << "\n            z: " << z.x << " " << z.y << " " << z.z;
     stream << "\n            p: " << p.x << " " << p.y << " " << p.z << "\n";
 
-    stream << "\n    Translate: " << transforms.translations.x << " " << transforms.translations.y << " " << transforms.translations.z;
-    stream << "\n       Rotate: " << transforms.rotations.x << " " << transforms.rotations.y << " " << transforms.rotations.z;
-    stream << "\n        Scale: " << transforms.scales.x << " " << transforms.scales.y << " " << transforms.scales.z;
+    stream << "\n    Translate: " << transforms.translation.x << " " << transforms.translation.y << " " << transforms.translation.z;
+    stream << "\n       Rotate: " << transforms.rotation.x << " " << transforms.rotation.y << " " << transforms.rotation.z;
+    stream << "\n        Scale: " << transforms.scale.x << " " << transforms.scale.y << " " << transforms.scale.z;
     stream << "\n       UScale: " << transforms.uniformScale;
     stream << "\n}";
 
