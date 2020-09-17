@@ -14,7 +14,7 @@ using namespace CGM;
 /* Vector */
 /* ####################################################################################### */
 
-TEST(Transformations_Refraction, Vector_DefaultPlane)
+TEST(Transformations3D_Refraction, Vector_DefaultPlane)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -37,7 +37,7 @@ TEST(Transformations_Refraction, Vector_DefaultPlane)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Refraction, Vector_PlaneNormal)
+TEST(Transformations3D_Refraction, Vector_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 

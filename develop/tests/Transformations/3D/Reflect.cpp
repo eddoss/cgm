@@ -14,7 +14,7 @@ using namespace CGM;
 /* Vector */
 /* ####################################################################################### */
 
-TEST(Transformations_Reflection, Vector_DefaultPlane)
+TEST(Transformations3D_Reflection, Vector_DefaultPlane)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -37,7 +37,7 @@ TEST(Transformations_Reflection, Vector_DefaultPlane)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Reflection, Vector_PlaneNormal)
+TEST(Transformations3D_Reflection, Vector_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -48,7 +48,7 @@ TEST(Transformations_Reflection, Vector_PlaneNormal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Reflection, Vector_PlaneNormalOrigin)
+TEST(Transformations3D_Reflection, Vector_PlaneNormalOrigin)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -61,7 +61,7 @@ TEST(Transformations_Reflection, Vector_PlaneNormalOrigin)
 /* Matrix3 */
 /* ####################################################################################### */
 
-TEST(Transformations_Reflection, Matrix3x3_DefaultPlane)
+TEST(Transformations3D_Reflection, Matrix3x3_DefaultPlane)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -99,7 +99,7 @@ TEST(Transformations_Reflection, Matrix3x3_DefaultPlane)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Reflection, Matrix3x3_PlaneNormal)
+TEST(Transformations3D_Reflection, Matrix3x3_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -117,7 +117,7 @@ TEST(Transformations_Reflection, Matrix3x3_PlaneNormal)
 /* Matrix4 */
 /* ####################################################################################### */
 
-TEST(Transformations_Reflection, Matrix4x4_DefaultPlane)
+TEST(Transformations3D_Reflection, Matrix4x4_DefaultPlane)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -158,7 +158,7 @@ TEST(Transformations_Reflection, Matrix4x4_DefaultPlane)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Reflection, Matrix4x4_PlaneNormal)
+TEST(Transformations3D_Reflection, Matrix4x4_PlaneNormal)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -175,7 +175,7 @@ TEST(Transformations_Reflection, Matrix4x4_PlaneNormal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Reflection, Matrix4x4_PlaneNormalOrigin)
+TEST(Transformations3D_Reflection, Matrix4x4_PlaneNormalOrigin)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 

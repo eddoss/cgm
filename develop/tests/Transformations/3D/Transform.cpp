@@ -7,7 +7,7 @@
 using namespace std;
 using namespace CGM;
 
-TEST(Transformations_Transform, Vector)
+TEST(Transformations3D_Transform, Vector)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -45,7 +45,7 @@ TEST(Transformations_Transform, Vector)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Transform, Matrix3)
+TEST(Transformations3D_Transform, Matrix3)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -177,7 +177,7 @@ TEST(Transformations_Transform, Matrix3)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Transform, Matrix4)
+TEST(Transformations3D_Transform, Matrix4)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
@@ -321,7 +321,7 @@ TEST(Transformations_Transform, Matrix4)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Transform, XFormMatrix)
+TEST(Transformations3D_Transform, XFormMatrix)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 

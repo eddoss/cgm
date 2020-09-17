@@ -8,7 +8,7 @@
 /* Vector */
 /* ####################################################################################### */
 
-TEST(Transformations_Rotate, Vector_DefaultAxis)
+TEST(Transformations3D_Rotate, Vector_DefaultAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -32,7 +32,7 @@ TEST(Transformations_Rotate, Vector_DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Vector_ArbitraryAxis)
+TEST(Transformations3D_Rotate, Vector_ArbitraryAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -53,7 +53,7 @@ TEST(Transformations_Rotate, Vector_ArbitraryAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Vector_PivotPoint)
+TEST(Transformations3D_Rotate, Vector_PivotPoint)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -94,7 +94,7 @@ TEST(Transformations_Rotate, Vector_PivotPoint)
 /* Matrix3 */
 /* ####################################################################################### */
 
-TEST(Transformations_Rotate, Matrix3_DefaultAxis)
+TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -167,7 +167,7 @@ TEST(Transformations_Rotate, Matrix3_DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix3_DefaultAxes)
+TEST(Transformations3D_Rotate, Matrix3_DefaultAxes)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -300,7 +300,7 @@ TEST(Transformations_Rotate, Matrix3_DefaultAxes)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix3_ArbitraryDirection)
+TEST(Transformations3D_Rotate, Matrix3_ArbitraryDirection)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -330,7 +330,7 @@ TEST(Transformations_Rotate, Matrix3_ArbitraryDirection)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix3_Pivot)
+TEST(Transformations3D_Rotate, Matrix3_Pivot)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -466,7 +466,7 @@ TEST(Transformations_Rotate, Matrix3_Pivot)
 /* Matrix4 */
 /* ####################################################################################### */
 
-TEST(Transformations_Rotate, Matrix4_DefaultAxis)
+TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -545,7 +545,7 @@ TEST(Transformations_Rotate, Matrix4_DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix4_DefaultAxes)
+TEST(Transformations3D_Rotate, Matrix4_DefaultAxes)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -691,7 +691,7 @@ TEST(Transformations_Rotate, Matrix4_DefaultAxes)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix4_ArbitraryAxis)
+TEST(Transformations3D_Rotate, Matrix4_ArbitraryAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -723,7 +723,7 @@ TEST(Transformations_Rotate, Matrix4_ArbitraryAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_Rotate, Matrix4_Pivot)
+TEST(Transformations3D_Rotate, Matrix4_Pivot)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -871,7 +871,7 @@ TEST(Transformations_Rotate, Matrix4_Pivot)
 /* Transformation makers */
 /* ####################################################################################### */
 
-TEST(Transformations_RotationMatrix, DefaultAxis)
+TEST(Transformations3D_RotationMatrix, DefaultAxis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -913,7 +913,7 @@ TEST(Transformations_RotationMatrix, DefaultAxis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_RotationMatrix, DefaultAxes)
+TEST(Transformations3D_RotationMatrix, DefaultAxes)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -988,7 +988,7 @@ TEST(Transformations_RotationMatrix, DefaultAxes)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_RotationMatrix, Direction)
+TEST(Transformations3D_RotationMatrix, Direction)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -1006,7 +1006,7 @@ TEST(Transformations_RotationMatrix, Direction)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_RotationMatrix, Axis)
+TEST(Transformations3D_RotationMatrix, Axis)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
@@ -1024,7 +1024,7 @@ TEST(Transformations_RotationMatrix, Axis)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations_RotationMatrix, Pivot)
+TEST(Transformations3D_RotationMatrix, Pivot)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
