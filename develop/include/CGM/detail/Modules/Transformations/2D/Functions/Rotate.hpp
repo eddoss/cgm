@@ -14,16 +14,19 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Vector<2,T>& vector, T angle)
 {
-    const T sin = number<T>(std::sin(angle));
-    const T cos = number<T>(std::cos(angle));
+    const auto  sin = number<T>(std::sin(angle));
+    const auto  cos = number<T>(std::cos(angle));
+    Vector<2,T> res;
 
 #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    vector.x = vector.x * cos - vector.y * sin;
-    vector.y = vector.x * sin + vector.y * cos;
+    res.x = vector.x * cos + vector.y * sin;
+    res.y = vector.y * cos - vector.x * sin;
 #else
-    vector.x = vector.x * cos + vector.y * sin;
-    vector.y = vector.y * cos - vector.x * sin;
+    res.x = vector.x * cos - vector.y * sin;
+    res.y = vector.x * sin + vector.y * cos;
 #endif
+
+    vector = res;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -118,17 +121,24 @@ rotate(Matrix<3,3,T>& matrix, T angle)
     const T cos = number<T>(std::cos(angle));
 
     auto axs = orientationAxes(matrix);
+    Vector<2,T> tmp;
 
 #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    axs.x.x = axs.x.x * cos - axs.x.y * sin;
-    axs.x.y = axs.x.x * sin + axs.x.y * cos;
-    axs.y.x = axs.y.x * cos - axs.y.y * sin;
-    axs.y.y = axs.y.x * sin + axs.y.y * cos;
+    tmp.x = axs.x.x * cos + axs.x.y * sin;
+    tmp.y = axs.x.y * cos - axs.x.x * sin;
+    axs.x = tmp;
+
+    tmp.x = axs.y.x * cos + axs.y.y * sin;
+    tmp.y = axs.y.y * cos - axs.y.x * sin;
+    axs.y = tmp;
 #else
-    axs.x.x = axs.x.x * cos + axs.x.y * sin;
-    axs.x.y = axs.x.y * cos - axs.x.x * sin;
-    axs.y.x = axs.y.x * cos + axs.y.y * sin;
-    axs.y.y = axs.y.y * cos - axs.y.x * sin;
+    tmp.x = axs.x.x * cos - axs.x.y * sin;
+    tmp.y = axs.x.x * sin + axs.x.y * cos;
+    axs.x = tmp;
+
+    tmp.x = axs.y.x * cos - axs.y.y * sin;
+    tmp.y = axs.y.x * sin + axs.y.y * cos;
+    axs.y = tmp;
 #endif
 
     if constexpr (Space == ESpace::World)
@@ -136,14 +146,14 @@ rotate(Matrix<3,3,T>& matrix, T angle)
         auto pos = position(matrix);
 
     #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-        pos.x = pos.x * cos - pos.y * sin;
-        pos.y = pos.x * sin + pos.y * cos;
+        tmp.x = pos.x * cos + pos.y * sin;
+        tmp.y = pos.y * cos - pos.x * sin;
     #else
-        pos.x = pos.x * cos + pos.y * sin;
-        pos.y = pos.y * cos - pos.x * sin;
+        tmp.x = pos.x * cos - pos.y * sin;
+        tmp.y = pos.x * sin + pos.y * cos;
     #endif
 
-        set(matrix, axs, pos);
+        set(matrix, axs, tmp);
     }
     else
     {
@@ -357,7 +367,7 @@ rotated(const Vector<2,T>& vector, const Transforms<T>& transforms)
 /* Matrix2 (outplace) */
 /* ####################################################################################### */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
 rotated(const Matrix<2,2,T>& matrix, T angle)
 {
@@ -368,7 +378,7 @@ rotated(const Matrix<2,2,T>& matrix, T angle)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
 rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms)
 {
@@ -386,7 +396,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle)
 {
     auto copy = matrix;
-    rotate(copy, angle);
+    rotate<Space>(copy, angle);
     return copy;
 }
 
@@ -397,7 +407,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
 {
     auto copy = matrix;
-    rotate(copy, angle, point);
+    rotate<Space>(copy, angle, point);
     return copy;
 }
 
@@ -408,7 +418,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot)
 {
     auto copy = matrix;
-    rotate(copy, angle, pivot.position);
+    rotate<Space>(copy, angle, pivot.position);
     return copy;
 }
 
@@ -419,7 +429,7 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
-    rotate(copy, transforms.rotation, transforms.pivot.position);
+    rotate<Space>(copy, transforms.rotation, transforms.pivot.position);
     return copy;
 }
 

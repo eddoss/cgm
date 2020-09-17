@@ -588,7 +588,6 @@ translationMatrix(T value, const Vector<2,T>& along)
     {
         number<T>(1), number<T>(0), number<T>(0),
         number<T>(0), number<T>(1), number<T>(0),
-        number<T>(0), number<T>(0), number<T>(0),
         along.x * value, along.y * value, number<T>(1)
     };
 #endif
