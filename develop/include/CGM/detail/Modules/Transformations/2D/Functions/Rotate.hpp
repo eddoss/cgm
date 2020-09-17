@@ -73,31 +73,28 @@ rotate(Matrix<2,2,T>& matrix, T angle)
     const T sin = number<T>(std::sin(angle));
     const T cos = number<T>(std::cos(angle));
 
+    auto axs = orientationAxes(matrix);
+    Vector<2,T> tmp;
+
 #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix *= {
-            cos, -sin,
-            sin,  cos
-        };
-    #else
-        matrix *= {
-             cos, sin,
-            -sin, cos
-        };
-    #endif
+    tmp.x = axs.x.x * cos + axs.x.y * sin;
+    tmp.y = axs.x.y * cos - axs.x.x * sin;
+    axs.x = tmp;
+
+    tmp.x = axs.y.x * cos + axs.y.y * sin;
+    tmp.y = axs.y.y * cos - axs.y.x * sin;
+    axs.y = tmp;
 #else
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix *= {
-             cos, sin,
-            -sin, cos
-        };
-    #else
-        matrix *= {
-            cos, -sin,
-            sin,  cos
-        };
-    #endif
+    tmp.x = axs.x.x * cos - axs.x.y * sin;
+    tmp.y = axs.x.x * sin + axs.x.y * cos;
+    axs.x = tmp;
+
+    tmp.x = axs.y.x * cos - axs.y.y * sin;
+    tmp.y = axs.y.x * sin + axs.y.y * cos;
+    axs.y = tmp;
 #endif
+
+    set(matrix, axs);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -217,7 +214,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot)
 {
-    rotate<Space>(matrix, angle, pivot);
+    rotate<Space>(matrix, angle, pivot.position);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -226,7 +223,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.angle, transforms.pivot);
+    rotate<Space>(matrix, transforms.rotation, transforms.pivot.position);
 }
 
 /* ####################################################################################### */
@@ -270,8 +267,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
-    rotate(pivot.axes.x, transforms.angle);
-    rotate(pivot.axes.y, transforms.angle);
+    rotate(pivot.axes.x, transforms.rotation);
+    rotate(pivot.axes.y, transforms.rotation);
     rotate(pivot.position, transforms.rotation, transforms.pivot.position);
 }
 

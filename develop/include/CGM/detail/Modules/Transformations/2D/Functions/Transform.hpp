@@ -76,12 +76,12 @@ transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters)
             case ETransformOrder::TSR:
             {
                 scale<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
+                rotate(matrix, parameters);
                 break;
             }
             default:
             {
-                rotate<Space>(matrix, parameters);
+                rotate(matrix, parameters);
                 scale<Space>(matrix, parameters);
                 break;
             }
@@ -89,27 +89,9 @@ transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters)
     }
     else
     {
-        auto pivot = parameters.pivot;
-        convert<ESpace::World>(pivot.axes.x, matrix);
-        convert<ESpace::World>(pivot.axes.y, matrix);
-        
-        switch (parameters.transformOrder)
-        {
-            case ETransformOrder::SRT:
-            case ETransformOrder::RST:
-            case ETransformOrder::TSR:
-            {
-                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
-                rotate<Space>(matrix, parameters.rotations, pivot, parameters.rotationOrder);
-                break;
-            }
-            default:
-            {
-                rotate<Space>(matrix, parameters.rotations, pivot, parameters.rotationOrder);
-                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
-                break;
-            }
-        }
+        auto parms = parameters;
+        convert<ESpace::World>(parms.pivot, matrix);
+        transform<ESpace::World>(matrix, parms);
     }
 }
 
@@ -349,8 +331,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 transformMatrix(const Transforms<T>& parameters)
 {
-    auto mat = identity<4,T>();
-    transform(mat, parameters);
+    auto mat = identity<3,T>();
+    transform<ESpace::World>(mat, parameters);
 
     transposeOrientation(mat);
 

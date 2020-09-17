@@ -17,7 +17,10 @@ using namespace std;
 using namespace CGM;
 
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
-
+#define CGM_PRINT_BASIS(b) \
+    std::cout << "\n\n" << CGM_XY::x(b) << ","  << std::endl; \
+    std::cout << CGM_XY::y(b) << "," << std::endl; \
+    std::cout << CGM_XY::position(b) << std::endl;
 namespace cgm_xy_xform_tests_data
 {
     static CGM_XFORM2D::Transforms<double>

@@ -10,6 +10,7 @@
 #include <CGM/Modules/Transformations/2D/Functions/Translate.hpp>
 #include <CGM/Modules/Transformations/2D/Functions/Scale.hpp>
 #include <CGM/Modules/Transformations/2D/Functions/Rotate.hpp>
+#include <CGM/Modules/Transformations/2D/Functions/Converters/Pivot.hpp>
 
 
 CGM_NAMESPACE_BEGIN
