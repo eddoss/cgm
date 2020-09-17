@@ -250,12 +250,12 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values)
 
     #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
         matrix = matrix * scales;
-        matrix(0,3) *= values.x;
-        matrix(1,3) *= values.y;
+        matrix(0,2) *= values.x;
+        matrix(1,2) *= values.y;
     #else
         matrix = scales * matrix;
-        matrix(3,0) *= values.x;
-        matrix(3,1) *= values.y;
+        matrix(2,0) *= values.x;
+        matrix(2,1) *= values.y;
     #endif
 
     }
@@ -607,17 +607,6 @@ scaled(const Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-scaled(const Matrix<2,2,T>& matrix, T value, const ArbitraryAxis<T>& axis)
-{
-    auto copy = matrix;
-    scale<Space>(copy, value, axis);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
 scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto copy = matrix;
@@ -867,7 +856,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<EAxes Axis, size_t N, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value)
 {
     if constexpr (N == 3)
@@ -938,25 +927,24 @@ scalingMatrix(T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t N, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(const Vector<2,T>& values)
 {
-    if constexpr (N == 3)
+    if constexpr (N == 2)
     {
-        return {
-            values.x, number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0),
-            number<T>(0), number<T>(0), values.z
+        return
+        {
+            values.x, number<T>(0),
+            number<T>(0), values.y,
         };
     }
     else
     {
         return
         {
-            values.x, number<T>(0), number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0), number<T>(0),
-            number<T>(0), number<T>(0), values.z, number<T>(0),
-            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+            values.x, number<T>(0), number<T>(0),
+            number<T>(0), values.y, number<T>(0),
+            number<T>(0), number<T>(0), number<T>(1)
         };
     }
 }
@@ -964,7 +952,7 @@ scalingMatrix(const Vector<2,T>& values)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t N, typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
+constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value, const Vector<2,T>& direction)
 {
     auto mat = identity<N,T>();
@@ -980,7 +968,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scalingMatrix(T value, const ArbitraryAxis<T>& axis)
 {
-    auto mat = identity<4,T>();
+    auto mat = identity<3,T>();
     scale(mat, value, axis);
     transposeOrientation(mat);
 
@@ -993,7 +981,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scalingMatrix(const Vector<2,T>& values, const Pivot<T>& pivotPoint)
 {
-    auto mat = identity<4,T>();
+    auto mat = identity<3,T>();
     scale(mat, values, pivotPoint);
     transposeOrientation(mat);
 
@@ -1006,7 +994,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scalingMatrix(const Transforms<T>& transforms)
 {
-    auto mat = identity<4,T>();
+    auto mat = identity<3,T>();
     scale(mat, transforms);
     transposeOrientation(mat);
 

@@ -658,17 +658,6 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
 
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis)
-{
-    auto copy = matrix;
-    scale<Space>(copy, value, axis);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto copy = matrix;
