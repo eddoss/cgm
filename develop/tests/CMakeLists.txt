@@ -163,7 +163,7 @@ set(TS_TRANSFORMATION_2D
     Transformations/2D/Scale.cpp
     Transformations/2D/Rotate.cpp
     Transformations/2D/Reflect.cpp
-#    Transformations/2D/Refract.cpp
+    Transformations/2D/Refract.cpp
     Transformations/2D/Transform.cpp
 )
 
