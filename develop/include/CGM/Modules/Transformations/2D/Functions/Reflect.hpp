@@ -119,7 +119,7 @@ constexpr void
 reflect(ArbitraryAxis<T>& axis, const Vector<2,T>& axisNormal, const Vector<2,T>& axisPosition);
 
 /* ####################################################################################### */
-/* Vector (inplace) */
+/* Vector (outplace) */
 /* ####################################################################################### */
 
 /**
@@ -144,7 +144,7 @@ constexpr Vector<2,T>
 reflected(const Vector<2,T>& vector, const Vector<2,T>& axisNormal, const Vector<2,T>& axisCenter);
 
 /* ####################################################################################### */
-/* Matrix2 (inplace) */
+/* Matrix2 (outplace) */
 /* ####################################################################################### */
 
 /**
@@ -153,12 +153,12 @@ reflected(const Vector<2,T>& vector, const Vector<2,T>& axisNormal, const Vector
  * @param axisNormal Axis normal.
  * @return Reflected orientation.
  */
-template<typename T>
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<2,2,T>
 reflected(const Matrix<2,2,T>& matrix, const Vector<2,T>& axisNormal);
 
 /* ####################################################################################### */
-/* Matrix3 (inplace) */
+/* Matrix3 (outplace) */
 /* ####################################################################################### */
 
 /**
@@ -183,7 +183,7 @@ constexpr Matrix<3,3,T>
 reflected(const Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal, const Vector<2,T>& axisCenter);
 
 /* ####################################################################################### */
-/* Pivot (inplace) */
+/* Pivot (outplace) */
 /* ####################################################################################### */
 
 /**
@@ -208,7 +208,7 @@ constexpr Pivot<T>
 reflected(const Pivot<T>& pivot, const Vector<2,T>& axisNormal, const Vector<2,T>& axisCenter);
 
 /* ####################################################################################### */
-/* Axis (inplace) */
+/* Axis (outplace) */
 /* ####################################################################################### */
 
 /**

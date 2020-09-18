@@ -121,7 +121,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal, const Vector<2,T>&
 
 template<typename T>
 constexpr void
-reflect(Pivot<T>& pivot, Vector<2,T>& axisNormal)
+reflect(Pivot<T>& pivot, const Vector<2,T>& axisNormal)
 {
     reflect(pivot.axes.x, axisNormal);
     reflect(pivot.axes.y, axisNormal);
@@ -132,7 +132,7 @@ reflect(Pivot<T>& pivot, Vector<2,T>& axisNormal)
 
 template<typename T>
 constexpr void
-reflect(Pivot<T>& pivot, Vector<2,T>& axisNormal, Vector<2,T>& axisCenter)
+reflect(Pivot<T>& pivot, const Vector<2,T>& axisNormal, const Vector<2,T>& axisCenter)
 {
     reflect(pivot.axes.x, axisNormal);
     reflect(pivot.axes.y, axisNormal);
@@ -186,7 +186,7 @@ reflected(const Vector<2,T>& vector, const Vector<2,T>& axisNormal, const Vector
 }
 
 /* ####################################################################################### */
-/* Matrix3 (outplace) */
+/* Matrix2 (outplace) */
 /* ####################################################################################### */
 
 template<ESpace Space, typename T>
@@ -199,7 +199,7 @@ reflected(const Matrix<2,2,T>& matrix, const Vector<2,T>& axisNormal)
 }
 
 /* ####################################################################################### */
-/* Matrix4 (outplace) */
+/* Matrix3 (outplace) */
 /* ####################################################################################### */
 
 template<ESpace Space, typename T>
@@ -228,7 +228,7 @@ reflected(const Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal, const Vect
 
 template<typename T>
 constexpr Pivot<T>
-reflected(const Pivot<T>& pivot, Vector<2,T>& axisNormal)
+reflected(const Pivot<T>& pivot, const Vector<2,T>& axisNormal)
 {
     auto copy = pivot;
     reflect(copy, axisNormal);
@@ -239,7 +239,7 @@ reflected(const Pivot<T>& pivot, Vector<2,T>& axisNormal)
 
 template<typename T>
 constexpr Pivot<T>
-reflected(const Pivot<T>& pivot, Vector<2,T>& axisNormal, Vector<2,T>& axisCenter)
+reflected(const Pivot<T>& pivot, const Vector<2,T>& axisNormal, const Vector<2,T>& axisCenter)
 {
     auto copy = pivot;
     reflect(copy, axisNormal, axisCenter);
