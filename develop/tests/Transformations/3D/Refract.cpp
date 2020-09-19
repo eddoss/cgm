@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
-#include <CGM/detail/Modules/Transformations/3D/Functions/Refract.hpp>
+#include <CGM/detail/Core/Functions/Vector.hpp>
+#include <CGM/detail/Transformations/3D/Functions/Refract.hpp>
 #include "Input.hpp"
 
 

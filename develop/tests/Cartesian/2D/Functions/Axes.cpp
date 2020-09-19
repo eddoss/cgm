@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
-#include <CGM/detail/Modules/Cartesian/2D/Functions/Axes.hpp>
+#include <CGM/detail/Core/Operators/Vector.hpp>
+#include <CGM/detail/Cartesian/2D/Functions/Axes.hpp>
 
 
 using namespace std;

@@ -2,11 +2,11 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Modules/Common.hpp>
-#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
-#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/detail/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/detail/Common.hpp>
+#include <CGM/detail/Core/Operators/Vector.hpp>
+#include <CGM/detail/Core/Operators/Matrix.hpp>
+#include <CGM/detail/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Utils.hpp>
 
 
 using namespace std;

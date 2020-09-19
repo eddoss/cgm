@@ -1,7 +1,7 @@
 
 
 #include "Input.hpp"
-#include <CGM/detail/Modules/Transformations/2D/Functions/Translate.hpp>
+#include <CGM/detail/Transformations/2D/Functions/Translate.hpp>
 
 
 using namespace std;

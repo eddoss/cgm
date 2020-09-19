@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Modules/Common.hpp>
-#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
-#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
-#include <CGM/detail/Modules/Core/Functions/Quaternion.hpp>
+#include <CGM/detail/Common.hpp>
+#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Core/Functions/Vector.hpp>
+#include <CGM/detail/Core/Functions/Quaternion.hpp>
 
 
 using namespace CGM;

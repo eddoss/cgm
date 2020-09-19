@@ -2,16 +2,16 @@
 
 
 #include <gtest/gtest.h>
-#include <CGM/detail/Modules/Core/Types/Vector.hpp>
-#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
-#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
-#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/detail/Modules/Cartesian/2D/Functions/Utils.hpp>
-#include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation.hpp>
-#include <CGM/detail/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
-#include <CGM/detail/Modules/Transformations/2D/Types/Pivot.hpp>
-#include <CGM/detail/Modules/Transformations/2D/Types/Transforms.hpp>
-#include <CGM/detail/Modules/Core/Functions/IO.hpp>
+#include <CGM/detail/Core/Types/Vector.hpp>
+#include <CGM/detail/Core/Types/Matrix.hpp>
+#include <CGM/detail/Core/Functions/Vector.hpp>
+#include <CGM/detail/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/detail/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/detail/Transformations/2D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Transformations/2D/Types/Pivot.hpp>
+#include <CGM/detail/Transformations/2D/Types/Transforms.hpp>
+#include <CGM/detail/Core/Functions/IO.hpp>
 
 using namespace std;
 using namespace CGM;
