@@ -37,6 +37,48 @@ apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
+apply(Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    auto matrix = identity<3,T>();
+    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
+    {
+        matrix *= *(transforms.begin() + i);
+    }
+    vector = matrix * vector;
+#else
+    for (const auto& mat : transforms)
+    {
+        vector *= mat;
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE void
+apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    auto matrix = identity<4,T>();
+    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
+    {
+        matrix *= *(transforms.begin() + i);
+    }
+    vector = detail::multiply_matrix4x4_on_vector3<Representation>(matrix, vector);
+#else
+    for (const auto& mat : transforms)
+    {
+        vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, mat);
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
 apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
@@ -50,12 +92,54 @@ apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
+apply(Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    auto mat = identity<3,T>();
+    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
+    {
+        mat *= *(transforms.begin() + i);
+    }
+    matrix = mat * matrix;
+#else
+    for (const auto& mat : transforms)
+    {
+        matrix *= mat;
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
 {
 #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
     matrix = transforms * matrix;
 #else
     matrix = matrix * transforms;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+apply(Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
+{
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    auto mat = identity<4,T>();
+    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
+    {
+        mat *= *(transforms.begin() + i);
+    }
+    matrix = mat * matrix;
+#else
+    for (const auto& mat : transforms)
+    {
+        matrix *= mat;
+    }
 #endif
 }
 
@@ -86,6 +170,28 @@ applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
+{
+    auto copy = vector;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+applied(const Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
+{
+    auto copy = vector;
+    apply<Representation>(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 {
@@ -97,8 +203,30 @@ applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
+constexpr CGM_FORCEINLINE Matrix<3,3,T>
+applied(const Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
+{
+    auto copy = matrix;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 applied(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
+{
+    auto copy = matrix;
+    apply(copy, transforms);
+    return copy;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<4,4,T>
+applied(const Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
 {
     auto copy = matrix;
     apply(copy, transforms);

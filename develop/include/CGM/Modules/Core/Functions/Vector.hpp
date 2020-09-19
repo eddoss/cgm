@@ -112,6 +112,27 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
+ * Convert given values from degrees to radians and pack them to 2D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @return Vector of radians.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
+radians(T x, T y);
+
+/**
+ * Convert given values from degrees to radians and pack them to 3D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @param z Value for Z component.
+ * @return Vector of radians.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
+radians(T x, T y, T z);
+
+/**
  * Convert vector of degrees to vector of radians.
  * @param angles Vector of degrees.
  * @return Vector of radians.
@@ -119,6 +140,27 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B);
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
 radians(const Vector<D,T>& angles);
+
+/**
+ * Convert given values from radians to degrees and pack them to 2D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @return Vector of degrees.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
+degrees(T x, T y);
+
+/**
+ * Convert given values from radians to degrees and pack them to 3D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @param z Value for Z component.
+ * @return Vector of degrees.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
+degrees(T x, T y, T z);
 
 /**
  * Convert vector of radians to vector of degrees.

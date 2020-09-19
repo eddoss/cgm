@@ -859,7 +859,26 @@ template<EAxes Axis, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value)
 {
-    if constexpr (N == 3)
+    if constexpr (N == 2)
+    {
+        if constexpr (Axis == EAxes::X)
+        {
+            return
+            {
+                value, number<T>(0),
+                number<T>(0), number<T>(1)
+            };
+        }
+        else
+        {
+            return
+            {
+                number<T>(1), number<T>(0),
+                number<T>(0), value
+            };
+        }
+    }
+    else
     {
         if constexpr (Axis == EAxes::X)
         {
@@ -870,55 +889,13 @@ scalingMatrix(T value)
                 number<T>(0), number<T>(0), number<T>(1)
             };
         }
-        else if constexpr (Axis == EAxes::Y)
+        else
         {
             return
             {
                 number<T>(1), number<T>(0), number<T>(0),
                 number<T>(0), value, number<T>(0),
                 number<T>(0), number<T>(0), number<T>(1)
-            };
-        }
-        else
-        {
-            return
-            {
-                number<T>(1), number<T>(0), number<T>(0),
-                number<T>(0), number<T>(1), number<T>(0),
-                number<T>(0), number<T>(0), value
-            };
-        }
-    }
-    else
-    {
-        if constexpr (Axis == EAxes::X)
-        {
-            return
-            {
-                value, number<T>(0), number<T>(0), number<T>(0),
-                number<T>(0), number<T>(1), number<T>(0), number<T>(0),
-                number<T>(0), number<T>(0), number<T>(1), number<T>(0),
-                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
-            };
-        }
-        else if constexpr (Axis == EAxes::Y)
-        {
-            return
-            {
-                number<T>(1), number<T>(0), number<T>(0), number<T>(0),
-                number<T>(0), value, number<T>(0), number<T>(0),
-                number<T>(0), number<T>(0), number<T>(1), number<T>(0),
-                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
-            };
-        }
-        else
-        {
-            return
-            {
-                number<T>(1), number<T>(0), number<T>(0), number<T>(0),
-                number<T>(0), number<T>(1), number<T>(0), number<T>(0),
-                number<T>(0), number<T>(0), value, number<T>(0),
-                number<T>(0), number<T>(0), number<T>(0), number<T>(1)
             };
         }
     }

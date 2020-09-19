@@ -278,6 +278,24 @@ angle(const Vector<D,T>& A, const Vector<D,T>& B)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
+radians(T x, T y)
+{
+    return {radians(x), radians(y)};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
+radians(T x, T y, T z)
+{
+    return {radians(x), radians(y), radians(z)};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
 radians(const Vector<D,T>& angles)
@@ -318,6 +336,24 @@ radians(const Vector<D,T>& angles)
         }
         return res;
     }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
+degrees(T x, T y)
+{
+    return {degrees(x), degrees(y)};
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
+degrees(T x, T y, T z)
+{
+    return {degrees(x), degrees(y), degrees(z)};
 }
 
 /* --------------------------------------------------------------------------------------- */

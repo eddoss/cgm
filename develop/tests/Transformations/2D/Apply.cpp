@@ -1,6 +1,7 @@
 
 
 #include "Input.hpp"
+#include <CGM/Modules/Transformations/2D/Functions/Scale.hpp>
 #include <CGM/Modules/Transformations/2D/Functions/Apply.hpp>
 
 
@@ -63,4 +64,88 @@ TEST(Transformations2D_Apply, Matrix3_Matrix3)
         Vector<2,double>{+1.184102, +0.642173}
     );
     ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations2D_Apply, Vector_Matrix2_Variadic)
+{
+    namespace cgm_test = cgm_xy_xform_tests_data;
+
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,2>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(0.7);
+
+    const auto result = CGM_XFORM2D::applied(cgm_test::vector, {A,B,C});
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    const auto expect = C * B * A * cgm_test::vector;
+#else
+    const auto expect = cgm_test::vector * A * B * C;
+#endif
+
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations2D_Apply, Vector_Matrix3_Variadic)
+{
+    namespace cgm_test = cgm_xy_xform_tests_data;
+
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,3>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(0.7);
+
+    const auto result = CGM_XFORM2D::applied<CGM_DIRECTION>(cgm_test::vector, {A,B,C});
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    const auto expect = CGM_XFORM2D::applied<CGM_DIRECTION>(cgm_test::vector, C * B * A);
+#else
+    const auto expect = CGM_XFORM2D::applied<CGM_DIRECTION>(cgm_test::vector, A * B * C);
+#endif
+
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations2D_Apply, Matrix2_Variadic)
+{
+    namespace cgm_test = cgm_xy_xform_tests_data;
+
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,2>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(0.7);
+
+    const auto result = CGM_XFORM2D::applied(cgm_test::orientation, {A,B,C});
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    const auto expect = C * B * A * cgm_test::orientation;
+#else
+    const auto expect = cgm_test::orientation * A * B * C;
+#endif
+
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Transformations2D_Apply, Matrix3_Variadic)
+{
+    namespace cgm_test = cgm_xy_xform_tests_data;
+
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,3>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(0.7);
+
+    const auto result = CGM_XFORM2D::applied(cgm_test::space, {A,B,C});
+
+#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    const auto expect = CGM_XFORM2D::applied(cgm_test::space, C * B * A);
+#else
+    const auto expect = CGM_XFORM2D::applied(cgm_test::space, A * B * C);
+#endif
+
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
