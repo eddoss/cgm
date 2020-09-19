@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/2D/Functions/Axes.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 

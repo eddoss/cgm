@@ -2,7 +2,7 @@
 
 
 #include <cmath>
-#include <CGM/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Coordinates/ModuleGlobals.hpp>
 #include <CGM/Modules/Coordinates/Types/Polar.hpp>
 #include <CGM/Modules/Coordinates/Types/Spherical.hpp>

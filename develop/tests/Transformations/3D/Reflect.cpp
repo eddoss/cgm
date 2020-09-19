@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Reflect.hpp>
 #include "Input.hpp"
 

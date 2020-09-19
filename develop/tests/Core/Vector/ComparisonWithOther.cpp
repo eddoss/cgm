@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 
 
 using namespace CGM;

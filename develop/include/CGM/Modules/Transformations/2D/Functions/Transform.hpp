@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/Modules/Cartesian/Common.hpp>
 #include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>

@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Operators/Vector.hpp>
-#include <CGM/Modules/Core/Operators/MatrixVectorMultiplication.hpp>
-#include <CGM/Modules/Core/Functions/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/MatrixVectorMultiplication.hpp>
+#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>

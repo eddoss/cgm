@@ -1,465 +1,199 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Functions/Vector.hpp>
+#include <cmath>
+#include <type_traits>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 
+/**
+ * Safely normalize vector.
+ * @param vector Vector to normalize.
+ * @param lengthTolerance If vector length less than this parameter, normalization will failed.
+ * @return False if normalization failed, true otherwise.
+ */
 template<size_t D, typename T>
 constexpr enable_if_floating<T, bool>
-normalize(Vector<D,T>& vector, T lengthTolerance)
-{
-    T len {length<T>(vector)};
+normalize(Vector<D,T>& vector, T lengthTolerance=T(0.000001));
 
-    if (std::abs(len) < lengthTolerance)
-    {
-        return false;
-    }
-
-    if constexpr (D == 2)
-    {
-        vector.x /= len;
-        vector.y /= len;
-    }
-
-    if constexpr (D == 3)
-    {
-        vector.x /= len;
-        vector.y /= len;
-        vector.z /= len;
-    }
-
-    if constexpr (D == 4)
-    {
-        vector.x /= len;
-        vector.y /= len;
-        vector.z /= len;
-        vector.w /= len;
-    }
-
-    if constexpr (D > 4)
-    {
-        for (size_t i = 0; i < D; ++i)
-        {
-            vector[i] /= len;
-        }
-    }
-
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely normalize vector.
+ * @param vector Vector to normalize.
+ * @param lengthTolerance If vector length less than this parameter, normalization will failed.
+ * @param success Change this flag false if normalization failed, true otherwise.
+ * @return Normalized copy of the vector.
+ */
 template<size_t D, typename T>
 constexpr enable_if_floating<T, Vector<D,T>>
-normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance)
-{
-    T len {length<T>(vector)};
+normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance=T(0.000001));
 
-    if (std::abs(len) < lengthTolerance)
-    {
-        success = false;
-        return vector;
-    }
-
-    success = true;
-
-    if constexpr (D == 2)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len
-        };
-    }
-
-    if constexpr (D == 3)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len,
-            vector.z / len
-        };
-    }
-
-    if constexpr (D == 4)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len,
-            vector.z / len,
-            vector.w / len
-        };
-    }
-
-    if constexpr (D > 4)
-    {
-        Vector<D,T> vec;
-        for (size_t i = 0; i < D; ++i)
-        {
-            vec[i] = vector[i] / len;
-        }
-        return vec;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely normalize vector.
+ * @param vector Vector to normalize.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
-normalizeForce(Vector<D,T>& vector)
-{
-    T len {length<T>(vector)};
+normalizeForce(Vector<D,T>& vector);
 
-    if constexpr (D == 2)
-    {
-        vector.x /= len;
-        vector.y /= len;
-    }
-
-    if constexpr (D == 3)
-    {
-        vector.x /= len;
-        vector.y /= len;
-        vector.z /= len;
-    }
-
-    if constexpr (D == 4)
-    {
-        vector.x /= len;
-        vector.y /= len;
-        vector.z /= len;
-        vector.w /= len;
-    }
-
-    if constexpr (D > 4)
-    {
-        for (size_t i = 0; i < D; ++i)
-        {
-            vector[i] /= len;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely normalize vector.
+ * @param vector Vector to normalize.
+ * @return Normalized copy of the vector.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<D,T>>
-normalizedForce(const Vector<D,T>& vector)
-{
-    T len {length<T>(vector)};
+normalizedForce(const Vector<D,T>& vector);
 
-    if constexpr (D == 2)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len
-        };
-    }
-
-    if constexpr (D == 3)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len,
-            vector.z / len
-        };
-    }
-
-    if constexpr (D == 4)
-    {
-        return
-        {
-            vector.x / len,
-            vector.y / len,
-            vector.z / len,
-            vector.w / len
-        };
-    }
-
-    if constexpr (D > 4)
-    {
-        Vector<D,T> vec;
-        for (size_t i = 0; i < D; ++i)
-        {
-            vec[i] = vector[i] / len;
-        }
-        return vec;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates dot product of two vectors.
+ * @param A First vector.
+ * @param B Second vector.
+ * @tparam TResult Type of result. It must be float or double.
+ * @return Dot product of A and B.
+ */
 template<size_t D, typename T>
 constexpr T
-dot(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return A.x * B.x + A.y * B.y;
-    }
-    if constexpr (D == 3)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z;
-    }
-    if constexpr (D == 4)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w;
-    }
-    if constexpr (D > 4)
-    {
-        T sum {zero<T>};
-        for (size_t i = 0; i < D; ++i)
-        {
-            sum += A[i] * B[i];
-        }
-        return sum;
-    }
-}
+dot(const Vector<D,T>& A, const Vector<D,T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates cross product of two vectors.
+ * @param A First vector.
+ * @param B Second vector.
+ * @tparam TResult Type of result. It must be float or double.
+ * @return Cross product of A and B.
+ */
 template<size_t AD, size_t BD, typename T>
 constexpr auto
-cross(const Vector<AD,T>& A, const Vector<BD,T>& B) -> typename std::enable_if_t<(AD<5 && BD<5), decltype(A^B)>
-{
-    return A ^ B;
-}
+cross(const Vector<AD,T>& A, const Vector<BD,T>& B) -> typename std::enable_if_t<(AD<5 && BD<5), decltype(A^B)>;
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename TResult, size_t D, typename T>
+/**
+ * Calculates vector length.
+ * @param vector Vector to calculate.
+ * @tparam TResult Type of result. It must be float or double.
+ * @return Vector length.
+ */
+template<typename TResult=FLOAT, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
-length(const Vector<D,T>& vector)
-{
-    TResult sum {dot(vector, vector)};
-    TResult zer {zero<TResult>};
+length(const Vector<D,T>& vector);
 
-    if (CGM::eq(sum,zer))
-    {
-        return zer;
-    }
-    else
-    {
-        return static_cast<TResult>(sqrt(sum));
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates vector squared length.
+ * @param vector Vector to calculate.
+ * @return Vector length.
+ */
 template<size_t D, typename T>
 constexpr T
-lengthSquared(const Vector<D,T>& vector)
-{
-    return dot(vector, vector);
-}
+lengthSquared(const Vector<D,T>& vector);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename TResult, size_t D, typename T>
+/**
+ * Calculates distance between two vectors.
+ * @param A First vector.
+ * @param B Second vector.
+ * @tparam TResult Type of result. It must be float or double.
+ * @return Distance between A and B.
+ */
+template<typename TResult=FLOAT, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
-distance(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    return length<TResult,D,T>(A-B);
-}
+distance(const Vector<D,T>& A, const Vector<D,T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename TResult, size_t D, typename T>
+/**
+ * Calculates angle between two vectors (in radians).
+ * @param A First vector.
+ * @param B Second vector.
+ * @tparam TResult Type of result. It must be float or double.
+ * @return Angle between A and B.
+ */
+template<typename TResult=FLOAT, size_t D, typename T>
 constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
-angle(const Vector<D,T>& A, const Vector<D,T>& B)
-{
-    return std::acos(A | B);
-}
+angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert given values from degrees to radians and pack them to 2D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @return Vector of radians.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
-radians(T x, T y)
-{
-    return {radians(x), radians(y)};
-}
+radians(T x, T y);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert given values from degrees to radians and pack them to 3D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @param z Value for Z component.
+ * @return Vector of radians.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
-radians(T x, T y, T z)
-{
-    return {radians(x), radians(y), radians(z)};
-}
+radians(T x, T y, T z);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector of degrees to vector of radians.
+ * @param angles Vector of degrees.
+ * @return Vector of radians.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
-radians(const Vector<D,T>& angles)
-{
-    if constexpr (D == 2)
-    {
-        return
-        {
-            radians(angles.x),
-            radians(angles.y)
-        };
-    }
-    else if constexpr (D == 3)
-    {
-        return
-        {
-            radians(angles.x),
-            radians(angles.y),
-            radians(angles.z)
-        };
-    }
-    else if constexpr (D == 4)
-    {
-        return
-        {
-            radians(angles.x),
-            radians(angles.y),
-            radians(angles.z),
-            radians(angles.w)
-        };
-    }
-    else
-    {
-        Vector<D,T> res;
-        for (size_t i = 0; i < D; ++i)
-        {
-            res[i] = radians(angles[i]);
-        }
-        return res;
-    }
-}
+radians(const Vector<D,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert given values from radians to degrees and pack them to 2D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @return Vector of degrees.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
-degrees(T x, T y)
-{
-    return {degrees(x), degrees(y)};
-}
+degrees(T x, T y);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert given values from radians to degrees and pack them to 3D vector.
+ * @param x Value for X component.
+ * @param y Value for Y component.
+ * @param z Value for Z component.
+ * @return Vector of degrees.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
-degrees(T x, T y, T z)
-{
-    return {degrees(x), degrees(y), degrees(z)};
-}
+degrees(T x, T y, T z);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector of radians to vector of degrees.
+ * @param angles Vector of radians.
+ * @return Vector of degrees.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
-degrees(const Vector<D,T>& angles)
-{
-    if constexpr (D == 2)
-    {
-        return
-        {
-            degrees(angles.x),
-            degrees(angles.y)
-        };
-    }
-    else if constexpr (D == 3)
-    {
-        return
-        {
-            degrees(angles.x),
-            degrees(angles.y),
-            degrees(angles.z)
-        };
-    }
-    else if constexpr (D == 4)
-    {
-        return
-        {
-            degrees(angles.x),
-            degrees(angles.y),
-            degrees(angles.z),
-            degrees(angles.w)
-        };
-    }
-    else
-    {
-        Vector<D,T> res;
-        for (size_t i = 0; i < D; ++i)
-        {
-            res[i] = degrees(angles[i]);
-        }
-        return res;
-    }
-}
+degrees(const Vector<D,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Compare vector A and B (floating point based).
+ * @param A First vector.
+ * @param B Second vector.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-eq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::eq(A.x, B.x, tolerance) &&
-                CGM::eq(A.y, B.y, tolerance);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::eq(A.x, B.x, tolerance) &&
-                CGM::eq(A.y, B.y, tolerance) &&
-                CGM::eq(A.z, B.z, tolerance);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::eq(A.x, B.x, tolerance) &&
-                CGM::eq(A.y, B.y, tolerance) &&
-                CGM::eq(A.z, B.z, tolerance) &&
-                CGM::eq(A.w, B.w, tolerance);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i], tolerance)) return false;
-        return true;
-    }
-}
+eq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Compare vector A and B (floating point based).
+ * @param A First vector.
+ * @param B Second vector.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-neq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::neq(A.x, B.x, tolerance) ||
-                CGM::neq(A.y, B.y, tolerance);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::neq(A.x, B.x, tolerance) ||
-                CGM::neq(A.y, B.y, tolerance) ||
-                CGM::neq(A.z, B.z, tolerance);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::neq(A.x, B.x, tolerance) ||
-                CGM::neq(A.y, B.y, tolerance) ||
-                CGM::neq(A.z, B.z, tolerance) ||
-                CGM::neq(A.w, B.w, tolerance);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i]), tolerance) return true;
-        return false;
-    }
-}
+neq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance);
 
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Core/Functions/Vector_impl.hpp>

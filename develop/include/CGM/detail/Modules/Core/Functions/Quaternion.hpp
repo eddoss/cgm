@@ -1,257 +1,193 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Functions/Quaternion.hpp>
+#include <cmath>
+#include <type_traits>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 
+/**
+ * Calculates dot product of two quaternions.
+ * @return The dot product.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE T
-dot(const Quaternion<T> &A, const Quaternion<T> &B)
-{
-    return
-    A.vector.x * B.vector.x +
-    A.vector.y * B.vector.y +
-    A.vector.z * B.vector.z +
-    A.scalar * B.scalar;
-}
+dot(const Quaternion<T>& A, const Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates quaternion norm.
+ * @return The quaternion norm.
+ */
 template<typename T>
 constexpr T
-norm(const Quaternion<T>& quaternion)
-{
-    return
-    quaternion.vector.x * quaternion.vector.x +
-    quaternion.vector.y * quaternion.vector.y +
-    quaternion.vector.z * quaternion.vector.z +
-    quaternion.scalar * quaternion.scalar;
-}
+norm(const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make quaternion conjugated.
+ * @return The conjugated quaternion.
+ */
 template<typename T>
 constexpr Quaternion<T>&
-conjugate(Quaternion<T>& quaternion)
-{
-    quaternion.vector.x *= -1;
-    quaternion.vector.y *= -1;
-    quaternion.vector.z *= -1;
+conjugate(Quaternion<T>& quaternion);
 
-    return quaternion;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Get the conjugate of the quaternion.
+ * @return The conjugated quaternion.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-conjugated(const Quaternion<T>& quaternion)
-{
-    return Quaternion<T> {-quaternion.vector, quaternion.scalar};
-}
+conjugated(const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Get the length of the quaternion.
+ * @return The length of this quaternion.
+ */
 template<typename T>
 constexpr T
-length(const Quaternion<T>& quaternion)
-{
-    T nrm {norm(quaternion)};
+length(const Quaternion<T>& quaternion);
 
-    if (CGM::eq(nrm, zero<T>))
-    {
-        return zero<T>;
-    }
-    else
-    {
-        return std::sqrt(nrm);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @param lengthTolerance If quaternion length less than this parameter, normalization will failed.
+ * @return False if normalization failed, true otherwise.
+ */
 template<typename T>
 constexpr bool
-normalize(Quaternion<T>& quaternion, T lengthTolerance)
-{
-    T len {length<T>(quaternion)};
+normalize(Quaternion<T>& quaternion, T lengthTolerance=T(0.000001));
 
-    if (len >= lengthTolerance)
-    {
-        quaternion /= len;
-        return true;
-    }
-
-    return false;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @param lengthTolerance If quaternion length less than this parameter, normalization will failed.
+ * @param success Change this flag false if normalization failed, true otherwise.
+ * @return Normalized copy of the quaternion.
+ */
 template<typename T>
 constexpr Quaternion<T>
-normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance)
-{
-    T len {length<T>(quaternion)};
+normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance=T(0.000001));
 
-    if (len >= lengthTolerance)
-    {
-        success = true;
-        return quaternion / len;
-    }
-    else
-    {
-        success = false;
-        return quaternion;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-normalizeForce(Quaternion<T>& quaternion)
-{
-    quaternion /= length(quaternion);
-}
+normalizeForce(Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely normalize quaternion.
+ * @param quaternion Quaternion to normalize.
+ * @return Normalized copy of the quaternion.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-normalizedForce(const Quaternion<T>& quaternion)
-{
-    return quaternion / length(quaternion);
-}
+normalizedForce(const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
+ * @param normTolerance If quaternion norm less than this parameter, inverting will failed.
+ * @param quaternion Quaternion for which it is necessary to calculate the inverse.
+ * @return False if cant calculate inverse matrix. true otherwise.
+ */
 template<typename T>
 constexpr bool
-invert(Quaternion<T>& quaternion, T normTolerance)
-{
-    auto nrm {norm(quaternion)};
+invert(Quaternion<T>& quaternion, T normTolerance=T(0.000001));
 
-    if (std::abs(nrm) >= normTolerance)
-    {
-        quaternion = conjugate(quaternion) /= nrm;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
+ * @param[in] quaternion Quaternion for which it is necessary to calculate the inverse.
+ * @param[out] success Set this false if cant calculate inverse quaternion.
+ * @return Inverse quaternion if could calculate, trash otherwise.
+ */
 template<typename T>
 constexpr Quaternion<T>
-inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance)
-{
-    auto nrm {norm(quaternion)};
+inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance=T(0.000001));
 
-    if (std::abs(nrm) >= normTolerance)
-    {
-        success = true;
-        return conjugated(quaternion) / nrm;
-    }
-    else
-    {
-        success = false;
-        return quaternion;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely calculate inverse quaternion.
+ * @param[in] quaternion Quaternion to calculate.
+ * @param[out] success Set this false if cant calculate inverse quaternion.
+ * @return Inverted copy of the quaternion if could calculate, trash otherwise.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-invertForce(Quaternion<T>& quaternion)
-{
-    conjugate(quaternion);
-    quaternion /= norm(quaternion);
-}
+invertForce(Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Get inverse copy of the quaternion if it is large enough.
+ * If it is too small, returns an no changed copy.
+ * @return Inverted quaternion.
+ */
 template<typename T>
-constexpr CGM_FORCEINLINE Quaternion<T>
-inverseForce(const Quaternion<T>& quaternion)
-{
-    return conjugated(quaternion) / norm(quaternion);
-}
+constexpr Quaternion<T>
+inverseForce(const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Orients vector by Quaternion.
+ * @param vector Vector to orient.
+ * @param quaternion Quaternion to orient by (must be normalized).
+ */
 template<typename T>
 constexpr void
-orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
-{
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    auto t = static_cast<T>(2) * cross(vector, quaternion.vector);
-    vector += cross(t, quaternion.vector);
-#else
-    auto t = static_cast<T>(2) * cross(quaternion.vector, vector);
-    vector += cross(quaternion.vector, t);
-#endif
+orient(Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
-    vector += quaternion.scalar * t;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Orients vector by Quaternion.
+ * @param vector Vector to orient.
+ * @param quaternion Quaternion to orient by (must be normalized).
+ * @return Oriented vector.
+ */
 template<typename T>
 constexpr Vector<3,T>
-oriented(const Vector<3,T>& vector, const Quaternion<T>& quaternion)
-{
-    Vector<3,T> result {vector};
-    orient(result, quaternion);
-    return result;
-}
+oriented(const Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Get angle between two quaternions.
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @return Shortest angle between two quaternions.
+ */
 template<typename T>
 constexpr T
-angle(const Quaternion<T>& A, const Quaternion<T>& B)
-{
-    return 2 * std::acos(dot(A,B));
-}
+angle(const Quaternion<T>& A, const Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Create identity quaternion.
+ * @return Identity quaternion.
+ */
+template<typename T=FLOAT>
 constexpr Quaternion<T>
-identity()
-{
-    return Quaternion<T> {zero<T>, number<T>(1)};
-}
+identity();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Compare quaternion A and B (floating point based).
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
+template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-eq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
-{
-    return
-    CGM::eq(A.vector.x, B.vector.x, tolerance) &&
-    CGM::eq(A.vector.y, B.vector.y, tolerance) &&
-    CGM::eq(A.vector.z, B.vector.z, tolerance) &&
-    CGM::eq(A.scalar, B.scalar, tolerance);
-}
+eq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Compare quaternion A and B (floating point based).
+ * @param A First quaternion.
+ * @param B Second quaternion.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
+template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-neq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
-{
-    return
-    CGM::neq(A.vector.x, B.vector.x, tolerance) ||
-    CGM::neq(A.vector.y, B.vector.y, tolerance) ||
-    CGM::neq(A.vector.z, B.vector.z, tolerance) ||
-    CGM::neq(A.scalar, B.scalar, tolerance);
-}
+neq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
 
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Core/Functions/Quaternion_impl.hpp>

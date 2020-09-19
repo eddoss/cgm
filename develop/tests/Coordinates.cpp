@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Coordinates/Functions/Converters.hpp>
 #include <CGM/Modules/Coordinates/Operators.hpp>
 

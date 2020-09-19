@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
 
 
 using namespace CGM;

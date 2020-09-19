@@ -2,10 +2,10 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 
 
 using namespace CGM;

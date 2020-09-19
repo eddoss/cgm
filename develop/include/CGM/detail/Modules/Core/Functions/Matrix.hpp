@@ -1,1056 +1,201 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Global.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 
+/**
+ * Get the transpose square matrix.
+ * @param matrix Matrix to transpose.
+ * @return The transposed matrix.
+ */
 template<size_t S, typename T>
 constexpr Matrix<S,S,T>&
-transpose(Matrix<S,S,T>& matrix)
-{
-    if constexpr (S == 2)
-    {
-        std::swap(matrix(0,1), matrix(1,0));
-    }
-    else if constexpr (S == 3)
-    {
-        std::swap(matrix(0,1), matrix(1,0));
-        std::swap(matrix(0,2), matrix(2,0));
-        std::swap(matrix(1,2), matrix(2,1));
-    }
-    else if constexpr (S == 4)
-    {
-        std::swap(matrix(0,1), matrix(1,0));
-        std::swap(matrix(0,2), matrix(2,0));
-        std::swap(matrix(0,3), matrix(3,0));
-        std::swap(matrix(1,2), matrix(2,1));
-        std::swap(matrix(1,3), matrix(3,1));
-        std::swap(matrix(2,3), matrix(3,2));
-    }
-    else
-    {
-        for (size_t i = 0; i < S-1; ++i)
-        {
-            for (size_t j = i+1; j < S; ++j)
-            {
-                std::swap(matrix(i,j),matrix(j,i));
-            }
-        }
-    }
+transpose(Matrix<S,S,T>& matrix);
 
-    return matrix;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Get transposed copy of the non-square matrix.
+ * @param matrix Matrix to transpose.
+ * @return The transposed matrix.
+ */
 template<size_t M, size_t N, typename T>
 constexpr typename Matrix<M,N,T>::Transposed
-transposed(const Matrix<M,N,T>& matrix)
-{
-    if constexpr (M==N)
-    {
-        auto copy {matrix};
-        transpose(copy);
-        return copy;
-    }
-    if constexpr (M == 1 && N == 2)
-    {
-        return
-        {
-            matrix(0,0),
-            matrix(0,1)
-        };
-    }
-    if constexpr (M == 1 && N == 3)
-    {
-        return
-        {
-            matrix(0,0),
-            matrix(0,1),
-            matrix(0,2)
-        };
-    }
-    if constexpr (M == 1 && N == 4)
-    {
-        return
-        {
-            matrix(0,0),
-            matrix(0,1),
-            matrix(0,2),
-            matrix(0,3)
-        };
-    }
-    if constexpr (M == 2 && N == 1)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0)
-        };
-    }
-    if constexpr (M == 3 && N == 1)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0)
-        };
-    }
-    if constexpr (M == 4 && N == 1)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0)
-        };
-    }
-    if constexpr (M == 2 && N == 3)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0),
-            matrix(0,1), matrix(1,1),
-            matrix(0,2), matrix(1,2)
-        };
-    }
-    if constexpr (M == 2 && N == 4)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0),
-            matrix(0,1), matrix(1,1),
-            matrix(0,2), matrix(1,2),
-            matrix(0,3), matrix(1,3)
-        };
-    }
-    if constexpr (M == 3 && N == 2)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0),
-            matrix(0,1), matrix(1,1), matrix(2,1),
-        };
-    }
-    if constexpr (M == 3 && N == 4)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0),
-            matrix(0,1), matrix(1,1), matrix(2,1),
-            matrix(0,2), matrix(1,2), matrix(2,2),
-            matrix(0,3), matrix(1,3), matrix(2,3)
-        };
-    }
-    if constexpr (M == 4 && N == 2)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
-            matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1)
-        };
-    }
-    if constexpr (M == 4 && N == 3)
-    {
-        return
-        {
-            matrix(0,0), matrix(1,0), matrix(2,0), matrix(3,0),
-            matrix(0,1), matrix(1,1), matrix(2,1), matrix(3,1),
-            matrix(0,2), matrix(1,2), matrix(2,2), matrix(3,2)
-        };
-    }
-    else
-    {
-        typename Matrix<M,N,T>::Transposed mat;
+transposed(const Matrix<M,N,T>& matrix);
 
-        for (size_t m = 0; m < M; ++m)
-        {
-            for (size_t n = 0; n < N; ++n)
-            {
-                mat(n,m) = matrix(m,n);
-            }
-        }
-
-        return mat;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculate determinant of square matrix.
+ * @param matrix Matrix to calculate.
+ * @return calculated determinant.
+ */
 template<size_t S, typename T>
 constexpr T
-determinant(const Matrix<S,S,T>& matrix)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate determinant for matrices more than 4x4 size.");
+determinant(const Matrix<S,S,T>& matrix);
 
-    if constexpr (S == 2)
-    {
-        return matrix(0,0)*matrix(1,1) - matrix(0,1)*matrix(1,0);
-    }
-
-    if constexpr (S == 3)
-    {
-        return
-        matrix(0,0) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)) -
-        matrix(0,1) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)) +
-        matrix(0,2) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0));
-    }
-
-    if constexpr (S == 4)
-    {
-        return
-        matrix(0,0) *
-        (
-            matrix(1,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
-            matrix(1,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) +
-            matrix(1,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1))
-        )
-        -matrix(0,1) *
-        (
-            matrix(1,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) -
-            matrix(1,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
-            matrix(1,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0))
-        )
-        +matrix(0,2) *
-        (
-            matrix(1,0) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) -
-            matrix(1,1) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) +
-            matrix(1,3) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
-        )
-        -matrix(0,3) *
-        (
-            matrix(1,0) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)) -
-            matrix(1,1) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)) +
-            matrix(1,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0))
-        );
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculate cofactors of square matrix.
+ * @param matrix Matrix to calculate.
+ * @return calculated cofactors.
+ */
 template<size_t S, typename T>
 constexpr Matrix<S,S,T>
-cofactors(const Matrix<S,S,T>& matrix)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate cofactors for matrices more than 4x4 size.");
+cofactors(const Matrix<S,S,T>& matrix);
 
-    if constexpr (S == 2)
-    {
-        return
-        {
-            matrix(1,1),    -matrix(1,0),
-            -matrix(0,1),    matrix(0,0),
-        };
-    }
-
-    if constexpr (S == 3)
-    {
-        return
-        {
-            matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1), matrix(1,2)*matrix(2,0) - matrix(1,0)*matrix(2,2), matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0),
-            matrix(0,2)*matrix(2,1) - matrix(0,1)*matrix(2,2), matrix(0,0)*matrix(2,2) - matrix(0,2)*matrix(2,0), matrix(0,1)*matrix(2,0) - matrix(0,0)*matrix(2,1),
-            matrix(0,1)*matrix(1,2) - matrix(0,2)*matrix(1,1), matrix(0,2)*matrix(1,0) - matrix(0,0)*matrix(1,2), matrix(0,0)*matrix(1,1) - matrix(0,1)*matrix(1,0)
-        };
-    }
-
-    if constexpr (S == 4)
-    {
-        return
-        {
-            matrix(1,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(1,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) + matrix(1,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)),
-            matrix(1,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) - matrix(1,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(1,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)),
-            matrix(1,0) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) - matrix(1,1) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) + matrix(1,3) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0)),
-            matrix(1,1) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)) - matrix(1,0) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)) - matrix(1,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0)),
-            matrix(0,2) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) - matrix(0,1) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(0,3) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)),
-            matrix(0,0) * (matrix(2,2)*matrix(3,3) - matrix(2,3)*matrix(3,2)) - matrix(0,2) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) + matrix(0,3) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)),
-            matrix(0,1) * (matrix(2,0)*matrix(3,3) - matrix(2,3)*matrix(3,0)) - matrix(0,0) * (matrix(2,1)*matrix(3,3) - matrix(2,3)*matrix(3,1)) - matrix(0,3) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0)),
-            matrix(0,0) * (matrix(2,1)*matrix(3,2) - matrix(2,2)*matrix(3,1)) - matrix(0,1) * (matrix(2,0)*matrix(3,2) - matrix(2,2)*matrix(3,0)) + matrix(0,2) * (matrix(2,0)*matrix(3,1) - matrix(2,1)*matrix(3,0)),
-            matrix(0,1) * (matrix(1,2)*matrix(3,3) - matrix(1,3)*matrix(3,2)) - matrix(0,2) * (matrix(1,1)*matrix(3,3) - matrix(1,3)*matrix(3,1)) + matrix(0,3) * (matrix(1,1)*matrix(3,2) - matrix(1,2)*matrix(3,1)),
-            matrix(0,2) * (matrix(1,0)*matrix(3,3) - matrix(1,3)*matrix(3,0)) - matrix(0,0) * (matrix(1,2)*matrix(3,3) - matrix(1,3)*matrix(3,2)) - matrix(0,3) * (matrix(1,0)*matrix(3,2) - matrix(1,2)*matrix(3,0)),
-            matrix(0,0) * (matrix(1,1)*matrix(3,3) - matrix(1,3)*matrix(3,1)) - matrix(0,1) * (matrix(1,0)*matrix(3,3) - matrix(1,3)*matrix(3,0)) + matrix(0,3) * (matrix(1,0)*matrix(3,1) - matrix(1,1)*matrix(3,0)),
-            matrix(0,1) * (matrix(1,0)*matrix(3,2) - matrix(1,2)*matrix(3,0)) - matrix(0,0) * (matrix(1,1)*matrix(3,2) - matrix(1,2)*matrix(3,1)) - matrix(0,2) * (matrix(1,0)*matrix(3,1) - matrix(1,1)*matrix(3,0)),
-            matrix(0,2) * (matrix(1,1)*matrix(2,3) - matrix(1,3)*matrix(2,1)) - matrix(0,1) * (matrix(1,2)*matrix(2,3) - matrix(1,3)*matrix(2,2)) - matrix(0,3) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)),
-            matrix(0,0) * (matrix(1,2)*matrix(2,3) - matrix(1,3)*matrix(2,2)) - matrix(0,2) * (matrix(1,0)*matrix(2,3) - matrix(1,3)*matrix(2,0)) + matrix(0,3) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)),
-            matrix(0,1) * (matrix(1,0)*matrix(2,3) - matrix(1,3)*matrix(2,0)) - matrix(0,0) * (matrix(1,1)*matrix(2,3) - matrix(1,3)*matrix(2,1)) - matrix(0,3) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0)),
-            matrix(0,0) * (matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)) - matrix(0,1) * (matrix(1,0)*matrix(2,2) - matrix(1,2)*matrix(2,0)) + matrix(0,2) * (matrix(1,0)*matrix(2,1) - matrix(1,1)*matrix(2,0))
-        };
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely invert matrix.
+ * @param matrix Matrix for which it is necessary to calculate the inverse.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ * @return False if cant calculate inverse matrix. true otherwise.
+ */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,bool>
-invert(Matrix<S,S,T>& matrix, T determinantTolerance)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
+invert(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
 
-    T det {determinant(matrix)};
-
-    if (std::abs(det) >= determinantTolerance)
-    {
-        matrix = transposed(cofactors(matrix)) / det;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Safely calculate inverse matrix. Change flag to false, if cant calculate.
+ * @param[in] matrix Matrix for which it is necessary to calculate the inverse.
+ * @param[out] success Set this false if cant calculate inverse matrix.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
+ * @return Inverse matrix if could calculate, trash otherwise.
+ */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,Matrix<S,S,T>>
-inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
+inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance=T(0.000001));
 
-    T det {determinant(matrix)};
-
-    if (std::abs(det) >= determinantTolerance)
-    {
-        success = true;
-        return transposed(cofactors(matrix)) / det;
-    }
-    else
-    {
-        success = false;
-        return Matrix<S,S,T>();
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
+ * @param matrix Matrix to calculate.
+ * @return Inverse matrix if could calculate, trash otherwise.
+ */
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,void>
-invertForce(Matrix<S,S,T>& matrix)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
-    matrix = transposed(cofactors(matrix)) / determinant(matrix);
-}
+constexpr enable_if_floating<T,void>
+invertForce(Matrix<S,S,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
+ * @param matrix Matrix to calculate.
+ * @return Inverse matrix if could calculate, trash otherwise.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Matrix<S,S,T>>
-inverseForce(const Matrix<S,S,T>& matrix)
-{
-    static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
-    return transposed(cofactors(matrix)) / determinant(matrix);
-}
+inverseForce(const Matrix<S,S,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculate matrix trace - sum of diagonal elements.
+ * @return Matrix trace.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE T
-trace(const Matrix<S,S,T>& matrix)
-{
-    if constexpr (S == 2)
-    {
-        return matrix(0,0) + matrix(1,1);
-    }
-    else if constexpr (S == 3)
-    {
-        return matrix(0,0) + matrix(1,1) + matrix(2,2);
-    }
-    else if constexpr (S == 4)
-    {
-        return matrix(0,0) + matrix(1,1) + matrix(2,2) + matrix(3,3);
-    }
-    else
-    {
-        T sum {zero<T>};
+trace(const Matrix<S,S,T>& matrix);
 
-        for (size_t i = 0; i < S; ++i)
-        {
-            sum += matrix(i,i);
-        }
-
-        return sum;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is symmetric (a symmetric matrix is a square matrix
+ * that equals its transpose: i.e., M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @return True if matrix is symmetric, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_integral<T,T>
-symmetric(const Matrix<S,S,T>& matrix)
-{
-    if constexpr (S == 2)
-    {
-        return eq(matrix(0,1), matrix(1,0));
-    }
-    else if constexpr (S == 3)
-    {
-        return
-        eq(matrix(0,1), matrix(1,0)) &&
-        eq(matrix(0,2), matrix(2,0)) &&
-        eq(matrix(1,2), matrix(2,1));
-    }
-    else if constexpr (S == 4)
-    {
-        return
-        eq(matrix(0,1), matrix(1,0)) &&
-        eq(matrix(0,2), matrix(2,0)) &&
-        eq(matrix(0,3), matrix(3,0)) &&
-        eq(matrix(1,2), matrix(2,1)) &&
-        eq(matrix(1,3), matrix(3,1)) &&
-        eq(matrix(2,3), matrix(3,2));
-    }
-    else
-    {
-        for (size_t i = 0; i < S-1; ++i)
-        {
-            for (size_t j = i+1; j < S; ++j)
-            {
-                if (neq(matrix(i,j),matrix(j,i)))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
+symmetric(const Matrix<S,S,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is symmetric (a symmetric matrix is a square matrix
+ * that equals its transpose: i.e., M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is symmetric, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
-symmetric(const Matrix<S,S,T>& matrix, T tolerance)
-{
-    if constexpr (S == 2)
-    {
-        return eq(matrix(0,1), matrix(1,0), tolerance);
-    }
-    else if constexpr (S == 3)
-    {
-        return
-        eq(matrix(0,1), matrix(1,0), tolerance) &&
-        eq(matrix(0,2), matrix(2,0), tolerance) &&
-        eq(matrix(1,2), matrix(2,1), tolerance);
-    }
-    else if constexpr (S == 4)
-    {
-        return
-        eq(matrix(0,1), matrix(1,0), tolerance) &&
-        eq(matrix(0,2), matrix(2,0), tolerance) &&
-        eq(matrix(0,3), matrix(3,0), tolerance) &&
-        eq(matrix(1,2), matrix(2,1), tolerance) &&
-        eq(matrix(1,3), matrix(3,1), tolerance) &&
-        eq(matrix(2,3), matrix(3,2), tolerance);
-    }
-    else
-    {
-        for (size_t i = 0; i < S-1; ++i)
-        {
-            for (size_t j = i+1; j < S; ++j)
-            {
-                if (neq(matrix(i,j),matrix(j,i), tolerance))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
+symmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is antisymmetric (an antisymmetric matrix is a matrix
+ * whose transpose is its own negative: i.e., -M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @return True if matrix is antisymmetric, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_integral<T,T>
-antisymmetric(const Matrix<S,S,T>& matrix)
-{
-    if constexpr (S == 2)
-    {
-        return eq(-matrix(0,1), matrix(1,0));
-    }
-    else if constexpr (S == 3)
-    {
-        return
-        eq(-matrix(0,1), matrix(1,0)) &&
-        eq(-matrix(0,2), matrix(2,0)) &&
-        eq(-matrix(1,2), matrix(2,1));
-    }
-    else if constexpr (S == 4)
-    {
-        eq(-matrix(0,1), matrix(1,0)) &&
-        eq(-matrix(0,2), matrix(2,0)) &&
-        eq(-matrix(0,3), matrix(3,0)) &&
-        eq(-matrix(1,2), matrix(2,1)) &&
-        eq(-matrix(1,3), matrix(3,1)) &&
-        eq(-matrix(2,3), matrix(3,2));
-    }
-    else
-    {
-        for (size_t i = 0; i < S-1; ++i)
-        {
-            for (size_t j = i+1; j < S; ++j)
-            {
-                if (neq(-matrix(i,j),matrix(j,i)))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
+antisymmetric(const Matrix<S,S,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is antisymmetric (an antisymmetric matrix is a matrix
+ * whose transpose is its own negative: i.e., -M = transposed(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is antisymmetric, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
-antisymmetric(const Matrix<S,S,T>& matrix, T tolerance)
-{
-    if constexpr (S == 2)
-    {
-        return eq(-matrix(0,1), matrix(1,0), tolerance);
-    }
-    else if constexpr (S == 3)
-    {
-        return
-        eq(-matrix(0,1), matrix(1,0), tolerance) &&
-        eq(-matrix(0,2), matrix(2,0), tolerance) &&
-        eq(-matrix(1,2), matrix(2,1), tolerance);
-    }
-    else if constexpr (S == 4)
-    {
-        return
-        eq(-matrix(0,1), matrix(1,0), tolerance) &&
-        eq(-matrix(0,2), matrix(2,0), tolerance) &&
-        eq(-matrix(0,3), matrix(3,0), tolerance) &&
-        eq(-matrix(1,2), matrix(2,1), tolerance) &&
-        eq(-matrix(1,3), matrix(3,1), tolerance) &&
-        eq(-matrix(2,3), matrix(3,2), tolerance);
-    }
-    else
-    {
-        for (size_t i = 0; i < S-1; ++i)
-        {
-            for (size_t j = i+1; j < S; ++j)
-            {
-                if (neq(-matrix(i,j),matrix(j,i), tolerance))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
+antisymmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is diagonal (a diagonal matrix is a square matrix
+ * whose elements are zero, apart from its diagonal).
+ * @param matrix Matrix to check.
+ * @return True if matrix is diagonal, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr enable_if_integral<T,T>
-diagonal(const Matrix<S,S,T>& matrix)
-{
-    for (size_t i = 0; i < S; ++i)
-    {
-        if (eq(matrix(i,i), zero<T>))
-        {
-            return false;
-        }
-    }
+diagonal(const Matrix<S,S,T>& matrix);
 
-    for (size_t m = 0; m < S; ++m)
-    {
-        for (size_t n = 0; n < S; ++n)
-        {
-            if (m == n) {continue;}
-
-            if (neq(matrix(m,n), zero<T>))
-            {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is diagonal (a diagonal matrix is a square matrix
+ * whose elements are zero, apart from its diagonal).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is diagonal, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,T>
-diagonal(const Matrix<S,S,T>& matrix, T tolerance)
-{
-    for (size_t i = 0; i < S; ++i)
-    {
-        if (eq(matrix(i,i), zero<T>), tolerance)
-        {
-            return false;
-        }
-    }
+diagonal(const Matrix<S,S,T>& matrix, T tolerance);
 
-    for (size_t m = 0; m < S; ++m)
-    {
-        for (size_t n = 0; n < S; ++n)
-        {
-            if (m == n) {continue;}
-
-            if (neq(matrix(m,n), zero<T>, tolerance))
-            {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Check if matrix is orthogonal (a matrix is orthogonal if its transpose
+ * is also its inverse, i.e., transposed(M) = inverse(M)).
+ * @param matrix Matrix to check.
+ * @param tolerance Comparison tolerance.
+ * @return True if matrix is orthogonal, false otherwise.
+ */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,T>
-orthogonal(const Matrix<S,S,T>& matrix, T tolerance)
-{
-    bool existInverse {false};
-    auto invmat {inverse(matrix, existInverse)};
+orthogonal(const Matrix<S,S,T>& matrix, T tolerance);
 
-    if (!existInverse)
-    {
-        return false;
-    }
-    else
-    {
-        if constexpr (S == 2)
-        {
-            return
-            eq(invmat(0,0), matrix(0,0), tolerance) &&
-            eq(invmat(0,1), matrix(1,0), tolerance) &&
-            eq(invmat(1,1), matrix(1,1), tolerance);
-        }
-        else if constexpr (S == 3)
-        {
-            return
-            eq(invmat(0,0), matrix(0,0), tolerance) &&
-            eq(invmat(0,1), matrix(1,0), tolerance) &&
-            eq(invmat(0,2), matrix(2,0), tolerance) &&
-            eq(invmat(1,2), matrix(2,1), tolerance) &&
-            eq(invmat(2,2), matrix(2,2), tolerance);
-        }
-        else if constexpr (S == 4)
-        {
-            return
-            eq(invmat(0,0), matrix(0,0), tolerance) &&
-            eq(invmat(0,1), matrix(1,0), tolerance) &&
-            eq(invmat(0,2), matrix(2,0), tolerance) &&
-            eq(invmat(0,3), matrix(3,0), tolerance) &&
-            eq(invmat(1,2), matrix(2,1), tolerance) &&
-            eq(invmat(1,3), matrix(3,1), tolerance) &&
-            eq(invmat(2,3), matrix(3,2), tolerance) &&
-            eq(invmat(3,3), matrix(3,3), tolerance);
-        }
-        else
-        {
-            bool result {false};
-            for (size_t i = 0; i < S-1; ++i)
-            {
-                for (size_t j = i+1; j < S; ++j)
-                {
-                    if (neq(invmat(i,j),matrix(j,i), tolerance))
-                    {
-                        result = false;
-                    };
-                }
-            }
-
-            return
-            eq(invmat(0,0),matrix(0,0), tolerance) &&
-            eq(invmat(S-1,S-1),matrix(S-1,S-1), tolerance) &&
-            result;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t S, typename T>
+/**
+ * Create identity matrix.
+ * @return Identity matrix.
+ */
+template<size_t S, typename T=FLOAT>
 constexpr CGM_FORCEINLINE Matrix<S,S,T>
-identity()
-{
-    if constexpr (S==2)
-    {
-        return
-        {
-            1, 0,
-            0, 1
-        };
-    }
-    else if constexpr (S==3)
-    {
-        return
-        {
-            1, 0, 0,
-            0, 1, 0,
-            0, 0, 1
-        };
-    }
-    else if constexpr (S==4)
-    {
-        return
-        {
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-        };
-    }
-    else
-    {
-        Matrix<S,S,T> matrix(zero<T>);
-        for (auto i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
-        return matrix;
-    }
-}
+identity();
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Compare matrix A and B (floating point based).
+ * @param A First matrix.
+ * @param B Second matrix.
+ * @param tolerance Compare tolerance.
+ * @return true if A equal to B, false otherwise.
+ */
 template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-eq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
-{
-    if constexpr (M == 1 && N == 2)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance);
-    }
-    else if constexpr (M == 1 && N == 3)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance);
-    }
-    else if constexpr (M == 1 && N == 4)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(0,3), B(0,3), tolerance);
-    }
-    else if constexpr (M == 2 && N == 1)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance);
-    }
-    else if constexpr (M == 3 && N == 1)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance);
-    }
-    else if constexpr (M == 4 && N == 1)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(3,0), B(3,0), tolerance);
-    }
-    else if constexpr (M == 2 && N == 2)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance);
-    }
-    else if constexpr (M == 2 && N == 3)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance);
-    }
-    else if constexpr (M == 2 && N == 4)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(0,3), B(0,3), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance) &&
-        CGM::eq(A(1,3), B(1,3), tolerance);
-    }
-    else if constexpr (M == 3 && N == 2)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance);
-    }
-    else if constexpr (M == 3 && N == 3)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance) &&
-        CGM::eq(A(2,2), B(2,2), tolerance);
-    }
-    else if constexpr (M == 3 && N == 4)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(0,3), B(0,3), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance) &&
-        CGM::eq(A(1,3), B(1,3), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance) &&
-        CGM::eq(A(2,2), B(2,2), tolerance) &&
-        CGM::eq(A(2,3), B(2,3), tolerance);
-    }
-    else if constexpr (M == 4 && N == 2)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance) &&
-        CGM::eq(A(3,0), B(3,0), tolerance) &&
-        CGM::eq(A(3,1), B(3,1), tolerance);
-    }
-    else if constexpr (M == 4 && N == 3)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance) &&
-        CGM::eq(A(2,2), B(2,2), tolerance) &&
-        CGM::eq(A(3,0), B(3,0), tolerance) &&
-        CGM::eq(A(3,1), B(3,1), tolerance) &&
-        CGM::eq(A(3,2), B(3,2), tolerance);
-    }
-    else if constexpr (M == 4 && N == 4)
-    {
-        return
-        CGM::eq(A(0,0), B(0,0), tolerance) &&
-        CGM::eq(A(0,1), B(0,1), tolerance) &&
-        CGM::eq(A(0,2), B(0,2), tolerance) &&
-        CGM::eq(A(0,3), B(0,3), tolerance) &&
-        CGM::eq(A(1,0), B(1,0), tolerance) &&
-        CGM::eq(A(1,1), B(1,1), tolerance) &&
-        CGM::eq(A(1,2), B(1,2), tolerance) &&
-        CGM::eq(A(1,3), B(1,3), tolerance) &&
-        CGM::eq(A(2,0), B(2,0), tolerance) &&
-        CGM::eq(A(2,1), B(2,1), tolerance) &&
-        CGM::eq(A(2,2), B(2,2), tolerance) &&
-        CGM::eq(A(2,3), B(2,3), tolerance) &&
-        CGM::eq(A(3,0), B(3,0), tolerance) &&
-        CGM::eq(A(3,1), B(3,1), tolerance) &&
-        CGM::eq(A(3,2), B(3,2), tolerance) &&
-        CGM::eq(A(3,3), B(3,3), tolerance);
-    }
-    else
-    {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
-        {
-            if (CGM::neq(A[i], B[i]), tolerance) return false;
-        }
-        return true;
-    }
-}
+eq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Compare matrix A and B (floating point based).
+ * @param A First matrix.
+ * @param B Second matrix.
+ * @param tolerance Compare tolerance.
+ * @return true if A not equal to B, false otherwise.
+ */
 template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
-neq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
-{
-    if constexpr (M == 1 && N == 2)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance);
-    }
-    else if constexpr (M == 1 && N == 3)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance);
-    }
-    else if constexpr (M == 1 && N == 4)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(0,3), B(0,3), tolerance);
-    }
-    else if constexpr (M == 2 && N == 1)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance);
-    }
-    else if constexpr (M == 3 && N == 1)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance);
-    }
-    else if constexpr (M == 4 && N == 1)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(3,0), B(3,0), tolerance);
-    }
-    else if constexpr (M == 2 && N == 2)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance);
-    }
-    else if constexpr (M == 2 && N == 3)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance);
-    }
-    else if constexpr (M == 2 && N == 4)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(0,3), B(0,3), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance) ||
-        CGM::neq(A(1,3), B(1,3), tolerance);
-    }
-    else if constexpr (M == 3 && N == 2)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance);
-    }
-    else if constexpr (M == 3 && N == 3)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance) ||
-        CGM::neq(A(2,2), B(2,2), tolerance);
-    }
-    else if constexpr (M == 3 && N == 4)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(0,3), B(0,3), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance) ||
-        CGM::neq(A(1,3), B(1,3), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance) ||
-        CGM::neq(A(2,2), B(2,2), tolerance) ||
-        CGM::neq(A(2,3), B(2,3), tolerance);
-    }
-    else if constexpr (M == 4 && N == 2)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance) ||
-        CGM::neq(A(3,0), B(3,0), tolerance) ||
-        CGM::neq(A(3,1), B(3,1), tolerance);
-    }
-    else if constexpr (M == 4 && N == 3)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance) ||
-        CGM::neq(A(2,2), B(2,2), tolerance) ||
-        CGM::neq(A(3,0), B(3,0), tolerance) ||
-        CGM::neq(A(3,1), B(3,1), tolerance) ||
-        CGM::neq(A(3,2), B(3,2), tolerance);
-    }
-    else if constexpr (M == 4 && N == 4)
-    {
-        return
-        CGM::neq(A(0,0), B(0,0), tolerance) ||
-        CGM::neq(A(0,1), B(0,1), tolerance) ||
-        CGM::neq(A(0,2), B(0,2), tolerance) ||
-        CGM::neq(A(0,3), B(0,3), tolerance) ||
-        CGM::neq(A(1,0), B(1,0), tolerance) ||
-        CGM::neq(A(1,1), B(1,1), tolerance) ||
-        CGM::neq(A(1,2), B(1,2), tolerance) ||
-        CGM::neq(A(1,3), B(1,3), tolerance) ||
-        CGM::neq(A(2,0), B(2,0), tolerance) ||
-        CGM::neq(A(2,1), B(2,1), tolerance) ||
-        CGM::neq(A(2,2), B(2,2), tolerance) ||
-        CGM::neq(A(2,3), B(2,3), tolerance) ||
-        CGM::neq(A(3,0), B(3,0), tolerance) ||
-        CGM::neq(A(3,1), B(3,1), tolerance) ||
-        CGM::neq(A(3,2), B(3,2), tolerance) ||
-        CGM::neq(A(3,3), B(3,3), tolerance);
-    }
-    else
-    {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
-        {
-            if (CGM::neq(A[i], B[i]), tolerance) return true;
-        }
-        return false;
-    }
-}
+neq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance);
 
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Core/Functions/Matrix_impl.hpp>

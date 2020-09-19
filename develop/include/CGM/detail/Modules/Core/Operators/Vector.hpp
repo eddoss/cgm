@@ -1,975 +1,334 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <type_traits>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Increment and decrement */
+/* Increment and decrement */
 /* ####################################################################################### */
 
+/**
+ * Increase all components of vector by 1 and returns it.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator++(CGM::Vector<D,T>& vector)
-{
-    if constexpr (D == 2)
-    {
-        ++vector.x;
-        ++vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-        ++vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
-    }
+constexpr CGM::Vector<D,T>&
+operator++(CGM::Vector<D,T>& vector);
 
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Decrease all components of vector by 1 and returns it.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator--(CGM::Vector<D,T>& vector)
-{
-    if constexpr (D == 2)
-    {
-        --vector.x;
-        --vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-        --vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) --vector[i];
-    }
+constexpr CGM::Vector<D,T>&
+operator--(CGM::Vector<D,T>& vector);
 
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Increase all components of vector by 1 and returns unchanged copy of it.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator++(CGM::Vector<D,T>& vector, int)
-{
-    auto copy {vector};
+constexpr CGM::Vector<D,T>
+operator++(CGM::Vector<D,T>& vector, int);
 
-    if constexpr (D == 2)
-    {
-        ++vector.x;
-        ++vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        ++vector.x;
-        ++vector.y;
-        ++vector.z;
-        ++vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Decrease all components of vector by 1 and returns unchanged copy of it.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator--(CGM::Vector<D,T>& vector, int)
-{
-    auto copy {vector};
-
-    if constexpr (D == 2)
-    {
-        --vector.x;
-        --vector.y;
-    }
-    else if constexpr (D == 3)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-    }
-    else if constexpr (D == 4)
-    {
-        --vector.x;
-        --vector.y;
-        --vector.z;
-        --vector.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) --vector[i];
-    }
-
-    return copy;
-}
+constexpr CGM::Vector<D,T>
+operator--(CGM::Vector<D,T>& vector, int);
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Plus */
+/* Plus */
 /* ####################################################################################### */
 
+/**
+ * Add scalar to vector components.
+ * @param vector Vector to add to.
+ * @param scalar Value to add.
+ * @return The result of adding.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator+=(CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-        vector.z += scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x += scalar;
-        vector.y += scalar;
-        vector.z += scalar;
-        vector.w += scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] += scalar;
-    }
+constexpr CGM::Vector<D,T>&
+operator+=(CGM::Vector<D,T>& vector, TScalar scalar);
 
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Add vector B to vector A.
+ * @param A Vector to add to.
+ * @param B Vector to add.
+ * @return The result of adding.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator+=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x += B.x;
-        A.y += B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x += B.x;
-        A.y += B.y;
-        A.z += B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x += B.x;
-        A.y += B.y;
-        A.z += B.z;
-        A.w += B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] += B[i];
-    }
+constexpr CGM::Vector<D,T>&
+operator+=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates sum of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator+(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    auto copy {A};
+constexpr CGM::Vector<D,T>
+operator+(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
-    if constexpr (D == 2)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-        copy.z += B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += B.x;
-        copy.y += B.y;
-        copy.z += B.z;
-        copy.w += B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Add scalar to vector and return copy.
+ * @param vector Vector to add to.
+ * @param scalar Value to add.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator+(const CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    auto copy {vector};
-    T value {static_cast<T>(scalar)};
+constexpr CGM::Vector<D,T>
+operator+(const CGM::Vector<D,T>& vector, TScalar scalar);
 
-    if constexpr (D == 2)
-    {
-        copy.x += value;
-        copy.y += value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-        copy.w += value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator+(T scalar, const CGM::Vector<D,T>& vector)
-{
-    auto copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x += value;
-        copy.y += value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x += value;
-        copy.y += value;
-        copy.z += value;
-        copy.w += value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
-    }
-
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Minus */
-/* ####################################################################################### */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator-(const CGM::Vector<D,T>& vector)
-{
-    auto copy {vector};
-
-    if constexpr (D == 2)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-        copy.z = -copy.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x = -copy.x;
-        copy.y = -copy.y;
-        copy.z = -copy.z;
-        copy.w = -copy.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] = -copy[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Add scalar to vector and return copy.
+ * @param vector Vector to add to.
+ * @param scalar Value to add.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator-=(CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-        vector.z -= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x -= scalar;
-        vector.y -= scalar;
-        vector.z -= scalar;
-        vector.w -= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] -= scalar;
-    }
+constexpr CGM::Vector<D,T>
+operator+(TScalar scalar, const CGM::Vector<D,T>& vector);
 
-    return vector;
-}
+/* ####################################################################################### */
+/* Minus */
+/* ####################################################################################### */
 
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator-=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-        A.z -= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x -= B.x;
-        A.y -= B.y;
-        A.z -= B.z;
-        A.w -= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] -= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator-(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    auto copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-        copy.z -= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x -= B.x;
-        copy.y -= B.y;
-        copy.z -= B.z;
-        copy.w -= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] -= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Subtract scalar from each vector component.
+ * @param vector Vector to subtract from.
+ * @param scalar Value to subtract.
+ * @return The result of subtraction.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator-(const CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    auto copy {vector};
-    T value {static_cast<T>(scalar)};
+constexpr CGM::Vector<D,T>&
+operator-=(CGM::Vector<D,T>& vector, TScalar scalar);
 
-    if constexpr (D == 2)
-    {
-        copy.x -= value;
-        copy.y -= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x -= value;
-        copy.y -= value;
-        copy.z -= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x -= value;
-        copy.y -= value;
-        copy.z -= value;
-        copy.w -= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] -= value;
-    }
+/**
+ * Subtract vector B from vector A.
+ * @param A Vector to subtract from.
+ * @param B Vector to subtract.
+ * @return The result of subtraction.
+ */
+template<size_t D, typename T>
+constexpr CGM::Vector<D,T>&
+operator-=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
-    return copy;
-}
+/**
+ * Get a negated copy of the vector.
+ * @param vector Vector to negate.
+ * @return A negated copy of the vector.
+ */
+template<size_t D, typename T>
+constexpr CGM::Vector<D,T>
+operator-(const CGM::Vector<D,T>& vector);
 
-/* ####################################################################################### */
-/* IMPLEMENTATION | Component wise multiplication */
-/* ####################################################################################### */
+/**
+ * Calculates difference of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T>
+constexpr CGM::Vector<D,T>
+operator-(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
+/**
+ * Subtract scalar from each vector component and return copy.
+ * @param vector Vector to subtract from.
+ * @param scalar Value to subtract.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator*=(CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-        vector.z *= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x *= scalar;
-        vector.y *= scalar;
-        vector.z *= scalar;
-        vector.w *= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] *= static_cast<T>(scalar);
-    }
+constexpr CGM::Vector<D,T>
+operator-(const CGM::Vector<D,T>& vector, TScalar scalar);
 
-    return vector;
-}
+/* ####################################################################################### */
+/* Component wise multiplication */
+/* ####################################################################################### */
 
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator*=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-        A.z *= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x *= B.x;
-        A.y *= B.y;
-        A.z *= B.z;
-        A.w *= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] *= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator*(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    auto copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-        copy.z *= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= B.x;
-        copy.y *= B.y;
-        copy.z *= B.z;
-        copy.w *= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Multiply scalar to each vector component.
+ * @param vector Vector to multiply to.
+ * @param scalar Value to multiply.
+ * @return The result of multiplication.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator*(const CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    auto copy {vector};
-    T value {static_cast<T>(scalar)};
+constexpr CGM::Vector<D,T>&
+operator*=(CGM::Vector<D,T>& vector, TScalar scalar);
 
-    if constexpr (D == 2)
-    {
-        copy.x *= value;
-        copy.y *= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-        copy.w *= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Multiply component wise vector A by vector B.
+ * @param A Vector to multiply to.
+ * @param B Vector to multiply.
+ * @return The result of multiplication.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator*(T scalar, const CGM::Vector<D,T>& vector)
-{
-    auto copy {vector};
-    T value {static_cast<T>(scalar)};
+constexpr CGM::Vector<D,T>&
+operator*=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
-    if constexpr (D == 2)
-    {
-        copy.x *= value;
-        copy.y *= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x *= value;
-        copy.y *= value;
-        copy.z *= value;
-        copy.w *= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
-    }
+/**
+ * Calculates component wise multiplication of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T>
+constexpr CGM::Vector<D,T>
+operator*(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
-    return copy;
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Component wise division */
-/* ####################################################################################### */
-
+/**
+ * Multiply scalar to each vector component and return copy.
+ * @param vector Vector to multiply to.
+ * @param scalar Value to multiply.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator/=(CGM::Vector<D,T>& vector, TScalar scalar)
-{
-    if constexpr (D == 2)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-    }
-    else if constexpr (D == 3)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-        vector.z /= scalar;
-    }
-    else if constexpr (D == 4)
-    {
-        vector.x /= scalar;
-        vector.y /= scalar;
-        vector.z /= scalar;
-        vector.w /= scalar;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) vector[i] /= scalar;
-    }
+constexpr CGM::Vector<D,T>
+operator*(const CGM::Vector<D,T>& vector, TScalar scalar);
 
-    return vector;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>&
-operator/=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-        A.z /= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        A.x /= B.x;
-        A.y /= B.y;
-        A.z /= B.z;
-        A.w /= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) A[i] /= B[i];
-    }
-
-    return A;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator/(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    auto copy {A};
-
-    if constexpr (D == 2)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-        copy.z /= B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x /= B.x;
-        copy.y /= B.y;
-        copy.z /= B.z;
-        copy.w /= B.w;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] /= B[i];
-    }
-
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Multiply scalar to each vector component and return copy.
+ * @param vector Vector to multiply to.
+ * @param scalar Value to multiply.
+ * @return New copy of the result vector.
+ */
 template<size_t D, typename T, typename TScalar>
-constexpr CGM_FORCEINLINE CGM::Vector<D,T>
-operator/(const CGM::Vector<D,T>& vector, TScalar scalar)
-{
-   auto copy {vector};
-    T value {static_cast<T>(scalar)};
-
-    if constexpr (D == 2)
-    {
-        copy.x /= value;
-        copy.y /= value;
-    }
-    else if constexpr (D == 3)
-    {
-        copy.x /= value;
-        copy.y /= value;
-        copy.z /= value;
-    }
-    else if constexpr (D == 4)
-    {
-        copy.x /= value;
-        copy.y /= value;
-        copy.z /= value;
-        copy.w /= value;
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) copy[i] /= value;
-    }
-
-    return copy;
-}
+constexpr CGM::Vector<D,T>
+operator*(TScalar scalar, const CGM::Vector<D,T>& vector);
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Comparison with scalar */
+/* Component wise division */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE bool
-operator==(const CGM::Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::eq(vector.x, scalar) &&
-                CGM::eq(vector.y, scalar);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::eq(vector.x, scalar) &&
-                CGM::eq(vector.y, scalar) &&
-                CGM::eq(vector.z, scalar);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::eq(vector.x, scalar) &&
-                CGM::eq(vector.y, scalar) &&
-                CGM::eq(vector.z, scalar) &&
-                CGM::eq(vector.w, scalar);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(vector[i], scalar)) return false;
-        return true;
-    }
-}
+/**
+ * Divide each vector component by a scalar and return copy.
+ * @param vector Vector to division to.
+ * @param scalar Value to division.
+ * @return The result of division.
+ */
+template<size_t D, typename T, typename TScalar>
+constexpr CGM::Vector<D,T>&
+operator/=(CGM::Vector<D,T>& vector, TScalar scalar);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Divide component wise vector A by vector B.
+ * @param A Vector to division to.
+ * @param B Vector to division.
+ * @return The result of division.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE bool
-operator!=(const CGM::Vector<D,T>& vector, T scalar)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::neq(vector.x, scalar) ||
-                CGM::neq(vector.y, scalar);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::neq(vector.x, scalar) ||
-                CGM::neq(vector.y, scalar) ||
-                CGM::neq(vector.z, scalar);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::neq(vector.x, scalar) ||
-                CGM::neq(vector.y, scalar) ||
-                CGM::neq(vector.z, scalar) ||
-                CGM::neq(vector.w, scalar);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(vector[i], scalar)) return true;
-        return false;
-    }
-}
+constexpr CGM::Vector<D,T>&
+operator/=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
+
+/**
+ * Calculates component wise division of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T>
+constexpr CGM::Vector<D,T>
+operator/(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
+
+/**
+ * Divide each vector component by a scalar and return copy.
+ * @param vector Vector to division to.
+ * @param scalar Value to division.
+ * @return New copy of the result vector.
+ */
+template<size_t D, typename T, typename TScalar>
+constexpr CGM::Vector<D,T>
+operator/(const CGM::Vector<D,T>& vector, TScalar scalar);
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Comparison with other */
+/* Comparison with scalar */
 /* ####################################################################################### */
 
+/**
+ * Checking the components of a vector for equality with a scalar.
+ * @param vector Vector to compare.
+ * @param scalar Scalar value to compare with.
+ * @return true if components of the vector are equal to scalar, false otherwise.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE bool
-operator==(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::eq(A.x, B.x) &&
-                CGM::eq(A.y, B.y);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::eq(A.x, B.x) &&
-                CGM::eq(A.y, B.y) &&
-                CGM::eq(A.z, B.z);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::eq(A.x, B.x) &&
-                CGM::eq(A.y, B.y) &&
-                CGM::eq(A.z, B.z) &&
-                CGM::eq(A.w, B.w);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i])) return false;
-        return true;
-    }
-}
+constexpr bool
+operator==(const CGM::Vector<D,T>& vector, T scalar);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Checking the components of a vector for inequality with a scalar.
+ * @param vector Vector to compare.
+ * @param scalar Scalar value to compare with.
+ * @return true if components of the vector are not equal to scalar, false otherwise.
+ */
 template<size_t D, typename T>
-constexpr CGM_FORCEINLINE bool
-operator!=(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return  CGM::neq(A.x, B.x) ||
-                CGM::neq(A.y, B.y);
-    }
-    else if constexpr (D == 3)
-    {
-        return  CGM::neq(A.x, B.x) ||
-                CGM::neq(A.y, B.y) ||
-                CGM::neq(A.z, B.z);
-    }
-    else if constexpr (D == 4)
-    {
-        return  CGM::neq(A.x, B.x) ||
-                CGM::neq(A.y, B.y) ||
-                CGM::neq(A.z, B.z) ||
-                CGM::neq(A.w, B.w);
-    }
-    else
-    {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i])) return true;
-        return false;
-    }
-}
+constexpr bool
+operator!=(const CGM::Vector<D,T>& vector, T scalar);
+
+/* ####################################################################################### */
+/* Comparison with other */
+/* ####################################################################################### */
+
+/**
+ * Check against another vector for equality.
+ * @param A Vector to compare.
+ * @param B Vector to compare with.
+ * @return true if the vectors are equal, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr bool
+operator==(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
+
+/**
+ * Check against another vector for inequality.
+ * @param A Vector to compare.
+ * @param B Vector to compare with.
+ * @return true if the vectors are not equal, false otherwise.
+ */
+template<size_t D, typename T>
+constexpr bool
+operator!=(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Dot product operator */
 /* ####################################################################################### */
 
+/**
+ * Calculates cross dot of two vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return The dot product.
+ */
 template<size_t D, typename T>
 constexpr T
-operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
-{
-    if constexpr (D == 2)
-    {
-        return A.x * B.x + A.y * B.y;
-    }
-    else if constexpr (D == 3)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z;
-    }
-    else if constexpr (D == 4)
-    {
-        return A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w;
-    }
-    else
-    {
-        T result {CGM::zero<T>};
-        for (auto i = 0; i < D; ++i)
-        {
-            result += A[i] * B[i];
-        }
-        return result;
-    }
-}
+operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Cross product operator */
 /* ####################################################################################### */
 
+/**
+ * Calculates cross product of 2D vector and 2D vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return The cross product.
+ */
 template<typename T>
 constexpr T
-operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B)
-{
-    return A.x * B.y - A.y * B.x;
-}
+operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Calculates cross product of 3D vector and 3D vectors.
+ * @param A Left vector.
+ * @param B Right vector.
+ * @return The cross product.
+ */
 template<typename T>
-constexpr CGM_FORCEINLINE CGM::Vector<3,T>
-operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B)
-{
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    return
-    {
-        A.z * B.y - A.y * B.z,
-        A.x * B.z - A.z * B.x,
-        A.y * B.x - A.x * B.y
-    };
-#else
-    return
-    {
-        A.y * B.z - A.z * B.y,
-        A.z * B.x - A.x * B.z,
-        A.x * B.y - A.y * B.x
-    };
-#endif
-}
+constexpr CGM::Vector<3,T>
+operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B);
+
+
+#include <CGM/detail/Modules/Core/Operators/Vector_impl.hpp>

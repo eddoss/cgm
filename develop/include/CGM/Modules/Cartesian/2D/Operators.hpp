@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/2D/ModuleGlobals.hpp>
 

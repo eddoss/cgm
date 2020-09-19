@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/Modules/Cartesian/Common.hpp>
 #include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>

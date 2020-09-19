@@ -1,260 +1,145 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Functions/Vector.hpp>
 
 
+/* ####################################################################################### */
+/* Minus */
+/* ####################################################################################### */
+
+/**
+ * Get a negated copy of the quaternion.
+ * @return A negated copy of the quaternion.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& quaternion)
-{
-    return {-quaternion.vector, -quaternion.scalar};
-}
+operator - (const CGM::Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Gets the result of subtraction quaternion "A" and quaternion "B".
+ * @return The result of quaternion subtraction.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    return
-    {
-        A.vector.x - B.vector.x,
-        A.vector.y - B.vector.y,
-        A.vector.z - B.vector.z,
-        A.scalar - B.scalar,
-    };
-}
+operator - (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Subtracts quaternion "B" from quaternion "B".
+ * @return The result of quaternion subtraction.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>&
-operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    A.vector.x -= B.vector.x;
-    A.vector.y -= B.vector.y;
-    A.vector.z -= B.vector.z;
-    A.scalar -= B.scalar;
-
-    return A;
-}
+operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Plus */
 /* ####################################################################################### */
 
+/**
+ * Gets the result of adding quaternion "A" and quaternion "B".
+ * @return The result of quaternion adding.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>
-operator + (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    return
-    {
-        A.vector.x + B.vector.x,
-        A.vector.y + B.vector.y,
-        A.vector.z + B.vector.z,
-        A.scalar + B.scalar
-    };
-}
+operator + (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Add quaternion "A" and quaternion "B".
+ * @return The result of adding subtraction.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>&
-operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    A.vector.x += B.vector.x;
-    A.vector.y += B.vector.y;
-    A.vector.z += B.vector.z;
-    A.scalar += B.scalar;
-
-    return A;
-}
+operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Multiplication */
 /* ####################################################################################### */
 
+/**
+ * Multiply quaternion by a scaling factor.
+ * @return The result of scaling.
+ */
 template<typename T, typename TScale>
 constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
-{
-    if constexpr (std::is_same_v<T, TScale>)
-    {
-        return
-        {
-            quaternion.vector.x * scale,
-            quaternion.vector.y * scale,
-            quaternion.vector.z * scale,
-            quaternion.scalar * scale
-        };
-    }
-    else
-    {
-        T castedScale = CGM::number<T>(scale);
+operator * (const CGM::Quaternion<T>& quaternion, TScale scale);
 
-        return
-        {
-            quaternion.vector.x * castedScale,
-            quaternion.vector.y * castedScale,
-            quaternion.vector.z * castedScale,
-            quaternion.scalar * castedScale
-        };
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Gets the result of multiplication quaternion "A" and quaternion "B".
+ * @return The result of quaternion multiplication.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-//    return
-//    {
-//        A.vector.x * B.scalar + B.vector.x * A.scalar + A.vector.y * B.vector.z - A.vector.z * B.vector.y,
-//        A.vector.y * B.scalar + B.vector.y * A.scalar + A.vector.z * B.vector.x - A.vector.x * B.vector.z,
-//        A.vector.z * B.scalar + B.vector.z * A.scalar + A.vector.x * B.vector.y - A.vector.y * B.vector.x,
-//        A.scalar * B.scalar - A.vector.x * B.vector.x - A.vector.y * B.vector.y - A.vector.z * B.vector.z
-//    };
-    return CGM::Quaternion<T>
-    {
-        A.vector * B.scalar + B.vector * A.scalar + CGM::cross(A.vector, B.vector),
-        A.scalar * B.scalar - (A.vector.x * B.vector.x + A.vector.y * B.vector.y + A.vector.z * B.vector.z)
-    };
-}
+operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Multiply quaternion by a scaling factor.
+ * @return The result of scaling.
+ */
 template<typename T, typename TScale>
 constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& quaternion, TScale scale)
-{
-    if constexpr (std::is_same_v<T, TScale>)
-    {
-        quaternion.vector.x *= scale;
-        quaternion.vector.y *= scale;
-        quaternion.vector.z *= scale;
-        quaternion.scalar *= scale;
-    }
-    else
-    {
-        T castedScale = CGM::number<T>(scale);
+operator *= (CGM::Quaternion<T>& quaternion, TScale scale);
 
-        quaternion.vector.x *= castedScale;
-        quaternion.vector.y *= castedScale;
-        quaternion.vector.z *= castedScale;
-        quaternion.scalar *= castedScale;
-    }
-
-    return quaternion;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Gets the result of multiplication quaternion "A" and quaternion "B".
+ * @return The result of quaternion multiplication.
+ */
 template<typename T>
 constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    A = A * B;
-
-    return A;
-}
+operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Division */
 /* ####################################################################################### */
 
+/**
+ * Divide this quaternion by scale.
+ * @return Results of division.
+ */
 template<typename T, typename TDivider>
 constexpr CGM::Quaternion<T>
-operator / (const CGM::Quaternion<T>& quaternion, TDivider divider)
-{
-    if constexpr (std::is_same_v<T, TDivider>)
-    {
-        return
-        {
-            quaternion.vector.x / divider,
-            quaternion.vector.y / divider,
-            quaternion.vector.z / divider,
-            quaternion.scalar / divider
-        };
-    }
-    else
-    {
-        T castedDivider = CGM::number<T>(divider);
+operator / (const CGM::Quaternion<T>& quaternion, TDivider divider);
 
-        return
-        {
-            quaternion.vector.x / castedDivider,
-            quaternion.vector.y / castedDivider,
-            quaternion.vector.z / castedDivider,
-            quaternion.scalar / castedDivider
-        };
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Divide this quaternion by scale.
+ * @return Results of division.
+ */
 template<typename T, typename TDivider>
 constexpr CGM::Quaternion<T>&
-operator /= (CGM::Quaternion<T>& quaternion, TDivider divider)
-{
-    if constexpr (std::is_same_v<T, TDivider>)
-    {
-        quaternion.vector.x /= divider;
-        quaternion.vector.y /= divider;
-        quaternion.vector.z /= divider;
-        quaternion.scalar /= divider;
-    }
-    else
-    {
-        T castedDivider = CGM::number<T>(divider);
-
-        quaternion.vector.x /= castedDivider;
-        quaternion.vector.y /= castedDivider;
-        quaternion.vector.z /= castedDivider;
-        quaternion.scalar /= castedDivider;
-    }
-
-    return quaternion;
-}
+operator /= (CGM::Quaternion<T>& quaternion, TDivider divider);
 
 /* ####################################################################################### */
 /* Comparison */
 /* ####################################################################################### */
 
+/**
+ * Checks whether quaternion "A" is equal to quaternion "B".
+ * @return true if the quaternion are equal, false otherwise.
+ */
 template<typename T>
 constexpr bool
-operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    return
-    CGM::eq(A.vector.x, B.vector.x) &&
-    CGM::eq(A.vector.y, B.vector.y) &&
-    CGM::eq(A.vector.z, B.vector.z) &&
-    CGM::eq(A.scalar, B.scalar);
-}
+operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Checks whether quaternion "A" is not equal to quaternion "B".
+ * @return true if the quaternion are not equal, false otherwise.
+ */
 template<typename T>
 constexpr bool
-operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    return
-    CGM::neq(A.vector.x, B.vector.x) ||
-    CGM::neq(A.vector.y, B.vector.y) ||
-    CGM::neq(A.vector.z, B.vector.z) ||
-    CGM::neq(A.scalar, B.scalar);
-}
+operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Dot product */
 /* ####################################################################################### */
 
+/**
+ * Calculates dot product of two quaternions.
+ * @return The dot product.
+ */
 template<typename T>
 constexpr T
-operator | (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
-{
-    A.vector.x * B.vector.x +
-    A.vector.y * B.vector.y +
-    A.vector.z * B.vector.z +
-    A.scalar * B.scalar;
-}
+operator | (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+
+
+#include <CGM/detail/Modules/Core/Operators/Quaternion_impl.hpp>

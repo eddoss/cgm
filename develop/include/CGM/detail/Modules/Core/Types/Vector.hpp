@@ -1,9 +1,16 @@
+#pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
+#include <iterator>
+#include <type_traits>
+#include <initializer_list>
+#include <CGM/Modules/Global.hpp>
+#include <CGM/Modules/Common.hpp>
 
 
 CGM_NAMESPACE_BEGIN
+
+template<size_t D, typename T=FLOAT, typename = void> struct Vector;
 
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
@@ -12,58 +19,81 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 2)>>::Vector(T value)
-    : x(value)
-    , y(value)
+struct Vector <D, T, std::enable_if_t<(D == 2)>>
 {
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 2)>>::Vector(T X, T Y)
-    : x(X)
-    , y(Y)
-{
-
-}
+    CGM_RULE_OF_FIVE(Vector)
 
 /* ####################################################################################### */
-/* Assignment operator */
+public: /* Components */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 2)>>&
-Vector <D, T, std::enable_if_t<(D == 2)>>::operator = (typename Vector <D, T, std::enable_if_t<(D == 2)>>::value_type value)
-{
-    x = value;
-    y = value;
-
-    return *this;
-}
+    T x;
+    T y;
 
 /* ####################################################################################### */
-/* Raw data */
+public: /* Typedefs */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::pointer
-Vector <D, T, std::enable_if_t<(D == 2)>>::data()
-{
-    return &x;
-}
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Static constants */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::const_pointer
-Vector <D, T, std::enable_if_t<(D == 2)>>::data() const
-{
-    return &x;
-}
+    /**
+     * Vector components count.
+     */
+    constexpr static size_t
+    dimensions {D};
+
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
+
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T value);
+
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y);
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assigns all components by single value.
+     */
+    constexpr CGM_FORCEINLINE Vector&
+    operator = (value_type value);
+
+/* ####################################################################################### */
+public: /* Raw data */
+/* ####################################################################################### */
+
+    /**
+     * Gets raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
+
+    /**
+     * Gets const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
+};
 
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
@@ -72,82 +102,95 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::data() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 3)>>::Vector(T value)
-    : x(value)
-    , y(value)
-    , z(value)
+struct Vector <D, T, std::enable_if_t<(D == 3)>>
 {
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 3)>>::Vector(T X, T Y, T Z)
-    : x(X)
-    , y(Y)
-    , z(Z)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 3)>>::Vector(const Vector<2,T>& XY, T Z)
-    : x(XY.x)
-    , y(XY.y)
-    , z(Z)
-{
-
-}
+    CGM_RULE_OF_FIVE(Vector)
 
 /* ####################################################################################### */
-/* Assignment operator */
+public: /* Components */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 3)>>&
-Vector <D, T, std::enable_if_t<(D == 3)>>::operator = (typename Vector <D, T, std::enable_if_t<(D == 3)>>::value_type value)
-{
-    x = value;
-    y = value;
-    z = value;
-
-    return *this;
-}
+    T x;
+    T y;
+    T z;
 
 /* ####################################################################################### */
-/* Getters */
+public: /* Typedefs */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::pointer
-Vector <D, T, std::enable_if_t<(D == 3)>>::data()
-{
-    return &x;
-}
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Static constants */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_pointer
-Vector <D, T, std::enable_if_t<(D == 3)>>::data() const
-{
-    return &x;
-}
+    /**
+     * Vector components count.
+     */
+    constexpr static size_t
+    dimensions {D};
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-Vector <D, T, std::enable_if_t<(D == 3)>>::xy() const
-{
-    return {x,y};
-}
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T value);
+
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y, T Z);
+
+    /**
+     * Initialize X and Y components from 2D vector.
+     */
+    constexpr explicit
+    Vector(const Vector<2,T>& XY, T Z=zero<T>);
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assigns all components by single value.
+     */
+    constexpr CGM_FORCEINLINE Vector&
+    operator = (value_type value);
+
+/* ####################################################################################### */
+public: /* Getters */
+/* ####################################################################################### */
+
+    /**
+     * Gets raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
+
+    /**
+     * Gets const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
+
+    /**
+     * Gets 2D vector (without Z component).
+     * @return 2D Vector.
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    xy() const;
+};
 
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
@@ -156,108 +199,109 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::xy() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(T value)
-    : x(value)
-    , y(value)
-    , z(value)
-    , w(value)
+struct Vector <D, T, std::enable_if_t<(D == 4)>>
 {
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(T X, T Y, T Z, T W)
-    : x(X)
-    , y(Y)
-    , z(Z)
-    , w(W)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(const Vector<3,T>& XYZ, T W)
-    : x(XYZ.x)
-    , y(XYZ.y)
-    , z(XYZ.z)
-    , w(W)
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(const Vector<2,T>& XY, const Vector<2,T>& ZW)
-    : x(XY.x)
-    , y(XY.y)
-    , z(ZW.z)
-    , w(ZW.w)
-{
-
-}
+    CGM_RULE_OF_FIVE(Vector)
 
 /* ####################################################################################### */
-/* Assignment operator */
+public: /* Components */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 4)>>&
-Vector <D, T, std::enable_if_t<(D == 4)>>::operator = (typename Vector <D, T, std::enable_if_t<(D == 4)>>::value_type value)
-{
-    x = value;
-    y = value;
-    z = value;
-    w = value;
-
-    return *this;
-}
+    T x;
+    T y;
+    T z;
+    T w;
 
 /* ####################################################################################### */
-/* Getters */
+public: /* Typedefs */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::pointer
-Vector <D, T, std::enable_if_t<(D == 4)>>::data()
-{
-    return &x;
-}
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Static constants */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_pointer
-Vector <D, T, std::enable_if_t<(D == 4)>>::data() const
-{
-    return &x;
-}
+    /**
+     * Vector components count.
+     */
+    constexpr static size_t
+    dimensions {D};
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Constructors */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-Vector <D, T, std::enable_if_t<(D == 4)>>::xy() const
-{
-    return {x,y};
-}
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T value);
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Initialize all components directly.
+     */
+    constexpr
+    Vector(T X, T Y, T Z, T W);
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-Vector <D, T, std::enable_if_t<(D == 4)>>::xyz() const
-{
-    return {x,y,z};
-}
+    /**
+     * Initialize X, Y, Z components from 3D vector.
+     */
+    constexpr explicit
+    Vector(const Vector<3,T>& XYZ, T W=zero<T>);
+
+    /**
+     * Initialize components from two 2D vectors.
+     */
+    constexpr
+    Vector(const Vector<2,T>& XY, const Vector<2,T>& ZW);
+
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
+
+    /**
+     * Assigns all components by single value.
+     */
+    constexpr CGM_FORCEINLINE Vector&
+    operator = (value_type value);
+
+/* ####################################################################################### */
+public: /* Getters */
+/* ####################################################################################### */
+
+    /**
+     * Gets raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
+
+    /**
+     * Gets const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
+
+    /**
+     * Gets 2D vector (without Z and W components).
+     * @return 2D Vector.
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    xy() const;
+
+    /**
+     * Gets 3D vector (without W component).
+     * @return 3D Vector.
+     */
+    constexpr CGM_FORCEINLINE Vector<3,T>
+    xyz() const;
+};
 
 /* ####################################################################################### */
 /* --------------------------------------------------------------------------------------- */
@@ -266,196 +310,185 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::xyz() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D > 4)>>::Vector(std::initializer_list<T> values)
+struct Vector <D, T, std::enable_if_t<(D > 4)>>
 {
-    for (size_t i = 0; i < D; ++i)
-    {
-        m_data[i] = *(values.begin() + i);
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr
-Vector <D, T, std::enable_if_t<(D > 4)>>::Vector(T value)
-{
-    for (size_t i = 0; i < D; ++i)
-    {
-        m_data[i] = value;
-    }
-}
+    CGM_RULE_OF_FIVE(Vector)
 
 /* ####################################################################################### */
-/* Components accessing */
+public: /* Typedefs */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::reference
-Vector <D, T, std::enable_if_t<(D > 4)>>::operator[](size_t index)
-{
-    return m_data[index];
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_reference
-Vector <D, T, std::enable_if_t<(D > 4)>>::operator[](size_t index) const
-{
-    return m_data[index];
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D > 4)>>&
-Vector <D, T, std::enable_if_t<(D > 4)>>::operator = (typename Vector <D, T, std::enable_if_t<(D > 4)>>::value_type value)
-{
-    for (size_t i = 0; i < D; ++i)
-    {
-        m_data[i] = value;
-    }
-
-    return *this;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
-Vector <D, T, std::enable_if_t<(D > 4)>>::xy() const
-{
-    return {m_data[0], m_data[1]};
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
-Vector <D, T, std::enable_if_t<(D > 4)>>::xyz() const
-{
-    return {m_data[0], m_data[1], m_data[2]};
-}
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
 /* ####################################################################################### */
-/* Raw data */
+public: /* Iterator typedefs */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::pointer
-Vector <D, T, std::enable_if_t<(D > 4)>>::data()
-{
-    return m_data;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_pointer
-Vector <D, T, std::enable_if_t<(D > 4)>>::data() const
-{
-    return m_data;
-}
+    using iterator                  = pointer;
+    using const_iterator            = const_pointer;
+    using reverse_iterator          = std::reverse_iterator<iterator>;
+    using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
 
 /* ####################################################################################### */
-/* Iterators */
+public: /* Constructors */
 /* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::begin()
-{
-    return m_data;
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Initialize all components via initializer_list.
+     */
+    constexpr
+    Vector(std::initializer_list<T> values);
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::end()
-{
-    return m_data + D + 1;
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Initialize all components by single value.
+     */
+    constexpr explicit
+    Vector(T value);
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::begin() const
-{
-    return m_data;
-}
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Assignment operator */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::end() const
-{
-    return m_data + D + 1;
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Assign all components by single value.
+     */
+    constexpr CGM_FORCEINLINE Vector&
+    operator = (value_type value);
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::cbegin() const
-{
-    return m_data;
-}
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Components accessing */
+/* ####################################################################################### */
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::cend() const
-{
-    return m_data + D + 1;
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Get component reference by index.
+     * @param component reference.
+     */
+    constexpr CGM_FORCEINLINE reference
+    operator[](size_t index);
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::rbegin()
-{
-    return this->end();
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Get component const reference by index.
+     * @param component const reference.
+     */
+    constexpr CGM_FORCEINLINE const_reference
+    operator[](size_t index) const;
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::rend()
-{
-    return this->begin();
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Get raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::rbegin() const
-{
-    return this->end();
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Get const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::rend() const
-{
-    return this->begin();
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Gets 2D vector XY.
+     * @return 2D Vector.
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    xy() const;
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::crbegin() const
-{
-    return this->cend();
-}
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Gets 3D vector XYZ.
+     * @return 3D Vector.
+     */
+    constexpr CGM_FORCEINLINE Vector<3,T>
+    xyz() const;
 
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D > 4)>>::const_reverse_iterator
-Vector <D, T, std::enable_if_t<(D > 4)>>::crend() const
-{
-    return this->cbegin();
-}
+/* ####################################################################################### */
+public: /* Iterators */
+/* ####################################################################################### */
+
+    /**
+     * Get an iterator pointing to the first component.
+     */
+    constexpr CGM_FORCEINLINE iterator
+    begin();
+
+    /**
+     * Get an iterator pointing to the component after the last.
+     */
+    constexpr CGM_FORCEINLINE iterator
+    end();
+
+    /**
+     * Get an const iterator pointing to the first component.
+     */
+    constexpr CGM_FORCEINLINE const_iterator
+    begin() const;
+
+    /**
+     * Get an const iterator pointing to the component after the last.
+     */
+    constexpr CGM_FORCEINLINE const_iterator
+    end() const;
+
+    /**
+     * Get an const iterator pointing to the first component.
+     */
+    constexpr CGM_FORCEINLINE const_iterator
+    cbegin() const;
+
+    /**
+     * Get an const iterator pointing to the component after the last.
+     */
+    constexpr CGM_FORCEINLINE const_iterator
+    cend() const;
+
+    /**
+     * Get an iterator pointing to the last component.
+     */
+    constexpr CGM_FORCEINLINE reverse_iterator
+    rbegin();
+
+    /**
+     * Get an iterator pointing to the component before the first.
+     */
+    constexpr CGM_FORCEINLINE reverse_iterator
+    rend();
+
+    /**
+     * Get an const iterator pointing to the last component.
+     */
+    constexpr CGM_FORCEINLINE const_reverse_iterator
+    rbegin() const;
+
+    /**
+     * Get an const iterator pointing to the component before the first.
+     */
+    constexpr CGM_FORCEINLINE const_reverse_iterator
+    rend() const;
+
+    /**
+     * Get an const iterator pointing to the last component.
+     */
+    constexpr CGM_FORCEINLINE const_reverse_iterator
+    crbegin() const;
+
+    /**
+     * Get an const iterator pointing to the component before the first.
+     */
+    constexpr CGM_FORCEINLINE const_reverse_iterator
+    crend() const;
+
+/* ####################################################################################### */
+protected: /* Components array */
+/* ####################################################################################### */
+
+    T m_data[D];
+};
 
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Core/Types/Vector_impl.hpp>

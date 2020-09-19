@@ -2,8 +2,8 @@
 
 
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
 
 
 CGM_NAMESPACE_BEGIN

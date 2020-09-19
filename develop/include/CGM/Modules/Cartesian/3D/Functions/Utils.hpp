@@ -3,10 +3,10 @@
 
 #include <tuple>
 #include <type_traits>
-#include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Core/Types/Quaternion.hpp>
-#include <CGM/Modules/Core/Functions/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Functions/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Enums.hpp>

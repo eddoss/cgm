@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
