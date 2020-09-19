@@ -14,8 +14,8 @@ using namespace std;
 
 TEST(Cartesian_3D_Functions_Quaternion, Dot)
 {
-    Quaternion<float> a {6.947f, 6.123f, 8.154f, 3.350f};
-    Quaternion<float> b {5.936f, 9.405f, 1.050f, 2.622f};
+    CGM_XYZ::Quaternion<float> a {6.947f, 6.123f, 8.154f, 3.350f};
+    CGM_XYZ::Quaternion<float> b {5.936f, 9.405f, 1.050f, 2.622f};
 
     float dtp = dot(a,b);
     float exp = 116.179f;
@@ -27,8 +27,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Dot)
 
 TEST(Cartesian_3D_Functions_Quaternion, Conjugate)
 {
-    Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
-    Quaternion<float> b {-6.f, -5.f, -8.f, 3.f};
+    CGM_XYZ::Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
+    CGM_XYZ::Quaternion<float> b {-6.f, -5.f, -8.f, 3.f};
 
     ASSERT_TRUE(conjugate(a) == b);
 }
@@ -37,7 +37,7 @@ TEST(Cartesian_3D_Functions_Quaternion, Conjugate)
 
 TEST(Cartesian_3D_Functions_Quaternion, Length)
 {
-    Quaternion<float> q {9.632f, 1.152f, 1.088f, 9.487f};
+    CGM_XYZ::Quaternion<float> q {9.632f, 1.152f, 1.088f, 9.487f};
     float len = length(q);
     float exp = 13.612f;
 
@@ -48,7 +48,7 @@ TEST(Cartesian_3D_Functions_Quaternion, Length)
 
 TEST(Cartesian_3D_Functions_Quaternion, Norm)
 {
-    Quaternion<float> q {1.690f, 8.336f, 2.821f, 9.678f};
+    CGM_XYZ::Quaternion<float> q {1.690f, 8.336f, 2.821f, 9.678f};
 
     float len = norm(q);
     float exp = 173.973f;
@@ -60,8 +60,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Norm)
 
 TEST(Cartesian_3D_Functions_Quaternion, Normalize)
 {
-    Quaternion<double> qtr {5.403, 2.650, 8.516, 4.043};
-    Quaternion<double> nrm {0.483, 0.237, 0.761, 0.362};
+    CGM_XYZ::Quaternion<double> qtr {5.403, 2.650, 8.516, 4.043};
+    CGM_XYZ::Quaternion<double> nrm {0.483, 0.237, 0.761, 0.362};
 
     {
         auto res = qtr;
@@ -93,8 +93,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Normalize)
 
 TEST(Cartesian_3D_Functions_Quaternion, Inverse)
 {
-    Quaternion<double> qtr {4.34, 5.11, 12.7, 1.22};
-    Quaternion<double> inv {-0.0208929, -0.0245997, -0.0611382, 0.0058731};
+    CGM_XYZ::Quaternion<double> qtr {4.34, 5.11, 12.7, 1.22};
+    CGM_XYZ::Quaternion<double> inv {-0.0208929, -0.0245997, -0.0611382, 0.0058731};
 
     {
         auto res = qtr;
@@ -126,7 +126,7 @@ TEST(Cartesian_3D_Functions_Quaternion, Inverse)
 
 TEST(Cartesian_3D_Functions_Quaternion, Orient)
 {
-    Quaternion<double> quat {0.968583, 0.175850, 0.105510, -0.140680};
+    CGM_XYZ::Quaternion<double> quat {0.968583, 0.175850, 0.105510, -0.140680};
     Vector<3,double> vec {1.0, 0.0, 0.0};
 
     Vector<3,double> result = oriented(vec, quat);
@@ -142,8 +142,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Orient)
 
 TEST(Cartesian_3D_Functions_Quaternion, Angle)
 {
-    Quaternion<float> a {4.34f, 5.11f, 3.74f, 1.22f};
-    Quaternion<float> b {2.16f, 1.45f, 2.47f, 0.25f};
+    CGM_XYZ::Quaternion<float> a {4.34f, 5.11f, 3.74f, 1.22f};
+    CGM_XYZ::Quaternion<float> b {2.16f, 1.45f, 2.47f, 0.25f};
 
     normalize(a);
     normalize(b);
@@ -157,8 +157,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Angle)
 
 TEST(Cartesian_3D_Functions_Quaternion, Identity)
 {
-    Quaternion<float> idn = identity<float>();
-    Quaternion<float> exp = {0.f, 1.0f};
+    CGM_XYZ::Quaternion<float> idn = CGM_XYZ::identity<float>();
+    CGM_XYZ::Quaternion<float> exp = {0.f, 1.0f};
 
     ASSERT_TRUE(idn.vector.x == exp.vector.x);
     ASSERT_TRUE(idn.vector.y == exp.vector.y);

@@ -14,24 +14,24 @@
  * @return A negated copy of the quaternion.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& quaternion);
+constexpr CGM_XYZ::Quaternion<T>
+operator - (const CGM_XYZ::Quaternion<T>& quaternion);
 
 /**
  * Gets the result of subtraction quaternion "A" and quaternion "B".
  * @return The result of quaternion subtraction.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>
+operator - (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /**
  * Subtracts quaternion "B" from quaternion "B".
  * @return The result of quaternion subtraction.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>&
+operator -= (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Plus */
@@ -42,16 +42,16 @@ operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
  * @return The result of quaternion adding.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator + (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>
+operator + (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /**
  * Add quaternion "A" and quaternion "B".
  * @return The result of adding subtraction.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>&
+operator += (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Multiplication */
@@ -62,32 +62,32 @@ operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
  * @return The result of scaling.
  */
 template<typename T, typename TScale>
-constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& quaternion, TScale scale);
+constexpr CGM_XYZ::Quaternion<T>
+operator * (const CGM_XYZ::Quaternion<T>& quaternion, TScale scale);
 
 /**
  * Gets the result of multiplication quaternion "A" and quaternion "B".
  * @return The result of quaternion multiplication.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>
+operator * (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /**
  * Multiply quaternion by a scaling factor.
  * @return The result of scaling.
  */
 template<typename T, typename TScale>
-constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& quaternion, TScale scale);
+constexpr CGM_XYZ::Quaternion<T>&
+operator *= (CGM_XYZ::Quaternion<T>& quaternion, TScale scale);
 
 /**
  * Gets the result of multiplication quaternion "A" and quaternion "B".
  * @return The result of quaternion multiplication.
  */
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+constexpr CGM_XYZ::Quaternion<T>&
+operator *= (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Division */
@@ -98,16 +98,16 @@ operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
  * @return Results of division.
  */
 template<typename T, typename TDivider>
-constexpr CGM::Quaternion<T>
-operator / (const CGM::Quaternion<T>& quaternion, TDivider divider);
+constexpr CGM_XYZ::Quaternion<T>
+operator / (const CGM_XYZ::Quaternion<T>& quaternion, TDivider divider);
 
 /**
  * Divide this quaternion by scale.
  * @return Results of division.
  */
 template<typename T, typename TDivider>
-constexpr CGM::Quaternion<T>&
-operator /= (CGM::Quaternion<T>& quaternion, TDivider divider);
+constexpr CGM_XYZ::Quaternion<T>&
+operator /= (CGM_XYZ::Quaternion<T>& quaternion, TDivider divider);
 
 /* ####################################################################################### */
 /* Comparison */
@@ -119,7 +119,7 @@ operator /= (CGM::Quaternion<T>& quaternion, TDivider divider);
  */
 template<typename T>
 constexpr bool
-operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+operator == (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /**
  * Checks whether quaternion "A" is not equal to quaternion "B".
@@ -127,7 +127,7 @@ operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
  */
 template<typename T>
 constexpr bool
-operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+operator != (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 /* ####################################################################################### */
 /* Dot product */
@@ -139,7 +139,7 @@ operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
  */
 template<typename T>
 constexpr T
-operator | (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
+operator | (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 
 #include <CGM/detail/Cartesian/3D/Operators/Quaternion_impl.hpp>

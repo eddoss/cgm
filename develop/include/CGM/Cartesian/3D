@@ -7,6 +7,7 @@
 #include <CGM/detail/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Typedefs.hpp>
 
 #include <CGM/detail/Cartesian/3D/Operators/Axes.hpp>
 #include <CGM/detail/Cartesian/3D/Operators/Quaternion.hpp>

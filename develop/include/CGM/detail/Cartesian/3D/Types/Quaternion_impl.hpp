@@ -4,6 +4,7 @@
 
 
 CGM_NAMESPACE_BEGIN
+CGM_XYZ_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr
@@ -68,4 +69,5 @@ Quaternion<T, enable_if_floating<T,void>>::data() const
 }
 
 
+CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

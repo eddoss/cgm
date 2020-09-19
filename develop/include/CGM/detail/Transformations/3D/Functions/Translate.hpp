@@ -3,6 +3,7 @@
 
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
+#include <CGM/detail/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Axes.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Orientation.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Converters/Vector.hpp>

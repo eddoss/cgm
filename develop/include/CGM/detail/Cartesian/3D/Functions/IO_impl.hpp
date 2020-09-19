@@ -43,7 +43,7 @@ operator << (std::ostream& stream, const CGM_XYZ::Quaternion<T>& quat)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
-    stream << "CGM::Quaternion<" << typeid(T).name() << ">{ ";
+    stream << "CGM_XYZ::Quaternion<" << typeid(T).name() << ">{ ";
     stream << quat.vector.x << " ";
     stream << quat.vector.y << " ";
     stream << quat.vector.z << " | ";

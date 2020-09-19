@@ -3,6 +3,7 @@
 
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
+#include <CGM/detail/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/detail/Core/Operators/Vector.hpp>
 #include <CGM/detail/Core/Operators/Matrix.hpp>

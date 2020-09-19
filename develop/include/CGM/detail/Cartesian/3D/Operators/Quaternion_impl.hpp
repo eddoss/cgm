@@ -4,8 +4,8 @@
 
 
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& quaternion)
+constexpr CGM_XYZ::Quaternion<T>
+operator - (const CGM_XYZ::Quaternion<T>& quaternion)
 {
     return {-quaternion.vector, -quaternion.scalar};
 }
@@ -13,8 +13,8 @@ operator - (const CGM::Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator - (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>
+operator - (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     return
     {
@@ -28,8 +28,8 @@ operator - (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>&
+operator -= (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     A.vector.x -= B.vector.x;
     A.vector.y -= B.vector.y;
@@ -44,8 +44,8 @@ operator -= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator + (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>
+operator + (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     return
     {
@@ -59,8 +59,8 @@ operator + (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>&
+operator += (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     A.vector.x += B.vector.x;
     A.vector.y += B.vector.y;
@@ -75,8 +75,8 @@ operator += (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* ####################################################################################### */
 
 template<typename T, typename TScale>
-constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
+constexpr CGM_XYZ::Quaternion<T>
+operator * (const CGM_XYZ::Quaternion<T>& quaternion, TScale scale)
 {
     if constexpr (std::is_same_v<T, TScale>)
     {
@@ -105,8 +105,8 @@ operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Quaternion<T>
-operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>
+operator * (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
 //    return
 //    {
@@ -115,7 +115,7 @@ operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 //        A.vector.z * B.scalar + B.vector.z * A.scalar + A.vector.x * B.vector.y - A.vector.y * B.vector.x,
 //        A.scalar * B.scalar - A.vector.x * B.vector.x - A.vector.y * B.vector.y - A.vector.z * B.vector.z
 //    };
-    return CGM::Quaternion<T>
+    return CGM_XYZ::Quaternion<T>
     {
         A.vector * B.scalar + B.vector * A.scalar + CGM::cross(A.vector, B.vector),
         A.scalar * B.scalar - (A.vector.x * B.vector.x + A.vector.y * B.vector.y + A.vector.z * B.vector.z)
@@ -125,8 +125,8 @@ operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T, typename TScale>
-constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& quaternion, TScale scale)
+constexpr CGM_XYZ::Quaternion<T>&
+operator *= (CGM_XYZ::Quaternion<T>& quaternion, TScale scale)
 {
     if constexpr (std::is_same_v<T, TScale>)
     {
@@ -151,8 +151,8 @@ operator *= (CGM::Quaternion<T>& quaternion, TScale scale)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Quaternion<T>&
-operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+constexpr CGM_XYZ::Quaternion<T>&
+operator *= (CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     A = A * B;
 
@@ -164,8 +164,8 @@ operator *= (CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 /* ####################################################################################### */
 
 template<typename T, typename TDivider>
-constexpr CGM::Quaternion<T>
-operator / (const CGM::Quaternion<T>& quaternion, TDivider divider)
+constexpr CGM_XYZ::Quaternion<T>
+operator / (const CGM_XYZ::Quaternion<T>& quaternion, TDivider divider)
 {
     if constexpr (std::is_same_v<T, TDivider>)
     {
@@ -194,8 +194,8 @@ operator / (const CGM::Quaternion<T>& quaternion, TDivider divider)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T, typename TDivider>
-constexpr CGM::Quaternion<T>&
-operator /= (CGM::Quaternion<T>& quaternion, TDivider divider)
+constexpr CGM_XYZ::Quaternion<T>&
+operator /= (CGM_XYZ::Quaternion<T>& quaternion, TDivider divider)
 {
     if constexpr (std::is_same_v<T, TDivider>)
     {
@@ -223,7 +223,7 @@ operator /= (CGM::Quaternion<T>& quaternion, TDivider divider)
 
 template<typename T>
 constexpr bool
-operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+operator == (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     return
     CGM::eq(A.vector.x, B.vector.x) &&
@@ -236,7 +236,7 @@ operator == (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 
 template<typename T>
 constexpr bool
-operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+operator != (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     return
     CGM::neq(A.vector.x, B.vector.x) ||
@@ -251,7 +251,7 @@ operator != (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 
 template<typename T>
 constexpr T
-operator | (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
+operator | (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B)
 {
     A.vector.x * B.vector.x +
     A.vector.y * B.vector.y +

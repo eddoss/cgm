@@ -16,8 +16,8 @@ using namespace std;
 
 TEST(Cartesian_3D_Operators_Quaternion, UnaryMinus)
 {
-    Quaternion<double> qat { 1, 2, 3, 4 };
-    Quaternion<double> exp {-1,-2,-3,-4 };
+    CGM_XYZ::Quaternion<double> qat { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> exp {-1,-2,-3,-4 };
     ASSERT_TRUE(-qat == exp);
 }
 
@@ -25,9 +25,9 @@ TEST(Cartesian_3D_Operators_Quaternion, UnaryMinus)
 
 TEST(Cartesian_3D_Operators_Quaternion, OutplaceMinus)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> b { 1, 1, 2, 2 };
-    Quaternion<double> e { 0, 1, 1, 2 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> b { 1, 1, 2, 2 };
+    CGM_XYZ::Quaternion<double> e { 0, 1, 1, 2 };
 
     a = a - b;
 
@@ -38,9 +38,9 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplaceMinus)
 
 TEST(Cartesian_3D_Operators_Quaternion, InplaceMinus)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> b { 1, 1, 2, 2 };
-    Quaternion<double> e { 0, 1, 1, 2 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> b { 1, 1, 2, 2 };
+    CGM_XYZ::Quaternion<double> e { 0, 1, 1, 2 };
 
     a -= b;
 
@@ -53,9 +53,9 @@ TEST(Cartesian_3D_Operators_Quaternion, InplaceMinus)
 
 TEST(Cartesian_3D_Operators_Quaternion, OutplacePlus)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> b { 1, 1, 2, 2 };
-    Quaternion<double> e { 2, 3, 5, 6 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> b { 1, 1, 2, 2 };
+    CGM_XYZ::Quaternion<double> e { 2, 3, 5, 6 };
 
     a = a + b;
 
@@ -66,9 +66,9 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplacePlus)
 
 TEST(Cartesian_3D_Operators_Quaternion, InplacePlus)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> b { 1, 1, 2, 2 };
-    Quaternion<double> e { 2, 3, 5, 6 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> b { 1, 1, 2, 2 };
+    CGM_XYZ::Quaternion<double> e { 2, 3, 5, 6 };
 
     a += b;
 
@@ -81,8 +81,8 @@ TEST(Cartesian_3D_Operators_Quaternion, InplacePlus)
 
 TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarMultiplication)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> e { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> e { 2, 4, 6, 8 };
 
     a = a * 2;
 
@@ -93,14 +93,14 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarMultiplication)
 
 TEST(Cartesian_3D_Operators_Quaternion, OutplaceOtherMultiplication)
 {
-    Quaternion<double> a { 3, 1, 5, 2 };
-    Quaternion<double> b { 9, 1, 3, 7 };
+    CGM_XYZ::Quaternion<double> a { 3, 1, 5, 2 };
+    CGM_XYZ::Quaternion<double> b { 9, 1, 3, 7 };
 
-    Quaternion<double> result = a * b;
+    CGM_XYZ::Quaternion<double> result = a * b;
 #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
-    Quaternion<double> expect {41, -27, 47, -29};
+    CGM_XYZ::Quaternion<double> expect {41, -27, 47, -29};
 #else
-    Quaternion<double> expect {37, 45, 35, -29};
+    CGM_XYZ::Quaternion<double> expect {37, 45, 35, -29};
 #endif
 
     ASSERT_TRUE(result == expect);
@@ -110,8 +110,8 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplaceOtherMultiplication)
 
 TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarMultiplication)
 {
-    Quaternion<double> a { 1, 2, 3, 4 };
-    Quaternion<double> e { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> a { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> e { 2, 4, 6, 8 };
 
     a *= 2;
 
@@ -124,8 +124,8 @@ TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarMultiplication)
 
 TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarDivision)
 {
-    Quaternion<double> a { 2, 4, 6, 8 };
-    Quaternion<double> e { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> a { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> e { 1, 2, 3, 4 };
 
     a = a / 2;
 
@@ -136,8 +136,8 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarDivision)
 
 TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarDivision)
 {
-    Quaternion<double> a { 2, 4, 6, 8 };
-    Quaternion<double> e { 1, 2, 3, 4 };
+    CGM_XYZ::Quaternion<double> a { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> e { 1, 2, 3, 4 };
 
     a /= 2;
 
@@ -150,13 +150,13 @@ TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarDivision)
 
 TEST(Cartesian_3D_Operators_Quaternion, ComparisonEqual)
 {
-    Quaternion<double> a { 2, 4, 6, 8 };
-    Quaternion<double> b { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> a { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> b { 2, 4, 6, 8 };
 
     ASSERT_TRUE(a == b);
 
-    Quaternion<double> c { 2, 4, 6, 8 };
-    Quaternion<double> d { 1, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> c { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> d { 1, 4, 6, 8 };
 
     ASSERT_FALSE(c == d);
 }
@@ -165,13 +165,13 @@ TEST(Cartesian_3D_Operators_Quaternion, ComparisonEqual)
 
 TEST(Cartesian_3D_Operators_Quaternion, ComparisonNotEqual)
 {
-    Quaternion<double> a { 2, 4, 6, 8 };
-    Quaternion<double> b { 1, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> a { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> b { 1, 4, 6, 8 };
 
     ASSERT_TRUE(a != b);
 
-    Quaternion<double> c { 2, 4, 6, 8 };
-    Quaternion<double> d { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> c { 2, 4, 6, 8 };
+    CGM_XYZ::Quaternion<double> d { 2, 4, 6, 8 };
 
     ASSERT_FALSE(c != d);
 }

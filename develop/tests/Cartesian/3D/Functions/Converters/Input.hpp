@@ -33,7 +33,7 @@ static const auto A_Z       = CGM::Vector<3,double>{ +0.34202, +0.00000, +0.9396
 static const auto A_P       = CGM::Vector<3,double>{ -0.40000, +1.00000, +0.60000 };
 static const auto A_MAT3    = CGM_XYZ::orientationMatrix(A_X, A_Y, A_Z);
 static const auto A_MAT4    = CGM_XYZ::spaceMatrix(A_X, A_Y, A_Z, A_P);
-static const auto A_QUAT    = CGM::Quaternion<double>{+0.00000, +0.17365, +0.00000, +0.98481};
+static const auto A_QUAT    = CGM_XYZ::Quaternion<double>{+0.00000, +0.17365, +0.00000, +0.98481};
 
 /* ####################################################################################### */
 /* B orientation and basis */
@@ -45,7 +45,7 @@ static const auto B_Z       = CGM::Vector<3,double>{ +0.00000, -0.57358, +0.8191
 static const auto B_P       = CGM::Vector<3,double>{ +0.20000, -0.50000, +0.00000 };
 static const auto B_MAT3    = CGM_XYZ::orientationMatrix(B_X, B_Y, B_Z);
 static const auto B_MAT4    = CGM_XYZ::spaceMatrix(B_X, B_Y, B_Z, B_P);
-static const auto B_QUAT    = CGM::Quaternion<double>{+0.30071, +0.00000, +0.00000, +0.95372};
+static const auto B_QUAT    = CGM_XYZ::Quaternion<double>{+0.30071, +0.00000, +0.00000, +0.95372};
 
 /* ####################################################################################### */
 /* Expect vector */

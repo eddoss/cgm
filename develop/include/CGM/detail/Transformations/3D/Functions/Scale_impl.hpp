@@ -1007,7 +1007,7 @@ template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 scalingMatrix(T value, const Vector<3,T>& direction)
 {
-    auto mat = identity<N,T>();
+    auto mat = CGM::identity<N,T>();
     scale(mat, value, direction);
     transposeOrientation(mat);
 
@@ -1020,7 +1020,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scalingMatrix(T value, const ArbitraryAxis<T>& axis)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     scale(mat, value, axis);
     transposeOrientation(mat);
 
@@ -1033,7 +1033,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scalingMatrix(const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     scale(mat, values, pivotPoint);
     transposeOrientation(mat);
 
@@ -1046,7 +1046,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scalingMatrix(const Transforms<T>& transforms)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     scale(mat, transforms);
     transposeOrientation(mat);
 

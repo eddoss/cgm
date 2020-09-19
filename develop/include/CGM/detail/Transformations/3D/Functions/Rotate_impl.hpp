@@ -1588,7 +1588,7 @@ template<EAxes Axis, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 rotationMatrix(T angle)
 {
-    auto mat = identity<N,T>();
+    auto mat = CGM::identity<N,T>();
     rotate<Axis>(mat, angle);
 
     if constexpr (N == 3)
@@ -1609,7 +1609,7 @@ template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 rotationMatrix(const Vector<3,T>& angles)
 {
-    auto mat = identity<N,T>();
+    auto mat = CGM::identity<N,T>();
     rotate(mat, angles);
 
     if constexpr (N == 3)
@@ -1630,7 +1630,7 @@ template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 rotationMatrix(const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
-    auto mat = identity<N,T>();
+    auto mat = CGM::identity<N,T>();
     rotate(mat, angles, rotationOrder);
 
     if constexpr (N == 3)
@@ -1651,7 +1651,7 @@ template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 rotationMatrix(T angle, const Vector<3,T>& direction)
 {
-    auto mat = identity<N,T>();
+    auto mat = CGM::identity<N,T>();
     rotate(mat, angle, direction);
 
     if constexpr (N == 3)
@@ -1672,7 +1672,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotationMatrix(T angle, const ArbitraryAxis<T>& axis)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     rotate(mat, angle, axis);
 
     transposeOrientation(mat);
@@ -1686,7 +1686,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     rotate(mat, angles, pivotPoint);
 
     transposeOrientation(mat);
@@ -1700,7 +1700,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     rotate(mat, angles, pivotPoint, rotationOrder);
 
     transposeOrientation(mat);
@@ -1714,7 +1714,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotationMatrix(const Transforms<T>& transforms)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     rotate(mat, transforms);
 
     transposeOrientation(mat);

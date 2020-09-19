@@ -10,6 +10,7 @@
 
 
 CGM_NAMESPACE_BEGIN
+CGM_XYZ_NAMESPACE_BEGIN
 
 /**
  * Calculates dot product of two quaternions.
@@ -187,6 +188,7 @@ template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
 neq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
 
+CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

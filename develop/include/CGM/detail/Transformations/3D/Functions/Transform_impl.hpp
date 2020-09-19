@@ -351,7 +351,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 transformMatrix(const Transforms<T>& parameters)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     transform(mat, parameters);
 
     transposeOrientation(mat);

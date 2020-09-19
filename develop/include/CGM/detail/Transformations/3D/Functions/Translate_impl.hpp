@@ -647,7 +647,7 @@ template<typename T>
 constexpr Matrix<4,4,T>
 translationMatrix(const Vector<3,T>& values, const Pivot<T>& pivot)
 {
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     translate(mat, values, pivot);
     return mat;
 }
