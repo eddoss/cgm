@@ -3,9 +3,9 @@
 
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Axes.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>

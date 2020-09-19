@@ -4,14 +4,14 @@
 #include <initializer_list>
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/Common.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
-#include <CGM/detail/Modules/Cartesian/3D/InternalUtils.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/InternalUtils_impl.hpp>
 #include <CGM/detail/Modules/Transformations/3D/InternalUtils.hpp>
 
 /* ####################################################################################### */

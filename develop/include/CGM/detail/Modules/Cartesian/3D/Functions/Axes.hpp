@@ -1,6 +1,11 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/3D/Functions/Axes.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Enums.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,130 +15,82 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* X, Y, Z axes */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+/**
+ * Create default Cartesian axis.
+ */
+template<EAxes Axis, typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-axis()
-{
-    if constexpr (Axis == EAxes::X)
-    {
-        return Vector<3,T>{number<T>(1), zero<T>, zero<T>};
-    }
-    else if constexpr (Axis == EAxes::Y)
-    {
-        return Vector<3,T>{zero<T>, number<T>(1), zero<T>};
-    }
-    else
-    {
-        return Vector<3,T>{zero<T>, zero<T>, number<T>(1)};
-    }
-}
+axis();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian x axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-x()
-{
-    return {number<T>(1), zero<T>, zero<T>};
-}
+x();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian Y axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-y()
-{
-    return {zero<T>, number<T>(1), zero<T>};
-}
+y();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system z axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-z()
-{
-    return {zero<T>, zero<T>, number<T>(1)};
-}
+z();
 
 /* ####################################################################################### */
 /* Cartesian system axes */
 /* ####################################################################################### */
 
-template<typename T>
+/**
+ * Gets Cartesian system up axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-up()
-{
-#ifdef CGM_CARTESIAN_UP_X
-        return x<T>();
-#endif
-#ifdef CGM_CARTESIAN_UP_Y
-        return y<T>();
-#endif
-#ifdef CGM_CARTESIAN_UP_Z
-        return z<T>();
-#endif
-}
+up();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system right axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-right()
-{
-#ifdef CGM_CARTESIAN_RIGHT_X
-        return x<T>();
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
-        return y<T>();
-#endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
-        return z<T>();
-#endif
-}
+right();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system forward axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-forward()
-{
-#ifdef CGM_CARTESIAN_FORWARD_X
-    return x<T>();
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
-    return y<T>();
-#endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
-    return z<T>();
-#endif
-}
+forward();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system down axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-down()
-{
-    return -up<T>();
-}
+down();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system left axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-left()
-{
-    return -right<T>();
-}
+left();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian system backward axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
-backward()
-{
-    return -forward<T>();
-}
+backward();
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Axes_impl.hpp>

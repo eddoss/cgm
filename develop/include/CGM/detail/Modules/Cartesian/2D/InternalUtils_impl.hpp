@@ -5,8 +5,8 @@
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Functions/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Enums.hpp>
-#include <CGM/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
 
 
 CGM_NAMESPACE_BEGIN

@@ -1,177 +1,175 @@
 #pragma once
 
 
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Matrix2x2.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/MatrixVectorMultiplication.hpp>
+#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/InternalUtils_impl.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Global to local / local to global (inplace)
+/* Global to local / local to global (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from given space to another space. If 'Space' is 'World' it mean
+ * orientation will be converted to from local to world (and vice versa).
+ * @tparam Space Space to convert to.
+ * @param matrix 2x2 orientation matrix to convert.
+ * @param orientation Local space orientation represented by 2x2 matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation)
-{
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = matrix * orientation;
-    #else
-        matrix = orientation * matrix;
-    #endif
-    }
-    else
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = matrix * inverseForce(orientation);
-    #else
-        matrix = inverseForce(orientation) * matrix;
-    #endif
-    }
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from given space to another space. If 'Space' is 'World' it mean
+ * orientation will be converted to from local to world (and vice versa).
+ * @tparam Space Space to convert to.
+ * @param matrix 2x2 orientation matrix to convert.
+ * @param space Local basis whose orientation will be used.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space)
-{
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = detail::multiply_matrix2x2_on_matrix3x3_res2x2(matrix, space);
-    #else
-        matrix = detail::multiply_matrix3x3_on_matrix2x2_res2x2(space, matrix);
-    #endif
-    }
-    else
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        matrix = detail::multiply_matrix2x2_on_matrix3x3_res2x2(matrix, inverseOrientationForce(space));
-    #else
-        matrix = detail::multiply_matrix3x3_on_matrix2x2_res2x2(inverseOrientationForce(space), matrix);
-    #endif
-    }
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
-/* Local to local: Matrix2 (inplace)
+/* Local to local: Matrix3 (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 3x3 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, spaceB);
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
-/* Local to local: Matrix3 (inplace)
+/* Local to local: Matrix4 (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    convert<ESpace::World>(matrix, spaceA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 3x3 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    convert<ESpace::World>(matrix, spaceA);
-    convert<ESpace::Local>(matrix, spaceB);
-}
+convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
-/* Global to local / local to global (outplace)
+/* Global to local / local to global (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from given space to another space. If 'Space' is 'World' it mean
+ * orientation will be converted to from local to world (and vice versa).
+ * @tparam Space Space to convert to.
+ * @param matrix 2x2 orientation matrix to convert.
+ * @param orientation Local space orientation represented by 2x2 matrix.
+ * @return Converted orientation matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation)
-{
-    auto copy = matrix;
-    convert<Space>(copy, orientation);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from given space to another space. If 'Space' is 'World' it mean
+ * orientation will be converted to from local to world (and vice versa).
+ * @tparam Space Space to convert to.
+ * @param matrix 2x2 orientation matrix to convert.
+ * @param space Local basis whose orientation will be used.
+ * @return Converted orientation matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space)
-{
-    auto copy = matrix;
-    convert<Space>(copy, space);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
-/* Local to local: Matrix2 (outplace)
+/* Local to local: Matrix3 (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, orientationB);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 3x3 matrix of B space.
+ * @return Converted orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, spaceB);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
-/* Local to local: Matrix3 (outplace)
+/* Local to local: Matrix4 (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = matrix;
-    convert(copy, spaceA, orientationB);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation from space A to space B (A and B are in one space).
+ * @param matrix 2x2 orientation matrix in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 3x3 matrix of B space.
+ * @return Converted orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = matrix;
-    convert(copy, spaceA, spaceB);
-    return copy;
-}
+converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Matrix2x2_impl.hpp>

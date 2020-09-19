@@ -4,7 +4,7 @@
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
 #include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Translate.hpp>

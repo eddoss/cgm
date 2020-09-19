@@ -1,6 +1,14 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <type_traits>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,217 +18,128 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* Axes */
 /* ####################################################################################### */
 
+/**
+ * Make axes struct from X,Y,Z.
+ * @param x X axis.
+ * @param y Y axis.
+ * @param z Z axis.
+ * @return Axes struct.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
-{
-    return Axes<T>(x,y,z);
-}
+orientationAxes(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make axes struct from 3x3 orientation matrix.
+ * @param orientation 3x3 orientation matrix to extract axes from.
+ * @return Axes struct.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Matrix<3,3,T>& orientation)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return Axes<T>
-    (
-        Vector<3,T>{orientation(0,0), orientation(0,1), orientation(0,2)},
-        Vector<3,T>{orientation(1,0), orientation(1,1), orientation(1,2)},
-        Vector<3,T>{orientation(2,0), orientation(2,1), orientation(2,2)}
-    );
-#else
-    return Axes<T>
-    (
-        Vector<3,T>{orientation(0,0), orientation(1,0), orientation(2,0)},
-        Vector<3,T>{orientation(0,1), orientation(1,1), orientation(2,1)},
-        Vector<3,T>{orientation(0,2), orientation(1,2), orientation(2,2)}
-    );
-#endif
-}
+orientationAxes(const Matrix<3,3,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make axes struct from orientation quaternion.
+ * @param orientation Orientation quaternion to extract axes from.
+ * @return Axes struct.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Quaternion<T>& orientation)
-{
-    return Axes<T>
-    (
-        oriented({number<T>(1),zero<T>,zero<T>}, orientation),
-        oriented({zero<T>,number<T>(1),zero<T>}, orientation),
-        oriented({zero<T>,zero<T>,number<T>(1)}, orientation)
-    );
-}
+orientationAxes(const Quaternion<T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make axes struct from space.
+ * @param space Space to extract axes from.
+ * @return Axes struct.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Matrix<4,4,T>& space)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return Axes<T>
-    (
-        Vector<3,T>{space(0,0), space(0,1), space(0,2)},
-        Vector<3,T>{space(1,0), space(1,1), space(1,2)},
-        Vector<3,T>{space(2,0), space(2,1), space(2,2)}
-    );
-#else
-    return Axes<T>
-    (
-        Vector<3,T>{space(0,0), space(1,0), space(2,0)},
-        Vector<3,T>{space(0,1), space(1,1), space(2,1)},
-        Vector<3,T>{space(0,2), space(1,2), space(2,2)}
-    );
-#endif
-}
+orientationAxes(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
 /* Matrix */
 /* ####################################################################################### */
 
+/**
+ * Pack orientation axes to 3x3 orientation matrix.
+ * @param axes Axes to pack.
+ * @return 3x3 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return
-    {
-        x.x, x.y, x.z,
-        y.x, y.y, y.z,
-        z.x, z.y, z.z
-    };
-#else
-    return
-    {
-        x.x, y.x, z.x,
-        x.y, y.y, z.y,
-        x.z, y.z, z.z
-    };
-#endif
-}
+orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make orientation axes to 3x3 orientation matrix.
+ * @param axes Axes to pack.
+ * @return 3x3 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const Axes<T>& axes)
-{
-    return orientationMatrix
-    (
-        axes.x,
-        axes.y,
-        axes.z
-    );
-}
+orientationMatrix(const Axes<T>& axes);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation quaternion to 3x3 orientation matrix.
+ * @param orientation Orientation quaternion to convert.
+ * @return 3x3 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const Quaternion<T>& orientation)
-{
-    return orientationMatrix(orientationAxes(orientation));
-}
+orientationMatrix(const Quaternion<T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Extract 3x3 orientation matrix from 4x4 space matrix.
+ * @param space Space to extract axes from.
+ * @return 3x3 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-orientationMatrix(const Matrix<4,4,T>& space)
-{
-    return
-    {
-        space(0,0), space(0,1), space(0,2),
-        space(1,0), space(1,1), space(1,2),
-        space(2,0), space(2,1), space(2,2)
-    };
-}
+orientationMatrix(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
 /* Quaternion */
 /* ####################################################################################### */
 
+/**
+ * Convert orientation axes to orientation quaternion.
+ * @param x X orientation axes.
+ * @param y Y orientation axes.
+ * @param z Z orientation axes.
+ * @return Orientation quaternion.
+ */
 template<typename T>
 constexpr Quaternion<T>
-orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
-{
-    Quaternion<T> q; T t;
+orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z);
 
-    if (z.z < 0)
-    {
-        if (x.x > y.y)
-        {
-            t = 1 + x.x - y.y - z.z;
-            q = {t, y.x + x.y, x.z + z.x, z.y - y.z};
-        } else
-        {
-            t = 1 - x.x + y.y - z.z;
-            q = {y.x + x.y, t, z.y + y.z, x.z - z.x};
-        }
-    } 
-    else
-    {
-        if (x.x < -y.y)
-        {
-            t = 1 - x.x - y.y + z.z;
-            q = {x.z + z.x, z.y + y.z, t, y.x - x.y};
-        }
-        else
-        {
-            t = 1 + x.x + y.y + z.z;
-            q = {z.y - y.z, x.z - z.x, y.x - x.y, t};
-        }
-    }
-
-    q *= static_cast<T>(0.5) / std::sqrt(t);
-
-    return q;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert orientation axes to orientation quaternion.
+ * @param axes Axes to make from.
+ * @return Orientation quaternion.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const Axes<T>& axes)
-{
-    return orientationQuaternion
-    (
-        axes.x,
-        axes.y,
-        axes.z
-    );
-}
+orientationQuaternion(const Axes<T>& axes);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert 3x3 orientation matrix to orientation quaternion.
+ * @param orientation Orientation matrix to convert from.
+ * @return Orientation quaternion.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const Matrix<3,3,T>& orientation)
-{
-    return orientationQuaternion
-    (
-        x(orientation),
-        y(orientation),
-        z(orientation)
-    );
-}
+orientationQuaternion(const Matrix<3,3,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Extract 3x3 orientation matrix and convert it to orientation quaternion.
+ * @param space 4x4 space matrix to extract from.
+ * @return Orientation quaternion.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-orientationQuaternion(const Matrix<4,4,T>& space)
-{
-    return orientationQuaternion
-    (
-        x(space),
-        y(space),
-        z(space)
-    );
-}
+orientationQuaternion(const Matrix<4,4,T>& space);
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Orientation_impl.hpp>

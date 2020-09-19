@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Cartesian/3D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 
 

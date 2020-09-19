@@ -1,349 +1,344 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/MatrixVectorMultiplication.hpp>
+#include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/InternalUtils_impl.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Global to local / local to global */
+/* Global to local (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param orientation Local space orientation represented as 2x2 matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
-{
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = inverseForce(orientation) * vector;
-    #else
-        vector = vector * inverseForce(orientation);
-    #endif
-    }
-    else
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = orientation * vector;
-    #else
-        vector = vector * orientation;
-    #endif
-    }
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param orientation Local space orientation represented as 2x2 matrix.
+ * @param position Local space position.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
-{
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = inverseForce(orientation) * vector + position;
-    #else
-        vector = vector * inverseForce(orientation) + position;
-    #endif
-    }
-    else
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        vector = orientation * (vector - position);
-    #else
-        vector = (vector - position) * orientation;
-    #endif
-    }
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param space Local space represented as 2x2 matrix.
+ */
+template<ESpace Space, EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<3,3,T>& space)
-{
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            vector = inverseForce(orientationMatrix(space)) * vector + position(space);
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            vector = inverseForce(orientationMatrix(space)) * vector;
-        }
-    #else
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            vector = vector * inverseForce(orientationMatrix(space)) + position(space);
-        }
-        else if constexpr (Representation == EVectorRepresentation::Direction)
-        {
-            vector = vector * inverseForce(orientationMatrix(space));
-        }
-    #endif
-    }
-    else
-    {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            vector = orientationMatrix(space) * (vector - position(space));
-        }
-        else
-        {
-            vector = orientationMatrix(space) * vector;
-        }
-    #else
-        if constexpr (Representation == EVectorRepresentation::Point)
-        {
-            vector = (vector - position(space)) * orientationMatrix(space);
-        }
-        else
-        {
-            vector = vector * orientationMatrix(space);
-        }
-    #endif
-    }
-}
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
-/* Local to local: Matrix2 */
+/* Local to local: Matrix2 (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    convert<ESpace::World>(vector, orientationA);
-    convert<ESpace::Local>(vector, orientationB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert<ESpace::World>(vector, orientationA);
-    convert<ESpace::Local>(vector, orientationB, positionB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 2x2 matrix of B space.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    convert<ESpace::World>(vector, orientationA);
-    convert<ESpace::Local,Representation>(vector, spaceB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
-/* Local to local: Matrix2 with Position */
+/* Local to local: Matrix2 with Position (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
-{
-    convert<ESpace::World>(vector, orientationA, positionA);
-    convert<ESpace::Local>(vector, orientationB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert<ESpace::World>(vector, orientationA, positionA);
-    convert<ESpace::Local>(vector, orientationB, positionB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param spaceB 2x2 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
-{
-    convert<ESpace::World>(vector, orientationA, positionA);
-    convert<ESpace::Local>(vector, spaceB);
-}
+convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
-/* Local to local: Matrix3 */
+/* Local to local: Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    convert<ESpace::World>(vector, spaceA);
-    convert<ESpace::Local>(vector, orientationB);
-}
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert<ESpace::World>(vector, spaceA);
-    convert<ESpace::Local>(vector, orientationB, positionB);
-}
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically 
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 2x2 matrix of B space.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    convert<ESpace::World>(vector, spaceA);
-    convert<ESpace::Local>(vector, spaceB);
-}
+convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Global to local (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param orientation Local space orientation represented as 2x2 matrix.
+ * @return Converted vector.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
-{
-    auto copy = vector;
-    convert<Space>(copy, orientation);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param orientation Local space orientation represented as 2x2 matrix.
+ * @param position Local space position.
+ * @return Converted vector.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
-{
-    auto copy = vector;
-    convert<Space>(copy, orientation, position);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the vector does not change, only recalculation to the local system occurs.
+ * @param vector Vector in global space.
+ * @param space Local space represented as 2x2 matrix.
+ * @return Converted vector.
+ */
+template<ESpace Space, EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<3,3,T>& space)
-{
-    auto copy = vector;
-    convert<Space,Representation>(copy, space);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
 /* Local to local: Matrix2 (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = vector;
-    convert(copy, orientationA, orientationB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = vector;
-    convert(copy, orientationA, orientationB, positionB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 2x2 matrix of B space.
+ * @return Converted vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = vector;
-    convert<Representation>(copy, orientationA, spaceB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix2 with Position (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = vector;
-    convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = vector;
-    convert(copy, orientationA, positionA, orientationB, positionB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param spaceB 2x2 matrix of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = vector;
-    convert(copy, orientationA, positionA, spaceB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = vector;
-    convert<Representation>(copy, spaceA, orientationB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = vector;
-    convert(copy, spaceA, orientationB, positionB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Convert vector from space A to space B (A and B are in one space). The physically
+ * position of the vector does not change, only recalculation to the B system occurs.
+ * @param vector Vector in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 2x2 matrix of B space.
+ * @return Converted vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = vector;
-    convert<Representation>(copy, spaceA, spaceB);
-    return copy;
-}
+converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
 
+
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Vector_impl.hpp>

@@ -1,6 +1,11 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/2D/Functions/Axes.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,37 +15,29 @@ CGM_XY_NAMESPACE_BEGIN
 /* X, Y axes */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+/**
+ * Create default Cartesian axis.
+ */
+template<EAxes Axis, typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<2,T>
-axis()
-{
-    if constexpr (Axis == EAxes::X)
-    {
-        return {number<T>(1), zero<T>};
-    }
-    else
-    {
-        return {zero<T>, number<T>(1)};
-    }
-}
+axis();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian X axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<2,T>
-x()
-{
-    return {number<T>(1), zero<T>};
-}
+x();
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
+/**
+ * Gets Cartesian Y axis.
+ */
+template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<2,T>
-y()
-{
-    return {zero<T>, number<T>(1)};
-}
+y();
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Axes_impl.hpp>

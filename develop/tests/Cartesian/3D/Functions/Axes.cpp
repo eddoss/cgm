@@ -3,7 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Axes.hpp>
 
 
 using namespace std;

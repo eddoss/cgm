@@ -8,8 +8,8 @@
 #include <CGM/detail/Modules/Core/Functions/Vector.hpp>
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Functions/Quaternion.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Orientation.hpp>
 
 
 using namespace std;

@@ -5,9 +5,9 @@
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/Axes.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>

@@ -1,26 +1,30 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/3D/Operators.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/ModuleGlobals.hpp>
 
 
+/**
+ * Compares two axes structs for equality.
+ * @param A Axes struct to compare.
+ * @param B Axes struct to compare with.
+ * @return true if the axes structs are equal, false otherwise.
+ */
 template<typename T>
 constexpr bool
-operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)
-{
-    return
-    CGM::eq(A.x, B.x) &&
-    CGM::eq(A.y, B.y) &&
-    CGM::eq(A.z, B.z);
-}
+operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Compares two axes structs for inequality.
+ * @param A Axes struct to compare.
+ * @param B Axes struct to compare with.
+ * @return true if the axes structs are not equal, false otherwise.
+ */
 template<typename T>
 constexpr bool
-operator != (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)
-{
-    return
-    CGM::neq(A.x, B.x) ||
-    CGM::neq(A.y, B.y) ||
-    CGM::neq(A.z, B.z);
-}
+operator != (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B);
+
+
+#include <CGM/detail/Modules/Cartesian/3D/Operators_impl.hpp>

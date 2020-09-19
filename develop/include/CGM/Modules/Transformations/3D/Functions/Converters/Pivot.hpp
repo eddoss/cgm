@@ -3,7 +3,7 @@
 
 #include <CGM/Modules/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
 
 
 CGM_NAMESPACE_BEGIN

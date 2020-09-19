@@ -5,7 +5,7 @@
 #include <CGM/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/InternalUtils_impl.hpp>
 
 
 using namespace std;

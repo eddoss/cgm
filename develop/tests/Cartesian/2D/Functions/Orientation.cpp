@@ -5,8 +5,8 @@
 #include <CGM/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation.hpp>
 
 
 using namespace std;

@@ -1,6 +1,14 @@
+#pragma once
 
 
-#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
+#include <tuple>
+#include <type_traits>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,103 +18,76 @@ CGM_XY_NAMESPACE_BEGIN
 /* Axes */
 /* ####################################################################################### */
 
+/**
+ * Make axes tuple from X,Y.
+ * @param x X axis.
+ * @param y Y axis.
+ * @return Tuple of axes.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Vector<2,T>& x, const Vector<2,T>& y)
-{
-    return Axes<T>(x,y);
-}
+orientationAxes(const Vector<2,T>& x, const Vector<2,T>& y);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make axes tuple from 2x2 orientation matrix.
+ * @param orientation 2x2 orientation matrix to extract axes from.
+ * @return Tuple of axes.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Matrix<2,2,T>& orientation)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return Axes<T>
-    (
-        Vector<2,T>{orientation(0,0), orientation(0,1)},
-        Vector<2,T>{orientation(1,0), orientation(1,1)}
-    );
-#else
-    return Axes<T>
-    (
-        Vector<2,T>{orientation(0,0), orientation(1,0)},
-        Vector<2,T>{orientation(0,1), orientation(1,1)}
-    );
-#endif
-}
+orientationAxes(const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make axes tuple from space.
+ * @param space Space to extract axes from.
+ * @return Tuple of axes.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
-orientationAxes(const Matrix<3,3,T>& space)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return Axes<T>
-    (
-        Vector<2,T>{space(0,0), space(0,1)},
-        Vector<2,T>{space(1,0), space(1,1)}
-    );
-#else
-    return Axes<T>
-    (
-        Vector<2,T>{space(0,0), space(1,0)},
-        Vector<2,T>{space(0,1), space(1,1)}
-    );
-#endif
-}
+orientationAxes(const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
 /* Matrix */
 /* ####################################################################################### */
 
+/**
+ * Pack orientation axes to 2x2 orientation matrix.
+ * @param axes Axes to pack.
+ * @return 2x2 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    return
-    {
-        x.x, x.y,
-        y.x, y.y
-    };
-#else
-    return
-    {
-        x.x, y.x,
-        x.y, y.y
-    };
-#endif
-}
+orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Make orientation axes to 2x2 orientation matrix.
+ * @param axes Axes to pack.
+ * @return 2x2 orientation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const Axes<T>& axes)
-{
-    return orientationMatrix
-    (
-        x(axes),
-        y(axes)
-    );
-}
+orientationMatrix(const Axes<T>& axes);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Extract orientation matrix from Space tuple.
+ * @param space Space tuple.
+ * @return Tuple of orientation axes.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
-orientationMatrix(const Matrix<3,3,T>& space)
-{
-    return
-    {
-        space(0,0), space(0,1),
-        space(1,0), space(1,1)
-    };
-}
+orientationMatrix(const Axes<T>& space);
+
+/**
+ * Extract 2x2 orientation matrix from 3x3 space matrix.
+ * @param space Space to extract axes from.
+ * @return 2x2 orientation matrix.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Matrix<2,2,T>
+orientationMatrix(const Matrix<3,3,T>& space);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation_impl.hpp>

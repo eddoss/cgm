@@ -6,8 +6,8 @@
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Functions/Vector.hpp>
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Orientation.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>

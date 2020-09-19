@@ -3,13 +3,13 @@
 
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
-#include <CGM/Modules/Cartesian/Common.hpp>
-#include <CGM/Modules/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
-#include <CGM/detail/Modules/Cartesian/2D/InternalUtils.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/InternalUtils_impl.hpp>
 #include <CGM/detail/Modules/Transformations/2D/InternalUtils.hpp>
 
 /* ####################################################################################### */

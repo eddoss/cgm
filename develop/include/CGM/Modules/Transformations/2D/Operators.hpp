@@ -2,7 +2,7 @@
 
 
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
-#include <CGM/Modules/Cartesian/2D/Operators.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Operators.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>

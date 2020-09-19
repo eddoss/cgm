@@ -3,7 +3,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <CGM/detail/Modules/Core/Functions/Vector.hpp>
-#include <CGM/Modules/Cartesian/2D/Functions/Converters/Matrix2x2.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Matrix2x2.hpp>
 #include "../Input.hpp"
 
 
