@@ -56,15 +56,9 @@ set(TS_CORE_MATRIX
     Core/Matrix/Iterators/Column.cpp
 )
 
-set(TS_CORE_QUATERNION
-    Core/Quaternion/Operators.cpp
-    Core/Quaternion/Functions.cpp
-)
-
 set(TS_MODULE_CORE
     "${TS_CORE_VECTOR}"
     "${TS_CORE_MATRIX}"
-    "${TS_CORE_QUATERNION}"
     "${TS_CORE_COORDINATES}"
 )
 
@@ -109,10 +103,12 @@ set(TS_CARTESIAN_2D
 )
 
 set(TS_CARTESIAN_3D
+    Cartesian/3D/InternalFunctions.cpp
+    Cartesian/3D/Quaternion/Operators.cpp
+    Cartesian/3D/Quaternion/Functions.cpp
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/Utils.cpp
     Cartesian/3D/Functions/Orientation.cpp
-    Cartesian/3D/InternalFunctions.cpp
     Cartesian/3D/Functions/Converters/Vector/WorldToLocal.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToWorld.cpp
     Cartesian/3D/Functions/Converters/Vector/LocalToLocal/Matrix3.cpp

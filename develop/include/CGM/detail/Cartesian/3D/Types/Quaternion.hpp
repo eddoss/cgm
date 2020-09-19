@@ -95,4 +95,4 @@ public: /* Components accessing */
 CGM_NAMESPACE_END
 
 
-#include <CGM/detail/Core/Types/Quaternion_impl.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion_impl.hpp>

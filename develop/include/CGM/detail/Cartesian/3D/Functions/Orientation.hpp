@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Utils.hpp>

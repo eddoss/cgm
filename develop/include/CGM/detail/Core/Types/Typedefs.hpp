@@ -4,7 +4,7 @@
 #include <CGM/detail/Core/ModuleGlobals.hpp>
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 
 
 CGM_NAMESPACE_BEGIN

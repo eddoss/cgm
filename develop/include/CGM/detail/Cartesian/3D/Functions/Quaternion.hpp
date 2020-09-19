@@ -3,8 +3,8 @@
 
 #include <cmath>
 #include <type_traits>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
-#include <CGM/detail/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Operators/Quaternion.hpp>
 #include <CGM/detail/Core/Functions/Vector.hpp>
 #include <CGM/detail/Core/Operators/Vector.hpp>
 
@@ -190,4 +190,4 @@ neq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance);
 CGM_NAMESPACE_END
 
 
-#include <CGM/detail/Core/Functions/Quaternion_impl.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Quaternion_impl.hpp>

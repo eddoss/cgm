@@ -3,16 +3,16 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <CGM/detail/Common.hpp>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/detail/Core/Functions/Vector.hpp>
-#include <CGM/detail/Core/Functions/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Quaternion.hpp>
 
 
 using namespace CGM;
 
 using namespace std;
 
-TEST(Quaternion_Functions, Dot)
+TEST(Cartesian_3D_Functions_Quaternion, Dot)
 {
     Quaternion<float> a {6.947f, 6.123f, 8.154f, 3.350f};
     Quaternion<float> b {5.936f, 9.405f, 1.050f, 2.622f};
@@ -25,7 +25,7 @@ TEST(Quaternion_Functions, Dot)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Conjugate)
+TEST(Cartesian_3D_Functions_Quaternion, Conjugate)
 {
     Quaternion<float> a {6.f, 5.f, 8.f, 3.f};
     Quaternion<float> b {-6.f, -5.f, -8.f, 3.f};
@@ -35,7 +35,7 @@ TEST(Quaternion_Functions, Conjugate)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Length)
+TEST(Cartesian_3D_Functions_Quaternion, Length)
 {
     Quaternion<float> q {9.632f, 1.152f, 1.088f, 9.487f};
     float len = length(q);
@@ -46,7 +46,7 @@ TEST(Quaternion_Functions, Length)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Norm)
+TEST(Cartesian_3D_Functions_Quaternion, Norm)
 {
     Quaternion<float> q {1.690f, 8.336f, 2.821f, 9.678f};
 
@@ -58,7 +58,7 @@ TEST(Quaternion_Functions, Norm)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Normalize)
+TEST(Cartesian_3D_Functions_Quaternion, Normalize)
 {
     Quaternion<double> qtr {5.403, 2.650, 8.516, 4.043};
     Quaternion<double> nrm {0.483, 0.237, 0.761, 0.362};
@@ -91,7 +91,7 @@ TEST(Quaternion_Functions, Normalize)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Inverse)
+TEST(Cartesian_3D_Functions_Quaternion, Inverse)
 {
     Quaternion<double> qtr {4.34, 5.11, 12.7, 1.22};
     Quaternion<double> inv {-0.0208929, -0.0245997, -0.0611382, 0.0058731};
@@ -124,7 +124,7 @@ TEST(Quaternion_Functions, Inverse)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Orient)
+TEST(Cartesian_3D_Functions_Quaternion, Orient)
 {
     Quaternion<double> quat {0.968583, 0.175850, 0.105510, -0.140680};
     Vector<3,double> vec {1.0, 0.0, 0.0};
@@ -140,7 +140,7 @@ TEST(Quaternion_Functions, Orient)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Angle)
+TEST(Cartesian_3D_Functions_Quaternion, Angle)
 {
     Quaternion<float> a {4.34f, 5.11f, 3.74f, 1.22f};
     Quaternion<float> b {2.16f, 1.45f, 2.47f, 0.25f};
@@ -155,7 +155,7 @@ TEST(Quaternion_Functions, Angle)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Functions, Identity)
+TEST(Cartesian_3D_Functions_Quaternion, Identity)
 {
     Quaternion<float> idn = identity<float>();
     Quaternion<float> exp = {0.f, 1.0f};

@@ -35,3 +35,13 @@ enum class ESpace
 #define CGM_DIRECTION   CGM::EVectorRepresentation::Direction
 
 CGM_NAMESPACE_END
+
+/* ####################################################################################### */
+/* IO */
+/* ####################################################################################### */
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ESpace space);
+
+
+#include <CGM/detail/Cartesian/Common_impl.hpp>

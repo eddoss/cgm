@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
-#include <CGM/detail/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Operators/Quaternion.hpp>
 
 
 using namespace CGM;
@@ -14,7 +14,7 @@ using namespace std;
 /* Minus */
 /* ####################################################################################### */
 
-TEST(Quaternion_Operators, UnaryMinus)
+TEST(Cartesian_3D_Operators_Quaternion, UnaryMinus)
 {
     Quaternion<double> qat { 1, 2, 3, 4 };
     Quaternion<double> exp {-1,-2,-3,-4 };
@@ -23,7 +23,7 @@ TEST(Quaternion_Operators, UnaryMinus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, OutplaceMinus)
+TEST(Cartesian_3D_Operators_Quaternion, OutplaceMinus)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> b { 1, 1, 2, 2 };
@@ -36,7 +36,7 @@ TEST(Quaternion_Operators, OutplaceMinus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, InplaceMinus)
+TEST(Cartesian_3D_Operators_Quaternion, InplaceMinus)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> b { 1, 1, 2, 2 };
@@ -51,7 +51,7 @@ TEST(Quaternion_Operators, InplaceMinus)
 /* Plus */
 /* ####################################################################################### */
 
-TEST(Quaternion_Operators, OutplacePlus)
+TEST(Cartesian_3D_Operators_Quaternion, OutplacePlus)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> b { 1, 1, 2, 2 };
@@ -64,7 +64,7 @@ TEST(Quaternion_Operators, OutplacePlus)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, InplacePlus)
+TEST(Cartesian_3D_Operators_Quaternion, InplacePlus)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> b { 1, 1, 2, 2 };
@@ -79,7 +79,7 @@ TEST(Quaternion_Operators, InplacePlus)
 /* Multiplication */
 /* ####################################################################################### */
 
-TEST(Quaternion_Operators, OutplaceScalarMultiplication)
+TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarMultiplication)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> e { 2, 4, 6, 8 };
@@ -91,7 +91,7 @@ TEST(Quaternion_Operators, OutplaceScalarMultiplication)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, OutplaceOtherMultiplication)
+TEST(Cartesian_3D_Operators_Quaternion, OutplaceOtherMultiplication)
 {
     Quaternion<double> a { 3, 1, 5, 2 };
     Quaternion<double> b { 9, 1, 3, 7 };
@@ -108,7 +108,7 @@ TEST(Quaternion_Operators, OutplaceOtherMultiplication)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, InplaceScalarMultiplication)
+TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarMultiplication)
 {
     Quaternion<double> a { 1, 2, 3, 4 };
     Quaternion<double> e { 2, 4, 6, 8 };
@@ -122,7 +122,7 @@ TEST(Quaternion_Operators, InplaceScalarMultiplication)
 /* Division */
 /* ####################################################################################### */
 
-TEST(Quaternion_Operators, OutplaceScalarDivision)
+TEST(Cartesian_3D_Operators_Quaternion, OutplaceScalarDivision)
 {
     Quaternion<double> a { 2, 4, 6, 8 };
     Quaternion<double> e { 1, 2, 3, 4 };
@@ -134,7 +134,7 @@ TEST(Quaternion_Operators, OutplaceScalarDivision)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, InplaceScalarDivision)
+TEST(Cartesian_3D_Operators_Quaternion, InplaceScalarDivision)
 {
     Quaternion<double> a { 2, 4, 6, 8 };
     Quaternion<double> e { 1, 2, 3, 4 };
@@ -148,7 +148,7 @@ TEST(Quaternion_Operators, InplaceScalarDivision)
 /* Comparison */
 /* ####################################################################################### */
 
-TEST(Quaternion_Operators, ComparisonEqual)
+TEST(Cartesian_3D_Operators_Quaternion, ComparisonEqual)
 {
     Quaternion<double> a { 2, 4, 6, 8 };
     Quaternion<double> b { 2, 4, 6, 8 };
@@ -163,7 +163,7 @@ TEST(Quaternion_Operators, ComparisonEqual)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Quaternion_Operators, ComparisonNotEqual)
+TEST(Cartesian_3D_Operators_Quaternion, ComparisonNotEqual)
 {
     Quaternion<double> a { 2, 4, 6, 8 };
     Quaternion<double> b { 1, 4, 6, 8 };

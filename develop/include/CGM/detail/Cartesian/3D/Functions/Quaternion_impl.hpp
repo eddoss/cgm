@@ -1,6 +1,6 @@
 
 
-#include <CGM/detail/Core/Functions/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Quaternion.hpp>
 
 
 CGM_NAMESPACE_BEGIN

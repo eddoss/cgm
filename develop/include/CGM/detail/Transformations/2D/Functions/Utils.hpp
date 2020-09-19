@@ -2,7 +2,7 @@
 
 
 #include <CGM/detail/Core/Types/Vector.hpp>
-#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/detail/Cartesian/2D/Functions/Axes.hpp>
 #include <CGM/detail/Transformations/2D/ModuleGlobals.hpp>
 

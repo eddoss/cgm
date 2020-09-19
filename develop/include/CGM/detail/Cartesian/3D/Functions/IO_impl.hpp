@@ -37,14 +37,19 @@ operator << (std::ostream& stream, CGM_XYZ::EAxes axis)
 
 /* --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ESpace space)
+operator << (std::ostream& stream, const CGM_XYZ::Quaternion<T>& quat)
 {
-    switch (space)
-    {
-        case CGM::ESpace::World: stream << "CGM::ESpace::World"; break;
-        case CGM::ESpace::Local: stream << "CGM::ESpace::Local"; break;
-    }
+    CGM_PREPARE_IO_STREAM_FLAGS(stream)
+
+    stream << "CGM::Quaternion<" << typeid(T).name() << ">{ ";
+    stream << quat.vector.x << " ";
+    stream << quat.vector.y << " ";
+    stream << quat.vector.z << " | ";
+    stream << quat.scalar << " }";
+
+    CGM_RESTORE_IO_STREAM_FLAGS(stream)
 
     return stream;
 }

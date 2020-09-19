@@ -7,7 +7,7 @@
 #include <CGM/detail/Core/Operators/Matrix.hpp>
 #include <CGM/detail/Core/Functions/Vector.hpp>
 #include <CGM/detail/Core/Functions/Matrix.hpp>
-#include <CGM/detail/Core/Functions/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Quaternion.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Utils.hpp>
 
 

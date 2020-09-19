@@ -67,22 +67,3 @@ operator << (std::ostream& stream, const CGM::Matrix<M,N,T>& mat)
 
     return stream;
 }
-
-/* --------------------------------------------------------------------------------------- */
-
-template <typename T>
-constexpr std::ostream&
-operator << (std::ostream& stream, const CGM::Quaternion<T>& quat)
-{
-    CGM_PREPARE_IO_STREAM_FLAGS(stream)
-
-    stream << "CGM::Quaternion<" << typeid(T).name() << ">{ ";
-    stream << quat.vector.x << " ";
-    stream << quat.vector.y << " ";
-    stream << quat.vector.z << " | ";
-    stream << quat.scalar << " }";
-
-    CGM_RESTORE_IO_STREAM_FLAGS(stream)
-
-    return stream;
-}

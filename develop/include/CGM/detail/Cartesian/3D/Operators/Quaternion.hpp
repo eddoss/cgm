@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/detail/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/detail/Core/Functions/Vector.hpp>
 
 
@@ -142,4 +142,4 @@ constexpr T
 operator | (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B);
 
 
-#include <CGM/detail/Core/Operators/Quaternion_impl.hpp>
+#include <CGM/detail/Cartesian/3D/Operators/Quaternion_impl.hpp>

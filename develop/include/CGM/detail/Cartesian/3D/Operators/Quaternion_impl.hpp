@@ -1,6 +1,6 @@
 
 
-#include <CGM/detail/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Cartesian/3D/Operators/Quaternion.hpp>
 
 
 template<typename T>
