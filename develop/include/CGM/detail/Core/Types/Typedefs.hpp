@@ -4,7 +4,6 @@
 #include <CGM/detail/Core/ModuleGlobals.hpp>
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
-#include <CGM/detail/Cartesian/3D/Types/Quaternion.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -85,13 +84,5 @@ using mat41_64  = Matrix<4,1,float64>;
 using mat42_64  = Matrix<4,2,float64>;
 using mat43_64  = Matrix<4,3,float64>;
 using mat44_64  = Matrix<4,4,float64>;
-
-/* ####################################################################################### */
-/* Quaternion */
-/* ####################################################################################### */
-
-using quat      = Quaternion<FLOAT>;
-using quat_32   = Quaternion<float32>;
-using quat_64   = Quaternion<float64>;
 
 CGM_NAMESPACE_END
