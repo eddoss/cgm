@@ -1,70 +1,73 @@
+#pragma once
 
 
-#include <CGM/Modules/Coordinates/Types/Polar.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Coordinates/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_COORD_NAMESPACE_BEGIN
 
-/* ####################################################################################### */
-/* IMPLEMENTATION | Constructors */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr
-Polar<T>::Polar(T angle, T radius)
-    : m_angle(angle)
-    , m_radius(radius)
+template<typename T=FLOAT>
+struct Polar
 {
-
-}
-
-/* ####################################################################################### */
-/* IMPLEMENTATION | Properties getters */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE T
-Polar<T>::angle() const
-{
-    return m_angle;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE T
-Polar<T>::radius() const
-{
-    return m_radius;
-}
+    CGM_RULE_OF_FIVE(Polar)
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Properties setters */
+public: /* Constructors */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr CGM_FORCEINLINE void
-Polar<T>::setAngle(T angle)
-{
-    m_angle = angle;
-}
+    /** Constructor initializing angle and radius. */
+    constexpr
+    Polar(T angle, T radius);
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Properties getters */
+/* ####################################################################################### */
 
-template<typename T>
-constexpr CGM_FORCEINLINE void
-Polar<T>::setRadius(T radius)
-{
-    if (radius < 0)
-    {
-        m_radius = 0;
-    }
-    else
-    {
-        m_radius = radius;
-    }
-}
+    /**
+     * @brief Get rotation angle.
+     * @return Angle in radians.
+     */
+    constexpr CGM_FORCEINLINE T
+    angle() const;
+
+    /**
+     * @brief Get circle radius.
+     * @return Circle radius.
+     */
+    constexpr CGM_FORCEINLINE T
+    radius() const;
+
+/* ####################################################################################### */
+public: /* Properties setters */
+/* ####################################################################################### */
+
+    /**
+     * @brief Set rotation angle.
+     * @param angle Angle in radians.
+     */
+    constexpr CGM_FORCEINLINE void
+    setAngle(T angle);
+
+    /**
+     * @brief Set circle radius. Value must be >= 0.
+     * @param radius Circle radius.
+     * @note If the given value is less than "0", then "0" will be set.
+     */
+    constexpr CGM_FORCEINLINE void
+    setRadius(T radius);
+
+/* ####################################################################################### */
+protected: /* Protected members */
+/* ####################################################################################### */
+
+    T m_angle;
+    T m_radius;
+};
 
 CGM_COORD_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Coordinates/Types/Polar_impl.hpp>

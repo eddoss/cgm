@@ -1,89 +1,88 @@
+#pragma once
 
 
-#include <CGM/Modules/Coordinates/Types/Cylindrical.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Coordinates/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_COORD_NAMESPACE_BEGIN
 
-/* ####################################################################################### */
-/* IMPLEMENTATION | Constructors */
-/* ####################################################################################### */
-
-template <typename T>
-constexpr
-Cylindrical<T>::Cylindrical(T angle, T height, T radius)
-    : m_angle(angle)
-    , m_height(height)
-    , m_radius(radius)
+template<typename T=FLOAT>
+struct Cylindrical
 {
-
-}
+    CGM_RULE_OF_FIVE(Cylindrical)
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Properties getters */
+public: /* Constructors */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr T
-Cylindrical<T>::angle() const
-{
-    return m_angle;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr T
-Cylindrical<T>::radius() const
-{
-    return m_radius;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr T
-Cylindrical<T>::height() const
-{
-    return m_height;
-}
+    /** Constructor initializing angle, height and radius. */
+    constexpr
+    Cylindrical(T angle, T height, T radius);
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Properties setters */
+public: /* Properties getters */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr void
-Cylindrical<T>::setAngle(T angle)
-{
-    m_angle = angle;
-}
+    /**
+     * @brief Get rotation angle.
+     * @return Angle in radians.
+     */
+    constexpr CGM_FORCEINLINE T
+    angle() const;
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * @brief Get cylinder radius.
+     * @return Cylinder radius.
+     */
+    constexpr CGM_FORCEINLINE T
+    radius() const;
 
-template<typename T>
-constexpr void
-Cylindrical<T>::setRadius(T radius)
-{
-    if (radius < 0)
-    {
-        m_radius = 0;
-    }
-    else
-    {
-        m_radius = radius;
-    }
-}
+    /**
+     * @brief Get cylinder radius.
+     * @return Cylinder radius.
+     */
+    constexpr CGM_FORCEINLINE T
+    height() const;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Properties setters */
+/* ####################################################################################### */
 
-template<typename T>
-constexpr void
-Cylindrical<T>::setHeight(T height)
-{
-    m_height = height;
-}
+    /**
+     * @brief Set rotation angle.
+     * @param angle Angle in radians.
+     */
+    constexpr CGM_FORCEINLINE void
+    setAngle(T angle);
+
+    /**
+     * @brief Set cylinder radius. Value must be >= 0.
+     * @param radius Cylinder radius.
+     * @note If the given value is less than "0", then "0" will be set.
+     */
+    constexpr CGM_FORCEINLINE void
+    setRadius(T radius);
+
+    /**
+     * @brief Set cylinder height.
+     * @param radius Cylinder height.
+     */
+    constexpr CGM_FORCEINLINE void
+    setHeight(T height);
+
+/* ####################################################################################### */
+protected: /* Protected members */
+/* ####################################################################################### */
+
+    T m_angle;
+    T m_height;
+    T m_radius;
+};
 
 CGM_COORD_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Coordinates/Types/Cylindrical_impl.hpp>

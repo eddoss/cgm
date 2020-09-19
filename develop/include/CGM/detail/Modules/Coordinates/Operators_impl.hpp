@@ -1,6 +1,6 @@
 
 
-#include <CGM/Modules/Coordinates/Operators.hpp>
+#include <CGM/detail/Modules/Coordinates/Operators.hpp>
 
 
 /* ####################################################################################### */

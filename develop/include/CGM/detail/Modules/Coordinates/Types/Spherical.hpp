@@ -1,100 +1,91 @@
+#pragma once
 
 
-#include <CGM/Modules/Coordinates/Types/Spherical.hpp>
+#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Coordinates/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_COORD_NAMESPACE_BEGIN
 
-/* ####################################################################################### */
-/* IMPLEMENTATION | Constructors */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr
-Spherical<T>::Spherical(T longitude, T latitude, T radius)
-    : m_longitude(longitude)
-    , m_latitude(latitude)
-    , m_radius(radius)
+template<typename T=FLOAT>
+struct Spherical
 {
-
-}
+    CGM_RULE_OF_FIVE(Spherical)
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Properties getters */
+public: /* Constructors */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr CGM_FORCEINLINE T
-Spherical<T>::longitude() const
-{
-    return m_longitude;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE T
-Spherical<T>::latitude() const
-{
-    return m_latitude;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE T
-Spherical<T>::radius() const
-{
-    return m_radius;
-}
+    /**
+     * @brief Constructor initializing longitude (horizontal) angle,
+     * latitude (vertical) angle and sphere radius.
+     */
+    constexpr
+    Spherical(T longitude, T latitude, T radius);
 
 /* ####################################################################################### */
-/* IMPLEMENTATION | Properties setters */
+public: /* Properties getters */
 /* ####################################################################################### */
 
-template<typename T>
-constexpr CGM_FORCEINLINE void
-Spherical<T>::setLongitude(T longitude)
-{
-    m_longitude = longitude;
-}
+    /**
+     * @brief Get longitude angle.
+     * @return Horizontal angle in radians.
+     */
+    constexpr CGM_FORCEINLINE T
+    longitude() const;
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * @brief Get latitude angle.
+     * @return Vertical angle in radians.
+     */
+    constexpr CGM_FORCEINLINE T
+    latitude() const;
 
-template<typename T>
-constexpr CGM_FORCEINLINE void
-Spherical<T>::setLatitude(T latitude)
-{
-    if (latitude > PI)
-    {
-        m_latitude = PI;
-    }
-    else if (latitude < 0)
-    {
-        m_latitude = 0;
-    }
-    else
-    {
-        m_latitude = latitude;
-    }
-}
+    /**
+     * @brief Get sphere radius.
+     * @return Sphere radius.
+     */
+    constexpr CGM_FORCEINLINE T
+    radius() const;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+public: /* Properties setters */
+/* ####################################################################################### */
 
-template<typename T>
-constexpr CGM_FORCEINLINE void
-Spherical<T>::setRadius(T radius)
-{
-    if (radius < 0)
-    {
-        m_radius = 0;
-    }
-    else
-    {
-        m_radius = radius;
-    }
-}
+    /**
+     * @brief Set longitude angle.
+     * @param longitude Horizontal angle in radians.
+     */
+    constexpr CGM_FORCEINLINE void
+    setLongitude(T longitude);
+
+    /**
+     * Set longitude angle in radians. Value must be in range [0, PI].
+     * @note If the given value is out of range, given value
+     * will be clamped.
+     */
+    constexpr CGM_FORCEINLINE void
+    setLatitude(T latitude);
+
+    /**
+     * Set sphere radius. Value must be >= 0.
+     * @note If the given value is less than "0", then "0" will be set.
+     */
+    constexpr CGM_FORCEINLINE void
+    setRadius(T radius);
+
+/* ####################################################################################### */
+protected: /* Protected members */
+/* ####################################################################################### */
+
+    T m_longitude;    // azimuth, horizontal
+    T m_latitude;     // elevation, vertical
+    T m_radius;
+};
 
 CGM_COORD_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Coordinates/Types/Spherical_impl.hpp>

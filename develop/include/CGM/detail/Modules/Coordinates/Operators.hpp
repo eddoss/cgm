@@ -2,10 +2,10 @@
 
 
 #include <CGM/Modules/Common.hpp>
-#include <CGM/Modules/Coordinates/ModuleGlobals.hpp>
-#include <CGM/Modules/Coordinates/Types/Polar.hpp>
-#include <CGM/Modules/Coordinates/Types/Spherical.hpp>
-#include <CGM/Modules/Coordinates/Types/Cylindrical.hpp>
+#include <CGM/detail/Modules/Coordinates/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Coordinates/Types/Polar.hpp>
+#include <CGM/detail/Modules/Coordinates/Types/Spherical.hpp>
+#include <CGM/detail/Modules/Coordinates/Types/Cylindrical.hpp>
 
 
 /* ####################################################################################### */
@@ -81,4 +81,4 @@ constexpr bool
 operator != (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B);
 
 
-#include <CGM/detail/Modules/Coordinates/Types/Operators.hpp>
+#include <CGM/detail/Modules/Coordinates/Operators_impl.hpp>
