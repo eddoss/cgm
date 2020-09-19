@@ -4,8 +4,8 @@
 #include <iterator>
 #include <type_traits>
 #include <initializer_list>
-#include <CGM/Modules/Global.hpp>
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Global.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 
 
 CGM_NAMESPACE_BEGIN

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 #include <CGM/detail/Modules/Coordinates/ModuleGlobals.hpp>
 #include <CGM/detail/Modules/Coordinates/Types/Polar.hpp>
 #include <CGM/detail/Modules/Coordinates/Types/Spherical.hpp>

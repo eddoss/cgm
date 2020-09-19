@@ -3,7 +3,7 @@
 
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
-#include <CGM/Modules/Global.hpp>
+#include <CGM/detail/Modules/Global.hpp>
 
 
 CGM_NAMESPACE_BEGIN

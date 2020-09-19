@@ -1,8 +1,8 @@
 
 
 #include "Input.hpp"
-#include <CGM/Modules/Transformations/3D/Functions/Rotate.hpp>
-#include <CGM/Modules/Transformations/3D/Functions/Apply.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Functions/Rotate.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Functions/Apply.hpp>
 
 
 using namespace std;

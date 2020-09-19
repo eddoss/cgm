@@ -8,10 +8,10 @@
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Modules/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/detail/Modules/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
-#include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 using namespace std;

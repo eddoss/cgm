@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Functions/Vector.hpp>

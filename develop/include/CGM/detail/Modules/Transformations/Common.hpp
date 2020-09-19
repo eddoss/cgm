@@ -1,24 +1,42 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/Common.hpp>
+#include <iomanip>
+#include <iostream>
+#include <CGM/detail/Modules/Transformations/3D/ModuleGlobals.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 
-constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ETransformOrder transformOrder)
-{
-    switch (transformOrder)
-    {
-        case CGM::ETransformOrder::RST: stream << "CGM::ETransformOrder::RST"; break;
-        case CGM::ETransformOrder::RTS: stream << "CGM::ETransformOrder::RTS"; break;
-        case CGM::ETransformOrder::SRT: stream << "CGM::ETransformOrder::SRT"; break;
-        case CGM::ETransformOrder::STR: stream << "CGM::ETransformOrder::STR"; break;
-        case CGM::ETransformOrder::TRS: stream << "CGM::ETransformOrder::TRS"; break;
-        case CGM::ETransformOrder::TSR: stream << "CGM::ETransformOrder::TSR"; break;
-    }
+/* ####################################################################################### */
+/* Enums */
+/* ####################################################################################### */
 
-    return stream;
-}
+/**
+ * Describe transformation order.
+ */
+enum class ETransformOrder
+{
+    SRT = 0,    /**< Scale, rotate, translate */
+    STR,        /**< Scale, translate, rotate */
+    TRS,        /**< Translate, rotate, scale */
+    TSR,        /**< Translate, scale, rotate */
+    RST,        /**< Rotate, scale, translate */
+    RTS         /**< Rotate, translate, scale */
+};
+
+constexpr std::ostream&
+operator << (std::ostream& stream, CGM::ETransformOrder transformOrder);
 
 CGM_NAMESPACE_END
+
+/* ####################################################################################### */
+/* Macro */
+/* ####################################################################################### */
+
+#define CGM_SRT CGM::ETransformOrder::SRT
+#define CGM_STR CGM::ETransformOrder::STR
+#define CGM_TRS CGM::ETransformOrder::TRS
+#define CGM_TSR CGM::ETransformOrder::TSR
+#define CGM_RST CGM::ETransformOrder::RST
+#define CGM_RTS CGM::ETransformOrder::RTS

@@ -1,6 +1,18 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/3D/Functions/Apply.hpp>
+#include <initializer_list>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Cartesian/Common.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Transformations/Common.hpp>
+#include <CGM/detail/Modules/Transformations/3D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/InternalUtils_impl.hpp>
+#include <CGM/detail/Modules/Transformations/3D/InternalUtils_impl.hpp>
 
 /* ####################################################################################### */
 /* Inplace */
@@ -9,229 +21,164 @@
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
+/**
+ * Applies transformation to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Vector<3,T>& vector, const Matrix<3,3,T>& transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    vector = transforms * vector;
-#else
-    vector = vector * transforms;
-#endif
-}
+apply(Vector<3,T>& vector, const Matrix<3,3,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Applies transformation to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    vector = detail::multiply_matrix4x4_on_vector3<Representation>(transforms, vector);
-#else
-    vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, transforms);
-#endif
-}
+apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms List of 3x3 transformations matrices.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    auto matrix = identity<3,T>();
-    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
-    {
-        matrix *= *(transforms.begin() + i);
-    }
-    vector = matrix * vector;
-#else
-    for (const auto& mat : transforms)
-    {
-        vector *= mat;
-    }
-#endif
-}
+apply(Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms List of 4x4 transformations matrices.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE void
-apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    auto matrix = identity<4,T>();
-    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
-    {
-        matrix *= *(transforms.begin() + i);
-    }
-    vector = detail::multiply_matrix4x4_on_vector3<Representation>(matrix, vector);
-#else
-    for (const auto& mat : transforms)
-    {
-        vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, mat);
-    }
-#endif
-}
+apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformation to 3x3 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    matrix = transforms * matrix;
-#else
-    matrix = matrix * transforms;
-#endif
-}
+apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 3x3 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrices.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    auto mat = identity<3,T>();
-    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
-    {
-        mat *= *(transforms.begin() + i);
-    }
-    matrix = mat * matrix;
-#else
-    for (const auto& mat : transforms)
-    {
-        matrix *= mat;
-    }
-#endif
-}
+apply(Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformation to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    matrix = transforms * matrix;
-#else
-    matrix = matrix * transforms;
-#endif
-}
+apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 4x4 transformation matrices.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-apply(Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
-{
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
-    auto mat = identity<4,T>();
-    for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
-    {
-        mat *= *(transforms.begin() + i);
-    }
-    matrix = mat * matrix;
-#else
-    for (const auto& mat : transforms)
-    {
-        matrix *= mat;
-    }
-#endif
-}
+apply(Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms);
 
 /* ####################################################################################### */
 /* Outplace */
 /* ####################################################################################### */
 
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ * @return Copy of transformed vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-applied(const Vector<3,T>& vector, const Matrix<3,3,T>& transforms)
-{
-    auto copy = vector;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Vector<3,T>& vector, const Matrix<3,3,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ * @return Copy of transformed vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
-{
-    auto copy = vector;
-    apply<Representation>(copy, transforms);
-    return copy;
-}
+applied(const Vector<3,T>& vector, const Matrix<4,4,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms List of 3x3 transformations matrices.
+ * @return Copy of transformed vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-applied(const Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
-{
-    auto copy = vector;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<EVectorRepresentation Representation, typename T>
+/**
+ * Applies transformations to vector.
+ * @param vector Vector to apply transformations to.
+ * @param transforms List of 4x4 transformations matrices.
+ * @return Copy of transformed vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-applied(const Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
-{
-    auto copy = vector;
-    apply<Representation>(copy, transforms);
-    return copy;
-}
+applied(const Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 3x3 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrix.
+ * @return Copy of transformed matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
-{
-    auto copy = matrix;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 3x3 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 3x3 transformation matrices.
+ * @return Copy of transformed matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-applied(const Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
-{
-    auto copy = matrix;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 4x4 transformation matrix.
+ * @return Copy of transformed matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-applied(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
-{
-    auto copy = matrix;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Applies transformations to 4x4 matrix.
+ * @param matrix Matrix to apply transformations to.
+ * @param transforms 4x4 transformation matrices.
+ * @return Copy of transformed matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-applied(const Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
-{
-    auto copy = matrix;
-    apply(copy, transforms);
-    return copy;
-}
+applied(const Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Apply_impl.hpp>

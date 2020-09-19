@@ -1,6 +1,9 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/2D/Functions/Converters/Axis.hpp>
+#include <CGM/detail/Modules/Transformations/2D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Converters/Vector.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,269 +13,334 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /* Global to local / local to global (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the axis does not change, only recalculation to the local system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param orientation Local space orientation represented by 3x3 matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation)
-{
-    convert<Space>(axis.direction, orientation);
-    convert<Space>(axis.position, orientation);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the axis does not change, only recalculation to the local system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param orientation Local space orientation represented by 3x3 matrix.
+ * @param position Local space position.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
-{
-    convert<Space>(axis.direction, orientation);
-    convert<Space>(axis.position, orientation, position);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
+ * will be converted to from local to world (and vice versa). The physically position of
+ * the axis does not change, only recalculation to the local system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param space Local space represented by 4x4 matrix.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& space)
-{
-    convert<Space,EVectorRepresentation::Direction>(axis.direction, space);
-    convert<Space,EVectorRepresentation::Point>(axis.position, space);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    convert(axis.direction, orientationA, orientationB);
-    convert(axis.position, orientationA, orientationB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert(axis.direction, orientationA, orientationB);
-    convert(axis.position, orientationA, orientationB, positionB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 4x4 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
-    convert<EVectorRepresentation::Point>(axis.position, orientationA, spaceB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 with Position (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
-{
-    convert(axis.direction, orientationA, orientationB);
-    convert(axis.position, orientationA, positionA, orientationB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert(axis.direction, orientationA, orientationB);
-    convert(axis.position, orientationA, positionA, orientationB, positionB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param spaceB 4x4 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
-{
-    convert<EVectorRepresentation::Direction>(axis.direction, orientationA, spaceB);
-    convert<EVectorRepresentation::Point>(axis.position, orientationA, positionA, spaceB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix4 (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
-    convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    convert<EVectorRepresentation::Direction>(axis.direction, spaceA, orientationB);
-    convert<EVectorRepresentation::Point>(axis.position, spaceA, orientationB, positionB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 4x4 matrix of B space.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    convert<EVectorRepresentation::Direction>(axis.direction, spaceA, spaceB);
-    convert<EVectorRepresentation::Point>(axis.position, spaceA, spaceB);
-}
+convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Global to local / local to global (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
+ * will be converted to from local to world (and vice versa). The physically position
+ * of the axis does not change, only recalculation to the local system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param orientation Local space orientation represented by 3x3 matrix.
+ * @return Converted axis.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation)
-{
-    auto copy = axis;
-    convert<Space>(copy, orientation);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
+ * will be converted to from local to world (and vice versa). The
+ * physically position  of the axis does not change, only recalculation to the local
+ * system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param orientation Local space orientation represented by 3x3 matrix.
+ * @param position Local space position.
+ * @return Converted axis.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
-{
-    auto copy = axis;
-    convert<Space>(copy, orientation, position);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
+ * will be converted to from local to world (and vice versa). The
+ * physically position  of the axis does not change, only recalculation to the local
+ * system occurs.
+ * @tparam Space Space to convert to.
+ * @param axis Axis to convert.
+ * @param space Local space represented by 4x4 matrix.
+ * @return Converted axis.
+ */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& space)
-{
-    auto copy = axis;
-    convert<Space>(copy, space);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& space);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, orientationB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, orientationB, positionB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param spaceB 4x4 matrix of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, spaceB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 with Position (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, positionA, orientationB, positionB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param orientationA Orientation of A space.
+ * @param positionB Position of A space.
+ * @param spaceB 4x4 matrix of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = axis;
-    convert(copy, orientationA, positionA, spaceB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientationA, const Vector<2,T>& positionA, const Matrix<3,3,T>& spaceB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix4 (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
-{
-    auto copy = axis;
-    convert(copy, spaceA, orientationB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param orientationB Orientation of B space.
+ * @param positionB Position of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB)
-{
-    auto copy = axis;
-    convert(copy, spaceA, orientationB, positionB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB, const Vector<2,T>& positionB);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Convert axis from space A to space B (A and B are in one space). The physically 
+ * position of the axis does not change, only recalculation to the B system occurs.
+ * @param axis Axis in A space.
+ * @param spaceA Basis of A space.
+ * @param spaceB 4x4 matrix of B space.
+ * @return Converted axis from space A to B.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
-{
-    auto copy = axis;
-    convert(copy, spaceA, spaceB);
-    return copy;
-}
+converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 CGM_XFORM2D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/2D/Functions/Converters/Axis_impl.hpp>

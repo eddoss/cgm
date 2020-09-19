@@ -2,7 +2,7 @@
 
 
 #include <type_traits>
-#include <CGM/Modules/Global.hpp>
+#include <CGM/detail/Modules/Global.hpp>
 #include <CGM/detail/Modules/Core/Support/Matrix/ReverseMatrixIterator_impl.hpp>
 #include <CGM/detail/Modules/Core/Support/Matrix/Iterators/Direct_impl.hpp>
 #include <CGM/detail/Modules/Core/Support/Matrix/Iterators/Indirect_impl.hpp>

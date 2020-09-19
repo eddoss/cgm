@@ -2,8 +2,8 @@
 
 
 #include <type_traits>
-#include <CGM/Modules/Global.hpp>
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Global.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 
 

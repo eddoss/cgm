@@ -1,6 +1,10 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/3D/Functions/Refract.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Transformations/Common.hpp>
+#include <CGM/detail/Modules/Transformations/3D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Enums.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,93 +14,54 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Refracts the vector through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param vector Vector to reflect.
+ * @param ior Index of refraction.
+ */
 template<EPlane Plane, typename T>
 constexpr void
-refract(Vector<3,T>& vector, T ior)
-{
-    T cosi;
+refract(Vector<3,T>& vector, T ior);
 
-    if constexpr (Plane == EPlane::XY)
-    {
-        cosi = -vector.z;
-    }
-    else if constexpr (Plane == EPlane::YZ)
-    {
-        cosi = -vector.x;
-    }
-    else
-    {
-        cosi = -vector.y;
-    }
-
-    T sint = ior * ior * (1 - cosi * cosi);
-
-    if (sint > 1)
-    {
-        return;
-    }
-
-    T cost = std::sqrt(1 - sint);
-
-    vector *= ior;
-
-    if constexpr (Plane == EPlane::XY)
-    {
-        vector.z += ior * cosi - cost;
-    }
-    else if constexpr (Plane == EPlane::YZ)
-    {
-        vector.x += ior * cosi - cost;
-    }
-    else
-    {
-        vector.y += ior * cosi - cost;
-    }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Refracts the vector through a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param ior Index of refraction.
+ */
 template<typename T>
 constexpr void
-refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
-{
-    T cosi = -dot(vector, planeNormal);
-    T sint = ior * ior * (1 - cosi * cosi);
-
-    if (sint > 1)
-    {
-        return;
-    }
-
-    T cost = std::sqrt(1 - sint);
-
-    vector = ior * vector + (ior * cosi - cost) * planeNormal;
-}
+refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Refracts the vector through a default Cartesian plane.
+ * @tparam Plane Default Cartesian plane.
+ * @param vector Vector to reflect.
+ * @param ior Index of refraction.
+ * @return Copy of refracted vector.
+ */
 template<EPlane Plane, typename T>
 constexpr Vector<3,T>
-refracted(const Vector<3,T>& vector, T ior)
-{
-    auto copy = vector;
-    refract<Plane>(copy, ior);
-    return copy;
-}
+refracted(const Vector<3,T>& vector, T ior);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Refracts the vector through a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param ior Index of refraction.
+ * @return Copy of refracted vector.
+ */
 template<typename T>
 constexpr Vector<3,T>
-refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
-{
-    auto copy = vector;
-    refract(copy, planeNormal, ior);
-    return copy;
-}
-
+refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Refract_impl.hpp>

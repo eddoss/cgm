@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Types/Matrix.hpp>
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/MatrixVectorMultiplication.hpp>

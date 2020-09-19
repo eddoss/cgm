@@ -1,1726 +1,1190 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/3D/Functions/Rotate.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Types/Quaternion.hpp>
+#include <CGM/detail/Modules/Core/Operators/Vector.hpp>
+#include <CGM/detail/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/detail/Modules/Core/Operators/Quaternion.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Types/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Axes.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Transformations/Common.hpp>
+#include <CGM/detail/Modules/Transformations/3D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Functions/Utils.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
-/* Vector */
+/* Vector (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates vector around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angle Rotation angle.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle)
-{
-    orient(vector, orientationQuaternion(axis<Axis,T>(), angle));
-}
+rotate(Vector<3,T>& vector, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Vector<3,T>& angles)
-{
-    orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-    orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-    orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-}
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            orient(vector, orientationQuaternion(axis<EAxes::Z,T>(), angles.z));
-            orient(vector, orientationQuaternion(axis<EAxes::Y,T>(), angles.y));
-            orient(vector, orientationQuaternion(axis<EAxes::X,T>(), angles.x));
-            break;
-        }
-    }
-}
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around arbitrary direction.
+ * @param vector Vector to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction)
-{
-    orient(vector, orientationQuaternion(direction, angle));
-}
+rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around arbitrary axis.
+ * @param vector Vector to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis)
-{
-    vector -= axis.position;
-    orient(vector, orientationQuaternion(axis.direction, angle));
-    vector += axis.position;
-}
+rotate(Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    vector -= pivotPoint.position;
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-    orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-    orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-    orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-
-    vector += pivotPoint.position;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    vector -= pivotPoint.position;
+rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            orient(vector, orientationQuaternion(pivotPoint.axes.z, angles.z));
-            orient(vector, orientationQuaternion(pivotPoint.axes.y, angles.y));
-            orient(vector, orientationQuaternion(pivotPoint.axes.x, angles.x));
-            break;
-        }
-    }
-
-    vector += pivotPoint.position;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector by Quaternion.
+ * @param vector Vector to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Quaternion<T>& quaternion)
-{
-    orient(vector, quaternion);
-}
+rotate(Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "transform.rotations".
+ * @param vector Vector to rotate.
+ * @param transforms Transformations parameters.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, const Transforms<T>& transforms)
-{
-    rotate(vector, transforms.rotation, transforms.pivot, transforms.rotationOrder);
-}
+rotate(Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
-/* Matrix3 */
+/* Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<3,3,T>& matrix, T angle)
-{
-    Vector<3,T> axs {};
+rotate(Matrix<3,3,T>& matrix, T angle);
 
-    if constexpr (Space == ESpace::World)
-    {
-       axs = axis<Axis,T>();
-    }
-    else
-    {
-        if constexpr (Axis == EAxes::X) axs = x(matrix);
-        if constexpr (Axis == EAxes::Y) axs = y(matrix);
-        if constexpr (Axis == EAxes::Z) axs = z(matrix);
-    }
-
-    rotate(matrix, orientationQuaternion(axs,angle));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around arbitrary direction.
+ * @param matrix Orientation matrix to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
-{
-    auto axes = orientationAxes(matrix);
-    Quaternion<T> quat;
+rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
-    if constexpr (Space == ESpace::World)
-    {
-        quat = orientationQuaternion(direction, angle);
-    }
-    else
-    {
-        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
-    }
-
-    orient(axes.x, quat);
-    orient(axes.y, quat);
-    orient(axes.z, quat);
-
-    set(matrix, axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles)
-{
-    rotate<EAxes::X, Space>(matrix, angles.x);
-    rotate<EAxes::Y, Space>(matrix, angles.y);
-    rotate<EAxes::Z, Space>(matrix, angles.z);
-}
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            rotate<EAxes::Z, Space>(matrix, angles.z);
-            rotate<EAxes::Y, Space>(matrix, angles.y);
-            rotate<EAxes::X, Space>(matrix, angles.x);
-            break;
-        }
-    }
-}
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
-{
-    rotate<Space>(matrix, angles.x, pivot.axes.x);
-    rotate<Space>(matrix, angles.y, pivot.axes.y);
-    rotate<Space>(matrix, angles.z, pivot.axes.z);
-}
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
-{
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            break;
-        }
-    }
-}
+rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates 3x3 matrix by Quaternion.
+ * @param matrix Matrix to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
 template<typename T>
 constexpr void
-rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
-{
-    auto axes = orientationAxes(matrix);
+rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
-    orient(axes.x, quaternion);
-    orient(axes.y, quaternion);
-    orient(axes.z, quaternion);
-
-    set(matrix, axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param transforms Transformations parameters.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
-{
-    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
-}
+rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
-/* Matrix4 */
+/* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Space matrix to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, T angle)
-{
-    Vector<3,T> axs {};
+rotate(Matrix<4,4,T>& matrix, T angle);
 
-    if constexpr (Space == ESpace::World)
-    {
-       axs = axis<Axis,T>();
-    }
-    else
-    {
-        if constexpr (Axis == EAxes::X) axs = x(matrix);
-        if constexpr (Axis == EAxes::Y) axs = y(matrix);
-        if constexpr (Axis == EAxes::Z) axs = z(matrix);
-    }
-
-    rotate(matrix, orientationQuaternion(axs,angle));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
-{
-    Quaternion<T> qx;
-    Quaternion<T> qy;
-    Quaternion<T> qz;
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
-    if constexpr (Space == ESpace::World)
-    {
-        qx = orientationQuaternion(axis<EAxes::X,T>(), angles.x);
-        qy = orientationQuaternion(axis<EAxes::Y,T>(), angles.y);
-        qz = orientationQuaternion(axis<EAxes::Z,T>(), angles.z);
-    }
-    else
-    {
-        qx = orientationQuaternion(x(matrix), angles.x);
-        qy = orientationQuaternion(y(matrix), angles.y);
-        qz = orientationQuaternion(z(matrix), angles.z);
-    }
-
-    auto axes = orientationAxes(matrix);
-
-    orient(axes.x, qx);
-    orient(axes.x, qy);
-    orient(axes.x, qz);
-
-    orient(axes.y, qx);
-    orient(axes.y, qy);
-    orient(axes.y, qz);
-
-    orient(axes.z, qx);
-    orient(axes.z, qy);
-    orient(axes.z, qz);
-
-    if constexpr (Space == ESpace::World)
-    {
-        auto pos = position(matrix);
-
-        orient(pos, qx);
-        orient(pos, qy);
-        orient(pos, qz);
-
-        setPosition(matrix, pos);
-    }
-
-    setOrientation(matrix, axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    Quaternion<T> qx;
-    Quaternion<T> qy;
-    Quaternion<T> qz;
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-    if constexpr (Space == ESpace::World)
-    {
-        qx = orientationQuaternion(axis<EAxes::X,T>(), angles.x);
-        qy = orientationQuaternion(axis<EAxes::Y,T>(), angles.y);
-        qz = orientationQuaternion(axis<EAxes::Z,T>(), angles.z);
-    }
-    else
-    {
-        qx = orientationQuaternion(x(matrix), angles.x);
-        qy = orientationQuaternion(y(matrix), angles.y);
-        qz = orientationQuaternion(z(matrix), angles.z);
-    }
-
-    auto axes = orientationAxes(matrix);
-
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            break;
-        }
-    }
-
-    if constexpr (Space == ESpace::World)
-    {
-        auto pos = position(matrix);
-
-        switch (rotationOrder)
-        {
-            case ERotationOrder::XYZ:
-            {
-                orient(pos, qx);
-                orient(pos, qy);
-                orient(pos, qz);
-                break;
-            }
-            case ERotationOrder::XZY:
-            {
-                orient(pos, qx);
-                orient(pos, qz);
-                orient(pos, qy);
-                break;
-            }
-            case ERotationOrder::YXZ:
-            {
-                orient(pos, qy);
-                orient(pos, qx);
-                orient(pos, qz);
-                break;
-            }
-            case ERotationOrder::YZX:
-            {
-                orient(pos, qy);
-                orient(pos, qz);
-                orient(pos, qx);
-                break;
-            }
-            case ERotationOrder::ZXY:
-            {
-                orient(pos, qz);
-                orient(pos, qx);
-                orient(pos, qy);
-                break;
-            }
-            case ERotationOrder::ZYX:
-            {
-                orient(pos, qz);
-                orient(pos, qy);
-                orient(pos, qx);
-                break;
-            }
-        }
-
-        setPosition(matrix, pos);
-    }
-
-    setOrientation(matrix, axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around arbitrary direction.
+ * @param matrix Orientation matrix to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
-    Quaternion<T> quat;
+rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
-    if constexpr (Space == ESpace::World)
-    {
-       quat = orientationQuaternion(direction, angle);
-    }
-    else
-    {
-        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
-    }
-
-    orient(axes.x, quat);
-    orient(axes.y, quat);
-    orient(axes.z, quat);
-    orient(pos, quat);
-
-    set(matrix, axes, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around arbitrary axis.
+ * @tparam Space In which space to transform.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
+rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
-    if constexpr (Space == ESpace::World)
-    {
-//        auto quat = orientationQuaternion(axis.direction, angle);
-//
-//        orient(axes.x, quat);
-//        orient(axes.y, quat);
-//        orient(axes.z, quat);
-//
-//        pos -= axis.position;
-//        orient(pos, quat);
-//        pos += axis.position;
-
-        rotate(axes.x, angle, axis.direction);
-        rotate(axes.y, angle, axis.direction);
-        rotate(axes.z, angle, axis.direction);
-        rotate(pos, angle, axis);
-    }
-    else
-    {
-        auto wsAxisDir = converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix);
-        auto wsAxisPos = converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix);
-        auto wsQuat = orientationQuaternion(wsAxisDir, angle);
-
-        orient(axes.x, wsQuat);
-        orient(axes.y, wsQuat);
-        orient(axes.z, wsQuat);
-
-        pos -= wsAxisPos;
-        orient(pos, wsQuat);
-        pos += wsAxisPos;
-    }
-
-    set(matrix, axes, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-    rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-    rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-}
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            break;
-        }
-        case ERotationOrder::XZY:
-        {
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            break;
-        }
-        case ERotationOrder::YXZ:
-        {
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            break;
-        }
-        case ERotationOrder::YZX:
-        {
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            break;
-        }
-        case ERotationOrder::ZXY:
-        {
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            break;
-        }
-        case ERotationOrder::ZYX:
-        {
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            break;
-        }
-    }
-}
+rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates 4x4 matrix by Quaternion.
+ * @param matrix Matrix to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
 template<typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
+rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
-    orient(axes.x, quaternion);
-    orient(axes.y, quaternion);
-    orient(axes.z, quaternion);
-    orient(pos, quaternion);
-
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around each axis of pivot on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param transforms Transformations parameters.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
-{
-    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
-}
+rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
-/* Pivot */
+/* Pivot (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates pivot around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param pivot Pivot to rotate.
+ * @param angle Rotation angle.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle)
-{
-    rotate<Axis>(pivot.axes.x, angle);
-    rotate<Axis>(pivot.axes.y, angle);
-    rotate<Axis>(pivot.axes.z, angle);
-    rotate<Axis>(pivot.position, angle);
-}
+rotate(Pivot<T>& pivot, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around arbitrary direction.
+ * @param pivot Pivot to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction)
-{
-    const auto quat = orientationQuaternion(direction, angle);
+rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
 
-    orient(pivot.axes.x, quat);
-    orient(pivot.axes.y, quat);
-    orient(pivot.axes.z, quat);
-    orient(pivot.position, quat);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around arbitrary axis.
+ * @param pivot Pivot to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis)
-{
-    rotate(pivot.axes.x, angle, axis);
-    rotate(pivot.axes.y, angle, axis);
-    rotate(pivot.axes.z, angle, axis);
-    rotate(pivot.position, angle);
-}
+rotate(Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param pivot Pivot to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    rotate(pivot.axes.x, angles, pivotPoint);
-    rotate(pivot.axes.y, angles, pivotPoint);
-    rotate(pivot.axes.z, angles, pivotPoint);
-    rotate(pivot.position, angles, pivotPoint);
-}
+rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in given rotation order).
+ * @param pivot Pivot to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    rotate(pivot.axes.x, angles, pivotPoint, rotationOrder);
-    rotate(pivot.axes.y, angles, pivotPoint, rotationOrder);
-    rotate(pivot.axes.z, angles, pivotPoint, rotationOrder);
-    rotate(pivot.position, angles, pivotPoint, rotationOrder);
-}
+rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot by Quaternion.
+ * @param pivot Pivot to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion)
-{
-    rotate(pivot.axes.x, quaternion);
-    rotate(pivot.axes.y, quaternion);
-    rotate(pivot.axes.z, quaternion);
-    rotate(pivot.position, quaternion);
-}
+rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot on angle contained in "transform.rotations".
+ * @param pivot Pivot to rotate.
+ * @param transforms Transformations parameters.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
-{
-    rotate(pivot, transforms.rotation, transforms.pivot, transforms.rotationOrder);
-}
+rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Axis (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates arbitrary axis around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angle Rotation angle.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle)
-{
-    rotate<Axis>(arbitraryAxis.direction, angle);
-    rotate<Axis>(arbitraryAxis.position, angle);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
-{
-    rotate(arbitraryAxis.direction, angles);
-    rotate(arbitraryAxis.position, angles);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    rotate(arbitraryAxis.direction, angles, rotationOrder);
-    rotate(arbitraryAxis.position, angles, rotationOrder);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around arbitrary direction.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
-{
-    rotate(arbitraryAxis.direction, angle, direction);
-    rotate(arbitraryAxis.position, angle, direction);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
-{
-    rotate(arbitraryAxis.direction, angle, axis);
-    rotate(arbitraryAxis.position, angle, axis);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    rotate(arbitraryAxis.direction, angles, pivotPoint);
-    rotate(arbitraryAxis.position, angles, pivotPoint);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    rotate(arbitraryAxis.direction, angles, pivotPoint, rotationOrder);
-    rotate(arbitraryAxis.position, angles, pivotPoint, rotationOrder);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis by Quaternion.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param quaternion Quaternion to rotate by.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
-{
-    rotate(arbitraryAxis.direction, quaternion);
-    rotate(arbitraryAxis.position, quaternion);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param transforms Transformations parameters.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
-{
-    rotate(arbitraryAxis.direction, transforms);
-    rotate(arbitraryAxis.position, transforms);
-}
+rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
-/* Quaternion */
+/* Quaternion (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates quaternion around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param quaternion Quaternion to rotate.
+ * @param angle Rotation angle.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, T angle)
-{
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(axis<Axis,T>(), angle));
-}
+rotate(Quaternion<T>& quaternion, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around arbitrary axis.
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param direction Arbitrary direction to rotate around.
+ * @param angle Rotation angle.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction)
-{
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(direction, angle));
-}
+rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-}
+rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    switch (rotationOrder)
-    {
-        case ERotationOrder::XYZ:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-        }
-        case ERotationOrder::XZY:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-        }
-        case ERotationOrder::YXZ:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-        }
-        case ERotationOrder::YZX:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-        }
-        case ERotationOrder::ZXY:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-        }
-        case ERotationOrder::ZYX:
-        {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-        }
-    }
-}
+rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion by Quaternion.
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param quat Quaternion to rotate by.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
-{
-    if constexpr (Space == ESpace::World)
-    {
-        quaternion *= quat;
-    }
-    else
-    {
-        auto [axs, ang] = axisAngle(quat);
-        auto worldSpaceAxis = converted<ESpace::World>(axs, quat);
-        quaternion *= CGM_XFORM3D::orientationQuaternion(worldSpaceAxis, angle);
-    }
-}
+rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param transforms Transformations parameters.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms)
-{
-    rotate<Space>(quaternion, transforms.rotation, transforms.pivot, transforms.rotationOrder);
-}
+rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates vector around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of vector.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle)
-{
-    auto copy = vector;
-    rotate<Axis,T>(copy, angle);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Vector<3,T>& angles)
-{
-    auto copy = vector;
-    rotate(copy, angles);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    auto copy = vector;
-    rotate(copy, angles, rotationOrder);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around arbitrary direction.
+ * @param vector Vector to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction)
-{
-    auto copy = vector;
-    rotate(copy, angle, direction);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around arbitrary axis.
+ * @param vector Vector to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto copy = vector;
-    rotate(copy, angle, axis);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto copy = vector;
-    rotate(copy, angles, pivotPoint);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param vector Vector to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto copy = vector;
-    rotate(copy, angles, pivotPoint, rotationOrder);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector by Quaternion.
+ * @param vector Vector to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Quaternion<T>& quaternion)
-{
-    auto copy = vector;
-    rotate(copy, quaternion);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates vector around each axis of pivot on angle contained in "transform.rotations".
+ * @param vector Vector to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of vector.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, const Transforms<T>& transforms)
-{
-    auto copy = vector;
-    rotate(copy, transforms);
-    return copy;
-}
+rotated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of matrix.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, T angle)
-{
-    auto copy = matrix;
-    rotate<Axis, Space>(copy, angle);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around arbitrary direction.
+ * @param matrix Orientation matrix to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angle, direction);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, rotationOrder);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, pivot);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angles Rotation angles.
+ * @param rotationOrder Rotation order.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, pivot, rotationOrder);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix by Quaternion.
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, quaternion);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 3x3 matrix around default Cartesian axes on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
-rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, transforms);
-    return copy;
-}
+rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param matrix Orientation matrix to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of matrix.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle)
-{
-    auto copy = matrix;
-    rotate<Axis,Space>(copy, angle);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in 'XYZ' rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around default Cartesian axes (in given rotation order).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param matrix Space matrix to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, rotationOrder);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around arbitrary direction.
+ * @param matrix Orientation matrix to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angle, direction);
-    return copy;
-}
+rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around arbitrary axis.
+ * @tparam Space In which space to transform.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angle, axis);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, pivotPoint);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix by Quaternion.
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, quaternion);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates 4x4 matrix around each axis of pivot on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
-{
-    auto copy = matrix;
-    rotate<Space>(copy, transforms);
-    return copy;
-}
+rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Pivot (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates pivot around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param pivot Pivot to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of pivot.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, T angle)
-{
-    auto copy = pivot;
-    rotate<Axis>(copy, angle);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around arbitrary direction.
+ * @param pivot Pivot to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction)
-{
-    auto copy = pivot;
-    rotate(copy, angle, direction);
-    return copy;
-}
+rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around arbitrary axis.
+ * @param pivot Pivot to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto copy = pivot;
-    rotate(copy, axis);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param pivot Pivot to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto copy = pivot;
-    rotate(copy, angles, pivotPoint);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot point on angle contained in "angles" (in given rotation order).
+ * @param pivot Pivot to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto copy = pivot;
-    rotate(copy, angles, pivotPoint, rotationOrder);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot by Quaternion.
+ * @param pivot Pivot to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion)
-{
-    auto copy = pivot;
-    rotate(copy, quaternion);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates pivot around each axis of pivot on angle contained in "transform.rotations".
+ * @param pivot Pivot to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of pivot.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, const Transforms<T>& transforms)
-{
-    auto copy = pivot;
-    rotate(copy, transforms);
-    return copy;
-}
+rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Axis (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Rotates arbitrary axis around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
 template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
-{
-    auto copy = arbitraryAxis;
-    rotate<Axis>(copy, angle);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angles);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angles, rotationOrder);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around arbitrary direction.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angle, direction);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around arbitrary axis.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angle, axis);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angles, pivotPoint);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, angles, pivotPoint, rotationOrder);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis by Quaternion.
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param quaternion Quaternion to rotate by.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, quaternion);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
+ * @param arbitraryAxis Arbitrary axis to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
-{
-    auto copy = arbitraryAxis;
-    rotate(copy, transforms);
-    return copy;
-}
+rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Quaternion (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+/**
+ * Rotates quaternion around default Cartesian axis.
+ * @tparam Axis Cartesian axis to rotate around.
+ * @tparam Space In which space to rotate.
+ * @param quaternion Quaternion to rotate.
+ * @param angle Rotation angle.
+ * @return Rotated copy of quaternion.
+ */
+template<EAxes Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-rotated(const Quaternion<T>& quaternion, T angle)
-{
-    auto copy = quaternion;
-    rotate<Axis, Space>(copy, angle);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, T angle);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around arbitrary axis.
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotated copy of quaternion.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-rotated(const Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis)
-{
-    auto copy = quaternion;
-    rotate<Space>(copy, angle, axis);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotated copy of quaternion.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto copy = quaternion;
-    rotate<Space>(copy, angles, pivotPoint);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotated copy of quaternion.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Quaternion<T>
-rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto copy = quaternion;
-    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion by Quaternion.
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param quat Quaternion to rotate by.
+ * @return Rotated copy of quaternion.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-rotated(const Quaternion<T>& quaternion, const Quaternion<T>& quat)
-{
-    auto copy = quaternion;
-    rotate<Space>(copy, quat);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, const Quaternion<T>& quat);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Rotates quaternion around each axis of pivot on angle contained in "transform.rotations".
+ * @tparam Space In which space to transform.
+ * @param quaternion Quaternion to rotate.
+ * @param transforms Transformations parameters.
+ * @return Rotated copy of quaternion.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms)
-{
-    auto copy = quaternion;
-    rotate<Space>(copy, transforms);
-    return copy;
-}
+rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Transformation makers */
 /* ####################################################################################### */
 
-template<EAxes Axis, size_t N, typename T>
+/**
+ * Create rotation matrix (around default Cartesian axis).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
+template<EAxes Axis, size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-rotationMatrix(T angle)
-{
-    auto mat = identity<N,T>();
-    rotate<Axis>(mat, angle);
+rotationMatrix(T angle);
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t N, typename T>
+/**
+ * Create rotation matrix (around default Cartesian axes in 'XYZ' rotation order).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angles Rotation angles (angle per axis).
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-rotationMatrix(const Vector<3,T>& angles)
-{
-    auto mat = identity<N,T>();
-    rotate(mat, angles);
+rotationMatrix(const Vector<3,T>& angles);
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t N, typename T>
+/**
+ * Create rotation matrix (around default Cartesian axes (in given rotation order).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @tparam Axis Cartesian axis to rotate around.
+ * @param angles Rotation angles (angle per axis).
+ * @tparam rotationOrder Rotation order.
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-rotationMatrix(const Vector<3,T>& angles, ERotationOrder rotationOrder)
-{
-    auto mat = identity<N,T>();
-    rotate(mat, angles, rotationOrder);
+rotationMatrix(const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<size_t N, typename T>
+/**
+ * Create rotation matrix (around arbitrary direction).
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @param direction Direction to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
+template<size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-rotationMatrix(T angle, const Vector<3,T>& direction)
-{
-    auto mat = identity<N,T>();
-    rotate(mat, angle, direction);
+rotationMatrix(T angle, const Vector<3,T>& direction);
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create rotation matrix (around arbitrary axis).
+ * @param axis Arbitrary axis to rotate around.
+ * @param angle Rotation angle.
+ * @return Rotation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(T angle, const ArbitraryAxis<T>& axis)
-{
-    auto mat = identity<4,T>();
-    rotate(mat, angle, axis);
+rotationMatrix(T angle, const ArbitraryAxis<T>& axis);
 
-    transposeOrientation(mat);
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained from "angles" in 'XYZ' rotation order).
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @return Rotation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
-{
-    auto mat = identity<4,T>();
-    rotate(mat, angles, pivotPoint);
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
-    transposeOrientation(mat);
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained from "angles" in given rotation order).
+ * @param angles Rotation angles (angle per pivot axis).
+ * @param pivotPoint Rotation pivot.
+ * @param rotationOrder Rotation order.
+ * @return Rotation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
-{
-    auto mat = identity<4,T>();
-    rotate(mat, angles, pivotPoint, rotationOrder);
+rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
-    transposeOrientation(mat);
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create rotation matrix (around each axis of pivot on angle contained in "transform.rotations").
+ * @param transforms Transformations parameters.
+ * @return Rotation matrix.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(const Transforms<T>& transforms)
-{
-    auto mat = identity<4,T>();
-    rotate(mat, transforms);
-
-    transposeOrientation(mat);
-
-    return mat;
-}
+rotationMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Rotate_impl.hpp>

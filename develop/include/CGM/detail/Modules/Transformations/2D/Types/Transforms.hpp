@@ -1,83 +1,119 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Cartesian/2D/Functions/Axes.hpp>
+#include <CGM/detail/Modules/Transformations/Common.hpp>
+#include <CGM/detail/Modules/Transformations/2D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Types/Pivot.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 CGM_XFORM2D_NAMESPACE_BEGIN
 
-template<typename T>
-constexpr
-Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
-    , translation(t)
-    , rotation(r)
-    , scale(s)
-    , uniformScale(number<T>(1))
-    , transformOrder(ETransformOrder::SRT)
+template<typename T=FLOAT>
+struct Transforms
 {
+    CGM_RULE_OF_FIVE(Transforms)
 
-}
+/* ####################################################################################### */
+/* Attributes */
+/* ####################################################################################### */
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Describe translations.
+     */
+    Pivot<T>
+    pivot;
 
-template<typename T>
-constexpr
-Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
-    , translation(t)
-    , rotation(r)
-    , scale(s)
-    , uniformScale(us)
-    , transformOrder(ETransformOrder::SRT)
-{
+    /**
+     * Describe translations.
+     */
+    Vector<2,T>
+    translation;
 
-}
+    /**
+     * Describe scales.
+     */
+    Vector<2,T>
+    scale;
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Describe uniform scale.
+     */
+    T
+    uniformScale;
 
-template<typename T>
-constexpr
-Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, const Pivot<T>& p)
-    : pivot(p)
-    , translation(t)
-    , rotation(r)
-    , scale(s)
-    , uniformScale(number<T>(1))
-    , transformOrder(ETransformOrder::SRT)
-{
+    /**
+     * Describe rotation (in radians).
+     */
+    T
+    rotation;
 
-}
+    /**
+     * Describe transformation order.
+     */
+    ETransformOrder
+    transformOrder;
 
-/* --------------------------------------------------------------------------------------- */
+/* ####################################################################################### */
+/* Constructors */
+/* ####################################################################################### */
 
-template<typename T>
-constexpr
-Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us, const Pivot<T>& p)
-    : pivot(p)
-    , translation(t)
-    , rotation(r)
-    , scale(s)
-    , uniformScale(us)
-    , transformOrder(ETransformOrder::SRT)
-{
+    /**
+     * Initialize translation, scale and rotation.
+     * @param t Translation value.
+     * @param s Scale value.
+     * @param r Rotation angle.
+     */
+    constexpr
+    Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r);
 
-}
+    /**
+     * Initialize translation, scale, rotation and uniform scale.
+     * @param t Translation value.
+     * @param s Scale value.
+     * @param us Uniform scale value
+     * @param r Rotation value.
+     */
+    constexpr
+    Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us);
 
-/* --------------------------------------------------------------------------------------- */
+    /**
+     * Initialize translation, scale and rotation.
+     * @param t Translation value.
+     * @param s Scale value.
+     * @param r Rotation angle.
+     * @param p Pivot point.
+     */
+    constexpr
+    Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, const Pivot<T>& p);
 
-template<typename T>
-constexpr
-Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us, const Pivot<T>& p, ETransformOrder to)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
-    , translation(t)
-    , rotation(r)
-    , scale(s)
-    , uniformScale(us)
-    , transformOrder(to)
-{
+    /**
+     * Initialize translation, scale, rotation and uniform scale.
+     * @param t Translation value.
+     * @param s Scale value.
+     * @param us Uniform scale value
+     * @param r Rotation value.
+     * @param p Pivot point.
+     */
+    constexpr
+    Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us, const Pivot<T>& p);
 
-}
+    /**
+     * Initialize translation, scale, rotation, uniform scale and pivot.
+     * @param t Translation value.
+     * @param s Scale value.
+     * @param us Uniform scale value
+     * @param r Rotation value.
+     * @param p Pivot point.
+     */
+    constexpr
+    Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us, const Pivot<T>& p, ETransformOrder to);
+};
 
 CGM_XFORM2D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/2D/Types/Transforms_impl.hpp>

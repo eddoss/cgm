@@ -1,6 +1,15 @@
+#pragma once
 
 
-#include <CGM/Modules/Transformations/3D/Functions/Reflect.hpp>
+#include <CGM/detail/Modules/Core/Types/Vector.hpp>
+#include <CGM/detail/Modules/Core/Types/Matrix.hpp>
+#include <CGM/detail/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Modules/Transformations/Common.hpp>
+#include <CGM/detail/Modules/Transformations/3D/ModuleGlobals.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Enums.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/detail/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -10,516 +19,343 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Reflects vector from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param vector Vector to reflect.
+ */
 template<EPlane Plane, typename T>
 constexpr void
-reflect(Vector<3,T>& vector)
-{
-    if constexpr (Plane == EPlane::XY)
-    {
-        vector.z = -vector.z;
-    }
-    else if constexpr (Plane == EPlane::YZ)
-    {
-        vector.x = -vector.x;
-    }
-    else
-    {
-        vector.y = -vector.y;
-    }
-}
+reflect(Vector<3,T>& vector);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects vector from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ */
 template<typename T>
 constexpr void
-reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal)
-{
-    vector -= number<T>(2) * dot(vector, planeNormal) * planeNormal;
-}
+reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects vector from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ */
 template<typename T>
 constexpr void
-reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto projected = dot(vector, planeNormal) * planeNormal;
-    auto reflected = vector - projected - projected;
-
-    T dist = dot(planeCenter, planeNormal);
-    reflected += planeNormal * dist * number<T>(2);
-
-    vector = reflected;
-}
+reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+/**
+ * Reflects 3x3 matrix from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param matrix Matrix to reflect.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
 constexpr void
-reflect(Matrix<3,3,T>& matrix)
-{
-    auto axes = orientationAxes(matrix);
+reflect(Matrix<3,3,T>& matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect<Plane>(axes.x);
-        reflect<Plane>(axes.y);
-        reflect<Plane>(axes.z);
-    }
-    else
-    {
-        Vector<3,T> planeNormal {};
-
-        if constexpr (Plane == EPlane::XY)
-        {
-            planeNormal = z(matrix);
-        }
-        else if constexpr (Plane == EPlane::YZ)
-        {
-            planeNormal = x(matrix);
-        }
-        else
-        {
-            planeNormal = y(matrix);
-        }
-
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-    }
-
-    set(matrix, axes);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 3x3 matrix from a plane.
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to reflect.
+ * @param planeNormal Plane normal.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
-{
-    auto axes = orientationAxes(matrix);
-
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-    }
-    else
-    {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-    }
-
-    set(matrix, axes);
-}
+reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
 
 /* ####################################################################################### */
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+/**
+ * Reflects 4x4 matrix from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param matrix Matrix to reflect.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
 constexpr void
-reflect(Matrix<4,4,T>& matrix)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
+reflect(Matrix<4,4,T>& matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect<Plane>(axes.x);
-        reflect<Plane>(axes.y);
-        reflect<Plane>(axes.z);
-        reflect<Plane>(pos);
-    }
-    else
-    {
-        Vector<3,T> planeNormal {};
-
-        if constexpr (Plane == EPlane::XY)
-        {
-            planeNormal = z(matrix);
-        }
-        else if constexpr (Plane == EPlane::YZ)
-        {
-            planeNormal = x(matrix);
-        }
-        else
-        {
-            planeNormal = y(matrix);
-        }
-
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal);
-    }
-
-    set(matrix, axes, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 4x4 matrix from a plane.
+ * @param matrix Matrix to reflect.
+ * @param planeNormal Plane normal.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
+reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal);
-    }
-    else
-    {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-        reflect(pos, pn);
-    }
-
-    set(matrix, axes, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 4x4 matrix from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr void
-reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
-
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal, planeCenter);
-    }
-    else
-    {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
-        auto pc = converted<ESpace::World>(planeCenter, matrix);
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-        reflect(pos, pn, pc);
-    }
-
-    set(matrix, axes, pos);
-}
+reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Reflects pivot from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param pivot Pivot to reflect.
+ */
 template<EPlane Plane, typename T>
 constexpr void
-reflect(Pivot<T>& pivot)
-{
-    reflect<Plane>(pivot.axes.x);
-    reflect<Plane>(pivot.axes.y);
-    reflect<Plane>(pivot.axes.z);
-    reflect<Plane>(pivot.position);
-}
+reflect(Pivot<T>& pivot);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects pivot through plane.
+ * @param pivot Pivot to reflect.
+ * @param planeNormal Plane normal.
+ */
 template<typename T>
 constexpr void
-reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal)
-{
-    reflect(pivot.axes.x, planeNormal);
-    reflect(pivot.axes.y, planeNormal);
-    reflect(pivot.axes.z, planeNormal);
-    reflect(pivot.position, planeNormal);
-}
+reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects pivot through plane.
+ * @param pivot Pivot to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ */
 template<typename T>
 constexpr void
-reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
-{
-    reflect(pivot.axes.x, planeNormal);
-    reflect(pivot.axes.y, planeNormal);
-    reflect(pivot.axes.z, planeNormal);
-    reflect(pivot.position, planeNormal, planeCenter);
-}
+reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Axis (inplace) */
 /* ####################################################################################### */
 
+/**
+ * Reflects arbitrary axis from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ */
 template<EPlane Plane, typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis)
-{
-    reflect<Plane>(arbitraryAxis.direction);
-    reflect<Plane>(arbitraryAxis.position);
-}
+reflect(ArbitraryAxis<T>& arbitraryAxis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
-{
-    reflect(arbitraryAxis.direction, planeNormal);
-    reflect(arbitraryAxis.position, planeNormal);
-}
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    reflect(arbitraryAxis.direction, planeNormal);
-    reflect(arbitraryAxis.position, planeNormal, planeCenter);
-}
+reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Reflects vector from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param vector Vector to reflect.
+ * @return Reflected copy of vector.
+ */
 template<EPlane Plane, typename T>
 constexpr Vector<3,T>
-reflected(const Vector<3,T>& vector)
-{
-    auto copy = vector;
-    reflect<Plane>(copy);
-    return copy;
-}
+reflected(const Vector<3,T>& vector);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects vector from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of vector.
+ */
 template<typename T>
 constexpr Vector<3,T>
-reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal)
-{
-    auto copy = vector;
-    reflect(copy, planeNormal);
-    return copy;
-}
+reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects vector from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflected copy of vector.
+ */
 template<typename T>
 constexpr Vector<3,T>
-reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto copy = vector;
-    reflect(copy, planeNormal, planeCenter);
-    return copy;
-}
+reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+/**
+ * Reflects 3x3 matrix from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param matrix Matrix to reflect.
+ * @return Reflected copy of matrix.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-reflected(const Matrix<3,3,T>& matrix)
-{
-    auto copy = matrix;
-    reflect<Plane,Space>(copy);
-    return copy;
-}
+reflected(const Matrix<3,3,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 3x3 matrix from a plane.
+ * @tparam Space In which space to transform.
+ * @param matrix Matrix to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
-reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
-{
-    auto copy = matrix;
-    reflect<Space>(copy, planeNormal);
-    return copy;
-}
+reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
 
 /* ####################################################################################### */
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+/**
+ * Reflects 3x3 matrix from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param matrix Matrix to reflect.
+ * @return Reflected copy of matrix.
+ */
+template<EPlane Plane, ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-reflected(const Matrix<4,4,T>& matrix)
-{
-    auto copy = matrix;
-    reflect<Plane,Space>(copy);
-    return copy;
-}
+reflected(const Matrix<4,4,T>& matrix);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 4x4 matrix from a plane.
+ * @param matrix Matrix to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
-{
-    auto copy = matrix;
-    reflect<Space>(copy, planeNormal);
-    return copy;
-}
+reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+/**
+ * Reflects 4x4 matrix from a plane.
+ * @param vector Vector to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflected copy of matrix.
+ */
+template<ESpace Space = ESpace::World, typename T>
 constexpr Matrix<4,4,T>
-reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto copy = matrix;
-    reflect<Space>(copy, planeNormal, planeCenter);
-    return copy;
-}
+reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Pivot (outplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, typename T>
-constexpr Pivot<T>
-reflected(const Pivot<T>& pivot)
-{
-    auto copy = pivot;
-    reflect<Plane>(copy);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects pivot through plane.
+ * @param pivot Pivot to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of pivot.
+ */
 template<typename T>
 constexpr Pivot<T>
-reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal)
-{
-    auto copy = pivot;
-    reflect(copy, planeNormal);
-    return copy;
-}
+reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects pivot through plane.
+ * @param pivot Pivot to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflected copy of pivot.
+ */
 template<typename T>
 constexpr Pivot<T>
-reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
-{
-    auto copy = pivot;
-    reflect(copy, planeNormal, planeCenter);
-    return copy;
-}
+reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Axis (outplace) */
 /* ####################################################################################### */
 
+/**
+ * Reflects arbitrary axis from a default Cartesian plane.
+ * @tparam Plane Cartesian plane to reflect from.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @return Reflected copy of axis.
+ */
 template<EPlane Plane, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis)
-{
-    auto copy = arbitraryAxis;
-    reflect<Plane>(copy);
-    return copy;
-}
+reflected(const ArbitraryAxis<T>& arbitraryAxis);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @return Reflected copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
-{
-    auto copy = arbitraryAxis;
-    reflect(copy, planeNormal);
-    return copy;
-}
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
 
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Reflects arbitrary axis from a plane.
+ * @param arbitraryAxis Arbitrary axis to reflect.
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflected copy of axis.
+ */
 template<typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto copy = arbitraryAxis;
-    reflect(copy, planeNormal, planeCenter);
-    return copy;
-}
+reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Transformation makers */
 /* ####################################################################################### */
 
+/**
+ * Create reflection matrix (from a default Cartesian plane).
+ * @tparam Plane Cartesian plane to reflect from.
+ * @tparam N Size of matrix need to create (must be 3 or 4).
+ * @return Reflection matrix.
+ */
 template<EPlane Plane, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-reflectionMatrix()
-{
-    auto mat = identity<N,T>();
-    reflect<Plane>(mat);
+reflectionMatrix();
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create reflection matrix (from a plane).
+ * @param planeNormal Plane normal.
+ * @return Reflection matrix.
+ */
 template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-reflectionMatrix(const Vector<3,T>& planeNormal)
-{
-    auto mat = identity<N,T>();
-    reflect(mat, planeNormal);
+reflectionMatrix(const Vector<3,T>& planeNormal);
 
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
+/**
+ * Create reflection matrix (from a plane).
+ * @param planeNormal Plane normal.
+ * @param planeCenter Plane origin.
+ * @return Reflection matrix.
+ */
 template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
-reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
-{
-    auto mat = identity<N,T>();
-    reflect(mat, planeNormal, planeCenter);
-
-    if constexpr (N == 3)
-    {
-        transpose(mat);
-    }
-    else
-    {
-        transposeOrientation(mat);
-    }
-
-    return mat;
-}
+reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
+
+
+#include <CGM/detail/Modules/Transformations/3D/Functions/Reflect_impl.hpp>

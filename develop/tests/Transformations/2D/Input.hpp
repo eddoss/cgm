@@ -8,9 +8,9 @@
 #include <CGM/detail/Modules/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/Functions/Utils.hpp>
 #include <CGM/detail/Modules/Cartesian/2D/Functions/Orientation.hpp>
-#include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
-#include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
-#include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Types/Pivot.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Types/Transforms.hpp>
 #include <CGM/detail/Modules/Core/Functions/IO.hpp>
 
 using namespace std;

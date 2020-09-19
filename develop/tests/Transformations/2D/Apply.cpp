@@ -1,8 +1,8 @@
 
 
 #include "Input.hpp"
-#include <CGM/Modules/Transformations/2D/Functions/Scale.hpp>
-#include <CGM/Modules/Transformations/2D/Functions/Apply.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Functions/Scale.hpp>
+#include <CGM/detail/Modules/Transformations/2D/Functions/Apply.hpp>
 
 
 using namespace std;

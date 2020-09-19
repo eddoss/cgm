@@ -3,7 +3,7 @@
 
 #include <cmath>
 #include <type_traits>
-#include <CGM/Modules/Common.hpp>
+#include <CGM/detail/Modules/Common.hpp>
 #include <CGM/detail/Modules/Core/Types/Vector.hpp>
 #include <CGM/detail/Modules/Core/Operators/Vector.hpp>
 

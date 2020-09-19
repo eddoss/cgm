@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CGM/Modules/Global.hpp>
+#include <CGM/detail/Modules/Global.hpp>
 
 #define CGM_CORE_MODULE
 
