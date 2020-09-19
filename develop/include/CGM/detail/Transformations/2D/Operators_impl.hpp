@@ -1,6 +1,6 @@
 
 
-#include <CGM/detail/Transformations/Operators.hpp>
+#include <CGM/detail/Transformations/2D/Operators.hpp>
 
 
 /* ####################################################################################### */
@@ -34,7 +34,7 @@ operator == (const CGM_XFORM2D::Transforms<T>& A, const CGM_XFORM2D::Transforms<
     return
     A.translation       == B.translation
     && A.scale          == B.scale
-    && A.rotations      == B.rotations
+    && A.rotation       == B.rotation
     && A.pivot          == B.pivot
     && A.uniformScale   == B.uniformScale
     && A.transformOrder == B.transformOrder;
@@ -49,7 +49,7 @@ operator != (const CGM_XFORM2D::Transforms<T>& A, const CGM_XFORM2D::Transforms<
     return
     A.translation       != B.translation
     || A.scale          != B.scale
-    || A.rotations      != B.rotations
+    || A.rotation       != B.rotations
     || A.pivot          != B.pivot
     || A.uniformScale   != B.uniformScale
     || A.transformOrder != B.transformOrder;

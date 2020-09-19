@@ -104,7 +104,7 @@ set(TS_CARTESIAN_2D
 
 set(TS_CARTESIAN_3D
     Cartesian/3D/InternalFunctions.cpp
-    Cartesian/3D/Quaternion/Operators.cpp
+        Cartesian/3D/Quaternion/Axes.cpp
     Cartesian/3D/Quaternion/Functions.cpp
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/Utils.cpp
