@@ -80,7 +80,7 @@ TEST(Transformations3D_Apply, Vector_Matrix3_Variadic)
 
     const auto result = CGM_XFORM3D::applied(cgm_test::vector, {A,B,C});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     const auto expect = C * B * A * cgm_test::vector;
 #else
     const auto expect = cgm_test::vector * A * B * C;
@@ -101,7 +101,7 @@ TEST(Transformations3D_Apply, Vector_Matrix4_Variadic)
 
     const auto result = CGM_XFORM3D::applied<CGM_DIRECTION>(cgm_test::vector, {A,B,C});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     const auto expect = CGM_XFORM3D::applied<CGM_DIRECTION>(cgm_test::vector, C * B * A);
 #else
     const auto expect = CGM_XFORM3D::applied<CGM_DIRECTION>(cgm_test::vector, A * B * C);
@@ -122,7 +122,7 @@ TEST(Transformations3D_Apply, Matrix3_Variadic)
 
     const auto result = CGM_XFORM3D::applied(cgm_test::orientation, {A,B,C});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     const auto expect = C * B * A * cgm_test::orientation;
 #else
     const auto expect = cgm_test::orientation * A * B * C;
@@ -143,7 +143,7 @@ TEST(Transformations3D_Apply, Matrix4_Variadic)
 
     const auto result = CGM_XFORM3D::applied(cgm_test::space, {A,B,C});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     const auto expect = CGM_XFORM3D::applied(cgm_test::space, C * B * A);
 #else
     const auto expect = CGM_XFORM3D::applied(cgm_test::space, A * B * C);

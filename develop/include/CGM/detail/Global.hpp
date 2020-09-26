@@ -1,5 +1,31 @@
 #pragma once
 
+/* ####################################################################################### */
+/* Library properties validation */
+/* ####################################################################################### */
+
+#if CGM_MATRIX_STORING != Row || CGM_MATRIX_STORING != Column
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_MATRIX_STORING'");
+#endif
+
+/* --------------------------------------------------------------------------------------- */
+
+#if CGM_HANDEDNESS != Left || CGM_HANDEDNESS != Right
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_HANDEDNESS'");
+#endif
+
+/* --------------------------------------------------------------------------------------- */
+
+#if CGM_RIGHT_UP_FORWARD_AXES_LABELS != XYZ || CGM_RIGHT_UP_FORWARD_AXES_LABELS != XZY || CGM_RIGHT_UP_FORWARD_AXES_LABELS != YXZ || CGM_RIGHT_UP_FORWARD_AXES_LABELS != YZX || CGM_RIGHT_UP_FORWARD_AXES_LABELS != ZXY || CGM_RIGHT_UP_FORWARD_AXES_LABELS != ZYX
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_RIGHT_UP_FORWARD_AXES_LABELS'");
+#endif
+
+/* --------------------------------------------------------------------------------------- */
+
+#if CGM_MATRIX_MULTIPLICATION_ORDER != Pre || CGM_MATRIX_MULTIPLICATION_ORDER != Post
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value 'CGM_RIGHT_UP_FORWARD_AXES_LABELS'");
+#endif
+
 
 #include <type_traits>
 

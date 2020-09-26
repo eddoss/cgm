@@ -178,7 +178,7 @@ TEST(Cartesian_2D_InternalFunctions, fast_inverse_matrix3x3)
     Vector<2,double> y {0.601815,  0.798635};
     Vector<2,double> p {     0.2,     -0.53};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,double> input
     {
         x.x, x.y, p.x,

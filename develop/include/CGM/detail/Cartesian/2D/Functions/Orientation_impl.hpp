@@ -23,7 +23,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<2,2,T>& orientation)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
         Vector<2,T>{orientation(0,0), orientation(0,1)},
@@ -44,7 +44,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& space)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
         Vector<2,T>{space(0,0), space(0,1)},
@@ -67,7 +67,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
 orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
         x.x, x.y,

@@ -97,7 +97,7 @@ TEST(Cartesian_3D_Operators_Quaternion, OutplaceOtherMultiplication)
     CGM_XYZ::Quaternion<double> b { 9, 1, 3, 7 };
 
     CGM_XYZ::Quaternion<double> result = a * b;
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     CGM_XYZ::Quaternion<double> expect {41, -27, 47, -29};
 #else
     CGM_XYZ::Quaternion<double> expect {37, 45, 35, -29};

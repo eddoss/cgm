@@ -33,7 +33,7 @@ TEST(Cartesian_2D_Functions_Utils, GetX)
     auto value2 = CGM_XY::x(mat2);
     auto value3 = CGM_XY::x(mat3);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Vector<2,int> expec {2,4};
 #else
     Vector<2,int> expec {2,3};
@@ -63,7 +63,7 @@ TEST(Cartesian_2D_Functions_Utils, GetY)
     auto value2 = CGM_XY::y(mat2);
     auto value3 = CGM_XY::y(mat3);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Vector<2,int> expec {3,6};
 #else
     Vector<2,int> expec {4,6};
@@ -80,7 +80,7 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
     Vector<2,int> x {2,4};
     Vector<2,int> y {3,6};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expec2
     {
         2, 4,
@@ -134,7 +134,7 @@ TEST(Cartesian_2D_Functions_Utils, GetPosition)
     };
 
     auto value = CGM_XY::position(mat);
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto expec = Vector<2,int>{5,7};
 #else
     auto expec = Vector<2,int>{0,9};
@@ -156,7 +156,7 @@ TEST(Cartesian_2D_Functions_Utils, SetPosition)
 
     CGM_XY::setPosition(mat, {2,3});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec
     {
         1, 0, 2,
@@ -273,7 +273,7 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromAxes)
 
     auto basis = CGM_XY::spaceMatrix(X,Y,P);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec
     {
         2,1,1,
@@ -305,7 +305,7 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromMatrixAndPosition)
 
     auto basis = CGM_XY::spaceMatrix(orientation, position);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec
     {
         2,1,5,

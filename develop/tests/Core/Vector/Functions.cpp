@@ -396,7 +396,7 @@ TEST(Vector_Functions, Cross)
     Vector<3,int> y {0,1,0};
     Vector<3,int> z {0,0,1};
 
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     ASSERT_TRUE(cross(x,y) == -z);
     ASSERT_TRUE(cross(y,z) == -x);
     ASSERT_TRUE(cross(z,x) == -y);

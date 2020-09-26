@@ -25,7 +25,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(const T* values)
 {
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     for (auto i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = *(values + i);
@@ -47,7 +47,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     for (auto i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = *(values.begin() + i);
@@ -104,7 +104,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::reference
 Matrix<M,N,T>::operator () (size_t row, size_t column)
 {
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     return m_data[row][column];
 #else
     return m_data[column][row];
@@ -117,7 +117,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::const_reference
 Matrix<M,N,T>::operator () (size_t row, size_t column) const
 {
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     return m_data[row][column];
 #else
     return m_data[column][row];

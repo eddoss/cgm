@@ -15,7 +15,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 x(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(0,0),
         basis(0,1)
@@ -44,7 +44,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 2 || S == 3), Vector<2,T>>
 y(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(1,0),
         basis(1,1)
@@ -72,7 +72,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setX(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(0,0) = value.x;
     basis(0,1) = value.y;
 #else
@@ -96,7 +96,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setY(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(1,0) = value.x;
     basis(1,1) = value.y;
 #else
@@ -123,7 +123,7 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 position(const Matrix<3,3,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(0,2),
         basis(1,2)
@@ -142,7 +142,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<3,3,T>& basis, const Vector<2,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(0,2) = position.x;
     basis(1,2) = position.y;
 #else
@@ -249,7 +249,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 spaceMatrix(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
         x.x, x.y, position.x,
@@ -272,7 +272,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 spaceMatrix(const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
         orientation(0,0), orientation(0,1), position.x,

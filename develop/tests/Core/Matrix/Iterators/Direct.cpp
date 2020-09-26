@@ -36,7 +36,7 @@ TEST(Matrix_DirectIterator, Plus)
     auto it1 = input.begin() + 2;
     auto it2 = input.begin() + 3;
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*it0 == 2);
         ASSERT_TRUE(*it1 == 3);
         ASSERT_TRUE(*it2 == 4);
@@ -63,7 +63,7 @@ TEST(Matrix_DirectIterator, Minus)
     auto it1 = input.end() - 2;
     auto it2 = input.end() - 3;
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*it0 == 9);
         ASSERT_TRUE(*it1 == 8);
         ASSERT_TRUE(*it2 == 7);
@@ -87,7 +87,7 @@ TEST(Matrix_DirectIterator, PreIncrement)
 
     auto it = input.begin();
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(++it) == 2);
         ASSERT_TRUE(*(++it) == 3);
     #else
@@ -110,7 +110,7 @@ TEST(Matrix_DirectIterator, PostIncrement)
     auto it = input.begin();
     it++;
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(it++) == 2);
         ASSERT_TRUE(*(it++) == 3);
     #else
@@ -132,7 +132,7 @@ TEST(Matrix_DirectIterator, PreDecrement)
 
     auto it = input.end();
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(--it) == 9);
         ASSERT_TRUE(*(--it) == 8);
     #else
@@ -155,7 +155,7 @@ TEST(Matrix_DirectIterator, PostDecrement)
     auto it = input.end();
     it--;
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*(it--) == 9);
         ASSERT_TRUE(*(it--) == 8);
     #else
@@ -193,7 +193,7 @@ TEST(Matrix_DirectIterator, RowsColumns_MidComponent)
 
     auto it {input.begin() + 5};
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(it.row() == 1);
         ASSERT_TRUE(it.column() == 1);
     #else
@@ -351,7 +351,7 @@ TEST(Matrix_DirectIterator, Reverse)
     auto c = input.rbegin() + 2;
     auto d = input.rbegin() + 3;
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(*a == 5);
         ASSERT_TRUE(*b == 4);
         ASSERT_TRUE(*c == 2);
@@ -410,7 +410,7 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbegin() + 5};
 
-    #ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_STORING
         ASSERT_TRUE(it.row() == 0);
         ASSERT_TRUE(it.column() == 2);
     #else

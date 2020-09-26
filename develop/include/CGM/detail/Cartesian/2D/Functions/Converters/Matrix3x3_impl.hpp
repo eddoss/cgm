@@ -16,7 +16,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientation)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = detail::multiply_matrix3x3_on_matrix2x2_res3x3(matrix, orientation);
         setPosition(matrix, position(matrix) * orientation);
     #else
@@ -28,7 +28,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientation)
     {
         const auto orient = inverseForce(orientation);
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = detail::multiply_matrix3x3_on_matrix2x2_res3x3(matrix, orient);
         setPosition(matrix, position(matrix) * orient);
     #else
@@ -51,7 +51,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientation, const Vector<2,
     {
         const auto invorient = inverseForce(orientation);
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         axs.x = invorient * axs.x;
         axs.y = invorient * axs.y;
         pos = invorient * pos;
@@ -65,7 +65,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientation, const Vector<2,
     else
     {
         pos -= position;
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         axs.x = orientation * axs.x;
         axs.y = orientation * axs.y;
         pos = orientation * pos;
@@ -92,7 +92,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& space)
     {
         const auto invorient = inverseForce(orientationMatrix(space));
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         axs.x = invorient * axs.x;
         axs.y = invorient * axs.y;
         pos = invorient * pos;
@@ -108,7 +108,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& space)
         const auto orient = orientationMatrix(space);
 
         pos -= position(space);
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         axs.x = orient * axs.x;
         axs.y = orient * axs.y;
         pos = orient * pos;

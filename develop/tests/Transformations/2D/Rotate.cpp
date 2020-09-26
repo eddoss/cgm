@@ -14,7 +14,7 @@ TEST(Transformations2D_Rotate, Vector_AroundOrigin)
     const auto values = cgm_xy_xform_tests_data::get();
 
     const auto result = CGM_XFORM2D::rotated(cgm_test::vector, values.rotation);
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     const auto expect = Vector<2,double>{+0.68132, +1.01897};
 #else
     const auto expect = Vector<2,double>{-0.21773, +1.20627};
@@ -30,7 +30,7 @@ TEST(Transformations2D_Rotate, Vector_ArounArbitraryPoint)
     const auto values = cgm_xy_xform_tests_data::get();
 
     const auto result = CGM_XFORM2D::rotated(cgm_test::vector, values.rotation, values.pivot.position);
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     const auto expect = Vector<2,double>{+0.82283, +1.14697};
 #else
     const auto expect = Vector<2,double>{-0.30099, +1.03458};
@@ -48,7 +48,7 @@ TEST(Transformations2D_Rotate, Matrix2_AroundOrigin)
     const auto values = cgm_xy_xform_tests_data::get();
 
     const auto result = CGM_XFORM2D::rotated(cgm_test::orientation, values.rotation);
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     const auto expect = CGM_XFORM2D::orientationMatrix
     (
         Vector<2,double>{+0.99452, +0.10453},
@@ -75,7 +75,7 @@ TEST(Transformations2D_Rotate, Matrix3_AroundOrigin)
 
     {
         const auto result = CGM_XFORM2D::rotated<CGM_WORLD>(cgm_test::space, values.rotation);
-    #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    #ifdef CGM_LEFT_HANDED
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
             Vector<2,double>{+0.99452, +0.10453},
@@ -94,7 +94,7 @@ TEST(Transformations2D_Rotate, Matrix3_AroundOrigin)
     }
     {
         const auto result = CGM_XFORM2D::rotated<CGM_LOCAL>(cgm_test::space, values.rotation);
-    #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    #ifdef CGM_LEFT_HANDED
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
             Vector<2,double>{+0.99452, +0.10453},
@@ -122,7 +122,7 @@ TEST(Transformations2D_Rotate, Matrix3_ArounArbitraryPoint)
 
     {
         const auto result = CGM_XFORM2D::rotated<CGM_WORLD>(cgm_test::space, values.rotation, values.pivot.position);
-    #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    #ifdef CGM_LEFT_HANDED
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
             Vector<2,double>{+0.99452, +0.10453},
@@ -141,7 +141,7 @@ TEST(Transformations2D_Rotate, Matrix3_ArounArbitraryPoint)
     }
     {
         const auto result = CGM_XFORM2D::rotated<CGM_LOCAL>(cgm_test::space, values.rotation, values.pivot.position);
-    #ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+    #ifdef CGM_LEFT_HANDED
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
             Vector<2,double>{+0.994524, +0.104526},

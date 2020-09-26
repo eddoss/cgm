@@ -42,7 +42,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     auto value4 = CGM_XYZ::x(mat4);
     auto valueQ = CGM_XYZ::x(quat);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Vector<3,double> expec3 {2,4,5};
     Vector<3,double> expec4 {2,4,5};
 #else
@@ -83,7 +83,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     auto value4 = CGM_XYZ::y(mat4);
     auto valueQ = CGM_XYZ::y(quat);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Vector<3,double> expec3 {3,6,7};
     Vector<3,double> expec4 {3,6,7};
 #else
@@ -124,7 +124,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     auto value4 = CGM_XYZ::z(mat4);
     auto valueQ = CGM_XYZ::z(quat);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Vector<3,double> expec3 {0,9,8};
     Vector<3,double> expec4 {0,9,8};
 #else
@@ -147,7 +147,7 @@ TEST(Cartesian_3D_Functions_Utils, SetXYZ)
     Vector<3,int> y {3,6,7};
     Vector<3,int> z {0,9,8};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec3
     {
         2, 4, 5,
@@ -521,7 +521,7 @@ TEST(Cartesian_3D_Functions_Utils, GetPosition)
     };
 
     auto value = CGM_XYZ::position(mat);
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto expec = Vector<3,int>{1,3,2};
 #else
     auto expec = Vector<3,int>{4,7,1};
@@ -544,7 +544,7 @@ TEST(Cartesian_3D_Functions_Utils, SetPosition)
 
     CGM_XYZ::setPosition(mat, {2,3,4});
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,int> expec
     {
         1, 0, 0, 2,
@@ -696,7 +696,7 @@ TEST(Cartesian_3D_Functions_Utils, FromXYZP)
 
     auto basis = CGM_XYZ::spaceMatrix(X,Y,Z,P);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,int> expec
     {
         2,1,3,1,
@@ -731,7 +731,7 @@ TEST(Cartesian_3D_Functions_Utils, FromMatrix3AndPosition)
 
     auto basis = CGM_XYZ::spaceMatrix(orientation, position);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,int> expec
     {
         2,1,3,5,
@@ -765,7 +765,7 @@ TEST(Cartesian_3D_Functions_Utils, FromQuaternionAndPosition)
     Vector<3,double> ey {-0.313298,0.939132,0.140980};
     Vector<3,double> ez {0.767503,0.162971,0.619983};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,double> expec
     {
         ex.x, ex.y, ex.z, position.x,

@@ -128,7 +128,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
             number<T>(0), number<T>(0), values.z
         };
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = matrix * scaler;
     #else
         matrix = scaler * matrix;
@@ -136,7 +136,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix(0,0) *= values.x;
         matrix(0,1) *= values.x;
         matrix(0,2) *= values.x;
@@ -281,7 +281,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
             number<T>(0), number<T>(0), number<T>(0), number<T>(1)
         };
 
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = matrix * scales;
         matrix(0,3) *= values.x;
         matrix(1,3) *= values.y;
@@ -296,7 +296,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix(0,0) *= values.x;
         matrix(0,1) *= values.x;
         matrix(0,2) *= values.x;

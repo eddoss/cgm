@@ -17,7 +17,7 @@ convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = matrix * orientation;
     #else
         matrix = orientation * matrix;
@@ -25,7 +25,7 @@ convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = matrix * inverseForce(orientation);
     #else
         matrix = inverseForce(orientation) * matrix;
@@ -41,7 +41,7 @@ convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = detail::multiply_matrix2x2_on_matrix3x3_res2x2(matrix, space);
     #else
         matrix = detail::multiply_matrix3x3_on_matrix2x2_res2x2(space, matrix);
@@ -49,7 +49,7 @@ convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         matrix = detail::multiply_matrix2x2_on_matrix3x3_res2x2(matrix, inverseOrientationForce(space));
     #else
         matrix = detail::multiply_matrix3x3_on_matrix2x2_res2x2(inverseOrientationForce(space), matrix);

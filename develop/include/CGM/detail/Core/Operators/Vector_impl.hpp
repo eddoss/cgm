@@ -957,7 +957,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE CGM::Vector<3,T>
 operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B)
 {
-#ifdef CGM_USE_LEFT_HANDED_CARTESIAN_SYSTEM
+#ifdef CGM_LEFT_HANDED
     return
     {
         A.z * B.y - A.y * B.z,

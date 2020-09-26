@@ -154,7 +154,7 @@ fast_invert_matrix3x3(Matrix<3,3,T>& mat)
     std::swap(mat(0,1), mat(1,0));
 
     // position = -(position * orientation)
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     T px = -(mat(0,0) * mat(0,2) + mat(0,1) * mat(1,2));
     T py = -(mat(1,0) * mat(0,2) + mat(1,1) * mat(1,2));
 

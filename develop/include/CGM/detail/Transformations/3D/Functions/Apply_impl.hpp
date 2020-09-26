@@ -13,7 +13,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, const Matrix<3,3,T>& transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     vector = transforms * vector;
 #else
     vector = vector * transforms;
@@ -26,7 +26,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     vector = detail::multiply_matrix4x4_on_vector3<Representation>(transforms, vector);
 #else
     vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, transforms);
@@ -39,7 +39,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto matrix = identity<3,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
@@ -60,7 +60,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto matrix = identity<4,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
@@ -81,7 +81,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     matrix = transforms * matrix;
 #else
     matrix = matrix * transforms;
@@ -94,7 +94,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto mat = identity<3,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
@@ -115,7 +115,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     matrix = transforms * matrix;
 #else
     matrix = matrix * transforms;
@@ -128,7 +128,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     auto mat = identity<4,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {

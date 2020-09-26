@@ -15,7 +15,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 x(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(0,0),
         basis(0,1),
@@ -55,7 +55,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 y(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(1,0),
         basis(1,1),
@@ -95,7 +95,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 z(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(2,0),
         basis(2,1),
@@ -134,7 +134,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setX(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(0,0) = value.x;
     basis(0,1) = value.y;
     basis(0,2) = value.z;
@@ -159,7 +159,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setY(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(1,0) = value.x;
     basis(1,1) = value.y;
     basis(1,2) = value.z;
@@ -185,7 +185,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(2,0) = value.x;
     basis(2,1) = value.y;
     basis(2,2) = value.z;
@@ -554,7 +554,7 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 position(const Matrix<4,4,T>& basis)
 {
     return
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(0,3),
         basis(1,3),
@@ -575,7 +575,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(0,3) = position.x;
     basis(1,3) = position.y;
     basis(2,3) = position.z;
@@ -711,7 +711,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
         x.x, x.y, x.z, position.x,
@@ -736,7 +736,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
         orientation(0,0), orientation(0,1), orientation(0,2), position.x,

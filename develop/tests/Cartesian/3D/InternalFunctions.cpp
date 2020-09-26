@@ -216,7 +216,7 @@ TEST(Cartesian_3D_InternalFunctions, fast_inverse_matrix4x4)
     Vector<3,double> z { 0.333334, -0.244017,  0.910683};
     Vector<3,double> p {      0.2,     -0.53,      0.91};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,double> input
     {
         x.x, x.y, x.z, p.x,

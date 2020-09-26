@@ -16,7 +16,7 @@ convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         vector = inverseForce(orientation) * vector;
     #else
         vector = vector * inverseForce(orientation);
@@ -24,7 +24,7 @@ convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         vector = orientation * vector;
     #else
         vector = vector * orientation;
@@ -40,7 +40,7 @@ convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         vector = inverseForce(orientation) * vector + position;
     #else
         vector = vector * inverseForce(orientation) + position;
@@ -48,7 +48,7 @@ convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation, const Vector<2,T>
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         vector = orientation * (vector - position);
     #else
         vector = (vector - position) * orientation;
@@ -64,7 +64,7 @@ convert(Vector<2,T>& vector, const Matrix<3,3,T>& space)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         if constexpr (Representation == EVectorRepresentation::Point)
         {
             vector = inverseForce(orientationMatrix(space)) * vector + position(space);
@@ -86,7 +86,7 @@ convert(Vector<2,T>& vector, const Matrix<3,3,T>& space)
     }
     else
     {
-    #ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
         if constexpr (Representation == EVectorRepresentation::Point)
         {
             vector = orientationMatrix(space) * (vector - position(space));

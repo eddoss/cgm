@@ -68,7 +68,7 @@ public: /* Iterators typedefs */
 
 /* --------------------------------------------------------------------------------------- */
 
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     using RowDirIterator                    = detail::MatrixDirectIterator<M,N,T>;
     using ConstRowDirIterator               = detail::ConstMatrixDirectIterator<M,N,T>;
 #else
@@ -80,7 +80,7 @@ public: /* Iterators typedefs */
 
 /* --------------------------------------------------------------------------------------- */
 
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     using ColumnDirIterator                 = detail::MatrixIndirectIterator<M,N,T>;
     using ConstColumnDirIterator            = detail::ConstMatrixIndirectIterator<M,N,T>;
 #else
@@ -94,7 +94,7 @@ public: /* Iterators typedefs */
 private: /* Data */
 /* ####################################################################################### */
 
-#ifdef CGM_USE_ROW_WISE_MATRIX_STORING
+#ifdef CGM_ROW_WISE_MATRIX_STORING
     T m_data[M][N];
 #else
     T m_data[N][M];

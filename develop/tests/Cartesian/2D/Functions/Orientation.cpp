@@ -35,7 +35,7 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix2x2)
     Vector<2,int> in_y {4, 5};
     Vector<2,int> in_z {7, 8};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> mat
     {
         in_x.x, in_x.y,
@@ -62,7 +62,7 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix3x3)
     Vector<2,int> in_x {1, 2};
     Vector<2,int> in_y {4, 5};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> mat
     {
         in_x.x, in_x.y, 0,
@@ -93,7 +93,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromXY)
     Vector<2,int> x {1, 2};
     Vector<2,int> y {4, 5};
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expect
     {
         x.x, x.y,
@@ -121,7 +121,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromAxesTuple)
 
     auto axes = CGM_XY::orientationAxes(x,y);
 
-#ifdef CGM_USE_COLUMN_MAJOR_VECTOR_REPRESENTATION
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expect
     {
         x.x, x.y,
