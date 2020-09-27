@@ -1,8 +1,8 @@
 #pragma once
 
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Window/Global.hpp"
 #include <string>
 #include <functional>
 
@@ -18,7 +18,7 @@ if (glfwInit() != GLFW_TRUE)                                    \
 }                                                               \
 glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);                  \
 glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);                  \
-glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  \
+glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 /* --------------------------------------------------------------------------------------- */
 
@@ -35,36 +35,18 @@ if( GLEWInitResult != GLEW_OK )                                 \
 }
 
 
-/**
- * GLFW window wrapper. This class help you to manage of GLFW window
- * life-cycle. It produce window event functions (resizeEvent ...).
- */
-class Window
+class Surface
 {
-
-/* ####################################################################################### */
-public: /* Name aliases */
-/* ####################################################################################### */
-
-    /**
-     * Window resize handler.
-     * First param is window width, second - height.
-     */
-    using ResizeHandler = std::function<void(Window*, int, int)>;
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
     /**
-     * Default constructor.
-     */
-    Window();
-
-    /**
      * Destructor.
      */
-    ~Window();
+    virtual
+    ~Surface();
 
 /* ####################################################################################### */
 public: /* Properties getters */
@@ -80,13 +62,13 @@ public: /* Properties getters */
 
     /** Check whether window is visible */
     bool
-    visible();
+    visible() const;
 
     /** Get window title */
     std::string
     title() const;
 
-    /** Get window sanples */
+    /** Get window samples */
     int
     samples() const;
 
@@ -117,10 +99,6 @@ public: /* Properties getters */
     /** Get window stencil channel bit depth */
     int
     stencilChannelBits() const;
-
-    /** Get GLFW window */
-    GLFWwindow*
-    raw();
 
 /* ####################################################################################### */
 public: /* Properties setters */
@@ -211,44 +189,17 @@ public: /* Properties setters */
     setStencilChannelBits(int bits);
 
 /* ####################################################################################### */
-public: /* Methods */
-/* ####################################################################################### */
-
-    /**
-     * Create GLFW window.
-     * @return True if created, false otherwise.
-     */
-    bool
-    create();
-
-    /**
-     * Make window GL context current.
-     */
-    void
-    makeCurrent();
-
-/* ####################################################################################### */
-public: /* Event handlers */
-/* ####################################################################################### */
-
-    ResizeHandler
-    resizeHandler {nullptr};
-
-/* ####################################################################################### */
-private: /* Private attributes */
+protected: /* Window protected attributes */
 /* ####################################################################################### */
 
     int
-    m_width {1920};
+    m_width {1280};
 
     int
-    m_height {1080};
+    m_height {720};
 
     int
     m_visible {GLFW_TRUE};
-
-    int
-    m_refreshRate {GLFW_DONT_CARE};
 
     int
     m_samples {16};
@@ -276,9 +227,6 @@ private: /* Private attributes */
 
     std::string
     m_title {"OpenGL Window"};
-
-    ResizeHandler
-    m_resizeHandler {nullptr};
 
     GLFWwindow*
     m_window {nullptr};

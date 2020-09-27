@@ -1,22 +1,14 @@
 
 
-#include <GL/glew.h>
-#include <Window.hpp>
 #include <iostream>
+#include <Window/Surface.hpp>
 
 
 /* ####################################################################################### */
 /* Properties getters */
 /* ####################################################################################### */
 
-Window::Window()
-{
-
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-Window::~Window()
+Surface::~Surface()
 {
     if (m_window)
     {
@@ -29,7 +21,7 @@ Window::~Window()
 /* ####################################################################################### */
 
 int
-Window::width() const
+Surface::width() const
 {
     return m_width;
 }
@@ -37,23 +29,39 @@ Window::width() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::height() const
+Surface::height() const
 {
     return m_height;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
+bool
+Surface::visible() const
+{
+    return m_visible;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 std::string
-Window::title() const
+Surface::title() const
 {
     return m_title;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
+int
+Surface::samples() const
+{
+    return m_samples;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 bool
-Window::isDoubleBufferEnabled() const
+Surface::isDoubleBufferEnabled() const
 {
     return m_doubleBuffer;
 }
@@ -61,7 +69,7 @@ Window::isDoubleBufferEnabled() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::redChannelBits() const
+Surface::redChannelBits() const
 {
     return m_redChannelBits;
 }
@@ -69,7 +77,7 @@ Window::redChannelBits() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::greenChannelBits() const
+Surface::greenChannelBits() const
 {
     return m_greenChannelBits;
 }
@@ -77,7 +85,7 @@ Window::greenChannelBits() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::blueChannelBits() const
+Surface::blueChannelBits() const
 {
     return m_blueChannelBits;
 }
@@ -85,7 +93,7 @@ Window::blueChannelBits() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::alphaChannelBits() const
+Surface::alphaChannelBits() const
 {
     return m_alphaChannelBits;
 }
@@ -93,7 +101,7 @@ Window::alphaChannelBits() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::depthChannelBits() const
+Surface::depthChannelBits() const
 {
     return m_depthBits;;
 }
@@ -101,17 +109,9 @@ Window::depthChannelBits() const
 /* --------------------------------------------------------------------------------------- */
 
 int
-Window::stencilChannelBits() const
+Surface::stencilChannelBits() const
 {
     return m_stencilBits;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-GLFWwindow*
-Window::raw()
-{
-    return m_window;
 }
 
 /* ####################################################################################### */
@@ -119,7 +119,7 @@ Window::raw()
 /* ####################################################################################### */
 
 void
-Window::setWidth(int width)
+Surface::setWidth(int width)
 {
     m_width = width;
     if (m_window)
@@ -131,7 +131,7 @@ Window::setWidth(int width)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setHeight(int height)
+Surface::setHeight(int height)
 {
     m_height = height;
     if (m_window)
@@ -143,7 +143,7 @@ Window::setHeight(int height)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setVisible(bool visible)
+Surface::setVisible(bool visible)
 {
     m_visible = visible;
     glfwWindowHint(GLFW_VISIBLE, visible);
@@ -152,7 +152,7 @@ Window::setVisible(bool visible)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setTitle(const std::string& title)
+Surface::setTitle(const std::string& title)
 {
     m_title = title;
     if (m_window)
@@ -164,7 +164,7 @@ Window::setTitle(const std::string& title)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setSamples(int samplesCount)
+Surface::setSamples(int samplesCount)
 {
     m_samples = samplesCount;
     glfwWindowHint(GLFW_SAMPLES, samplesCount);
@@ -173,7 +173,7 @@ Window::setSamples(int samplesCount)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setDoubleBufferEnabled(bool enabled)
+Surface::setDoubleBufferEnabled(bool enabled)
 {
     m_doubleBuffer = enabled;
     glfwWindowHint(GLFW_DOUBLEBUFFER, enabled);
@@ -182,7 +182,7 @@ Window::setDoubleBufferEnabled(bool enabled)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setRedChannelBits(int bits)
+Surface::setRedChannelBits(int bits)
 {
     m_redChannelBits = bits;
     glfwWindowHint(GLFW_RED_BITS, bits);
@@ -191,7 +191,7 @@ Window::setRedChannelBits(int bits)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setGreenChannelBits(int bits)
+Surface::setGreenChannelBits(int bits)
 {
     m_greenChannelBits = bits;
     glfwWindowHint(GLFW_GREEN_BITS, bits);
@@ -200,7 +200,7 @@ Window::setGreenChannelBits(int bits)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setBlueChannelBits(int bits)
+Surface::setBlueChannelBits(int bits)
 {
     m_blueChannelBits = bits;
     glfwWindowHint(GLFW_BLUE_BITS, bits);
@@ -209,7 +209,7 @@ Window::setBlueChannelBits(int bits)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setAlphaChannelBits(int bits)
+Surface::setAlphaChannelBits(int bits)
 {
     m_alphaChannelBits = bits;
     glfwWindowHint(GLFW_ALPHA_BITS, bits);
@@ -218,7 +218,7 @@ Window::setAlphaChannelBits(int bits)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setDepthChannelBits(int bits)
+Surface::setDepthChannelBits(int bits)
 {
     m_depthBits = bits;
     glfwWindowHint(GLFW_DEPTH_BITS, bits);
@@ -227,53 +227,8 @@ Window::setDepthChannelBits(int bits)
 /* --------------------------------------------------------------------------------------- */
 
 void
-Window::setStencilChannelBits(int bits)
+Surface::setStencilChannelBits(int bits)
 {
     m_stencilBits = bits;
     glfwWindowHint(GLFW_STENCIL_BITS, bits);
-}
-
-/* ####################################################################################### */
-/* Methods */
-/* ####################################################################################### */
-
-bool
-Window::create()
-{
-    setVisible(m_visible);
-    setSamples(m_samples);
-    setRedChannelBits(m_redChannelBits);
-    setGreenChannelBits(m_greenChannelBits);
-    setBlueChannelBits(m_blueChannelBits);
-    setAlphaChannelBits(m_alphaChannelBits);
-    setDepthChannelBits(m_depthBits);
-    setStencilChannelBits(m_stencilBits);
-    setDoubleBufferEnabled(m_doubleBuffer);
-
-    m_window = glfwCreateWindow(m_width, m_height, m_title.data(), nullptr, nullptr);
-    if (!m_window)
-    {
-        std::cout << "[ERROR] Cant create GLFW window" << std::endl;
-        return false;
-    }
-
-    GLFWwindowsizefun resizeFunc = [](GLFWwindow* window, int width, int height)
-    {
-        Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
-        if (self->resizeHandler)
-        {
-            self->resizeHandler(self, width, height);
-        }
-    };
-    glfwSetWindowSizeCallback(m_window, resizeFunc);
-    return true;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-void
-Window::makeCurrent()
-{
-    glfwMakeContextCurrent(m_window);
-    glfwSetWindowUserPointer(m_window, this);
 }

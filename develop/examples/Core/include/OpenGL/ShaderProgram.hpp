@@ -181,7 +181,7 @@ public: /* Uniform variables setters: scalar */
      * @param scalar Attribute value.
      */
     void
-    setUniform(const std::string& name, cgm::FLOAT scalar);
+    setUniform(const std::string& name, cgm::float32 scalar);
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y */
@@ -215,7 +215,7 @@ public: /* Uniform variables setters: x, y */
      * @param y Attribute Y value.
      */
     void
-    setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y);
+    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y);
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y, z */
@@ -252,7 +252,7 @@ public: /* Uniform variables setters: x, y, z */
      * @param z Attribute Z value.
      */
     void
-    setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y, cgm::FLOAT z);
+    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z);
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y, z, w */
@@ -291,7 +291,7 @@ public: /* Uniform variables setters: x, y, z, w */
      * @param w Attribute w value.
      */
     void
-    setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y, cgm::FLOAT z, cgm::FLOAT w);
+    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z, cgm::float32 w);
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: array */
@@ -328,7 +328,7 @@ public: /* Uniform variables setters: array */
      * @param componentsCount Array element components count (if element is cgm::vec3, componentCount = 3).
      */
     void
-    setUniform(const std::string& name, const cgm::FLOAT* values, uint32_t count, uint32_t componentsCount);
+    setUniform(const std::string& name, const cgm::float32* values, uint32_t count, uint32_t componentsCount);
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: float vectors */

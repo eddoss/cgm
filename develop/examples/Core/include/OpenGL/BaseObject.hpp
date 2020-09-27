@@ -7,7 +7,7 @@
 /**
  * OpenGL primitive types.
  */
-enum class EGLType
+enum EGLType
 {
     SByte   = GL_BYTE,              /**< Signed byte */
     SShort  = GL_SHORT,             /**< Signed short integer */
@@ -22,11 +22,11 @@ enum class EGLType
     Byte4   = GL_4_BYTES            /**< 4 byte number */
 };
 
-const uint32_t PRIMITIVE_RESTART_VALUE = 0xffffffff;
+#define PRIMITIVE_RESTART_VALUE = 0xffffffff;
 
 /**
  * OpenGL base object. It describe create/destroy, bind/release
- * and get object ID functionality. All GL objects inhereted from
+ * and get object ID functionality. All GL objects inherited from
  * this class.
  */
 class OpenGLObject

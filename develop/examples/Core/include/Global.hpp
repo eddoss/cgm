@@ -5,7 +5,15 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-#define CGM_EXAMPLES_FUNC_INFO(message) std::cout << std::endl; std::cout << __FUNCTION__ << "()" << std::endl; std::cout << message << std::endl;
+#define CGM_EXAMPLES_FUNC_INFO(message) std::cout << "[INFO | " << __FUNCTION__ << "()]:" << message << std::endl;
+
+/* --------------------------------------------------------------------------------------- */
+
+#define CGM_EXAMPLES_FUNC_WARNING(message) std::cout << "[WARNING | " << __FUNCTION__ << "()]:" << message << std::endl;
+
+/* --------------------------------------------------------------------------------------- */
+
+#define CGM_EXAMPLES_FUNC_ERROR(message) std::cout << "[ERROR | " << __FUNCTION__ << "()]:" << message << std::endl;
 
 /* --------------------------------------------------------------------------------------- */
 

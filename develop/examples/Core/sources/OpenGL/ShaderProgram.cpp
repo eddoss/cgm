@@ -310,7 +310,7 @@ ShaderProgram::setUniform(const std::string& name, uint32_t scalar)
 /* --------------------------------------------------------------------------------------- */
 
 void
-ShaderProgram::setUniform(const std::string& name, cgm::FLOAT scalar)
+ShaderProgram::setUniform(const std::string& name, cgm::float32 scalar)
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     glUniform1f(location, scalar);
@@ -339,7 +339,7 @@ ShaderProgram::setUniform(const std::string& name, uint32_t x, uint32_t y)
 /* --------------------------------------------------------------------------------------- */
 
 void
-ShaderProgram::setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y)
+ShaderProgram::setUniform(const std::string& name, cgm::float32 x, cgm::float32 y)
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     glUniform2f(location, x, y);
@@ -368,7 +368,7 @@ ShaderProgram::setUniform(const std::string& name, uint32_t x, uint32_t y, uint3
 /* --------------------------------------------------------------------------------------- */
 
 void
-ShaderProgram::setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y, cgm::FLOAT z)
+ShaderProgram::setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z)
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     glUniform3f(location, x, y, z);
@@ -397,7 +397,7 @@ ShaderProgram::setUniform(const std::string& name, uint32_t x, uint32_t y, uint3
 /* --------------------------------------------------------------------------------------- */
 
 void
-ShaderProgram::setUniform(const std::string& name, cgm::FLOAT x, cgm::FLOAT y, cgm::FLOAT z, cgm::FLOAT w)
+ShaderProgram::setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z, cgm::float32 w)
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     glUniform4f(location, x, y, z, w);
@@ -432,7 +432,7 @@ ShaderProgram::setUniform(const std::string& name, const uint32_t* values, uint3
 /* --------------------------------------------------------------------------------------- */
 
 void
-ShaderProgram::setUniform(const std::string& name, const cgm::FLOAT* values, uint32_t count, uint32_t componentsCount)
+ShaderProgram::setUniform(const std::string& name, const cgm::float32* values, uint32_t count, uint32_t componentsCount)
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     if (componentsCount == 1) {glUniform1fv(location, GLsizei(count), reinterpret_cast<const GLfloat*>(values)); return;}
