@@ -19,14 +19,14 @@ endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(CGM_MATRIX_STORING STREQUAL Row)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_STORING=Row)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_ROW_WISE_MATRIX_STORING)
-elseif(CGM_MATRIX_STORING STREQUAL Column)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_STORING=Column)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_COLUMN_WISE_MATRIX_STORING)
+if(CGM_MATRIX_LAYOUT STREQUAL Row)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_LAYOUT=Row)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_ROW_WISE_MATRIX_LAYOUT)
+elseif(CGM_MATRIX_LAYOUT STREQUAL Column)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_LAYOUT=Column)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_COLUMN_WISE_MATRIX_LAYOUT)
 else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_MATRIX_STORING> configuration property. It must be <Row> or <Column>.")
+    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_MATRIX_LAYOUT> configuration property. It must be <Row> or <Column>.")
 endif()
 
 # --------------------------------------------------------------------------------------- #

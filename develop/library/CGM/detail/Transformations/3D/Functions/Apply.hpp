@@ -4,8 +4,9 @@
 #include <initializer_list>
 #include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Types/Matrix.hpp>
+#include <CGM/detail/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Cartesian/Common.hpp>
-#include <CGM/detail/Cartesian/2D/Types/Axes.hpp>
+#include <CGM/detail/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/detail/Transformations/Common.hpp>
 #include <CGM/detail/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/detail/Transformations/3D/Types/Enums.hpp>
@@ -13,6 +14,7 @@
 #include <CGM/detail/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/detail/Cartesian/3D/InternalUtils_impl.hpp>
 #include <CGM/detail/Transformations/3D/InternalUtils_impl.hpp>
+
 
 /* ####################################################################################### */
 /* Inplace */

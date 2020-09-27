@@ -288,7 +288,7 @@ public: /* Methods */
     row() const
     {
         CGM_VERIFY_MATRIX_DIRECT_ITERATOR_GET_ROW(m_data, m_begin, m_begin + M*N, "(CGM) can't get row from matrix iterator (out of range).")
-    #ifdef CGM_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
         return (m_data - m_begin) / N;
     #else
         return (m_data - m_begin) - M * column();
@@ -305,7 +305,7 @@ public: /* Methods */
     column() const
     {
         CGM_VERIFY_MATRIX_DIRECT_ITERATOR_GET_COLUMN(m_data, m_begin, m_begin + M*N, "(CGM) can't get column from matrix iterator (out of range).")
-    #ifdef CGM_ROW_WISE_MATRIX_STORING
+    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
         return (m_data - m_begin) - N * row();
     #else
         return (m_data - m_begin) / M;

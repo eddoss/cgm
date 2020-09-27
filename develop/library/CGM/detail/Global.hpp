@@ -4,8 +4,8 @@
 /* Library properties validation */
 /* ####################################################################################### */
 
-#if CGM_MATRIX_STORING != Row || CGM_MATRIX_STORING != Column
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_MATRIX_STORING'");
+#if CGM_MATRIX_LAYOUT != Row || CGM_MATRIX_LAYOUT != Column
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_MATRIX_LAYOUT'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */

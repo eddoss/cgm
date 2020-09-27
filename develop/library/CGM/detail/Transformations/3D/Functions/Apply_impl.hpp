@@ -40,7 +40,7 @@ constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, std::initializer_list<Matrix<3,3,T>> transforms)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    auto matrix = identity<3,T>();
+    auto matrix = CGM::identity<3,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
         matrix *= *(transforms.begin() + i);
@@ -61,7 +61,7 @@ constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    auto matrix = identity<4,T>();
+    auto matrix = CGM::identity<4,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
         matrix *= *(transforms.begin() + i);
@@ -95,7 +95,7 @@ constexpr CGM_FORCEINLINE void
 apply(Matrix<3,3,T>& matrix, std::initializer_list<Matrix<3,3,T>> transforms)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    auto mat = identity<3,T>();
+    auto mat = CGM::identity<3,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
         mat *= *(transforms.begin() + i);
@@ -129,16 +129,16 @@ constexpr CGM_FORCEINLINE void
 apply(Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    auto mat = identity<4,T>();
+    auto mat = CGM::identity<4,T>();
     for (auto i = static_cast<int>(transforms.size())-1; i >= 0; --i)
     {
-        mat *= *(transforms.begin() + i);
+        mat = mat * *(transforms.begin() + i);
     }
     matrix = mat * matrix;
 #else
     for (const auto& mat : transforms)
     {
-        matrix *= mat;
+        matrix = matrix * mat;
     }
 #endif
 }

@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(CGM_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
 option(CGM_BUILD_EXAMPLES "Build examples projects." OFF)
 option(CGM_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
-set(CGM_MATRIX_STORING "Column" CACHE STRING "Store matrix components by rows or columns (Row/Column).")
+set(CGM_MATRIX_LAYOUT "Column" CACHE STRING "Store matrix components by rows or columns (Row/Column).")
 set(CGM_HANDEDNESS "Right" CACHE STRING "Cartesian system handedness (Right/Left).")
 set(CGM_RIGHT_UP_FORWARD_AXES_LABELS "XYZ" CACHE STRING "Right, Up, Forward vectors of Cartesian system (XYZ/YXZ/ZYX/YZX/XZY/ZXY).")
 set(CGM_MATRIX_MULTIPLICATION_ORDER "Pre" CACHE STRING "If 'Pre' is used vector will be represented as row, if 'Post' - as column.")
@@ -34,8 +34,8 @@ set(CGM_MATRIX_MULTIPLICATION_ORDER "Pre" CACHE STRING "If 'Pre' is used vector 
 # ####################################################################################### #
 
 set_property(CACHE CGM_RIGHT_UP_FORWARD_AXES_LABELS PROPERTY STRINGS "XYZ;YXZ;ZYX;YZX;XZY;ZXY")
-set_property(CACHE CGM_MATRIX_MULTIPLICATION_ORDER PROPERTY STRINGS "Column-Major;Row-Major")
-set_property(CACHE CGM_MATRIX_STORING PROPERTY STRINGS "Row;Column")
+set_property(CACHE CGM_MATRIX_MULTIPLICATION_ORDER PROPERTY STRINGS "Pre;Post")
+set_property(CACHE CGM_MATRIX_LAYOUT PROPERTY STRINGS "Row;Column")
 set_property(CACHE CGM_HANDEDNESS PROPERTY STRINGS "Left;Right")
 
 # ####################################################################################### #
