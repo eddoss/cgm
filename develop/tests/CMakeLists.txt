@@ -12,7 +12,6 @@
 
 function(cgm_add_test TARGET SOURCES)
     add_executable(${TARGET} ${SOURCES})
-#    target_include_directories(${TARGET} PRIVATE ../include)
     target_link_libraries(${TARGET}
         PRIVATE
             GTest::GTest
@@ -34,9 +33,9 @@ find_package(GTest REQUIRED)
 # Setup libraries output dir
 # ####################################################################################### #
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # ####################################################################################### #
 # SUITES | Core

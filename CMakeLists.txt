@@ -22,6 +22,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ####################################################################################### #
 
 option(CGM_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
+option(CGM_BUILD_EXAMPLES "Build examples projects." OFF)
 option(CGM_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
 set(CGM_MATRIX_STORING "Column" CACHE STRING "Store matrix components by rows or columns (Row/Column).")
 set(CGM_HANDEDNESS "Right" CACHE STRING "Cartesian system handedness (Right/Left).")
@@ -38,153 +39,24 @@ set_property(CACHE CGM_MATRIX_STORING PROPERTY STRINGS "Row;Column")
 set_property(CACHE CGM_HANDEDNESS PROPERTY STRINGS "Left;Right")
 
 # ####################################################################################### #
-# Setup main target
+# Setup subproject output dirs
 # ####################################################################################### #
 
-add_library(${PROJECT_NAME} INTERFACE)
-
-target_include_directories(${PROJECT_NAME} INTERFACE
-    $<INSTALL_INTERFACE:include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/develop/include>
-)
-
-# --------------------------------------------------------------------------------------- #
-
-if(CGM_USE_DOUBLE_PRECISION)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_USE_DOUBLE_PRECISION)
-endif()
-
-# --------------------------------------------------------------------------------------- #
-
-if(CGM_MATRIX_STORING STREQUAL Row)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_STORING=Row)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_ROW_WISE_MATRIX_STORING)
-elseif(CGM_MATRIX_STORING STREQUAL Column)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_STORING=Column)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_COLUMN_WISE_MATRIX_STORING)
-else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_MATRIX_STORING> configuration property. It must be <Row> or <Column>.")
-endif()
-
-# --------------------------------------------------------------------------------------- #
-
-if(CGM_HANDEDNESS STREQUAL Left)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_HANDEDNESS=Left)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_LEFT_HANDED)
-elseif(CGM_HANDEDNESS STREQUAL Right)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_HANDEDNESS=Right)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_HANDED)
-else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_HANDEDNESS> configuration property. It must be <Left> or <Right>.")
-endif()
-
-# --------------------------------------------------------------------------------------- #
-
-if(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZXY)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=ZXY)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_ZXY)
-elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YXZ)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=YXZ)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_YXZ)
-elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL ZYX)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=ZYX)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_ZYX)
-elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL YZX)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=YZX)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_YZX)
-elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL XZY)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=XZY)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_XZY)
-elseif(CGM_RIGHT_UP_FORWARD_AXES_LABELS STREQUAL XYZ)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_RIGHT_UP_FORWARD_AXES_LABELS=XYZ)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_RIGHT_X)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_UP_Y)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_FORWARD_Z)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CARTESIAN_XYZ)
-else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_RIGHT_UP_FORWARD_AXES_LABELS> configuration property. It must be <XYZ>/<YXZ>/<ZYX>/<YZX>/<XZY>/<ZXY>.")
-endif()
-
-# --------------------------------------------------------------------------------------- #
-
-if(CGM_MATRIX_MULTIPLICATION_ORDER STREQUAL Pre)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_MULTIPLICATION_ORDER=Pre)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_PRE_MULTIPLICATION)
-elseif(CGM_MATRIX_MULTIPLICATION_ORDER STREQUAL Post)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_MULTIPLICATION_ORDER=Post)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_POST_MULTIPLICATION)
-else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of 'CGM_MATRIX_MULTIPLICATION_ORDER' configuration property. It must be <Pre> or <Post>.")
-endif()
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 # ####################################################################################### #
-# Testing
+# Subprojects
 # ####################################################################################### #
 
-if(CGM_BUILD_UNIT_TESTS)
+add_subdirectory(develop/library)
+
+if(${CGM_BUILD_UNIT_TESTS})
     enable_testing()
     add_subdirectory(develop/tests)
 endif()
 
-# ####################################################################################### #
-# Installation
-# ####################################################################################### #
-
-include(CMakePackageConfigHelpers)
-
-set(ConfigPackageLocation "${CMAKE_INSTALL_PREFIX}/cmake")
-
-write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
-)
-
-configure_package_config_file(
-    develop/cmake/Config.cmake.in
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
-    INSTALL_DESTINATION ${ConfigPackageLocation}
-)
-
-install(
-    TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Targets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-)
-
-install(
-    EXPORT ${PROJECT_NAME}Targets
-    FILE ${PROJECT_NAME}Targets.cmake
-    NAMESPACE CGM::
-    DESTINATION ${ConfigPackageLocation}
-)
-
-install(
-    FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-    DESTINATION ${ConfigPackageLocation}
-)
-
-install(
-    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/develop/include"
-    DESTINATION ${CMAKE_INSTALL_PREFIX}
-)
+if(${CGM_BUILD_EXAMPLES})
+    add_subdirectory(develop/examples)
+endif()
