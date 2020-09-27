@@ -13,7 +13,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(T scalar)
 {
-    for (auto i = 0; i < size; ++i)
+    for (size_t i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = scalar;
     }
@@ -26,14 +26,14 @@ constexpr
 Matrix<M,N,T>::Matrix(const T* values)
 {
 #ifdef CGM_ROW_WISE_MATRIX_STORING
-    for (auto i = 0; i < size; ++i)
+    for (size_t i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = *(values + i);
     }
 #else
-    for (auto c = 0; c < columns; ++c)
+    for (size_t c = 0; c < columns; ++c)
     {
-        for (auto r = 0; r < rows; ++r)
+        for (size_t r = 0; r < rows; ++r)
         {
             m_data[c][r] = *(values + r * columns + c);
         }
@@ -48,14 +48,14 @@ constexpr
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
 #ifdef CGM_ROW_WISE_MATRIX_STORING
-    for (auto i = 0; i < size; ++i)
+    for (size_t i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = *(values.begin() + i);
     }
 #else
-    for (auto c = 0; c < columns; ++c)
+    for (size_t c = 0; c < columns; ++c)
     {
-        for (auto r = 0; r < rows; ++r)
+        for (size_t r = 0; r < rows; ++r)
         {
             m_data[c][r] = *(values.begin() + r * columns + c);
         }
@@ -71,7 +71,7 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 Matrix<M,N,T>::operator = (T scalar)
 {
-    for (auto i = 0; i < size; ++i)
+    for (size_t i = 0; i < size; ++i)
     {
         *(&m_data[0][0] + i) = scalar;
     }
@@ -86,7 +86,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::pointer
 Matrix<M,N,T>::data()
 {
-    return &m_data;
+    return &m_data[0][0];
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -95,7 +95,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::const_pointer
 Matrix<M,N,T>::data() const
 {
-    return &m_data;
+    return &m_data[0][0];
 }
 
 /* --------------------------------------------------------------------------------------- */

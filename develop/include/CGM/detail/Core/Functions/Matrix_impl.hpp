@@ -672,33 +672,33 @@ identity()
     {
         return
         {
-            1, 0,
-            0, 1
+            number<T>(1), number<T>(0),
+            number<T>(0), number<T>(1)
         };
     }
     else if constexpr (S==3)
     {
         return
         {
-            1, 0, 0,
-            0, 1, 0,
-            0, 0, 1
+            number<T>(1), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), number<T>(0), number<T>(1)
         };
     }
     else if constexpr (S==4)
     {
         return
         {
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
+            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
+            number<T>(0), number<T>(0), number<T>(1), number<T>(0),
+            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
         };
     }
     else
     {
         Matrix<S,S,T> matrix(zero<T>);
-        for (auto i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
+        for (size_t i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
         return matrix;
     }
 }
@@ -870,7 +870,7 @@ eq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (size_t i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
         {
             if (CGM::neq(A[i], B[i]), tolerance) return false;
         }
@@ -1045,7 +1045,7 @@ neq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (size_t i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
         {
             if (CGM::neq(A[i], B[i]), tolerance) return true;
         }

@@ -31,7 +31,7 @@ operator++(CGM::Vector<D,T>& vector)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
+        for (size_t i = 0; i < D; ++i) ++(vector[i]);
     }
 
     return vector;
@@ -63,7 +63,7 @@ operator--(CGM::Vector<D,T>& vector)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) --vector[i];
+        for (size_t i = 0; i < D; ++i) --vector[i];
     }
 
     return vector;
@@ -97,7 +97,7 @@ operator++(CGM::Vector<D,T>& vector, int)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) ++(vector[i]);
+        for (size_t i = 0; i < D; ++i) ++(vector[i]);
     }
 
     return copy;
@@ -131,7 +131,7 @@ operator--(CGM::Vector<D,T>& vector, int)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) --vector[i];
+        for (size_t i = 0; i < D; ++i) --vector[i];
     }
 
     return copy;
@@ -165,7 +165,7 @@ operator+=(CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) vector[i] += scalar;
+        for (size_t i = 0; i < D; ++i) vector[i] += scalar;
     }
 
     return vector;
@@ -197,7 +197,7 @@ operator+=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) A[i] += B[i];
+        for (size_t i = 0; i < D; ++i) A[i] += B[i];
     }
 
     return A;
@@ -231,7 +231,7 @@ operator+(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] += B[i];
+        for (size_t i = 0; i < D; ++i) copy[i] += B[i];
     }
 
     return copy;
@@ -266,7 +266,7 @@ operator+(const CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
+        for (size_t i = 0; i < D; ++i) copy[i] += value;
     }
 
     return copy;
@@ -301,7 +301,7 @@ operator+(T scalar, const CGM::Vector<D,T>& vector)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] += value;
+        for (size_t i = 0; i < D; ++i) copy[i] += value;
     }
 
     return copy;
@@ -337,7 +337,7 @@ operator-(const CGM::Vector<D,T>& vector)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] = -copy[i];
+        for (size_t i = 0; i < D; ++i) copy[i] = -copy[i];
     }
 
     return copy;
@@ -369,7 +369,7 @@ operator-=(CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) vector[i] -= scalar;
+        for (size_t i = 0; i < D; ++i) vector[i] -= scalar;
     }
 
     return vector;
@@ -401,7 +401,7 @@ operator-=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) A[i] -= B[i];
+        for (size_t i = 0; i < D; ++i) A[i] -= B[i];
     }
 
     return A;
@@ -435,7 +435,7 @@ operator-(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] -= B[i];
+        for (size_t i = 0; i < D; ++i) copy[i] -= B[i];
     }
 
     return copy;
@@ -470,7 +470,7 @@ operator-(const CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] -= value;
+        for (size_t i = 0; i < D; ++i) copy[i] -= value;
     }
 
     return copy;
@@ -504,7 +504,7 @@ operator*=(CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) vector[i] *= static_cast<T>(scalar);
+        for (size_t i = 0; i < D; ++i) vector[i] *= static_cast<T>(scalar);
     }
 
     return vector;
@@ -536,7 +536,7 @@ operator*=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) A[i] *= B[i];
+        for (size_t i = 0; i < D; ++i) A[i] *= B[i];
     }
 
     return A;
@@ -570,7 +570,7 @@ operator*(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] *= B[i];
+        for (size_t i = 0; i < D; ++i) copy[i] *= B[i];
     }
 
     return copy;
@@ -605,7 +605,7 @@ operator*(const CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
+        for (size_t i = 0; i < D; ++i) copy[i] *= value;
     }
 
     return copy;
@@ -640,7 +640,7 @@ operator*(T scalar, const CGM::Vector<D,T>& vector)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] *= value;
+        for (size_t i = 0; i < D; ++i) copy[i] *= value;
     }
 
     return copy;
@@ -674,7 +674,7 @@ operator/=(CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) vector[i] /= scalar;
+        for (size_t i = 0; i < D; ++i) vector[i] /= scalar;
     }
 
     return vector;
@@ -706,7 +706,7 @@ operator/=(CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) A[i] /= B[i];
+        for (size_t i = 0; i < D; ++i) A[i] /= B[i];
     }
 
     return A;
@@ -740,7 +740,7 @@ operator/(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] /= B[i];
+        for (size_t i = 0; i < D; ++i) copy[i] /= B[i];
     }
 
     return copy;
@@ -775,7 +775,7 @@ operator/(const CGM::Vector<D,T>& vector, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) copy[i] /= value;
+        for (size_t i = 0; i < D; ++i) copy[i] /= value;
     }
 
     return copy;
@@ -809,7 +809,7 @@ operator==(const CGM::Vector<D,T>& vector, T scalar)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(vector[i], scalar)) return false;
+        for (size_t i = 0; i < D; ++i) if (CGM::neq(vector[i], scalar)) return false;
         return true;
     }
 }

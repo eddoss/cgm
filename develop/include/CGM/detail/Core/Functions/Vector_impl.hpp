@@ -237,11 +237,10 @@ constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
 length(const Vector<D,T>& vector)
 {
     TResult sum {dot(vector, vector)};
-    TResult zer {zero<TResult>};
 
-    if (CGM::eq(sum,zer))
+    if (CGM::eq(sum,zero<TResult>))
     {
-        return zer;
+        return zero<TResult>;
     }
     else
     {
@@ -426,7 +425,10 @@ eq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i], tolerance)) return false;
+        for (size_t i = 0; i < D; ++i)
+        {
+            if (CGM::neq(A[i], B[i], tolerance)) return false;
+        }
         return true;
     }
 }
@@ -457,7 +459,10 @@ neq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance)
     }
     else
     {
-        for (auto i = 0; i < D; ++i) if (CGM::neq(A[i], B[i]), tolerance) return true;
+        for (size_t i = 0; i < D; ++i)
+        {
+            if (CGM::neq(A[i], B[i]), tolerance) return true;
+        }
         return false;
     }
 }
