@@ -6,6 +6,7 @@
 #include <CGM/Core>
 #include <CGM/Cartesian/3D>
 #include <OpenGL/BaseObject.hpp>
+#include <Global.hpp>
 
 
 /**
@@ -13,8 +14,15 @@
  */
 class ShaderProgram : public OpenGLObject
 {
+    CGM_EXAMPLES_DISABLE_COPY(ShaderProgram);
 
-    CGM_EXAMPLES_DISABLE_COPY(ShaderProgram)
+/* ####################################################################################### */
+public: /* Aliases */
+/* ####################################################################################### */
+
+    using Shared    = std::shared_ptr<ShaderProgram>;
+    using Unique    = std::unique_ptr<ShaderProgram>;
+    using Weak      = std::weak_ptr<ShaderProgram>;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -38,20 +46,20 @@ public: /* Static methods */
 /* ####################################################################################### */
 
     /**
-     * Get shaders source file extension by types.
+     * Gets shaders source file extension by types.
      * @param shaderType Type of shader.
      * @return shader source file extension.
      */
     static std::wstring
-    ShaderFileExtensionByType(EShaderType shaderType);
+    getShaderFileExtensionByType(EShaderType shaderType);
 
     /**
-     * Get shaders type by source file extension.
+     * Gets shaders type by source file extension.
      * @param file Path to shader source file. This path should contain extension.
      * @return shader type int(shaderType) if all ok, -1 otherwise.
      */
     static int
-    ShaderTypeByFile(const std::wstring& file);
+    getShaderTypeByFile(const std::wstring& file);
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -403,14 +411,14 @@ public: /* GL object interface */
 
     /**
      * Bind this object.
-     * @return true if binding was succeded, false otherwise.
+     * @return true if binding was succeeded, false otherwise.
      */
     bool
     bind() override;
 
     /**
      * Release this object.
-     * @return true if releasing was succeded, false otherwise.
+     * @return true if releasing was succeeded, false otherwise.
      */
     bool
     release() override;

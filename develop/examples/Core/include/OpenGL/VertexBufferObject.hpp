@@ -4,14 +4,23 @@
 #include <cstdint>
 #include <Global.hpp>
 #include <OpenGL/BaseObject.hpp>
+#include <memory>
 
 
 /**
- * OpenGL vertex buffer object (VBO).
+ * OpenGL vertex buffer object.
  */
-class VertexBufferObject : OpenGLObject
+class VBO : OpenGLObject
 {
-    CGM_EXAMPLES_DISABLE_COPY(VertexBufferObject)
+    CGM_EXAMPLES_DISABLE_COPY(VBO)
+
+/* ####################################################################################### */
+public: /* Aliases */
+/* ####################################################################################### */
+
+    using Shared    = std::shared_ptr<VBO>;
+    using Unique    = std::unique_ptr<VBO>;
+    using Weak      = std::weak_ptr<VBO>;
 
 /* ####################################################################################### */
 public: /* Enums */
@@ -77,12 +86,12 @@ public: /* Constructors */
      * @param usagePattern Usage pattern of  this VBO.
      * @param accessPattern Acces pattern of this VBO.
      */
-    VertexBufferObject(EBufferType bufferType, EUsagePattern usagePattern, EAccessPattern accessPattern);
+    VBO(EBufferType bufferType, EUsagePattern usagePattern, EAccessPattern accessPattern);
 
     /**
      * Destructor.
      */
-   ~VertexBufferObject() override;
+   ~VBO() override;
 
 /* ####################################################################################### */
 public: /* Properties getters */

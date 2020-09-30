@@ -2,14 +2,23 @@
 
 
 #include <OpenGL/BaseObject.hpp>
+#include <memory>
 
 
 /**
  * OpenGL vertex array object (VAO).
  */
-class VertexArrayObject : public OpenGLObject
+class VAO : public OpenGLObject
 {
-    CGM_EXAMPLES_DISABLE_COPY(VertexArrayObject)
+//    CGM_EXAMPLES_DISABLE_COPY(VAO)
+
+/* ####################################################################################### */
+public: /* Aliases */
+/* ####################################################################################### */
+
+    using Shared    = std::shared_ptr<VAO>;
+    using Unique    = std::unique_ptr<VAO>;
+    using Weak      = std::weak_ptr<VAO>;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -18,12 +27,12 @@ public: /* Constructors */
     /**
      * Default constructor with no parameters.
      */
-    VertexArrayObject();
+    VAO();
 
     /**
      * Destructor.
      */
-    ~VertexArrayObject() override;
+    ~VAO() override;
 
 /* ####################################################################################### */
 public: /* GL object interface */

@@ -41,7 +41,9 @@ BaseWindow::create()
     glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
     {
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
-        self->resizeEvent(width, height);
+        self->m_width = width;
+        self->m_height = height;
+        self->resizeEvent();
     });
 
     glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -107,11 +109,12 @@ BaseWindow::start()
     {
         glfwPollEvents();
 
-        const double time = glfwGetTime();
-        const double tickDelta = time - m_previousTick;
-        m_previousTick = time;
+        m_time = glfwGetTime();
+        m_currentTick = m_time - m_previousTick;
+        m_previousTick = m_time;
 
-        loopEvent(tickDelta, time);
+        clearEvent();
+        renderEvent();
 
         glfwSwapBuffers(m_window);
     }
@@ -170,7 +173,15 @@ BaseWindow::beforeLoop()
 /* --------------------------------------------------------------------------------------- */
 
 void
-BaseWindow::loopEvent(double tickDelta, double time)
+BaseWindow::clearEvent()
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+void
+BaseWindow::renderEvent()
 {
 
 }
@@ -186,10 +197,9 @@ BaseWindow::afterLoop()
 /* --------------------------------------------------------------------------------------- */
 
 void
-BaseWindow::resizeEvent(size_t width, size_t height)
+BaseWindow::resizeEvent()
 {
-    m_width = width;
-    m_height = height;
+
 }
 
 /* --------------------------------------------------------------------------------------- */

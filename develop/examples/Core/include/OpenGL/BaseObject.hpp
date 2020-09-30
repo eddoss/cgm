@@ -22,8 +22,6 @@ enum EGLType
     Byte4   = GL_4_BYTES            /**< 4 byte number */
 };
 
-#define PRIMITIVE_RESTART_VALUE = 0xffffffff;
-
 /**
  * OpenGL base object. It describe create/destroy, bind/release
  * and get object ID functionality. All GL objects inherited from

@@ -216,6 +216,20 @@ protected: /* Protected methods */
     bool
     isMouseInWindow();
 
+    /**
+     * Gets current time (in seconds).
+     * @return Time since event loop was started.
+     */
+    CGM_FORCEINLINE double
+    time() const { return m_time; }
+
+    /**
+     * Gets delta between previous and current ticks (in seconds).
+     * @return Tick delta time.
+     */
+    CGM_FORCEINLINE double
+    tickDelta() const { return m_currentTick; }
+
 /* ####################################################################################### */
 protected: /* Window events */
 /* ####################################################################################### */
@@ -227,12 +241,16 @@ protected: /* Window events */
     beforeLoop();
 
     /**
-     * Window main loop event handler.
-     * @param tickDelta Delta between this tick and previous (in seconds).
-     * @param time Time since window was created (in seconds).
+     * Window clear event. Called before 'renderEvent'.
      */
     virtual void
-    loopEvent(double tickDelta, double time);
+    clearEvent();
+
+    /**
+     * Window render event handler.
+     */
+    virtual void
+    renderEvent();
 
     /**
      * Call this handler after window main loop finished.
@@ -242,11 +260,9 @@ protected: /* Window events */
 
     /**
      * Resize event handler.
-     * @param width New window width.
-     * @param height New window height.
      */
     virtual void
-    resizeEvent(size_t width, size_t height);
+    resizeEvent();
 
     /**
      * Key event handler.
@@ -290,6 +306,12 @@ protected: /* Window events */
 /* ####################################################################################### */
 private: /* Internals */
 /* ####################################################################################### */
+
+    double
+    m_time = 0.0;
+
+    double
+    m_currentTick = 0.0;
 
     double
     m_previousTick = 0.0;

@@ -1,14 +1,10 @@
 
-#include <Window/BaseWindow.hpp>
+#include "Program.hpp"
 
 int main(int argc, char** argv)
 {
-    INIT_GLFW
-    BaseWindow window;
-    if (!window.create()){ exit(-1); }
-    INIT_GLEW
-
-    window.start();
+    Program program;
+    program.start();
 
     return 0;
 }

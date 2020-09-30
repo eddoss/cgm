@@ -9,7 +9,7 @@
 /* Constructors */
 /* ####################################################################################### */
 
-VertexArrayObject::~VertexArrayObject()
+VAO::~VAO()
 {
     if( m_objectCreated )
     {
@@ -19,7 +19,7 @@ VertexArrayObject::~VertexArrayObject()
 
 /* --------------------------------------------------------------------------------------- */
 
-VertexArrayObject::VertexArrayObject()
+VAO::VAO()
     :OpenGLObject()
 {
 
@@ -30,7 +30,7 @@ VertexArrayObject::VertexArrayObject()
 /* ####################################################################################### */
 
 bool
-VertexArrayObject::bind()
+VAO::bind()
 {
     if( !m_objectCreated )
     {
@@ -44,7 +44,7 @@ VertexArrayObject::bind()
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexArrayObject::release()
+VAO::release()
 {
     if (!m_objectCreated)
     {
@@ -58,7 +58,7 @@ VertexArrayObject::release()
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexArrayObject::create()
+VAO::create()
 {
     if (m_objectCreated)
     {
@@ -82,7 +82,7 @@ VertexArrayObject::create()
 /* --------------------------------------------------------------------------------------- */
 
 void
-VertexArrayObject::destroy()
+VAO::destroy()
 {
     if (!m_objectCreated)
     {

@@ -27,7 +27,7 @@
 /* ####################################################################################### */
 
 std::wstring
-ShaderProgram::ShaderFileExtensionByType(ShaderProgram::EShaderType shaderType)
+ShaderProgram::getShaderFileExtensionByType(ShaderProgram::EShaderType shaderType)
 {
     switch (shaderType)
     {
@@ -43,7 +43,7 @@ ShaderProgram::ShaderFileExtensionByType(ShaderProgram::EShaderType shaderType)
 /* --------------------------------------------------------------------------------------- */
 
 int
-ShaderProgram::ShaderTypeByFile(const std::wstring& file)
+ShaderProgram::getShaderTypeByFile(const std::wstring& file)
 {
     std::wstring ext = std::filesystem::path(file).extension();
 
@@ -123,8 +123,10 @@ ShaderProgram::link()
         return false;
     }
 
-    for( size_t i = 0; i < m_shadersIDs.size(); i++ )
-        glDeleteShader(m_shadersIDs[i]);
+    for(auto m_shadersID : m_shadersIDs)
+    {
+        glDeleteShader(m_shadersID);
+    }
 
     m_shadersIDs.clear();
 
@@ -195,10 +197,12 @@ ShaderProgram::addShaderFromFile(ShaderProgram::EShaderType shaderType, const st
 bool
 ShaderProgram::addShaderPack(const std::wstring& directory)
 {
-    for (const auto& it : std::filesystem::directory_iterator(directory))
+    auto absdir = std::filesystem::absolute(directory);
+
+    for (const auto& it : std::filesystem::directory_iterator(absdir))
     {
         if (!std::filesystem::is_regular_file(it.path())) continue;
-        int type = ShaderTypeByFile(it.path());
+        int type = getShaderTypeByFile(it.path());
         if (type == -1) continue;
         addShaderFromFile(ShaderProgram::EShaderType(type), it.path());
     }
@@ -283,8 +287,7 @@ ShaderProgram::setAttributeBuffer(const std::string& name, EGLType type, uint32_
         return;
     }
 
-    glVertexAttribPointer(GLuint(location), GLint(componentCount), type, GL_TRUE, GLsizei(stride), &offset);
-//    glVertexAttribPointer(GLuint(location), GLint(componentCount), type, GL_TRUE, GLsizei(stride), reinterpret_cast<void*>(offset));
+    glVertexAttribPointer(GLuint(location), GLint(componentCount), type, GL_TRUE, GLsizei(stride), reinterpret_cast<void*>(offset));
 }
 
 /* ####################################################################################### */

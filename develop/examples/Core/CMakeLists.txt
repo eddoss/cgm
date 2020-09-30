@@ -10,3 +10,12 @@ add_library(${PROJECT_NAME} STATIC ${SOURCES_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw GLEW::GLEW ComputerGraphixMath)
+
+get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} PATH)
+
+add_custom_command(
+    TARGET ExamplesCore POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PARENT_DIR}/Resources
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources
+)

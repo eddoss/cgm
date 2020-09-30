@@ -8,7 +8,7 @@
 /* Constructors */
 /* ####################################################################################### */
 
-VertexBufferObject::~VertexBufferObject()
+VBO::~VBO()
 {
     if( m_objectCreated )
     {
@@ -18,7 +18,7 @@ VertexBufferObject::~VertexBufferObject()
 
 /* --------------------------------------------------------------------------------------- */
 
-VertexBufferObject::VertexBufferObject(EBufferType bufferType, EUsagePattern usagePattern, EAccessPattern accessPattern)
+VBO::VBO(EBufferType bufferType, EUsagePattern usagePattern, EAccessPattern accessPattern)
     : OpenGLObject()
     , m_bufferType(bufferType)
     , m_usagePattern(usagePattern)
@@ -31,24 +31,24 @@ VertexBufferObject::VertexBufferObject(EBufferType bufferType, EUsagePattern usa
 /* Properties getters */
 /* ####################################################################################### */
 
-VertexBufferObject::EBufferType
-VertexBufferObject::bufferType() const
+VBO::EBufferType
+VBO::bufferType() const
 {
     return m_bufferType;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-VertexBufferObject::EUsagePattern
-VertexBufferObject::usagePattern() const
+VBO::EUsagePattern
+VBO::usagePattern() const
 {
     return m_usagePattern;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-VertexBufferObject::EAccessPattern
-VertexBufferObject::accessPattern() const
+VBO::EAccessPattern
+VBO::accessPattern() const
 {
     return m_accessPattern;
 }
@@ -56,7 +56,7 @@ VertexBufferObject::accessPattern() const
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexBufferObject::readable() const
+VBO::readable() const
 {
     if( !m_objectCreated )
     {
@@ -75,7 +75,7 @@ VertexBufferObject::readable() const
 /* --------------------------------------------------------------------------------------- */
 
 int32_t
-VertexBufferObject::size() const
+VBO::size() const
 {
     if( !m_objectCreated )
     {
@@ -92,7 +92,7 @@ VertexBufferObject::size() const
 /* ####################################################################################### */
 
 bool
-VertexBufferObject::read(uint32_t from, uint32_t count, void* outData) const
+VBO::read(uint32_t from, uint32_t count, void* outData) const
 {
     if( !m_objectCreated )
     {
@@ -122,7 +122,7 @@ VertexBufferObject::read(uint32_t from, uint32_t count, void* outData) const
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexBufferObject::write(uint32_t offset, uint32_t count, const void* data )
+VBO::write(uint32_t offset, uint32_t count, const void* data )
 {
     if( !m_objectCreated )
     {
@@ -152,7 +152,7 @@ VertexBufferObject::write(uint32_t offset, uint32_t count, const void* data )
 /* --------------------------------------------------------------------------------------- */
 
 void
-VertexBufferObject::allocate( uint32_t byteCount, const void* data )
+VBO::allocate(uint32_t byteCount, const void* data )
 {
     glBufferData(m_bufferType, byteCount, data, m_usagePattern);
 }
@@ -162,7 +162,7 @@ VertexBufferObject::allocate( uint32_t byteCount, const void* data )
 /* ####################################################################################### */
 
 bool
-VertexBufferObject::bind()
+VBO::bind()
 {
     if( !m_objectCreated )
     {
@@ -176,7 +176,7 @@ VertexBufferObject::bind()
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexBufferObject::release()
+VBO::release()
 {
     if( !m_objectCreated )
     {
@@ -190,7 +190,7 @@ VertexBufferObject::release()
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VertexBufferObject::create()
+VBO::create()
 {
     if( m_objectCreated )
     {
@@ -214,7 +214,7 @@ VertexBufferObject::create()
 /* --------------------------------------------------------------------------------------- */
 
 void
-VertexBufferObject::destroy()
+VBO::destroy()
 {
     if( !m_objectCreated )
     {
