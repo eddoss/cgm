@@ -10,7 +10,7 @@
 #include <CGM/detail/Cartesian/Common.hpp>
 #include <CGM/detail/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/detail/Cartesian/3D/InternalUtils_impl.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Utils.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -38,19 +38,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation);
  * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
- * @param orientation Local space orientation represented by 3x3 matrix.
- * @param position Local space position.
- */
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
-
-/**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
- * the vector does not change, only recalculation to the local system occurs.
- * @tparam Space Space to convert to.
- * @param matrix 4x4 basis matrix to convert.
  * @param space Local space represented by 4x4 matrix.
  */
 template<ESpace Space, typename T>
@@ -69,19 +56,6 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation);
 
-/**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
- * the vector does not change, only recalculation to the local system occurs.
- * @tparam Space Space to convert to.
- * @param matrix 4x4 basis matrix to convert.
- * @param orientation Local space orientation represented by quaternion.
- * @param position Position of local space.
- */
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,T>& position);
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 (inplace) */
 /* ####################################################################################### */
@@ -96,18 +70,6 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,
 template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -131,84 +93,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
 
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
-/* ####################################################################################### */
-/* Local to local: Matrix3 with Position (inplace) */
-/* ####################################################################################### */
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param spaceB 4x4 matrix of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
 /* ####################################################################################### */
 /* Local to local: Matrix4 (inplace) */
 /* ####################################################################################### */
@@ -223,18 +107,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3
 template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -258,18 +130,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
 
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
 /* ####################################################################################### */
 /* Local to local: Quaternion (inplace) */
 /* ####################################################################################### */
@@ -284,18 +144,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>&
 template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -319,84 +167,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
-/* ####################################################################################### */
-/* Local to local: Quaternion with Position (inplace) */
-/* ####################################################################################### */
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param spaceB 4x4 matrix of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
 /* ####################################################################################### */
 /* Global to local / local to global (outplace) */
 /* ####################################################################################### */
@@ -413,21 +183,6 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation);
-
-/**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The
- * physically position  of the vector does not change, only recalculation to the local
- * system occurs.
- * @tparam Space Space to convert to.
- * @param matrix 4x4 basis matrix to convert.
- * @param orientation Local space orientation represented by 3x3 matrix.
- * @param position Local space position.
- * @return Converted matrix.
- */
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
  * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
@@ -457,21 +212,6 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation);
 
-/**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The
- * physically position  of the vector does not change, only recalculation to the local
- * system occurs.
- * @tparam Space Space to convert to.
- * @param matrix 4x4 basis matrix to convert.
- * @param orientation Local space orientation represented by quaternion.
- * @param position Position of local space.
- * @return Converted matrix.
- */
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,T>& position);
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 (outplace) */
 /* ####################################################################################### */
@@ -487,19 +227,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const V
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -525,90 +252,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
 
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
-/* ####################################################################################### */
-/* Local to local: Matrix3 with Position (outplace) */
-/* ####################################################################################### */
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param spaceB 4x4 matrix of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionB Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
 /* ####################################################################################### */
 /* Local to local: Matrix4 (outplace) */
 /* ####################################################################################### */
@@ -624,19 +267,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -662,19 +292,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
 
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param spaceA Basis of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
 /* ####################################################################################### */
 /* Local to local: Quaternion (outplace) */
 /* ####################################################################################### */
@@ -690,19 +307,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quater
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert vector from space A to space B (A and B are in one space). The physically 
@@ -727,90 +331,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
-
-/* ####################################################################################### */
-/* Local to local: Quaternion with Position (outplace) */
-/* ####################################################################################### */
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param spaceB 4x4 matrix of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
-
-/**
- * Convert vector from space A to space B (A and B are in one space). The physically 
- * position of the vector does not change, only recalculation to the B system occurs.
- * @param matrix 4x4 basis matrix in A space.
- * @param orientationA Orientation of A space.
- * @param positionA Position of A space.
- * @param orientationB Orientation of B space.
- * @param positionB Position of B space.
- * @return Converted vector from space A to B.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

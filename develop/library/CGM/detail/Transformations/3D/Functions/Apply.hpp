@@ -12,7 +12,6 @@
 #include <CGM/detail/Transformations/3D/Types/Enums.hpp>
 #include <CGM/detail/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/detail/Transformations/3D/Types/Transforms.hpp>
-#include <CGM/detail/Cartesian/3D/InternalUtils_impl.hpp>
 #include <CGM/detail/Transformations/3D/InternalUtils_impl.hpp>
 
 

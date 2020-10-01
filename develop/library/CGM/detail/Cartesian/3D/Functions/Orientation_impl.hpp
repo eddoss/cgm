@@ -23,21 +23,12 @@ template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<3,3,T>& orientation)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
-        Vector<3,T>{orientation(0,0), orientation(0,1), orientation(0,2)},
-        Vector<3,T>{orientation(1,0), orientation(1,1), orientation(1,2)},
-        Vector<3,T>{orientation(2,0), orientation(2,1), orientation(2,2)}
+        x(orientation),
+        y(orientation),
+        z(orientation)
     );
-#else
-    return Axes<T>
-    (
-        Vector<3,T>{orientation(0,0), orientation(1,0), orientation(2,0)},
-        Vector<3,T>{orientation(0,1), orientation(1,1), orientation(2,1)},
-        Vector<3,T>{orientation(0,2), orientation(1,2), orientation(2,2)}
-    );
-#endif
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -60,21 +51,12 @@ template<typename T>
 constexpr CGM_FORCEINLINE Axes<T>
 orientationAxes(const Matrix<4,4,T>& space)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
-        Vector<3,T>{space(0,0), space(0,1), space(0,2)},
-        Vector<3,T>{space(1,0), space(1,1), space(1,2)},
-        Vector<3,T>{space(2,0), space(2,1), space(2,2)}
+        x(space),
+        y(space),
+        z(space)
     );
-#else
-    return Axes<T>
-    (
-        Vector<3,T>{space(0,0), space(1,0), space(2,0)},
-        Vector<3,T>{space(0,1), space(1,1), space(2,1)},
-        Vector<3,T>{space(0,2), space(1,2), space(2,2)}
-    );
-#endif
 }
 
 /* ####################################################################################### */
@@ -88,16 +70,16 @@ orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>&
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
-        x.x, x.y, x.z,
-        y.x, y.y, y.z,
-        z.x, z.y, z.z
+        x.x, y.x, z.x,
+        x.y, y.y, z.y,
+        x.z, y.z, z.z
     };
 #else
     return
     {
-        x.x, y.x, z.x,
-        x.y, y.y, z.y,
-        x.z, y.z, z.z
+        x.x, x.y, x.z,
+        y.x, y.y, y.z,
+        z.x, z.y, z.z
     };
 #endif
 }

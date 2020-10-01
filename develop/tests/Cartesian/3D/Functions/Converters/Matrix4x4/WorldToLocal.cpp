@@ -19,16 +19,6 @@ TEST(Cartesian_3D_Functions_Matrix4x4_Converters, WorldToLocal_Mat3)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Matrix4x4_Converters, WorldToLocal_Mat3WithPos)
-{
-    using namespace cgm_xyz_converters_tests_data;
-
-    auto result = CGM_XYZ::converted<CGM_LOCAL>(MAT4, A_MAT3, A_P);
-    ASSERT_TRUE(CGM::eq(result, EXPECT_MAT4_TO_LOCAL_BY_MAT4, 0.0001));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
 TEST(Cartesian_3D_Functions_Matrix4x4_Converters, WorldToLocal_Mat4)
 {
     using namespace cgm_xyz_converters_tests_data;
@@ -45,14 +35,4 @@ TEST(Cartesian_3D_Functions_Matrix4x4_Converters, WorldToLocal_Quat)
 
     auto result = CGM_XYZ::converted<CGM_LOCAL>(MAT4, A_QUAT);
     ASSERT_TRUE(CGM::eq(result, EXPECT_MAT4_TO_LOCAL_BY_MAT3, 0.0001));
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-TEST(Cartesian_3D_Functions_Matrix4x4_Converters, WorldToLocal_QuatWithPos)
-{
-    using namespace cgm_xyz_converters_tests_data;
-
-    auto result = CGM_XYZ::converted<CGM_LOCAL>(MAT4, A_QUAT, A_P);
-    ASSERT_TRUE(CGM::eq(result, EXPECT_MAT4_TO_LOCAL_BY_MAT4, 0.0001));
 }

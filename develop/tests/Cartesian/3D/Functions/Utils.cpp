@@ -43,11 +43,12 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     auto valueQ = CGM_XYZ::x(quat);
 
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    Vector<3,double> expec3 {2,4,5};
-    Vector<3,double> expec4 {2,4,5};
-#else
     Vector<3,double> expec3 {2,3,0};
     Vector<3,double> expec4 {2,3,0};
+
+#else
+    Vector<3,double> expec3 {2,4,5};
+    Vector<3,double> expec4 {2,4,5};
 #endif
 
     Vector<3,double> expecQ {0.559270,0.302442,-0.771846};
@@ -84,11 +85,11 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     auto valueQ = CGM_XYZ::y(quat);
 
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    Vector<3,double> expec3 {3,6,7};
-    Vector<3,double> expec4 {3,6,7};
-#else
     Vector<3,double> expec3 {4,6,9};
     Vector<3,double> expec4 {4,6,9};
+#else
+    Vector<3,double> expec3 {3,6,7};
+    Vector<3,double> expec4 {3,6,7};
 #endif
 
     Vector<3,double> expecQ {-0.313298,0.939132,0.140980};
@@ -125,11 +126,11 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     auto valueQ = CGM_XYZ::z(quat);
 
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    Vector<3,double> expec3 {0,9,8};
-    Vector<3,double> expec4 {0,9,8};
-#else
     Vector<3,double> expec3 {5,7,8};
     Vector<3,double> expec4 {5,7,8};
+#else
+    Vector<3,double> expec3 {0,9,8};
+    Vector<3,double> expec4 {0,9,8};
 #endif
 
     Vector<3,double> expecQ {0.767503,0.162971,0.619983};
@@ -150,21 +151,6 @@ TEST(Cartesian_3D_Functions_Utils, SetXYZ)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec3
     {
-        2, 4, 5,
-        3, 6, 7,
-        0, 9, 8
-    };
-
-    Matrix<4,4,int> expec4
-    {
-        2, 4, 5, 0,
-        3, 6, 7, 0,
-        0, 9, 8, 0,
-        0, 0, 0, 0
-    };
-#else
-    Matrix<3,3,int> expec3
-    {
         2, 3, 0,
         4, 6, 9,
         5, 7, 8
@@ -175,6 +161,21 @@ TEST(Cartesian_3D_Functions_Utils, SetXYZ)
         2, 3, 0, 0,
         4, 6, 9, 0,
         5, 7, 8, 0,
+        0, 0, 0, 0
+    };
+#else
+    Matrix<3,3,int> expec3
+    {
+        2, 4, 5,
+        3, 6, 7,
+        0, 9, 8
+    };
+
+    Matrix<4,4,int> expec4
+    {
+        2, 4, 5, 0,
+        3, 6, 7, 0,
+        0, 9, 8, 0,
         0, 0, 0, 0
     };
 #endif
@@ -699,17 +700,17 @@ TEST(Cartesian_3D_Functions_Utils, FromXYZP)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,int> expec
     {
-        2,1,3,1,
-        4,3,6,2,
-        7,9,2,3,
+        2,4,7,1,
+        1,3,9,2,
+        3,6,2,3,
         0,0,0,1
     };
 #else
     Matrix<4,4,int> expec
     {
-        2,4,7,0,
-        1,3,9,0,
-        3,6,2,0,
+        2,1,3,0,
+        4,3,6,0,
+        7,9,2,0,
         1,2,3,1
     };
 #endif
@@ -756,10 +757,10 @@ TEST(Cartesian_3D_Functions_Utils, FromMatrix3AndPosition)
 
 TEST(Cartesian_3D_Functions_Utils, FromQuaternionAndPosition)
 {
-    CGM_XYZ::Quaternion<double> quaternion {-0.006227,0.435855,0.174342,0.882948};
-    Vector<3,double> position {0.7, 1.3, 4.0};
+    const auto q = CGM_XYZ::Quaternion<double>{-0.006227,0.435855,0.174342,0.882948};
+    const auto p = Vector<3,double> {0.7, 1.3, 4.0};
 
-    auto result = CGM_XYZ::spaceMatrix(quaternion, position);
+    auto result = CGM_XYZ::spaceMatrix(q,p);
 
     Vector<3,double> ex {0.559270,0.302442,-0.771846};
     Vector<3,double> ey {-0.313298,0.939132,0.140980};
@@ -768,20 +769,215 @@ TEST(Cartesian_3D_Functions_Utils, FromQuaternionAndPosition)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,double> expec
     {
-        ex.x, ex.y, ex.z, position.x,
-        ey.x, ey.y, ey.z, position.y,
-        ez.x, ez.y, ez.z, position.z,
-        0.0, 0.0, 0.0, 1.0
+        ex.x, ey.x, ez.x, p.x,
+        ex.y, ey.y, ez.y, p.y,
+        ex.z, ey.z, ez.z, p.z,
+         0.0,  0.0,  0.0, 1.0
     };
 #else
     Matrix<4,4,double> expec
     {
-        ex.x, ey.x, ez.x, 0.0,
-        ex.y, ey.y, ez.y, 0.0,
-        ex.z, ey.z, ez.z, 0.0,
-        position.x, position.y, position.z, 1.0
+        ex.x, ex.y, ex.z, 0.0,
+        ey.x, ey.y, ey.z, 0.0,
+        ez.x, ez.y, ez.z, 0.0,
+         p.x,  p.y,  p.z, 1.0
     };
 #endif
 
     ASSERT_TRUE(CGM::eq(result, expec, 0.0001));
+}
+
+/* ####################################################################################### */
+/* Multiplication */
+/* ####################################################################################### */
+
+TEST(Cartesian_3D_Functions_Utils, MultiplyMatrix4Vector3)
+{
+    {
+        Vector<3,int> vec {2,3,4};
+        Matrix<4,4,int> mat
+        {
+            3,2,4,1,
+            2,1,3,2,
+            5,1,1,3,
+            0,0,0,1
+        };
+
+        auto res = CGM_XYZ::multiply<EVectorRepresentation::Point>(mat, vec);
+        Vector<3,int> exp {29,21,20};
+        ASSERT_TRUE(res == exp);
+    }
+
+    {
+        Vector<3,int> vec {2,3,4};
+        Matrix<4,4,int> mat
+        {
+            3,2,4,1,
+            2,1,3,2,
+            5,1,1,3,
+            0,0,0,1
+        };
+
+        auto res = CGM_XYZ::multiply<EVectorRepresentation::Direction>(mat, vec);
+        Vector<3,int> exp {28,19,17};
+        ASSERT_TRUE(res == exp);
+    }
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_Functions_Utils, MultiplyVector3Matrix4)
+{
+    {
+        Vector<3,int> vec {2,3,4};
+        Matrix<4,4,int> mat
+        {
+            3,2,5,0,
+            2,1,1,0,
+            4,3,1,0,
+            1,2,3,1
+        };
+
+        auto res = CGM_XYZ::multiply<EVectorRepresentation::Point>(vec, mat);
+        Vector<3,int> exp {29,21,20};
+        ASSERT_TRUE(res == exp);
+    }
+
+    {
+        Vector<3,int> vec {2,3,4};
+        Matrix<4,4,int> mat
+        {
+            3,2,5,0,
+            2,1,1,0,
+            4,3,1,0,
+            1,2,3,1
+        };
+
+        auto res = CGM_XYZ::multiply<EVectorRepresentation::Direction>(vec, mat);
+        Vector<3,int> exp {28,19,17};
+        ASSERT_TRUE(res == exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_Functions_Utils, MultiplyMatrix3Matrix4)
+{
+    {
+        Matrix<3,3,int> expect
+        {
+             58,  37,   39,
+             99,  62,   48,
+            121,  66,   76
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            4,2,5,
+            3,6,7,
+            9,8,5
+        };
+
+        Matrix<4,4,int> mat4
+        {
+            3,1,5,5,
+            8,4,2,9,
+            6,5,3,8,
+            2,4,7,3
+        };
+
+        auto result = CGM_XYZ::multiply<3>(mat3, mat4);
+
+        ASSERT_TRUE(result == expect);
+    }
+    {
+        Matrix<4,4,int> expect
+        {
+             58,  37,   39,   78,
+             99,  62,   48,  125,
+            121,  66,   76,  157,
+              2,   4,    7,    3
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            4,2,5,
+            3,6,7,
+            9,8,5
+        };
+
+        Matrix<4,4,int> mat4
+        {
+            3,1,5,5,
+            8,4,2,9,
+            6,5,3,8,
+            2,4,7,3
+        };
+
+        auto result = CGM_XYZ::multiply<4>(mat3, mat4);
+
+        ASSERT_TRUE(result == expect);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_3D_Functions_Utils, MultiplyVector4Matrix3)
+{
+    {
+        Matrix<3,3,int> expect
+        {
+            60,  52,  47,
+            62,  56,  78,
+            66,  66,  80
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            4,2,5,
+            3,6,7,
+            9,8,5
+        };
+
+        Matrix<4,4,int> mat4
+        {
+            3,1,5,5,
+            8,4,2,9,
+            6,5,3,8,
+            2,4,7,3
+        };
+
+        auto result = CGM_XYZ::multiply<3>(mat4, mat3);
+
+        ASSERT_TRUE(result == expect);
+    }
+    {
+        Matrix<4,4,int> expect
+        {
+            60,  52,  47,  5,
+            62,  56,  78,  9,
+            66,  66,  80,  8,
+            83,  84,  73,  3
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            4,2,5,
+            3,6,7,
+            9,8,5
+        };
+
+        Matrix<4,4,int> mat4
+        {
+            3,1,5,5,
+            8,4,2,9,
+            6,5,3,8,
+            2,4,7,3
+        };
+
+        auto result = CGM_XYZ::multiply<4>(mat4, mat3);
+
+        ASSERT_TRUE(result == expect);
+    }
 }

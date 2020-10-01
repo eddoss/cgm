@@ -10,7 +10,7 @@
 #include <CGM/detail/Cartesian/Common.hpp>
 #include <CGM/detail/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/detail/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/detail/Cartesian/3D/InternalUtils_impl.hpp>
+#include <CGM/detail/Cartesian/3D/Functions/Utils.hpp>
 
 
 CGM_NAMESPACE_BEGIN

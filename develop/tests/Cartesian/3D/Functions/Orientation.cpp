@@ -43,16 +43,16 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> mat
     {
-        in_x.x, in_x.y, in_x.z,
-        in_y.x, in_y.y, in_y.z,
-        in_z.x, in_z.y, in_z.z,
+        in_x.x, in_y.x, in_z.x,
+        in_x.y, in_y.y, in_z.y,
+        in_x.z, in_y.z, in_z.z
     };
 #else
     Matrix<3,3,int> mat
     {
-        in_x.x, in_y.x, in_z.x,
-        in_x.y, in_y.y, in_z.y,
-        in_x.z, in_y.z, in_z.z
+        in_x.x, in_x.y, in_x.z,
+        in_y.x, in_y.y, in_y.z,
+        in_z.x, in_z.y, in_z.z,
     };
 #endif
 
@@ -90,17 +90,17 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<4,4,int> mat
     {
-        in_x.x, in_x.y, in_x.z, 0,
-        in_y.x, in_y.y, in_y.z, 0,
-        in_z.x, in_z.y, in_z.z, 0,
+        in_x.x, in_y.x, in_z.x, 0,
+        in_x.y, in_y.y, in_z.y, 0,
+        in_x.z, in_y.z, in_z.z, 0,
         0, 0, 0, 1
     };
 #else
     Matrix<4,4,int> mat
     {
-        in_x.x, in_y.x, in_z.x, 0,
-        in_x.y, in_y.y, in_z.y, 0,
-        in_x.z, in_y.z, in_z.z, 0,
+        in_x.x, in_x.y, in_x.z, 0,
+        in_y.x, in_y.y, in_y.z, 0,
+        in_z.x, in_z.y, in_z.z, 0,
         0, 0, 0, 1
     };
 #endif
@@ -125,16 +125,16 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expect
     {
-        x.x, x.y, x.z,
-        y.x, y.y, y.z,
-        z.x, z.y, z.z,
+        x.x, y.x, z.x,
+        x.y, y.y, z.y,
+        x.z, y.z, z.z
     };
 #else
     Matrix<3,3,int> expect
     {
-        x.x, y.x, z.x,
-        x.y, y.y, z.y,
-        x.z, y.z, z.z
+        x.x, x.y, x.z,
+        y.x, y.y, y.z,
+        z.x, z.y, z.z,
     };
 #endif
 
@@ -156,16 +156,16 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expect
     {
-        x.x, x.y, x.z,
-        y.x, y.y, y.z,
-        z.x, z.y, z.z,
+        x.x, y.x, z.x,
+        x.y, y.y, z.y,
+        x.z, y.z, z.z
     };
 #else
     Matrix<3,3,int> expect
     {
-        x.x, y.x, z.x,
-        x.y, y.y, z.y,
-        x.z, y.z, z.z
+        x.x, x.y, x.z,
+        y.x, y.y, y.z,
+        z.x, z.y, z.z,
     };
 #endif
 
@@ -185,16 +185,16 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,double> expect
     {
-        x.x, x.y, x.z,
-        y.x, y.y, y.z,
-        z.x, z.y, z.z,
+        x.x, y.x, z.x,
+        x.y, y.y, z.y,
+        x.z, y.z, z.z
     };
 #else
     Matrix<3,3,double> expect
     {
-        x.x, y.x, z.x,
-        x.y, y.y, z.y,
-        x.z, y.z, z.z
+        x.x, x.y, x.z,
+        y.x, y.y, y.z,
+        z.x, z.y, z.z,
     };
 #endif
 

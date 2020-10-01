@@ -10,7 +10,7 @@
 #include <CGM/detail/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Axes.hpp>
 #include <CGM/detail/Cartesian/3D/Types/Enums.hpp>
-#include <CGM/detail/Cartesian/3D/InternalUtils_impl.hpp>
+#include <CGM/detail/Cartesian/Common.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -485,7 +485,7 @@ set(Matrix<3,3,T>& matrix, const Axes<T>& axes);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-set(Matrix<4,4,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& position);
+set(Matrix<4,4,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
 
 /**
  * Set X,Y,Z axes and position to 4x4 orientation matrix.
@@ -543,7 +543,7 @@ constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
 unpackSpace(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
-/* 4x4 orientation manipulations */
+/* 4x4 matrix manipulations */
 /* ####################################################################################### */
 
 /**
@@ -600,6 +600,58 @@ invertOrientationForce(Matrix<4,4,T>& basis);
 template<typename T>
 constexpr Matrix<4,4,T>
 inverseOrientationForce(const Matrix<4,4,T>& basis);
+
+/* ####################################################################################### */
+/* Multiplication */
+/* ####################################################################################### */
+
+/**
+ * Multiplies 3D row-vector by 4x4 matrix.
+ * @tparam Representation How to represent input vector. If its 'Point'
+ * given vector will be represented as Vector4D(x,y,z,1), and Vector4D(x,y,z,0)
+ * otherwise.
+ * @param vector Vector to multiply.
+ * @param matrix Matrix to multiply by.
+ * @return Result vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+multiply(const Vector<3,T>& vector, const Matrix<4,4,T>& matrix);
+
+/**
+ * Multiplies 4x4 matrix by 3D column-vector.
+ * @tparam Representation How to represent input vector. If its 'Point'
+ * given vector will be represented as Vector4D(x,y,z,1), and Vector4D(x,y,z,0)
+ * otherwise.
+ * @param vector Vector to multiply.
+ * @param matrix Matrix to multiply by.
+ * @return Result vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+multiply(const Matrix<4,4,T>& matrix, const Vector<3,T>& vector);
+
+/**
+ * Represents 3x3 matrix as not translated basis and multiplies it by 4x4 matrix.
+ * @tparam N Size of result matrix.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply by.
+ * @return Result matrix.
+ */
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 3 || N == 4), Matrix<N,N,T>>
+multiply(const Matrix<3,3,T>& A, const Matrix<4,4,T>& B);
+
+/**
+ * Multiplies 3x3 matrix by 4x4 matrix (3x3 matrix represents as not translated basis).
+ * @tparam N Size of result matrix.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply by.
+ * @return Result matrix.
+ */
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 3 || N == 4), Matrix<N,N,T>>
+multiply(const Matrix<4,4,T>& A, const Matrix<3,3,T>& B);
 
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

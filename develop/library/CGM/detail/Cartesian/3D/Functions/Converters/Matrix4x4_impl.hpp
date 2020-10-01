@@ -17,70 +17,19 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation)
     if constexpr (Space == ESpace::World)
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = detail::multiply_matrix4x4_on_matrix3x3_res4x4(matrix, orientation);
-        setPosition(matrix, position(matrix) * orientation);
+        matrix = multiply<4>(orientation,matrix);
     #else
-        matrix = detail::multiply_matrix3x3_on_matrix4x4_res4x4(orientation, matrix);
-        setPosition(matrix, orientation * position(matrix));
+        matrix = multiply<4>(matrix, orientation);
     #endif
     }
     else
     {
-        const auto orient = inverseForce(orientation);
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = detail::multiply_matrix4x4_on_matrix3x3_res4x4(matrix, orient);
-        setPosition(matrix, position(matrix) * orient);
+        matrix = multiply<4>(inverseForce(orientation), matrix);
     #else
-        matrix = detail::multiply_matrix3x3_on_matrix4x4_res4x4(orient, matrix);
-        setPosition(matrix, orient * position(matrix));
+        matrix = multiply<4>(matrix, inverseForce(orientation));
     #endif
     }
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
-{
-    auto axs = orientationAxes(matrix);
-    auto pos = CGM_XYZ::position(matrix);
-
-    if constexpr (Space == ESpace::World)
-    {
-        const auto invorient = inverseForce(orientation);
-
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        axs.x = invorient * axs.x;
-        axs.y = invorient * axs.y;
-        axs.z = invorient * axs.z;
-        pos = invorient * pos;
-    #else
-        axs.x = axs.x * invorient;
-        axs.y = axs.y * invorient;
-        axs.z = axs.z * invorient;
-        pos = pos * invorient;
-    #endif
-        pos += position;
-    }
-    else
-    {
-        pos -= position;
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        axs.x = orientation * axs.x;
-        axs.y = orientation * axs.y;
-        axs.z = orientation * axs.z;
-        pos = orientation * pos;
-    #else
-        axs.x = axs.x * orientation;
-        axs.y = axs.y * orientation;
-        axs.z = axs.z * orientation;
-        pos = pos * orientation;
-    #endif
-    }
-
-    set(matrix, axs, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -89,45 +38,22 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space)
 {
-    auto axs = orientationAxes(matrix);
-    auto pos = CGM_XYZ::position(matrix);
-
     if constexpr (Space == ESpace::World)
     {
-        const auto invorient = inverseForce(orientationMatrix(space));
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        axs.x = invorient * axs.x;
-        axs.y = invorient * axs.y;
-        axs.z = invorient * axs.z;
-        pos = invorient * pos;
+        matrix = space * matrix;
     #else
-        axs.x = axs.x * invorient;
-        axs.y = axs.y * invorient;
-        axs.z = axs.z * invorient;
-        pos = pos * invorient;
+        matrix = matrix * space;
     #endif
-        pos += position(space);
     }
     else
     {
-        const auto orient = orientationMatrix(space);
-
-        pos -= position(space);
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        axs.x = orient * axs.x;
-        axs.y = orient * axs.y;
-        axs.z = orient * axs.z;
-        pos = orient * pos;
+        matrix = inverseForce(space) * matrix;
     #else
-        axs.x = axs.x * orient;
-        axs.y = axs.y * orient;
-        axs.z = axs.z * orient;
-        pos = pos * orient;
+        matrix = matrix * inverseForce(space);
     #endif
     }
-
-    set(matrix, axs, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -159,37 +85,6 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation)
     set(matrix, axs, pos);
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,T>& position)
-{
-    auto axs = orientationAxes(matrix);
-    auto pos = CGM_XYZ::position(matrix);
-
-    if constexpr (Space == ESpace::World)
-    {
-        orient(axs.x, orientation);
-        orient(axs.y, orientation);
-        orient(axs.z, orientation);
-        orient(pos, orientation);
-        pos += position;
-    }
-    else
-    {
-        const auto quat = inverseForce(orientation);
-
-        pos -= position;
-        orient(axs.x, quat);
-        orient(axs.y, quat);
-        orient(axs.z, quat);
-        orient(pos, quat);
-    }
-
-    set(matrix, axs, pos);
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 (inplace) */
 /* ####################################################################################### */
@@ -200,16 +95,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3
 {
     convert<ESpace::World>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -232,68 +117,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaterni
     convert<ESpace::Local>(matrix, orientationB);
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
-/* ####################################################################################### */
-/* Local to local: Matrix3 with Position (inplace) */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, spaceB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix4 (inplace) */
 /* ####################################################################################### */
@@ -304,16 +127,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>&
 {
     convert<ESpace::World>(matrix, spaceA);
     convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, spaceA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -336,16 +149,6 @@ convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>&
     convert<ESpace::Local>(matrix, orientationB);
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, spaceA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
 /* ####################################################################################### */
 /* Local to local: Quaternion (inplace) */
 /* ####################################################################################### */
@@ -356,16 +159,6 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3
 {
     convert<ESpace::World>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -388,68 +181,6 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaterni
     convert<ESpace::Local>(matrix, orientationB);
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
-/* ####################################################################################### */
-/* Local to local: Quaternion with Position (inplace) */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, spaceB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE void
-convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    convert<ESpace::World>(matrix, orientationA, positionA);
-    convert<ESpace::Local>(matrix, orientationB, positionB);
-}
-
 /* ####################################################################################### */
 /* Global to local / local to global (outplace) */
 /* ####################################################################################### */
@@ -460,17 +191,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation)
 {
     auto copy = matrix;
     convert<Space>(copy, orientation);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
-{
-    auto copy = matrix;
-    convert<Space>(copy, orientation, position);
     return copy;
 }
 
@@ -496,17 +216,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation)
     return copy;
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientation, const Vector<3,T>& position)
-{
-    auto copy = matrix;
-    convert<Space>(copy, orientation, position);
-    return copy;
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix3 (outplace) */
 /* ####################################################################################### */
@@ -517,17 +226,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const 
 {
     auto copy = matrix;
     convert(copy, orientationA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, orientationB, positionB);
     return copy;
 }
 
@@ -553,74 +251,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const 
     return copy;
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, orientationB, positionB);
-    return copy;
-}
-
-/* ####################################################################################### */
-/* Local to local: Matrix3 with Position (outplace) */
-/* ####################################################################################### */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB, positionB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, spaceB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB, positionB);
-    return copy;
-}
-
 /* ####################################################################################### */
 /* Local to local: Matrix4 (outplace) */
 /* ####################################################################################### */
@@ -631,17 +261,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix
 {
     auto copy = matrix;
     convert(copy, spaceA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, spaceA, orientationB, positionB);
     return copy;
 }
 
@@ -667,17 +286,6 @@ converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quater
     return copy;
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, spaceA, orientationB, positionB);
-    return copy;
-}
-
 /* ####################################################################################### */
 /* Local to local: Quaternion (outplace) */
 /* ####################################################################################### */
@@ -688,17 +296,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
 {
     auto copy = matrix;
     convert(copy, orientationA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, orientationB, positionB);
     return copy;
 }
 
@@ -724,17 +321,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
     return copy;
 }
 
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, orientationB, positionB);
-    return copy;
-}
-
 /* ####################################################################################### */
 /* Local to local: Quaternion with Position (outplace) */
 /* ####################################################################################### */
@@ -745,17 +331,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
 {
     auto copy = matrix;
     convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB, positionB);
     return copy;
 }
 
@@ -778,17 +353,6 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
 {
     auto copy = matrix;
     convert(copy, orientationA, positionA, orientationB);
-    return copy;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
-converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB)
-{
-    auto copy = matrix;
-    convert(copy, orientationA, positionA, orientationB, positionB);
     return copy;
 }
 

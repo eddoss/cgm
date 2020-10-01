@@ -56,9 +56,9 @@ static const auto EXPECT_VEC_TO_WORLD_REBASED       = CGM::Vector<3, double>{ -0
 static const auto EXPECT_VEC_TO_LOCAL_REORIENTED    = CGM::Vector<3, double>{ -0.502627, +0.863650, +0.038312 };
 static const auto EXPECT_VEC_TO_LOCAL_REBASED       = CGM::Vector<3, double>{ +0.078464, -0.136350, -0.388694 };
 static const auto EXPECT_VEC_A2B_MAT3_TO_MAT3       = CGM::Vector<3, double>{ -0.360406, +0.909605, -0.206679 };
-static const auto EXPECT_VEC_A2B_MAT3_TO_MAT4       = CGM::Vector<3, double>{-0.560407, +1.319182, -0.493468 };
-static const auto EXPECT_VEC_A2B_MAT4_TO_MAT3       = CGM::Vector<3, double>{-0.760407, +2.072905, -0.288768 };
-static const auto EXPECT_VEC_A2B_MAT4_TO_MAT4       = CGM::Vector<3, double>{-0.960407, +2.482480, -0.575558 };
+static const auto EXPECT_VEC_A2B_MAT3_TO_MAT4       = CGM::Vector<3, double>{ -0.560407, +1.319182, -0.493468 };
+static const auto EXPECT_VEC_A2B_MAT4_TO_MAT3       = CGM::Vector<3, double>{ -0.760407, +2.072905, -0.288768 };
+static const auto EXPECT_VEC_A2B_MAT4_TO_MAT4       = CGM::Vector<3, double>{ -0.960407, +2.482480, -0.575558 };
 
 /* ####################################################################################### */
 /* Expect 3x3 matrix */
