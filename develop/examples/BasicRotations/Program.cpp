@@ -4,10 +4,12 @@
 #include "Program.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <CGM/Transformations/3D>
 
+namespace cgx = cgm::xyz;
 
 Program::Program()
-    : material(new ShaderProgram)
+   : material(new ShaderProgram)
 {
     INIT_GLFW
     if (!create())
@@ -16,25 +18,42 @@ Program::Program()
         exit(-1);
     }
     INIT_GLEW
+
+    cameraProperties.far = 500.0f;
+    cameraProperties.near = 0.01f;
+    cameraProperties.fov = 45.0f;
+    cameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
+
+    camera.setProperties(cameraProperties);
+    camera.setPosition({2,2,2});
+    camera.setTarget({0,0,0});
+}
+
+void
+Program::render()
+{
+//    camera.rotate(0.0f, tickDelta() * 100);
+    auto worldToCamera = cgm::inverseForce(camera.space());
+
+    for (const auto& object : objects)
+    {
+        object->render(worldToCamera, camera.perspective());
+    }
 }
 
 void
 Program::createObjects()
 {
     material->create();
-//    material->addShaderPack(L"Resources/Plain");
     material->addShaderPack(L"Resources/ColorView");
     material->link();
 
-//    objects.emplace_back(Geometry::makeTriangle(material));
     objects.emplace_back(Geometry::makeAxes(material));
 
     for (const auto& object : objects)
     {
         object->init();
     }
-
-    perspective = makePerspective(m_width, m_height, 45, 0.01, 100);
 }
 
 void
@@ -67,53 +86,81 @@ Program::clearEvent()
 void
 Program::renderEvent()
 {
-    for (const auto& object : objects)
-    {
-        object->render(camera, perspective);
-    }
+    render();
 }
 
 void
 Program::resizeEvent()
 {
-    perspective = makePerspective(m_width, m_height, 45, 0.01, 100);
+    cameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
+    camera.setProperties(cameraProperties);
+
     glViewport(0, 0, GLsizei(m_width), GLsizei(m_height));
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (const auto& object : objects)
-    {
-        object->render(camera, perspective);
-    }
+    render();
+
     glfwSwapBuffers(m_window);
 }
 
-cgm::mat4
-Program::makePerspective(size_t w, size_t h, cgm::float32 fovy, cgm::float32 n, cgm::float32 f)
+void
+Program::mouseMoveEvent(cgm::Vector<2,int> position)
 {
-    cgm::float32 aspect = cgm::float32(w)/cgm::float32(h);
+    auto dx = m_mouse_move_dir.x;
+    auto dy = m_mouse_move_dir.y;
 
-    if (cgm::eq(n,f) || cgm::eq(aspect, 0.0f))
+    if (buttonState(EButton::Left) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        return {};
+        camera.rotate(-dx * 2.25, -dy * 2.25);
+    }
+    else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
+    {
+        camera.move(0, 0, -dx * 0.1);
+    }
+    else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
+    {
+        camera.move(-dx * 0.05, dy * 0.05, 0);
     }
 
-    cgm::float32 fov = cgm::radians(fovy/2);
-    cgm::float32 sin = std::sin(fov);
+}
 
-    if (cgm::eq(sin,0.0f))
+void
+Program::tickEvent()
+{
+    if (m_previous_tick_mouse_pos == cgm::Vector<2,int>(0))
     {
-        return {};
+        m_previous_tick_mouse_pos = 0;
     }
 
-    cgm::float32 ctg = std::cos(fov) / sin;
-    cgm::float32 clp = f - n;
+    const auto currentPos = mousePosition();
+    const auto delta = currentPos - m_previous_tick_mouse_pos;
+    m_previous_tick_mouse_pos = currentPos;
+    m_previous_tick_mouse_pos_delta.x = std::abs(delta.x);
+    m_previous_tick_mouse_pos_delta.y = std::abs(delta.y);
 
-    cgm::mat4 matrix (0.0f);
-    matrix(0,0) = ctg / aspect;
-    matrix(1,1) = ctg;
-    matrix(2,2) = -(n + f) / clp;
-    matrix(2,3) = -(n * f) / clp;
-    matrix(3,2) = -1.0f;
+    if (delta.x < 0)
+    {
+        m_mouse_move_dir.x = -1;
+    }
+    else if (delta.x == 0)
+    {
+        m_mouse_move_dir.x = 0;
+    }
+    else
+    {
+        m_mouse_move_dir.x = 1;
+    }
 
-    return matrix;
+    if (delta.y < 0)
+    {
+        m_mouse_move_dir.y = -1;
+    }
+    else if (delta.y == 0)
+    {
+        m_mouse_move_dir.y = 0;
+    }
+    else
+    {
+        m_mouse_move_dir.y = 1;
+    }
 }

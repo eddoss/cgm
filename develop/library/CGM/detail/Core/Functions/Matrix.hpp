@@ -98,7 +98,7 @@ trace(const Matrix<S,S,T>& matrix);
  * @return True if matrix is symmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_integral<T,T>
+constexpr CGM_FORCEINLINE bool
 symmetric(const Matrix<S,S,T>& matrix);
 
 /**
@@ -109,7 +109,7 @@ symmetric(const Matrix<S,S,T>& matrix);
  * @return True if matrix is symmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE bool
 symmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
@@ -119,7 +119,7 @@ symmetric(const Matrix<S,S,T>& matrix, T tolerance);
  * @return True if matrix is antisymmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_integral<T,T>
+constexpr CGM_FORCEINLINE bool
 antisymmetric(const Matrix<S,S,T>& matrix);
 
 /**
@@ -130,7 +130,7 @@ antisymmetric(const Matrix<S,S,T>& matrix);
  * @return True if matrix is antisymmetric, false otherwise.
  */
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE bool
 antisymmetric(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
@@ -140,7 +140,7 @@ antisymmetric(const Matrix<S,S,T>& matrix, T tolerance);
  * @return True if matrix is diagonal, false otherwise.
  */
 template<size_t S, typename T>
-constexpr enable_if_integral<T,T>
+constexpr bool
 diagonal(const Matrix<S,S,T>& matrix);
 
 /**
@@ -151,7 +151,7 @@ diagonal(const Matrix<S,S,T>& matrix);
  * @return True if matrix is diagonal, false otherwise.
  */
 template<size_t S, typename T>
-constexpr enable_if_floating<T,T>
+constexpr bool
 diagonal(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
@@ -162,7 +162,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance);
  * @return True if matrix is orthogonal, false otherwise.
  */
 template<size_t S, typename T>
-constexpr enable_if_floating<T,T>
+constexpr bool
 orthogonal(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
@@ -172,6 +172,14 @@ orthogonal(const Matrix<S,S,T>& matrix, T tolerance);
 template<size_t S, typename T=FLOAT>
 constexpr CGM_FORCEINLINE Matrix<S,S,T>
 identity();
+
+/**
+ * Set matrix to identity.
+ * @param matrix Matrix to set.
+ */
+template<size_t S, typename T>
+constexpr CGM_FORCEINLINE void
+setIdentity(Matrix<S,S,T>& matrix);
 
 /**
  * Compare matrix A and B (floating point based).

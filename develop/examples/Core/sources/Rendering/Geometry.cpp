@@ -200,15 +200,13 @@ Geometry::render(const cgm::mat4& camera, const cgm::mat4& perspective)
     }
 
     material->bind();
-//    material->setUniform("xform", xform);
-//    material->setUniform("cameraSpace", camera);
-//    material->setUniform("cameraProjection", perspective);
+    material->setUniform("xform", xform);
+    material->setUniform("cameraSpace", camera);
+    material->setUniform("cameraProjection", perspective);
 
     vao->bind();
 //    glDrawElements(GL_TRIANGLE_FAN, GLsizei(indices.size()), GL_UNSIGNED_INT, nullptr);
     glDrawElements(GL_LINES, GLsizei(indices.size()), GL_UNSIGNED_INT, nullptr);
-//    glDrawArrays(GL_TRIANGLES, 0, GLsizei(points.size()));
-//    glDrawElements(GL_TRIANGLE_FAN, GLsizei(indices.size()), GL_UNSIGNED_INT, nullptr);
     vao->release();
 }
 

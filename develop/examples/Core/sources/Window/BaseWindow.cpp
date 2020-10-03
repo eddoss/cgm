@@ -60,7 +60,7 @@ BaseWindow::create()
     glfwSetCursorPosCallback(m_window, [](GLFWwindow* window, double x, double y)
     {
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
-        self->mouseMoveEvent(cgm::Vector<2,double>{x,y});
+        self->mouseMoveEvent(cgm::Vector<2,int>{int(x),int(y)});
     });
 
     glfwSetCursorEnterCallback(m_window, [](GLFWwindow* window, int entered)
@@ -113,6 +113,7 @@ BaseWindow::start()
         m_currentTick = m_time - m_previousTick;
         m_previousTick = m_time;
 
+        tickEvent();
         clearEvent();
         renderEvent();
 
@@ -144,12 +145,15 @@ BaseWindow::buttonState(EButton button)
 
 /* --------------------------------------------------------------------------------------- */
 
-cgm::Vector<2,double>
+cgm::Vector<2,int>
 BaseWindow::mousePosition()
 {
-    cgm::Vector<2,double> pos {};
-    glfwGetCursorPos(m_window, &pos.x, &pos.y);
-    return pos;
+    double x = 0;
+    double y = 0;
+
+    glfwGetCursorPos(m_window, &x, &y);
+
+    return {int(x), int(y)};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -160,12 +164,28 @@ BaseWindow::isMouseInWindow()
     return bool(glfwGetWindowAttrib(m_window, GLFW_HOVERED));
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+void
+BaseWindow::close()
+{
+    glfwSetWindowShouldClose(m_window, true);
+}
+
 /* ####################################################################################### */
 /* Window events */
 /* ####################################################################################### */
 
 void
 BaseWindow::beforeLoop()
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+void
+BaseWindow::tickEvent()
 {
 
 }
@@ -207,7 +227,10 @@ BaseWindow::resizeEvent()
 void
 BaseWindow::keyEvent(EKey key, EState state, EModifier modifier)
 {
-
+    if (key == EKey::Escape && state == EState::Release)
+    {
+        close();
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -221,7 +244,7 @@ BaseWindow::mouseAreaEvent(bool entered)
 /* --------------------------------------------------------------------------------------- */
 
 void
-BaseWindow::mouseMoveEvent(cgm::Vector<2,double> position)
+BaseWindow::mouseMoveEvent(cgm::Vector<2,int> position)
 {
 
 }

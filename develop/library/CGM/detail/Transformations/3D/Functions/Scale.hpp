@@ -7,7 +7,7 @@
 #include <CGM/detail/Core/Operators/MatrixVectorMultiplication.hpp>
 #include <CGM/detail/Core/Functions/Vector.hpp>
 #include <CGM/detail/Core/Functions/Matrix.hpp>
-#include <CGM/detail/Cartesian/3D/Functions/Converters/Vector.hpp>
+#include <CGM/detail/Transformations/3D/Functions/Converters/Pivot.hpp>
 #include <CGM/detail/Transformations/Common.hpp>
 #include <CGM/detail/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/detail/Transformations/3D/Types/Enums.hpp>

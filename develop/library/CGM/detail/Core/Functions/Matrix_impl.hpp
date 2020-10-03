@@ -371,7 +371,7 @@ trace(const Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_integral<T,T>
+constexpr CGM_FORCEINLINE bool
 symmetric(const Matrix<S,S,T>& matrix)
 {
     if constexpr (S == 2)
@@ -414,7 +414,7 @@ symmetric(const Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE bool
 symmetric(const Matrix<S,S,T>& matrix, T tolerance)
 {
     if constexpr (S == 2)
@@ -457,7 +457,7 @@ symmetric(const Matrix<S,S,T>& matrix, T tolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_integral<T,T>
+constexpr CGM_FORCEINLINE bool
 antisymmetric(const Matrix<S,S,T>& matrix)
 {
     if constexpr (S == 2)
@@ -499,7 +499,7 @@ antisymmetric(const Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE bool
 antisymmetric(const Matrix<S,S,T>& matrix, T tolerance)
 {
     if constexpr (S == 2)
@@ -542,7 +542,7 @@ antisymmetric(const Matrix<S,S,T>& matrix, T tolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr enable_if_integral<T,T>
+constexpr bool
 diagonal(const Matrix<S,S,T>& matrix)
 {
     for (size_t i = 0; i < S; ++i)
@@ -571,7 +571,7 @@ diagonal(const Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr enable_if_floating<T,T>
+constexpr bool
 diagonal(const Matrix<S,S,T>& matrix, T tolerance)
 {
     for (size_t i = 0; i < S; ++i)
@@ -600,7 +600,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr enable_if_floating<T,T>
+constexpr bool
 orthogonal(const Matrix<S,S,T>& matrix, T tolerance)
 {
     bool existInverse {false};
@@ -700,6 +700,60 @@ identity()
         Matrix<S,S,T> matrix(zero<T>);
         for (size_t i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
         return matrix;
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t S, typename T>
+constexpr CGM_FORCEINLINE void
+setIdentity(Matrix<S,S,T>& matrix)
+{
+    if constexpr (S==2)
+    {
+        matrix(0,0) = number<T>(1);
+        matrix(1,1) = number<T>(1);
+        matrix(0,1) = zero<T>;
+        matrix(1,0) = zero<T>;
+    }
+    else if constexpr (S==3)
+    {
+        matrix(0,0) = number<T>(1);
+        matrix(1,1) = number<T>(1);
+        matrix(2,2) = number<T>(1);
+        matrix(0,1) = zero<T>;
+        matrix(0,2) = zero<T>;
+        matrix(1,0) = zero<T>;
+        matrix(1,2) = zero<T>;
+        matrix(2,0) = zero<T>;
+        matrix(2,1) = zero<T>;
+    }
+    else if constexpr (S==4)
+    {
+        matrix(0,0) = number<T>(1);
+        matrix(1,1) = number<T>(1);
+        matrix(2,2) = number<T>(1);
+        matrix(3,3) = number<T>(1);
+        matrix(0,1) = zero<T>;
+        matrix(0,2) = zero<T>;
+        matrix(0,3) = zero<T>;
+        matrix(1,0) = zero<T>;
+        matrix(1,2) = zero<T>;
+        matrix(1,3) = zero<T>;
+        matrix(2,0) = zero<T>;
+        matrix(2,1) = zero<T>;
+        matrix(2,3) = zero<T>;
+        matrix(3,0) = zero<T>;
+        matrix(3,1) = zero<T>;
+        matrix(3,2) = zero<T>;
+    }
+    else
+    {
+        matrix = zero<T>;
+        for (size_t i = 0; i < S; ++i)
+        {
+            matrix(i,i) = number<T>(1);
+        }
     }
 }
 

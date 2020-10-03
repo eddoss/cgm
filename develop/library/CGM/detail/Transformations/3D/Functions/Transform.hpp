@@ -5,6 +5,7 @@
 #include <CGM/detail/Core/Types/Matrix.hpp>
 #include <CGM/detail/Core/Functions/Matrix.hpp>
 #include <CGM/detail/Cartesian/Common.hpp>
+#include <CGM/detail/Transformations/3D/Functions/Converters/Pivot.hpp>
 #include <CGM/detail/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/detail/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/detail/Transformations/3D/Functions/Translate.hpp>

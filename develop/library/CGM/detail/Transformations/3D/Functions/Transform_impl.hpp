@@ -171,11 +171,8 @@ transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
     else
     {
         auto parms = parameters;
-        convert<ESpace::World,EVectorRepresentation::Direction>(parms.pivot.axes.x, matrix);
-        convert<ESpace::World,EVectorRepresentation::Direction>(parms.pivot.axes.y, matrix);
-        convert<ESpace::World,EVectorRepresentation::Direction>(parms.pivot.axes.z, matrix);
-        convert<ESpace::World,EVectorRepresentation::Point>(parms.pivot.position, matrix);
-        
+        convert<ESpace::World>(parms.pivot, matrix);
+
         transform<ESpace::World>(matrix, parms);
     }
 }

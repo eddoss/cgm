@@ -6,6 +6,7 @@
 #include <OpenGL/ShaderProgram.hpp>
 #include <Rendering/IRenderable.hpp>
 #include <Rendering/Geometry.hpp>
+#include <Rendering/Camera.hpp>
 
 
 class Program : public BaseWindow
@@ -15,11 +16,17 @@ public:
 
 protected:
     virtual void
+    render();
+
+    virtual void
     createObjects();
 
 protected:
     void
     beforeLoop() override;
+
+    void
+    tickEvent() override;
 
     void
     clearEvent() override;
@@ -30,22 +37,32 @@ protected:
     void
     resizeEvent() override;
 
-protected:
-    static cgm::mat4
-    makePerspective(size_t w, size_t h, cgm::float32 fovy, cgm::float32 n, cgm::float32 f);
+    void
+    mouseMoveEvent(cgm::Vector<2,int> position) override;
 
+protected:
     std::vector<IRenderable::Shared>
     objects;
 
     ShaderProgram::Shared
     material {nullptr};
 
-    cgm::mat4
-    camera {cgm::identity<4>()};
-
-    cgm::mat4
-    perspective;
-
     cgm::vec3
     backgroundColor {0.1f, 0.1f, 0.1f};
+
+    Camera::Properties
+    cameraProperties;
+
+    Camera
+    camera;
+
+private:
+    cgm::Vector<2,int>
+    m_mouse_move_dir;
+
+    cgm::Vector<2,int>
+    m_previous_tick_mouse_pos {0,0};
+
+    cgm::Vector<2,int>
+    m_previous_tick_mouse_pos_delta {0,0};
 };

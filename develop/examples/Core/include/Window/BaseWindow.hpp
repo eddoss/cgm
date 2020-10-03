@@ -206,7 +206,7 @@ protected: /* Protected methods */
      * Gets mouse position.
      * @return mouse position.
      */
-    cgm::Vector<2,double>
+    cgm::Vector<2,int>
     mousePosition();
 
     /**
@@ -230,6 +230,12 @@ protected: /* Protected methods */
     CGM_FORCEINLINE double
     tickDelta() const { return m_currentTick; }
 
+    /**
+     * Close window.
+     */
+    virtual void
+    close();
+
 /* ####################################################################################### */
 protected: /* Window events */
 /* ####################################################################################### */
@@ -239,6 +245,12 @@ protected: /* Window events */
      */
     virtual void
     beforeLoop();
+
+    /**
+     * Window tick event handler.
+     */
+    virtual void
+    tickEvent();
 
     /**
      * Window clear event. Called before 'renderEvent'.
@@ -285,7 +297,7 @@ protected: /* Window events */
      * @param position Mouse position.
      */
     virtual void
-    mouseMoveEvent(cgm::Vector<2,double> position);
+    mouseMoveEvent(cgm::Vector<2,int> position);
 
     /**
      * Mouse button event handler.

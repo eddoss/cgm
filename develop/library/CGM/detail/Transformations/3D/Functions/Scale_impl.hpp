@@ -119,47 +119,27 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
 {
+    auto scaler = Matrix<3,3,T>
+    {
+        values.x, number<T>(0), number<T>(0),
+        number<T>(0), values.y, number<T>(0),
+        number<T>(0), number<T>(0), values.z
+    };
+
     if constexpr (Space == ESpace::World)
     {
-        auto scaler = Matrix<3,3,T>
-        {
-            values.x, number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0),
-            number<T>(0), number<T>(0), values.z
-        };
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = matrix * scaler;
-    #else
         matrix = scaler * matrix;
+    #else
+        matrix = matrix * scaler;
     #endif
     }
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix(0,0) *= values.x;
-        matrix(0,1) *= values.x;
-        matrix(0,2) *= values.x;
-
-        matrix(1,0) *= values.y;
-        matrix(1,1) *= values.y;
-        matrix(1,2) *= values.y;
-
-        matrix(2,0) *= values.z;
-        matrix(2,1) *= values.z;
-        matrix(2,2) *= values.z;
+        matrix = matrix * scaler;
     #else
-        matrix(0,0) *= values.x;
-        matrix(1,0) *= values.x;
-        matrix(2,0) *= values.x;
-
-        matrix(0,1) *= values.y;
-        matrix(1,1) *= values.y;
-        matrix(2,1) *= values.y;
-
-        matrix(0,2) *= values.z;
-        matrix(1,2) *= values.z;
-        matrix(2,2) *= values.z;
+        matrix = scaler * matrix;
     #endif
     }
 }
@@ -207,15 +187,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
     }
     else
     {
-        auto wsPivot = Pivot<T>
-        {
-            converted<ESpace::World>(pivotPoint.axes.x, matrix),
-            converted<ESpace::World>(pivotPoint.axes.y, matrix),
-            converted<ESpace::World>(pivotPoint.axes.z, matrix),
-            Vector<3,T>(zero<T>)
-        };
-
-        scale<ESpace::World>(matrix, values, wsPivot);
+        scale<ESpace::World>(matrix, values, converted<ESpace::World>(pivot, matrix));
     }
 }
 
@@ -271,55 +243,29 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
 {
+    auto scaler = Matrix<4,4,T>
+    {
+        values.x, number<T>(0), number<T>(0), number<T>(0),
+        number<T>(0), values.y, number<T>(0), number<T>(0),
+        number<T>(0), number<T>(0), values.z, number<T>(0),
+        number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+    };
+
     if constexpr (Space == ESpace::World)
     {
-        auto scales = Matrix<4,4,T>
-        {
-            values.x, number<T>(0), number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0), number<T>(0),
-            number<T>(0), number<T>(0), values.z, number<T>(0),
-            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
-        };
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = matrix * scales;
-        matrix(0,3) *= values.x;
-        matrix(1,3) *= values.y;
-        matrix(2,3) *= values.z;
+        matrix = scaler * matrix;
     #else
-        matrix = scales * matrix;
-        matrix(3,0) *= values.x;
-        matrix(3,1) *= values.y;
-        matrix(3,2) *= values.z;
+        matrix = matrix * scaler;
     #endif
 
     }
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix(0,0) *= values.x;
-        matrix(0,1) *= values.x;
-        matrix(0,2) *= values.x;
-
-        matrix(1,0) *= values.y;
-        matrix(1,1) *= values.y;
-        matrix(1,2) *= values.y;
-
-        matrix(2,0) *= values.z;
-        matrix(2,1) *= values.z;
-        matrix(2,2) *= values.z;
+        matrix = matrix * scaler;
     #else
-        matrix(0,0) *= values.x;
-        matrix(1,0) *= values.x;
-        matrix(2,0) *= values.x;
-
-        matrix(0,1) *= values.y;
-        matrix(1,1) *= values.y;
-        matrix(2,1) *= values.y;
-
-        matrix(0,2) *= values.z;
-        matrix(1,2) *= values.z;
-        matrix(2,2) *= values.z;
+        matrix = scaler * matrix;
     #endif
     }
 }
@@ -407,15 +353,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     }
     else
     {
-        auto worldSpacePivot = Pivot<T>
-        {
-            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
-            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
-            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.z, matrix),
-            converted<ESpace::World,EVectorRepresentation::Point>(pivotPoint.position, matrix)
-        };
-
-        scale<ESpace::World>(matrix, values, worldSpacePivot);
+        scale<ESpace::World>(matrix, values, converted<ESpace::World>(pivotPoint, matrix));
     }
 }
 

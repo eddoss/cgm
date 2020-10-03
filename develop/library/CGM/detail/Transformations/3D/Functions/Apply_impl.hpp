@@ -27,9 +27,9 @@ constexpr CGM_FORCEINLINE void
 apply(Vector<3,T>& vector, const Matrix<4,4,T>& transforms)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    vector = detail::multiply_matrix4x4_on_vector3<Representation>(transforms, vector);
+    vector = multiply<Representation>(transforms, vector);
 #else
-    vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, transforms);
+    vector = multiply<Representation>(vector, transforms);
 #endif
 }
 
@@ -66,11 +66,11 @@ apply(Vector<3,T>& vector, std::initializer_list<Matrix<4,4,T>> transforms)
     {
         matrix *= *(transforms.begin() + i);
     }
-    vector = detail::multiply_matrix4x4_on_vector3<Representation>(matrix, vector);
+    vector = multiply<Representation>(matrix, vector);
 #else
     for (const auto& mat : transforms)
     {
-        vector = detail::multiply_vector3_on_matrix4x4<Representation>(vector, mat);
+        vector = multiply<Representation>(vector, mat);
     }
 #endif
 }

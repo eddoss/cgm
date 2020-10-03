@@ -3,17 +3,19 @@
 #include "Input.hpp"
 #include <CGM/detail/Transformations/3D/Functions/Rotate.hpp>
 #include <CGM/detail/Transformations/3D/Functions/Apply.hpp>
-
+#include <CGM/detail/Core/Functions/IO.hpp>
 
 using namespace std;
 using namespace CGM;
+
+#define CGM_PRINT(what) std::cout << "\n" << what << std::endl;
 
 TEST(Transformations3D_Apply, Vector_Matrix3)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
     const auto result = CGM_XFORM3D::applied(cgm_test::vector, cgm_test::mat3);
-    const auto expect = Vector<3,double>{ -1.39577, 2.62554, -0.178844 };
+    const auto expect = Vector<3,double>{ +1.197280, +0.193243, -1.925383 };
     ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
@@ -25,12 +27,12 @@ TEST(Transformations3D_Apply, Vector_Matrix4)
 
     {
         const auto result = CGM_XFORM3D::applied<CGM_POINT>(cgm_test::vector, cgm_test::mat4);
-        const auto expect = Vector<3,double>{ -1.09577, 1.42554, 0.821156 };
+        const auto expect = Vector<3,double>{ +1.497280, -1.006757, -0.925383 };
         ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
     }
     {
         const auto result = CGM_XFORM3D::applied<CGM_DIRECTION>(cgm_test::vector, cgm_test::mat4);
-        const auto expect = Vector<3,double>{ -1.39577, 2.62554, -0.178844 };
+        const auto expect = Vector<3,double>{ +1.197280, +0.193243, -1.925383 };
         ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
     }
 }
@@ -44,9 +46,9 @@ TEST(Transformations3D_Apply, Matrix3_Matrix3)
     const auto result = CGM_XFORM3D::applied(cgm_test::orientation, cgm_test::mat3);
     const auto expect = CGM_XYZ::orientationMatrix
     (
-        Vector<3,double>{+0.422386, +0.249121, +1.516038},
-        Vector<3,double>{-0.269509, +1.109342, -0.936976},
-        Vector<3,double>{-0.767905, +0.239267, +0.844442}
+        Vector<3,double>{+0.565342, +0.713463, +0.767129},
+        Vector<3,double>{-0.098305, +0.764397, -1.522012},
+        Vector<3,double>{-0.557434, +0.588787, +1.046432}
     );
     ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
@@ -60,10 +62,10 @@ TEST(Transformations3D_Apply, Matrix4_Matrix4)
     const auto result = CGM_XFORM3D::applied(cgm_test::space, cgm_test::mat4);
     const auto expect = CGM_XYZ::spaceMatrix
     (
-        Vector<3,double>{+0.422386, +0.249121, +1.516038},
-        Vector<3,double>{-0.269509, +1.109342, -0.936976},
-        Vector<3,double>{-0.767905, +0.239267, +0.844442},
-        Vector<3,double>{-1.095765, +1.425543, +0.821154}
+        Vector<3,double>{+0.565342, +0.713463, +0.767129},
+        Vector<3,double>{-0.098305, +0.764397, -1.522012},
+        Vector<3,double>{-0.557434, +0.588787, +1.046432},
+        Vector<3,double>{+1.497280, -1.006757, -0.925383}
     );
     ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
