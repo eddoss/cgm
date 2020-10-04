@@ -5,6 +5,7 @@ namespace cgx = cgm::xyz;
 
 Camera::Camera()
     : m_space(cgm::identity<4>())
+    , m_spaceInverse(cgm::identity<4>())
     , m_perspective(0.0f)
     , m_position(1.0f)
     , m_target(0)
@@ -29,6 +30,12 @@ const Camera::Properties&
 Camera::properties()
 {
     return m_properties;
+}
+
+const cgm::mat4&
+Camera::inverseSpace()
+{
+    return m_spaceInverse;
 }
 
 const cgm::mat4&
@@ -70,6 +77,7 @@ Camera::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forwar
     cgx::translate(m_space, cgx::right(m_space) * horizontal);
     cgx::translate(m_space, cgx::up(m_space) * vertical);
     cgx::translate(m_space, cgx::forward(m_space) * forward);
+    m_spaceInverse = cgm::inverseForce(m_space);
 }
 
 void
@@ -77,6 +85,7 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 {
     cgx::rotate(m_space, cgm::radians(vertical), cgx::ArbitraryAxis(cgx::right(m_space), m_target));
     cgx::rotate(m_space, cgm::radians(horizontal), cgx::up());
+    m_spaceInverse = cgm::inverseForce(m_space);
 }
 
 void
@@ -105,4 +114,6 @@ Camera::calculateSpace()
     auto y = cgm::normalizedForce(cgm::cross(z, x));
 
     cgx::set(m_space, x, y, z, m_position);
+    cgx::set(m_spaceInverse, x, y, z, m_position);
+    cgm::invertForce(m_spaceInverse);
 }

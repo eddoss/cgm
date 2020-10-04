@@ -18,9 +18,6 @@ protected:
     virtual void
     render();
 
-    virtual void
-    createObjects();
-
 protected:
     void
     beforeLoop() override;
@@ -41,20 +38,23 @@ protected:
     mouseMoveEvent(cgm::Vector<2,int> position) override;
 
 protected:
-    std::vector<IRenderable::Shared>
-    objects;
+    Camera::Properties
+    sceneCameraProperties;
+
+    Camera
+    sceneCamera;
 
     ShaderProgram::Shared
     material {nullptr};
 
+    Geometry::Unique
+    sceneGrid;
+
+    Geometry::Unique
+    sceneGnomon;
+
     cgm::vec3
-    backgroundColor {0.1f, 0.1f, 0.1f};
-
-    Camera::Properties
-    cameraProperties;
-
-    Camera
-    camera;
+    sceneBgColor {0.1f, 0.1f, 0.1f};
 
 private:
     cgm::Vector<2,int>

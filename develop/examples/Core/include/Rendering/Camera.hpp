@@ -40,6 +40,9 @@ public:
     space();
 
     const cgm::mat4&
+    inverseSpace();
+
+    const cgm::mat4&
     perspective();
 
 public:
@@ -69,6 +72,9 @@ protected:
 protected:
     cgm::mat4
     m_space;
+
+    cgm::mat4
+    m_spaceInverse;
 
     cgm::mat4
     m_perspective;

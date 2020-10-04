@@ -9,60 +9,50 @@
 namespace cgx = cgm::xyz;
 
 Program::Program()
-   : material(new ShaderProgram)
 {
     INIT_GLFW
     if (!create())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant create GLFW window")
-        exit(-1);
     }
     INIT_GLEW
 
-    cameraProperties.far = 500.0f;
-    cameraProperties.near = 0.01f;
-    cameraProperties.fov = 45.0f;
-    cameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
+    sceneCameraProperties.far = 500.0f;
+    sceneCameraProperties.near = 0.01f;
+    sceneCameraProperties.fov = 45.0f;
+    sceneCameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
+    sceneCamera.setProperties(sceneCameraProperties);
+    sceneCamera.setPosition({2, 2, 2});
+    sceneCamera.setTarget({0, 0, 0});
 
-    camera.setProperties(cameraProperties);
-    camera.setPosition({2,2,2});
-    camera.setTarget({0,0,0});
+    material = ShaderProgram::Shared(new ShaderProgram);
+    sceneGrid = Geometry::makeGrid(20, 160, {0.15,0.15,0.15,1.0}, material);
+    sceneGnomon = Geometry::makeAxes(material);
 }
 
 void
 Program::render()
 {
-//    camera.rotate(0.0f, tickDelta() * 100);
-    auto worldToCamera = cgm::inverseForce(camera.space());
-
-    for (const auto& object : objects)
-    {
-        object->render(worldToCamera, camera.perspective());
-    }
-}
-
-void
-Program::createObjects()
-{
-    material->create();
-    material->addShaderPack(L"Resources/ColorView");
-    material->link();
-
-    objects.emplace_back(Geometry::makeAxes(material));
-
-    for (const auto& object : objects)
-    {
-        object->init();
-    }
+    sceneGrid->render(sceneCamera.inverseSpace(), sceneCamera.perspective());
+    sceneGnomon->render(sceneCamera.inverseSpace(), sceneCamera.perspective());
 }
 
 void
 Program::beforeLoop()
 {
-    createObjects();
+    material->create();
+    material->addShaderPack(L"Resources/ColorView");
+    material->link();
 
-    glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f);
+    sceneGrid->init();
+    sceneGnomon->init();
+
+    glClearColor(sceneBgColor.x, sceneBgColor.y, sceneBgColor.z, 1.0f);
     glViewport(0, 0, GLsizei(m_width), GLsizei(m_height));
+
+    glPrimitiveRestartIndex(Geometry::primitiveRestartValue);
+    glEnable(GL_PRIMITIVE_RESTART);
+
     glEnable(GL_MULTISAMPLE);
 
 //    glEnable(GL_DEPTH_TEST);
@@ -72,9 +62,6 @@ Program::beforeLoop()
 //    glEnable(GL_CULL_FACE);
 //    glCullFace(GL_BACK);
 //    glFrontFace(GL_CCW);
-
-//    glPrimitiveRestartIndex(Geometry::primitiveRestartValue);
-//    glEnable(GL_PRIMITIVE_RESTART);
 }
 
 void
@@ -92,8 +79,8 @@ Program::renderEvent()
 void
 Program::resizeEvent()
 {
-    cameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
-    camera.setProperties(cameraProperties);
+    sceneCameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
+    sceneCamera.setProperties(sceneCameraProperties);
 
     glViewport(0, 0, GLsizei(m_width), GLsizei(m_height));
     glClear(GL_COLOR_BUFFER_BIT);
@@ -111,15 +98,15 @@ Program::mouseMoveEvent(cgm::Vector<2,int> position)
 
     if (buttonState(EButton::Left) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        camera.rotate(-dx * 2.25, -dy * 2.25);
+        sceneCamera.rotate(-dx * 2.25, -dy * 2.25);
     }
     else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        camera.move(0, 0, -dx * 0.1);
+        sceneCamera.move(0, 0, -dx * 0.1);
     }
     else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        camera.move(-dx * 0.05, dy * 0.05, 0);
+        sceneCamera.move(-dx * 0.025, dy * 0.025, 0);
     }
 
 }

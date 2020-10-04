@@ -35,7 +35,7 @@ public:
 
 public:
     const static uint32_t
-    primitiveRestartValue = 0xffffffff;
+    primitiveRestartValue = std::numeric_limits<uint32_t>::max();
 
     static Geometry::Unique
     makeAxes(ShaderProgram::Shared material);
@@ -56,14 +56,14 @@ public:
     std::vector<cgm::uint32>
     indices;
 
-    VAO::Unique
-    vao {nullptr};
+    VAO
+    vao;
 
-    VBO::Unique
-    vbo {nullptr};
+    VBO
+    vbo;
 
-    VBO::Unique
-    ids {nullptr};
+    VBO
+    ids;
 
     ShaderProgram::Shared
     material {nullptr};
