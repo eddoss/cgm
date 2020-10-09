@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <CGM/Transformations/3D>
+#include <memory>
 
 namespace cgx = cgm::xyz;
 
@@ -25,7 +26,7 @@ Program::Program()
     sceneCamera.setPosition({2, 2, 2});
     sceneCamera.setTarget({0, 0, 0});
 
-    material = ShaderProgram::Shared(new ShaderProgram);
+    material = std::make_shared<ShaderProgram>();
     sceneGrid = Geometry::makeGrid(20, 160, {0.15,0.15,0.15,1.0}, material);
     sceneGnomon = Geometry::makeAxes(material);
 }
@@ -33,8 +34,8 @@ Program::Program()
 void
 Program::render()
 {
-    sceneGrid->render(sceneCamera.inverseSpace(), sceneCamera.perspective());
-    sceneGnomon->render(sceneCamera.inverseSpace(), sceneCamera.perspective());
+    sceneGrid->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
+    sceneGnomon->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
 }
 
 void

@@ -76,7 +76,7 @@ public:
     init() override;
 
     void
-    render(const cgm::mat4& camera, const cgm::mat4& perspective) override;
+    render(const cgm::mat4& cameraInverse, const cgm::mat4& ndc) override;
 
     void
     clearHostBuffers();

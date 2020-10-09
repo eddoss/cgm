@@ -8,6 +8,11 @@
 class Camera
 {
 public:
+    using Shared = std::shared_ptr<Camera>;
+    using Unique = std::unique_ptr<Camera>;
+    using Weak = std::weak_ptr<Camera>;
+
+public:
     struct Properties
     {
         cgm::float32
@@ -43,7 +48,7 @@ public:
     inverseSpace();
 
     const cgm::mat4&
-    perspective();
+    ndc();
 
 public:
     void
@@ -64,7 +69,7 @@ public:
 
 protected:
     void
-    calculatePerspective();
+    calculateNdc();
 
     void
     calculateSpace();

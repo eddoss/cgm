@@ -30,5 +30,5 @@ public:
     init() = 0;
 
     virtual void
-    render(const cgm::mat4& camera, const cgm::mat4& perspective) = 0;
+    render(const cgm::mat4& cameraInverse, const cgm::mat4& ndc) = 0;
 };

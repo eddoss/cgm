@@ -11,7 +11,7 @@ Camera::Camera()
     , m_target(0)
 {
     calculateSpace();
-    calculatePerspective();
+    calculateNdc();
 }
 
 const cgm::vec3&
@@ -45,7 +45,7 @@ Camera::space()
 }
 
 const cgm::mat4&
-Camera::perspective()
+Camera::ndc()
 {
     return m_perspective;
 }
@@ -54,7 +54,7 @@ void
 Camera::setProperties(const Camera::Properties& properties)
 {
     m_properties = properties;
-    calculatePerspective();
+    calculateNdc();
 }
 
 void
@@ -89,7 +89,7 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 }
 
 void
-Camera::calculatePerspective()
+Camera::calculateNdc()
 {
     cgm::float32 angle = cgm::radians(m_properties.fov);
     cgm::float32 n = m_properties.near;
@@ -99,11 +99,24 @@ Camera::calculatePerspective()
     cgm::float32 r = t * m_properties.aspect;
     cgm::float32 l = -r;
 
-    m_perspective(0,0) = 2.0f * n / (r - l);
-    m_perspective(1,1) = 2.0f * n / (t - b);
-    m_perspective(2,2) = -(f + n) / (f - n);
+    // x - side length
+    // y - up length
+    // z - depth min
+    // w - depth max
+    const auto bound = cgm::vec4{2,2,-1,1};
+
+    m_perspective = 0.0f;
+    m_perspective(0,0) = bound.x * n / (r - l);
+    m_perspective(1,1) = bound.y * n / (t - b);
+    m_perspective(2,2) = n * f * (bound.z + bound.w) / (n - f);
+
+#ifdef CGM_MATRIX_POST_MULTIPLICATION
     m_perspective(3,2) = -1.0f;
-    m_perspective(2,3) = -2.0f * f * n / (f - n);
+    m_perspective(2,3) = (f * bound.w - n * bound.z) / (n - f);
+#else
+    m_perspective(2,3) = -1.0f;
+    m_perspective(3,2) = (f * bound.w - n * bound.z) / (n - f);
+#endif
 }
 
 void

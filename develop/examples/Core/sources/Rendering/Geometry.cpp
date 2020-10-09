@@ -2,6 +2,7 @@
 
 #include <Rendering/Geometry.hpp>
 #include <CGM/Coordinates>
+#include <utility>
 
 
 const uint32_t Geometry::Point::size            = sizeof(Geometry::Point);
@@ -92,7 +93,7 @@ Geometry::Unique
 Geometry::makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, ShaderProgram::Shared material)
 {
     auto geo = std::make_unique<Geometry>();
-    geo->material = material;
+    geo->material = std::move(material);
     geo->points.reserve(count * 8);
     geo->indices.reserve(count * 6 - 2);
 
@@ -103,7 +104,7 @@ Geometry::makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, Sh
     // make along forward axis
     for (int i = -count; i < int(count); ++i)
     {
-        const auto forward = step * i;
+        const auto forward = step * float(i);
         geo->points.emplace_back(cgm::coord::cartesian(0.0f, -radius, forward), color);
         geo->points.emplace_back(cgm::coord::cartesian(0.0f, radius, forward), color);
         geo->indices.emplace_back(idIndex);
@@ -114,7 +115,7 @@ Geometry::makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, Sh
     // make along right axis
     for (int i = -count; i < int(count); ++i)
     {
-        const auto right = step * i;
+        const auto right = step * float(i);
         geo->points.emplace_back(cgm::coord::cartesian(0.0f, right, -radius), color);
         geo->points.emplace_back(cgm::coord::cartesian(0.0f, right, radius), color);
         geo->indices.emplace_back(idIndex);
@@ -186,7 +187,7 @@ Geometry::init()
 /* --------------------------------------------------------------------------------------- */
 
 void
-Geometry::render(const cgm::mat4& camera, const cgm::mat4& perspective)
+Geometry::render(const cgm::mat4& cameraInverse, const cgm::mat4& ndc)
 {
     if (!material)
     {
@@ -195,8 +196,8 @@ Geometry::render(const cgm::mat4& camera, const cgm::mat4& perspective)
 
     material->bind();
     material->setUniform("xform", xform);
-    material->setUniform("cameraSpace", camera);
-    material->setUniform("cameraProjection", perspective);
+    material->setUniform("cameraSpace", cameraInverse);
+    material->setUniform("cameraProjection", ndc);
 
     vao.bind();
 //    glDrawElements(GL_TRIANGLE_FAN, GLsizei(indices.size()), GL_UNSIGNED_INT, nullptr);
