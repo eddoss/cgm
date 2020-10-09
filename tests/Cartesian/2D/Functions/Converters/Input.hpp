@@ -2,10 +2,10 @@
 
 
 #include <gtest/gtest.h>
-#include <CGM/detail/Core/Types/Vector.hpp>
-#include <CGM/detail/Core/Types/Matrix.hpp>
-#include <CGM/detail/Cartesian/2D/Functions/Utils.hpp>
-#include <CGM/detail/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/Core/Types/Vector.hpp>
+#include <CGM/Core/Types/Matrix.hpp>
+#include <CGM/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Cartesian/2D/Functions/Orientation.hpp>
 
 
 namespace cgm_xy_converters_tests_data

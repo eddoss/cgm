@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Core/Types/Vector.hpp>
-#include <CGM/detail/Core/Operators/Vector.hpp>
-#include <CGM/detail/Core/Functions/Vector.hpp>
+#include <CGM/Core/Types/Vector.hpp>
+#include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
 
 
 using namespace std;

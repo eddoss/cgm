@@ -1,7 +1,7 @@
 
 
 #include "Input.hpp"
-#include <CGM/detail/Transformations/3D/Functions/Rotate.hpp>
+#include <CGM/Transformations/3D/Functions/Rotate.hpp>
 
 
 /* ####################################################################################### */

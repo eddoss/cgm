@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Core>
+#include <CGM/Modules/Core.hpp>
 #include <vector>
 #include "IRenderable.hpp"
 #include <OpenGL/VertexArrayObject.hpp>

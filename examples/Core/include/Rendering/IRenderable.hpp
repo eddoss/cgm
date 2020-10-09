@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CGM/Core>
+#include <CGM/Modules/Core.hpp>
 #include <GL/glew.h>
 
 

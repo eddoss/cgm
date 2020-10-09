@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include <CGM/Core>
+#include <CGM/Modules/Core.hpp>
 #include <CGM/Cartesian/3D>
 #include <OpenGL/BaseObject.hpp>
 #include <Global.hpp>

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Core>
+#include <CGM/Modules/Core.hpp>
 #include <Application/BaseWindow.hpp>
 #include <OpenGL/ShaderProgram.hpp>
 #include <Rendering/IRenderable.hpp>

@@ -1,7 +1,7 @@
 
 
 #include <Rendering/Geometry.hpp>
-#include <CGM/Coordinates>
+#include <CGM/Modules/Coordinates.hpp>
 #include <utility>
 
 

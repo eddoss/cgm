@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/detail/Core/Functions/Vector.hpp>
-#include <CGM/detail/Cartesian/2D/Functions/Converters/Vector.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Cartesian/2D/Functions/Converters/Vector.hpp>
 #include "../Input.hpp"
 
 

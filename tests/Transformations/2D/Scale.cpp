@@ -1,7 +1,7 @@
 
 
 #include "Input.hpp"
-#include <CGM/detail/Transformations/2D/Functions/Scale.hpp>
+#include <CGM/Transformations/2D/Functions/Scale.hpp>
 
 
 using namespace std;

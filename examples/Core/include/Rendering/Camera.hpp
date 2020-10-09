@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Core>
+#include <CGM/Modules/Core.hpp>
 #include <CGM/Transformations/3D>
 
 
