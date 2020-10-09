@@ -1,7 +1,3 @@
-#pragma once
-
-
-#include <CGM/Projections/Functions.hpp>
 
 
 CGM_NAMESPACE_BEGIN

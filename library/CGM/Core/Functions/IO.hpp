@@ -16,4 +16,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, const CGM::Matrix<M,N,T>& mat);
 
 
-#include <CGM/Core/Functions/IO.inl>
+#include "IO.inl"

@@ -44,4 +44,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, CGM::ESpace space);
 
 
-#include <CGM/Cartesian/Common.inl>
+#include "Common.inl"

@@ -1,8 +1,5 @@
 
 
-#include <CGM/Cartesian/2D/Functions/IO.hpp>
-
-
 template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XY::Axes<T>& axes)

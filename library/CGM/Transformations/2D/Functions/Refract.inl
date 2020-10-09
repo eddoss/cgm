@@ -1,8 +1,5 @@
 
 
-#include <CGM/Transformations/2D/Functions/Refract.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 CGM_XFORM2D_NAMESPACE_BEGIN
 

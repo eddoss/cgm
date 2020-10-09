@@ -142,4 +142,4 @@ constexpr T
 operator | (const CGM_XYZ::Quaternion<T>& A, const CGM_XYZ::Quaternion<T>& B);
 
 
-#include <CGM/Cartesian/3D/Operators/Quaternion.inl>
+#include "Quaternion.inl"

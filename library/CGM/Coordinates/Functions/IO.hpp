@@ -21,4 +21,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_COORD::Cylindrical<T>& cylindricalCoord);
 
 
-#include <CGM/Coordinates/Functions/IO.inl>
+#include "IO.inl"

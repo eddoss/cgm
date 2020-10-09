@@ -35,4 +35,5 @@ template<size_t D, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N > 1), CGM::Vector<N,T>&>
 operator *= (CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B);
 
-#include <CGM/Core/Operators/MatrixVectorMultiplication.inl>
+
+#include "MatrixVectorMultiplication.inl"

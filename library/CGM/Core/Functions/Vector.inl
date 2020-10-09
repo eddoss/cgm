@@ -1,8 +1,5 @@
 
 
-#include <CGM/Core/Functions/Vector.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 
 template<size_t D, typename T>

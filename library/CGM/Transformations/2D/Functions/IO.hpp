@@ -20,4 +20,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM2D::Transforms<T>& transforms);
 
 
-#include <CGM/Transformations/2D/Functions/IO.inl>
+#include "IO.inl"

@@ -799,4 +799,4 @@ CGM_XFORM2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Transformations/2D/Functions/Scale.inl>
+#include "Scale.inl"

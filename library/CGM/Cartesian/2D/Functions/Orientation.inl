@@ -1,8 +1,5 @@
 
 
-#include <CGM/Cartesian/2D/Functions/Orientation.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN
 

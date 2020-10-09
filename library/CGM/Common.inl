@@ -1,8 +1,5 @@
 
 
-#include <CGM/Common.hpp>
-
-
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,bool>
 eq(T A, T B, T tolerance)

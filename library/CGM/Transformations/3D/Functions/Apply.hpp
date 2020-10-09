@@ -12,7 +12,6 @@
 #include <CGM/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
-#include <CGM/Transformations/3D/InternalUtils.inl>
 
 
 /* ####################################################################################### */
@@ -182,4 +181,4 @@ CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Transformations/3D/Functions/Apply.inl>
+#include "Apply.inl"

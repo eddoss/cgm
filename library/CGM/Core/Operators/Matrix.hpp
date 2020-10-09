@@ -327,4 +327,4 @@ constexpr bool
 operator != (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B);
 
 
-#include <CGM/Core/Operators/Matrix.inl>
+#include "Matrix.inl"

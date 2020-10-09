@@ -206,4 +206,4 @@ neq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance);
 CGM_NAMESPACE_END
 
 
-#include <CGM/Core/Functions/Matrix.inl>
+#include "Matrix.inl"

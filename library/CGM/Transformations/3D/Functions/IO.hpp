@@ -30,4 +30,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder);
 
 
-#include <CGM/Transformations/3D/Functions/IO.inl>
+#include "IO.inl"

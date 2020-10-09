@@ -45,4 +45,4 @@ ndc(const Vector<2,T>& screenSize, T near, T far, T width, T height, T depthMin,
 CGM_NAMESPACE_END
 
 
-#include <CGM/Projections/Functions.inl>
+#include "Functions.inl"

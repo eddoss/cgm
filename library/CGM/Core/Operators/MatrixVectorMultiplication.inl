@@ -1,8 +1,5 @@
 
 
-#include <CGM/Core/Operators/MatrixVectorMultiplication.hpp>
-
-
 template<size_t D, size_t N, typename T>
 constexpr std::conditional_t<(N == 1), T, CGM::Vector<N,T>>
 operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)

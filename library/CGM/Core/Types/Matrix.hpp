@@ -706,4 +706,4 @@ private: /* Data */
 CGM_NAMESPACE_END
 
 
-#include <CGM/Core/Types/Matrix.inl>
+#include "Matrix.inl"

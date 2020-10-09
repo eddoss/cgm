@@ -37,4 +37,4 @@ CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.inl>
+#include "ArbitraryAxis.inl"

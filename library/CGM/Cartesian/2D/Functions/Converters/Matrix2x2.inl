@@ -1,7 +1,3 @@
-#pragma once
-
-
-#include <CGM/Cartesian/2D/Functions/Converters/Matrix2x2.hpp>
 
 
 CGM_NAMESPACE_BEGIN

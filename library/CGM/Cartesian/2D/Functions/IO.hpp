@@ -15,4 +15,4 @@ constexpr std::ostream&
 operator << (std::ostream& stream, CGM_XY::EAxes axis);
 
 
-#include <CGM/Cartesian/2D/Functions/IO.inl>
+#include "IO.inl"

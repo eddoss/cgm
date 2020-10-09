@@ -341,4 +341,4 @@ CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Cartesian/2D/Functions/Converters/Vector.inl>
+#include "Vector.inl"

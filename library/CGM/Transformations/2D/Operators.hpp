@@ -82,4 +82,4 @@ constexpr bool
 operator != (const CGM_XFORM2D::ArbitraryAxis<T>& A, const CGM_XFORM2D::ArbitraryAxis<T>& B);
 
 
-#include <CGM/Transformations/2D/Operators.inl>
+#include "Operators.inl"

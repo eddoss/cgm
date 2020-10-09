@@ -1,8 +1,5 @@
 
 
-#include <CGM/Cartesian/3D/Operators/Axes.hpp>
-
-
 template<typename T>
 constexpr bool
 operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)

@@ -196,4 +196,4 @@ neq(const Vector<D,T>& A, const Vector<D,T>& B, T tolerance);
 CGM_NAMESPACE_END
 
 
-#include <CGM/Core/Functions/Vector.inl>
+#include "Vector.inl"

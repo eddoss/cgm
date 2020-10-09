@@ -331,4 +331,4 @@ constexpr CGM::Vector<3,T>
 operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B);
 
 
-#include <CGM/Core/Operators/Vector.inl>
+#include "Vector.inl"

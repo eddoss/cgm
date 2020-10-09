@@ -1,8 +1,5 @@
 
 
-#include <CGM/Transformations/2D/Functions/IO.hpp>
-
-
 template <typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM_XFORM2D::ArbitraryAxis<T>& axis)

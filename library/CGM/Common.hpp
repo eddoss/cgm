@@ -144,7 +144,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 degrees(T angle);
 
 
-#include <CGM/Common.inl>
+#include "Common.inl"
 
 
 CGM_NAMESPACE_END

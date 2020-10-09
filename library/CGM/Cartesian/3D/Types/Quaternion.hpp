@@ -96,4 +96,4 @@ CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Cartesian/3D/Types/Quaternion.inl>
+#include "Quaternion.inl"

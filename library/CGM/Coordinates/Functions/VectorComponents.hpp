@@ -64,4 +64,4 @@ CGM_COORD_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Coordinates/Functions/VectorComponents.inl>
+#include "VectorComponents.inl"

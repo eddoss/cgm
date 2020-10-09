@@ -517,4 +517,4 @@ CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Transformations/3D/Functions/Translate.inl>
+#include "Translate.inl"

@@ -1,8 +1,5 @@
 
 
-#include <CGM/Core/Functions/IO.hpp>
-
-
 template<size_t D, typename T>
 constexpr std::ostream&
 operator << (std::ostream& stream, const CGM::Vector<D,T>& vec)

@@ -140,4 +140,4 @@ CGM_XFORM2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Transformations/2D/Functions/Transform.inl>
+#include "Transform.inl"

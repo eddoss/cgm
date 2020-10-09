@@ -1,8 +1,5 @@
 
 
-#include <CGM/Cartesian/3D/Functions/Utils.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 CGM_XYZ_NAMESPACE_BEGIN
 

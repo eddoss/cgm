@@ -115,4 +115,4 @@ CGM_COORD_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include <CGM/Coordinates/Functions/Converters.inl>
+#include "Converters.inl"

@@ -81,4 +81,4 @@ constexpr bool
 operator != (const CGM_COORD::Cylindrical<T>& A, const CGM_COORD::Cylindrical<T>& B);
 
 
-#include <CGM/Coordinates/Operators.inl>
+#include "Operators.inl"

@@ -27,4 +27,4 @@ constexpr bool
 operator != (const CGM_XY::Axes<T>& A, const CGM_XY::Axes<T>& B);
 
 
-#include <CGM/Cartesian/2D/Operators.inl>
+#include "Operators.inl"

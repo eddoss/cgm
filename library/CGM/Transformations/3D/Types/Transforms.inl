@@ -1,8 +1,5 @@
 
 
-#include <CGM/Transformations/3D/Types/Transforms.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
