@@ -786,6 +786,51 @@ unpackSpace(const Matrix<4,4,T>& space)
 }
 
 /* ####################################################################################### */
+/* Vector remapper */
+/* ####################################################################################### */
+
+template<EComponent3D X, EComponent3D Y, EComponent3D Z, size_t S, typename T>
+constexpr std::enable_if_t<(S == 3 || S == 4), Matrix<S,S,T>>
+remapper()
+{
+    auto x = Vector<3,T>(zero<T>);
+    auto y = Vector<3,T>(zero<T>);
+    auto z = Vector<3,T>(zero<T>);
+
+    x.get<X>() = number<T>(1);
+    y.get<Y>() = number<T>(1);
+    z.get<Z>() = number<T>(1);
+
+    Matrix<S,S,T> mat;
+    set(mat, x, y, z);
+
+    if constexpr (S == 4)
+    {
+        mat(3,3) = number<T>(1);
+    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+        mat(3,0) = zero<T>;
+        mat(3,1) = zero<T>;
+        mat(3,2) = zero<T>;
+    #else
+        mat(0,3) = zero<T>;
+        mat(1,3) = zero<T>;
+        mat(2,3) = zero<T>;
+    #endif
+    }
+
+    return mat;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, size_t S, typename T>
+constexpr Matrix<4,4,T>
+remapper()
+{
+    // TODO Impl it!
+}
+
+/* ####################################################################################### */
 /* 4x4 orientation manipulations */
 /* ####################################################################################### */
 

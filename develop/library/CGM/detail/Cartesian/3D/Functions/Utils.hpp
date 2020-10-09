@@ -543,6 +543,33 @@ constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
 unpackSpace(const Matrix<4,4,T>& space);
 
 /* ####################################################################################### */
+/* Vector remapper */
+/* ####################################################################################### */
+
+/**
+ * Creates 3D vector component remapping matrix.
+ * @tparam X New 'X' component value.
+ * @tparam Y New 'Y' component value.
+ * @tparam Z New 'Z' component value.
+ * @return Vector component remapping matrix.
+ **/
+template<EComponent3D X, EComponent3D Y, EComponent3D Z, size_t S, typename T=FLOAT>
+constexpr std::enable_if_t<(S == 3 || S == 4), Matrix<S,S,T>>
+remapper();
+
+/**
+ * Creates 4D vector component remapping matrix.
+ * @tparam X New 'X' component value.
+ * @tparam Y New 'Y' component value.
+ * @tparam Z New 'Z' component value.
+ * @tparam W New 'W' component value.
+ * @return Vector component remapping matrix.
+ **/
+template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, size_t S, typename T=FLOAT>
+constexpr Matrix<4,4,T>
+remapper();
+
+/* ####################################################################################### */
 /* 4x4 matrix manipulations */
 /* ####################################################################################### */
 
