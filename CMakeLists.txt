@@ -50,13 +50,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 # Subprojects
 # ####################################################################################### #
 
-add_subdirectory(develop/library)
+add_subdirectory(library)
 
 if(${CGM_BUILD_UNIT_TESTS})
     enable_testing()
-    add_subdirectory(develop/tests)
+    add_subdirectory(tests)
 endif()
 
 if(${CGM_BUILD_EXAMPLES})
-    add_subdirectory(develop/examples)
+    add_subdirectory(examples)
 endif()
