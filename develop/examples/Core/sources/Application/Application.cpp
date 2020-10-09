@@ -1,7 +1,7 @@
 
 
+#include <Application/Application.hpp>
 #include <Global.hpp>
-#include "Program.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <CGM/Transformations/3D>
@@ -9,7 +9,7 @@
 
 namespace cgx = cgm::xyz;
 
-Program::Program()
+Application::Application()
 {
     INIT_GLFW
     if (!create())
@@ -32,14 +32,14 @@ Program::Program()
 }
 
 void
-Program::render()
+Application::render()
 {
     sceneGrid->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
     sceneGnomon->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
 }
 
 void
-Program::beforeLoop()
+Application::beforeLoop()
 {
     material->create();
     material->addShaderPack(L"Resources/ColorView");
@@ -66,19 +66,19 @@ Program::beforeLoop()
 }
 
 void
-Program::clearEvent()
+Application::clearEvent()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void
-Program::renderEvent()
+Application::renderEvent()
 {
     render();
 }
 
 void
-Program::resizeEvent()
+Application::resizeEvent()
 {
     sceneCameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
     sceneCamera.setProperties(sceneCameraProperties);
@@ -92,7 +92,7 @@ Program::resizeEvent()
 }
 
 void
-Program::mouseMoveEvent(cgm::Vector<2,int> position)
+Application::mouseMoveEvent(cgm::Vector<2,int> position)
 {
     auto dx = m_mouse_move_dir.x;
     auto dy = m_mouse_move_dir.y;
@@ -113,7 +113,7 @@ Program::mouseMoveEvent(cgm::Vector<2,int> position)
 }
 
 void
-Program::tickEvent()
+Application::tickEvent()
 {
     if (m_previous_tick_mouse_pos == cgm::Vector<2,int>(0))
     {

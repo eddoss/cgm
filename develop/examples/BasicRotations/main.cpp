@@ -1,10 +1,10 @@
 
-#include "Program.hpp"
+#include <Launcher.hpp>
 
 int main(int argc, char** argv)
 {
-    Program program;
-    program.start();
+    Launcher app;
+    app.start();
 
     return 0;
 }

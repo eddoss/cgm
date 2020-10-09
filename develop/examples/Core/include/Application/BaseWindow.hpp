@@ -2,7 +2,7 @@
 
 
 #include <CGM/Core>
-#include <Window/Surface.hpp>
+#include <Application/Surface.hpp>
 
 
 class BaseWindow : public Surface

@@ -2,17 +2,17 @@
 
 
 #include <CGM/Core>
-#include <Window/BaseWindow.hpp>
+#include <Application/BaseWindow.hpp>
 #include <OpenGL/ShaderProgram.hpp>
 #include <Rendering/IRenderable.hpp>
 #include <Rendering/Geometry.hpp>
 #include <Rendering/Camera.hpp>
 
 
-class Program : public BaseWindow
+class Application : public BaseWindow
 {
 public:
-    Program();
+    Application();
 
 protected:
     virtual void
