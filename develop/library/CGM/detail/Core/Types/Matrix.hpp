@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <CGM/detail/Global.hpp>
+#include <CGM/detail/Core/Types/Vector.hpp>
 #include <CGM/detail/Core/Support/Matrix/ReverseMatrixIterator_impl.hpp>
 #include <CGM/detail/Core/Support/Matrix/Iterators/Direct_impl.hpp>
 #include <CGM/detail/Core/Support/Matrix/Iterators/Indirect_impl.hpp>
@@ -32,8 +33,8 @@ public: /* Typedefs */
 public: /* Matrices typedefs */
 /* ####################################################################################### */
 
-    using Row                               = Matrix<1,N,T>;
-    using Column                            = Matrix<M,1,T>;
+    using Row                               = Vector<N,T>;
+    using Column                            = Vector<M,T>;
     using Transposed                        = Matrix<N,M,T>;
 
 /* ####################################################################################### */
@@ -91,16 +92,6 @@ public: /* Iterators typedefs */
     using ConstReverseColumnDirIterator     = detail::ReverseMatrixIterator<ConstColumnDirIterator>;
 
 /* ####################################################################################### */
-private: /* Data */
-/* ####################################################################################### */
-
-#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
-    T m_data[M][N];
-#else
-    T m_data[N][M];
-#endif
-
-/* ####################################################################################### */
 public: /* Statics */
 /* ####################################################################################### */
 
@@ -120,7 +111,7 @@ public: /* Statics */
      * Components count.
      */
     constexpr static const size_type
-    size    {M*N};
+    count   {M * N};
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -212,6 +203,38 @@ public: /* Components accessing */
      */
     constexpr CGM_FORCEINLINE const_reference
     operator[](size_t index) const;
+
+    /**
+     * Gets a specific row.
+     * @param index Index of row.
+     * @return Vector contains row values.
+     */
+    constexpr std::conditional_t<(N == 1), T, Row>
+    row(size_t index) const;
+
+    /**
+     * Gets a specific column.
+     * @param index Index of column.
+     * @return Vector contains column values.
+     */
+    constexpr std::conditional_t<(M == 1), T, Column>
+    column(size_t index) const;
+
+    /**
+     * Sets a specific row.
+     * @param index Index of row.
+     * @return Vector contains row values.
+     */
+    constexpr void
+    setRow(size_t index, const Row& values);
+
+    /**
+     * Gets a specific column.
+     * @param index Index of column.
+     * @return Vector contains column values.
+     */
+    constexpr void
+    setColumn(size_t index, const Column& values);
 
 /* ####################################################################################### */
 public: /* Direct iterators */
@@ -668,6 +691,16 @@ public: /* Column iterators */
      */
     constexpr ConstReverseColumnIterator
     crendColumn(size_type column) const;
+
+/* ####################################################################################### */
+private: /* Data */
+/* ####################################################################################### */
+
+#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    T m_data[M][N];
+#else
+    T m_data[N][M];
+#endif
 };
 
 CGM_NAMESPACE_END

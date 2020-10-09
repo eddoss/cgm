@@ -13,7 +13,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(T scalar)
 {
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = scalar;
     }
@@ -26,7 +26,7 @@ constexpr
 Matrix<M,N,T>::Matrix(const T* values)
 {
 #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = *(values + i);
     }
@@ -48,7 +48,7 @@ constexpr
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
 #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = *(values.begin() + i);
     }
@@ -71,7 +71,7 @@ template<size_t M, size_t N, typename T>
 constexpr Matrix<M,N,T>&
 Matrix<M,N,T>::operator = (T scalar)
 {
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = scalar;
     }
@@ -140,6 +140,250 @@ constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::const_reference
 Matrix<M,N,T>::operator [] (size_t index) const
 {
     return *(&**m_data + index);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr std::conditional_t<(N == 1), T, typename Matrix<M,N,T>::Row>
+Matrix<M,N,T>::row(size_t index) const
+{
+#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+    if constexpr (N == 1)
+    {
+        return m_data[0][index];
+    }
+    else if constexpr (N == 2)
+    {
+        return Matrix::Row{m_data[0][index], m_data[1][index]};
+    }
+    else if constexpr (N == 3)
+    {
+        return Matrix::Row{m_data[0][index], m_data[1][index], m_data[2][index]};
+    }
+    else if constexpr (N == 4)
+    {
+        return Matrix::Row{m_data[0][index], m_data[1][index], m_data[2][index], m_data[3][index]};
+    }
+    else
+    {
+        Row res {};
+        for (size_t i = 0; i < N; ++i)
+        {
+            res[i] = m_data[i][index];
+        }
+        return res;
+    }
+#else
+    if constexpr (N == 1)
+    {
+        return m_data[index][0];
+    }
+    else if constexpr (N == 2)
+    {
+        return Matrix::Row{m_data[index][0], m_data[index][1]};
+    }
+    else if constexpr (N == 3)
+    {
+        return Matrix::Row{m_data[index][0], m_data[index][1], m_data[index][2]};
+    }
+    else if constexpr (N == 4)
+    {
+        return Matrix::Row{m_data[index][0], m_data[index][1], m_data[index][2], m_data[index][3]};
+    }
+    else
+    {
+        Row res {};
+        for (size_t i = 0; i < N; ++i)
+        {
+            res[i] = m_data[index][i];
+        }
+        return res;
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr std::conditional_t<(M == 1), T, typename Matrix<M,N,T>::Column>
+Matrix<M,N,T>::column(size_t index) const
+{
+#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+    if constexpr (M == 1)
+    {
+        return m_data[index][0];
+    }
+    else if constexpr (M == 2)
+    {
+        return Matrix::Column{m_data[index][0], m_data[index][1]};
+    }
+    else if constexpr (M == 3)
+    {
+        return Matrix::Column{m_data[index][0], m_data[index][1], m_data[index][2]};
+    }
+    else if constexpr (M == 4)
+    {
+        return Matrix::Column{m_data[index][0], m_data[index][1], m_data[index][2], m_data[index][3]};
+    }
+    else
+    {
+        Column res {};
+        for (size_t i = 0; i < M; ++i)
+        {
+            res[i] = m_data[index][i];
+        }
+        return res;
+    }
+#else
+    if constexpr (M == 1)
+    {
+        return m_data[0][index];
+    }
+    else if constexpr (M == 2)
+    {
+        return Matrix::Column{m_data[0][index], m_data[1][index]};
+    }
+    else if constexpr (M == 3)
+    {
+        return Matrix::Column{m_data[0][index], m_data[1][index], m_data[2][index]};
+    }
+    else if constexpr (M == 4)
+    {
+        return Matrix::Column{m_data[0][index], m_data[1][index], m_data[2][index], m_data[3][index]};
+    }
+    else
+    {
+        Column res {};
+        for (size_t i = 0; i < M; ++i)
+        {
+            res[i] = m_data[i][index];
+        }
+        return res;
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr void
+Matrix<M,N,T>::setRow(size_t index, const typename Matrix<M,N,T>::Row& values)
+{
+#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+    if constexpr (N == 2)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+    }
+    else if constexpr (N == 3)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+        m_data[2][index] = values.z;
+    }
+    else if constexpr (N == 4)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+        m_data[2][index] = values.z;
+        m_data[3][index] = values.w;
+    }
+    else
+    {
+        for (size_t i = 0; i < N; ++i)
+        {
+            m_data[i][index] = values[i];
+        }
+    }
+#else
+    if constexpr (N == 2)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+    }
+    else if constexpr (N == 3)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+        m_data[index][2] = values.z;
+    }
+    else if constexpr (N == 4)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+        m_data[index][2] = values.z;
+        m_data[index][3] = values.w;
+    }
+    else
+    {
+        for (size_t i = 0; i < N; ++i)
+        {
+            m_data[index][i] = values[i];
+        }
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t M, size_t N, typename T>
+constexpr void
+Matrix<M,N,T>::setColumn(size_t index, const typename Matrix<M,N,T>::Column& values)
+{
+#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+    if constexpr (M == 2)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+    }
+    else if constexpr (M == 3)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+        m_data[index][2] = values.z;
+    }
+    else if constexpr (M == 4)
+    {
+        m_data[index][0] = values.x;
+        m_data[index][1] = values.y;
+        m_data[index][2] = values.z;
+        m_data[index][3] = values.w;
+    }
+    else
+    {
+        for (size_t i = 0; i < M; ++i)
+        {
+            m_data[index][i] = values[i];
+        }
+    }
+#else
+    if constexpr (M == 2)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+    }
+    else if constexpr (M == 3)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+        m_data[2][index] = values.z;
+    }
+    else if constexpr (M == 4)
+    {
+        m_data[0][index] = values.x;
+        m_data[1][index] = values.y;
+        m_data[2][index] = values.z;
+        m_data[3][index] = values.w;
+    }
+    else
+    {
+        for (size_t i = 0; i < M; ++i)
+        {
+            m_data[i][index] = values[i];
+        }
+    }
+#endif
 }
 
 /* ####################################################################################### */

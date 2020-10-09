@@ -213,7 +213,7 @@ TEST(Matrix_DirectIterator, RowsColumns_LastComponent)
         7, 8, 9
     };
 
-    auto it {input.begin() + Mat33::size-1};
+    auto it {input.begin() + Mat33::count - 1};
 
     ASSERT_TRUE(it.row() == 2);
     ASSERT_TRUE(it.column() == 2);
@@ -430,7 +430,7 @@ TEST(Matrix_DirectIterator, Reverse_RowsColumns_LastComponent)
         7, 8, 9
     };
 
-    auto it {input.rbegin() + Mat33::size-1};
+    auto it {input.rbegin() + Mat33::count - 1};
 
     ASSERT_TRUE(it.row() == 0);
     ASSERT_TRUE(it.column() == 0);

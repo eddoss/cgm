@@ -176,7 +176,7 @@ TEST(Matrix_ColumnDirIterator, RowsColumns_LastComponent)
         7, 8, 9
     };
 
-    auto it {input.beginColumnDir() + Mat33::size-1};
+    auto it {input.beginColumnDir() + Mat33::count - 1};
 
     ASSERT_TRUE(it.row() == 2);
     ASSERT_TRUE(it.column() == 2);

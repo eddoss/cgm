@@ -924,7 +924,7 @@ eq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
     }
     else
     {
-        for (size_t i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (size_t i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(A[i], B[i]), tolerance) return false;
         }
@@ -1099,7 +1099,7 @@ neq(const Matrix<M,N,T>& A, const Matrix<M,N,T>& B, T tolerance)
     }
     else
     {
-        for (size_t i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (size_t i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(A[i], B[i]), tolerance) return true;
         }

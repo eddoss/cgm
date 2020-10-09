@@ -67,7 +67,7 @@ operator ++ (CGM::Matrix<M,N,T>& matrix)
     } 
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             ++(matrix[i]);
         }
@@ -138,7 +138,7 @@ operator -- (CGM::Matrix<M,N,T>& matrix)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             --(matrix[i]);
         }
@@ -211,7 +211,7 @@ operator ++ (CGM::Matrix<M,N,T>& matrix, int)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             ++(matrix[i]);
         }
@@ -284,7 +284,7 @@ operator -- (CGM::Matrix<M,N,T>& matrix, int)
     } 
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             --(matrix[i]);
         }
@@ -385,7 +385,7 @@ operator + (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = A[i] + B[i];
         }
@@ -485,7 +485,7 @@ operator + (const CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     else
     {
         auto result {matrix};
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] += value;
         }
@@ -585,7 +585,7 @@ operator + (T scalar, const CGM::Matrix<M,N,T>& matrix)
     else
     {
         auto result {matrix};
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] += value;
         }
@@ -657,7 +657,7 @@ operator += (CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             matrix[i] += value;
         }
@@ -728,7 +728,7 @@ operator += (CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             A[i] += B[i];
         }
@@ -829,7 +829,7 @@ operator - (const CGM::Matrix<M,N,T>& matrix)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = -matrix[i];
         }
@@ -927,7 +927,7 @@ operator - (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = A[i] - B[i];
         }
@@ -1027,7 +1027,7 @@ operator - (const CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = matrix[i] - value;
         }
@@ -1099,7 +1099,7 @@ operator -= (CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             matrix[i] -= value;
         }
@@ -1170,7 +1170,7 @@ operator -= (CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             A[i] -= B[i];
         }
@@ -1273,7 +1273,7 @@ operator * (const CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     else
     {
         CGM::Matrix<M,N,T> result {matrix};
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] *= value;
         }
@@ -1373,7 +1373,7 @@ operator * (TScalar scalar, const CGM::Matrix<M,N,T>& matrix)
     else
     {
         auto result {matrix};
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] *= value;
         }
@@ -2119,7 +2119,7 @@ operator *= (CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             matrix[i] *= value;
         }
@@ -2310,7 +2310,7 @@ operator ^ (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = A[i] * B[i];
         }
@@ -2434,7 +2434,7 @@ operator ^= (CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             A[i] *= B[i];
         };
@@ -2535,7 +2535,7 @@ operator | (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = A[i] / B[i];
         }
@@ -2659,7 +2659,7 @@ operator |= (CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             A[i] /= B[i];
         };
@@ -2760,7 +2760,7 @@ operator / (const CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     else
     {
         CGM::Matrix<M,N,T> result;
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             result[i] = matrix[i] / value;
         }
@@ -2832,7 +2832,7 @@ operator /= (CGM::Matrix<M,N,T>& matrix, TScalar scalar)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             matrix[i] /= value;
         }
@@ -2903,7 +2903,7 @@ operator /= (CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             A[i] /= B[i];
         }
@@ -3083,7 +3083,7 @@ operator == (const CGM::Matrix<M,N,T>& matrix, T scalar)
     } 
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(matrix[i], scalar)) return false;
         }
@@ -3260,7 +3260,7 @@ operator != (const CGM::Matrix<M,N,T>& matrix, T scalar)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(matrix[i], scalar)) return true;
         }
@@ -3437,7 +3437,7 @@ operator == (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(A[i], B[i])) return false;
         }
@@ -3612,7 +3612,7 @@ operator != (const CGM::Matrix<M,N,T>& A, const CGM::Matrix<M,N,T>& B)
     }
     else
     {
-        for (auto i = 0; i < CGM::Matrix<M,N,T>::size; ++i)
+        for (auto i = 0; i < CGM::Matrix<M,N,T>::count; ++i)
         {
             if (CGM::neq(A[i], B[i])) return true;
         }

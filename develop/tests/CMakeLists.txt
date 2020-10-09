@@ -50,6 +50,7 @@ set(TS_CORE_VECTOR
 )
 
 set(TS_CORE_MATRIX
+    Core/Matrix/Access.cpp
     Core/Matrix/Functions.cpp
     Core/Matrix/Arithmetic/Plus.cpp
     Core/Matrix/Arithmetic/Minus.cpp
@@ -75,7 +76,7 @@ set(TS_MODULE_CORE
     "${TS_CORE_COORDINATES}"
 )
 
-cgm_add_test(ModuleCoreTestSuite         "run.cpp;${MODULE_CORE_TEST_SUITE}")
+cgm_add_test(ModuleCoreTestSuite         "run.cpp;${TS_MODULE_CORE}")
 cgm_add_test(Core-VectorTestSuite        "run.cpp;${TS_CORE_VECTOR}")
 cgm_add_test(Core-MatrixTestSuite        "run.cpp;${TS_CORE_MATRIX}")
 cgm_add_test(Core-QuaternionTestSuite    "run.cpp;${TS_CORE_QUATERNION}")
