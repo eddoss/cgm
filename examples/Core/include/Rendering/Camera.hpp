@@ -2,7 +2,7 @@
 
 
 #include <CGM/Modules/Core.hpp>
-#include <CGM/Transformations/3D>
+#include <CGM/Modules/Transformations/3D.hpp>
 
 
 class Camera

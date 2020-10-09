@@ -112,7 +112,7 @@ write_basic_package_version_file(
 )
 
 configure_package_config_file(
-    ${CMAKE_CURRENT_LIST_DIR}/Config.cmake.in
+        ../cmake/Config.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
     INSTALL_DESTINATION ${ConfigPackageLocation}
 )
@@ -141,6 +141,6 @@ install(
 )
 
 install(
-    DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/CGM"
+    DIRECTORY "../CGM"
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include
 )

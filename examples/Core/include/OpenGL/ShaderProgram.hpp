@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <CGM/Modules/Core.hpp>
-#include <CGM/Cartesian/3D>
+#include <CGM/Modules/Cartesian/3D.hpp>
 #include <OpenGL/BaseObject.hpp>
 #include <Global.hpp>
 
