@@ -5,10 +5,10 @@
 #include <type_traits>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
+#include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Cartesian/2D/Types/Enums.hpp>
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
-#include <CGM/Cartesian/2D/InternalUtils.inl>
 
 
 CGM_NAMESPACE_BEGIN
@@ -284,6 +284,58 @@ invertOrientationForce(Matrix<3,3,T>& basis);
 template<typename T>
 constexpr Matrix<3,3,T>
 inverseOrientationForce(const Matrix<3,3,T>& basis);
+
+/* ####################################################################################### */
+/* Multiplication */
+/* ####################################################################################### */
+
+/**
+ * Multiplies 2D row-vector by 3x3 matrix.
+ * @tparam Representation How to represent input vector. If its 'Point'
+ * given vector will be represented as Vector3D(x,y,1), and Vector3D(x,y,0)
+ * otherwise.
+ * @param vector Vector to multiply.
+ * @param matrix Matrix to multiply by.
+ * @return Result vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+multiply(const Vector<2,T>& vector, const Matrix<3,3,T>& matrix);
+
+/**
+ * Multiplies 3x3 matrix by 2D column-vector.
+ * @tparam Representation How to represent input vector. If its 'Point'
+ * given vector will be represented as Vector3D(x,y,1), and Vector3D(x,y,0)
+ * otherwise.
+ * @param vector Vector to multiply.
+ * @param matrix Matrix to multiply by.
+ * @return Result vector.
+ */
+template<EVectorRepresentation Representation=EVectorRepresentation::Point, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+multiply(const Matrix<3,3,T>& matrix, const Vector<2,T>& vector);
+
+/**
+ * Represents 2x2 matrix as not translated basis and multiplies it by 3x3 matrix.
+ * @tparam N Size of result matrix.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply by.
+ * @return Result matrix.
+ */
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 2 || N == 3), Matrix<N,N,T>>
+multiply(const Matrix<2,2,T>& A, const Matrix<3,3,T>& B);
+
+/**
+ * Multiplies 2x2 matrix by 3x3 matrix (2x2 matrix represents as not translated basis).
+ * @tparam N Size of result matrix.
+ * @param A Matrix to multiply.
+ * @param B Matrix to multiply by.
+ * @return Result matrix.
+ */
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 2 || N == 3), Matrix<N,N,T>>
+multiply(const Matrix<3,3,T>& A, const Matrix<2,2,T>& B);
 
 CGM_XY_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -8,7 +8,6 @@
 #include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 #include <CGM/Cartesian/2D/Functions/Orientation.hpp>
-#include <CGM/Cartesian/2D/InternalUtils.inl>
 
 
 CGM_NAMESPACE_BEGIN

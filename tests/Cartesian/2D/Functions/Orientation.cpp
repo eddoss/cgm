@@ -38,14 +38,14 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix2x2)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> mat
     {
-        in_x.x, in_x.y,
-        in_y.x, in_y.y
+        in_x.x, in_y.x,
+        in_x.y, in_y.y
     };
 #else
     Matrix<2,2,int> mat
     {
-        in_x.x, in_y.x,
-        in_x.y, in_y.y
+        in_x.x, in_x.y,
+        in_y.x, in_y.y
     };
 #endif
 
@@ -65,15 +65,15 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix3x3)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> mat
     {
-        in_x.x, in_x.y, 0,
-        in_y.x, in_y.y, 0,
+        in_x.x, in_y.x, 0,
+        in_x.y, in_y.y, 0,
         0, 0, 1
     };
 #else
     Matrix<3,3,int> mat
     {
-        in_x.x, in_y.x, 0,
-        in_x.y, in_y.y, 0,
+        in_x.x, in_x.y, 0,
+        in_y.x, in_y.y, 0,
         0, 0, 1
     };
 #endif
@@ -96,14 +96,14 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromXY)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expect
     {
-        x.x, x.y,
-        y.x, y.y,
+        x.x, y.x,
+        x.y, y.y
     };
 #else
     Matrix<2,2,int> expect
     {
-        x.x, y.x,
-        x.y, y.y
+        x.x, x.y,
+        y.x, y.y
     };
 #endif
 
@@ -124,14 +124,14 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromAxesTuple)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expect
     {
-        x.x, x.y,
-        y.x, y.y
+        x.x, y.x,
+        x.y, y.y
     };
 #else
     Matrix<2,2,int> expect
     {
-        x.x, y.x,
-        x.y, y.y
+        x.x, x.y,
+        y.x, y.y
     };
 #endif
 
@@ -144,20 +144,22 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromAxesTuple)
 
 TEST(Cartesian_2D_Functions_OrientationMatrix, FromMatrix3x3)
 {
-    Vector<2,int> x {1, 2};
-    Vector<2,int> y {4, 5};
+    int a = 2;
+    int b = 3;
+    int c = 4;
+    int d = 5;
 
     Matrix<3,3,int> mat
     {
-        x.x, y.x, 0,
-        x.y, y.y, 0,
+        a, b, 0,
+        c, d, 0,
         0, 0, 1
     };
 
     Matrix<2,2,int> expect
     {
-        x.x, y.x,
-        x.y, y.y
+        a, b,
+        c, d
     };
 
     auto result = CGM_XY::orientationMatrix(mat);

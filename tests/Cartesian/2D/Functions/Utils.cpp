@@ -34,9 +34,9 @@ TEST(Cartesian_2D_Functions_Utils, GetX)
     auto value3 = CGM_XY::x(mat3);
 
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    Vector<2,int> expec {2,4};
-#else
     Vector<2,int> expec {2,3};
+#else
+    Vector<2,int> expec {2,4};
 #endif
 
     ASSERT_TRUE(value2 == expec);
@@ -64,9 +64,9 @@ TEST(Cartesian_2D_Functions_Utils, GetY)
     auto value3 = CGM_XY::y(mat3);
 
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    Vector<2,int> expec {3,6};
-#else
     Vector<2,int> expec {4,6};
+#else
+    Vector<2,int> expec {3,6};
 #endif
 
     ASSERT_TRUE(value2 == expec);
@@ -83,19 +83,6 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<2,2,int> expec2
     {
-        2, 4,
-        3, 6,
-    };
-
-    Matrix<3,3,int> expec3
-    {
-        2, 4, 0,
-        3, 6, 0,
-        0, 0, 0
-    };
-#else
-    Matrix<2,2,int> expec2
-    {
         2, 3,
         4, 6,
     };
@@ -104,6 +91,19 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
     {
         2, 3, 0,
         4, 6, 0,
+        0, 0, 0
+    };
+#else
+    Matrix<2,2,int> expec2
+    {
+        2, 4,
+        3, 6,
+    };
+
+    Matrix<3,3,int> expec3
+    {
+        2, 4, 0,
+        3, 6, 0,
         0, 0, 0
     };
 #endif
@@ -276,15 +276,15 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromAxes)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     Matrix<3,3,int> expec
     {
-        2,1,1,
-        4,3,2,
+        2,4,1,
+        1,3,2,
         0,0,1
     };
 #else
     Matrix<3,3,int> expec
     {
-        2,4,0,
-        1,3,0,
+        2,1,0,
+        4,3,0,
         1,2,1
     };
 #endif
@@ -322,4 +322,162 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromMatrixAndPosition)
 #endif
 
     ASSERT_TRUE(basis == expec);
+}
+
+/* ####################################################################################### */
+/* Multiplication */
+/* ####################################################################################### */
+
+TEST(Cartesian_2D_Functions_Utils, MultiplyVector2Matrix3)
+{
+    Vector<2,int> vec {2,3};
+    Matrix<3,3,int> mat
+    {
+        1,4,0,
+        3,5,0,
+        4,3,1
+    };
+
+    {
+        auto res = CGM_XY::multiply<CGM_POINT>(vec, mat);
+        auto exp = Vector<2,int> {15,26};
+        ASSERT_TRUE(res == exp);
+    }
+
+    {
+        auto res = CGM_XY::multiply<CGM_DIRECTION>(vec, mat);
+        auto exp = Vector<2,int> {11,23};
+        ASSERT_TRUE(res == exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix3Vector2)
+{
+    Vector<2,int> vec {2,3};
+    Matrix<3,3,int> mat
+    {
+        1,3,4,
+        4,5,3,
+        0,0,1,
+    };
+
+    {
+        auto res = CGM_XY::multiply<CGM_POINT>(mat, vec);
+        auto exp = Vector<2,int> {15,26};
+        ASSERT_TRUE(res == exp);
+    }
+
+    {
+        auto res = CGM_XY::multiply<CGM_DIRECTION>(mat, vec);
+        auto exp = Vector<2,int> {11,23};
+        ASSERT_TRUE(res == exp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix22Matrix3)
+{
+    {
+        Matrix<2,2,int> expect
+        {
+            28,  12,
+            57,  27
+        };
+
+        Matrix<2,2,int> mat2
+        {
+            4,2,
+            3,6
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            3,1,5,
+            8,4,2,
+            6,5,3
+        };
+
+        auto result = CGM_XY::multiply<2>(mat2, mat3);
+        ASSERT_TRUE(result == expect);
+    }
+    {
+        Matrix<3,3,int> expect
+        {
+            28,  12,  24,
+            57,  27,  27,
+             6,   5,   3
+        };
+
+        Matrix<2,2,int> mat2
+        {
+            4,2,
+            3,6
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            3,1,5,
+            8,4,2,
+            6,5,3
+        };
+
+        auto result = CGM_XY::multiply<3>(mat2, mat3);
+        ASSERT_TRUE(result == expect);
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix3Matrix2)
+{
+    {
+        Matrix<2,2,int> expect
+        {
+            15,  12,
+            44,  40
+        };
+
+        Matrix<2,2,int> mat2
+        {
+            4,2,
+            3,6
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            3,1,5,
+            8,4,2,
+            6,5,3
+        };
+
+        auto result = CGM_XY::multiply<2>(mat3, mat2);
+        ASSERT_TRUE(result == expect);
+    }
+    {
+        Matrix<3,3,int> expect
+        {
+            15,  12,  5,
+            44,  40,  2,
+            39,  42,  3
+        };
+
+        Matrix<2,2,int> mat2
+        {
+            4,2,
+            3,6
+        };
+
+        Matrix<3,3,int> mat3
+        {
+            3,1,5,
+            8,4,2,
+            6,5,3
+        };
+
+        auto result = CGM_XY::multiply<3>(mat3, mat2);
+        ASSERT_TRUE(result == expect);
+    }
 }

@@ -23,14 +23,14 @@ orientationAxes(const Matrix<2,2,T>& orientation)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
-        Vector<2,T>{orientation(0,0), orientation(0,1)},
-        Vector<2,T>{orientation(1,0), orientation(1,1)}
+        Vector<2,T>{orientation(0,0), orientation(1,0)},
+        Vector<2,T>{orientation(0,1), orientation(1,1)}
     );
 #else
     return Axes<T>
     (
-        Vector<2,T>{orientation(0,0), orientation(1,0)},
-        Vector<2,T>{orientation(0,1), orientation(1,1)}
+        Vector<2,T>{orientation(0,0), orientation(0,1)},
+        Vector<2,T>{orientation(1,0), orientation(1,1)}
     );
 #endif
 }
@@ -44,14 +44,14 @@ orientationAxes(const Matrix<3,3,T>& space)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return Axes<T>
     (
-        Vector<2,T>{space(0,0), space(0,1)},
-        Vector<2,T>{space(1,0), space(1,1)}
+        Vector<2,T>{space(0,0), space(1,0)},
+        Vector<2,T>{space(0,1), space(1,1)}
     );
 #else
     return Axes<T>
     (
-        Vector<2,T>{space(0,0), space(1,0)},
-        Vector<2,T>{space(0,1), space(1,1)}
+        Vector<2,T>{space(0,0), space(0,1)},
+        Vector<2,T>{space(1,0), space(1,1)}
     );
 #endif
 }
@@ -67,14 +67,14 @@ orientationMatrix(const Vector<2,T>& x, const Vector<2,T>& y)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
-        x.x, x.y,
-        y.x, y.y
+        x.x, y.x,
+        x.y, y.y
     };
 #else
     return
     {
-        x.x, y.x,
-        x.y, y.y
+        x.x, x.y,
+        y.x, y.y
     };
 #endif
 }

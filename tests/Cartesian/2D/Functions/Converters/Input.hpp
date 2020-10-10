@@ -104,9 +104,9 @@ static const auto EXPECT_MAT3_TO_LOCAL_BY_MAT2 = CGM_XY::spaceMatrix
 
 static const auto EXPECT_MAT3_TO_LOCAL_BY_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ +0.777142, -0.629319 },
-    CGM::Vector<2, double>{ +0.629319, +0.777142 },
-    CGM::Vector<2, double>{ +1.358575, -0.129449 }
+    CGM::Vector<2, double>{ +0.777150, -0.629326 },
+    CGM::Vector<2, double>{ +0.629326, +0.777150 },
+    CGM::Vector<2, double>{ +0.560860, +0.948270 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT2_TO_MAT2 = CGM_XY::spaceMatrix
@@ -118,9 +118,9 @@ static const auto EXPECT_MAT3_A2B_MAT2_TO_MAT2 = CGM_XY::spaceMatrix
 
 static const auto EXPECT_MAT3_A2B_MAT2_TO_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ -0.743141, +0.669127 },
-    CGM::Vector<2, double>{ -0.669127, -0.743141 },
-    CGM::Vector<2, double>{ -1.700398, +0.053772 }
+    CGM::Vector<2, double>{ -0.743144, +0.669129 },
+    CGM::Vector<2, double>{ -0.669129, -0.743144 },
+    CGM::Vector<2, double>{ -1.192853, +0.193603 }
 );
 
 static const auto EXPECT_MAT3_A2B_MAT3_TO_MAT2 = CGM_XY::spaceMatrix
@@ -132,8 +132,8 @@ static const auto EXPECT_MAT3_A2B_MAT3_TO_MAT2 = CGM_XY::spaceMatrix
 
 static const auto EXPECT_MAT3_A2B_MAT3_TO_MAT3 = CGM_XY::spaceMatrix
 (
-    CGM::Vector<2, double>{ -0.743149, +0.669133 },
-    CGM::Vector<2, double>{ -0.669133, -0.743149 },
-    CGM::Vector<2, double>{ -1.992950, -0.219030 }
+    CGM::Vector<2, double>{ -0.743144, +0.669129 },
+    CGM::Vector<2, double>{ -0.669129, -0.743144 },
+    CGM::Vector<2, double>{ -1.592853, +0.193603 }
 );
 }

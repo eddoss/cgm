@@ -16,12 +16,12 @@ x(const Matrix<S,S,T>& basis)
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
         basis(0,0),
-        basis(0,1)
+        basis(1,0)
     };
 #else
     {
         basis(0,0),
-        basis(1,0)
+        basis(0,1)
     };
 #endif
 }
@@ -44,12 +44,12 @@ y(const Matrix<S,S,T>& basis)
     return
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     {
-        basis(1,0),
+        basis(0,1),
         basis(1,1)
     };
 #else
     {
-        basis(0,1),
+        basis(1,0),
         basis(1,1)
     };
 #endif
@@ -72,10 +72,10 @@ setX(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     basis(0,0) = value.x;
-    basis(0,1) = value.y;
+    basis(1,0) = value.y;
 #else
     basis(0,0) = value.x;
-    basis(1,0) = value.y;
+    basis(0,1) = value.y;
 #endif
 }
 
@@ -95,10 +95,10 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 2 || S == 3), void>
 setY(Matrix<S,S,T>& basis, const Vector<2,T>& value)
 {
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
-    basis(1,0) = value.x;
+    basis(0,1) = value.x;
     basis(1,1) = value.y;
 #else
-    basis(0,1) = value.x;
+    basis(1,0) = value.x;
     basis(1,1) = value.y;
 #endif
 }
@@ -250,15 +250,15 @@ spaceMatrix(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& posit
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
-        x.x, x.y, position.x,
-        y.x, y.y, position.y,
-        zero<T>, zero<T>, number<T>(1)
+        x.x, y.x, position.x
+        x.y, y.y, position.y
+        zero<T>,  zero<T>, number<T>(1)
     };
 #else
     return
     {
-        x.x, y.x, zero<T>,
-        x.y, y.y, zero<T>,
+        x.x, x.y, zero<T>,
+        y.x, y.y, zero<T>,
         position.x, position.y, number<T>(1)
     };
 #endif
@@ -436,6 +436,138 @@ inverseOrientationForce(const Matrix<3,3,T>& basis)
     mat(2,2) = basis(2,2);
 
     return mat;
+}
+
+/* ####################################################################################### */
+/* Multiplication */
+/* ####################################################################################### */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+multiply(const Vector<2,T>& vector, const Matrix<3,3,T>& matrix)
+{
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return
+        {
+            matrix(0,0) * vector.x + matrix(1,0) * vector.y + matrix(2,0),
+            matrix(0,1) * vector.x + matrix(1,1) * vector.y + matrix(2,1)
+        };
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return
+        {
+            matrix(0,0) * vector.x + matrix(1,0) * vector.y,
+            matrix(0,1) * vector.x + matrix(1,1) * vector.y
+        };
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<EVectorRepresentation Representation, typename T>
+constexpr CGM_FORCEINLINE Vector<2,T>
+multiply(const Matrix<3,3,T>& matrix, const Vector<2,T>& vector)
+{
+    if constexpr (Representation == EVectorRepresentation::Point)
+    {
+        return
+        {
+            matrix(0,0) * vector.x + matrix(0,1) * vector.y + matrix(0,2),
+            matrix(1,0) * vector.x + matrix(1,1) * vector.y + matrix(1,2)
+        };
+    }
+    else if constexpr (Representation == EVectorRepresentation::Direction)
+    {
+        return
+        {
+            matrix(0,0) * vector.x + matrix(0,1) * vector.y,
+            matrix(1,0) * vector.x + matrix(1,1) * vector.y
+        };
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 2 || N == 3), Matrix<N,N,T>>
+multiply(const Matrix<2,2,T>& A, const Matrix<3,3,T>& B)
+{
+    if constexpr (N == 2)
+    {
+        return
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+        };
+    }
+    else
+    {
+        return
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,0)*B(0,2) + A(0,1)*B(1,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,0)*B(0,2) + A(1,1)*B(1,2),
+
+            // row 2
+            B(2,0),
+            B(2,1),
+            B(2,2)
+        };
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t N, typename T>
+constexpr std::enable_if_t<(N == 2 || N == 3), Matrix<N,N,T>>
+multiply(const Matrix<3,3,T>& A, const Matrix<2,2,T>& B)
+{
+    if constexpr (N == 2)
+    {
+        return
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+        };
+    }
+    else
+    {
+        return
+        {
+            // row 0
+            A(0,0)*B(0,0) + A(0,1)*B(1,0),
+            A(0,0)*B(0,1) + A(0,1)*B(1,1),
+            A(0,2),
+
+            // row 1
+            A(1,0)*B(0,0) + A(1,1)*B(1,0),
+            A(1,0)*B(0,1) + A(1,1)*B(1,1),
+            A(1,2),
+
+            // row 2
+            A(2,0)*B(0,0) + A(2,1)*B(1,0),
+            A(2,0)*B(0,1) + A(2,1)*B(1,1),
+            A(2,2)
+        };
+    }
 }
 
 CGM_XY_NAMESPACE_END

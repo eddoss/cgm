@@ -46,9 +46,9 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = multiply<3>(inverseOrientationForce(space), matrix);
+        matrix = multiply<3>(inverseForce(space), matrix);
     #else
-        matrix = multiply<3>(matrix, inverseOrientationForce(space));
+        matrix = multiply<3>(matrix, inverseForce(space));
     #endif
     }
 }
