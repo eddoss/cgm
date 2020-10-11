@@ -68,6 +68,12 @@ endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
 
+file(GLOB_RECURSE ${PROJECT_NAME}_HEADERS   "${CMAKE_CURRENT_LIST_DIR}/CGM/*.hpp")
+file(GLOB_RECURSE ${PROJECT_NAME}_IMPLS     "${CMAKE_CURRENT_LIST_DIR}/CGM/*.inl")
+
+source_group("Headers" ${${PROJECT_NAME}_HEADERS})
+source_group("Implementation" ${${PROJECT_NAME}_IMPLS})
+
 # ####################################################################################### #
 # Library properties
 # ####################################################################################### #
