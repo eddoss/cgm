@@ -1,5 +1,8 @@
 
 
+#include "Quaternion.hpp"
+
+
 template<typename T>
 constexpr CGM_XYZ::Quaternion<T>
 operator - (const CGM_XYZ::Quaternion<T>& quaternion)

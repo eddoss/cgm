@@ -1,5 +1,8 @@
 
 
+#include "Common.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 
 constexpr std::ostream&

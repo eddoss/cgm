@@ -3,8 +3,6 @@ import os
 def linesCount(directory: str):
     count = 0
     for root, subdirs, files in os.walk(directory):
-        if os.path.basename(root)[0] == '.':
-            continue
         for filename in files:
             file_path = os.path.join(root, filename)
             count += sum(1 for line in open(file_path))

@@ -1,5 +1,8 @@
 
 
+#include "Spherical.hpp"
+
+
 #include <CGM/Coordinates/Types/Spherical.hpp>
 
 

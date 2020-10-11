@@ -1,5 +1,8 @@
 
 
+#include "Polar.hpp"
+
+
 #include <CGM/Coordinates/Types/Polar.hpp>
 
 

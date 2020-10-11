@@ -1,5 +1,8 @@
 
 
+#include "Scale.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 CGM_XFORM2D_NAMESPACE_BEGIN
 
@@ -114,7 +117,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
     if constexpr (Space == ESpace::World)
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = scaler * matrix;
+        matrix = scales * matrix;
     #else
         matrix = matrix * scales;
     #endif
@@ -122,7 +125,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = inverseForce(scaler) * matrix;
+        matrix = inverseForce(scales) * matrix;
     #else
         matrix = matrix * inverseForce(scales);
     #endif

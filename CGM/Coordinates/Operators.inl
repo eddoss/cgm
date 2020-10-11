@@ -1,5 +1,8 @@
 
 
+#include "Operators.hpp"
+
+
 #include <CGM/Coordinates/Operators.hpp>
 
 
