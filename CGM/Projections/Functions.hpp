@@ -4,7 +4,7 @@
 #include <CGM/Projections/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
+#include <CGM/Projections/Types.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -12,35 +12,31 @@ CGM_NAMESPACE_BEGIN
 /**
  * Creates matrix are transit points from camera frustum to normalized device space (unit cube).
  * @note This matrix should be applied to vectors are in camera space.
- * @param fov Vertical angle of view (in radians).
- * @param aspect Ration between target frame width and height (width/height).
- * @param near Distance to near plane.
- * @param far Distance to far plane.
- * @param width Target unit cube width (2 for OpenGL/Vulkan/DirectX).
- * @param height Target unit cube height (2 for OpenGL/Vulkan/DirectX).
- * @param depthMin Target unit cube depth min (-1 for OpenGL/Vulkan, 0 for DirectX).
- * @param depthMax Target unit cube depth max (1 for OpenGL/Vulkan/DirectX).
- * @return Transition (to unit cube) matrix.
+ * @param nearPlaneWidth Width of near projection plane (sometimes referred as 'left' and 'right', in this case its distance between 'right' and 'left').
+ * @param nearPlaneHeight Height of near projection plane (sometimes referred as 'top' and 'bottom', in this case its distance between 'top' and 'bottom').
+ * @param nearPlaneDist Offset of the near plane from frustum apex.
+ * @param farPlaneDist Distance between frustum apex and bottom (frustum depth).
+ * @param cubeWidth Target unit cube width (2 for OpenGL/Vulkan/DirectX).
+ * @param cubeHeight Target unit cube height (2 for OpenGL/Vulkan/DirectX).
+ * @param cubeDepthMin Target unit cube depth min (-1 for OpenGL/Vulkan, 0 for DirectX).
+ * @param cubeDepthMax Target unit cube depth max (1 for OpenGL/Vulkan/DirectX).
+ * @return Transition (to NDC) matrix.
  **/
 template<typename T>
 constexpr Matrix<4,4,T>
-ndc(T fov, T aspect, T near, T far, T width, T height, T depthMin, T depthMax);
+ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax);
 
 /**
- * Creates matrix are transit points from camera frustum to normalized device space (unit cube).
+ * Creates matrix are transit points from camera frustum to normalized device space (unit cube) for specific graphics API.
  * @note This matrix should be applied to vectors are in camera space.
- * @param screenSize Size of near projection plane (sometimes referred as "top and right").
- * @param near Distance to near plane.
- * @param far Distance to far plane.
- * @param width Target unit cube width (2 for OpenGL/Vulkan/DirectX).
- * @param height Target unit cube height (2 for OpenGL/Vulkan/DirectX).
- * @param depthMin Target unit cube depth min (-1 for OpenGL/Vulkan, 0 for DirectX).
- * @param depthMax Target unit cube depth max (1 for OpenGL/Vulkan/DirectX).
- * @return Transition (to unit cube) matrix.
+ * @param fov Vertical angle of field of view.
+ * @param viewport Current viewport size (target frame buffer size).
+ * @param api Graphics API.
+ * @return Transition (to NDC) matrix.
  **/
 template<typename T>
 constexpr Matrix<4,4,T>
-ndc(const Vector<2,T>& screenSize, T near, T far, T width, T height, T depthMin, T depthMax);
+ndc(T fov, const Vector<2,uint32>& viewport, EGraphicsApi api);
 
 CGM_NAMESPACE_END
 

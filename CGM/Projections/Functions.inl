@@ -1,10 +1,13 @@
 
 
+#include "Functions.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr Matrix<4,4,T>
-ndc(T fov, T aspect, T near, T far, T width, T height, T depthMin, T depthMax)
+ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax)
 {
 
 }
@@ -13,7 +16,7 @@ ndc(T fov, T aspect, T near, T far, T width, T height, T depthMin, T depthMax)
 
 template<typename T>
 constexpr Matrix<4,4,T>
-ndc(const Vector<2,T>& screenSize, T near, T far, T width, T height, T depthMin, T depthMax)
+ndc(T fov, const Vector<2,uint32>& viewport, EGraphicsApi api)
 {
 
 }
