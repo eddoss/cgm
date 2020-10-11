@@ -13,12 +13,12 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /**
  * Calculates shortest distance from point to plane.
  * @param point Point to calculate distance from.
- * @param planeNormal Normal of plane to calculate distance to.
+ * @param axisNormal Normal of axis to calculate distance to.
  * @return Shortest distance from point to plane.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE T
-shortestDistance(const Vector<2,T>& point, const Vector<2,T>& planeNormal);
+shortestDistance(const Vector<2,T>& point, const Vector<2,T>& axisNormal);
 
 /**
  * Create zero pivot. Axes has default value, position is zero.

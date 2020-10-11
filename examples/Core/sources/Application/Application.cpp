@@ -27,7 +27,7 @@ Application::Application()
     sceneCamera.setTarget({0, 0, 0});
 
     material = std::make_shared<ShaderProgram>();
-    sceneGrid = Geometry::makeGrid(20, 160, {0.15,0.15,0.15,1.0}, material);
+    sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, material);
     sceneGnomon = Geometry::makeAxes(material);
 }
 

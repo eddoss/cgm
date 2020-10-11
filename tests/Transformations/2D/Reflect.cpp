@@ -63,7 +63,7 @@ TEST(Transformations2D_Reflection, Matrix2_PlaneNormal)
 /* Matrix3 */
 /* ####################################################################################### */
 
-TEST(Transformations2D_Reflection, Matrix3_PlaneNormal)
+TEST(Transformations2D_Reflection, Matrix3_AxisNormal)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
@@ -75,15 +75,16 @@ TEST(Transformations2D_Reflection, Matrix3_PlaneNormal)
             Vector<2,double>{-0.989089, -0.147325},
             Vector<2,double>{-0.816372, -0.914349}
         );
-        ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
+
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
         const auto result = CGM_XFORM2D::reflected<CGM_LOCAL>(cgm_test::space, cgm_test::normal);
         const auto expect = CGM_XY::spaceMatrix
         (
-            Vector<2,double>{+0.318984, -4.961398},
-            Vector<2,double>{-1.307840, -7.190369},
-            Vector<2,double>{-0.982092, -10.664777}
+            Vector<2,double>{+0.318984, -4.961410},
+            Vector<2,double>{-1.307841, -7.190390},
+            Vector<2,double>{-0.982093, -10.66480}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
     }
@@ -91,7 +92,7 @@ TEST(Transformations2D_Reflection, Matrix3_PlaneNormal)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Transformations2D_Reflection, Matrix3_PlaneNormalOrigin)
+TEST(Transformations2D_Reflection, Matrix3_AxisNormalOrigin)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 

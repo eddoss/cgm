@@ -105,34 +105,26 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
 {
+    auto scales = Matrix<2,2,T>
+    {
+        values.x, number<T>(0),
+        number<T>(0), values.y
+    };
+
     if constexpr (Space == ESpace::World)
     {
-        auto scaler = Matrix<2,2,T>
-        {
-            values.x, number<T>(0),
-            number<T>(0), values.y
-        };
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = matrix * scaler;
-    #else
         matrix = scaler * matrix;
+    #else
+        matrix = matrix * scales;
     #endif
     }
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix(0,0) *= values.x;
-        matrix(0,1) *= values.x;
-
-        matrix(1,0) *= values.y;
-        matrix(1,1) *= values.y;
+        matrix = inverseForce(scaler) * matrix;
     #else
-        matrix(0,0) *= values.x;
-        matrix(1,0) *= values.x;
-
-        matrix(0,1) *= values.y;
-        matrix(1,1) *= values.y;
+        matrix = matrix * inverseForce(scales);
     #endif
     }
 }
@@ -236,40 +228,28 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values)
 {
+    auto scales = Matrix<3,3,T>
+    {
+        values.x, number<T>(0), number<T>(0),
+        number<T>(0), values.y, number<T>(0),
+        number<T>(0), number<T>(0), number<T>(1)
+    };
+
     if constexpr (Space == ESpace::World)
     {
-        auto scales = Matrix<3,3,T>
-        {
-            values.x, number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0),
-            number<T>(0), number<T>(0), number<T>(1)
-        };
-
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix = matrix * scales;
-        matrix(0,2) *= values.x;
-        matrix(1,2) *= values.y;
-    #else
         matrix = scales * matrix;
-        matrix(2,0) *= values.x;
-        matrix(2,1) *= values.y;
+    #else
+        matrix = matrix * scales;
     #endif
 
     }
     else
     {
     #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        matrix(0,0) *= values.x;
-        matrix(0,1) *= values.x;
-
-        matrix(1,0) *= values.y;
-        matrix(1,1) *= values.y;
+        matrix = inverseForce(scales) * matrix;
     #else
-        matrix(0,0) *= values.x;
-        matrix(1,0) *= values.x;
-
-        matrix(0,1) *= values.y;
-        matrix(1,1) *= values.y;
+        matrix = matrix * inverseForce(scales);
     #endif
     }
 }

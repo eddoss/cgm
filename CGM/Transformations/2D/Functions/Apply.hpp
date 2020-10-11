@@ -9,8 +9,6 @@
 #include <CGM/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Transformations/2D/Types/Transforms.hpp>
-#include <CGM/Cartesian/2D/InternalUtils.inl>
-#include <CGM/Transformations/2D/InternalUtils.inl>
 
 /* ####################################################################################### */
 /* Inplace */

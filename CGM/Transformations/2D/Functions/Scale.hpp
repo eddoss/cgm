@@ -4,8 +4,10 @@
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Core/Operators/Matrix.hpp>
 #include <CGM/Core/Operators/MatrixVectorMultiplication.hpp>
 #include <CGM/Core/Functions/Vector.hpp>
+#include <CGM/Core/Functions/Matrix.hpp>
 #include <CGM/Cartesian/2D/Functions/Converters/Vector.hpp>
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/2D/ModuleGlobals.hpp>
