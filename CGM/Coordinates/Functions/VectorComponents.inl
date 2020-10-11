@@ -1,5 +1,8 @@
 
 
+#include "VectorComponents.hpp"
+
+
 #include <CGM/Coordinates/Functions/VectorComponents.hpp>
 
 

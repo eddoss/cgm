@@ -1,5 +1,7 @@
 
 
+#include "Utils.hpp"
+
 
 CGM_NAMESPACE_BEGIN
 CGM_XY_NAMESPACE_BEGIN
@@ -250,8 +252,8 @@ spaceMatrix(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& posit
 #ifdef CGM_MATRIX_POST_MULTIPLICATION
     return
     {
-        x.x, y.x, position.x
-        x.y, y.y, position.y
+        x.x, y.x, position.x,
+        x.y, y.y, position.y,
         zero<T>,  zero<T>, number<T>(1)
     };
 #else

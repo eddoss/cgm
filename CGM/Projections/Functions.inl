@@ -1,5 +1,8 @@
 
 
+#include "Functions.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 
 template<typename T>

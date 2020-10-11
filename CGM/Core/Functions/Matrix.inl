@@ -1,5 +1,8 @@
 
 
+#include "Matrix.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 
 template<size_t S, typename T>

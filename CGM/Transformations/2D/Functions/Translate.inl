@@ -1,5 +1,8 @@
 
 
+#include "Translate.hpp"
+
+
 CGM_NAMESPACE_BEGIN
 CGM_XFORM2D_NAMESPACE_BEGIN
 
