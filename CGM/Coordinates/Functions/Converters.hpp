@@ -45,7 +45,7 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 cartesian(const Cylindrical<T>& coord);
 
 /**
- * Create Cartesian coordinate independently from axes labels.
+ * Create 3D cartesian coordinate independently from axes labels.
  * @param up Up component of coord.
  * @param right Right component of coord.
  * @param forward Forward component of coord.
@@ -53,6 +53,17 @@ cartesian(const Cylindrical<T>& coord);
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 cartesian(T up, T right, T forward);
+
+/**
+ * Create 4D cartesian vector independently from axes labels.
+ * @param up Up component of coord.
+ * @param right Right component of coord.
+ * @param forward Forward component of coord.
+ * @param homogeneous Homogeneous component of vector.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<4,T>
+cartesian(T up, T right, T forward, T homogeneous);
 
 /* ####################################################################################### */
 /* Convert to Polar system */

@@ -67,7 +67,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 orientationMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
         x.x, y.x, z.x,

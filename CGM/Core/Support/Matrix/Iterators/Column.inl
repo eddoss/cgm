@@ -80,7 +80,7 @@ public: /* Constructors */
     ConstMatrixColumnIterator(pointer firstComponentPointer, size_t column, size_t row)
         : m_row(row+1)
         , m_column(column)
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         , m_begin(firstComponentPointer + column)
     #else
         , m_begin(firstComponentPointer + column * M)
@@ -337,7 +337,7 @@ protected: /* Internal */
     constexpr void
     recalculateDataAddress()
     {
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         m_data = m_begin + (N * (m_row - 1));
     #else
         m_data = m_begin + (m_row - 1);

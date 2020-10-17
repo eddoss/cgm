@@ -4,26 +4,26 @@
 /* Library properties validation */
 /* ####################################################################################### */
 
-#if CGM_MATRIX_LAYOUT != Row || CGM_MATRIX_LAYOUT != Column
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_MATRIX_LAYOUT'");
+#if CGMATH_MATRIX_LAYOUT != Row || CGMATH_MATRIX_LAYOUT != Column
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGMATH_MATRIX_LAYOUT'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
-#if CGM_HANDEDNESS != Left || CGM_HANDEDNESS != Right
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_HANDEDNESS'");
+#if CGMATH_HANDEDNESS != Left || CGMATH_HANDEDNESS != Right
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGMATH_HANDEDNESS'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
-#if CGM_RIGHT_UP_FORWARD_AXES_LABELS != XYZ || CGM_RIGHT_UP_FORWARD_AXES_LABELS != XZY || CGM_RIGHT_UP_FORWARD_AXES_LABELS != YXZ || CGM_RIGHT_UP_FORWARD_AXES_LABELS != YZX || CGM_RIGHT_UP_FORWARD_AXES_LABELS != ZXY || CGM_RIGHT_UP_FORWARD_AXES_LABELS != ZYX
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_RIGHT_UP_FORWARD_AXES_LABELS'");
+#if CGM_CFG_AXES != XYZ || CGM_CFG_AXES != YZX || CGM_CFG_AXES != ZXY
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_CFG_AXES'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
-#if CGM_MATRIX_MULTIPLICATION_ORDER != Pre || CGM_MATRIX_MULTIPLICATION_ORDER != Post
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value 'CGM_RIGHT_UP_FORWARD_AXES_LABELS'");
+#if CGM_CFG_MATRIX_MULTIPLICATION_ORDER != Pre || CGM_CFG_MATRIX_MULTIPLICATION_ORDER != Post
+    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value 'CGM_CFG_AXES'");
 #endif
 
 

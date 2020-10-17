@@ -106,7 +106,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& value)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         basis(0,2) += value.x;
         basis(1,2) += value.y;
     #else
@@ -506,7 +506,7 @@ template<EAxes Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translationMatrix(T value)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     if constexpr (Axis == EAxes::X)
     {
         return
@@ -553,7 +553,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translationMatrix(const Vector<2,T>& values)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
         number<T>(1), number<T>(0), values.x,
@@ -576,7 +576,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translationMatrix(T value, const Vector<2,T>& along)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
         number<T>(1), number<T>(0), along.x * value,

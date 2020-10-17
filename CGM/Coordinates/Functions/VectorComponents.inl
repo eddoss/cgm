@@ -13,27 +13,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE T&
 right(Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.x;
 #endif
 }
@@ -44,27 +44,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE T&
 up(Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.y;
 #endif
 }
@@ -75,27 +75,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE T&
 forward(Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.z;
 #endif
 }
@@ -106,27 +106,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE const T&
 right(const Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.x;
 #endif
 }
@@ -137,27 +137,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE const T&
 up(const Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.y;
 #endif
 }
@@ -168,27 +168,27 @@ template<typename T>
 constexpr CGM_FORCEINLINE const T&
 forward(const Vector<3,T>& coord)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return coord.z;
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return coord.x;
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return coord.y;
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return coord.z;
 #endif
 }

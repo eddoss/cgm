@@ -194,10 +194,21 @@ Geometry::render(const cgm::mat4& cameraInverse, const cgm::mat4& ndc)
         CGM_EXAMPLES_FUNC_ERROR("Cant draw geometry, material is nullptr")
     }
 
+    auto remapper = cgm::mat4
+    {
+        0,1,0,0,
+        0,0,1,0,
+        1,0,0,0,
+        0,0,0,1
+    };
+
+//    cgm::setIdentity(remapper);
+
     material->bind();
     material->setUniform("xform", xform);
     material->setUniform("cameraSpace", cameraInverse);
     material->setUniform("cameraProjection", ndc);
+//    material->setUniform("remapper", remapper);
 
     vao.bind();
 //    glDrawElements(GL_TRIANGLE_FAN, GLsizei(indices.size()), GL_UNSIGNED_INT, nullptr);

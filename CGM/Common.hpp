@@ -28,7 +28,7 @@ using float64 = double;
 /* Common constants */
 /* ####################################################################################### */
 
-#ifdef CGM_USE_DOUBLE_PRECISION
+#ifdef CGMATH_USE_DOUBLE_PRECISION
     using FLOAT = double;
     #define CGM_BIG_NUMBER                  1.79768e+308
     #define CGM_SMALL_NEGATIVE_NUMBER       2.22506e-308

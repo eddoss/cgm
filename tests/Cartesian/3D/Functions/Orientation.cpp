@@ -40,7 +40,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
     Vector<3,int> in_y {4, 5, 6};
     Vector<3,int> in_z {7, 8, 9};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<3,3,int> mat
     {
         in_x.x, in_y.x, in_z.x,
@@ -87,7 +87,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
     Vector<3,int> in_y {4, 5, 6};
     Vector<3,int> in_z {7, 8, 9};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<4,4,int> mat
     {
         in_x.x, in_y.x, in_z.x, 0,
@@ -122,7 +122,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
     Vector<3,int> y {4, 5, 6};
     Vector<3,int> z {7, 8, 9};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<3,3,int> expect
     {
         x.x, y.x, z.x,
@@ -153,7 +153,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
 
     auto axes = CGM_XYZ::orientationAxes(x,y,z);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<3,3,int> expect
     {
         x.x, y.x, z.x,
@@ -182,7 +182,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
     Vector<3,double> y {-0.313298,0.939132,0.140980};
     Vector<3,double> z {0.767503,0.162971,0.619983};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<3,3,double> expect
     {
         x.x, y.x, z.x,

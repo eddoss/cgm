@@ -1,5 +1,8 @@
 
+
 #include <Rendering/Camera.hpp>
+#include <CGM/Modules/Projections.hpp>
+
 
 namespace cgx = cgm::xyz;
 
@@ -77,7 +80,9 @@ Camera::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forwar
     cgx::translate(m_space, cgx::right(m_space) * horizontal);
     cgx::translate(m_space, cgx::up(m_space) * vertical);
     cgx::translate(m_space, cgx::forward(m_space) * forward);
-    m_spaceInverse = cgm::inverseForce(m_space);
+
+    m_spaceInverse = m_space;
+    cgm::invertForce(m_spaceInverse);
 }
 
 void
@@ -85,48 +90,46 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 {
     cgx::rotate(m_space, cgm::radians(vertical), cgx::ArbitraryAxis(cgx::right(m_space), m_target));
     cgx::rotate(m_space, cgm::radians(horizontal), cgx::up());
-    m_spaceInverse = cgm::inverseForce(m_space);
+
+    m_spaceInverse = m_space;
+    cgm::invertForce(m_spaceInverse);
 }
 
 void
 Camera::calculateNdc()
 {
-    cgm::float32 angle = cgm::radians(m_properties.fov);
-    cgm::float32 n = m_properties.near;
-    cgm::float32 f = m_properties.far;
-    cgm::float32 t = std::tan(angle * 0.5f) * n;
-    cgm::float32 b = -t;
-    cgm::float32 r = t * m_properties.aspect;
-    cgm::float32 l = -r;
-
-    // x - side length
-    // y - up length
-    // z - depth min
-    // w - depth max
-    const auto bound = cgm::vec4{2,2,-1,1};
-
-    m_perspective = 0.0f;
-    m_perspective(0,0) = bound.x * n / (r - l);
-    m_perspective(1,1) = bound.y * n / (t - b);
-    m_perspective(2,2) = n * f * (bound.z + bound.w) / (n - f);
-
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
-    m_perspective(3,2) = -1.0f;
-    m_perspective(2,3) = (f * bound.w - n * bound.z) / (n - f);
-#else
-    m_perspective(2,3) = -1.0f;
-    m_perspective(3,2) = (f * bound.w - n * bound.z) / (n - f);
-#endif
+    m_perspective = cgm::ndc
+    (
+        cgm::radians(m_properties.fov),
+        m_properties.aspect,
+        m_properties.near,
+        m_properties.far,
+        cgm::EGraphicsApi::OpenGL
+    );
 }
 
 void
 Camera::calculateSpace()
 {
-    auto z = cgm::normalizedForce(m_position - m_target);
-    auto x = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), z));
-    auto y = cgm::normalizedForce(cgm::cross(z, x));
+////#ifdef CGM_CFG_RHS
+////    auto f = cgm::normalizedForce(m_position - m_target);
+////    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
+////    auto u = cgm::normalizedForce(cgm::cross(f, r));
+////#else
+////    auto f = cgm::normalizedForce(m_target - m_position);
+////    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
+////    auto u = cgm::normalizedForce(cgm::cross(f, r));
+////#endif
+//    auto f = cgm::normalizedForce(m_position - m_target);
+//    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
+//    auto u = cgm::normalizedForce(cgm::cross(f, r));
+//
+//    cgx::setRight(m_space, r);
+//    cgx::setUp(m_space, u);
+//    cgx::setForward(m_space, f);
+//    cgx::setPosition(m_space, m_position);
 
-    cgx::set(m_space, x, y, z, m_position);
-    cgx::set(m_spaceInverse, x, y, z, m_position);
+    m_space = cgx::lookAt(m_position, m_target, cgx::up());
+    m_spaceInverse = m_space;
     cgm::invertForce(m_spaceInverse);
 }

@@ -58,7 +58,7 @@ operator << (std::ostream& stream, const CGM::Matrix<M,N,T>& mat)
         stream << "\n  ";
         for (size_t c = 0; c < N; ++c)
         {
-            stream  << "  " << mat(r,c);
+            stream << "  " << mat(r,c);
         }
     }
     stream << "\n}";

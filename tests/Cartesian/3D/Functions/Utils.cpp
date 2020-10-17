@@ -42,7 +42,7 @@ TEST(Cartesian_3D_Functions_Utils, GetX)
     auto value4 = CGM_XYZ::x(mat4);
     auto valueQ = CGM_XYZ::x(quat);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Vector<3,double> expec3 {2,3,0};
     Vector<3,double> expec4 {2,3,0};
 
@@ -84,7 +84,7 @@ TEST(Cartesian_3D_Functions_Utils, GetY)
     auto value4 = CGM_XYZ::y(mat4);
     auto valueQ = CGM_XYZ::y(quat);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Vector<3,double> expec3 {4,6,9};
     Vector<3,double> expec4 {4,6,9};
 #else
@@ -125,7 +125,7 @@ TEST(Cartesian_3D_Functions_Utils, GetZ)
     auto value4 = CGM_XYZ::z(mat4);
     auto valueQ = CGM_XYZ::z(quat);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Vector<3,double> expec3 {5,7,8};
     Vector<3,double> expec4 {5,7,8};
 #else
@@ -148,7 +148,7 @@ TEST(Cartesian_3D_Functions_Utils, SetXYZ)
     Vector<3,int> y {3,6,7};
     Vector<3,int> z {0,9,8};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<3,3,int> expec3
     {
         2, 3, 0,
@@ -222,17 +222,17 @@ TEST(Cartesian_3D_Functions_Utils, GetUp)
     auto value4 = CGM_XYZ::up(mat4);
     auto valueQ = CGM_XYZ::up(quat);
 
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
     auto expec3 = CGM_XYZ::x(mat3);
     auto expec4 = CGM_XYZ::x(mat4);
     auto expecQ = CGM_XYZ::x(quat);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
     auto expec3 = CGM_XYZ::y(mat3);
     auto expec4 = CGM_XYZ::y(mat4);
     auto expecQ = CGM_XYZ::y(quat);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
     auto expec3 = CGM_XYZ::z(mat3);
     auto expec4 = CGM_XYZ::z(mat4);
     auto expecQ = CGM_XYZ::z(quat);
@@ -269,17 +269,17 @@ TEST(Cartesian_3D_Functions_Utils, GetRight)
     auto value4 = CGM_XYZ::right(mat4);
     auto valueQ = CGM_XYZ::right(quat);
 
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
     auto expec3 = CGM_XYZ::x(mat3);
     auto expec4 = CGM_XYZ::x(mat4);
     auto expecQ = CGM_XYZ::x(quat);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
     auto expec3 = CGM_XYZ::y(mat3);
     auto expec4 = CGM_XYZ::y(mat4);
     auto expecQ = CGM_XYZ::y(quat);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
     auto expec3 = CGM_XYZ::z(mat3);
     auto expec4 = CGM_XYZ::z(mat4);
     auto expecQ = CGM_XYZ::z(quat);
@@ -316,17 +316,17 @@ TEST(Cartesian_3D_Functions_Utils, GetForward)
     auto value4 = CGM_XYZ::forward(mat4);
     auto valueQ = CGM_XYZ::forward(quat);
 
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     auto expec3 = CGM_XYZ::x(mat3);
     auto expec4 = CGM_XYZ::x(mat4);
     auto expecQ = CGM_XYZ::x(quat);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     auto expec3 = CGM_XYZ::y(mat3);
     auto expec4 = CGM_XYZ::y(mat4);
     auto expecQ = CGM_XYZ::y(quat);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     auto expec3 = CGM_XYZ::z(mat3);
     auto expec4 = CGM_XYZ::z(mat4);
     auto expecQ = CGM_XYZ::z(quat);
@@ -450,37 +450,37 @@ TEST(Cartesian_3D_Functions_Utils, SetUpRightForward)
     Vector<3,int> r {2,3,0};
     Vector<3,int> f {5,7,8};
 
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
     auto x = u;
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
     auto y = u;
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
     auto z = u;
 #endif
 
 // ------------------------------
 
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
     auto x = r;
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
     auto y = r;
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
     auto z = r;
 #endif
 
 // ------------------------------
 
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     auto x = f;
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     auto y = f;
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     auto z = f;
 #endif
 
@@ -522,7 +522,7 @@ TEST(Cartesian_3D_Functions_Utils, GetPosition)
     };
 
     auto value = CGM_XYZ::position(mat);
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     auto expec = Vector<3,int>{1,3,2};
 #else
     auto expec = Vector<3,int>{4,7,1};
@@ -545,7 +545,7 @@ TEST(Cartesian_3D_Functions_Utils, SetPosition)
 
     CGM_XYZ::setPosition(mat, {2,3,4});
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<4,4,int> expec
     {
         1, 0, 0, 2,
@@ -697,7 +697,7 @@ TEST(Cartesian_3D_Functions_Utils, FromXYZP)
 
     auto basis = CGM_XYZ::spaceMatrix(X,Y,Z,P);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<4,4,int> expec
     {
         2,4,7,1,
@@ -732,7 +732,7 @@ TEST(Cartesian_3D_Functions_Utils, FromMatrix3AndPosition)
 
     auto basis = CGM_XYZ::spaceMatrix(orientation, position);
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<4,4,int> expec
     {
         2,1,3,5,
@@ -766,7 +766,7 @@ TEST(Cartesian_3D_Functions_Utils, FromQuaternionAndPosition)
     Vector<3,double> ey {-0.313298,0.939132,0.140980};
     Vector<3,double> ez {0.767503,0.162971,0.619983};
 
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     Matrix<4,4,double> expec
     {
         ex.x, ey.x, ez.x, p.x,

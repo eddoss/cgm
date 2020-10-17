@@ -63,13 +63,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 up()
 {
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
         return x<T>();
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
         return y<T>();
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
         return z<T>();
 #endif
 }
@@ -80,13 +80,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 right()
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
         return x<T>();
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
         return y<T>();
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
         return z<T>();
 #endif
 }
@@ -97,13 +97,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 forward()
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     return x<T>();
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     return y<T>();
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     return z<T>();
 #endif
 }

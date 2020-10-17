@@ -24,6 +24,15 @@ enum class ESpace
     World         /**< Transform in world space. */
 };
 
+/**
+ * Describe transformation space.
+ */
+enum class EHandedness
+{
+    Left = 0,    /**< Left handed. */
+    Right        /**< Right handed. */
+};
+
 /* ####################################################################################### */
 /* Macro */
 /* ####################################################################################### */
@@ -33,6 +42,9 @@ enum class ESpace
 
 #define CGM_POINT       CGM::EVectorRepresentation::Point
 #define CGM_DIRECTION   CGM::EVectorRepresentation::Direction
+
+#define CGM_LH          CGM::EHandedness::Left
+#define CGM_RH          CGM::EHandedness::Right
 
 CGM_NAMESPACE_END
 

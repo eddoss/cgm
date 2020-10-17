@@ -109,7 +109,6 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
     {
         sceneCamera.move(-dx * 0.025, dy * 0.025, 0);
     }
-
 }
 
 void

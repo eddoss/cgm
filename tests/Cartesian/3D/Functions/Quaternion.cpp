@@ -130,7 +130,7 @@ TEST(Cartesian_3D_Functions_Quaternion, Orient)
     Vector<3,double> vec {1.0, 0.0, 0.0};
 
     Vector<3,double> result = oriented(vec, quat);
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     Vector<3,double> expect {0.915889 , 0.310964 , 0.253868 };
 #else
     Vector<3,double> expect {0.915888, 0.370337, 0.154913};

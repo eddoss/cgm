@@ -25,7 +25,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(const T* values)
 {
-#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
     for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = *(values + i);
@@ -47,7 +47,7 @@ template<size_t M, size_t N, typename T>
 constexpr
 Matrix<M,N,T>::Matrix(std::initializer_list<T> values)
 {
-#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
     for (size_t i = 0; i < count; ++i)
     {
         *(&m_data[0][0] + i) = *(values.begin() + i);
@@ -104,7 +104,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::reference
 Matrix<M,N,T>::operator () (size_t row, size_t column)
 {
-#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
     return m_data[row][column];
 #else
     return m_data[column][row];
@@ -117,7 +117,7 @@ template<size_t M, size_t N, typename T>
 constexpr CGM_FORCEINLINE typename Matrix<M,N,T>::const_reference
 Matrix<M,N,T>::operator () (size_t row, size_t column) const
 {
-#ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
     return m_data[row][column];
 #else
     return m_data[column][row];
@@ -148,7 +148,7 @@ template<size_t M, size_t N, typename T>
 constexpr std::conditional_t<(N == 1), T, typename Matrix<M,N,T>::Row>
 Matrix<M,N,T>::row(size_t index) const
 {
-#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT
     if constexpr (N == 1)
     {
         return m_data[0][index];
@@ -209,7 +209,7 @@ template<size_t M, size_t N, typename T>
 constexpr std::conditional_t<(M == 1), T, typename Matrix<M,N,T>::Column>
 Matrix<M,N,T>::column(size_t index) const
 {
-#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT
     if constexpr (M == 1)
     {
         return m_data[index][0];
@@ -270,7 +270,7 @@ template<size_t M, size_t N, typename T>
 constexpr void
 Matrix<M,N,T>::setRow(size_t index, const typename Matrix<M,N,T>::Row& values)
 {
-#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT
     if constexpr (N == 2)
     {
         m_data[0][index] = values.x;
@@ -331,7 +331,7 @@ template<size_t M, size_t N, typename T>
 constexpr void
 Matrix<M,N,T>::setColumn(size_t index, const typename Matrix<M,N,T>::Column& values)
 {
-#ifdef CGM_COLUMN_WISE_MATRIX_LAYOUT
+#ifdef CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT
     if constexpr (M == 2)
     {
         m_data[index][0] = values.x;

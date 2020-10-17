@@ -37,6 +37,6 @@ void main()
     posWorld = xform * posLocal;
     posCamera = cameraSpace * posWorld;
     posProject = cameraProjection * posCamera;
-    
+
     gl_Position = posProject;
 }

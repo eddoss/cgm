@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
+#include <CGM/Core/Functions/Vector.hpp>
 #include <CGM/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Cartesian/3D/Functions/Quaternion.hpp>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
@@ -340,7 +341,7 @@ setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value);
  * @param value New axis value.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setUp(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
@@ -358,7 +359,7 @@ setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value);
  * @param value New axis value.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setRight(Axes<T>& axes, const Vector<3,T>& value);
 
 /**
@@ -376,8 +377,48 @@ setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value);
  * @param value New axis value.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setForward(Axes<T>& axes, const Vector<3,T>& value);
+
+/* ####################################################################################### */
+/* Basis homogeneous components */
+/* ####################################################################################### */
+
+/**
+ * Set homogeneous components of orientation axes.
+ * @param matrix 4x4 basis matrix.
+ * @param values Components values.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+homogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
+
+/**
+ * Set homogeneous components of orientation axes and position.
+ * @param matrix 4x4 basis matrix.
+ * @param values Components values.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<4,T>
+axesHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values);
+
+/**
+ * Set homogeneous components of orientation axes.
+ * @param matrix 4x4 basis matrix.
+ * @param values Components values.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+setHomogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
+
+/**
+ * Set homogeneous components of orientation axes and position.
+ * @param matrix 4x4 basis matrix.
+ * @param values Components values.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+setHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values);
 
 /* ####################################################################################### */
 /* Basis position */
@@ -542,6 +583,17 @@ template<typename T>
 constexpr std::tuple<Vector<3,T>, Vector<3,T>, Vector<3,T>, Vector<3,T>>
 unpackSpace(const Matrix<4,4,T>& space);
 
+/**
+ * Create basis which forward axis looks at given target from specific position.
+ * @param position Observers position.
+ * @param target Observable point.
+ * @param up Up vector.
+ * @return 3D Space represented by 4x4 matrix.
+ */
+template<typename T>
+constexpr Matrix<4,4,T>
+lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>& up);
+
 /* ####################################################################################### */
 /* Vector remapper */
 /* ####################################################################################### */
@@ -553,19 +605,20 @@ unpackSpace(const Matrix<4,4,T>& space);
  * @tparam Z New 'Z' component value.
  * @return Vector component remapping matrix.
  **/
-template<EComponent3D X, EComponent3D Y, EComponent3D Z, size_t S, typename T=FLOAT>
-constexpr std::enable_if_t<(S == 3 || S == 4), Matrix<S,S,T>>
+template<EComponent3D X, EComponent3D Y, EComponent3D Z, typename T=FLOAT>
+constexpr Matrix<3,3,T>
 remapper();
 
 /**
- * Creates 4D vector component remapping matrix.
+ * Creates 4x4 matrix which remap 4D vector components from
+ * current layout (axis labels) to specified.
  * @tparam X New 'X' component value.
  * @tparam Y New 'Y' component value.
  * @tparam Z New 'Z' component value.
  * @tparam W New 'W' component value.
  * @return Vector component remapping matrix.
  **/
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, size_t S, typename T=FLOAT>
+template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, typename T=FLOAT>
 constexpr Matrix<4,4,T>
 remapper();
 

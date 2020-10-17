@@ -128,7 +128,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
 
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = scaler * matrix;
     #else
         matrix = matrix * scaler;
@@ -136,7 +136,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values)
     }
     else
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = matrix * scaler;
     #else
         matrix = scaler * matrix;
@@ -253,7 +253,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
 
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = scaler * matrix;
     #else
         matrix = matrix * scaler;
@@ -262,7 +262,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
     }
     else
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = matrix * scaler;
     #else
         matrix = scaler * matrix;

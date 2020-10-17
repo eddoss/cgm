@@ -23,13 +23,13 @@ dir_build   = os.path.join(dir_install, 'build')
 
 props = {
     "CMAKE_INSTALL_PREFIX": dir_install,
-    "CGM_BUILD_UNIT_TESTS": "OFF",
-    "CGM_BUILD_EXAMPLES": "OFF",
-    "CGM_USE_DOUBLE_PRECISION": "OFF",
-    "CGM_MATRIX_LAYOUT": "Column",
-    "CGM_HANDEDNESS": "Right",
-    "CGM_RIGHT_UP_FORWARD_AXES_LABELS": "XYZ",
-    "CGM_MATRIX_MULTIPLICATION_ORDER": "Post"
+    "CGMATH_BUILD_UNIT_TESTS": "OFF",
+    "CGMATH_BUILD_EXAMPLES": "OFF",
+    "CGMATH_USE_DOUBLE_PRECISION": "OFF",
+    "CGMATH_MATRIX_LAYOUT": "Column",
+    "CGMATH_MATRIX_MULTIPLICATION_ORDER": "Post",
+    "CGMATH_HANDEDNESS": "Right",
+    "CGMATH_UP_AXES": "Y",
 }
 
 generate(props, dir_source, dir_build)

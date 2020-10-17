@@ -36,11 +36,11 @@ TEST(Matrix_IndirectIterator, Plus)
     auto it1 = input.beginIndirect() + 1;
     auto it2 = input.beginIndirect() + 2;
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*it0 == 11);
         ASSERT_TRUE(*it1 == 21);
         ASSERT_TRUE(*it2 == 31);
-    #elif CGM_COLUMN_WISE_MATRIX_LAYOUT
+    #elif CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*it0 == 11);
         ASSERT_TRUE(*it1 == 12);
         ASSERT_TRUE(*it2 == 13);
@@ -62,7 +62,7 @@ TEST(Matrix_IndirectIterator, Minus)
     auto it1 = input.endIndirect() - 2;
     auto it2 = input.endIndirect() - 3;
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*it0 == 9);
         ASSERT_TRUE(*it1 == 6);
         ASSERT_TRUE(*it2 == 3);
@@ -86,7 +86,7 @@ TEST(Matrix_IndirectIterator, PreIncrement)
 
     auto it = input.beginIndirect();
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*(++it) == 4);
         ASSERT_TRUE(*(++it) == 7);
     #else
@@ -108,7 +108,7 @@ TEST(Matrix_IndirectIterator, PostIncrement)
 
     auto it = input.beginIndirect();
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*(it++) == 1);
         ASSERT_TRUE(*(it++) == 4);
     #else
@@ -130,7 +130,7 @@ TEST(Matrix_IndirectIterator, PreDecrement)
 
     auto it = input.endIndirect();
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*(--it) == 9);
         ASSERT_TRUE(*(--it) == 6);
     #else
@@ -153,7 +153,7 @@ TEST(Matrix_IndirectIterator, PostDecrement)
     auto it = input.endIndirect();
     it--;
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*(it--) == 9);
         ASSERT_TRUE(*(it--) == 6);
     #else
@@ -191,7 +191,7 @@ TEST(Matrix_IndirectIterator, RowsColumns_MidComponent)
 
     auto it {input.beginIndirect() + 5};
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*it == 7);
         ASSERT_TRUE(it.row() == 1);
         ASSERT_TRUE(it.column() == 2);
@@ -351,7 +351,7 @@ TEST(Matrix_IndirectIterator, Reverse)
     auto c = input.rbeginIndirect() + 2;
     auto d = input.rbeginIndirect() + 3;
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(*a == 5);
         ASSERT_TRUE(*b == 2);
         ASSERT_TRUE(*c == 4);
@@ -410,7 +410,7 @@ TEST(Matrix_IndirectIterator, Reverse_RowsColumns_MidComponent)
 
     auto it {input.rbeginIndirect() + 5};
 
-    #ifdef CGM_ROW_WISE_MATRIX_LAYOUT
+    #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
         ASSERT_TRUE(it.row() == 0);
         ASSERT_TRUE(it.column() == 1);
     #else

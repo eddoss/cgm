@@ -18,7 +18,7 @@ rotate(Vector<2,T>& vector, T angle)
     const auto  cos = number<T>(std::cos(angle));
     Vector<2,T> res;
 
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     res.x = vector.x * cos + vector.y * sin;
     res.y = vector.y * cos - vector.x * sin;
 #else
@@ -76,7 +76,7 @@ rotate(Matrix<2,2,T>& matrix, T angle)
     auto axs = orientationAxes(matrix);
     Vector<2,T> tmp;
 
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     tmp.x = axs.x.x * cos + axs.x.y * sin;
     tmp.y = axs.x.y * cos - axs.x.x * sin;
     axs.x = tmp;
@@ -120,7 +120,7 @@ rotate(Matrix<3,3,T>& matrix, T angle)
     auto axs = orientationAxes(matrix);
     Vector<2,T> tmp;
 
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     tmp.x = axs.x.x * cos + axs.x.y * sin;
     tmp.y = axs.x.y * cos - axs.x.x * sin;
     axs.x = tmp;
@@ -142,7 +142,7 @@ rotate(Matrix<3,3,T>& matrix, T angle)
     {
         auto pos = position(matrix);
 
-    #ifdef CGM_LEFT_HANDED
+    #ifdef CGM_CFG_LHS
         tmp.x = pos.x * cos + pos.y * sin;
         tmp.y = pos.y * cos - pos.x * sin;
     #else
@@ -166,7 +166,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) -= point.x;
         matrix(1,2) -= point.y;
     #else
@@ -176,7 +176,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
 
         rotate<ESpace::World>(matrix, angle);
 
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) += point.x;
         matrix(1,2) += point.y;
     #else
@@ -188,7 +188,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
     {
         const auto pt = converted<ESpace::World,EVectorRepresentation::Point>(point, matrix);
 
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) -= pt.x;
         matrix(1,2) -= pt.y;
     #else
@@ -198,7 +198,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
 
         rotate<ESpace::World>(matrix, angle);
 
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) += pt.x;
         matrix(1,2) += pt.y;
     #else

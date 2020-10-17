@@ -3,9 +3,6 @@
 #include "Converters.hpp"
 
 
-#include <CGM/Coordinates/Functions/Converters.hpp>
-
-
 CGM_NAMESPACE_BEGIN
 CGM_COORD_NAMESPACE_BEGIN
 
@@ -134,28 +131,59 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 cartesian(T up, T right, T forward)
 {
-#ifdef CGM_CARTESIAN_ZXY
+#ifdef CGM_CFG_AXES_ARE_ZXY
     return {up, forward, right};
 #endif
 
-#ifdef CGM_CARTESIAN_YXZ
+#ifdef CGM_CFG_AXES_ARE_YXZ
     return {up, right, forward};
 #endif
 
-#ifdef CGM_CARTESIAN_ZYX
+#ifdef CGM_CFG_AXES_ARE_ZYX
     return {forward, up, right};
 #endif
 
-#ifdef CGM_CARTESIAN_YZX
+#ifdef CGM_CFG_AXES_ARE_YZX
     return {forward, right, up};
 #endif
 
-#ifdef CGM_CARTESIAN_XZY
+#ifdef CGM_CFG_AXES_ARE_XZY
     return {right, forward, up};
 #endif
 
-#ifdef CGM_CARTESIAN_XYZ
+#ifdef CGM_CFG_AXES_ARE_XYZ
     return {right, up, forward};
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<4,T>
+cartesian(T up, T right, T forward, T homogeneous)
+{
+#ifdef CGM_CFG_AXES_ARE_ZXY
+    return {up, forward, right, homogeneous};
+#endif
+
+#ifdef CGM_CFG_AXES_ARE_YXZ
+    return {up, right, forward, homogeneous};
+#endif
+
+#ifdef CGM_CFG_AXES_ARE_ZYX
+    return {forward, up, right, homogeneous};
+#endif
+
+#ifdef CGM_CFG_AXES_ARE_YZX
+    return {forward, right, up, homogeneous};
+#endif
+
+#ifdef CGM_CFG_AXES_ARE_XZY
+    return {right, forward, up, homogeneous};
+#endif
+
+#ifdef CGM_CFG_AXES_ARE_XYZ
+    return {right, up, forward, homogeneous};
 #endif
 }
 

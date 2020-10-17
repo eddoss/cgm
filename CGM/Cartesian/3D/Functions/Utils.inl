@@ -15,7 +15,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 x(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     {
         basis(0,0),
         basis(1,0),
@@ -55,7 +55,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 y(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     {
         basis(0,1),
         basis(1,1),
@@ -95,7 +95,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 z(const Matrix<S,S,T>& basis)
 {
     return
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     {
         basis(0,2),
         basis(1,2),
@@ -134,7 +134,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setX(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     basis(0,0) = value.x;
     basis(1,0) = value.y;
     basis(2,0) = value.z;
@@ -159,7 +159,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setY(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     basis(0,1) = value.x;
     basis(1,1) = value.y;
     basis(2,1) = value.z;
@@ -185,7 +185,7 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setZ(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     basis(0,2) = value.x;
     basis(1,2) = value.y;
     basis(2,2) = value.z;
@@ -213,13 +213,13 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 up(const Matrix<S,S,T>& basis)
 {
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
     return x(basis);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
     return y(basis);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
     return z(basis);
 #endif
 }
@@ -230,13 +230,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 up(const Quaternion<T>& orientation)
 {
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
     return x(orientation);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
     return y(orientation);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
     return z(orientation);
 #endif
 }
@@ -247,13 +247,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 up(const Axes<T>& axes)
 {
-#ifdef CGM_CARTESIAN_UP_X
+#ifdef CGM_CFG_UP_IS_X
     return x(axes);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
+#ifdef CGM_CFG_UP_IS_Y
     return y(axes);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
+#ifdef CGM_CFG_UP_IS_Z
     return z(axes);
 #endif
 }
@@ -264,13 +264,13 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 right(const Matrix<S,S,T>& basis)
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
     return x(basis);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
     return y(basis);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
     return z(basis);
 #endif
 }
@@ -281,13 +281,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 right(const Quaternion<T>& orientation)
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
     return x(orientation);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
     return y(orientation);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
     return z(orientation);
 #endif
 }
@@ -298,13 +298,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 right(const Axes<T>& axes)
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
+#ifdef CGM_CFG_RIGHT_IS_X
     return x(axes);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
+#ifdef CGM_CFG_RIGHT_IS_Y
     return y(axes);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
+#ifdef CGM_CFG_RIGHT_IS_Z
     return z(axes);
 #endif
 }
@@ -315,13 +315,13 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), Vector<3,T>>
 forward(const Matrix<S,S,T>& basis)
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     return x(basis);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     return y(basis);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     return z(basis);
 #endif
 }
@@ -332,13 +332,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 forward(const Quaternion<T>& orientation)
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     return x(orientation);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     return y(orientation);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     return z(orientation);
 #endif
 }
@@ -349,13 +349,13 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 forward(const Axes<T>& axes)
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
+#ifdef CGM_CFG_FORWARD_IS_X
     return x(axes);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
+#ifdef CGM_CFG_FORWARD_IS_Y
     return y(axes);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
+#ifdef CGM_CFG_FORWARD_IS_Z
     return z(axes);
 #endif
 }
@@ -449,31 +449,31 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setUp(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_UP_X
-    return setX(basis, value);
+#ifdef CGM_CFG_UP_IS_X
+    setX(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
-    return setY(basis, value);
+#ifdef CGM_CFG_UP_IS_Y
+    setY(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
-    return setZ(basis, value);
+#ifdef CGM_CFG_UP_IS_Z
+    setZ(basis, value);
 #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setUp(Axes<T>& axes, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_UP_X
-    return setX(axes, value);
+#ifdef CGM_CFG_UP_IS_X
+    setX(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_UP_Y
-    return setY(axes, value);
+#ifdef CGM_CFG_UP_IS_Y
+    setY(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_UP_Z
-    return setZ(axes, value);
+#ifdef CGM_CFG_UP_IS_Z
+    setZ(axes, value);
 #endif
 }
 
@@ -483,31 +483,31 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setRight(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
-    return setX(basis, value);
+#ifdef CGM_CFG_RIGHT_IS_X
+    setX(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
-    return setY(basis, value);
+#ifdef CGM_CFG_RIGHT_IS_Y
+    setY(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
-    return setZ(basis, value);
+#ifdef CGM_CFG_RIGHT_IS_Z
+    setZ(basis, value);
 #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setRight(Axes<T>& axes, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_RIGHT_X
-    return setX(axes, value);
+#ifdef CGM_CFG_RIGHT_IS_X
+    setX(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Y
-    return setY(axes, value);
+#ifdef CGM_CFG_RIGHT_IS_Y
+    setY(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_RIGHT_Z
-    return setZ(axes, value);
+#ifdef CGM_CFG_RIGHT_IS_Z
+    setZ(axes, value);
 #endif
 }
 
@@ -517,32 +517,110 @@ template<size_t S, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(S == 3 || S == 4), void>
 setForward(Matrix<S,S,T>& basis, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
-    return setX(basis, value);
+#ifdef CGM_CFG_FORWARD_IS_X
+    setX(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
-    return setY(basis, value);
+#ifdef CGM_CFG_FORWARD_IS_Y
+    setY(basis, value);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
-    return setZ(basis, value);
+#ifdef CGM_CFG_FORWARD_IS_Z
+    setZ(basis, value);
 #endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE void
 setForward(Axes<T>& axes, const Vector<3,T>& value)
 {
-#ifdef CGM_CARTESIAN_FORWARD_X
-    return setX(axes, value);
+#ifdef CGM_CFG_FORWARD_IS_X
+    setX(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Y
-    return setY(axes, value);
+#ifdef CGM_CFG_FORWARD_IS_Y
+    setY(axes, value);
 #endif
-#ifdef CGM_CARTESIAN_FORWARD_Z
-    return setZ(axes, value);
+#ifdef CGM_CFG_FORWARD_IS_Z
+    setZ(axes, value);
 #endif
+}
+
+/* ####################################################################################### */
+/* Basis homogeneous components */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+homogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
+{
+    return
+    {
+    #ifdef CGM_CFG_MATRIX_POSTMULT
+        matrix(3,0),
+        matrix(3,1),
+        matrix(3,2),
+    #else
+        matrix(0,3),
+        matrix(1,3),
+        matrix(2,3),
+    #endif
+        matrix(3,3)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<4,T>
+axesHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values)
+{
+    return
+    {
+    #ifdef CGM_CFG_MATRIX_POSTMULT
+        matrix(3,0),
+        matrix(3,1),
+        matrix(3,2)
+    #else
+        matrix(0,3),
+        matrix(1,3),
+        matrix(2,3)
+    #endif
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+setHomogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
+{
+#ifdef CGM_CFG_MATRIX_POSTMULT
+    matrix(3,0) = values.x;
+    matrix(3,1) = values.y;
+    matrix(3,2) = values.z;
+#else
+    matrix(0,3) = values.x;
+    matrix(1,3) = values.y;
+    matrix(2,3) = values.z;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+setHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values)
+{
+#ifdef CGM_CFG_MATRIX_POSTMULT
+    matrix(3,0) = values.x;
+    matrix(3,1) = values.y;
+    matrix(3,2) = values.z;
+#else
+    matrix(0,3) = values.x;
+    matrix(1,3) = values.y;
+    matrix(2,3) = values.z;
+#endif
+    matrix(3,3) = values.w;
 }
 
 /* ####################################################################################### */
@@ -554,7 +632,7 @@ constexpr CGM_FORCEINLINE Vector<3,T>
 position(const Matrix<4,4,T>& basis)
 {
     return
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     {
         basis(0,3),
         basis(1,3),
@@ -575,7 +653,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 setPosition(Matrix<4,4,T>& basis, const Vector<3,T>& position)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     basis(0,3) = position.x;
     basis(1,3) = position.y;
     basis(2,3) = position.z;
@@ -711,7 +789,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
         x.x, y.x, z.x, position.x,
@@ -736,7 +814,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
-#ifdef CGM_MATRIX_POST_MULTIPLICATION
+#ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
         orientation(0,0), orientation(0,1), orientation(0,2), position.x,
@@ -785,12 +863,38 @@ unpackSpace(const Matrix<4,4,T>& space)
     );
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr Matrix<4,4,T>
+lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>& up)
+{
+    const auto f = CGM::normalizedForce(target - position);
+#ifdef CGM_CFG_RHS
+    const auto r = CGM::normalizedForce(CGM::cross(up, f));
+    const auto u = CGM::normalizedForce(CGM::cross(f, r));
+#else
+    const auto r = CGM::normalizedForce(CGM::cross(f, up));
+    const auto u = CGM::normalizedForce(CGM::cross(r, f));
+#endif
+
+    Matrix<4,4,T> mat {};
+    mat(3,3) = number<T>(1);
+
+    setUp(mat, u);
+    setRight(mat, r);
+    setForward(mat, f);
+    setPosition(mat, position);
+
+    return mat;
+}
+
 /* ####################################################################################### */
 /* Vector remapper */
 /* ####################################################################################### */
 
-template<EComponent3D X, EComponent3D Y, EComponent3D Z, size_t S, typename T>
-constexpr std::enable_if_t<(S == 3 || S == 4), Matrix<S,S,T>>
+template<EComponent3D X, EComponent3D Y, EComponent3D Z, typename T>
+constexpr Matrix<3,3,T>
 remapper()
 {
     auto x = Vector<3,T>(zero<T>);
@@ -801,33 +905,43 @@ remapper()
     y.get<Y>() = number<T>(1);
     z.get<Z>() = number<T>(1);
 
-    Matrix<S,S,T> mat;
+    Matrix<3,3,T> mat;
     set(mat, x, y, z);
-
-    if constexpr (S == 4)
-    {
-        mat(3,3) = number<T>(1);
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
-        mat(3,0) = zero<T>;
-        mat(3,1) = zero<T>;
-        mat(3,2) = zero<T>;
-    #else
-        mat(0,3) = zero<T>;
-        mat(1,3) = zero<T>;
-        mat(2,3) = zero<T>;
-    #endif
-    }
 
     return mat;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, size_t S, typename T>
+template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, typename T>
 constexpr Matrix<4,4,T>
 remapper()
 {
-    // TODO Impl it!
+    Matrix<4,4,T> mat;
+
+    auto x = Vector<4,T>(zero<T>);
+    auto y = Vector<4,T>(zero<T>);
+    auto z = Vector<4,T>(zero<T>);
+    auto w = Vector<4,T>(zero<T>);
+
+    x.get<X>() = number<T>(1);
+    y.get<Y>() = number<T>(1);
+    z.get<Z>() = number<T>(1);
+    w.get<W>() = number<T>(1);
+
+#ifdef CGM_CFG_MATRIX_POSTMULT
+    mat.setColumn(0,x);
+    mat.setColumn(1,y);
+    mat.setColumn(2,z);
+    mat.setColumn(3,w);
+#else
+    mat.setRow(0,x);
+    mat.setRow(1,y);
+    mat.setRow(2,z);
+    mat.setRow(3,w);
+#endif
+
+    return mat;
 }
 
 /* ####################################################################################### */

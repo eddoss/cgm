@@ -190,7 +190,7 @@ template<typename T>
 constexpr void
 orient(Vector<3,T>& vector, const Quaternion<T>& quaternion)
 {
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     auto t = static_cast<T>(2) * cross(vector, quaternion.vector);
     vector += cross(t, quaternion.vector);
 #else

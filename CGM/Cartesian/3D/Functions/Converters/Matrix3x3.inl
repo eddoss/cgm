@@ -16,7 +16,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = orientation * matrix;
     #else
         matrix = matrix * orientation;
@@ -24,7 +24,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation)
     }
     else
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = inverseForce(orientation) * matrix;
     #else
         matrix = matrix * inverseForce(orientation);
@@ -40,7 +40,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
 {
     if constexpr (Space == ESpace::World)
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = multiply<3>(space, matrix);
     #else
         matrix = multiply<3>(matrix, space);
@@ -48,7 +48,7 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
     }
     else
     {
-    #ifdef CGM_MATRIX_POST_MULTIPLICATION
+    #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = multiply<3>(inverseForce(space), matrix);
     #else
         matrix = multiply<3>(matrix, inverseForce(space));

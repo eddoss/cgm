@@ -11,7 +11,7 @@ TEST(Transformations2D_Transform, Vector)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     {
         const auto result = CGM_XFORM2D::transformed(cgm_test::vector, cgm_test::get(ETransformOrder::SRT));
         const auto expect = Vector<2,double>{+2.18460, +2.89412};
@@ -85,7 +85,7 @@ TEST(Transformations2D_Transform, Matrix2)
     {
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::SRT));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -102,7 +102,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::STR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -119,7 +119,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::RST));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -136,7 +136,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::RTS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -153,7 +153,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::TSR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -170,7 +170,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::TRS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -189,7 +189,7 @@ TEST(Transformations2D_Transform, Matrix2)
     {
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::SRT));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -206,7 +206,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::STR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -223,7 +223,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::RST));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -240,7 +240,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::RTS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -257,7 +257,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::TSR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -274,7 +274,7 @@ TEST(Transformations2D_Transform, Matrix2)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(ETransformOrder::TRS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::orientationMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -301,7 +301,7 @@ TEST(Transformations2D_Transform, Matrix3)
     {
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::SRT));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -320,7 +320,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::STR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -339,7 +339,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::RST));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -358,7 +358,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::RTS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -377,7 +377,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::TSR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+1.94926, +0.20488},
@@ -396,7 +396,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::TRS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{+2.12161, -0.11927},
@@ -417,7 +417,7 @@ TEST(Transformations2D_Transform, Matrix3)
     {
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::SRT));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -436,7 +436,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::STR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -455,7 +455,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::RST));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -474,7 +474,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::RTS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -493,7 +493,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::TSR));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.206538, -0.176554 },
@@ -512,7 +512,7 @@ TEST(Transformations2D_Transform, Matrix3)
         }
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(ETransformOrder::TRS));
-        #ifdef CGM_LEFT_HANDED
+        #ifdef CGM_CFG_LHS
             const auto expect = CGM_XY::spaceMatrix
             (
                 Vector<2,double>{ +2.571642, -0.214931 },
@@ -538,7 +538,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-#ifdef CGM_LEFT_HANDED
+#ifdef CGM_CFG_LHS
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(ETransformOrder::SRT));
         const auto expect = CGM_XY::spaceMatrix
