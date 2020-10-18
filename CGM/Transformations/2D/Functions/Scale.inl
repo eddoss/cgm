@@ -10,11 +10,11 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<2,T>& vector, T value)
 {
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E2D::X)
     {
         vector.x += vector.x * (value - number<T>(1));
     }
@@ -76,7 +76,7 @@ scale(Vector<2,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<2,2,T>& matrix, T value)
 {
@@ -91,7 +91,7 @@ scale(Matrix<2,2,T>& matrix, T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             scale<ESpace::World>(matrix, value, x(matrix));
         }
@@ -197,7 +197,7 @@ scale(Matrix<2,2,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, T value)
 {
@@ -214,7 +214,7 @@ scale(Matrix<3,3,T>& matrix, T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             scale<ESpace::World>(matrix, value, x(matrix));
         }
@@ -361,7 +361,7 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, T value)
 {
@@ -417,7 +417,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(ArbitraryAxis<T>& arbitraryAxis, T value)
 {
@@ -473,7 +473,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Vector (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 scaled(const Vector<2,T>& vector, T value)
 {
@@ -552,7 +552,7 @@ scaled(const Vector<2,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
 scaled(const Matrix<2,2,T>& matrix, T value)
 {
@@ -609,7 +609,7 @@ scaled(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value)
 {
@@ -688,7 +688,7 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, T value)
 {
@@ -767,7 +767,7 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value)
 {
@@ -835,13 +835,13 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Transformation makers */
 /* ####################################################################################### */
 
-template<EAxes Axis, size_t N, typename T>
+template<E2D Axis, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value)
 {
     if constexpr (N == 2)
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             return
             {
@@ -860,7 +860,7 @@ scalingMatrix(T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             return
             {

@@ -10,7 +10,6 @@
 #include <CGM/Cartesian/3D/Functions/Quaternion.hpp>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/Cartesian/3D/Types/Axes.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/Cartesian/Common.hpp>
 
 
@@ -605,7 +604,7 @@ lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>
  * @tparam Z New 'Z' component value.
  * @return Vector component remapping matrix.
  **/
-template<EComponent3D X, EComponent3D Y, EComponent3D Z, typename T=FLOAT>
+template<E3D X, E3D Y, E3D Z, typename T=FLOAT>
 constexpr Matrix<3,3,T>
 remapper();
 
@@ -618,7 +617,7 @@ remapper();
  * @tparam W New 'W' component value.
  * @return Vector component remapping matrix.
  **/
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, typename T=FLOAT>
+template<E4D X, E4D Y, E4D Z, E4D W, typename T=FLOAT>
 constexpr Matrix<4,4,T>
 remapper();
 

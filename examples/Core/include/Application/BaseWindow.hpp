@@ -180,7 +180,7 @@ public: /* Public methods */
      * Start window main loop.
      */
     void
-    start();
+    run();
 
 /* ####################################################################################### */
 protected: /* Protected methods */

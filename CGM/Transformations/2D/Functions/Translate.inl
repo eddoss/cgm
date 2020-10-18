@@ -10,11 +10,11 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Vector<2,T>& vector, T value)
 {
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E2D::X)
     {
         vector.x += value;
     }
@@ -65,7 +65,7 @@ translate(Vector<2,T>& vector, const Transforms<T>& transforms)
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr void
 translate(Matrix<3,3,T>& basis, T value)
 {
@@ -73,7 +73,7 @@ translate(Matrix<3,3,T>& basis, T value)
 
     if constexpr (Space == ESpace::World)
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             axs = x<T>();
         }
@@ -84,7 +84,7 @@ translate(Matrix<3,3,T>& basis, T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E2D::X)
         {
             axs = x(basis);
         }
@@ -178,7 +178,7 @@ translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms)
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, T value)
 {
@@ -226,7 +226,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(ArbitraryAxis<T>& axis, T value)
 {
@@ -274,7 +274,7 @@ translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 /* Vector (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 translated(const Vector<2,T>& vector, T value)
 {
@@ -331,7 +331,7 @@ translated(const Vector<2,T>& vector, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translated(const Matrix<3,3,T>& matrix, T value)
 {
@@ -388,7 +388,7 @@ translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, T value)
 {
@@ -445,7 +445,7 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, T value)
 {
@@ -502,12 +502,12 @@ translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 /* Transformation makers */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translationMatrix(T value)
 {
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E2D::X)
     {
         return
         {
@@ -526,7 +526,7 @@ translationMatrix(T value)
         };
     }
 #else
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E2D::X)
     {
         return
         {

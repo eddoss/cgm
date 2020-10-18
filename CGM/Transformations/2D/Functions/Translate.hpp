@@ -26,7 +26,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
  * @param vector Vector to translate.
  * @param value How much to translate.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Vector<2,T>& vector, T value);
 
@@ -78,7 +78,7 @@ translate(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::World, typename T>
 constexpr void
 translate(Matrix<3,3,T>& basis, T value);
 
@@ -135,7 +135,7 @@ translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms);
  * @param pivot Pivot to translate.
  * @param value How much to translate.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(Pivot<T>& pivot, T value);
 
@@ -186,7 +186,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param axis Arbitrary axis to translate.
  * @param value How much to translate.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 translate(ArbitraryAxis<T>& axis, T value);
 
@@ -239,7 +239,7 @@ translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translated vector.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 translated(const Vector<2,T>& vector, T value);
 
@@ -296,7 +296,7 @@ translated(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translated matrix.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translated(const Matrix<3,3,T>& matrix, T value);
 
@@ -357,7 +357,7 @@ translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translated pivot.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 translated(const Pivot<T>& pivot, T value);
 
@@ -413,7 +413,7 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translated axis.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 translated(const ArbitraryAxis<T>& axis, T value);
 
@@ -469,7 +469,7 @@ translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translation matrix.
  */
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 translationMatrix(T value);
 

@@ -30,7 +30,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
  * @param vector Vector to scale.
  * @param value How much to scale.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, T value);
 
@@ -93,7 +93,7 @@ scale(Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, T value);
 
@@ -149,7 +149,7 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, T value);
 
@@ -216,7 +216,7 @@ scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @param pivot Pivot position to scale.
  * @param value How much to scale.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, T value);
 
@@ -292,7 +292,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param arbitraryAxis Arbitrary axis to scale.
  * @param value How much to scale.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(ArbitraryAxis<T>& arbitraryAxis, T value);
 
@@ -356,7 +356,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of vector.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 scaled(const Vector<3,T>& vector, T value);
 
@@ -441,7 +441,7 @@ scaled(const Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value);
 
@@ -501,7 +501,7 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value);
 
@@ -588,7 +588,7 @@ scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of pivot.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, T value);
 
@@ -670,7 +670,7 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of axis.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
 
@@ -739,7 +739,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaling matrix.
  */
-template<EAxes Axis, size_t N=4, typename T>
+template<E3D Axis, size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 scalingMatrix(T value);
 

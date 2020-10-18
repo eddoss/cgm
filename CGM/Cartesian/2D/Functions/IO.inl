@@ -22,12 +22,12 @@ operator << (std::ostream& stream, const CGM_XY::Axes<T>& axes)
 /* --------------------------------------------------------------------------------------- */
 
 constexpr std::ostream&
-operator << (std::ostream& stream, CGM_XY::EAxes axis)
+operator << (std::ostream& stream, CGM::E2D axis)
 {
     switch (axis)
     {
-        case CGM_XY::EAxes::X: stream << "CGM::XY::EAxes::X"; break;
-        case CGM_XY::EAxes::Y: stream << "CGM::XY::EAxes::Y"; break;
+        case CGM::E2D::X: stream << "CGM::XY::E2D::X"; break;
+        case CGM::E2D::Y: stream << "CGM::XY::E2D::Y"; break;
     }
     return stream;
 }

@@ -94,7 +94,7 @@ BaseWindow::create()
 /* --------------------------------------------------------------------------------------- */
 
 void
-BaseWindow::start()
+BaseWindow::run()
 {
     if (!m_window)
     {

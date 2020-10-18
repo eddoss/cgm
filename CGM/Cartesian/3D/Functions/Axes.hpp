@@ -5,7 +5,6 @@
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -18,7 +17,7 @@ CGM_XYZ_NAMESPACE_BEGIN
 /**
  * Create default Cartesian axis.
  */
-template<EAxes Axis, typename T=FLOAT>
+template<E3D Axis, typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
 axis();
 

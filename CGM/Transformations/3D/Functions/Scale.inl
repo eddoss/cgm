@@ -10,15 +10,15 @@ CGM_XFORM3D_NAMESPACE_BEGIN
 /* Vector (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<3,T>& vector, T value)
 {
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E3D::X)
     {
         vector.x += vector.x * (value - number<T>(1));
     }
-    else if constexpr (Axis == EAxes::Y)
+    else if constexpr (Axis == E3D::Y)
     {
         vector.y += vector.y * (value - number<T>(1));
     }
@@ -82,7 +82,7 @@ scale(Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E3D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, T value)
 {
@@ -98,11 +98,11 @@ scale(Matrix<3,3,T>& matrix, T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E3D::X)
         {
             scale<ESpace::World>(matrix, value, x(matrix));
         }
-        else if constexpr (Axis == EAxes::Y)
+        else if constexpr (Axis == E3D::Y)
         {
             scale<ESpace::World>(matrix, value, y(matrix));
         }
@@ -204,7 +204,7 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E3D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, T value)
 {
@@ -222,11 +222,11 @@ scale(Matrix<4,4,T>& matrix, T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E3D::X)
         {
             scale<ESpace::World>(matrix, value, x(matrix));
         }
-        else if constexpr (Axis == EAxes::Y)
+        else if constexpr (Axis == E3D::Y)
         {
             scale<ESpace::World>(matrix, value, y(matrix));
         }
@@ -370,7 +370,7 @@ scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Pivot<T>& pivot, T value)
 {
@@ -426,7 +426,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(ArbitraryAxis<T>& arbitraryAxis, T value)
 {
@@ -482,7 +482,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Vector (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 scaled(const Vector<3,T>& vector, T value)
 {
@@ -561,7 +561,7 @@ scaled(const Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E3D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value)
 {
@@ -618,7 +618,7 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, ESpace Space, typename T>
+template<E3D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value)
 {
@@ -697,7 +697,7 @@ scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 /* Pivot (outplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 scaled(const Pivot<T>& pivot, T value)
 {
@@ -776,7 +776,7 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* Axis (inplace) */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value)
 {
@@ -844,13 +844,13 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Transformation makers */
 /* ####################################################################################### */
 
-template<EAxes Axis, size_t N, typename T>
+template<E3D Axis, size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 scalingMatrix(T value)
 {
     if constexpr (N == 3)
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E3D::X)
         {
             return
             {
@@ -859,7 +859,7 @@ scalingMatrix(T value)
                 number<T>(0), number<T>(0), number<T>(1)
             };
         }
-        else if constexpr (Axis == EAxes::Y)
+        else if constexpr (Axis == E3D::Y)
         {
             return
             {
@@ -880,7 +880,7 @@ scalingMatrix(T value)
     }
     else
     {
-        if constexpr (Axis == EAxes::X)
+        if constexpr (Axis == E3D::X)
         {
             return
             {
@@ -890,7 +890,7 @@ scalingMatrix(T value)
                 number<T>(0), number<T>(0), number<T>(0), number<T>(1)
             };
         }
-        else if constexpr (Axis == EAxes::Y)
+        else if constexpr (Axis == E3D::Y)
         {
             return
             {

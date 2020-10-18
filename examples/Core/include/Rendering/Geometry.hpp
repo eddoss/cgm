@@ -34,6 +34,11 @@ public:
     };
 
 public:
+    using Shared    = std::shared_ptr<Geometry>;
+    using Unique    = std::unique_ptr<Geometry>;
+    using Weak      = std::weak_ptr<Geometry>;
+
+public:
     const static uint32_t
     primitiveRestartValue = std::numeric_limits<uint32_t>::max();
 

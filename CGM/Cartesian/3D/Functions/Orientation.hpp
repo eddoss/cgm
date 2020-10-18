@@ -6,7 +6,6 @@
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Cartesian/3D/Types/Axes.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 

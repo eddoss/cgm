@@ -10,15 +10,15 @@ CGM_XYZ_NAMESPACE_BEGIN
 /* X, Y, Z axes */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 axis()
 {
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E3D::X)
     {
         return Vector<3,T>{number<T>(1), zero<T>, zero<T>};
     }
-    else if constexpr (Axis == EAxes::Y)
+    else if constexpr (Axis == E3D::Y)
     {
         return Vector<3,T>{zero<T>, number<T>(1), zero<T>};
     }

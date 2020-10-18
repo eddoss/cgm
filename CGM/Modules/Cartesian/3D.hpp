@@ -5,7 +5,6 @@
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 
 #include <CGM/Cartesian/3D/Types/Axes.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
 #include <CGM/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Cartesian/3D/Types/Typedefs.hpp>
 

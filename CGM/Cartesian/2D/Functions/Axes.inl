@@ -10,11 +10,11 @@ CGM_XY_NAMESPACE_BEGIN
 /* X, Y axes */
 /* ####################################################################################### */
 
-template<EAxes Axis, typename T>
+template<E2D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 axis()
 {
-    if constexpr (Axis == EAxes::X)
+    if constexpr (Axis == E2D::X)
     {
         return {number<T>(1), zero<T>};
     }

@@ -98,37 +98,18 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 void
 Camera::calculateNdc()
 {
-    m_perspective = cgm::ndc
+    m_perspective = cgm::ndc<cgm::EGraphicsApi::OpenGL>
     (
         cgm::radians(m_properties.fov),
         m_properties.aspect,
         m_properties.near,
-        m_properties.far,
-        cgm::EGraphicsApi::OpenGL
+        m_properties.far
     );
 }
 
 void
 Camera::calculateSpace()
 {
-////#ifdef CGM_CFG_RHS
-////    auto f = cgm::normalizedForce(m_position - m_target);
-////    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
-////    auto u = cgm::normalizedForce(cgm::cross(f, r));
-////#else
-////    auto f = cgm::normalizedForce(m_target - m_position);
-////    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
-////    auto u = cgm::normalizedForce(cgm::cross(f, r));
-////#endif
-//    auto f = cgm::normalizedForce(m_position - m_target);
-//    auto r = cgm::normalizedForce(cgm::cross(cgm::xyz::up(), f));
-//    auto u = cgm::normalizedForce(cgm::cross(f, r));
-//
-//    cgx::setRight(m_space, r);
-//    cgx::setUp(m_space, u);
-//    cgx::setForward(m_space, f);
-//    cgx::setPosition(m_space, m_position);
-
     m_space = cgx::lookAt(m_position, m_target, cgx::up());
     m_spaceInverse = m_space;
     cgm::invertForce(m_spaceInverse);

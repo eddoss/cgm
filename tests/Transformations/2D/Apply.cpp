@@ -72,9 +72,9 @@ TEST(Transformations2D_Apply, Vector_Matrix2_Variadic)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(2.1);
-    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,2>(1.1);
-    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(0.7);
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_X,2>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_Y,2>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_X,2>(0.7);
 
     const auto result = CGM_XFORM2D::applied(cgm_test::vector, {A,B,C});
 
@@ -93,9 +93,9 @@ TEST(Transformations2D_Apply, Vector_Matrix3_Variadic)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(2.1);
-    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,3>(1.1);
-    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(0.7);
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_X,3>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_Y,3>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_X,3>(0.7);
 
     const auto result = CGM_XFORM2D::applied<CGM_DIRECTION>(cgm_test::vector, {A,B,C});
 
@@ -114,9 +114,9 @@ TEST(Transformations2D_Apply, Matrix2_Variadic)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(2.1);
-    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,2>(1.1);
-    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,2>(0.7);
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_X,2>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_Y,2>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_X,2>(0.7);
 
     const auto result = CGM_XFORM2D::applied(cgm_test::orientation, {A,B,C});
 
@@ -135,9 +135,9 @@ TEST(Transformations2D_Apply, Matrix3_Variadic)
 {
     namespace cgm_test = cgm_xy_xform_tests_data;
 
-    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(2.1);
-    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_Y,3>(1.1);
-    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_AXIS_X,3>(0.7);
+    const auto A = CGM_XFORM2D::scalingMatrix<CGM_2D_X,3>(2.1);
+    const auto B = CGM_XFORM2D::scalingMatrix<CGM_2D_Y,3>(1.1);
+    const auto C = CGM_XFORM2D::scalingMatrix<CGM_2D_X,3>(0.7);
 
     const auto result = CGM_XFORM2D::applied(cgm_test::space, {A,B,C});
 

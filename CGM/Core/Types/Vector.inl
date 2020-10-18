@@ -51,7 +51,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::operator = (typename Vector <D, T, st
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::reference
-Vector <D, T, std::enable_if_t<(D == 2)>>::get(EComponent2D component)
+Vector <D, T, std::enable_if_t<(D == 2)>>::get(E2D component)
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -60,7 +60,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::get(EComponent2D component)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::const_reference
-Vector <D, T, std::enable_if_t<(D == 2)>>::get(EComponent2D component) const
+Vector <D, T, std::enable_if_t<(D == 2)>>::get(E2D component) const
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -68,7 +68,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::get(EComponent2D component) const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent2D Component>
+template <E2D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::reference
 Vector <D, T, std::enable_if_t<(D == 2)>>::get()
 {
@@ -78,7 +78,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::get()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent2D Component>
+template <E2D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 2)>>::const_reference
 Vector <D, T, std::enable_if_t<(D == 2)>>::get() const
 {
@@ -108,11 +108,11 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::data() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-template<EComponent2D X, EComponent2D Y>
+template<E2D X, E2D Y>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 2)>>::swizzle()
+Vector <D, T, std::enable_if_t<(D == 2)>>::shuffle()
 {
-    if constexpr (X != EComponent2D::X || Y != EComponent2D::Y)
+    if constexpr (X != E2D::X || Y != E2D::Y)
     {
         *this = Vector<D,T>{ get<X>(), get<Y>() };
     }
@@ -121,9 +121,9 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::swizzle()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template<EComponent2D X, EComponent2D Y>
+template<E2D X, E2D Y>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 2)>>
-Vector <D, T, std::enable_if_t<(D == 2)>>::swizzled() const
+Vector <D, T, std::enable_if_t<(D == 2)>>::shuffled() const
 {
     return Vector<D,T>{ get<X>(), get<Y>() };
 }
@@ -132,7 +132,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::swizzled() const
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 2)>>::swizzle(EComponent2D X, EComponent2D Y)
+Vector <D, T, std::enable_if_t<(D == 2)>>::shuffle(E2D X, E2D Y)
 {
     *this = Vector<D,T>{ get(X), get(Y) };
 }
@@ -141,7 +141,7 @@ Vector <D, T, std::enable_if_t<(D == 2)>>::swizzle(EComponent2D X, EComponent2D 
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 2)>>
-Vector <D, T, std::enable_if_t<(D == 2)>>::swizzled(EComponent2D X, EComponent2D Y) const
+Vector <D, T, std::enable_if_t<(D == 2)>>::shuffled(E2D X, E2D Y) const
 {
     return Vector<D,T>{ get(X), get(Y) };
 }
@@ -216,7 +216,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::operator = (typename Vector <D, T, st
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::reference
-Vector <D, T, std::enable_if_t<(D == 3)>>::get(EComponent3D component)
+Vector <D, T, std::enable_if_t<(D == 3)>>::get(E3D component)
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -225,7 +225,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::get(EComponent3D component)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_reference
-Vector <D, T, std::enable_if_t<(D == 3)>>::get(EComponent3D component) const
+Vector <D, T, std::enable_if_t<(D == 3)>>::get(E3D component) const
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -233,7 +233,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::get(EComponent3D component) const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent3D Component>
+template <E3D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::reference
 Vector <D, T, std::enable_if_t<(D == 3)>>::get()
 {
@@ -243,7 +243,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::get()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent3D Component>
+template <E3D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_reference
 Vector <D, T, std::enable_if_t<(D == 3)>>::get() const
 {
@@ -273,11 +273,11 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::data() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-template<EComponent3D X, EComponent3D Y, EComponent3D Z>
+template<E3D X, E3D Y, E3D Z>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 3)>>::swizzle()
+Vector <D, T, std::enable_if_t<(D == 3)>>::shuffle()
 {
-    if constexpr (X != EComponent3D::X || Y != EComponent3D::Y || Z != EComponent3D::Z)
+    if constexpr (X != E3D::X || Y != E3D::Y || Z != E3D::Z)
     {
         *this = Vector<D,T>{ get<X>(), get<Y>(), get<Z>() };
     }
@@ -286,9 +286,9 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::swizzle()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template<EComponent3D X, EComponent3D Y, EComponent3D Z>
+template<E3D X, E3D Y, E3D Z>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 3)>>
-Vector <D, T, std::enable_if_t<(D == 3)>>::swizzled() const
+Vector <D, T, std::enable_if_t<(D == 3)>>::shuffled() const
 {
     return Vector<D,T>{ get<X>(), get<Y>(), get<Z>() };
 }
@@ -297,7 +297,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::swizzled() const
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 3)>>::swizzle(EComponent3D X, EComponent3D Y, EComponent3D Z)
+Vector <D, T, std::enable_if_t<(D == 3)>>::shuffle(E3D X, E3D Y, E3D Z)
 {
     *this = Vector<D,T>{ get(X), get(Y), get(Z) };
 }
@@ -306,7 +306,7 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::swizzle(EComponent3D X, EComponent3D 
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 3)>>
-Vector <D, T, std::enable_if_t<(D == 3)>>::swizzled(EComponent3D X, EComponent3D Y, EComponent3D Z) const
+Vector <D, T, std::enable_if_t<(D == 3)>>::shuffled(E3D X, E3D Y, E3D Z) const
 {
     return Vector<D,T>{ get(X), get(Y), get(Z) };
 }
@@ -398,7 +398,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::operator = (typename Vector <D, T, st
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
-Vector <D, T, std::enable_if_t<(D == 4)>>::get(EComponent4D component)
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E4D component)
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -407,7 +407,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::get(EComponent4D component)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
-Vector <D, T, std::enable_if_t<(D == 4)>>::get(EComponent4D component) const
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E4D component) const
 {
     return *(&x + static_cast<size_t>(component));
 }
@@ -415,7 +415,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::get(EComponent4D component) const
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent4D Component>
+template <E4D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
 Vector <D, T, std::enable_if_t<(D == 4)>>::get()
 {
@@ -425,7 +425,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::get()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template <EComponent4D Component>
+template <E4D Component>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
 Vector <D, T, std::enable_if_t<(D == 4)>>::get() const
 {
@@ -455,11 +455,11 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::data() const
 /* ####################################################################################### */
 
 template<size_t D, typename T>
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W>
+template<E4D X, E4D Y, E4D Z, E4D W>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 4)>>::swizzle()
+Vector <D, T, std::enable_if_t<(D == 4)>>::shuffle()
 {
-    if constexpr (X != EComponent4D::X || Y != EComponent4D::Y || Z != EComponent4D::Z || W != EComponent4D::W)
+    if constexpr (X != E4D::X || Y != E4D::Y || Z != E4D::Z || W != E4D::W)
     {
         *this = Vector<D,T>{ get<X>(), get<Y>(), get<Z>(), get<W>() };
     }
@@ -468,9 +468,9 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::swizzle()
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W>
+template<E4D X, E4D Y, E4D Z, E4D W>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 4)>>
-Vector <D, T, std::enable_if_t<(D == 4)>>::swizzled() const
+Vector <D, T, std::enable_if_t<(D == 4)>>::shuffled() const
 {
     return Vector<D,T>{ get<X>(), get<Y>(), get<Z>(), get<W>() };
 }
@@ -479,7 +479,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::swizzled() const
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE void
-Vector <D, T, std::enable_if_t<(D == 4)>>::swizzle(EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W)
+Vector <D, T, std::enable_if_t<(D == 4)>>::shuffle(E4D X, E4D Y, E4D Z, E4D W)
 {
     *this = Vector<D,T>{ get(X), get(Y), get(Z), get(W) };
 }
@@ -488,7 +488,7 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::swizzle(EComponent4D X, EComponent4D 
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE Vector <D, T, std::enable_if_t<(D == 4)>>
-Vector <D, T, std::enable_if_t<(D == 4)>>::swizzled(EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W) const
+Vector <D, T, std::enable_if_t<(D == 4)>>::shuffled(E4D X, E4D Y, E4D Z, E4D W) const
 {
     return Vector<D,T>{ get(X), get(Y), get(Z), get(W) };
 }

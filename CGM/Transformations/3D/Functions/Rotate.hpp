@@ -33,7 +33,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
  * @param vector Vector to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Vector<3,T>& vector, T angle);
 
@@ -128,7 +128,7 @@ rotate(Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param matrix Orientation matrix to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle);
 
@@ -214,7 +214,7 @@ rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param matrix Space matrix to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle);
 
@@ -311,7 +311,7 @@ rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @param pivot Pivot to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Pivot<T>& pivot, T angle);
 
@@ -384,7 +384,7 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param arbitraryAxis Arbitrary axis to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(ArbitraryAxis<T>& arbitraryAxis, T angle);
 
@@ -477,7 +477,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param quaternion Quaternion to rotate.
  * @param angle Rotation angle.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle);
 
@@ -546,7 +546,7 @@ rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of vector.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 rotated(const Vector<3,T>& vector, T angle);
 
@@ -650,7 +650,7 @@ rotated(const Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
@@ -743,7 +743,7 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle);
 
@@ -850,7 +850,7 @@ rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of pivot.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
 rotated(const Pivot<T>& pivot, T angle);
 
@@ -930,7 +930,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of axis.
  */
-template<EAxes Axis, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
 
@@ -1032,7 +1032,7 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotated copy of quaternion.
  */
-template<EAxes Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, ESpace Space = ESpace::World, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, T angle);
 
@@ -1106,7 +1106,7 @@ rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  * @return Rotation matrix.
  */
-template<EAxes Axis, size_t N=4, typename T>
+template<E3D Axis, size_t N=4, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 rotationMatrix(T angle);
 

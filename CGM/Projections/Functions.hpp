@@ -14,6 +14,20 @@
 CGM_NAMESPACE_BEGIN
 
 /**
+ * Creates matrix are transit points from camera frustum to normalized device space (unit cube) for specific graphics API.
+ * @note This matrix should be applied to vectors are in camera space.
+ * @tparam API Graphics API.
+ * @param fov Vertical angle of field of view (in radiance).
+ * @param aspect Viewport size ration (width / height).
+ * @param near Near clipping plane distance.
+ * @param far Far clipping plane distance.
+ * @return Transition (to NDC) matrix.
+ **/
+template<EGraphicsApi API, typename T>
+constexpr Matrix<4,4,T>
+ndc(T fov, T aspect, T near, T far);
+
+/**
  * Creates matrix are transit points from camera frustum to normalized device space (unit cube).
  * @note This matrix should be applied to vectors are in camera space.
  * @tparam Right Target coordinate system right axis label.
@@ -30,23 +44,9 @@ CGM_NAMESPACE_BEGIN
  * @param cubeDepthMax Target unit cube depth max (1 for OpenGL/Vulkan/DirectX).
  * @return Transition (to NDC) matrix.
  **/
-template<CGM_XYZ::EAxes Right, CGM_XYZ::EAxes Up, CGM_XYZ::EAxes Forward, CGM::EHandedness Handedness, typename T>
+template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
 constexpr Matrix<4,4,T>
 ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax);
-
-/**
- * Creates matrix are transit points from camera frustum to normalized device space (unit cube) for specific graphics API.
- * @note This matrix should be applied to vectors are in camera space.
- * @param fov Vertical angle of field of view (in radiance).
- * @param aspect Viewport size ration (width / height).
- * @param near Near clipping plane distance.
- * @param far Far clipping plane distance.
- * @param api Graphics API.
- * @return Transition (to NDC) matrix.
- **/
-template<typename T>
-constexpr Matrix<4,4,T>
-ndc(T fov, T aspect, T near, T far, EGraphicsApi api);
 
 CGM_NAMESPACE_END
 

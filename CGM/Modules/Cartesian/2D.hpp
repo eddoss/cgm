@@ -5,7 +5,6 @@
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 #include <CGM/Cartesian/2D/Types/Axes.hpp>
-#include <CGM/Cartesian/2D/Types/Enums.hpp>
 
 #include <CGM/Cartesian/2D/Operators.hpp>
 

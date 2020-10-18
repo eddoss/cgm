@@ -14,17 +14,17 @@ TEST(Transformations3D_Rotate, Vector_DefaultAxis)
     const auto values = cgm_xyz_xform_tests_data::get();
 
     {
-        const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_X>(cgm_test::vector, values.rotation.x);
+        const auto result = CGM_XFORM3D::rotated<CGM_3D_X>(cgm_test::vector, values.rotation.x);
         const auto expect = Vector<3,double>{0.25, 1.59961, -0.755811};
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Y>(cgm_test::vector, values.rotation.x);
+        const auto result = CGM_XFORM3D::rotated<CGM_3D_Y>(cgm_test::vector, values.rotation.x);
         const auto expect = Vector<3,double>{-0.255193, 1.2, -1.29899};
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Z>(cgm_test::vector, values.rotation.x);
+        const auto result = CGM_XFORM3D::rotated<CGM_3D_Z>(cgm_test::vector, values.rotation.x);
         const auto expect = Vector<3,double>{-0.217732, 1.20627, -1.3};
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -101,7 +101,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
 
     {
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_X, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_X, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.88295, +0.43529, +0.17587},
@@ -111,7 +111,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Y, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Y, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.81865, +0.46947, -0.33076},
@@ -121,7 +121,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Z, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Z, CGM_WORLD>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.64279, +0.76604, +0.00000},
@@ -133,7 +133,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
     }
     {
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_X, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_X, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.882950, +0.469470, +0.000000},
@@ -143,7 +143,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Y, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Y, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.782093, +0.504053, -0.366419},
@@ -153,7 +153,7 @@ TEST(Transformations3D_Rotate, Matrix3_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Z, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Z, CGM_LOCAL>(cgm_test::orientation, values.rotation.x);
             const auto expect = CGM_XYZ::orientationMatrix
             (
                 Vector<3,double>{+0.646633, +0.758816, +0.077887},
@@ -473,7 +473,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
 
     {
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_X, CGM_WORLD>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_X, CGM_WORLD>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.88295, +0.43529, +0.17587},
@@ -484,7 +484,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Y, CGM_WORLD>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Y, CGM_WORLD>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.81865, +0.46947, -0.33076},
@@ -495,7 +495,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Z, CGM_WORLD>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Z, CGM_WORLD>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.64279, +0.76604, +0.00000},
@@ -508,7 +508,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
     }
     {
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_X, CGM_LOCAL>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_X, CGM_LOCAL>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.882950, +0.469470, +0.000000},
@@ -519,7 +519,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Y, CGM_LOCAL>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Y, CGM_LOCAL>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.782093, +0.504053, -0.366419},
@@ -530,7 +530,7 @@ TEST(Transformations3D_Rotate, Matrix4_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM3D::rotated<CGM_3D_AXIS_Z, CGM_LOCAL>(cgm_test::space, values.rotation.x);
+            const auto result = CGM_XFORM3D::rotated<CGM_3D_Z, CGM_LOCAL>(cgm_test::space, values.rotation.x);
             const auto expect = CGM_XYZ::spaceMatrix
             (
                 Vector<3,double>{+0.646633, +0.758816, +0.077887},
@@ -877,7 +877,7 @@ TEST(Transformations3D_RotationMatrix, DefaultAxis)
     const auto values = cgm_xyz_xform_tests_data::get();
 
     {
-        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_AXIS_X,4>(values.rotation.x);
+        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_X,4>(values.rotation.x);
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.00000, +0.00000, +0.00000},
@@ -888,7 +888,7 @@ TEST(Transformations3D_RotationMatrix, DefaultAxis)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_AXIS_Y,4>(values.rotation.x);
+        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_Y,4>(values.rotation.x);
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+0.92718, +0.00000, +0.37461},
@@ -899,7 +899,7 @@ TEST(Transformations3D_RotationMatrix, DefaultAxis)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_AXIS_Z,4>(values.rotation.x);
+        const auto result = CGM_XYZ::rotationMatrix<CGM_3D_Z,4>(values.rotation.x);
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+0.92718, -0.37461, +0.00000},

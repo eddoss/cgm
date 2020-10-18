@@ -893,7 +893,7 @@ lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>
 /* Vector remapper */
 /* ####################################################################################### */
 
-template<EComponent3D X, EComponent3D Y, EComponent3D Z, typename T>
+template<E3D X, E3D Y, E3D Z, typename T>
 constexpr Matrix<3,3,T>
 remapper()
 {
@@ -913,7 +913,7 @@ remapper()
 
 /* --------------------------------------------------------------------------------------- */
 
-template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W, typename T>
+template<E4D X, E4D Y, E4D Z, E4D W, typename T>
 constexpr Matrix<4,4,T>
 remapper()
 {

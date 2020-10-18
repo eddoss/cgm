@@ -1,10 +1,10 @@
 #pragma once
 
 
+#include <CGM/Core/Types/Enums.hpp>
 #include <CGM/Cartesian/ModuleGlobals.hpp>
 #include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
-#include <CGM/Cartesian/3D/Types/Enums.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -15,25 +15,25 @@ struct Config
     /**
      * Current configuration 3D system right axis label.
      */
-    EAxes
+    const E3D
     right;
 
     /**
      * Current configuration 3D system up axis label.
      */
-    EAxes
+    const E3D
     up;
 
     /**
      * Current configuration 3D system forward axis label.
      */
-    EAxes
+    const E3D
     forward;
 
     /**
      * Current configuration 3D system handedness.
      */
-    EHandedness
+    const EHandedness
     handedness;
 
 /* ####################################################################################### */
@@ -44,8 +44,6 @@ struct Config
      * Create current 3D system configuration.
      */
     constexpr Config();
-    constexpr Config(const Config&)                 = delete;
-    constexpr Config(Config&&)                      = delete;
     constexpr Config& operator = (const Config&)    = delete;
     constexpr Config& operator = (Config&&)         = delete;
 };

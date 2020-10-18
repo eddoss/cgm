@@ -6,34 +6,10 @@
 #include <initializer_list>
 #include <CGM/Global.hpp>
 #include <CGM/Common.hpp>
+#include <CGM/Core/Types/Enums.hpp>
 
 
 CGM_NAMESPACE_BEGIN
-
-enum class EComponent2D
-{
-    X = size_t(0),
-    Y
-};
-
-/* --------------------------------------------------------------------------------------- */
-
-enum class EComponent3D
-{
-    X = size_t(0),
-    Y,
-    Z
-};
-
-/* --------------------------------------------------------------------------------------- */
-
-enum class EComponent4D
-{
-    X = size_t(0),
-    Y,
-    Z,
-    W
-};
 
 template<size_t D, typename T=FLOAT, typename = void> struct Vector;
 
@@ -110,20 +86,20 @@ public: /* Access */
      * @param Reference to component.
      */
     constexpr CGM_FORCEINLINE reference
-    get(EComponent2D component);
+    get(E2D component);
 
     /**
      * Gets component const ref (at runtime).
      * @param Const reference to component.
      */
     constexpr CGM_FORCEINLINE const_reference
-    get(EComponent2D component) const;
+    get(E2D component) const;
 
     /**
      * Gets component ref (at compile time).
      * @param Reference to component.
      */
-    template <EComponent2D Component>
+    template <E2D Component>
     constexpr CGM_FORCEINLINE reference
     get();
 
@@ -131,7 +107,7 @@ public: /* Access */
      * Gets component const ref (at compile time).
      * @param Const reference to component.
      */
-    template <EComponent2D Component>
+    template <E2D Component>
     constexpr CGM_FORCEINLINE const_reference
     get() const;
     
@@ -156,28 +132,28 @@ public: /* Methods */
     /**
      * Rearrange components inplace (at compile time).
      */
-    template<EComponent2D X, EComponent2D Y>
+    template<E2D X, E2D Y>
     constexpr CGM_FORCEINLINE void
-    swizzle();
+    shuffle();
 
     /**
      * Rearrange components outplace (at compile time).
      */
-    template<EComponent2D X, EComponent2D Y>
+    template<E2D X, E2D Y>
     constexpr CGM_FORCEINLINE Vector
-    swizzled() const;
+    shuffled() const;
 
     /**
      * Rearrange components inplace.
      */
     constexpr CGM_FORCEINLINE void
-    swizzle(EComponent2D X, EComponent2D Y);
+    shuffle(E2D X, E2D Y);
 
     /**
      * Rearrange components outplace.
      */
     constexpr CGM_FORCEINLINE Vector
-    swizzled(EComponent2D X, EComponent2D Y) const;
+    shuffled(E2D X, E2D Y) const;
 
     /**
      * Gets xy vector.
@@ -267,20 +243,20 @@ public: /* Access */
      * @param Reference to component.
      */
     constexpr CGM_FORCEINLINE reference
-    get(EComponent3D component);
+    get(E3D component);
 
     /**
      * Gets component const ref (at runtime).
      * @param Const reference to component.
      */
     constexpr CGM_FORCEINLINE const_reference
-    get(EComponent3D component) const;
+    get(E3D component) const;
 
     /**
      * Gets component ref (at compile time).
      * @param Reference to component.
      */
-    template <EComponent3D Component>
+    template <E3D Component>
     constexpr CGM_FORCEINLINE reference
     get();
 
@@ -288,7 +264,7 @@ public: /* Access */
      * Gets component const ref (at compile time).
      * @param Const reference to component.
      */
-    template <EComponent3D Component>
+    template <E3D Component>
     constexpr CGM_FORCEINLINE const_reference
     get() const;
 
@@ -313,28 +289,28 @@ public: /* Methods */
     /**
      * Rearrange components inplace (at compile time).
      */
-    template<EComponent3D X, EComponent3D Y, EComponent3D Z>
+    template<E3D X, E3D Y, E3D Z>
     constexpr CGM_FORCEINLINE void
-    swizzle();
+    shuffle();
 
     /**
      * Rearrange components outplace (at compile time).
      */
-    template<EComponent3D X, EComponent3D Y, EComponent3D Z>
+    template<E3D X, E3D Y, E3D Z>
     constexpr CGM_FORCEINLINE Vector
-    swizzled() const;
+    shuffled() const;
 
     /**
      * Rearrange components inplace.
      */
     constexpr CGM_FORCEINLINE void
-    swizzle(EComponent3D X, EComponent3D Y, EComponent3D Z);
+    shuffle(E3D X, E3D Y, E3D Z);
 
     /**
      * Rearrange components outplace.
      */
     constexpr CGM_FORCEINLINE Vector
-    swizzled(EComponent3D X, EComponent3D Y, EComponent3D Z) const;
+    shuffled(E3D X, E3D Y, E3D Z) const;
 
     /**
      * Gets 2D xy vector.
@@ -431,20 +407,20 @@ public: /* Access */
      * @param Reference to component.
      */
     constexpr CGM_FORCEINLINE reference
-    get(EComponent4D component);
+    get(E4D component);
 
     /**
      * Gets component const ref (at runtime).
      * @param Const reference to component.
      */
     constexpr CGM_FORCEINLINE const_reference
-    get(EComponent4D component) const;
+    get(E4D component) const;
 
     /**
      * Gets component ref (at compile time).
      * @param Reference to component.
      */
-    template <EComponent4D Component>
+    template <E4D Component>
     constexpr CGM_FORCEINLINE reference
     get();
 
@@ -452,7 +428,7 @@ public: /* Access */
      * Gets component const ref (at compile time).
      * @param Const reference to component.
      */
-    template <EComponent4D Component>
+    template <E4D Component>
     constexpr CGM_FORCEINLINE const_reference
     get() const;
 
@@ -491,28 +467,28 @@ public: /* Methods */
     /**
      * Rearrange components inplace (at compile time).
      */
-    template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W>
+    template<E4D X, E4D Y, E4D Z, E4D W>
     constexpr CGM_FORCEINLINE void
-    swizzle();
+    shuffle();
 
     /**
      * Rearrange components outplace (at compile time).
      */
-    template<EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W>
+    template<E4D X, E4D Y, E4D Z, E4D W>
     constexpr CGM_FORCEINLINE Vector
-    swizzled() const;
+    shuffled() const;
 
     /**
      * Rearrange components inplace.
      */
     constexpr CGM_FORCEINLINE void
-    swizzle(EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W);
+    shuffle(E4D X, E4D Y, E4D Z, E4D W);
 
     /**
      * Rearrange components outplace.
      */
     constexpr CGM_FORCEINLINE Vector
-    swizzled(EComponent4D X, EComponent4D Y, EComponent4D Z, EComponent4D W) const;
+    shuffled(E4D X, E4D Y, E4D Z, E4D W) const;
 };
 
 /* ####################################################################################### */

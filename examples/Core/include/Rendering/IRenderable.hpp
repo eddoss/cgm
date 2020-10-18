@@ -1,6 +1,8 @@
 #pragma once
 
+
 #include <CGM/Modules/Core.hpp>
+#include <Rendering/Camera.hpp>
 #include <GL/glew.h>
 
 
@@ -13,6 +15,9 @@ enum EDrawMode
     Triangles   = GL_TRIANGLES,
     Polygon     = GL_TRIANGLE_FAN
 };
+
+// Easy way to impl correct painting.
+//using Painter = std::function<void(const Geometry&, const Camera&)>;
 
 class IRenderable
 {
