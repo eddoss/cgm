@@ -162,7 +162,7 @@ VBO::allocate(uint32_t byteCount, const void* data )
 /* ####################################################################################### */
 
 bool
-VBO::bind()
+VBO::bind() const
 {
     if( !m_objectCreated )
     {
@@ -176,7 +176,7 @@ VBO::bind()
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VBO::release()
+VBO::release() const
 {
     if( !m_objectCreated )
     {

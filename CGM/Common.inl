@@ -67,3 +67,106 @@ degrees(T angle)
 {
     return angle * number<T>(57.295779513082320876798154814105);
 }
+
+/* ####################################################################################### */
+/* Value remapping */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+clamp(const T& value, T min, T max)
+{
+    return value > max ? max : value < min ? min : value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit(T value, T omin, T omax, T nmin, T nmax)
+{
+    return (clamp(value, omin, omax) - omin) / (omax - omin) * (nmax - nmin) + nmin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit01(T value, T newMin, T newMax)
+{
+    return clamp(value, number<T>(0), number<T>(1)) / (newMax - newMin) + newMin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit10(T value, T newMin, T newMax)
+{
+    return (clamp(value, number<T>(1), number<T>(0)) - number<T>(1)) / number<T>(-1) * (newMax - newMin) + newMin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit11(T value, T newMin, T newMax)
+{
+    return (clamp(value, number<T>(-1), number<T>(1)) - number<T>(-1)) / number<T>(2) * (newMax - newMin) + newMin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit(T value, T omin, T omax, T nmin, T nmax)
+{
+    return (value - omin) / (omax - omin) * (nmax - nmin) + nmin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit01(T value, T newMin, T newMax)
+{
+    return value / (newMax - newMin) + newMax;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit10(T value, T newMin, T newMax)
+{
+    return -(value - number<T>(1)) * (newMax - newMin) + newMin;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit11(T value, T newMin, T newMax)
+{
+    return (value - number<T>(-1)) * number<T>(0.5) * (newMax - newMin) + newMin;
+}
+
+/* ####################################################################################### */
+/* Interpolations */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE T
+lerp(T A, T B, T bias)
+{
+
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+static T
+blerp(const T& Ax, const T& Ay, const T& Bx, const T& By, T biasX, T biasY)
+{
+
+}

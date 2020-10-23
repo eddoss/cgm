@@ -17,32 +17,21 @@ BaseWindow::~BaseWindow()
 /* Public methods */
 /* ####################################################################################### */
 
-bool
-BaseWindow::create()
+BaseWindow::BaseWindow()
+    : Surface()
 {
-    setVisible(m_visible);
-    setSamples(m_samples);
-    setRedChannelBits(m_redChannelBits);
-    setGreenChannelBits(m_greenChannelBits);
-    setBlueChannelBits(m_blueChannelBits);
-    setAlphaChannelBits(m_alphaChannelBits);
-    setDepthChannelBits(m_depthBits);
-    setStencilChannelBits(m_stencilBits);
-    setDoubleBufferEnabled(m_doubleBuffer);
-
-    m_window = glfwCreateWindow(m_width, m_height, m_title.data(), nullptr, nullptr);
-
     if (!m_window)
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant create GLFW window");
-        return false;
     }
+
+    glfwSetWindowUserPointer(m_window, this);
 
     glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
     {
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
-        self->m_width = width;
-        self->m_height = height;
+        self->setWidth(width);
+        self->setHeight(height);
         self->resizeEvent();
     });
 
@@ -51,9 +40,9 @@ BaseWindow::create()
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
         self->keyEvent
         (
-            *reinterpret_cast<const EKey*>(&key),
-            *reinterpret_cast<const EState*>(&action),
-            *reinterpret_cast<const EModifier*>(&mods)
+            static_cast<EKey>(key),
+            static_cast<EState>(action),
+            static_cast<EModifier>(mods)
         );
     });
 
@@ -74,9 +63,9 @@ BaseWindow::create()
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
         self->buttonEvent
         (
-            *reinterpret_cast<const EButton*>(&button),
-            *reinterpret_cast<const EState*>(&action),
-            *reinterpret_cast<const EModifier*>(&mods)
+            static_cast<EButton>(button),
+            static_cast<EState>(action),
+            static_cast<EModifier>(mods)
         );
     });
 
@@ -85,10 +74,6 @@ BaseWindow::create()
         auto* self = static_cast<BaseWindow*>(glfwGetWindowUserPointer(window));
         self->scrollEvent(cgm::Vector<2,double>{x,y});
     });
-    glfwSetWindowUserPointer(m_window, this);
-    glfwMakeContextCurrent(m_window);
-
-    return true;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -158,6 +143,26 @@ BaseWindow::mousePosition()
 
 /* --------------------------------------------------------------------------------------- */
 
+cgm::Vector<2,double>
+BaseWindow::mouseOffset()
+{
+    return convertToScreen(mousePosition()) - m_previous_tick_mouse_pos;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+cgm::Vector<2,double>
+BaseWindow::convertToScreen(const cgm::Vector<2,int>& pos) const
+{
+    return
+    {
+        cgm::fit<double>(pos.x, 0.0, width(), -1.0, 1.0),
+        cgm::fit<double>(pos.y, 0.0, height(), 1.0, -1.0)
+    };
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 bool
 BaseWindow::isMouseInWindow()
 {
@@ -187,7 +192,7 @@ BaseWindow::beforeLoop()
 void
 BaseWindow::tickEvent()
 {
-
+    m_previous_tick_mouse_pos = convertToScreen(mousePosition());
 }
 
 /* --------------------------------------------------------------------------------------- */

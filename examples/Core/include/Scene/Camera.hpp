@@ -33,22 +33,31 @@ public:
 
 public:
     const cgm::vec3&
-    position();
+    position() const;
+
+    CGM_FORCEINLINE cgm::vec3
+    right() const {return cgm::xyz::right(m_space);};
+
+    CGM_FORCEINLINE cgm::vec3
+    up() const {return cgm::xyz::up(m_space);};
+
+    CGM_FORCEINLINE cgm::vec3
+    forward() const {return cgm::xyz::forward(m_space);};
 
     const cgm::vec3&
-    target();
+    target() const;
 
     const Properties&
-    properties();
+    properties() const;
 
     const cgm::mat4&
-    space();
+    space() const;
 
     const cgm::mat4&
-    inverseSpace();
+    inverseSpace() const;
 
     const cgm::mat4&
-    ndc();
+    ndc() const;
 
 public:
     void

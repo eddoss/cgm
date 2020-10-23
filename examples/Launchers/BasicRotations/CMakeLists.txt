@@ -1,5 +1,5 @@
 
-project(ExampleBasicRotations LANGUAGES CXX)
+project(BasicRotations LANGUAGES CXX)
 
 file(GLOB_RECURSE SOURCES_FILES ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
 

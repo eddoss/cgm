@@ -70,14 +70,14 @@ public: /* Public virtual methods */
      * @return true if binding was succeded, false otherwise.
      */
     virtual bool
-    bind() = 0;
+    bind() const = 0;
 
     /**
      * Release this object.
      * @return true if releasing was succeded, false otherwise.
      */
     virtual bool
-    release() = 0;
+    release() const = 0;
 
     /**
      * Create this object.

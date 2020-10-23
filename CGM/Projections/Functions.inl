@@ -5,11 +5,27 @@
 
 CGM_NAMESPACE_BEGIN
 
+template<typename T>
+constexpr Vector<3,T>
+cameraRay(const Vector<2,T>& point, T fov, T aspect, T planeOffset, const Matrix<4,4,T>& cameraSpace)
+{
+    const T h = std::tan(fov * number<T>(0.5)) * planeOffset;
+    const T w = h * aspect;
+
+    auto direction = CGM_XYZ::forward(cameraSpace) * planeOffset;
+    direction += fit11(point.x, -w, w) * CGM_XYZ::right(cameraSpace);
+    direction += fit11(point.y, -h, h) * CGM_XYZ::up(cameraSpace);
+
+    return normalizedForce(direction);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
 template<EGraphicsApi API, typename T>
 constexpr Matrix<4,4,T>
 ndc(T fov, T aspect, T near, T far)
 {
-    const T nearPlaneHeight = number<T>(2) * near * std::tan(fov * 0.5f);
+    const T nearPlaneHeight = near * std::tan(fov * number<T>(0.5));
     const T nearPlaneWidth = nearPlaneHeight * aspect;
     const T cubeWidth = number<T>(2);
     const T cubeHeight = number<T>(2);
@@ -70,7 +86,7 @@ ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cube
         Vector<4,T> u(zero<T>);
         Vector<4,T> f(zero<T>);
 
-        u.get< static_cast<E4D>(cfg.up)>() = number<T>(1);
+        u.get<static_cast<E4D>(cfg.up)>() = number<T>(1);
 
         if constexpr (cfg.handedness != Handedness)
         {

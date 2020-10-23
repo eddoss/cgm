@@ -1,55 +1,50 @@
 
 
 #include <Application/Application.hpp>
-#include <Global.hpp>
-#include <CGM/Modules/Transformations/3D.hpp>
-#include <iostream>
+#include <Rendering/LinePainter.hpp>
 #include <memory>
-#include <cstdlib>
+#include <CGM/Cartesian/3D/Types/Config.hpp>
 
 namespace cgx = cgm::xyz;
 
 Application::Application()
+    : sceneCamera(new Camera)
+    , sceneMaterial(new ShaderProgram)
+    , scenePainter(new LinePainter)
 {
-    INIT_GLFW
-    if (!create())
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Cant create GLFW window")
-    }
-    INIT_GLEW
+    Camera::Properties props;
+    props.far = 500.0f;
+    props.near = 0.01f;
+    props.fov = 90.0f;
+    props.aspect = cgm::float32(width()) / cgm::float32(height());
 
-    sceneCameraProperties.far = 500.0f;
-    sceneCameraProperties.near = 0.01f;
-    sceneCameraProperties.fov = 45.0f;
-    sceneCameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
-    sceneCamera.setProperties(sceneCameraProperties);
-    sceneCamera.setPosition({2, 2, 2});
-    sceneCamera.setTarget({0, 0, 0});
+    sceneCamera->setProperties(props);
+    sceneCamera->setPosition({2, 2, 2});
+    sceneCamera->setTarget({0, 0, 0});
 
-    material = std::make_shared<ShaderProgram>();
-    sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, material);
-    sceneGnomon = Geometry::makeAxes(material);
+    sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, sceneMaterial);
+    sceneGnomon = Geometry::makeAxes(sceneMaterial);
 }
 
 void
 Application::render()
 {
-    sceneGrid->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
-    sceneGnomon->render(sceneCamera.inverseSpace(), sceneCamera.ndc());
+    scenePainter->render(*sceneGrid, *sceneCamera);
+    scenePainter->render(*sceneGnomon, *sceneCamera);
 }
 
 void
 Application::beforeLoop()
 {
-    material->create();
-    material->addShaderPack(L"Resources/ColorView");
-    material->link();
+    sceneMaterial->create();
+    sceneMaterial->addShaderPack(L"Resources/ColorView");
+    sceneMaterial->link();
 
     sceneGrid->init();
     sceneGnomon->init();
 
     glClearColor(sceneBgColor.x, sceneBgColor.y, sceneBgColor.z, 1.0f);
-    glViewport(0, 0, GLsizei(m_width), GLsizei(m_height));
+    glViewport(0, 0, GLsizei(width()), GLsizei(height()));
 
     glPrimitiveRestartIndex(Geometry::primitiveRestartValue);
     glEnable(GL_PRIMITIVE_RESTART);
@@ -80,10 +75,13 @@ Application::renderEvent()
 void
 Application::resizeEvent()
 {
-    sceneCameraProperties.aspect = cgm::float32(m_width) / cgm::float32(m_height);
-    sceneCamera.setProperties(sceneCameraProperties);
+    BaseWindow::resizeEvent();
 
-    glViewport(0, 0, GLsizei(m_width), GLsizei(m_height));
+    auto props = sceneCamera->properties();
+    props.aspect = cgm::float32(width()) / cgm::float32(height());
+    sceneCamera->setProperties(props);
+
+    glViewport(0, 0, GLsizei(width()), GLsizei(height()));
     glClear(GL_COLOR_BUFFER_BIT);
 
     render();
@@ -94,60 +92,34 @@ Application::resizeEvent()
 void
 Application::mouseMoveEvent(cgm::Vector<2,int> position)
 {
-    auto dx = m_mouse_move_dir.x;
-    auto dy = m_mouse_move_dir.y;
+    BaseWindow::mouseMoveEvent(position);
+
+    const auto offset = mouseOffset();
 
     if (buttonState(EButton::Left) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        sceneCamera.rotate(-dx * 2.25, -dy * 2.25);
+        if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
+        {
+            sceneCamera->rotate(offset.x * 250, -offset.y * 250);
+        }
+        else
+        {
+            sceneCamera->rotate(-offset.x * 250, -offset.y * 250);
+        }
     }
     else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        sceneCamera.move(0, 0, -dx * 0.1);
+        sceneCamera->move(0, 0, offset.x * 5);
     }
     else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        sceneCamera.move(-dx * 0.025, dy * 0.025, 0);
-    }
-}
-
-void
-Application::tickEvent()
-{
-    if (m_previous_tick_mouse_pos == cgm::Vector<2,int>(0))
-    {
-        m_previous_tick_mouse_pos = 0;
-    }
-
-    const auto currentPos = mousePosition();
-    const auto delta = currentPos - m_previous_tick_mouse_pos;
-    m_previous_tick_mouse_pos = currentPos;
-    m_previous_tick_mouse_pos_delta.x = std::abs(delta.x);
-    m_previous_tick_mouse_pos_delta.y = std::abs(delta.y);
-
-    if (delta.x < 0)
-    {
-        m_mouse_move_dir.x = -1;
-    }
-    else if (delta.x == 0)
-    {
-        m_mouse_move_dir.x = 0;
-    }
-    else
-    {
-        m_mouse_move_dir.x = 1;
-    }
-
-    if (delta.y < 0)
-    {
-        m_mouse_move_dir.y = -1;
-    }
-    else if (delta.y == 0)
-    {
-        m_mouse_move_dir.y = 0;
-    }
-    else
-    {
-        m_mouse_move_dir.y = 1;
+        if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
+        {
+            sceneCamera->move(-offset.x * 2, -offset.y * 2, 0);
+        }
+        else
+        {
+            sceneCamera->move(offset.x * 2, -offset.y * 2, 0);
+        }
     }
 }

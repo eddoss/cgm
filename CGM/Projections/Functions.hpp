@@ -14,15 +14,28 @@
 CGM_NAMESPACE_BEGIN
 
 /**
+ * Convert 2D viewport point to camera ray (takes into account perspective projection).
+ * @param point Relative coordinate of point in viewport space. X and Y values should laid out in [-1,+1] range.
+ * @param fov Vertical angle of field of view (in radiance).
+ * @param aspect Viewport size ratio (width / height).
+ * @param planeOffset Offset of projection plane (near plane of camera frustum).
+ * @param cameraSpace Camera space matrix.
+ * @return 3D ray from camera.
+ */
+template<typename T>
+constexpr Vector<3,T>
+cameraRay(const Vector<2,T>& point, T fov, T aspect, T planeOffset, const Matrix<4,4,T>& cameraSpace);
+
+/**
  * Creates matrix are transit points from camera frustum to normalized device space (unit cube) for specific graphics API.
  * @note This matrix should be applied to vectors are in camera space.
  * @tparam API Graphics API.
  * @param fov Vertical angle of field of view (in radiance).
- * @param aspect Viewport size ration (width / height).
+ * @param aspect Viewport size ratio (width / height).
  * @param near Near clipping plane distance.
  * @param far Far clipping plane distance.
  * @return Transition (to NDC) matrix.
- **/
+ */
 template<EGraphicsApi API, typename T>
 constexpr Matrix<4,4,T>
 ndc(T fov, T aspect, T near, T far);
@@ -43,7 +56,7 @@ ndc(T fov, T aspect, T near, T far);
  * @param cubeDepthMin Target unit cube depth min (-1 for OpenGL/Vulkan, 0 for DirectX).
  * @param cubeDepthMax Target unit cube depth max (1 for OpenGL/Vulkan/DirectX).
  * @return Transition (to NDC) matrix.
- **/
+ */
 template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
 constexpr Matrix<4,4,T>
 ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax);

@@ -1,6 +1,6 @@
 
 
-#include <Rendering/Camera.hpp>
+#include <Scene/Camera.hpp>
 #include <CGM/Modules/Projections.hpp>
 
 
@@ -18,37 +18,37 @@ Camera::Camera()
 }
 
 const cgm::vec3&
-Camera::position()
+Camera::position() const
 {
     return m_position;
 }
 
 const cgm::vec3&
-Camera::target()
+Camera::target() const
 {
     return m_target;
 }
 
 const Camera::Properties&
-Camera::properties()
+Camera::properties() const
 {
     return m_properties;
 }
 
 const cgm::mat4&
-Camera::inverseSpace()
+Camera::inverseSpace() const
 {
     return m_spaceInverse;
 }
 
 const cgm::mat4&
-Camera::space()
+Camera::space() const
 {
     return m_space;
 }
 
 const cgm::mat4&
-Camera::ndc()
+Camera::ndc() const
 {
     return m_perspective;
 }

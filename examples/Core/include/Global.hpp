@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 
 #define CGM_EXAMPLES_PRINT(message)   std::cout << message << std::endl;
 

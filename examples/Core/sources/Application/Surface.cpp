@@ -1,117 +1,54 @@
 
 
-#include <iostream>
 #include <Application/Surface.hpp>
+#include <Global.hpp>
 
 
 /* ####################################################################################### */
-/* Properties getters */
+/* Constructors */
 /* ####################################################################################### */
+
+Surface::Surface()
+{
+    if (glfwInit() != GLFW_TRUE)
+    {
+        CGM_EXAMPLES_FUNC_ERROR("Cant initialize GLFW");
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    setVisible(m_visible);
+    setSamples(m_samples);
+    setRedChannelBits(m_redChannelBits);
+    setGreenChannelBits(m_greenChannelBits);
+    setBlueChannelBits(m_blueChannelBits);
+    setAlphaChannelBits(m_alphaChannelBits);
+    setDepthChannelBits(m_depthBits);
+    setStencilChannelBits(m_stencilBits);
+    setDoubleBufferEnabled(m_doubleBuffer);
+
+    m_window = glfwCreateWindow(m_width, m_height, m_title.data(), nullptr, nullptr);
+    glfwMakeContextCurrent(m_window);
+
+    glewExperimental = GL_TRUE;
+    GLenum GLEWInitResult = glewInit();
+    if (GLEWInitResult != GLEW_OK)
+    {
+        CGM_EXAMPLES_FUNC_ERROR(glewGetErrorString(GLEWInitResult));
+    }
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 Surface::~Surface()
 {
     if (m_window)
     {
         glfwDestroyWindow(m_window);
+        m_window = nullptr;
     }
-}
-
-/* ####################################################################################### */
-/* Properties getters */
-/* ####################################################################################### */
-
-int
-Surface::width() const
-{
-    return m_width;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::height() const
-{
-    return m_height;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-bool
-Surface::visible() const
-{
-    return m_visible;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-std::string
-Surface::title() const
-{
-    return m_title;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::samples() const
-{
-    return m_samples;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-bool
-Surface::isDoubleBufferEnabled() const
-{
-    return m_doubleBuffer;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::redChannelBits() const
-{
-    return m_redChannelBits;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::greenChannelBits() const
-{
-    return m_greenChannelBits;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::blueChannelBits() const
-{
-    return m_blueChannelBits;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::alphaChannelBits() const
-{
-    return m_alphaChannelBits;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::depthChannelBits() const
-{
-    return m_depthBits;;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-int
-Surface::stencilChannelBits() const
-{
-    return m_stencilBits;
 }
 
 /* ####################################################################################### */

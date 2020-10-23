@@ -3,36 +3,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <string>
 #include <functional>
-
-
-#define INIT_GLFW                                               \
-if (glfwInit() != GLFW_TRUE)                                    \
-{                                                               \
-    glfwTerminate();                                            \
-    std::cout                                                   \
-    << "[ERROR] Cant initialize GLFW"                           \
-    << std::endl;                                               \
-    exit(-1);                                                   \
-}                                                               \
-glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);                  \
-glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);                  \
-glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-/* --------------------------------------------------------------------------------------- */
-
-#define INIT_GLEW                                               \
-glewExperimental = GL_TRUE;                                     \
-GLenum GLEWInitResult = glewInit();                             \
-if( GLEWInitResult != GLEW_OK )                                 \
-{                                                               \
-    std::cout                                                   \
-    << "[ERROR] Cant initialize GLEW: "                         \
-    << glewGetErrorString(GLEWInitResult)                       \
-    << std::endl;                                               \
-    exit(-1);                                                   \
-}
+#include <string>
 
 
 class Surface
@@ -42,9 +14,8 @@ class Surface
 public: /* Constructors */
 /* ####################################################################################### */
 
-    /**
-     * Destructor.
-     */
+    Surface();
+
     virtual
     ~Surface();
 
@@ -53,51 +24,51 @@ public: /* Properties getters */
 /* ####################################################################################### */
 
     /** Get window width */
-    int
+    inline int
     width() const;
 
     /** Get window height */
-    int
+    inline int
     height() const;
 
     /** Check whether window is visible */
-    bool
+    inline bool
     visible() const;
 
     /** Get window title */
-    std::string
+    inline std::string
     title() const;
 
     /** Get window samples */
-    int
+    inline int
     samples() const;
 
     /** Check whether double buffer enabled */
-    bool
+    inline bool
     isDoubleBufferEnabled() const;
 
     /** Get window red channel bit depth */
-    int
+    inline int
     redChannelBits() const;
 
     /** Get window green channel bit depth */
-    int
+    inline int
     greenChannelBits() const;
 
     /** Get window red channel bit depth */
-    int
+    inline int
     blueChannelBits() const;
 
     /** Get window blue channel bit depth */
-    int
+    inline int
     alphaChannelBits() const;
 
     /** Get window alpha channel bit depth */
-    int
+    inline int
     depthChannelBits() const;
 
     /** Get window stencil channel bit depth */
-    int
+    inline int
     stencilChannelBits() const;
 
 /* ####################################################################################### */
@@ -189,7 +160,14 @@ public: /* Properties setters */
     setStencilChannelBits(int bits);
 
 /* ####################################################################################### */
-protected: /* Window protected attributes */
+protected: /* Window protected properties */
+/* ####################################################################################### */
+
+    GLFWwindow*
+    m_window {nullptr};
+
+/* ####################################################################################### */
+private: /* Window private properties */
 /* ####################################################################################### */
 
     int
@@ -227,7 +205,103 @@ protected: /* Window protected attributes */
 
     std::string
     m_title {"OpenGL Window"};
-
-    GLFWwindow*
-    m_window {nullptr};
 };
+
+
+/* ####################################################################################### */
+/* IMPLEMENTATION | Properties getters */
+/* ####################################################################################### */
+
+int
+Surface::width() const
+{
+    return m_width;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::height() const
+{
+    return m_height;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+bool
+Surface::visible() const
+{
+    return m_visible;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+std::string
+Surface::title() const
+{
+    return m_title;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::samples() const
+{
+    return m_samples;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+bool
+Surface::isDoubleBufferEnabled() const
+{
+    return m_doubleBuffer;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::redChannelBits() const
+{
+    return m_redChannelBits;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::greenChannelBits() const
+{
+    return m_greenChannelBits;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::blueChannelBits() const
+{
+    return m_blueChannelBits;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::alphaChannelBits() const
+{
+    return m_alphaChannelBits;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::depthChannelBits() const
+{
+    return m_depthBits;;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+int
+Surface::stencilChannelBits() const
+{
+    return m_stencilBits;
+}

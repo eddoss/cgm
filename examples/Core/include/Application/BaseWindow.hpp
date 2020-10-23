@@ -167,14 +167,10 @@ public: /* Enums */
 public: /* Public methods */
 /* ####################################################################################### */
 
-    ~BaseWindow() override;
+    virtual
+    ~BaseWindow();
 
-    /**
-     * Create window.
-     * @return True, if window was successfully created, false otherwise.
-     */
-    bool
-    create();
+    BaseWindow();
 
     /**
      * Start window main loop.
@@ -208,6 +204,21 @@ protected: /* Protected methods */
      */
     cgm::Vector<2,int>
     mousePosition();
+
+    /**
+     * Gets mouse offset between position in current tick and previous tick.
+     * @return Mouse position offset.
+     */
+    cgm::Vector<2,double>
+    mouseOffset();
+
+    /**
+     * Convert window coordinate to screen coordinate (in to [-1,1] range).
+     * @param pos Window coordinate to convert.
+     * @return Converted coord.
+     */
+    cgm::Vector<2,double>
+    convertToScreen(const cgm::Vector<2,int>& pos) const;
 
     /**
      * Checks is mouse in window area.
@@ -327,4 +338,7 @@ private: /* Internals */
 
     double
     m_previousTick = 0.0;
+
+    cgm::Vector<2,double>
+    m_previous_tick_mouse_pos {0,0};
 };

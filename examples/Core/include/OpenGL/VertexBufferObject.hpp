@@ -166,14 +166,14 @@ public: /* GL object interface */
      * @return true if binding was succeded, false otherwise.
      */
     bool
-    bind() override;
+    bind() const override;
 
     /**
      * Release this object.
      * @return true if releasing was succeded, false otherwise.
      */
     bool
-    release() override;
+    release() const override;
 
     /**
      * Create this object.

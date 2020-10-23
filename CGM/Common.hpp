@@ -143,6 +143,149 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 degrees(T angle);
 
+/* ####################################################################################### */
+/* Value remapping */
+/* ####################################################################################### */
+
+/**
+ * Returns value clamped between min and max.
+ * @tparam T Type must have next traits: less and greater comparable.
+ * @param value Value to clamp.
+ * @param min Minimum of range.
+ * @param max Maximum of range.
+ * @return clamped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+clamp(const T& value, T min, T max);
+
+/**
+ * Takes the value in one range and shifts it to the corresponding value in a new range.
+ * @param value Value to remap.
+ * @param omin Old range min value.
+ * @param omax Old range max value.
+ * @param nmin New range min value.
+ * @param nmax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit(T value, T omin, T omax, T nmin, T nmax);
+
+/**
+ * Takes the value in the range [0,1] and shifts it to the corresponding value in a new range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit01(T value, T newMin, T newMax);
+
+/**
+ * Takes the value in the range [1,0] and shifts it to the corresponding value in a new range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit10(T value, T newMin, T newMax);
+
+/**
+ * Takes the value in the range [-1,1] and shifts it to the corresponding value in a new range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+fit11(T value, T newMin, T newMax);
+
+/**
+ * Takes the value in one range and shifts it to the corresponding value in a new range.
+ * Does not clamp values to the given range.
+ * @param value Value to remap.
+ * @param omin Old range min value.
+ * @param omax Old range max value.
+ * @param nmin New range min value.
+ * @param nmax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit(T value, T omin, T omax, T nmin, T nmax);
+
+/**
+ * Takes the value in the range [0,1] and shifts it to the corresponding value in a new range.
+ * Does not clamp values to the given range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit01(T value, T newMin, T newMax);
+
+/**
+ * Takes the value in the range [1,0] and shifts it to the corresponding value in a new range.
+ * Does not clamp values to the given range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit10(T value, T newMin, T newMax);
+
+/**
+ * Takes the value in the range [-1,1] and shifts it to the corresponding value in a new range.
+ * Does not clamp values to the given range.
+ * @param value Value to remap.
+ * @param newMin New range min value.
+ * @param newMax New range max value.
+ * @param remapped value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+ufit11(T value, T newMin, T newMax);
+
+/* ####################################################################################### */
+/* Interpolations */
+/* ####################################################################################### */
+
+/**
+ * Performs linear interpolation between the values.
+ * @param A First value.
+ * @param B Second value.
+ * @param bias Interpolation coefficient.
+ * @return Interpolated value.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE T
+lerp(T A, T B, T bias);
+
+/**
+ * Performs a 2D linear interpolation between 4 values.
+ * BiasX and biasY must laid out in [0,1] range.
+ * @tparam T Type must have next traits: comparable, binary plus and minus, binary multiply
+ * @param Ax First point X value.
+ * @param Ay First point Y value.
+ * @param Bx Second point X value.
+ * @param By Second point Y value.
+ * @param biasX X-direction interpolation coefficient.
+ * @param biasY Y-direction interpolation coefficient.
+ * @return Interpolated value.
+ */
+template<typename T>
+static T
+blerp(const T& Ax, const T& Ay, const T& Bx, const T& By, T biasX, T biasY);
+
 
 #include "Common.inl"
 
