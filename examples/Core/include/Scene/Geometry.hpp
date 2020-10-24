@@ -13,15 +13,6 @@ class Geometry
 public:
     struct Point
     {
-        const static uint32_t
-        size;
-
-        const static uint32_t
-        positionOffset;
-
-        const static uint32_t
-        colorOffset;
-
         cgm::vec4
         color;
 

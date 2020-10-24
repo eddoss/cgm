@@ -283,8 +283,8 @@ lerp(T A, T B, T bias);
  * @return Interpolated value.
  */
 template<typename T>
-static T
-blerp(const T& Ax, const T& Ay, const T& Bx, const T& By, T biasX, T biasY);
+constexpr CGM_FORCEINLINE T
+blerp(T Ax, T Ay, T Bx, T By, T biasX, T biasY);
 
 
 #include "Common.inl"

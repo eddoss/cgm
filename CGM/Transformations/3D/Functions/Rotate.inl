@@ -610,13 +610,17 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
     }
     else
     {
-        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
+        quat = orientationQuaternion(converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix), angle);
     }
 
     orient(axes.x, quat);
     orient(axes.y, quat);
     orient(axes.z, quat);
-    orient(pos, quat);
+
+    if constexpr (Space == ESpace::World)
+    {
+        orient(pos, quat);
+    }
 
     set(matrix, axes, pos);
 }

@@ -19,10 +19,12 @@ Application::Application()
     props.aspect = cgm::float32(width()) / cgm::float32(height());
 
     sceneCamera->setProperties(props);
-    sceneCamera->setPosition({2, 2, 2});
-    sceneCamera->setTarget({0, 0, 0});
+    sceneCamera->setPosition({3,3,3});
+    sceneCamera->setTarget({0,0,0});
 
     sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, sceneMaterial);
+    cgx::translate(sceneGrid->xform, 0.005f * cgx::down());
+
     sceneGnomon = Geometry::makeAxes(sceneMaterial);
 }
 
@@ -51,19 +53,15 @@ Application::beforeLoop()
 
     glEnable(GL_MULTISAMPLE);
 
-//    glEnable(GL_DEPTH_TEST);
-//    glDepthFunc(GL_LESS);
-//    glDepthMask(GL_TRUE);
-
-//    glEnable(GL_CULL_FACE);
-//    glCullFace(GL_BACK);
-//    glFrontFace(GL_CCW);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
 }
 
 void
 Application::clearEvent()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void
@@ -82,7 +80,7 @@ Application::resizeEvent()
     sceneCamera->setProperties(props);
 
     glViewport(0, 0, GLsizei(width()), GLsizei(height()));
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     render();
 

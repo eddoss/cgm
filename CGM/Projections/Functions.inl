@@ -57,8 +57,6 @@ template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, 
 constexpr Matrix<4,4,T>
 ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax)
 {
-    constexpr CGM_XYZ::Config cfg {};
-
     auto mat = Matrix<4,4,T>(zero<T>);
 
     {
@@ -67,47 +65,45 @@ ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cube
         const auto up = CGM_COORD::cartesian(cubeHeight * nearPlaneDist / nearPlaneHeight, zero<T>, zero<T>);
         const auto forward = CGM_COORD::cartesian(zero<T>, zero<T>, (farPlaneDist * cubeDepthMax - nearPlaneDist * cubeDepthMin) / frustumLen);
 
-        CGM_XYZ::setRight(mat, right);
+        if constexpr (Handedness == CGM_CONFIG.handedness)
+        {
+            CGM_XYZ::setRight(mat, right);
+        }
+        else
+        {
+            CGM_XYZ::setRight(mat, -right);
+        }
         CGM_XYZ::setUp(mat, up);
         CGM_XYZ::setForward(mat, forward);
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        mat(3, static_cast<size_t>(cfg.forward)) = number<T>(1);
-        mat(static_cast<size_t>(cfg.forward), 3) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
+        mat(3, static_cast<size_t>(CGM_CONFIG.forward)) = number<T>(1);
+        mat(static_cast<size_t>(CGM_CONFIG.forward), 3) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
     #else
         mat(static_cast<size_t>(cfg.forward), 3) = number<T>(1);
         mat(3, static_cast<size_t>(cfg.forward)) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
     #endif
     }
 
-    if constexpr (cfg.right != Right || cfg.up != Up || cfg.forward != Forward || cfg.handedness != Handedness)
+    if constexpr (CGM_CONFIG.right != Right || CGM_CONFIG.up != Up || CGM_CONFIG.forward != Forward)
     {
         Vector<4,T> r(zero<T>);
         Vector<4,T> u(zero<T>);
         Vector<4,T> f(zero<T>);
 
-        u.get<static_cast<E4D>(cfg.up)>() = number<T>(1);
-
-        if constexpr (cfg.handedness != Handedness)
-        {
-            r.get<static_cast<E4D>(cfg.right)>() = number<T>(-1);
-            f.get<static_cast<E4D>(cfg.forward)>() = number<T>(-1);
-        }
-        else
-        {
-            r.get<static_cast<E4D>(cfg.right)>() = number<T>(1);
-            f.get<static_cast<E4D>(cfg.forward)>() = number<T>(1);
-        }
+        u.get<static_cast<E4D>(CGM_CONFIG.up)>() = number<T>(1);
+        r.get<static_cast<E4D>(CGM_CONFIG.right)>() = number<T>(1);
+        f.get<static_cast<E4D>(CGM_CONFIG.forward)>() = number<T>(1);
 
         Matrix<4,4,T> remapper(zero<T>);
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        remapper.setRow(static_cast<size_t>(Right), r);
         remapper.setRow(static_cast<size_t>(Up), u);
+        remapper.setRow(static_cast<size_t>(Right), r);
         remapper.setRow(static_cast<size_t>(Forward), f);
     #else
-        remapper.setColumn(static_cast<size_t>(Right), r);
         remapper.setColumn(static_cast<size_t>(Up), u);
+        remapper.setColumn(static_cast<size_t>(Right), r);
         remapper.setColumn(static_cast<size_t>(Forward), f);
     #endif
 

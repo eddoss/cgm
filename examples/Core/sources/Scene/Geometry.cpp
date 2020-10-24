@@ -5,12 +5,6 @@
 #include <utility>
 
 
-const uint32_t Geometry::Point::size            = sizeof(Geometry::Point);
-const uint32_t Geometry::Point::positionOffset  = sizeof(decltype(Geometry::Point::color));
-const uint32_t Geometry::Point::colorOffset     = 0;
-
-/* --------------------------------------------------------------------------------------- */
-
 Geometry::Point::Point(const cgm::vec3& p, const cgm::vec4& c)
     : color(c)
     , position(p)
@@ -178,14 +172,14 @@ Geometry::init()
     m_vao.bind();
 
     m_vbo.bind();
-    m_vbo.allocate(cgm::uint32(m_points.size()) * Point::size, m_points.data());
+    m_vbo.allocate(cgm::uint32(m_points.size()) * sizeof(Point), m_points.data());
     m_ids.bind();
     m_ids.allocate(cgm::uint32(m_indices.size()) * sizeof(cgm::uint32), m_indices.data());
     m_vbo.bind();
     m_material->enableAttributeArray("vertexPosition");
-    m_material->setAttributeBuffer("vertexPosition", EGLType::Float, 3, Point::positionOffset, Point::size);
+    m_material->setAttributeBuffer("vertexPosition", EGLType::Float, 3, sizeof(decltype(Point::color)), sizeof(Point));
     m_material->enableAttributeArray("vertexColor");
-    m_material->setAttributeBuffer("vertexColor", EGLType::Float, 4, Point::colorOffset, Point::size);
+    m_material->setAttributeBuffer("vertexColor", EGLType::Float, 4, 0, sizeof(Point));
 
     m_vao.release();
 

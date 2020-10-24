@@ -48,6 +48,12 @@ struct Config
     constexpr Config& operator = (Config&&)         = delete;
 };
 
+/* ####################################################################################### */
+/* Macro */
+/* ####################################################################################### */
+
+#define CGM_CONFIG CGM_XYZ::Config()
+
 CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 

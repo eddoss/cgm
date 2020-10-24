@@ -159,14 +159,19 @@ template<typename T>
 constexpr CGM_FORCEINLINE T
 lerp(T A, T B, T bias)
 {
-
+    return bias * (B - A) + A;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-static T
-blerp(const T& Ax, const T& Ay, const T& Bx, const T& By, T biasX, T biasY)
+constexpr CGM_FORCEINLINE T
+blerp(T Ax, T Ay, T Bx, T By, T biasX, T biasY)
 {
-
+    return lerp
+    (
+        lerp(Ax, Ay, biasX),
+        lerp(Bx, By, biasX),
+        biasY
+    );
 }
