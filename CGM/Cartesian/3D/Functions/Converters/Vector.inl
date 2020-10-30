@@ -25,9 +25,9 @@ convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        vector = inverseForce(orientation) * vector;
+        vector = inverse(orientation) * vector;
     #else
-        vector = vector * inverseForce(orientation);
+        vector = vector * inverse(orientation);
     #endif
     }
 }
@@ -49,9 +49,9 @@ convert(Vector<3,T>& vector, const Matrix<4,4,T>& space)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        vector = multiply<Representation>(inverseForce(space), vector);
+        vector = multiply<Representation>(inverse(space), vector);
     #else
-        vector = multiply<Representation>(vector, inverseForce(space));
+        vector = multiply<Representation>(vector, inverse(space));
     #endif
     }
 }
@@ -68,7 +68,7 @@ convert(Vector<3,T>& vector, const Quaternion<T>& orientation)
     }
     else
     {
-        vector = oriented(vector, inverseForce(orientation));
+        vector = oriented(vector, inverse(orientation));
     }
 }
 

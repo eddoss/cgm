@@ -16,7 +16,7 @@ cameraRay(const Vector<2,T>& point, T fov, T aspect, T planeOffset, const Matrix
     direction += fit11(point.x, -w, w) * CGM_XYZ::right(cameraSpace);
     direction += fit11(point.y, -h, h) * CGM_XYZ::up(cameraSpace);
 
-    return normalizedForce(direction);
+    return normalized(direction);
 }
 
 /* --------------------------------------------------------------------------------------- */

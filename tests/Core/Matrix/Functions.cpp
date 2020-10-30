@@ -508,26 +508,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invert(res);
+            bool suc = invertSafe(res);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverse(res, suc);
+            res = inverseSafe(res, suc);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invertForce(res);
+            invert(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverseForce(res);
+            res = inverse(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
     }
@@ -551,26 +551,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invert(res);
+            bool suc = invertSafe(res);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverse(res, suc);
+            res = inverseSafe(res, suc);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invertForce(res);
+            invert(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverseForce(res);
+            res = inverse(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
     }
@@ -595,26 +595,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invert(res);
+            bool suc = invertSafe(res);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverse(res, suc);
+            res = inverseSafe(res, suc);
             ASSERT_TRUE(eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invertForce(res);
+            invert(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverseForce(res);
+            res = inverse(res);
             ASSERT_TRUE(eq(res, inv, 0.001));
         }
     }

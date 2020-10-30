@@ -7,10 +7,11 @@
 void
 LinePainter::render(const Geometry& geo, const Camera& camera)
 {
-    geo.material()->bind();
-    geo.material()->setUniform("xform", geo.xform);
-    geo.material()->setUniform("cameraSpace", camera.inverseSpace());
-    geo.material()->setUniform("cameraProjection", camera.ndc());
+    auto mat = geo.material();
+    mat->bind();
+    mat->setUniform("matXform", geo.xform);
+    mat->setUniform("matWorldToCamera", camera.inverseSpace());
+    mat->setUniform("matCameraToProject", camera.ndc());
 
     geo.vao().bind();
     glDrawElements(GL_LINES, GLsizei(geo.indicesCount()), GL_UNSIGNED_INT, nullptr);

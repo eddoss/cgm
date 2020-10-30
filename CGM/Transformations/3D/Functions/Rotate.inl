@@ -207,9 +207,9 @@ rotate(Matrix<3,3,T>& matrix, T angle)
     }
     else
     {
-        if constexpr (Axis == E3D::X) axs = x(matrix);
-        if constexpr (Axis == E3D::Y) axs = y(matrix);
-        if constexpr (Axis == E3D::Z) axs = z(matrix);
+        if constexpr (Axis == E3D::X) axs = normalized(x(matrix));
+        if constexpr (Axis == E3D::Y) axs = normalized(y(matrix));
+        if constexpr (Axis == E3D::Z) axs = normalized(z(matrix));
     }
 
     rotate(matrix, orientationQuaternion(axs,angle));
@@ -230,7 +230,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
     }
     else
     {
-        quat = orientationQuaternion(converted<ESpace::World>(direction, matrix), angle);
+        quat = orientationQuaternion(normalized(converted<ESpace::World>(direction, matrix), angle));
     }
 
     orient(axes.x, quat);
@@ -408,9 +408,9 @@ rotate(Matrix<4,4,T>& matrix, T angle)
     }
     else
     {
-        if constexpr (Axis == E3D::X) axs = x(matrix);
-        if constexpr (Axis == E3D::Y) axs = y(matrix);
-        if constexpr (Axis == E3D::Z) axs = z(matrix);
+        if constexpr (Axis == E3D::X) axs = normalized(x(matrix));
+        if constexpr (Axis == E3D::Y) axs = normalized(y(matrix));
+        if constexpr (Axis == E3D::Z) axs = normalized(z(matrix));
     }
 
     rotate(matrix, orientationQuaternion(axs,angle));
@@ -434,9 +434,9 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
     }
     else
     {
-        qx = orientationQuaternion(x(matrix), angles.x);
-        qy = orientationQuaternion(y(matrix), angles.y);
-        qz = orientationQuaternion(z(matrix), angles.z);
+        qx = orientationQuaternion(normalized(x(matrix)), angles.x);
+        qy = orientationQuaternion(normalized(y(matrix)), angles.y);
+        qz = orientationQuaternion(normalized(z(matrix)), angles.z);
     }
 
     auto axes = orientationAxes(matrix);
@@ -485,9 +485,9 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
     }
     else
     {
-        qx = orientationQuaternion(x(matrix), angles.x);
-        qy = orientationQuaternion(y(matrix), angles.y);
-        qz = orientationQuaternion(z(matrix), angles.z);
+        qx = orientationQuaternion(normalized(x(matrix)), angles.x);
+        qy = orientationQuaternion(normalized(y(matrix)), angles.y);
+        qz = orientationQuaternion(normalized(z(matrix)), angles.z);
     }
 
     auto axes = orientationAxes(matrix);
@@ -610,7 +610,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
     }
     else
     {
-        quat = orientationQuaternion(converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix), angle);
+        quat = orientationQuaternion(normalized(converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix)), angle);
     }
 
     orient(axes.x, quat);
@@ -636,24 +636,19 @@ rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
 
     if constexpr (Space == ESpace::World)
     {
-//        auto quat = orientationQuaternion(axis.direction, angle);
-//
-//        orient(axes.x, quat);
-//        orient(axes.y, quat);
-//        orient(axes.z, quat);
-//
-//        pos -= axis.position;
-//        orient(pos, quat);
-//        pos += axis.position;
+        auto quat = orientationQuaternion(axis.direction, angle);
 
-        rotate(axes.x, angle, axis.direction);
-        rotate(axes.y, angle, axis.direction);
-        rotate(axes.z, angle, axis.direction);
-        rotate(pos, angle, axis);
+        orient(axes.x, quat);
+        orient(axes.y, quat);
+        orient(axes.z, quat);
+
+        pos -= axis.position;
+        orient(pos, quat);
+        pos += axis.position;
     }
     else
     {
-        auto wsAxisDir = converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix);
+        auto wsAxisDir = normalized(converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix));
         auto wsAxisPos = converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix);
         auto wsQuat = orientationQuaternion(wsAxisDir, angle);
 

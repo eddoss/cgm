@@ -278,7 +278,7 @@ cofactors(const Matrix<S,S,T>& matrix)
 
 template<size_t S, typename T>
 constexpr enable_if_floating<T,bool>
-invert(Matrix<S,S,T>& matrix, T determinantTolerance)
+invertSafe(Matrix<S,S,T>& matrix, T determinantTolerance)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
 
@@ -299,7 +299,7 @@ invert(Matrix<S,S,T>& matrix, T determinantTolerance)
 
 template<size_t S, typename T>
 constexpr enable_if_floating<T,Matrix<S,S,T>>
-inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
+inverseSafe(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
 
@@ -321,7 +321,7 @@ inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
 
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,void>
-invertForce(Matrix<S,S,T>& matrix)
+invert(Matrix<S,S,T>& matrix)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
     matrix = transposed(cofactors(matrix)) / determinant(matrix);
@@ -331,7 +331,7 @@ invertForce(Matrix<S,S,T>& matrix)
 
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Matrix<S,S,T>>
-inverseForce(const Matrix<S,S,T>& matrix)
+inverse(const Matrix<S,S,T>& matrix)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
     return transposed(cofactors(matrix)) / determinant(matrix);
@@ -604,7 +604,7 @@ constexpr bool
 orthogonal(const Matrix<S,S,T>& matrix, T tolerance)
 {
     bool existInverse {false};
-    auto invmat {inverse(matrix, existInverse)};
+    auto invmat {inverseSafe(matrix, existInverse)};
 
     if (!existInverse)
     {

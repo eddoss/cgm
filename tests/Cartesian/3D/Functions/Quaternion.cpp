@@ -65,26 +65,26 @@ TEST(Cartesian_3D_Functions_Quaternion, Normalize)
 
     {
         auto res = qtr;
-        auto suc = normalize(res);
+        auto suc = normalizeSafe(res);
         ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
     }
 
     {
         auto res = qtr;
         bool suc = false;
-        res = normalized(res, suc);
+        res = normalizedSafe(res, suc);
         ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
     }
 
     {
         auto res = qtr;
-        normalizeForce(res);
+        normalize(res);
         ASSERT_TRUE(eq(res, nrm, 0.001));
     }
 
     {
         auto res = qtr;
-        res = normalizedForce(res);
+        res = normalized(res);
         ASSERT_TRUE(eq(res, nrm, 0.001));
     }
 }
@@ -98,26 +98,26 @@ TEST(Cartesian_3D_Functions_Quaternion, Inverse)
 
     {
         auto res = qtr;
-        invert(res);
+        invertSafe(res);
         ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
         bool success = false;
-        res = inverse(res, success);
+        res = inverseSafe(res, success);
         ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
-        invertForce(res);
+        invert(res);
         ASSERT_TRUE(eq(res, inv, 0.001));
     }
 
     {
         auto res = qtr;
-        res = inverseForce(res);
+        res = inverse(res);
         ASSERT_TRUE(eq(res, inv, 0.001));
     }
 }
@@ -145,8 +145,8 @@ TEST(Cartesian_3D_Functions_Quaternion, Angle)
     CGM_XYZ::Quaternion<float> a {4.34f, 5.11f, 3.74f, 1.22f};
     CGM_XYZ::Quaternion<float> b {2.16f, 1.45f, 2.47f, 0.25f};
 
-    normalize(a);
-    normalize(b);
+    normalizeSafe(a);
+    normalizeSafe(b);
 
     float ang = angle(a,b);
 

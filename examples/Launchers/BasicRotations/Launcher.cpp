@@ -16,7 +16,7 @@ void Launcher::render()
     Application::render();
 
     cgx::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 3), cgx::up());
-    cgx::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 12), cgx::ArbitraryAxis{cgm::normalizedForce(cgx::forward(space->xform)), cgx::position(space->xform)});
+    cgx::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 12), cgx::ArbitraryAxis{cgm::normalized(cgx::forward(space->xform)), cgx::position(space->xform)});
     scenePainter->render(*space, *sceneCamera);
 }
 

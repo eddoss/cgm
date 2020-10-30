@@ -75,7 +75,7 @@ length(const Quaternion<T>& quaternion)
 
 template<typename T>
 constexpr bool
-normalize(Quaternion<T>& quaternion, T lengthTolerance)
+normalizeSafe(Quaternion<T>& quaternion, T lengthTolerance)
 {
     T len {length<T>(quaternion)};
 
@@ -92,7 +92,7 @@ normalize(Quaternion<T>& quaternion, T lengthTolerance)
 
 template<typename T>
 constexpr Quaternion<T>
-normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance)
+normalizedSafe(const Quaternion<T>& quaternion, bool& success, T lengthTolerance)
 {
     T len {length<T>(quaternion)};
 
@@ -112,7 +112,7 @@ normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-normalizeForce(Quaternion<T>& quaternion)
+normalize(Quaternion<T>& quaternion)
 {
     quaternion /= length(quaternion);
 }
@@ -121,7 +121,7 @@ normalizeForce(Quaternion<T>& quaternion)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-normalizedForce(const Quaternion<T>& quaternion)
+normalized(const Quaternion<T>& quaternion)
 {
     return quaternion / length(quaternion);
 }
@@ -130,7 +130,7 @@ normalizedForce(const Quaternion<T>& quaternion)
 
 template<typename T>
 constexpr bool
-invert(Quaternion<T>& quaternion, T normTolerance)
+invertSafe(Quaternion<T>& quaternion, T normTolerance)
 {
     auto nrm {norm(quaternion)};
 
@@ -149,7 +149,7 @@ invert(Quaternion<T>& quaternion, T normTolerance)
 
 template<typename T>
 constexpr Quaternion<T>
-inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance)
+inverseSafe(const Quaternion<T>& quaternion, bool& success, T normTolerance)
 {
     auto nrm {norm(quaternion)};
 
@@ -169,7 +169,7 @@ inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-invertForce(Quaternion<T>& quaternion)
+invert(Quaternion<T>& quaternion)
 {
     conjugate(quaternion);
     quaternion /= norm(quaternion);
@@ -179,7 +179,7 @@ invertForce(Quaternion<T>& quaternion)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-inverseForce(const Quaternion<T>& quaternion)
+inverse(const Quaternion<T>& quaternion)
 {
     return conjugated(quaternion) / norm(quaternion);
 }

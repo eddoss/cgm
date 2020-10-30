@@ -45,9 +45,6 @@ Application::beforeLoop()
     sceneGrid->init();
     sceneGnomon->init();
 
-    glClearColor(sceneBgColor.x, sceneBgColor.y, sceneBgColor.z, 1.0f);
-    glViewport(0, 0, GLsizei(width()), GLsizei(height()));
-
     glPrimitiveRestartIndex(Geometry::primitiveRestartValue);
     glEnable(GL_PRIMITIVE_RESTART);
 
@@ -61,6 +58,7 @@ Application::beforeLoop()
 void
 Application::clearEvent()
 {
+    glClearColor(sceneBgColor.x, sceneBgColor.y, sceneBgColor.z, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

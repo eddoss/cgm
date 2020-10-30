@@ -1,14 +1,17 @@
-#version 330 core
+#version 450 core
 
 /* ####################################################################################### */
 /* [ INPUTS ] */
 /* ####################################################################################### */
 
 in vec4 color;
-in vec4 posLocal;
-in vec4 posWorld;
-in vec4 posCamera;
-in vec4 posProject;
+in Position
+{
+    vec4 local;
+    vec4 world;
+    vec4 camera;
+    vec4 project;
+} pos;
 
 /* ####################################################################################### */
 /* [ OUTPUTS ] */

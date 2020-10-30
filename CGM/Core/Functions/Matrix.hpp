@@ -52,7 +52,7 @@ cofactors(const Matrix<S,S,T>& matrix);
  */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,bool>
-invert(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
+invertSafe(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
 
 /**
  * Safely calculate inverse matrix. Change flag to false, if cant calculate.
@@ -63,7 +63,7 @@ invert(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
  */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,Matrix<S,S,T>>
-inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance=T(0.000001));
+inverseSafe(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance=T(0.000001));
 
 /**
  * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
@@ -72,7 +72,7 @@ inverse(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance=T(0.0
  */
 template<size_t S, typename T>
 constexpr enable_if_floating<T,void>
-invertForce(Matrix<S,S,T>& matrix);
+invert(Matrix<S,S,T>& matrix);
 
 /**
  * Unsafely calculate inverse matrix. Does not check the determinants for equality to 0.
@@ -81,7 +81,7 @@ invertForce(Matrix<S,S,T>& matrix);
  */
 template<size_t S, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Matrix<S,S,T>>
-inverseForce(const Matrix<S,S,T>& matrix);
+inverse(const Matrix<S,S,T>& matrix);
 
 /**
  * Calculate matrix trace - sum of diagonal elements.
@@ -156,7 +156,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance);
 
 /**
  * Check if matrix is orthogonal (a matrix is orthogonal if its transpose
- * is also its inverse, i.e., transposed(M) = inverse(M)).
+ * is also its inverse, i.e., transposed(M) = inverseSafe(M)).
  * @param matrix Matrix to check.
  * @param tolerance Comparison tolerance.
  * @return True if matrix is orthogonal, false otherwise.

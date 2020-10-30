@@ -24,26 +24,26 @@ TEST(Vector_Functions, Normalize)
 
         {
             auto res = vec;
-            auto suc = normalize(res);
+            auto suc = normalizeSafe(res);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
-            res = normalized(res, suc);
+            res = normalizedSafe(res, suc);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
-            normalizeForce(res);
+            normalize(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
-            res = normalizedForce(res);
+            res = normalized(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
@@ -56,26 +56,26 @@ TEST(Vector_Functions, Normalize)
 
         {
             auto res = vec;
-            auto suc = normalize(res);
+            auto suc = normalizeSafe(res);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
-            res = normalized(res, suc);
+            res = normalizedSafe(res, suc);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
-            normalizeForce(res);
+            normalize(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
-            res = normalizedForce(res);
+            res = normalized(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
@@ -88,26 +88,26 @@ TEST(Vector_Functions, Normalize)
 
         {
             auto res = vec;
-            auto suc = normalize(res);
+            auto suc = normalizeSafe(res);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
-            res = normalized(res, suc);
+            res = normalizedSafe(res, suc);
             ASSERT_TRUE(eq(res, nrm, 0.001) && suc);
         }
 
         {
             auto res = vec;
-            normalizeForce(res);
+            normalize(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
 
         {
             auto res = vec;
-            res = normalizedForce(res);
+            res = normalized(res);
             ASSERT_TRUE(eq(res, nrm, 0.001));
         }
     }
@@ -120,26 +120,26 @@ TEST(Vector_Functions, Normalize)
 
         {
             auto res = vec;
-            auto suc = normalize(res);
+            auto suc = normalizeSafe(res);
             ASSERT_TRUE(CGM::eq(res, nrm, 0.01) && suc);
         }
 
         {
             auto res = vec;
             bool suc = false;
-            res = normalized(res, suc);
+            res = normalizedSafe(res, suc);
             ASSERT_TRUE(eq(res, nrm, 0.01) && suc);
         }
 
         {
             auto res = vec;
-            normalizeForce(res);
+            normalize(res);
             ASSERT_TRUE(eq(res, nrm, 0.01));
         }
 
         {
             auto res = vec;
-            res = normalizedForce(res);
+            res = normalized(res);
             ASSERT_TRUE(eq(res, nrm, 0.01));
         }
     }

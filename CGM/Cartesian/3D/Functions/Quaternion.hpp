@@ -60,7 +60,7 @@ length(const Quaternion<T>& quaternion);
  */
 template<typename T>
 constexpr bool
-normalize(Quaternion<T>& quaternion, T lengthTolerance=T(0.000001));
+normalizeSafe(Quaternion<T>& quaternion, T lengthTolerance=T(0.000001));
 
 /**
  * Safely normalize quaternion.
@@ -71,7 +71,7 @@ normalize(Quaternion<T>& quaternion, T lengthTolerance=T(0.000001));
  */
 template<typename T>
 constexpr Quaternion<T>
-normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance=T(0.000001));
+normalizedSafe(const Quaternion<T>& quaternion, bool& success, T lengthTolerance=T(0.000001));
 
 /**
  * Unsafely normalize quaternion.
@@ -79,7 +79,7 @@ normalized(const Quaternion<T>& quaternion, bool& success, T lengthTolerance=T(0
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-normalizeForce(Quaternion<T>& quaternion);
+normalize(Quaternion<T>& quaternion);
 
 /**
  * Unsafely normalize quaternion.
@@ -88,7 +88,7 @@ normalizeForce(Quaternion<T>& quaternion);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
-normalizedForce(const Quaternion<T>& quaternion);
+normalized(const Quaternion<T>& quaternion);
 
 /**
  * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
@@ -98,7 +98,7 @@ normalizedForce(const Quaternion<T>& quaternion);
  */
 template<typename T>
 constexpr bool
-invert(Quaternion<T>& quaternion, T normTolerance=T(0.000001));
+invertSafe(Quaternion<T>& quaternion, T normTolerance=T(0.000001));
 
 /**
  * Safely calculate inverse quaternion. Change flag to false, if cant calculate.
@@ -108,7 +108,7 @@ invert(Quaternion<T>& quaternion, T normTolerance=T(0.000001));
  */
 template<typename T>
 constexpr Quaternion<T>
-inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance=T(0.000001));
+inverseSafe(const Quaternion<T>& quaternion, bool& success, T normTolerance=T(0.000001));
 
 /**
  * Unsafely calculate inverse quaternion.
@@ -118,7 +118,7 @@ inverse(const Quaternion<T>& quaternion, bool& success, T normTolerance=T(0.0000
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-invertForce(Quaternion<T>& quaternion);
+invert(Quaternion<T>& quaternion);
 
 /**
  * Get inverse copy of the quaternion if it is large enough.
@@ -127,7 +127,7 @@ invertForce(Quaternion<T>& quaternion);
  */
 template<typename T>
 constexpr Quaternion<T>
-inverseForce(const Quaternion<T>& quaternion);
+inverse(const Quaternion<T>& quaternion);
 
 /**
  * Orients vector by Quaternion.

@@ -25,9 +25,9 @@ convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = inverseForce(orientation) * matrix;
+        matrix = inverse(orientation) * matrix;
     #else
-        matrix = matrix * inverseForce(orientation);
+        matrix = matrix * inverse(orientation);
     #endif
     }
 }
@@ -49,9 +49,9 @@ convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& space)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = multiply<2>(inverseForce(space), matrix);
+        matrix = multiply<2>(inverse(space), matrix);
     #else
-        matrix = multiply<2>(matrix, inverseForce(space));
+        matrix = multiply<2>(matrix, inverse(space));
     #endif
     }
 }

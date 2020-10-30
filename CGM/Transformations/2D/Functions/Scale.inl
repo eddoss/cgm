@@ -125,9 +125,9 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = inverseForce(scales) * matrix;
+        matrix = inverse(scales) * matrix;
     #else
-        matrix = matrix * inverseForce(scales);
+        matrix = matrix * inverse(scales);
     #endif
     }
 }
@@ -250,9 +250,9 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = inverseForce(scales) * matrix;
+        matrix = inverse(scales) * matrix;
     #else
-        matrix = matrix * inverseForce(scales);
+        matrix = matrix * inverse(scales);
     #endif
     }
 }

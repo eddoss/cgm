@@ -869,13 +869,13 @@ template<typename T>
 constexpr Matrix<4,4,T>
 lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>& up)
 {
-    const auto f = CGM::normalizedForce(target - position);
+    const auto f = CGM::normalized(target - position);
 #ifdef CGM_CFG_RHS
-    const auto r = CGM::normalizedForce(CGM::cross(up, f));
-    const auto u = CGM::normalizedForce(CGM::cross(f, r));
+    const auto r = CGM::normalized(CGM::cross(up, f));
+    const auto u = CGM::normalized(CGM::cross(f, r));
 #else
-    const auto r = CGM::normalizedForce(CGM::cross(f, up));
-    const auto u = CGM::normalizedForce(CGM::cross(r, f));
+    const auto r = CGM::normalized(CGM::cross(f, up));
+    const auto u = CGM::normalized(CGM::cross(r, f));
 #endif
 
     Matrix<4,4,T> mat {};
@@ -981,7 +981,7 @@ invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance)
         basis(2,0), basis(2,1), basis(2,2)
     };
 
-    if (invert(orient, determinantTolerance))
+    if (invertSafe(orient, determinantTolerance))
     {
         basis(0,0) = orient(0,0);
         basis(0,1) = orient(0,1);
@@ -1014,7 +1014,7 @@ inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantToler
         basis(2,0), basis(2,1), basis(2,2)
     };
 
-    success = invert(orient, determinantTolerance);
+    success = invertSafe(orient, determinantTolerance);
 
     if (success)
     {
@@ -1059,7 +1059,7 @@ invertOrientationForce(Matrix<4,4,T>& basis)
         basis(2,0), basis(2,1), basis(2,2)
     };
 
-    invertForce(orient);
+    invert(orient);
 
     basis(0,0) = orient(0,0);
     basis(0,1) = orient(0,1);
@@ -1085,7 +1085,7 @@ inverseOrientationForce(const Matrix<4,4,T>& basis)
         basis(2,0), basis(2,1), basis(2,2)
     };
 
-    invertForce(orient);
+    invert(orient);
 
     Matrix<4,4,T> mat;
 

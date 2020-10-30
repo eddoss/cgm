@@ -14,7 +14,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation)
 {
-    convert<Space>(axis.direction, orientation);
+    normalized(convert<Space>(axis.direction, orientation));
     convert<Space>(axis.position, orientation);
 }
 
@@ -24,7 +24,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
 {
-    convert<Space>(axis.direction, orientation);
+    normalized(convert<Space>(axis.direction, orientation));
     convert<Space>(axis.position, orientation, position);
 }
 
@@ -34,7 +34,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space)
 {
-    convert<Space,EVectorRepresentation::Direction>(axis.direction, space);
+    normalized(convert<Space,EVectorRepresentation::Direction>(axis.direction, space));
     convert<Space,EVectorRepresentation::Point>(axis.position, space);
 }
 
@@ -44,7 +44,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation)
 {
-    convert<Space>(axis.direction, orientation);
+    normalized(convert<Space>(axis.direction, orientation));
     convert<Space>(axis.position, orientation);
 }
 
@@ -54,7 +54,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
-    convert<Space>(axis.direction, orientation);
+    normalized(convert<Space>(axis.direction, orientation));
     convert<Space>(axis.position, orientation, position);
 }
 

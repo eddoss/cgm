@@ -7,7 +7,7 @@ CGM_NAMESPACE_BEGIN
 
 template<size_t D, typename T>
 constexpr enable_if_floating<T, bool>
-normalize(Vector<D,T>& vector, T lengthTolerance)
+normalizeSafe(Vector<D,T>& vector, T lengthTolerance)
 {
     T len {length<T>(vector)};
 
@@ -52,7 +52,7 @@ normalize(Vector<D,T>& vector, T lengthTolerance)
 
 template<size_t D, typename T>
 constexpr enable_if_floating<T, Vector<D,T>>
-normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance)
+normalizedSafe(const Vector<D,T>& vector, bool& success, T lengthTolerance)
 {
     T len {length<T>(vector)};
 
@@ -109,7 +109,7 @@ normalized(const Vector<D,T>& vector, bool& success, T lengthTolerance)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
-normalizeForce(Vector<D,T>& vector)
+normalize(Vector<D,T>& vector)
 {
     T len {length<T>(vector)};
 
@@ -147,7 +147,7 @@ normalizeForce(Vector<D,T>& vector)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<D,T>>
-normalizedForce(const Vector<D,T>& vector)
+normalized(const Vector<D,T>& vector)
 {
     T len {length<T>(vector)};
 

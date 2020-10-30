@@ -90,9 +90,9 @@ transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
     else
     {
         auto pivot = parameters.pivot;
-        convert<ESpace::World>(pivot.axes.x, matrix);
-        convert<ESpace::World>(pivot.axes.y, matrix);
-        convert<ESpace::World>(pivot.axes.z, matrix);
+        normalized(convert<ESpace::World>(pivot.axes.x, matrix));
+        normalized(convert<ESpace::World>(pivot.axes.y, matrix));
+        normalized(convert<ESpace::World>(pivot.axes.z, matrix));
         
         switch (parameters.transformOrder)
         {

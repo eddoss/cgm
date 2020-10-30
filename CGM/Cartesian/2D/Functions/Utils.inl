@@ -337,7 +337,7 @@ invertOrientation(Matrix<3,3,T>& basis, T determinantTolerance)
         basis(1,0), basis(1,1)
     };
 
-    if (invert(orient, determinantTolerance))
+    if (invertSafe(orient, determinantTolerance))
     {
         basis(0,0) = orient(0,0);
         basis(0,1) = orient(0,1);
@@ -364,7 +364,7 @@ inverseOrientation(const Matrix<3,3,T>& basis, bool& success, T determinantToler
         basis(1,0), basis(1,1)
     };
 
-    success = invert(orient, determinantTolerance);
+    success = invertSafe(orient, determinantTolerance);
 
     if (success)
     {
@@ -401,7 +401,7 @@ invertOrientationForce(Matrix<3,3,T>& basis)
         basis(1,0), basis(1,1)
     };
 
-    invertForce(orient);
+    invert(orient);
 
     basis(2,0) = orient(2,0);
     basis(2,1) = orient(2,1);
@@ -422,7 +422,7 @@ inverseOrientationForce(const Matrix<3,3,T>& basis)
         basis(1,0), basis(1,1)
     };
 
-    invertForce(orient);
+    invert(orient);
 
     Matrix<3,3,T> mat;
 

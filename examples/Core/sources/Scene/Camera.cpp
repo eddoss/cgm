@@ -82,7 +82,7 @@ Camera::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forwar
     cgx::translate(m_space, cgx::forward(m_space) * forward);
 
     m_spaceInverse = m_space;
-    cgm::invertForce(m_spaceInverse);
+    cgm::invert(m_spaceInverse);
 }
 
 void
@@ -92,7 +92,7 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
     cgx::rotate(m_space, cgm::radians(horizontal), cgx::up());
 
     m_spaceInverse = m_space;
-    cgm::invertForce(m_spaceInverse);
+    cgm::invert(m_spaceInverse);
 }
 
 void
@@ -112,5 +112,5 @@ Camera::calculateSpace()
 {
     m_space = cgx::lookAt(m_position, m_target, cgx::up());
     m_spaceInverse = m_space;
-    cgm::invertForce(m_spaceInverse);
+    cgm::invert(m_spaceInverse);
 }

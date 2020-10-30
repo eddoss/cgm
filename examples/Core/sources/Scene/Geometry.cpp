@@ -176,10 +176,10 @@ Geometry::init()
     m_ids.bind();
     m_ids.allocate(cgm::uint32(m_indices.size()) * sizeof(cgm::uint32), m_indices.data());
     m_vbo.bind();
-    m_material->enableAttributeArray("vertexPosition");
-    m_material->setAttributeBuffer("vertexPosition", EGLType::Float, 3, sizeof(decltype(Point::color)), sizeof(Point));
-    m_material->enableAttributeArray("vertexColor");
-    m_material->setAttributeBuffer("vertexColor", EGLType::Float, 4, 0, sizeof(Point));
+    m_material->enableAttributeArray("attrPosition");
+    m_material->setAttributeBuffer("attrPosition", EGLType::Float, 3, sizeof(decltype(Point::color)), sizeof(Point));
+    m_material->enableAttributeArray("attrColor");
+    m_material->setAttributeBuffer("attrColor", EGLType::Float, 4, 0, sizeof(Point));
 
     m_vao.release();
 

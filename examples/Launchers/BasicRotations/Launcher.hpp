@@ -18,6 +18,6 @@ protected:
     beforeLoop() override;
 
 private:
-    std::unique_ptr<Geometry>
+    Geometry::Unique
     space = nullptr;
 };

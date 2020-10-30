@@ -162,7 +162,7 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction)
     }
     else
     {
-        scale<ESpace::World>(matrix, value, converted<ESpace::World>(direction, matrix));
+        scale<ESpace::World>(matrix, value, normalized(converted<ESpace::World>(direction, matrix)));
     }
 }
 
@@ -187,7 +187,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
     }
     else
     {
-        scale<ESpace::World>(matrix, values, converted<ESpace::World>(pivot, matrix));
+        scale<ESpace::World>(matrix, values, normalized(converted<ESpace::World>(pivot, matrix)));
     }
 }
 
@@ -293,7 +293,7 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
         scale<ESpace::World>
         (
             matrix, value,
-            converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix)
+            normalized(converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix))
         );
     }
 }
@@ -323,8 +323,8 @@ scale(Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis)
             matrix, value,
             ArbitraryAxis<T>
             (
-                converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix),
-                converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix)
+                normalized(converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix)),
+                normalized(converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix))
             )
         );
     }
@@ -353,7 +353,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivotPoi
     }
     else
     {
-        scale<ESpace::World>(matrix, values, converted<ESpace::World>(pivotPoint, matrix));
+        scale<ESpace::World>(matrix, values, normalized(converted<ESpace::World>(pivotPoint, matrix)));
     }
 }
 

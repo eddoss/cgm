@@ -16,8 +16,7 @@
     GLint location = glGetUniformLocation(m_id, name.data()); \
     if (location == -1) \
     {\
-        CGM_EXAMPLES_FUNC_INFO("Error: can not enable attribute array. Attribute is alreay disabled or not exist");\
-        std::cout << "Attribute: " << name << std::endl;\
+        CGM_EXAMPLES_FUNC_ERROR(std::string("can not enable attribute array: '") + name + "'");\
         return;\
     }
 #endif
@@ -87,15 +86,15 @@ ShaderProgram::link()
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is not created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created");
         return false;
     }
 
     GLint success;
 
-    for( size_t i = 0; i < m_shadersIDs.size(); ++i )
+    for(auto m_shadersID : m_shadersIDs)
     {
-        glAttachShader(m_id, m_shadersIDs[i]);
+        glAttachShader(m_id, m_shadersID);
     }
 
     glLinkProgram( m_id );
@@ -111,12 +110,11 @@ ShaderProgram::link()
             char* logData = new char[uint64_t(logLength)];
 
             glGetShaderInfoLog( m_id, logLength, nullptr, logData );
-            CGM_EXAMPLES_FUNC_INFO("Error: can not link shader program");
-            CGM_EXAMPLES_PRINT(std::string(logData));
+            CGM_EXAMPLES_FUNC_ERROR(std::string(logData));
         }
         else
         {
-            CGM_EXAMPLES_FUNC_INFO("Error: can not link shader program");
+            CGM_EXAMPLES_FUNC_ERROR("can not link shader program");
         }
 
         m_linked = false;
@@ -149,7 +147,7 @@ ShaderProgram::addShader(ShaderProgram::EShaderType shaderType, const std::strin
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO( "Error: shader program is not created. Create shader program before shader attaching" );
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created. Create shader program before shader attaching");
         return false;
     }
 
@@ -224,7 +222,7 @@ ShaderProgram::uniformLocation(const std::string& name) const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is not created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created");
         return -1;
     }
     return glGetUniformLocation(m_id, name.data());
@@ -237,14 +235,14 @@ ShaderProgram::enableAttributeArray(const std::string& name) const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is not created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created");
         return;
     }
 
     GLint location = glGetAttribLocation(m_id, name.data());
     if( location == -1 )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not enable attribute array");
+        CGM_EXAMPLES_FUNC_ERROR(std::string("can not enable attribute array: '") + name + "'");
         return;
     }
     glEnableVertexAttribArray(GLuint(location));
@@ -257,13 +255,13 @@ ShaderProgram::disableAttributeArray(const std::string& name) const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is not created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created");
         return;
     }
     GLint location = glGetAttribLocation(m_id, name.data());
     if( location == -1 )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not enable attribute array. Attribute is alreay disable or not exist");
+        CGM_EXAMPLES_FUNC_ERROR(std::string("can not disable attribute array: '") + name + "'");
         return;
     }
     glDisableVertexAttribArray(GLuint(location));
@@ -276,14 +274,14 @@ ShaderProgram::setAttributeBuffer(const std::string& name, EGLType type, uint32_
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is not created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is not created");
         return;
     }
 
     GLint location = glGetAttribLocation(m_id, name.data());
     if( location == -1 )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not set attribute array. Attribute disable or not exist");
+        CGM_EXAMPLES_FUNC_ERROR(std::string("can not set attribute array: '") + name + "'");
         return;
     }
 
@@ -522,7 +520,7 @@ ShaderProgram::bind() const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not bind shader program, it is not created");
+        CGM_EXAMPLES_FUNC_ERROR("can not bind shader program, it is not created");
         return false;
     }
     glUseProgram(m_id);
@@ -536,7 +534,7 @@ ShaderProgram::release() const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not bind shader program, it is not created");
+        CGM_EXAMPLES_FUNC_ERROR("can not bind shader program, it is not created");
         return false;
     }
     glUseProgram(0);
@@ -550,7 +548,7 @@ ShaderProgram::create()
 {
     if( m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: shader program is already created");
+        CGM_EXAMPLES_FUNC_ERROR("shader program is already created");
         return false;
     }
 
@@ -558,7 +556,7 @@ ShaderProgram::create()
 
     if( m_id == 0 )
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not to create shader program");
+        CGM_EXAMPLES_FUNC_ERROR("can not to create shader program");
         m_objectCreated = false;
         return false;
     }

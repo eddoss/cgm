@@ -25,9 +25,9 @@ convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = inverseForce(orientation) * matrix;
+        matrix = inverse(orientation) * matrix;
     #else
-        matrix = matrix * inverseForce(orientation);
+        matrix = matrix * inverse(orientation);
     #endif
     }
 }
@@ -49,9 +49,9 @@ convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space)
     else
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
-        matrix = multiply<3>(inverseForce(space), matrix);
+        matrix = multiply<3>(inverse(space), matrix);
     #else
-        matrix = multiply<3>(matrix, inverseForce(space));
+        matrix = multiply<3>(matrix, inverse(space));
     #endif
     }
 }
@@ -72,7 +72,7 @@ convert(Matrix<3,3,T>& matrix, const Quaternion<T>& orientation)
     }
     else
     {
-        auto quat = inverseForce(orientation);
+        auto quat = inverse(orientation);
         orient(axes.x, quat);
         orient(axes.y, quat);
         orient(axes.z, quat);

@@ -74,15 +74,15 @@ reflect(Matrix<3,3,T>& matrix)
 
         if constexpr (Plane == EPlane::XY)
         {
-            planeNormal = z(matrix);
+            planeNormal = normalized(z(matrix));
         }
         else if constexpr (Plane == EPlane::YZ)
         {
-            planeNormal = x(matrix);
+            planeNormal = normalized(x(matrix));
         }
         else
         {
-            planeNormal = y(matrix);
+            planeNormal = normalized(y(matrix));
         }
 
         reflect(axes.x, planeNormal);
@@ -109,7 +109,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
     }
     else
     {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
+        auto pn = normalized(converted<ESpace::World,EVectorRepresentation::Direction>(planeNormal, matrix));
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
@@ -143,15 +143,15 @@ reflect(Matrix<4,4,T>& matrix)
 
         if constexpr (Plane == EPlane::XY)
         {
-            planeNormal = z(matrix);
+            planeNormal = normalized(z(matrix));
         }
         else if constexpr (Plane == EPlane::YZ)
         {
-            planeNormal = x(matrix);
+            planeNormal = normalized(x(matrix));
         }
         else
         {
-            planeNormal = y(matrix);
+            planeNormal = normalized(y(matrix));
         }
 
         reflect(axes.x, planeNormal);
@@ -181,7 +181,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
     }
     else
     {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
+        auto pn = normalized(converted<ESpace::World>(planeNormal, matrix));
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
@@ -210,8 +210,8 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>
     }
     else
     {
-        auto pn = converted<ESpace::World>(planeNormal, matrix);
-        auto pc = converted<ESpace::World>(planeCenter, matrix);
+        auto pn = normalized(converted<ESpace::World>(planeNormal, matrix));
+        auto pc = normalized(converted<ESpace::World>(planeCenter, matrix));
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
