@@ -21,19 +21,19 @@ public: /* Typedefs */
 /* ####################################################################################### */
 
     using value_type        = T;
+    using vector_type       = Vector<3,T>;
+    using scalar_type       = value_type;
     using pointer           = T*;
     using reference         = T&;
     using const_pointer     = const T*;
     using const_reference   = const T&;
-    using VectorType        = Vector<3,T>;
-    using ScalarType        = T;
 
 /* ####################################################################################### */
 public: /* Components */
 /* ####################################################################################### */
 
-    VectorType vector;
-    ScalarType scalar;
+    vector_type vector;
+    scalar_type scalar;
 
 /* ####################################################################################### */
 public: /* Constructors */
@@ -63,7 +63,7 @@ public: /* Constructors */
      * @param coefficients Imaginary components coefficients.
      */
     constexpr
-    Quaternion(const VectorType& coefficients, T scalarValue);
+    Quaternion(const vector_type& coefficients, T scalarValue);
 
     /**
      * Initialize from 4D vector.

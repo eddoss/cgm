@@ -30,7 +30,7 @@ Quaternion<T, enable_if_floating<T,void>>::Quaternion(T coefficientsValue, T sca
 
 template<typename T>
 constexpr
-Quaternion<T, enable_if_floating<T,void>>::Quaternion(const VectorType& coefficients, T scalarValue)
+Quaternion<T, enable_if_floating<T,void>>::Quaternion(const vector_type& coefficients, T scalarValue)
     : vector(coefficients)
     , scalar(scalarValue)
 {

@@ -124,11 +124,10 @@ rotate(Vector<3,T>& vector, const Transforms<T>& transforms);
 /**
  * Rotates 3x3 matrix around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angle Rotation angle.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle);
 
@@ -138,49 +137,45 @@ rotate(Matrix<3,3,T>& matrix, T angle);
  * @param direction Direction to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes (in 'XYZ' rotation order).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes (in given rotation order).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  * @param rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
 /**
  * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  * @param rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
@@ -195,11 +190,10 @@ rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -210,11 +204,10 @@ rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 /**
  * Rotates 4x4 matrix around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param matrix Space matrix to rotate.
  * @param angle Rotation angle.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle);
 
@@ -224,7 +217,7 @@ rotate(Matrix<4,4,T>& matrix, T angle);
  * @param matrix Space matrix to rotate.
  * @param angles Rotation angles (angle per axis).
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
@@ -235,7 +228,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
  * @param angles Rotation angles (angle per axis).
  * @tparam rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
@@ -245,40 +238,37 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
  * @param direction Direction to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates 4x4 matrix around arbitrary axis.
- * @tparam Space In which space to transform.
  * @param axis Arbitrary axis to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @param rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
@@ -293,11 +283,10 @@ rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
  * Rotates 4x4 matrix around each axis of pivot on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
@@ -473,65 +462,59 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 /**
  * Rotates quaternion around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param quaternion Quaternion to rotate.
  * @param angle Rotation angle.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle);
 
 /**
  * Rotates quaternion around arbitrary axis.
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param direction Arbitrary direction to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @param rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates quaternion by Quaternion.
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param quat Quaternion to rotate by.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms);
 
@@ -645,12 +628,11 @@ rotated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 /**
  * Rotates 3x3 matrix around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
@@ -661,73 +643,67 @@ rotated(const Matrix<3,3,T>& matrix, T angle);
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes (in 'XYZ' rotation order).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes (in given rotation order).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  * @param rotationOrder Rotation order.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates 3x3 matrix around pivot axes in 'XYZ' rotation order (pivot position is not taken in account).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
 /**
  * Rotates 3x3 matrix around pivot axes in given rotation order (pivot position is not taken in account).
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angles Rotation angles.
  * @param rotationOrder Rotation order.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
 /**
  * Rotates 3x3 matrix by Quaternion.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param quaternion Quaternion to rotate by.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
  * Rotates 3x3 matrix around default Cartesian axes on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param transforms Transformations parameters.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -738,12 +714,11 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 /**
  * Rotates 4x4 matrix around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param matrix Orientation matrix to rotate.
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle);
 
@@ -754,7 +729,7 @@ rotated(const Matrix<4,4,T>& matrix, T angle);
  * @param angles Rotation angles (angle per axis).
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
@@ -766,7 +741,7 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
  * @tparam rotationOrder Rotation order.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
@@ -777,65 +752,60 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder r
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates 4x4 matrix around arbitrary axis.
- * @tparam Space In which space to transform.
  * @param axis Arbitrary axis to rotate around.
  * @param angle Rotation angle.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in given rotation order).
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @param rotationOrder Rotation order.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates 4x4 matrix by Quaternion.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param quaternion Quaternion to rotate by.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
  * Rotates 4x4 matrix around each axis of pivot on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param matrix Matrix to rotate.
  * @param transforms Transformations parameters.
  * @return Rotated copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
@@ -1027,71 +997,65 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 /**
  * Rotates quaternion around default Cartesian axis.
  * @tparam Axis Cartesian axis to rotate around.
- * @tparam Space In which space to rotate.
  * @param quaternion Quaternion to rotate.
  * @param angle Rotation angle.
  * @return Rotated copy of quaternion.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, T angle);
 
 /**
  * Rotates quaternion around arbitrary axis.
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param axis Arbitrary axis to rotate around.
  * @param angle Rotation angle.
  * @return Rotated copy of quaternion.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @return Rotated copy of quaternion.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "angles" (in given rotation order).
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param angles Rotation angles (angle per pivot axis).
  * @param pivotPoint Rotation pivot.
  * @param rotationOrder Rotation order.
  * @return Rotated copy of quaternion.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates quaternion by Quaternion.
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param quat Quaternion to rotate by.
  * @return Rotated copy of quaternion.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Quaternion<T>& quat);
 
 /**
  * Rotates quaternion around each axis of pivot on angle contained in "transform.rotations".
- * @tparam Space In which space to transform.
  * @param quaternion Quaternion to rotate.
  * @param transforms Transformations parameters.
  * @return Rotated copy of quaternion.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms);
 

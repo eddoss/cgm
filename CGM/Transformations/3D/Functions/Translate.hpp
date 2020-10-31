@@ -6,7 +6,6 @@
 #include <CGM/Core/Functions/Matrix.hpp>
 #include <CGM/Cartesian/3D/Functions/Axes.hpp>
 #include <CGM/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
@@ -76,55 +75,49 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Translates basis matrix along default Cartesian axis.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, T value);
 
 /**
  * Translates basis matrix by vector.
  * @tparam Axis Cartesian axis to translate along which.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, const Vector<3,T>& value);
 
 /**
  * Translate basis matrix along other vector. Result offset is depend on other vector length.
- * @tparam Space In which space to translate.
- * @tparam AlongRepr Representation of 'along' vector. Its affect when 'Space == Local'.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  * @param along Vector to translate along to.
  */
-template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& basis, T value, const Vector<3,T>& along);
 
 /**
  * Translate basis matrix along pivot axes.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param values How much to translate (value per pivot axis).
  * @param pivot Pivot point.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& basis, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Translates basis matrix using "transforms.translations".
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& basis, const Transforms<T>& transforms);
 
@@ -293,59 +286,53 @@ translated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /**
  * Translates transform matrix along default Cartesian axis.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  * @return Translated matrix.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, T value);
 
 /**
  * Translates transform matrix by vector.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value);
 
 /**
  * Translate basis matrix along other vector. Result offset is depend on other vector length.
- * @tparam Space In which space to translate.
- * @tparam AlongRepr Representation of 'along' vector.
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  * @param along Vector to translate along to.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& basis, T value, const Vector<3,T>& along);
 
 /**
  * Translate basis matrix along pivot axes.
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param values How much to translate (value per pivot axis).
  * @param pivot Pivot point.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& basis, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Translates transform matrix using "transforms.translations".
- * @tparam Space In which space to translate.
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 

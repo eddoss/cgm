@@ -70,126 +70,62 @@ translate(Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, T value)
 {
-    Vector<3,T> axs;
-
-    if constexpr (Space == ESpace::World)
-    {
-        if constexpr (Axis == E3D::X)
-        {
-            axs = x<T>();
-        }
-        else if constexpr (Axis == E3D::Y)
-        {
-            axs = y<T>();
-        }
-        else
-        {
-            axs = z<T>();
-        }
-    }
-    else
-    {
-        if constexpr (Axis == E3D::X)
-        {
-            axs = x(basis);
-        }
-        else if constexpr (Axis == E3D::Y)
-        {
-            axs = y(basis);
-        }
-        else
-        {
-            axs = z(basis);
-        }
-    }
-
-    const auto pos = position(basis) + value * axs;
+    const auto pos = position(basis) + value * axis<Axis,T>();
     setPosition(basis, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, const Vector<3,T>& value)
 {
-    if constexpr (Space == ESpace::World)
-    {
-    #ifdef CGM_CFG_MATRIX_POSTMULT
-        basis(0,3) += value.x;
-        basis(1,3) += value.y;
-        basis(2,3) += value.z;
-    #else
-        basis(3,0) += value.x;
-        basis(3,1) += value.y;
-        basis(3,2) += value.z;
-    #endif
-    }
-    else
-    {
-        auto pos = position(basis);
-
-        pos += x(basis) * value.x;
-        pos += y(basis) * value.y;
-        pos += z(basis) * value.z;
-
-        setPosition(basis, pos);
-    }
+#ifdef CGM_CFG_MATRIX_POSTMULT
+    basis(0,3) += value.x;
+    basis(1,3) += value.y;
+    basis(2,3) += value.z;
+#else
+    basis(3,0) += value.x;
+    basis(3,1) += value.y;
+    basis(3,2) += value.z;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, EVectorRepresentation AlongRepr, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& basis, T value, const Vector<3,T>& along)
 {
-    if constexpr (Space == ESpace::World)
-    {
-        setPosition(basis, position(basis) + along * value);
-    }
-    else
-    {
-        setPosition(basis, position(basis) + converted<ESpace::World,AlongRepr>(along, basis) * value);
-    }
+    setPosition(basis, position(basis) + along * value);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 translate(Matrix<4,4,T>& basis, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
-    if constexpr (Space == ESpace::World)
-    {
-        auto pos = position(basis);
-        pos += values.x * pivot.axes.x;
-        pos += values.y * pivot.axes.y;
-        pos += values.z * pivot.axes.z;
-        setPosition(basis, pos);
-    }
-    else
-    {
-        auto piv = pivot;
-        converted<ESpace::World,EVectorRepresentation::Direction>(pivot.axes.x, basis);
-        converted<ESpace::World,EVectorRepresentation::Direction>(pivot.axes.y, basis);
-        converted<ESpace::World,EVectorRepresentation::Direction>(pivot.axes.z, basis);
-        converted<ESpace::World,EVectorRepresentation::Point>(pivot.position, basis);
-
-        translate<ESpace::World>(basis, values, piv);
-    }
+    auto pos = position(basis);
+    
+    pos += values.x * pivot.axes.x;
+    pos += values.y * pivot.axes.y;
+    pos += values.z * pivot.axes.z;
+    
+    setPosition(basis, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 translate(Matrix<4,4,T>& basis, const Transforms<T>& transforms)
 {
-    translate<Space>(basis, transforms.translation, transforms.pivot);
+    translate(basis, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
@@ -351,56 +287,56 @@ translated(const Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, T value)
 {
     auto copy = matrix;
-    translate<Axis,Space>(copy, value);
+    translate<Axis>(copy, value);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Vector<3,T>& value)
 {
     auto copy = matrix;
-    translate<Space>(copy, value);
+    translate(copy, value);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, EVectorRepresentation AlongRepr, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& basis, T value, const Vector<3,T>& along)
 {
     auto copy = basis;
-    translate<Space,AlongRepr>(copy, value, along);
+    translate(copy, value, along);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& basis, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto copy = basis;
-    translate<Space>(copy, values, pivot);
+    translate(copy, values, pivot);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
-    translate<Space>(copy, transforms);
+    translate(copy, transforms);
     return copy;
 }
 

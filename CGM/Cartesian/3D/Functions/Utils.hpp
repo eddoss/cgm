@@ -384,22 +384,20 @@ setForward(Axes<T>& axes, const Vector<3,T>& value);
 /* ####################################################################################### */
 
 /**
- * Set homogeneous components of orientation axes.
+ * Gets homogeneous components of orientation axes.
  * @param matrix 4x4 basis matrix.
- * @param values Components values.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-homogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
+homogeneous(Matrix<4,4,T>& matrix);
 
 /**
- * Set homogeneous components of orientation axes and position.
+ * Gets homogeneous components of orientation axes and position.
  * @param matrix 4x4 basis matrix.
- * @param values Components values.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<4,T>
-axesHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values);
+axesHomogeneous(Matrix<4,4,T>& matrix);
 
 /**
  * Set homogeneous components of orientation axes.
@@ -516,7 +514,7 @@ constexpr CGM_FORCEINLINE void
 set(Matrix<3,3,T>& matrix, const Axes<T>& axes);
 
 /**
- * Set X,Y,Z axes and position to 4x4 orientation matrix.
+ * Set X,Y,Z axes and position to 4x4 matrix.
  * @param matrix Matrix to set axes to.
  * @param x X axis.
  * @param y Y axis.
@@ -526,6 +524,18 @@ set(Matrix<3,3,T>& matrix, const Axes<T>& axes);
 template<typename T>
 constexpr CGM_FORCEINLINE void
 set(Matrix<4,4,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position);
+
+/**
+ * Set X,Y,Z axes and position to 4x4 matrix.
+ * @param matrix Matrix to set axes to.
+ * @param x X axis.
+ * @param y Y axis.
+ * @param z Z axis.
+ * @param position Basis position.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<4,4,T>& matrix, const Vector<4,T>& x, const Vector<4,T>& y, const Vector<4,T>& z, const Vector<4,T>& position);
 
 /**
  * Set X,Y,Z axes and position to 4x4 orientation matrix.
@@ -649,7 +659,7 @@ transposedOrientation(const Matrix<4,4,T>& basis);
  */
 template<typename T>
 constexpr bool
-invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance=T(0.000001));
+invertOrientationSafe(Matrix<4,4,T>& basis, T determinantTolerance=T(0.000001));
 
 /**
  * Safely calculates inverse orientation of 4x4 basis matrix.
@@ -659,7 +669,7 @@ invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance=T(0.000001));
  */
 template<typename T>
 constexpr Matrix<4,4,T>
-inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance=T(0.000001));
+inverseOrientationSafe(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance=T(0.000001));
 
 /**
  * Unsafely invert orientation of 4x4 basis matrix. Does not check the determinants for equality to 0.
@@ -668,7 +678,7 @@ inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantToler
  */
 template<typename T>
 constexpr void
-invertOrientationForce(Matrix<4,4,T>& basis);
+invertOrientation(Matrix<4,4,T>& basis);
 
 /**
  * Unsafely calculates inverse orientation of 4x4 basis matrix. Does not check the determinants for
@@ -678,7 +688,7 @@ invertOrientationForce(Matrix<4,4,T>& basis);
  */
 template<typename T>
 constexpr Matrix<4,4,T>
-inverseOrientationForce(const Matrix<4,4,T>& basis);
+inverseOrientation(const Matrix<4,4,T>& basis);
 
 /* ####################################################################################### */
 /* Multiplication */

@@ -50,7 +50,7 @@ TEST(Transformations3D_Transform, Matrix3)
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::SRT));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::SRT));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -60,7 +60,7 @@ TEST(Transformations3D_Transform, Matrix3)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::STR));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::STR));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -70,7 +70,7 @@ TEST(Transformations3D_Transform, Matrix3)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::RST));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::RST));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},
@@ -80,7 +80,7 @@ TEST(Transformations3D_Transform, Matrix3)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::RTS));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::RTS));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},
@@ -90,7 +90,7 @@ TEST(Transformations3D_Transform, Matrix3)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::TSR));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::TSR));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -100,7 +100,7 @@ TEST(Transformations3D_Transform, Matrix3)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(ETransformOrder::TRS));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::orientation, cgm_test::get(ETransformOrder::TRS));
         const auto expect = CGM_XYZ::orientationMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},
@@ -118,7 +118,7 @@ TEST(Transformations3D_Transform, Matrix4)
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::SRT));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::SRT));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -129,7 +129,7 @@ TEST(Transformations3D_Transform, Matrix4)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::STR));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::STR));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -140,7 +140,7 @@ TEST(Transformations3D_Transform, Matrix4)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::RST));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::RST));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},
@@ -151,7 +151,7 @@ TEST(Transformations3D_Transform, Matrix4)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::RTS));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::RTS));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},
@@ -162,7 +162,7 @@ TEST(Transformations3D_Transform, Matrix4)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::TSR));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::TSR));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.77181, +0.98431, -0.71973},
@@ -173,7 +173,7 @@ TEST(Transformations3D_Transform, Matrix4)
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        const auto result = CGM_XFORM3D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(ETransformOrder::TRS));
+        const auto result = CGM_XFORM3D::transformed(cgm_test::space, cgm_test::get(ETransformOrder::TRS));
         const auto expect = CGM_XYZ::spaceMatrix
         (
             Vector<3,double>{+1.75566, +0.52078, -0.51638},

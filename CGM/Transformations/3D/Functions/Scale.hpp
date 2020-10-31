@@ -93,49 +93,45 @@ scale(Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, T value);
 
 /**
  * Scales 3x3 matrix related to local/world center.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values);
 
 /**
  * Scales 3x3 matrix along to arbitrary axis.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  * @param direction Axis direction.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 3x3 matrix related to pivot point. Pivot position is not taken in account.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 3x3 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -149,17 +145,16 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, T value);
 
 /**
  * Scales 4x4 matrix related to local/world center.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
 
@@ -169,40 +164,36 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values);
  * @param value How much to scale.
  * @param direction Axis direction.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  * @param axis The axis along which to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 4x4 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
@@ -253,8 +244,6 @@ scale(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>&
 
 /**
  * Scales pivot along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param pivot Pivot position to scale.
  * @param value How much to scale.
  * @param axis The axis along which to scale.
@@ -395,8 +384,6 @@ scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const V
 
 /**
  * Scales vector along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param vector Vector to scale.
  * @param value How much to scale.
  * @param axis The axis along which to scale.
@@ -408,8 +395,6 @@ scaled(const Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales vector related to pivot point.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, pivot position gets in account.
  * @param vector Vector to scale.
  * @param value How much to scale (value per axis).
  * @param pivot Pivot point.
@@ -441,18 +426,17 @@ scaled(const Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value);
 
 /**
  * Scales 3x3 matrix related to local/world center.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values);
 
@@ -463,30 +447,28 @@ scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values);
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 3x3 matrix related to pivot point.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 3x3 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -501,18 +483,17 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<E3D Axis, ESpace Space = ESpace::World, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value);
 
 /**
  * Scales 4x4 matrix related to local/world center.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values);
 
@@ -523,57 +504,51 @@ scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values);
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  * @param origin Axis origin.
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const Vector<3,T>& origin);
 
 /**
  * Scales 4x4 matrix along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  * @param axis The axis along which to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
- * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Scales 4x4 matrix related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
- * @tparam Space In which space to scale.
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 scaled(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
@@ -627,8 +602,6 @@ scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vecto
 
 /**
  * Scales pivot along to arbitrary axis.
- * @tparam Representation How to represent vector. If vector
- * are represented as point, axis position gets in account.
  * @param pivot Pivot position to scale.
  * @param value How much to scale.
  * @param axis The axis along which to scale.

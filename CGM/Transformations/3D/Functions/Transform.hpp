@@ -5,7 +5,6 @@
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Core/Functions/Matrix.hpp>
 #include <CGM/Cartesian/Common.hpp>
-#include <CGM/Transformations/3D/Functions/Converters/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Transformations/3D/Functions/Translate.hpp>
@@ -34,7 +33,7 @@ transform(Vector<3,T>& vector, const Transforms<T>& parameters);
  * @param matrix 3x3 matrix to transform.
  * @param parameters Transformation parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 
@@ -43,7 +42,7 @@ transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
  * @param matrix 4x4 matrix to transform.
  * @param parameters Transformation parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
 
@@ -87,7 +86,7 @@ transformed(const Vector<3,T>& vector, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  * @return Transformed matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 
@@ -97,7 +96,7 @@ transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  * @return Transformed matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
 

@@ -3,7 +3,6 @@
 
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
-#include <CGM/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
@@ -56,17 +55,16 @@ reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& 
  * @tparam Plane Cartesian plane to reflect from.
  * @param matrix Matrix to reflect.
  */
-template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+template<EPlane Plane, typename T>
 constexpr void
 reflect(Matrix<3,3,T>& matrix);
 
 /**
  * Reflects 3x3 matrix from a plane.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
 
@@ -79,7 +77,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
  * @tparam Plane Cartesian plane to reflect from.
  * @param matrix Matrix to reflect.
  */
-template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+template<EPlane Plane, typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix);
 
@@ -88,7 +86,7 @@ reflect(Matrix<4,4,T>& matrix);
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
 
@@ -98,7 +96,7 @@ reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
  * @param planeNormal Plane normal.
  * @param planeCenter Plane origin.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
@@ -211,18 +209,17 @@ reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vecto
  * @param matrix Matrix to reflect.
  * @return Reflected copy of matrix.
  */
-template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+template<EPlane Plane, typename T>
 constexpr Matrix<3,3,T>
 reflected(const Matrix<3,3,T>& matrix);
 
 /**
  * Reflects 3x3 matrix from a plane.
- * @tparam Space In which space to transform.
  * @param matrix Matrix to reflect.
  * @param planeNormal Plane normal.
  * @return Reflected copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
 
@@ -236,7 +233,7 @@ reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal);
  * @param matrix Matrix to reflect.
  * @return Reflected copy of matrix.
  */
-template<EPlane Plane, ESpace Space = ESpace::World, typename T>
+template<EPlane Plane, typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix);
 
@@ -246,7 +243,7 @@ reflected(const Matrix<4,4,T>& matrix);
  * @param planeNormal Plane normal.
  * @return Reflected copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
 
@@ -257,7 +254,7 @@ reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal);
  * @param planeCenter Plane origin.
  * @return Reflected copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 

@@ -329,7 +329,7 @@ transposedOrientation(const Matrix<3,3,T>& basis)
 
 template<typename T>
 constexpr bool
-invertOrientation(Matrix<3,3,T>& basis, T determinantTolerance)
+invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance)
 {
     Matrix<2,2,T> orient
     {
@@ -356,7 +356,7 @@ invertOrientation(Matrix<3,3,T>& basis, T determinantTolerance)
 
 template<typename T>
 constexpr Matrix<3,3,T>
-inverseOrientation(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance)
+inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance)
 {
     Matrix<2,2,T> orient
     {
@@ -393,7 +393,7 @@ inverseOrientation(const Matrix<3,3,T>& basis, bool& success, T determinantToler
 
 template<typename T>
 constexpr void
-invertOrientationForce(Matrix<3,3,T>& basis)
+invertOrientation(Matrix<3,3,T>& basis)
 {
     Matrix<2,2,T> orient
     {
@@ -414,7 +414,7 @@ invertOrientationForce(Matrix<3,3,T>& basis)
 
 template<typename T>
 constexpr Matrix<3,3,T>
-inverseOrientationForce(const Matrix<3,3,T>& basis)
+inverseOrientation(const Matrix<3,3,T>& basis)
 {
     Matrix<2,2,T> orient
     {

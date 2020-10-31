@@ -195,44 +195,22 @@ rotate(Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle)
 {
-    Vector<3,T> axs {};
-
-    if constexpr (Space == ESpace::World)
-    {
-       axs = axis<Axis,T>();
-    }
-    else
-    {
-        if constexpr (Axis == E3D::X) axs = normalized(x(matrix));
-        if constexpr (Axis == E3D::Y) axs = normalized(y(matrix));
-        if constexpr (Axis == E3D::Z) axs = normalized(z(matrix));
-    }
-
-    rotate(matrix, orientationQuaternion(axs,angle));
+    rotate(matrix, orientationQuaternion(axis<Axis,T>(),angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
 {
+    const auto quat = orientationQuaternion(direction, angle);
+    
     auto axes = orientationAxes(matrix);
-    Quaternion<T> quat;
-
-    if constexpr (Space == ESpace::World)
-    {
-        quat = orientationQuaternion(direction, angle);
-    }
-    else
-    {
-        quat = orientationQuaternion(normalized(converted<ESpace::World>(direction, matrix), angle));
-    }
-
     orient(axes.x, quat);
     orient(axes.y, quat);
     orient(axes.z, quat);
@@ -242,18 +220,18 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles)
 {
-    rotate<E3D::X, Space>(matrix, angles.x);
-    rotate<E3D::Y, Space>(matrix, angles.y);
-    rotate<E3D::Z, Space>(matrix, angles.z);
+    rotate<E3D::X>(matrix, angles.x);
+    rotate<E3D::Y>(matrix, angles.y);
+    rotate<E3D::Z>(matrix, angles.z);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
@@ -261,44 +239,44 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
     {
         case ERotationOrder::XYZ:
         {
-            rotate<E3D::X, Space>(matrix, angles.x);
-            rotate<E3D::Y, Space>(matrix, angles.y);
-            rotate<E3D::Z, Space>(matrix, angles.z);
+            rotate<E3D::X>(matrix, angles.x);
+            rotate<E3D::Y>(matrix, angles.y);
+            rotate<E3D::Z>(matrix, angles.z);
             break;
         }
         case ERotationOrder::XZY:
         {
-            rotate<E3D::X, Space>(matrix, angles.x);
-            rotate<E3D::Z, Space>(matrix, angles.z);
-            rotate<E3D::Y, Space>(matrix, angles.y);
+            rotate<E3D::X>(matrix, angles.x);
+            rotate<E3D::Z>(matrix, angles.z);
+            rotate<E3D::Y>(matrix, angles.y);
             break;
         }
         case ERotationOrder::YXZ:
         {
-            rotate<E3D::Y, Space>(matrix, angles.y);
-            rotate<E3D::X, Space>(matrix, angles.x);
-            rotate<E3D::Z, Space>(matrix, angles.z);
+            rotate<E3D::Y>(matrix, angles.y);
+            rotate<E3D::X>(matrix, angles.x);
+            rotate<E3D::Z>(matrix, angles.z);
             break;
         }
         case ERotationOrder::YZX:
         {
-            rotate<E3D::Y, Space>(matrix, angles.y);
-            rotate<E3D::Z, Space>(matrix, angles.z);
-            rotate<E3D::X, Space>(matrix, angles.x);
+            rotate<E3D::Y>(matrix, angles.y);
+            rotate<E3D::Z>(matrix, angles.z);
+            rotate<E3D::X>(matrix, angles.x);
             break;
         }
         case ERotationOrder::ZXY:
         {
-            rotate<E3D::Z, Space>(matrix, angles.z);
-            rotate<E3D::X, Space>(matrix, angles.x);
-            rotate<E3D::Y, Space>(matrix, angles.y);
+            rotate<E3D::Z>(matrix, angles.z);
+            rotate<E3D::X>(matrix, angles.x);
+            rotate<E3D::Y>(matrix, angles.y);
             break;
         }
         case ERotationOrder::ZYX:
         {
-            rotate<E3D::Z, Space>(matrix, angles.z);
-            rotate<E3D::Y, Space>(matrix, angles.y);
-            rotate<E3D::X, Space>(matrix, angles.x);
+            rotate<E3D::Z>(matrix, angles.z);
+            rotate<E3D::Y>(matrix, angles.y);
+            rotate<E3D::X>(matrix, angles.x);
             break;
         }
     }
@@ -306,18 +284,18 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
 {
-    rotate<Space>(matrix, angles.x, pivot.axes.x);
-    rotate<Space>(matrix, angles.y, pivot.axes.y);
-    rotate<Space>(matrix, angles.z, pivot.axes.z);
+    rotate(matrix, angles.x, pivot.axes.x);
+    rotate(matrix, angles.y, pivot.axes.y);
+    rotate(matrix, angles.z, pivot.axes.z);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
 {
@@ -325,44 +303,44 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, 
     {
         case ERotationOrder::XYZ:
         {
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.z, pivot.axes.z);
             break;
         }
         case ERotationOrder::XZY:
         {
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.y, pivot.axes.y);
             break;
         }
         case ERotationOrder::YXZ:
         {
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.z, pivot.axes.z);
             break;
         }
         case ERotationOrder::YZX:
         {
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.x, pivot.axes.x);
             break;
         }
         case ERotationOrder::ZXY:
         {
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.y, pivot.axes.y);
             break;
         }
         case ERotationOrder::ZYX:
         {
-            rotate<Space>(matrix, angles.z, pivot.axes.z);
-            rotate<Space>(matrix, angles.y, pivot.axes.y);
-            rotate<Space>(matrix, angles.x, pivot.axes.x);
+            rotate(matrix, angles.z, pivot.axes.z);
+            rotate(matrix, angles.y, pivot.axes.y);
+            rotate(matrix, angles.x, pivot.axes.x);
             break;
         }
     }
@@ -385,59 +363,33 @@ rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
+    rotate(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
 /* Matrix4 */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle)
 {
-    Vector<3,T> axs {};
-
-    if constexpr (Space == ESpace::World)
-    {
-       axs = axis<Axis,T>();
-    }
-    else
-    {
-        if constexpr (Axis == E3D::X) axs = normalized(x(matrix));
-        if constexpr (Axis == E3D::Y) axs = normalized(y(matrix));
-        if constexpr (Axis == E3D::Z) axs = normalized(z(matrix));
-    }
-
-    rotate(matrix, orientationQuaternion(axs,angle));
+    rotate(matrix, orientationQuaternion(axis<Axis,T>(),angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
 {
-    Quaternion<T> qx;
-    Quaternion<T> qy;
-    Quaternion<T> qz;
-
-    if constexpr (Space == ESpace::World)
-    {
-        qx = orientationQuaternion(axis<E3D::X,T>(), angles.x);
-        qy = orientationQuaternion(axis<E3D::Y,T>(), angles.y);
-        qz = orientationQuaternion(axis<E3D::Z,T>(), angles.z);
-    }
-    else
-    {
-        qx = orientationQuaternion(normalized(x(matrix)), angles.x);
-        qy = orientationQuaternion(normalized(y(matrix)), angles.y);
-        qz = orientationQuaternion(normalized(z(matrix)), angles.z);
-    }
+    const auto qx = orientationQuaternion(axis<E3D::X,T>(), angles.x);
+    const auto qy = orientationQuaternion(axis<E3D::Y,T>(), angles.y);
+    const auto qz = orientationQuaternion(axis<E3D::Z,T>(), angles.z);
 
     auto axes = orientationAxes(matrix);
 
@@ -453,231 +405,134 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
     orient(axes.z, qy);
     orient(axes.z, qz);
 
-    if constexpr (Space == ESpace::World)
-    {
-        auto pos = position(matrix);
+    auto pos = position(matrix);
 
-        orient(pos, qx);
-        orient(pos, qy);
-        orient(pos, qz);
+    orient(pos, qx);
+    orient(pos, qy);
+    orient(pos, qz);
 
-        setPosition(matrix, pos);
-    }
-
+    setPosition(matrix, pos);
     setOrientation(matrix, axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
-    Quaternion<T> qx;
-    Quaternion<T> qy;
-    Quaternion<T> qz;
+    const auto qx = orientationQuaternion(axis<E3D::X,T>(), angles.x);
+    const auto qy = orientationQuaternion(axis<E3D::Y,T>(), angles.y);
+    const auto qz = orientationQuaternion(axis<E3D::Z,T>(), angles.z);
 
-    if constexpr (Space == ESpace::World)
-    {
-        qx = orientationQuaternion(axis<E3D::X,T>(), angles.x);
-        qy = orientationQuaternion(axis<E3D::Y,T>(), angles.y);
-        qz = orientationQuaternion(axis<E3D::Z,T>(), angles.z);
-    }
-    else
-    {
-        qx = orientationQuaternion(normalized(x(matrix)), angles.x);
-        qy = orientationQuaternion(normalized(y(matrix)), angles.y);
-        qz = orientationQuaternion(normalized(z(matrix)), angles.z);
-    }
-
+    auto pos = position(matrix);
     auto axes = orientationAxes(matrix);
 
     switch (rotationOrder)
     {
         case ERotationOrder::XYZ:
         {
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
             break;
         }
         case ERotationOrder::XZY:
         {
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
             break;
         }
         case ERotationOrder::YXZ:
         {
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
             break;
         }
         case ERotationOrder::YZX:
         {
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
             break;
         }
         case ERotationOrder::ZXY:
         {
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
             break;
         }
         case ERotationOrder::ZYX:
         {
-            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz);
-            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy);
-            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx);
+            orient(axes.x, qz); orient(axes.y, qz); orient(axes.z, qz); orient(pos, qz);
+            orient(axes.x, qy); orient(axes.y, qy); orient(axes.z, qy); orient(pos, qy);
+            orient(axes.x, qx); orient(axes.y, qx); orient(axes.z, qx); orient(pos, qx);
             break;
         }
     }
 
-    if constexpr (Space == ESpace::World)
-    {
-        auto pos = position(matrix);
-
-        switch (rotationOrder)
-        {
-            case ERotationOrder::XYZ:
-            {
-                orient(pos, qx);
-                orient(pos, qy);
-                orient(pos, qz);
-                break;
-            }
-            case ERotationOrder::XZY:
-            {
-                orient(pos, qx);
-                orient(pos, qz);
-                orient(pos, qy);
-                break;
-            }
-            case ERotationOrder::YXZ:
-            {
-                orient(pos, qy);
-                orient(pos, qx);
-                orient(pos, qz);
-                break;
-            }
-            case ERotationOrder::YZX:
-            {
-                orient(pos, qy);
-                orient(pos, qz);
-                orient(pos, qx);
-                break;
-            }
-            case ERotationOrder::ZXY:
-            {
-                orient(pos, qz);
-                orient(pos, qx);
-                orient(pos, qy);
-                break;
-            }
-            case ERotationOrder::ZYX:
-            {
-                orient(pos, qz);
-                orient(pos, qy);
-                orient(pos, qx);
-                break;
-            }
-        }
-
-        setPosition(matrix, pos);
-    }
-
+    setPosition(matrix, pos);
     setOrientation(matrix, axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
 {
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
-    Quaternion<T> quat;
+    const auto quat = orientationQuaternion(direction, angle);
 
-    if constexpr (Space == ESpace::World)
-    {
-       quat = orientationQuaternion(direction, angle);
-    }
-    else
-    {
-        quat = orientationQuaternion(normalized(converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix)), angle);
-    }
+    auto pos = position(matrix);
+    auto axes = orientationAxes(matrix);
+
+    orient(axes.x, quat);
+    orient(axes.y, quat);
+    orient(axes.z, quat);
+    orient(pos, quat);
+
+    set(matrix, axes, pos);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr void
+rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
+{
+    const auto quat = orientationQuaternion(axis.direction, angle);
+
+    auto pos = position(matrix);
+    auto axes = orientationAxes(matrix);
 
     orient(axes.x, quat);
     orient(axes.y, quat);
     orient(axes.z, quat);
 
-    if constexpr (Space == ESpace::World)
-    {
-        orient(pos, quat);
-    }
+    pos -= axis.position;
+    orient(pos, quat);
+    pos += axis.position;
 
     set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
-constexpr void
-rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
-{
-    auto axes = orientationAxes(matrix);
-    auto pos = position(matrix);
-
-    if constexpr (Space == ESpace::World)
-    {
-        auto quat = orientationQuaternion(axis.direction, angle);
-
-        orient(axes.x, quat);
-        orient(axes.y, quat);
-        orient(axes.z, quat);
-
-        pos -= axis.position;
-        orient(pos, quat);
-        pos += axis.position;
-    }
-    else
-    {
-        auto wsAxisDir = normalized(converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix));
-        auto wsAxisPos = converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix);
-        auto wsQuat = orientationQuaternion(wsAxisDir, angle);
-
-        orient(axes.x, wsQuat);
-        orient(axes.y, wsQuat);
-        orient(axes.z, wsQuat);
-
-        pos -= wsAxisPos;
-        orient(pos, wsQuat);
-        pos += wsAxisPos;
-    }
-
-    set(matrix, axes, pos);
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-    rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-    rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+    rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+    rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+    rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
@@ -685,44 +540,44 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
     {
         case ERotationOrder::XYZ:
         {
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
             break;
         }
         case ERotationOrder::XZY:
         {
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
             break;
         }
         case ERotationOrder::YXZ:
         {
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
             break;
         }
         case ERotationOrder::YZX:
         {
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
             break;
         }
         case ERotationOrder::ZXY:
         {
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
             break;
         }
         case ERotationOrder::ZYX:
         {
-            rotate<Space>(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate<Space>(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate<Space>(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
             break;
         }
     }
@@ -742,19 +597,16 @@ rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
     orient(axes.z, quaternion);
     orient(pos, quaternion);
 
-    setX(matrix, axes.x);
-    setY(matrix, axes.y);
-    setZ(matrix, axes.z);
-    setPosition(matrix, pos);
+    set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
-    rotate<Space>(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
+    rotate(matrix, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -938,36 +790,36 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Quaternion */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle)
 {
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(axis<Axis,T>(), angle));
+    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(axis<Axis,T>(), angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction)
 {
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(direction, angle));
+    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(direction, angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-    rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
@@ -975,68 +827,59 @@ rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& piv
     {
         case ERotationOrder::XYZ:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
         }
         case ERotationOrder::XZY:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
         }
         case ERotationOrder::YXZ:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
         }
         case ERotationOrder::YZX:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
         }
         case ERotationOrder::ZXY:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
         }
         case ERotationOrder::ZYX:
         {
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate<Space>(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
         }
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat)
 {
-    if constexpr (Space == ESpace::World)
-    {
-        quaternion *= quat;
-    }
-    else
-    {
-        auto [axs, ang] = axisAngle(quat);
-        auto worldSpaceAxis = converted<ESpace::World>(axs, quat);
-        quaternion *= CGM_XFORM3D::orientationQuaternion(worldSpaceAxis, angle);
-    }
+    quaternion *= quat;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms)
 {
-    rotate<Space>(quaternion, transforms.rotation, transforms.pivot, transforms.rotationOrder);
+    rotate(quaternion, transforms.rotation, transforms.pivot, transforms.rotationOrder);
 }
 
 /* ####################################################################################### */
@@ -1144,89 +987,89 @@ rotated(const Vector<3,T>& vector, const Transforms<T>& transforms)
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle)
 {
     auto copy = matrix;
-    rotate<Axis, Space>(copy, angle);
+    rotate<Axis>(copy, angle);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angle, direction);
+    rotate(copy, angle, direction);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles);
+    rotate(copy, angles);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, rotationOrder);
+    rotate(copy, angles, rotationOrder);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, pivot);
+    rotate(copy, angles, pivot);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, pivot, rotationOrder);
+    rotate(copy, angles, pivot, rotationOrder);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion)
 {
     auto copy = matrix;
-    rotate<Space>(copy, quaternion);
+    rotate(copy, quaternion);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
-    rotate<Space>(copy, transforms);
+    rotate(copy, transforms);
     return copy;
 }
 
@@ -1234,100 +1077,100 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle)
 {
     auto copy = matrix;
-    rotate<Axis,Space>(copy, angle);
+    rotate<Axis>(copy, angle);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles);
+    rotate(copy, angles);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, rotationOrder);
+    rotate(copy, angles, rotationOrder);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angle, direction);
+    rotate(copy, angle, direction);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angle, axis);
+    rotate(copy, angle, axis);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, pivotPoint);
+    rotate(copy, angles, pivotPoint);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
     auto copy = matrix;
-    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
+    rotate(copy, angles, pivotPoint, rotationOrder);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion)
 {
     auto copy = matrix;
-    rotate<Space>(copy, quaternion);
+    rotate(copy, quaternion);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
-    rotate<Space>(copy, transforms);
+    rotate(copy, transforms);
     return copy;
 }
 
@@ -1515,67 +1358,67 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
 /* Quaternion (outplace) */
 /* ####################################################################################### */
 
-template<E3D Axis, ESpace Space, typename T>
+template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, T angle)
 {
     auto copy = quaternion;
-    rotate<Axis, Space>(copy, angle);
+    rotate<Axis>(copy, angle);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, T angle, const Vector<3,T>& axis)
 {
     auto copy = quaternion;
-    rotate<Space>(copy, angle, axis);
+    rotate(copy, angle, axis);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
     auto copy = quaternion;
-    rotate<Space>(copy, angles, pivotPoint);
+    rotate(copy, angles, pivotPoint);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
     auto copy = quaternion;
-    rotate<Space>(copy, angles, pivotPoint, rotationOrder);
+    rotate(copy, angles, pivotPoint, rotationOrder);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Quaternion<T>& quat)
 {
     auto copy = quaternion;
-    rotate<Space>(copy, quat);
+    rotate(copy, quat);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Quaternion<T>
 rotated(const Quaternion<T>& quaternion, const Transforms<T>& transforms)
 {
     auto copy = quaternion;
-    rotate<Space>(copy, transforms);
+    rotate(copy, transforms);
     return copy;
 }
 

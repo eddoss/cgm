@@ -63,117 +63,79 @@ transform(Vector<3,T>& vector, const Transforms<T>& parameters)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 {   
-    if constexpr (Space == ESpace::World)
+    switch (parameters.transformOrder)
     {
-        switch (parameters.transformOrder)
+        case ETransformOrder::SRT:
+        case ETransformOrder::STR:
+        case ETransformOrder::TSR:
         {
-            case ETransformOrder::SRT:
-            case ETransformOrder::STR:
-            case ETransformOrder::TSR:
-            {
-                scale<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
-                break;
-            }
-            default:
-            {
-                rotate<Space>(matrix, parameters);
-                scale<Space>(matrix, parameters);
-                break;
-            }
+            scale(matrix, parameters);
+            rotate(matrix, parameters);
+            break;
         }
-    }
-    else
-    {
-        auto pivot = parameters.pivot;
-        normalized(convert<ESpace::World>(pivot.axes.x, matrix));
-        normalized(convert<ESpace::World>(pivot.axes.y, matrix));
-        normalized(convert<ESpace::World>(pivot.axes.z, matrix));
-        
-        switch (parameters.transformOrder)
+        default:
         {
-            case ETransformOrder::SRT:
-            case ETransformOrder::RST:
-            case ETransformOrder::TSR:
-            {
-                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
-                rotate<Space>(matrix, parameters.rotation, pivot, parameters.rotationOrder);
-                break;
-            }
-            default:
-            {
-                rotate<Space>(matrix, parameters.rotation, pivot, parameters.rotationOrder);
-                scale<Space>(matrix, parameters.scale * parameters.uniformScale, pivot);
-                break;
-            }
+            rotate(matrix, parameters);
+            scale(matrix, parameters);
+            break;
         }
     }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE void
 transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 {
-    if constexpr (Space == ESpace::World)
+    switch (parameters.transformOrder)
     {
-        switch (parameters.transformOrder)
+        case ETransformOrder::SRT:
         {
-            case ETransformOrder::SRT:
-            {
-                scale<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
-                translate<Space>(matrix, parameters);
-                break;
-            }
-            case ETransformOrder::STR:
-            {
-                scale<Space>(matrix, parameters);
-                translate<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
-                break;
-            }
-            case ETransformOrder::RTS:
-            {
-                rotate<Space>(matrix, parameters);
-                translate<Space>(matrix, parameters);
-                scale<Space>(matrix, parameters);
-                break;
-            }
-            case ETransformOrder::RST:
-            {
-                rotate<Space>(matrix, parameters);
-                scale<Space>(matrix, parameters);
-                translate<Space>(matrix, parameters);
-                break;
-            }
-            case ETransformOrder::TSR:
-            {
-                translate<Space>(matrix, parameters);
-                scale<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
-                break;
-            }
-            case ETransformOrder::TRS:
-            {
-                translate<Space>(matrix, parameters);
-                rotate<Space>(matrix, parameters);
-                scale<Space>(matrix, parameters);
-                break;
-            }
+            scale(matrix, parameters);
+            rotate(matrix, parameters);
+            translate(matrix, parameters);
+            break;
         }
-    }
-    else
-    {
-        auto parms = parameters;
-        convert<ESpace::World>(parms.pivot, matrix);
-
-        transform<ESpace::World>(matrix, parms);
+        case ETransformOrder::STR:
+        {
+            scale(matrix, parameters);
+            translate(matrix, parameters);
+            rotate(matrix, parameters);
+            break;
+        }
+        case ETransformOrder::RTS:
+        {
+            rotate(matrix, parameters);
+            translate(matrix, parameters);
+            scale(matrix, parameters);
+            break;
+        }
+        case ETransformOrder::RST:
+        {
+            rotate(matrix, parameters);
+            scale(matrix, parameters);
+            translate(matrix, parameters);
+            break;
+        }
+        case ETransformOrder::TSR:
+        {
+            translate(matrix, parameters);
+            scale(matrix, parameters);
+            rotate(matrix, parameters);
+            break;
+        }
+        case ETransformOrder::TRS:
+        {
+            translate(matrix, parameters);
+            rotate(matrix, parameters);
+            scale(matrix, parameters);
+            break;
+        }
     }
 }
 
@@ -298,23 +260,23 @@ transformed(const Vector<3,T>& vector, const Transforms<T>& parameters)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 {
     auto copy = matrix;
-    transform<Space>(copy, parameters);
+    transform(copy, parameters);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 {
     auto copy = matrix;
-    transform<Space>(copy, parameters);
+    transform(copy, parameters);
     return copy;
 }
 

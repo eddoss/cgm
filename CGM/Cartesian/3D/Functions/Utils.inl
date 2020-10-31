@@ -551,7 +551,7 @@ setForward(Axes<T>& axes, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-homogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
+homogeneous(Matrix<4,4,T>& matrix)
 {
     return
     {
@@ -572,7 +572,7 @@ homogeneous(Matrix<4,4,T>& matrix, const Vector<3,T>& values)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<4,T>
-axesHomogeneous(Matrix<4,4,T>& matrix, const Vector<4,T>& values)
+axesHomogeneous(Matrix<4,4,T>& matrix)
 {
     return
     {
@@ -762,6 +762,18 @@ set(Matrix<3,3,T>& matrix, const Axes<T>& axes)
 template<typename T>
 constexpr CGM_FORCEINLINE void
 set(Matrix<4,4,T>& matrix, const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, const Vector<3,T>& position)
+{
+    setX(matrix, x);
+    setY(matrix, y);
+    setZ(matrix, z);
+    setPosition(matrix, position);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE void
+set(Matrix<4,4,T>& matrix, const Vector<4,T>& x, const Vector<4,T>& y, const Vector<4,T>& z, const Vector<4,T>& position)
 {
     setX(matrix, x);
     setY(matrix, y);
@@ -972,7 +984,7 @@ transposedOrientation(const Matrix<4,4,T>& basis)
 
 template<typename T>
 constexpr bool
-invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance)
+invertOrientationSafe(Matrix<4,4,T>& basis, T determinantTolerance)
 {
     Matrix<3,3,T> orient
     {
@@ -1005,7 +1017,7 @@ invertOrientation(Matrix<4,4,T>& basis, T determinantTolerance)
 
 template<typename T>
 constexpr Matrix<4,4,T>
-inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance)
+inverseOrientationSafe(const Matrix<4,4,T>& basis, bool& success, T determinantTolerance)
 {
     Matrix<3,3,T> orient
     {
@@ -1050,7 +1062,7 @@ inverseOrientation(const Matrix<4,4,T>& basis, bool& success, T determinantToler
 
 template<typename T>
 constexpr void
-invertOrientationForce(Matrix<4,4,T>& basis)
+invertOrientation(Matrix<4,4,T>& basis)
 {
     Matrix<3,3,T> orient
     {
@@ -1076,7 +1088,7 @@ invertOrientationForce(Matrix<4,4,T>& basis)
 
 template<typename T>
 constexpr Matrix<4,4,T>
-inverseOrientationForce(const Matrix<4,4,T>& basis)
+inverseOrientation(const Matrix<4,4,T>& basis)
 {
     Matrix<3,3,T> orient
     {

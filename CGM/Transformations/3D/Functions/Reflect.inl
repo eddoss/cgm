@@ -56,65 +56,30 @@ reflect(Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vector<3,T>& 
 /* Matrix3 (inplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+template<EPlane Plane, typename T>
 constexpr void
 reflect(Matrix<3,3,T>& matrix)
 {
     auto axes = orientationAxes(matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect<Plane>(axes.x);
-        reflect<Plane>(axes.y);
-        reflect<Plane>(axes.z);
-    }
-    else
-    {
-        Vector<3,T> planeNormal {};
-
-        if constexpr (Plane == EPlane::XY)
-        {
-            planeNormal = normalized(z(matrix));
-        }
-        else if constexpr (Plane == EPlane::YZ)
-        {
-            planeNormal = normalized(x(matrix));
-        }
-        else
-        {
-            planeNormal = normalized(y(matrix));
-        }
-
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-    }
+    reflect<Plane>(axes.x);
+    reflect<Plane>(axes.y);
+    reflect<Plane>(axes.z);
 
     set(matrix, axes);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 {
     auto axes = orientationAxes(matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-    }
-    else
-    {
-        auto pn = normalized(converted<ESpace::World,EVectorRepresentation::Direction>(planeNormal, matrix));
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-    }
+    reflect(axes.x, planeNormal);
+    reflect(axes.y, planeNormal);
+    reflect(axes.z, planeNormal);
 
     set(matrix, axes);
 }
@@ -123,101 +88,51 @@ reflect(Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 /* Matrix4 (inplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+template<EPlane Plane, typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix)
 {
     auto axes = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect<Plane>(axes.x);
-        reflect<Plane>(axes.y);
-        reflect<Plane>(axes.z);
-        reflect<Plane>(pos);
-    }
-    else
-    {
-        Vector<3,T> planeNormal {};
-
-        if constexpr (Plane == EPlane::XY)
-        {
-            planeNormal = normalized(z(matrix));
-        }
-        else if constexpr (Plane == EPlane::YZ)
-        {
-            planeNormal = normalized(x(matrix));
-        }
-        else
-        {
-            planeNormal = normalized(y(matrix));
-        }
-
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal);
-    }
+    reflect<Plane>(axes.x);
+    reflect<Plane>(axes.y);
+    reflect<Plane>(axes.z);
+    reflect<Plane>(pos);
 
     set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
 {
     auto axes = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal);
-    }
-    else
-    {
-        auto pn = normalized(converted<ESpace::World>(planeNormal, matrix));
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-        reflect(pos, pn);
-    }
+    reflect(axes.x, planeNormal);
+    reflect(axes.y, planeNormal);
+    reflect(axes.z, planeNormal);
+    reflect(pos, planeNormal);
 
     set(matrix, axes, pos);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr void
 reflect(Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
     auto axes = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
-    {
-        reflect(axes.x, planeNormal);
-        reflect(axes.y, planeNormal);
-        reflect(axes.z, planeNormal);
-        reflect(pos, planeNormal, planeCenter);
-    }
-    else
-    {
-        auto pn = normalized(converted<ESpace::World>(planeNormal, matrix));
-        auto pc = normalized(converted<ESpace::World>(planeCenter, matrix));
-
-        reflect(axes.x, pn);
-        reflect(axes.y, pn);
-        reflect(axes.z, pn);
-        reflect(pos, pn, pc);
-    }
+    reflect(axes.x, planeNormal);
+    reflect(axes.y, planeNormal);
+    reflect(axes.z, planeNormal);
+    reflect(pos, planeNormal, planeCenter);
 
     set(matrix, axes, pos);
 }
@@ -331,23 +246,23 @@ reflected(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, const Vecto
 /* Matrix3 (outplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+template<EPlane Plane, typename T>
 constexpr Matrix<3,3,T>
 reflected(const Matrix<3,3,T>& matrix)
 {
     auto copy = matrix;
-    reflect<Plane,Space>(copy);
+    reflect<Plane>(copy);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<3,3,T>
 reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 {
     auto copy = matrix;
-    reflect<Space>(copy, planeNormal);
+    reflect(copy, planeNormal);
     return copy;
 }
 
@@ -355,34 +270,34 @@ reflected(const Matrix<3,3,T>& matrix, const Vector<3,T>& planeNormal)
 /* Matrix4 (outplace) */
 /* ####################################################################################### */
 
-template<EPlane Plane, ESpace Space, typename T>
+template<EPlane Plane, typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix)
 {
     auto copy = matrix;
-    reflect<Plane,Space>(copy);
+    reflect<Plane>(copy);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal)
 {
     auto copy = matrix;
-    reflect<Space>(copy, planeNormal);
+    reflect(copy, planeNormal);
     return copy;
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<ESpace Space, typename T>
+template<typename T>
 constexpr Matrix<4,4,T>
 reflected(const Matrix<4,4,T>& matrix, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
     auto copy = matrix;
-    reflect<Space>(copy, planeNormal, planeCenter);
+    reflect(copy, planeNormal, planeCenter);
     return copy;
 }
 

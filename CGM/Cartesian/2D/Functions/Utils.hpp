@@ -253,7 +253,7 @@ transposedOrientation(const Matrix<3,3,T>& basis);
  */
 template<typename T>
 constexpr bool
-invertOrientation(Matrix<3,3,T>& basis, T determinantTolerance=T(0.000001));
+invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance=T(0.000001));
 
 /**
  * Safely calculates inverse orientation of 3x3 basis matrix.
@@ -263,7 +263,7 @@ invertOrientation(Matrix<3,3,T>& basis, T determinantTolerance=T(0.000001));
  */
 template<typename T>
 constexpr Matrix<3,3,T>
-inverseOrientation(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance=T(0.000001));
+inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance=T(0.000001));
 
 /**
  * Unsafely invert orientation of 3x3 basis matrix. Does not check the determinants for equality to 0.
@@ -272,7 +272,7 @@ inverseOrientation(const Matrix<3,3,T>& basis, bool& success, T determinantToler
  */
 template<typename T>
 constexpr void
-invertOrientationForce(Matrix<3,3,T>& basis);
+invertOrientation(Matrix<3,3,T>& basis);
 
 /**
  * Unsafely calculates inverse orientation of 3x3 basis matrix. Does not check the determinants for
@@ -282,7 +282,7 @@ invertOrientationForce(Matrix<3,3,T>& basis);
  */
 template<typename T>
 constexpr Matrix<3,3,T>
-inverseOrientationForce(const Matrix<3,3,T>& basis);
+inverseOrientation(const Matrix<3,3,T>& basis);
 
 /* ####################################################################################### */
 /* Multiplication */

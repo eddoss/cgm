@@ -81,62 +81,31 @@ TEST(Transformations3D_Translation, Matrix4_DefaultAxis)
     const auto values = cgm_xyz_xform_tests_data::get();
 
     {
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_X,CGM_WORLD>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.75000, +1.20000, -1.30000}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_Y,CGM_WORLD>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.25000, +1.70000, -1.30000}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_Z,CGM_WORLD>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.25000, +1.20000, -0.80000}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
+        const auto result = CGM_XFORM3D::translated<CGM_3D_X>(cgm_test::space, values.translation.x);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            cgm_test::orientation,
+            Vector<3,double>{+0.75000, +1.20000, -1.30000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_X,CGM_LOCAL>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.691475, +1.434735, -1.300000}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_Y,CGM_LOCAL>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.020395, +1.631825, -1.196045}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_3D_Z,CGM_LOCAL>(cgm_test::space, values.translation.x);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.298805, +1.108210, -0.810925}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
+        const auto result = CGM_XFORM3D::translated<CGM_3D_Y>(cgm_test::space, values.translation.x);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            cgm_test::orientation,
+            Vector<3,double>{+0.25000, +1.70000, -1.30000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
+    }
+    {
+        const auto result = CGM_XFORM3D::translated<CGM_3D_Z>(cgm_test::space, values.translation.x);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            cgm_test::orientation,
+            Vector<3,double>{+0.25000, +1.20000, -0.80000}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
 }
 
@@ -147,24 +116,13 @@ TEST(Transformations3D_Translation, Matrix4_ArbitraryOffset)
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
 
-    {
-        const auto result = CGM_XFORM3D::translated<CGM_WORLD>(cgm_test::space, values.translation);
-        const auto expect = CGM_XYZ::spaceMatrix
-        (
-            cgm_test::orientation,
-            Vector<3,double>{+0.75000, -0.20000, +1.00000}
-        );
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-    }
-    {
-        const auto result = CGM_XFORM3D::translated<CGM_LOCAL>(cgm_test::space, values.translation);
-        const auto expect = CGM_XYZ::spaceMatrix
-        (
-            cgm_test::orientation,
-            Vector<3,double>{+1.558872, -0.196609, +0.658671}
-        );
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-    }
+    const auto result = CGM_XFORM3D::translated(cgm_test::space, values.translation);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        cgm_test::orientation,
+        Vector<3,double>{+0.75000, -0.20000, +1.00000}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -175,44 +133,22 @@ TEST(Transformations3D_Translation, Matrix4_AlongVector)
     const auto values = cgm_xyz_xform_tests_data::get();
 
     {
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_WORLD,CGM_DIRECTION>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.72471, +1.27519, -1.43782}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_WORLD,CGM_POINT>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.72471, +1.27519, -1.43782}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
+        const auto result = CGM_XFORM3D::translated(cgm_test::space, values.translation.x, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            cgm_test::orientation,
+            Vector<3,double>{+0.72471, +1.27519, -1.43782}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
     {
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_LOCAL,CGM_DIRECTION>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.621170, +1.513099, -1.419175}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
-        {
-            const auto result = CGM_XFORM3D::translated<CGM_LOCAL,CGM_POINT>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
-            const auto expect = CGM_XYZ::spaceMatrix
-            (
-                cgm_test::orientation,
-                Vector<3,double>{+0.746170, +2.113099, -2.069175}
-            );
-            ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-        }
+        const auto result = CGM_XFORM3D::translated(cgm_test::space, values.translation.x, cgm_test::axis.direction);
+        const auto expect = CGM_XYZ::spaceMatrix
+        (
+            cgm_test::orientation,
+            Vector<3,double>{+0.72471, +1.27519, -1.43782}
+        );
+        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
 }
 
@@ -223,24 +159,13 @@ TEST(Transformations3D_Translation, Matrix4_AlongPivotAxes)
     namespace cgm_test = cgm_xyz_xform_tests_data;
     const auto values = cgm_xyz_xform_tests_data::get();
 
-    {
-        const auto result = CGM_XFORM3D::translated<CGM_WORLD>(cgm_test::space, values.translation, values.pivot);
-        const auto expect = CGM_XYZ::spaceMatrix
-        (
-            cgm_test::orientation,
-            Vector<3,double>{+1.46093, -0.95299, -0.11751}
-        );
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-    }
-    {
-        const auto result = CGM_XFORM3D::translated<CGM_LOCAL>(cgm_test::space, values.translation, values.pivot);
-        const auto expect = CGM_XYZ::spaceMatrix
-        (
-            cgm_test::orientation,
-            Vector<3,double>{+1.460935, -0.952989, -0.117524}
-        );
-        ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
-    }
+    const auto result = CGM_XFORM3D::translated(cgm_test::space, values.translation, values.pivot);
+    const auto expect = CGM_XYZ::spaceMatrix
+    (
+        cgm_test::orientation,
+        Vector<3,double>{+1.46093, -0.95299, -0.11751}
+    );
+    ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
 
 /* ####################################################################################### */
