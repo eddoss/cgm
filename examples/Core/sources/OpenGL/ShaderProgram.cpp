@@ -534,7 +534,7 @@ ShaderProgram::release() const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_ERROR("can not bind shader program, it is not created");
+        CGM_EXAMPLES_FUNC_WARNING("can not release shader program, it is not created");
         return false;
     }
     glUseProgram(0);

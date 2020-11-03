@@ -7,9 +7,9 @@
 class LinePainter : public IPainter
 {
 public:
-    using Shared    = std::shared_ptr<IPainter>;
-    using Unique    = std::unique_ptr<IPainter>;
-    using Weak      = std::weak_ptr<IPainter>;
+    using Shared    = std::shared_ptr<LinePainter>;
+    using Unique    = std::unique_ptr<LinePainter>;
+    using Weak      = std::weak_ptr<LinePainter>;
 
 public:
     void

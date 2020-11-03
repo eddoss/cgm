@@ -52,4 +52,13 @@ protected:
 
     cgm::vec3
     sceneBgColor {0.1f, 0.1f, 0.1f};
+
+    cgm::float32
+    moveVerticalScale = 1.0f;
+
+    cgm::float32
+    moveHorizontalScale = 1.0f;
+
+    cgm::float32
+    moveForwardScale = 1.0f;
 };

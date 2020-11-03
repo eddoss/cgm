@@ -105,17 +105,17 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
     }
     else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        sceneCamera->move(0, 0, offset.x * 5);
+        sceneCamera->move(0, 0, offset.x * 5 * moveForwardScale);
     }
     else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
         if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
         {
-            sceneCamera->move(-offset.x * 2, -offset.y * 2, 0);
+            sceneCamera->move(-offset.x * 2 * moveHorizontalScale, -offset.y * 2 * moveVerticalScale, 0);
         }
         else
         {
-            sceneCamera->move(offset.x * 2, -offset.y * 2, 0);
+            sceneCamera->move(offset.x * 2 * moveHorizontalScale, -offset.y * 2 * moveVerticalScale, 0);
         }
     }
 }

@@ -6,48 +6,53 @@
 CGM_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr Vector<3,T>
-cameraRay(const Vector<2,T>& point, T fov, T aspect, T planeOffset, const Matrix<4,4,T>& cameraSpace)
+constexpr CGM_FORCEINLINE Vector<2,T>
+perspectiveViewport(T fov, T aspect, T offset)
 {
-    const T h = std::tan(fov * number<T>(0.5)) * planeOffset;
+    const T h = number<T>(2) * offset * std::tan(fov * number<T>(0.5));
     const T w = h * aspect;
 
-    auto direction = CGM_XYZ::forward(cameraSpace) * planeOffset;
-    direction += fit11(point.x, -w, w) * CGM_XYZ::right(cameraSpace);
-    direction += fit11(point.y, -h, h) * CGM_XYZ::up(cameraSpace);
+    return {w,h};
+}
 
-    return normalized(direction);
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Vector<3,T>
+perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace)
+{
+    const T h = std::tan(fov * number<T>(0.5));
+    const T w = h * aspect;
+
+    const auto r_offset = CGM_XYZ::right(projectorSpace) * fit11(point.x, -w, w);
+    const auto u_offset = CGM_XYZ::up(projectorSpace) * fit11(point.y, -h, h);
+    if constexpr (CGM_CONFIG.handedness == EHandedness::Right)
+    {
+        return normalized(CGM_XYZ::forward(projectorSpace) + u_offset - r_offset);
+    }
+    else
+    {
+        return normalized(CGM_XYZ::forward(projectorSpace) + u_offset + r_offset);
+    }
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template<EGraphicsApi API, typename T>
 constexpr Matrix<4,4,T>
-ndc(T fov, T aspect, T near, T far)
+perspective(T fov, T aspect, T near, T far)
 {
-    const T nearPlaneHeight = near * std::tan(fov * number<T>(0.5));
-    const T nearPlaneWidth = nearPlaneHeight * aspect;
-    const T cubeWidth = number<T>(2);
-    const T cubeHeight = number<T>(2);
-    const T cubeDepthMax = number<T>(1);
-
-    T cubeDepthMin = number<T>(-1);
+    auto viewport = perspectiveViewport(fov, aspect, near);
+    auto ndcBound = Vector<4,T> {number<T>(2), number<T>(2), number<T>(-1), number<T>(1)};
 
     if constexpr (API == EGraphicsApi::DirectX)
     {
-        cubeDepthMin = number<T>(0);
+        ndcBound.z = number<T>(0);
     }
 
-    return ndc<CGM::E3D::X, CGM::E3D::Y, CGM::E3D::Z, CGM::EHandedness::Left>
+    return perspective<CGM::E3D::X, CGM::E3D::Y, CGM::E3D::Z, CGM::EHandedness::Left>
     (
-        nearPlaneWidth,
-        nearPlaneHeight,
-        near,
-        far,
-        cubeWidth,
-        cubeHeight,
-        cubeDepthMin,
-        cubeDepthMax
+        viewport.x, viewport.y, near, far, ndcBound.x, ndcBound.y, ndcBound.z, ndcBound.w
     );
 }
 
@@ -55,7 +60,7 @@ ndc(T fov, T aspect, T near, T far)
 
 template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
 constexpr Matrix<4,4,T>
-ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax)
+perspective(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax)
 {
     auto mat = Matrix<4,4,T>(zero<T>);
 
@@ -80,8 +85,8 @@ ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cube
         mat(3, static_cast<size_t>(CGM_CONFIG.forward)) = number<T>(1);
         mat(static_cast<size_t>(CGM_CONFIG.forward), 3) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
     #else
-        mat(static_cast<size_t>(cfg.forward), 3) = number<T>(1);
-        mat(3, static_cast<size_t>(cfg.forward)) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
+        mat(static_cast<size_t>(CGM_CONFIG.forward), 3) = number<T>(1);
+        mat(3, static_cast<size_t>(CGM_CONFIG.forward)) = nearPlaneDist * farPlaneDist * (cubeDepthMin - cubeDepthMax) / frustumLen;
     #endif
     }
 
@@ -118,6 +123,5 @@ ndc(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cube
 
     return mat;
 }
-
 
 CGM_NAMESPACE_END

@@ -61,7 +61,7 @@ Surface::setWidth(int width)
     m_width = width;
     if (m_window)
     {
-        glfwSetWindowSize(m_window, width, m_height);
+        glfwSetWindowSize(m_window, m_width, m_height);
     }
 }
 
@@ -73,7 +73,7 @@ Surface::setHeight(int height)
     m_height = height;
     if (m_window)
     {
-        glfwSetWindowSize(m_window, m_width, height);
+        glfwSetWindowSize(m_window, m_width, m_height);
     }
 }
 

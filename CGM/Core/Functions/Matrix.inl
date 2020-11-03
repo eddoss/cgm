@@ -601,7 +601,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance)
 
 template<size_t S, typename T>
 constexpr bool
-orthogonal(const Matrix<S,S,T>& matrix, T tolerance)
+orthogonal(const Matrix<S,S,T>& matrix, T tolerance, T determinantTolerance)
 {
     bool existInverse {false};
     auto invmat {inverseSafe(matrix, existInverse)};

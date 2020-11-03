@@ -159,11 +159,12 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance);
  * is also its inverse, i.e., transposed(M) = inverseSafe(M)).
  * @param matrix Matrix to check.
  * @param tolerance Comparison tolerance.
+ * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  * @return True if matrix is orthogonal, false otherwise.
  */
 template<size_t S, typename T>
 constexpr bool
-orthogonal(const Matrix<S,S,T>& matrix, T tolerance);
+orthogonal(const Matrix<S,S,T>& matrix, T tolerance, T determinantTolerance=T(0.000001));
 
 /**
  * Create identity matrix.

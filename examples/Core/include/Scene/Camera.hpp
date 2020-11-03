@@ -32,32 +32,38 @@ public:
     Camera();
 
 public:
-    const cgm::vec3&
+    CGM_FORCEINLINE const cgm::vec3&
     position() const;
 
     CGM_FORCEINLINE cgm::vec3
-    right() const {return cgm::xyz::right(m_space);};
+    right() const;
 
     CGM_FORCEINLINE cgm::vec3
-    up() const {return cgm::xyz::up(m_space);};
+    up() const;
 
     CGM_FORCEINLINE cgm::vec3
-    forward() const {return cgm::xyz::forward(m_space);};
+    forward() const;
 
-    const cgm::vec3&
+    CGM_FORCEINLINE const cgm::vec3&
     target() const;
 
-    const Properties&
+    CGM_FORCEINLINE const Properties&
     properties() const;
 
-    const cgm::mat4&
+    CGM_FORCEINLINE const cgm::mat4&
     space() const;
 
-    const cgm::mat4&
+    CGM_FORCEINLINE const cgm::mat4&
     inverseSpace() const;
 
-    const cgm::mat4&
-    ndc() const;
+    CGM_FORCEINLINE const cgm::mat4&
+    perspective() const;
+
+    CGM_FORCEINLINE const cgm::mat4&
+    inversePerspective() const;
+
+    CGM_FORCEINLINE const cgm::vec2&
+    Camera::viewport() const;
 
 public:
     void
@@ -78,7 +84,7 @@ public:
 
 protected:
     void
-    calculateNdc();
+    calculatePerspective();
 
     void
     calculateSpace();
@@ -93,6 +99,9 @@ protected:
     cgm::mat4
     m_perspective;
 
+    cgm::mat4
+    m_perspectiveInverse;
+
     Properties
     m_properties;
 
@@ -101,4 +110,76 @@ protected:
 
     cgm::vec3
     m_target {cgm::vec3(0)};
+
+    cgm::vec2
+    m_viewport {cgm::vec2(0)};
 };
+
+std::ostream&
+operator << (std::ostream& stream, const Camera& camera);
+
+CGM_FORCEINLINE const cgm::vec3&
+Camera::position() const
+{
+    return m_position;
+}
+
+CGM_FORCEINLINE cgm::vec3
+Camera::right() const
+{
+    return cgm::xyz::right(m_space);
+}
+
+CGM_FORCEINLINE cgm::vec3
+Camera::up() const
+{
+    return cgm::xyz::up(m_space);
+}
+
+CGM_FORCEINLINE cgm::vec3
+Camera::forward() const
+{
+    return cgm::xyz::forward(m_space);
+}
+
+CGM_FORCEINLINE const cgm::vec3&
+Camera::target() const
+{
+    return m_target;
+}
+
+CGM_FORCEINLINE const Camera::Properties&
+Camera::properties() const
+{
+    return m_properties;
+}
+
+CGM_FORCEINLINE const cgm::mat4&
+Camera::space() const
+{
+    return m_space;
+}
+
+CGM_FORCEINLINE const cgm::mat4&
+Camera::inverseSpace() const
+{
+    return m_spaceInverse;
+}
+
+CGM_FORCEINLINE const cgm::mat4&
+Camera::perspective() const
+{
+    return m_perspective;
+}
+
+CGM_FORCEINLINE const cgm::mat4&
+Camera::inversePerspective() const
+{
+    return m_perspectiveInverse;
+}
+
+CGM_FORCEINLINE const cgm::vec2&
+Camera::viewport() const
+{
+    return m_viewport;
+}

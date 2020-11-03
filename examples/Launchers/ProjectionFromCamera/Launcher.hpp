@@ -17,16 +17,37 @@ protected:
     beforeLoop() override;
 
     void
-    buttonEvent(EButton button, EState state, EModifier modifier) override;
+    mouseMoveEvent(cgm::Vector<2, int> position) override;
+
+    void buttonEvent(EButton button, EState state, EModifier modifier) override;
 
 private:
+
     void
-    setupFrame();
+    setupDots(size_t freq);
+
+    void
+    setupFrustum();
+
+    void
+    locateSpace(const cgm::vec2& screenPos);
+
+    cgm::vec3
+    intersection(const cgm::vec3& rayVector, const cgm::vec3& rayPoint,const cgm::vec3& planeNormal, const cgm::vec3& planePoint);
 
 private:
-    Geometry::Unique
-    frame = nullptr;
+    Camera::Unique
+    projector = nullptr;
 
     Geometry::Unique
-    space = nullptr;
+    dots = nullptr;
+
+    Geometry::Unique
+    frustum = nullptr;
+
+    Geometry::Unique
+    object = nullptr;
+
+    IPainter::Unique
+    dotPainter = nullptr;
 };

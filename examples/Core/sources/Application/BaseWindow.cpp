@@ -146,19 +146,7 @@ BaseWindow::mousePosition()
 cgm::Vector<2,double>
 BaseWindow::mouseOffset()
 {
-    return convertToScreen(mousePosition()) - m_previous_tick_mouse_pos;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-cgm::Vector<2,double>
-BaseWindow::convertToScreen(const cgm::Vector<2,int>& pos) const
-{
-    return
-    {
-        cgm::fit<double>(pos.x, 0.0, width(), -1.0, 1.0),
-        cgm::fit<double>(pos.y, 0.0, height(), 1.0, -1.0)
-    };
+    return convertToScreen<double>(mousePosition()) - m_previous_tick_mouse_pos;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -192,7 +180,7 @@ BaseWindow::beforeLoop()
 void
 BaseWindow::tickEvent()
 {
-    m_previous_tick_mouse_pos = convertToScreen(mousePosition());
+    m_previous_tick_mouse_pos = convertToScreen<double>(mousePosition());
 }
 
 /* --------------------------------------------------------------------------------------- */

@@ -145,12 +145,6 @@ Geometry::init()
         exit(-1);
     }
 
-    if (m_indices.empty())
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, indices count is zero");
-        exit(-1);
-    }
-
     if (!m_vao.create())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, cant create VAO");

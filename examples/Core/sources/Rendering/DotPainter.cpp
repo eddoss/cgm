@@ -1,11 +1,11 @@
 
 
-#include <Rendering/LinePainter.hpp>
+#include <Rendering/DotPainter.hpp>
 #include <GL/glew.h>
 
 
 void
-LinePainter::render(const Geometry& geo, const Camera& camera)
+DotPainter::render(const Geometry& geo, const Camera& camera)
 {
     auto mat = geo.material();
     mat->bind();
@@ -14,6 +14,6 @@ LinePainter::render(const Geometry& geo, const Camera& camera)
     mat->setUniform("matCameraToProject", camera.perspective());
 
     geo.vao().bind();
-    glDrawElements(GL_LINES, GLsizei(geo.indicesCount()), GL_UNSIGNED_INT, nullptr);
+    glDrawArrays(GL_POINTS, 0, GLsizei(geo.pointsCount()));
     geo.vao().release();
 }

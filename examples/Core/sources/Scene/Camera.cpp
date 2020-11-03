@@ -7,57 +7,18 @@
 namespace cgx = cgm::xyz;
 
 Camera::Camera()
-    : m_space(cgm::identity<4>())
-    , m_spaceInverse(cgm::identity<4>())
-    , m_perspective(0.0f)
-    , m_position(1.0f)
+    : m_position(1.0f)
     , m_target(0)
 {
     calculateSpace();
-    calculateNdc();
-}
-
-const cgm::vec3&
-Camera::position() const
-{
-    return m_position;
-}
-
-const cgm::vec3&
-Camera::target() const
-{
-    return m_target;
-}
-
-const Camera::Properties&
-Camera::properties() const
-{
-    return m_properties;
-}
-
-const cgm::mat4&
-Camera::inverseSpace() const
-{
-    return m_spaceInverse;
-}
-
-const cgm::mat4&
-Camera::space() const
-{
-    return m_space;
-}
-
-const cgm::mat4&
-Camera::ndc() const
-{
-    return m_perspective;
+    calculatePerspective();
 }
 
 void
 Camera::setProperties(const Camera::Properties& properties)
 {
     m_properties = properties;
-    calculateNdc();
+    calculatePerspective();
 }
 
 void
@@ -96,15 +57,19 @@ Camera::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 }
 
 void
-Camera::calculateNdc()
+Camera::calculatePerspective()
 {
-    m_perspective = cgm::ndc<cgm::EGraphicsApi::OpenGL>
+    const auto fov = cgm::radians(m_properties.fov);
+
+    m_viewport = cgm::perspectiveViewport(fov, m_properties.aspect, 1.0f);
+    m_perspective = cgm::perspective<cgm::EGraphicsApi::OpenGL>
     (
         cgm::radians(m_properties.fov),
         m_properties.aspect,
         m_properties.near,
         m_properties.far
     );
+    cgm::invert(m_perspectiveInverse);
 }
 
 void
@@ -113,4 +78,14 @@ Camera::calculateSpace()
     m_space = cgx::lookAt(m_position, m_target, cgx::up());
     m_spaceInverse = m_space;
     cgm::invert(m_spaceInverse);
+}
+
+std::ostream&
+operator << (std::ostream& stream, const Camera& camera)
+{
+    stream << "   FOV: " << camera.properties().fov << std::endl;
+    stream << "Aspect: " << camera.properties().aspect << std::endl;
+    stream << "  Near: " << camera.properties().near << std::endl;
+
+    return stream;
 }

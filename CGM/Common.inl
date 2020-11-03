@@ -94,7 +94,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE T
 fit01(T value, T newMin, T newMax)
 {
-    return clamp(value, number<T>(0), number<T>(1)) / (newMax - newMin) + newMin;
+    return clamp(value, number<T>(0), number<T>(1)) * (newMax - newMin) + newMin;
 }
 
 /* --------------------------------------------------------------------------------------- */

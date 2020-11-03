@@ -217,7 +217,8 @@ protected: /* Protected methods */
      * @param pos Window coordinate to convert.
      * @return Converted coord.
      */
-    cgm::Vector<2,double>
+    template<typename T>
+    cgm::Vector<2,T>
     convertToScreen(const cgm::Vector<2,int>& pos) const;
 
     /**
@@ -232,14 +233,22 @@ protected: /* Protected methods */
      * @return Time since event loop was started.
      */
     CGM_FORCEINLINE double
-    time() const { return m_time; }
+    time() const;
 
     /**
      * Gets delta between previous and current ticks (in seconds).
      * @return Tick delta time.
      */
     CGM_FORCEINLINE double
-    tickDelta() const { return m_currentTick; }
+    tickDelta() const;
+
+    /**
+     * Gets window aspect ratio (width / height).
+     * @return Aspect ratio.
+     */
+    template<typename T=float>
+    CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
+    aspect() const;
 
     /**
      * Close window.
@@ -342,3 +351,41 @@ private: /* Internals */
     cgm::Vector<2,double>
     m_previous_tick_mouse_pos {0,0};
 };
+
+/* --------------------------------------------------------------------------------------- */
+
+CGM_FORCEINLINE double
+BaseWindow::time() const
+{
+    return m_time;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+CGM_FORCEINLINE double
+BaseWindow::tickDelta() const
+{
+    return m_currentTick;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
+BaseWindow::aspect() const
+{
+    return static_cast<T>(width()) / height();
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+cgm::Vector<2,T>
+BaseWindow::convertToScreen(const cgm::Vector<2,int>& pos) const
+{
+    return
+    {
+        cgm::fit<T>(T(pos.x), T(0), T(width()), T(-1.0), T(1.0)),
+        cgm::fit<T>(T(pos.y), T(0), T(height()), T(1.0), T(-1.0))
+    };
+}
