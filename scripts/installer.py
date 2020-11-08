@@ -31,7 +31,7 @@ props = {
     "CGMATH_MATRIX_LAYOUT":                 "Column",
     "CGMATH_MATRIX_MULTIPLICATION_ORDER":   "Post",
     "CGMATH_HANDEDNESS":                    "Right",
-    "CGMATH_UP_AXES":                       "Y",
+    "CGMATH_UP_AXIS":                       "Y",
 }
 
 generate(props, dir_source, dir_build)

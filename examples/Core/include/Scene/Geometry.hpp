@@ -40,6 +40,15 @@ public:
     makeTriangle(ShaderProgram::Shared material);
 
     static Geometry::Unique
+    makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color, ShaderProgram::Shared material);
+
+    static Geometry::Unique
+    makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4& color, ShaderProgram::Shared material);
+
+    static Geometry::Unique
+    makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& color, ShaderProgram::Shared material);
+
+    static Geometry::Unique
     makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, ShaderProgram::Shared material);
 
 public:

@@ -6,7 +6,9 @@
 #include <OpenGL/ShaderProgram.hpp>
 #include <Rendering/IPainter.hpp>
 #include <Scene/Geometry.hpp>
-#include <Scene/Camera.hpp>
+#include <Scene/Camera/Models/Perspective.hpp>
+#include <Scene/Camera/Controllers/Aim.hpp>
+#include <Scene/Camera/Controllers/Flyable.hpp>
 
 
 class Application : public BaseWindow
@@ -35,7 +37,20 @@ protected:
     mouseMoveEvent(cgm::Vector<2,int> position) override;
 
 protected:
-    Camera::Unique
+    void
+    setupSceneCamera();
+
+protected:
+    PerspectiveCameraModel::Shared
+    scenePerspectiveCameraModel {nullptr};
+
+    AimCameraController::Shared
+    sceneAimCameraController {nullptr};
+
+    FlyableCameraController::Shared
+    sceneFlyableCameraController {nullptr};
+
+    Camera::Shared
     sceneCamera {nullptr};
 
     ShaderProgram::Shared
@@ -53,12 +68,9 @@ protected:
     cgm::vec3
     sceneBgColor {0.1f, 0.1f, 0.1f};
 
-    cgm::float32
-    moveVerticalScale = 1.0f;
+    cgm::vec3
+    moveScale {1.0f, 1.0f, 1.0f};   // horizontal, vertical, forward
 
-    cgm::float32
-    moveHorizontalScale = 1.0f;
-
-    cgm::float32
-    moveForwardScale = 1.0f;
+    cgm::vec2
+    rotateScale {1.0f, 1.0f};       // horizontal, vertical
 };

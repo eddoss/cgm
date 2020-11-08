@@ -34,7 +34,7 @@ VAO::bind() const
 {
     if( !m_objectCreated )
     {
-        CGM_EXAMPLES_FUNC_INFO("[ERROR]: can not bind array object, it is not created")
+        CGM_EXAMPLES_FUNC_ERROR("can not bind array object, it is not created")
         return false;
     }
     glBindVertexArray(m_id);
@@ -48,7 +48,7 @@ VAO::release() const
 {
     if (!m_objectCreated)
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not bind array object, it is not created")
+        CGM_EXAMPLES_FUNC_ERROR("can not release array object, it is not created")
         return false;
     }
     glBindVertexArray(0);
@@ -62,7 +62,7 @@ VAO::create()
 {
     if (m_objectCreated)
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: array object is already created");
+        CGM_EXAMPLES_FUNC_ERROR("array object is already created");
         return false;
     }
 
@@ -70,7 +70,7 @@ VAO::create()
 
     if (m_id == 0)
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: can not to create array object")
+        CGM_EXAMPLES_FUNC_ERROR("can not to create array object")
         m_objectCreated = false;
         return false;
     }
@@ -86,7 +86,7 @@ VAO::destroy()
 {
     if (!m_objectCreated)
     {
-        CGM_EXAMPLES_FUNC_INFO("Error: array object is not created")
+        CGM_EXAMPLES_FUNC_ERROR("array object is not created")
         return;
     }
 

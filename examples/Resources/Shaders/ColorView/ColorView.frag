@@ -20,6 +20,7 @@ in Position
 out vec4 fragColor;
 
 void main()
-{   
+{
     fragColor = color;
+    fragColor.w = 1.0;
 }

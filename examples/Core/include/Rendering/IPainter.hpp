@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <Scene/Camera.hpp>
 #include <Scene/Geometry.hpp>
+#include <Scene/Camera/Camera.hpp>
 
 
 class IPainter

@@ -19,7 +19,8 @@ protected:
     void
     mouseMoveEvent(cgm::Vector<2, int> position) override;
 
-    void buttonEvent(EButton button, EState state, EModifier modifier) override;
+    void
+    buttonEvent(EButton button, EState state, EModifier modifier) override;
 
 private:
 

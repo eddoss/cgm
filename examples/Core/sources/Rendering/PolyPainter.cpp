@@ -1,11 +1,10 @@
 
 
-#include <Rendering/DotPainter.hpp>
-#include <GL/glew.h>
+#include <Rendering/PolyPainter.hpp>
 
 
 void
-DotPainter::render(const Geometry& geo, const Camera& camera)
+PolyPainter::render(const Geometry& geo, const Camera& camera)
 {
     auto mat = geo.material();
     mat->bind();
@@ -14,6 +13,7 @@ DotPainter::render(const Geometry& geo, const Camera& camera)
     mat->setUniform("matCameraToProject", camera.model->projection());
 
     geo.vao().bind();
-    glDrawArrays(GL_POINTS, 0, GLsizei(geo.pointsCount()));
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, GLsizei(geo.pointsCount()));
+    glDrawElements(GL_TRIANGLE_FAN, GLsizei(geo.indicesCount()), EGLType::UInt, nullptr);
     geo.vao().release();
 }

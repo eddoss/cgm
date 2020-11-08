@@ -2,8 +2,11 @@
 
 #include <Scene/Geometry.hpp>
 #include <CGM/Modules/Coordinates.hpp>
+#include <CGM/Modules/Transformations/3D.hpp>
 #include <utility>
 
+
+namespace cgx = cgm::xyz;
 
 Geometry::Point::Point(const cgm::vec3& p, const cgm::vec4& c)
     : color(c)
@@ -63,14 +66,116 @@ Geometry::makeTriangle(ShaderProgram::Shared material)
     points.resize(3);
     indices.resize(3);
 
-    points[0] = Point{ {   0.0f,  0.5f,  0.0f}, r };
-    points[1] = Point{ {   0.5f, -0.5f,  0.0f}, g };
-    points[2] = Point{ {  -0.5f, -0.5f,  0.0f}, b };
+    points[0] = Point{ cgm::coord::cartesian(0.0f, 0.0f, 1.0f), r };
+    points[1] = Point{ cgm::coord::cartesian(1.0f, 0.0f, 0.0f), g };
+    points[2] = Point{ cgm::coord::cartesian(0.0f, 1.0f, 0.0f), b };
 
     indices[0] = 0;
     indices[1] = 1;
     indices[2] = 2;
 
+    return std::make_unique<Geometry>(std::move(points), std::move(indices), std::move(material));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+Geometry::Unique
+Geometry::makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color, ShaderProgram::Shared material)
+{
+    const auto axis = cgx::forward();
+    const auto angleStep = CGM_PI2 / pointsCount;
+
+    std::vector<Point> points {};
+    points.reserve(pointsCount);
+
+    for (size_t i = 0; i < pointsCount; ++i)
+    {
+        const auto angle = angleStep * i;
+        const auto radiusVector = cgx::rotated(cgx::right() * radius, angle, axis);
+
+        points.emplace_back(radiusVector, color);
+    }
+
+    return std::make_unique<Geometry>(std::move(points), std::vector<cgm::uint32>{}, std::move(material));
+}
+
+Geometry::Unique
+Geometry::makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4& color, ShaderProgram::Shared material)
+{
+    // Top view. P4 - top of pyramid
+    //
+    // 0---------------> right
+    // |  p1       p2
+    // |  |--------|
+    // |  |   p4   |
+    // |  |--------|
+    // |  p0       p3
+    // |
+    // V
+    // forward
+
+    const auto p0 = cgm::coord::cartesian(0.0f, 0.0f, 1.0f) * radius * 2;
+    const auto p1 = cgm::coord::cartesian(0.0f, 0.0f, 0.0f);
+    const auto p2 = cgm::coord::cartesian(0.0f, 1.0f, 0.0f) * radius * 2;
+    const auto p3 = cgm::coord::cartesian(0.0f, 0.0f, 1.0f) * radius * 2;
+    const auto p4 = cgm::coord::cartesian(height, radius, radius);
+
+    std::vector<Point> points
+    {
+        Point{ p0, color },
+        Point{ p1, color },
+        Point{ p2, color },
+        Point{ p3, color },
+        Point{ p4, color }
+    };
+
+    std::vector<uint32_t> indices
+    {
+//        0, 1, 2, 3, primitiveRestartValue,
+        1, 4, 0, primitiveRestartValue,
+        2, 4, 1, primitiveRestartValue,
+        3, 4, 2, primitiveRestartValue,
+        0, 4, 3
+    };
+
+    return std::make_unique<Geometry>(std::move(points), std::move(indices), std::move(material));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+Geometry::Unique
+Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& color, ShaderProgram::Shared material)
+{
+    std::vector<Point> points {};
+    std::vector<uint32_t> indices {};
+
+    const auto make_circle = [&points, &indices](const cgm::vec3& center, cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color)
+    {
+        const auto axis = cgx::forward();
+        const auto angleStep = CGM_PI2 / pointsCount;
+
+        for (size_t i = 0; i < pointsCount; ++i)
+        {
+            const auto angle = angleStep * i;
+            const auto radiusVector = cgx::rotated(cgx::right() * radius, angle, axis) + center;
+
+            indices.emplace_back(points.size());
+            points.emplace_back(radiusVector, color);
+        }
+    };
+
+    const auto angleStep = CGM_PI2 / count;
+
+    for (size_t i = 0; i < count; ++i)
+    {
+        const auto coeff = cgm::float32(i) / count;
+        const auto angle = angleStep * i;
+        const auto center = cgx::rotated(cgx::right() * radius, angle, cgx::forward()) - cgx::forward() * coeff;
+        make_circle(center, radius, 128, color);
+        indices.emplace_back(Geometry::primitiveRestartValue);
+    }
+    points.shrink_to_fit();
+    indices.shrink_to_fit();
     return std::make_unique<Geometry>(std::move(points), std::move(indices), std::move(material));
 }
 
@@ -136,39 +241,36 @@ Geometry::init()
     if (!m_material)
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init geometry, material is nullptr")
-        exit(-1);
     }
 
     if (m_points.empty())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, point count is zero");
-        exit(-1);
     }
 
     if (!m_vao.create())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, cant create VAO");
-        exit(-1);
     }
 
     if (!m_vbo.create())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, cant create VBO");
-        exit(-1);
     }
 
     if (!m_ids.create())
     {
         CGM_EXAMPLES_FUNC_ERROR("Cant init Geometry, cant create element buffer");
-        exit(-1);
     }
 
     m_vao.bind();
 
     m_vbo.bind();
-    m_vbo.allocate(cgm::uint32(m_points.size()) * sizeof(Point), m_points.data());
+    m_vbo.allocate(m_pointsCount * sizeof(Point), m_points.data());
+
     m_ids.bind();
-    m_ids.allocate(cgm::uint32(m_indices.size()) * sizeof(cgm::uint32), m_indices.data());
+    m_ids.allocate(m_indicesCount * sizeof(cgm::uint32), m_indices.data());
+
     m_vbo.bind();
     m_material->enableAttributeArray("attrPosition");
     m_material->setAttributeBuffer("attrPosition", EGLType::Float, 3, sizeof(decltype(Point::color)), sizeof(Point));

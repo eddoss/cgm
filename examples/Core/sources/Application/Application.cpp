@@ -1,9 +1,13 @@
 
 
 #include <Application/Application.hpp>
-#include <Rendering/LinePainter.hpp>
-#include <memory>
 #include <CGM/Cartesian/3D/Types/Config.hpp>
+#include <CGM/Modules/Transformations/3D.hpp>
+#include <Rendering/LinePainter.hpp>
+#include <Scene/Camera/Controllers/Aim.hpp>
+#include <Scene/Camera/Controllers/Flyable.hpp>
+#include <Scene/Camera/Models/Perspective.hpp>
+#include <memory>
 
 namespace cgx = cgm::xyz;
 
@@ -12,15 +16,7 @@ Application::Application()
     , sceneMaterial(new ShaderProgram)
     , scenePainter(new LinePainter)
 {
-    Camera::Properties props;
-    props.far = 500.0f;
-    props.near = 0.01f;
-    props.fov = 90.0f;
-    props.aspect = cgm::float32(width()) / cgm::float32(height());
-
-    sceneCamera->setProperties(props);
-    sceneCamera->setPosition({3,3,3});
-    sceneCamera->setTarget({0,0,0});
+    setupSceneCamera();
 
     sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, sceneMaterial);
     cgx::translate(sceneGrid->xform, 0.005f * cgx::down());
@@ -39,7 +35,11 @@ void
 Application::beforeLoop()
 {
     sceneMaterial->create();
+#ifdef NDEBUG
     sceneMaterial->addShaderPack(L"Resources/ColorView");
+#else
+    sceneMaterial->addShaderPack(L"C:/Users/edward/Desktop/dev/projects/ComputerGraphixMath/examples/Resources/ColorView");
+#endif
     sceneMaterial->link();
 
     sceneGrid->init();
@@ -73,9 +73,9 @@ Application::resizeEvent()
 {
     BaseWindow::resizeEvent();
 
-    auto props = sceneCamera->properties();
-    props.aspect = cgm::float32(width()) / cgm::float32(height());
-    sceneCamera->setProperties(props);
+    auto props = scenePerspectiveCameraModel->properties();
+    props.aspect = aspect<cgm::float32>();
+    scenePerspectiveCameraModel->setProperties(props);
 
     glViewport(0, 0, GLsizei(width()), GLsizei(height()));
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -90,32 +90,44 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
 {
     BaseWindow::mouseMoveEvent(position);
 
+    auto& controller = sceneCamera->controller;
     const auto offset = mouseOffset();
 
     if (buttonState(EButton::Left) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
         if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
         {
-            sceneCamera->rotate(offset.x * 250, -offset.y * 250);
+            controller->rotate(offset.x * 250 * rotateScale.x, -offset.y * 250 * rotateScale.y);
         }
         else
         {
-            sceneCamera->rotate(-offset.x * 250, -offset.y * 250);
+            controller->rotate(-offset.x * 250 * rotateScale.x, -offset.y * 250 * rotateScale.y);
         }
     }
     else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        sceneCamera->move(0, 0, offset.x * 5 * moveForwardScale);
+        controller->move(0, 0, offset.x * 5 * moveScale.z);
     }
     else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
-        {
-            sceneCamera->move(-offset.x * 2 * moveHorizontalScale, -offset.y * 2 * moveVerticalScale, 0);
-        }
-        else
-        {
-            sceneCamera->move(offset.x * 2 * moveHorizontalScale, -offset.y * 2 * moveVerticalScale, 0);
-        }
+        controller->move(-offset.x * 2 * moveScale.x, -offset.y * moveScale.y * 2, 0);
     }
+}
+
+void
+Application::setupSceneCamera()
+{
+    const cgm::float32 aspect = this->aspect<cgm::float32>();
+    const cgm::float32 fov = 45.0f;
+    const cgm::float32 near = 0.01f;
+    const cgm::float32 far = 1000.0f;
+    scenePerspectiveCameraModel = std::make_shared<PerspectiveCameraModel>(aspect, fov, near, far);
+
+    const auto position = cgm::vec3 {3.0f, 3.0f, 3.0f};
+    const auto target = cgm::vec3 {0.0f, 0.0f, 0.0f};
+    sceneAimCameraController = std::make_shared<AimCameraController>(target, position);
+
+    sceneFlyableCameraController = std::make_shared<FlyableCameraController>(target, position);
+
+    sceneCamera = std::make_shared<Camera>(scenePerspectiveCameraModel, sceneAimCameraController);
 }
