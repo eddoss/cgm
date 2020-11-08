@@ -19,7 +19,7 @@ Text2DLauncher::Text2DLauncher()
 
 //    const auto fontFile = std::string("C:/Windows/Fonts/JetBrainsMono-Medium.ttf");
     const auto fontFile = std::string("C:/Windows/Fonts/FreeSerifItalic.ttf");
-    const auto textValue = std::string("ez");
+    const auto textValue = std::string("f");
 
     text = std::make_unique<Text>(textValue, fontFile, roughShader, controlShader);
 }
@@ -32,16 +32,13 @@ Text2DLauncher::beforeLoop()
 
     glEnable(GL_MULTISAMPLE);
 
-//    glPrimitiveRestartIndex(Text::primitiveRestartValue);
-//    glEnable(GL_PRIMITIVE_RESTART);
-
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
     glBlendEquation(GL_FUNC_SUBTRACT);
 
     text->init();
 
-    setWidth(720);
+    setWidth(1280);
     setHeight(720);
 }
 
@@ -54,15 +51,26 @@ Text2DLauncher::clearEvent()
 void
 Text2DLauncher::renderEvent()
 {
-    text->roughShader()->bind();
+    const auto aspectRatio = this->aspect<float>();
+
+    auto& shaderRough = *text->roughShader();
+    shaderRough.bind();
+    shaderRough.setUniform("parmAspect", aspectRatio);
+
     text->roughVao().bind();
         glDrawArrays(GL_TRIANGLE_FAN, 0, text->roughPointsCount());
     text->roughVao().release();
 
-//    text->controlShader()->bind();
-//    text->controlVao().bind();
-//        glDrawArrays(GL_TRIANGLES, 0, text->controlPointsCount());
-//    text->controlVao().release();
+    if (text->controlPointsCount())
+    {
+        auto& shaderControl = *text->controlShader();
+        shaderControl.bind();
+        shaderControl.setUniform("parmAspect", aspectRatio);
+
+        text->controlVao().bind();
+            glDrawArrays(GL_TRIANGLES, 0, text->controlPointsCount());
+        text->controlVao().release();
+    }
 }
 
 void

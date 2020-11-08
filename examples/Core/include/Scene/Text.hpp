@@ -14,6 +14,18 @@ class Text
 {
 
 public:
+    struct ControlAttrs
+    {
+        cgm::vec2 P;
+        cgm::vec2 A;
+        cgm::vec2 B;
+        cgm::vec2 C;
+
+        ControlAttrs() = default;
+        ControlAttrs(cgm::vec2 p, cgm::vec2 a, cgm::vec2 b, cgm::vec2 c) : P(p), A(a), B(b), C(c) {}
+    };
+
+public:
     using Shared    = std::shared_ptr<Text>;
     using Unique    = std::unique_ptr<Text>;
     using Weak      = std::weak_ptr<Text>;
@@ -82,7 +94,7 @@ private:
     VBO
     m_controlVbo;
 
-    std::vector<cgm::vec2>
+    std::vector<ControlAttrs>
     m_controlPoints;
 
     cgm::uint16

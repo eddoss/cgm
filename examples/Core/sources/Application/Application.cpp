@@ -12,9 +12,9 @@
 namespace cgx = cgm::xyz;
 
 Application::Application()
-    : sceneCamera(new Camera)
-    , sceneMaterial(new ShaderProgram)
-    , scenePainter(new LinePainter)
+    : sceneCamera(std::make_shared<Camera>())
+    , sceneMaterial(std::make_shared<ShaderProgram>())
+    , scenePainter(std::make_shared<LinePainter>())
 {
     setupSceneCamera();
 
@@ -35,11 +35,7 @@ void
 Application::beforeLoop()
 {
     sceneMaterial->create();
-#ifdef NDEBUG
-    sceneMaterial->addShaderPack(L"Resources/ColorView");
-#else
-    sceneMaterial->addShaderPack(L"C:/Users/edward/Desktop/dev/projects/ComputerGraphixMath/examples/Resources/ColorView");
-#endif
+    sceneMaterial->addShaderPack(L"Resources/Shaders/ColorView");
     sceneMaterial->link();
 
     sceneGrid->init();

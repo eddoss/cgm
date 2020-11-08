@@ -180,7 +180,7 @@ private: /* Window private properties */
     m_visible {GLFW_TRUE};
 
     int
-    m_samples {16};
+    m_samples {32};
 
     int
     m_doubleBuffer {GLFW_TRUE};

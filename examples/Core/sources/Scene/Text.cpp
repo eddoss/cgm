@@ -12,14 +12,14 @@ public:
     std::vector<cgm::vec2>&
     points;
 
-    std::vector<cgm::vec2>&
+    std::vector<Text::ControlAttrs>&
     controls;
 
     FT_BBox
     bound {};
 
 public:
-    Visitor(std::vector<cgm::vec2>& pts, std::vector<cgm::vec2>& ctls) : points(pts), controls(ctls) {}
+    Visitor(std::vector<cgm::vec2>& pts, std::vector<Text::ControlAttrs>& ctls) : points(pts), controls(ctls) {}
 
 public:
     cgm::vec2
@@ -27,8 +27,8 @@ public:
     {
         return
         {
-            cgm::fit<cgm::vec2::value_type>(vec.x, bound.xMin, bound.xMax, -0.5f, 0.5f),
-            cgm::fit<cgm::vec2::value_type>(vec.y, bound.yMin, bound.yMax, -0.5f, 0.5f)
+            cgm::fit<cgm::vec2::value_type>(vec.x, bound.xMin, bound.xMax, -1.0f, 1.0f),
+            cgm::fit<cgm::vec2::value_type>(vec.y, bound.yMin, bound.yMax, -1.0f, 1.0f)
         };
     }
 };
@@ -43,7 +43,7 @@ Text::Text(const std::string& text, std::string fontFile, ShaderProgram::Shared 
 
     FT_New_Face(ftlib, fontFile.data(), 0, &ftface);
     FT_Load_Glyph(ftface, 0, FT_LOAD_DEFAULT);
-    FT_Set_Char_Size(ftface, 8, 8, 0, 0);
+    FT_Set_Char_Size(ftface, 1024, 1024, 0, 0);
     
     setupText(text);
 }
@@ -84,13 +84,15 @@ Text::setupText(const std::string& text)
     {
         auto& visitor = *reinterpret_cast<Visitor*>(user);
 
+        const auto ctrl = visitor.remapped(*control);
         const auto next = visitor.remapped(*to);
-        const auto prev = visitor.points[visitor.points.size()-1];
+        const auto prev = visitor.points.back();
 
-        visitor.points.emplace_back(visitor.remapped(*to));
-        visitor.controls.emplace_back(prev);
-        visitor.controls.emplace_back(visitor.remapped(*control));
-        visitor.controls.emplace_back(next);
+        visitor.points.emplace_back(next);
+        visitor.controls.emplace_back(Text::ControlAttrs{prev, prev, ctrl, next});
+        visitor.controls.emplace_back(Text::ControlAttrs{ctrl, prev, ctrl, next});
+        visitor.controls.emplace_back(Text::ControlAttrs{next, prev, ctrl, next});
+
         return 0;
     };
 
@@ -130,51 +132,57 @@ Text::init()
         CGM_EXAMPLES_FUNC_ERROR("Text object init fails. Cant create 'Rough' VBO");
     }
 
-
-
-    if (!m_controlShader)
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Text object init fails. 'Controls' shader is nullptr")
-    }
-
-    if (m_controlPointsCount == 0)
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Text object init fails. 'Control' points is empty");
-    }
-
-    if (!m_controlVao.create())
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Text object init fails. Cant create 'Controls' VAO");
-    }
-
-    if (!m_controlVbo.create())
-    {
-        CGM_EXAMPLES_FUNC_ERROR("Text object init fails. Cant create 'Controls' VBO");
-    }
-
-
-
     m_roughVao.bind();
 
     m_roughVbo.bind();
     m_roughVbo.allocate(m_roughPointsCount * sizeof(cgm::vec2), m_roughPoints.data());
 
-    m_roughShader->enableAttributeArray("position");
-    m_roughShader->setAttributeBuffer("position", EGLType::Float, 2, 0, sizeof(cgm::vec2));
+    m_roughShader->enableAttributeArray("attrPosition");
+    m_roughShader->setAttributeBuffer("attrPosition", EGLType::Float, 2, 0, sizeof(cgm::vec2));
 
     m_roughVao.release();
     m_roughPoints.clear();
 
 
+    if (m_controlPointsCount == 0)
+    {
+        CGM_EXAMPLES_FUNC_INFO("'Control' points is empty");
+    }
+    else
+    {
+        if (!m_controlShader)
+        {
+            CGM_EXAMPLES_FUNC_ERROR("Text object init fails. 'Controls' shader is nullptr")
+        }
 
-    m_controlVao.bind();
+        if (!m_controlVao.create())
+        {
+            CGM_EXAMPLES_FUNC_ERROR("Text object init fails. Cant create 'Controls' VAO");
+        }
 
-    m_controlVbo.bind();
-    m_controlVbo.allocate(m_controlPointsCount * sizeof(cgm::vec2), m_controlPoints.data());
+        if (!m_controlVbo.create())
+        {
+            CGM_EXAMPLES_FUNC_ERROR("Text object init fails. Cant create 'Controls' VBO");
+        }
 
-    m_controlShader->enableAttributeArray("position");
-    m_controlShader->setAttributeBuffer("position", EGLType::Float, 2, 0, sizeof(cgm::vec2));
+        m_controlVao.bind();
 
-    m_controlVao.release();
-    m_controlPoints.clear();
+        m_controlVbo.bind();
+        m_controlVbo.allocate(m_controlPointsCount * sizeof(ControlAttrs), m_controlPoints.data());
+
+        m_controlShader->enableAttributeArray("attrP");
+        m_controlShader->setAttributeBuffer("attrP", EGLType::Float, 2, 0, sizeof(ControlAttrs));
+
+        m_controlShader->enableAttributeArray("attrA");
+        m_controlShader->setAttributeBuffer("attrA", EGLType::Float, 2, sizeof(cgm::vec2), sizeof(ControlAttrs));
+
+        m_controlShader->enableAttributeArray("attrB");
+        m_controlShader->setAttributeBuffer("attrB", EGLType::Float, 2, sizeof(cgm::vec2) * 2, sizeof(ControlAttrs));
+
+        m_controlShader->enableAttributeArray("attrC");
+        m_controlShader->setAttributeBuffer("attrC", EGLType::Float, 2, sizeof(cgm::vec2) * 3, sizeof(ControlAttrs));
+
+        m_controlVao.release();
+        m_controlPoints.clear();
+    }
 }

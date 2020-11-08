@@ -4,7 +4,6 @@
 #include <CGM/Modules/Projections.hpp>
 #include <CGM/Modules/Transformations/3D.hpp>
 #include <Rendering/DotPainter.hpp>
-#include <examples/Launchers/Text3D/Launcher.hpp>
 
 
 namespace cgx = cgm::xyz;
