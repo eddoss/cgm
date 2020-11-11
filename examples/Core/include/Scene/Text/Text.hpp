@@ -9,7 +9,6 @@
 #include <freetype/freetype.h>
 #include <vector>
 
-
 class Text
 {
 
@@ -35,11 +34,10 @@ public:
 //    primitiveRestartValue = std::numeric_limits<cgm::uint16>::max();
 
 public:
-    Text(const std::string& text, std::string fontFile, ShaderProgram::Shared roughShader, ShaderProgram::Shared controlShader);
+    ~Text() noexcept;
+    Text(FT_Library& libInstance, ShaderProgram::Shared roughShader, ShaderProgram::Shared controlShader);
 
-    void
-    init();
-
+public:
     CGM_FORCEINLINE const VAO&
     roughVao() const;
 
@@ -58,17 +56,38 @@ public:
     CGM_FORCEINLINE ShaderProgram::Shared
     controlShader() const;
 
+public:
+    void
+    init();
+
+    void
+    setText(const std::string& text);
+
+    void
+    setFont(const std::string& fontFile);
+
 protected:
     void
-    setupText(const std::string& text);
+    setupCharacter(FT_ULong character);
+
+    void
+    setupText(std::string text);
+
+    cgm::vec2
+    remapped(const FT_Vector& vec);
 
 private:
-    FT_Library
-    ftlib;
+    FT_Library&
+    m_ftLibrary;
 
     FT_Face
-    ftface;
+    m_ftFace;
 
+    cgm::vec2
+    currentOffset {0,0};
+
+    bool
+    flag = false;
 
 
     VAO

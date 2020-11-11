@@ -6,6 +6,8 @@ in vec2 attrB;
 in vec2 attrC;
 
 uniform float parmAspect;
+uniform vec2 offset;
+uniform vec2 scale;
 
 out vec2 P;
 out vec2 A;
@@ -14,10 +16,10 @@ out vec2 C;
 
 void main()
 {
-    P = attrP;
-    A = attrA;
-    B = attrB;
-    C = attrC;
+    P = attrP * scale.x * scale.y + offset;
+    A = attrA * scale.x * scale.y + offset;
+    B = attrB * scale.x * scale.y + offset;
+    C = attrC * scale.x * scale.y + offset;
 
     P.x /= parmAspect;
     A.x /= parmAspect;

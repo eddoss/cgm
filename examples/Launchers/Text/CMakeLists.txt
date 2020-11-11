@@ -1,5 +1,5 @@
 
-project(Text2D LANGUAGES CXX)
+project(Text LANGUAGES CXX)
 
 file(GLOB_RECURSE SOURCES_FILES ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
 
