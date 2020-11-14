@@ -56,6 +56,10 @@ public:
     CGM_FORCEINLINE ShaderProgram::Shared
     controlShader() const;
 
+    CGM_FORCEINLINE float
+    emSize() const {return m_ftFace->units_per_EM;}
+//    emSize() const {return 1.0f;}
+
 public:
     void
     init();
@@ -70,11 +74,8 @@ protected:
     void
     setupCharacter(FT_ULong character);
 
-    void
-    setupText(std::string text);
-
     cgm::vec2
-    remapped(const FT_Vector& vec);
+    calculatePosition(const FT_Vector& vec);
 
 private:
     FT_Library&
@@ -85,6 +86,9 @@ private:
 
     cgm::vec2
     currentOffset {0,0};
+
+    FT_Vector
+    offset {0,0};
 
     bool
     flag = false;

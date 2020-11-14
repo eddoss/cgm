@@ -2,7 +2,7 @@
 
 
 #include <Application/Application.hpp>
-#include <Scene/Text/Text.hpp>
+#include <TextObject.hpp>
 
 
 class Text2DLauncher : public Application
@@ -27,7 +27,7 @@ protected:
     setupFrameBuffer();
 
     void
-    setupPlate();
+    setupScreenPlate();
 
 private:
     FT_Library
@@ -61,11 +61,14 @@ private:
     fboTexture = 0;
 
     VAO
-    plateVao;
+    screenPlateVao;
 
     VBO
-    plateVbo;
+    screenPlateVbo;
 
     ShaderProgram
-    plateShader;
+    antialiasingShader;
+
+    ShaderProgram
+    subpixelAntialiasingShader;
 };

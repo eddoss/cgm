@@ -171,10 +171,10 @@ private: /* Window private properties */
 /* ####################################################################################### */
 
     int
-    m_width {1280};
+    m_width {1920};
 
     int
-    m_height {720};
+    m_height {1080};
 
     int
     m_visible {GLFW_TRUE};

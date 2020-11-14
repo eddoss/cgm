@@ -12,12 +12,12 @@
 /* ####################################################################################### */
 
 #ifndef IMPL_SUPPORT_SET_UNIFORM_COMMON
-    #define IMPL_SUPPORT_SET_UNIFORM_COMMON\
-    GLint location = glGetUniformLocation(m_id, name.data()); \
-    if (location == -1) \
-    {\
-        CGM_EXAMPLES_FUNC_ERROR(std::string("can not enable attribute array: '") + name + "'");\
-        return;\
+    #define IMPL_SUPPORT_SET_UNIFORM_COMMON                                                     \
+    GLint location = glGetUniformLocation(m_id, name.data());                                   \
+    if (location == -1)                                                                         \
+    {                                                                                           \
+        CGM_EXAMPLES_FUNC_ERROR(std::string("could not set uniform value: '") + name + "'");    \
+        return;                                                                                 \
     }
 #endif
 
@@ -103,18 +103,14 @@ ShaderProgram::link()
     if( !success )
     {
         GLint logLength;
-        glGetProgramiv( m_id, GL_INFO_LOG_LENGTH, &logLength );
+        glGetShaderiv( m_id, GL_INFO_LOG_LENGTH, &logLength );
 
         if( logLength > 0 )
         {
             char* logData = new char[uint64_t(logLength)];
 
-            glGetShaderInfoLog( m_id, logLength, nullptr, logData );
-            CGM_EXAMPLES_FUNC_ERROR(std::string(logData));
-        }
-        else
-        {
-            CGM_EXAMPLES_FUNC_ERROR("can not link shader program");
+            glGetShaderInfoLog(m_id, logLength, nullptr, logData);
+            CGM_EXAMPLES_FUNC_INFO(std::string(logData));
         }
 
         m_linked = false;
@@ -281,7 +277,7 @@ ShaderProgram::setAttributeBuffer(const std::string& name, EGLType type, uint32_
     GLint location = glGetAttribLocation(m_id, name.data());
     if( location == -1 )
     {
-        CGM_EXAMPLES_FUNC_ERROR(std::string("can not set attribute array: '") + name + "'");
+        CGM_EXAMPLES_FUNC_ERROR(std::string("could not set attribute array: '") + name + "'");
         return;
     }
 

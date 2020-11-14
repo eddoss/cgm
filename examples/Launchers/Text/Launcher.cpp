@@ -19,7 +19,7 @@ Text2DLauncher::~Text2DLauncher()
 Text2DLauncher::Text2DLauncher()
     : roughShader(std::make_shared<ShaderProgram>())
     , controlShader(std::make_shared<ShaderProgram>())
-    , plateVbo(VBO::EBufferType::ArrayBuffer, VBO::EUsagePattern::StaticDraw, VBO::EAccessPattern::ReadWrite)
+    , screenPlateVbo(VBO::EBufferType::ArrayBuffer, VBO::EUsagePattern::StaticDraw, VBO::EAccessPattern::ReadWrite)
 {
     FT_Init_FreeType(&ftLibInstance);
 
@@ -32,9 +32,11 @@ Text2DLauncher::Text2DLauncher()
     controlShader->link();
 
     text = std::make_unique<Text>(ftLibInstance, roughShader, controlShader);
-//    text->setFont("C:/Windows/Fonts/FreeSerifItalic.ttf");
-    text->setFont("C:/Windows/Fonts/Candara.ttf");
-    text->setText("hello world");
+    text->setFont("C:/Windows/Fonts/FreeSerifItalic.ttf");
+//    text->setFont("C:/Windows/Fonts/Candara.ttf");
+//    text->setFont("C:/Windows/Fonts/times.ttf");
+//    text->setFont("C:/Windows/Fonts/tahoma.ttf");
+    text->setText("VA. Hello World. Scalable text. 0123456789 .,!?<>()[]{}");
 
     glGenTextures(1, &fboTexture);
     glGenFramebuffers(1, &fbo);
@@ -45,28 +47,34 @@ Text2DLauncher::beforeLoop()
 {
     text->init();
 
-    setWidth(1280);
-    setHeight(720);
+//    setWidth(1280);
+//    setHeight(720);
 
     setupFrameBuffer();
-    setupPlate();
+    setupScreenPlate();
 
     const auto aspectRatio = this->aspect<float>();
 
-    text->roughShader()->bind();
-    text->roughShader()->setUniform("parmAspect", aspectRatio);
-    text->roughShader()->release();
+    roughShader->bind();
+//    roughShader->setUniform("screenWidth", width());
+//    roughShader->setUniform("screenHeight", height());
+    roughShader->setUniform("parmAspect", aspectRatio);
+    roughShader->setUniform("em", text->emSize());
+    roughShader->release();
 
-    text->controlShader()->bind();
-    text->controlShader()->setUniform("parmAspect", aspectRatio);
-    text->controlShader()->release();
+    controlShader->bind();
+//    controlShader->setUniform("screenWidth", width());
+//    controlShader->setUniform("screenHeight", height());
+    controlShader->setUniform("parmAspect", aspectRatio);
+    controlShader->setUniform("em", text->emSize());
+    controlShader->release();
 }
 
 void
 Text2DLauncher::render()
 {
     // draw to frame buffer
-//    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
@@ -74,55 +82,62 @@ Text2DLauncher::render()
     glBlendEquation(GL_FUNC_SUBTRACT);
     glClear(GL_COLOR_BUFFER_BIT);
 
-        text->roughShader()->bind();
-        text->roughShader()->setUniform("offset", textOffset);
-        text->roughShader()->setUniform("scale", textScale);
-        text->roughVao().bind();
-        glDrawArrays(GL_TRIANGLE_FAN, 0, text->roughPointsCount());
-        text->roughVao().release();
+    text->roughShader()->bind();
+    text->roughShader()->setUniform("offset", textOffset);
+    text->roughShader()->setUniform("scale", textScale);
+    text->roughVao().bind();
+    glDrawArrays(GL_TRIANGLE_FAN, 0, text->roughPointsCount());
+    text->roughVao().release();
 
-        if (text->controlPointsCount())
-        {
-            text->controlShader()->bind();
-            text->controlShader()->setUniform("offset", textOffset);
-            text->controlShader()->setUniform("scale", textScale);
+    if (text->controlPointsCount())
+    {
+        text->controlShader()->bind();
+        text->controlShader()->setUniform("offset", textOffset);
+        text->controlShader()->setUniform("scale", textScale);
 
-            text->controlVao().bind();
-                glDrawArrays(GL_TRIANGLES, 0, text->controlPointsCount());
-            text->controlVao().release();
-        }
+        text->controlVao().bind();
+            glDrawArrays(GL_TRIANGLES, 0, text->controlPointsCount());
+        text->controlVao().release();
+    }
 
+    // draw on the screen
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDisable(GL_BLEND);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-//    // draw on the screen
-//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-////    glDisable(GL_MULTISAMPLE);
-//    glDisable(GL_BLEND);
-//    glClear(GL_COLOR_BUFFER_BIT);
-//
-//    plateShader.bind();
-//    plateVao.bind();
-//    glBindTexture(GL_TEXTURE_2D, fboTexture);
-//    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-//    plateVbo.bind();
+    subpixelAntialiasingShader.bind();
+    screenPlateVao.bind();
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, fboTexture);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    screenPlateVbo.bind();
 }
 
 void
 Text2DLauncher::resizeEvent()
 {
+    glViewport(0, 0, GLsizei(width()), GLsizei(height()));
+
     const auto aspectRatio = this->aspect<float>();
-
-    text->roughShader()->bind();
-    text->roughShader()->setUniform("parmAspect", aspectRatio);
-    text->roughShader()->release();
-
-    text->controlShader()->bind();
-    text->controlShader()->setUniform("parmAspect", aspectRatio);
-    text->controlShader()->release();
 
     setupFrameBuffer();
 
-    glViewport(0, 0, GLsizei(width()), GLsizei(height()));
-    clearEvent();
+    subpixelAntialiasingShader.bind();
+    subpixelAntialiasingShader.setUniform("screenWidth", width());
+    subpixelAntialiasingShader.setUniform("screenHeight", height());
+    subpixelAntialiasingShader.release();
+
+    roughShader->bind();
+//    roughShader->setUniform("screenWidth", width());
+//    roughShader->setUniform("screenHeight", height());
+    roughShader->setUniform("parmAspect", aspectRatio);
+    roughShader->release();
+
+    controlShader->bind();
+//    controlShader->setUniform("screenWidth", width());
+//    controlShader->setUniform("screenHeight", height());
+    controlShader->setUniform("parmAspect", aspectRatio);
+    controlShader->release();
+
     renderEvent();
     glfwSwapBuffers(m_window);
 }
@@ -133,7 +148,7 @@ Text2DLauncher::mouseMoveEvent(cgm::Vector<2, int> position)
     Application::mouseMoveEvent(position);
 
     const auto offset = mouseOffset();
-    const auto scaleStep = 0.01f;
+    const auto scaleStep = 0.0025f;
 
     if (buttonState(EButton::Left) == EState::Press)
     {
@@ -165,13 +180,28 @@ Text2DLauncher::mouseMoveEvent(cgm::Vector<2, int> position)
 void
 Text2DLauncher::setupFrameBuffer()
 {
-    glBindTexture(GL_TEXTURE_2D, fboTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width(), height(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    glBindTexture(GL_TEXTURE_2D, fboTexture);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width(), height(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//
+//    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+//    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
+//
+//    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+//    {
+//        CGM_EXAMPLES_FUNC_ERROR("Could not create FBO")
+//    }
+//
+//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
+    glBindTexture( GL_TEXTURE_2D_MULTISAMPLE, fboTexture );
+    glTexParameteri (GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri (GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexImage2DMultisample( GL_TEXTURE_2D_MULTISAMPLE, 16, GL_RGB, width(), height(), false );
+
+    glBindFramebuffer( GL_FRAMEBUFFER, fbo );
+    glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, fboTexture, 0 );
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
@@ -182,7 +212,7 @@ Text2DLauncher::setupFrameBuffer()
 }
 
 void
-Text2DLauncher::setupPlate()
+Text2DLauncher::setupScreenPlate()
 {
     const auto platePoints = std::vector
     {
@@ -190,22 +220,28 @@ Text2DLauncher::setupPlate()
         cgm::vec2 { 1, 1}, cgm::vec2 { 1,-1}
     };
 
-    plateVao.create();
-    plateVbo.create();
-    plateShader.create();
+    screenPlateVao.create();
+    screenPlateVbo.create();
+    subpixelAntialiasingShader.create();
+    antialiasingShader.create();
 
-    plateShader.addShaderPack(L"C:/Users/edward/Desktop/dev/projects/ComputerGraphixMath/examples/Resources/Shaders/Text/Plate");
-    plateShader.link();
+//    antialiasingShader.addShaderPack(L"C:/Users/edward/Desktop/dev/projects/ComputerGraphixMath/examples/Resources/Shaders/Text/AA");
+//    antialiasingShader.link();
 
-    plateVao.bind();
+    subpixelAntialiasingShader.addShaderPack(L"C:/Users/edward/Desktop/dev/projects/ComputerGraphixMath/examples/Resources/Shaders/Text/SAA");
+    subpixelAntialiasingShader.link();
 
-    plateVbo.bind();
-    plateVbo.allocate(platePoints.size() * sizeof(cgm::vec2), platePoints.data());
+    screenPlateVao.bind();
 
-    plateShader.bind();
-    plateShader.setAttributeBuffer("attrPosition", EGLType::Float, 2, 0, sizeof(cgm::vec2));
-    plateShader.enableAttributeArray("attrPosition");
-    plateShader.setUniform("screenTexture", fboTexture);
+    screenPlateVbo.bind();
+    screenPlateVbo.allocate(platePoints.size() * sizeof(cgm::vec2), platePoints.data());
 
-    plateVao.release();
+    subpixelAntialiasingShader.bind();
+    subpixelAntialiasingShader.setAttributeBuffer("attrPosition", EGLType::Float, 2, 0, sizeof(cgm::vec2));
+    subpixelAntialiasingShader.enableAttributeArray("attrPosition");
+    subpixelAntialiasingShader.setUniform("screenTexture", fboTexture);
+    subpixelAntialiasingShader.setUniform("screenWidth", width());
+    subpixelAntialiasingShader.setUniform("screenHeight", height());
+
+    screenPlateVao.release();
 }
