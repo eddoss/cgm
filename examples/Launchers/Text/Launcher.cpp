@@ -174,10 +174,26 @@ Text2DLauncher::keyEvent(BaseWindow::EKey key, BaseWindow::EState state, BaseWin
 {
     BaseWindow::keyEvent(key, state, modifier);
 
-    if (key == EKey::Space)
+    switch (key)
     {
-        m_textOffset = {-0.5, 0};
-        m_textScale = {0.045, 0.045};
+        case EKey::KP1:
+        {
+            m_textOffset = {-0.5, 0};
+            m_textScale = {0.045, 0.045};
+        }
+        case EKey::KP2:
+        {
+            m_textOffset = {-0.5, 0};
+            m_textScale = {0.03, 0.03};
+        }
+        case EKey::Space:
+        {
+            if (keyState(key) == EState::Release)
+            {
+                m_params.spaa = !m_params.spaa;
+                m_postProcessShader.setUniform("enableSPAA", m_params.spaa);
+            }
+        }
     }
 }
 
