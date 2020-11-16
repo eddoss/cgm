@@ -35,9 +35,9 @@ void main()
         vec4 l = one - texture_ms(screenTexture, uv - step);    // left pixel
         vec4 r = one - texture_ms(screenTexture, uv + step);    // right pixel
 
-        const float k1 = (1.1f * 1.0f) / 9.0f;
-        const float k2 = (1.1f * 2.0f) / 9.0f;
-        const float k3 = (1.1f * 3.0f) / 9.0f;
+        const float k1 = 1.0f / 9.0f;
+        const float k2 = 2.0f / 9.0f;
+        const float k3 = 3.0f / 9.0f;
 
         fragColor.r = 1.0f - (k1*l.g + k2*l.b + k3*c.r + k2*c.g + k1*c.b);
         fragColor.g = 1.0f - (k1*l.b + k2*c.r + k3*c.g + k2*c.b + k1*r.r);
