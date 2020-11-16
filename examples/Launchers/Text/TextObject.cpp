@@ -5,7 +5,7 @@
 #include <freetype/ftoutln.h>
 #include <harfbuzz/hb.h>
 #include <harfbuzz/hb-ft.h>
-#include <fstream>
+#include <sstream>
 
 struct Visitor
 {
@@ -111,56 +111,64 @@ Text::init()
 void
 Text::setText(const std::string& text)
 {
-    hb_buffer_t *buf;
-    buf = hb_buffer_create();
-    hb_buffer_add_utf8(buf, text.c_str(), -1, 0, -1);
+    std::stringstream stream(text);
+    std::string line;
 
-    hb_buffer_set_direction(buf, HB_DIRECTION_LTR);
-    hb_buffer_set_script(buf, HB_SCRIPT_LATIN);
-    hb_buffer_set_language(buf, hb_language_from_string("en", -1));
+    uint16_t i = 0;
 
-    hb_font_t *font = hb_ft_font_create(m_ftFace, nullptr);
-    hb_shape(font, buf, nullptr, 0);
-
-    uint32_t glyph_count = 0;
-    hb_glyph_info_t *glyphs_info    = hb_buffer_get_glyph_infos(buf, &glyph_count);
-    hb_glyph_position_t *glyphs_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
-
-    offset.x = 0;
-    offset.y = 0;
-
-    for (size_t i = 0; i < text.size(); ++i)
+    while(std::getline(stream, line, '\n'))
     {
-        if (i > 0)
+        hb_buffer_t *buf;
+        buf = hb_buffer_create();
+        hb_buffer_add_utf8(buf, line.c_str(), -1, 0, -1);
+
+        hb_buffer_set_direction(buf, HB_DIRECTION_LTR);
+        hb_buffer_set_script(buf, HB_SCRIPT_LATIN);
+        hb_buffer_set_language(buf, hb_language_from_string("en", -1));
+
+        hb_font_t *font = hb_ft_font_create(m_ftFace, nullptr);
+        hb_shape(font, buf, nullptr, 0);
+
+        uint32_t glyph_count = 0;
+        hb_glyph_info_t *glyphs_info    = hb_buffer_get_glyph_infos(buf, &glyph_count);
+        hb_glyph_position_t *glyphs_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
+
+        offset.x = 0;
+        offset.y = -2200 * i++;
+
+        for (size_t i = 0; i < line.size(); ++i)
         {
-            hb_position_t kerning_correction_x = 0;
-            hb_position_t kerning_correction_y = 0;
-
-            if (i < text.size() - 1)
+            if (i > 0)
             {
-                hb_font_get_glyph_kerning_for_direction
-                (
-                    font,
-                    glyphs_info[i-1].codepoint,
-                    glyphs_info[i].codepoint,
-                    hb_direction_t::HB_DIRECTION_LTR,
-                    &kerning_correction_x,
-                    &kerning_correction_y
-                );
+                hb_position_t kerning_correction_x = 0;
+                hb_position_t kerning_correction_y = 0;
+
+                if (i < line.size() - 1)
+                {
+                    hb_font_get_glyph_kerning_for_direction
+                    (
+                        font,
+                        glyphs_info[i-1].codepoint,
+                        glyphs_info[i].codepoint,
+                        hb_direction_t::HB_DIRECTION_LTR,
+                        &kerning_correction_x,
+                        &kerning_correction_y
+                    );
+                }
+
+                const auto glyphPos = glyphs_pos[i-1];
+                offset.x += glyphPos.x_advance + kerning_correction_x;
+                offset.y += glyphPos.y_advance + kerning_correction_y;
             }
-
-            const auto glyphPos = glyphs_pos[i-1];
-            offset.x += glyphPos.x_advance + kerning_correction_x;
-            offset.y += glyphPos.y_advance + kerning_correction_y;
+            setupCharacter(line[i]);
         }
-        setupCharacter(text[i]);
+
+        offset.x = 0;
+        offset.y = 0;
+
+        hb_buffer_destroy(buf);
+        hb_font_destroy(font);
     }
-
-    offset.x = 0;
-    offset.y = 0;
-
-    hb_buffer_destroy(buf);
-    hb_font_destroy(font);
 }
 
 void
@@ -217,11 +225,6 @@ Text::setupCharacter(FT_ULong character)
 
     Visitor visitor(*this);
     FT_Outline_Decompose(&m_ftFace->glyph->outline, &funcs, &visitor);
-
-    const auto w = m_ftFace->glyph->metrics.width;
-    const auto em = m_ftFace->bbox;
-
-    currentOffset.x += cgm::fit<cgm::float32>(w, em.xMin, em.xMax, 0.0f, 1.0f);
 
     m_controlPointsCount = m_controlPoints.size();
     m_roughPointsCount = m_roughPoints.size();

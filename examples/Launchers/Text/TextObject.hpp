@@ -29,10 +29,6 @@ public:
     using Unique    = std::unique_ptr<Text>;
     using Weak      = std::weak_ptr<Text>;
 
-//public:
-//    const static uint16_t
-//    primitiveRestartValue = std::numeric_limits<cgm::uint16>::max();
-
 public:
     ~Text() noexcept;
     Text(FT_Library& libInstance, ShaderProgram::Shared roughShader, ShaderProgram::Shared controlShader);
@@ -58,7 +54,6 @@ public:
 
     CGM_FORCEINLINE float
     emSize() const {return m_ftFace->units_per_EM;}
-//    emSize() const {return 1.0f;}
 
 public:
     void
@@ -84,15 +79,8 @@ private:
     FT_Face
     m_ftFace;
 
-    cgm::vec2
-    currentOffset {0,0};
-
     FT_Vector
     offset {0,0};
-
-    bool
-    flag = false;
-
 
     VAO
     m_roughVao;
@@ -108,8 +96,6 @@ private:
 
     ShaderProgram::Shared
     m_roughShader;
-
-
 
     VAO
     m_controlVao;

@@ -5,11 +5,24 @@
 #include <TextObject.hpp>
 
 
+struct CLI
+{
+    std::string
+    fontFile;
+
+    float
+    gamma = 1.0f;
+
+    bool
+    spaa = true;
+};
+
 class Text2DLauncher : public Application
 {
 public:
-    ~Text2DLauncher();
-    Text2DLauncher();
+    explicit
+    Text2DLauncher(const CLI& parameters);
+    ~Text2DLauncher() override;
 
 protected:
     void
@@ -21,7 +34,11 @@ protected:
     void
     resizeEvent() override;
 
-    void mouseMoveEvent(cgm::Vector<2, int> position) override;
+    void
+    mouseMoveEvent(cgm::Vector<2, int> position) override;
+
+    void
+    keyEvent(EKey key, EState state, EModifier modifier) override;
 
     void
     setupFrameBuffer();
@@ -30,45 +47,39 @@ protected:
     setupScreenPlate();
 
 private:
+    CLI
+    m_params;
+
     FT_Library
-    ftLibInstance;
-
-
+    m_ftLibInstance;
 
     Text::Unique
-    text = nullptr;
+    m_text = nullptr;
 
     cgm::vec2
-    textOffset {0,0};
+    m_textOffset {-0.5, 0};
 
     cgm::vec2
-    textScale {1,1};
-
-
-
-    ShaderProgram::Shared
-    roughShader = nullptr;
-
-    ShaderProgram::Shared
-    controlShader = nullptr;
-
-
+    m_textScale {0.03, 0.03};
 
     uint32_t
-    fbo = 0;
+    m_fbo = 0;
 
     uint32_t
-    fboTexture = 0;
+    m_fboTexture = 0;
 
     VAO
-    screenPlateVao;
+    m_screenPlateVao;
 
     VBO
-    screenPlateVbo;
+    m_screenPlateVbo;
 
     ShaderProgram
-    antialiasingShader;
+    m_postProcessShader;
 
-    ShaderProgram
-    subpixelAntialiasingShader;
+    ShaderProgram::Shared
+    m_roughShader = nullptr;
+
+    ShaderProgram::Shared
+    m_controlShader = nullptr;
 };
