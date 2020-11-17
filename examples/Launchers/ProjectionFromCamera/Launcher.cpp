@@ -194,16 +194,11 @@ Launcher::locateSpace(const cgm::vec2& tap)
     const auto& contr = *sceneAimCameraController;
 
     const auto fov     = cgm::radians(model.properties().fov);
-    const auto pos     = contr.position();
     const auto aspect  = model.properties().aspect;
     const auto& space  = contr.space();
 
-    const auto proj_ray = cgm::perspectiveRay(tap, fov, aspect, space);
-    const auto intersec = intersection(proj_ray, pos, cgx::up(), cgm::vec3(0));
+    const auto ray = cgm::perspectiveRay(tap, fov, aspect, space);
+    const auto intersec = intersection(ray.direction, ray.position, cgx::up(), cgm::vec3(0));
 
     cgx::setPosition(object->xform, intersec);
-
-//    std::cout << "      Screen: " << tap_pos << std::endl;
-//    std::cout << "   World Ray: " << proj_ray << std::endl;
-//    std::cout << "Intersection: " << intersec << std::endl;
 }

@@ -7,8 +7,8 @@
 #include <CGM/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Cartesian/3D/Types/Config.hpp>
 #include <CGM/Coordinates/Functions/Converters.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Projections/Types.hpp>
-#include <CGM/Core/Functions/IO.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -33,7 +33,7 @@ perspectiveViewport(T fov, T aspect, T offset = number<T>(1));
  * @return 3D ray from projector.
  */
 template<typename T>
-constexpr Vector<3,T>
+constexpr CGM_XYZ::Ray<T>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace);
 
 /**

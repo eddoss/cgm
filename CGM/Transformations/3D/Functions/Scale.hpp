@@ -11,7 +11,7 @@
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Transformations/3D/Functions/Utils.hpp>
@@ -61,7 +61,7 @@ scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis);
+scale(Vector<3,T>& vector, T value, const Ray<T>& axis);
 
 /**
  * Scales vector related to pivot point.
@@ -176,7 +176,7 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr void
-scale(Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
+scale(Matrix<4,4,T>& matrix, T value, const Ray<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
@@ -250,7 +250,7 @@ scale(Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vector<3,T>&
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
+scale(Pivot<T>& pivot, T value, const Ray<T>& axis);
 
 /**
  * Scales pivot position related to pivot point.
@@ -283,7 +283,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms);
  */
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value);
+scale(Ray<T>& arbitraryAxis, T value);
 
 /**
  * Scales arbitrary axis position related to world center.
@@ -292,7 +292,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
+scale(Ray<T>& arbitraryAxis, const Vector<3,T>& values);
 
 /**
  * Scales arbitrary axis position along to arbitrary axis.
@@ -302,7 +302,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
+scale(Ray<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
 
 /**
  * Scales arbitrary axis position along to arbitrary axis.
@@ -312,7 +312,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
+scale(Ray<T>& arbitraryAxis, T value, const Ray<T>& axis);
 
 /**
  * Scales arbitrary axis position related to pivot point.
@@ -322,7 +322,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+scale(Ray<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
 
 /**
  * Scales arbitrary axis position related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -332,7 +332,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+scale(Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
@@ -391,7 +391,7 @@ scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const V
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(const Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis);
+scaled(const Vector<3,T>& vector, T value, const Ray<T>& axis);
 
 /**
  * Scales vector related to pivot point.
@@ -529,7 +529,7 @@ scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(const Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis);
+scaled(const Matrix<4,4,T>& matrix, T value, const Ray<T>& axis);
 
 /**
  * Scales 4x4 matrix related to pivot point.
@@ -609,7 +609,7 @@ scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vecto
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(const Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
+scaled(const Pivot<T>& pivot, T value, const Ray<T>& axis);
 
 /**
  * Scales pivot position related to pivot point.
@@ -644,8 +644,8 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Scaled copy of axis.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value);
 
 /**
  * Scales arbitrary axis position related to world center.
@@ -654,8 +654,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Vector<3,T>& values);
 
 /**
  * Scales arbitrary axis position along to arbitrary axis.
@@ -665,8 +665,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values);
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value, const Vector<3,T>& direction);
 
 /**
  * Scales arbitrary axis position along to arbitrary axis.
@@ -676,8 +676,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direct
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value, const Ray<T>& axis);
 
 /**
  * Scales arbitrary axis position related to pivot point.
@@ -687,8 +687,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& a
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint);
 
 /**
  * Scales arbitrary axis position related to "transform.pivot" on "transform.scale" and "transform.uniformScale".
@@ -698,8 +698,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const P
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Transformation makers */
@@ -746,7 +746,7 @@ scalingMatrix(T value, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scalingMatrix(T value, const ArbitraryAxis<T>& axis);
+scalingMatrix(T value, const Ray<T>& axis);
 
 /**
  * Create scaling matrix (related to pivot point).

@@ -52,7 +52,7 @@ scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis)
+scale(Vector<3,T>& vector, T value, const Ray<T>& axis)
 {
     vector += axis.direction * (value - number<T>(1)) * shortestDistance(vector - axis.position, axis.direction);
 }
@@ -254,7 +254,7 @@ scale(Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr void
-scale(Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis)
+scale(Matrix<4,4,T>& matrix, T value, const Ray<T>& axis)
 {
     auto pos = position(matrix);
     auto axes = orientationAxes(matrix);
@@ -328,7 +328,7 @@ scale(Pivot<T>& pivot, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis)
+scale(Pivot<T>& pivot, T value, const Ray<T>& axis)
 {
     scale(pivot.position, value, axis);
 }
@@ -357,7 +357,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms)
 
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value)
+scale(Ray<T>& arbitraryAxis, T value)
 {
     scale<Axis>(arbitraryAxis.position, value);
 }
@@ -366,7 +366,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
+scale(Ray<T>& arbitraryAxis, const Vector<3,T>& values)
 {
     scale(arbitraryAxis.position, values);
 }
@@ -375,7 +375,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
+scale(Ray<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
 {
     scale(arbitraryAxis.position, value, direction);
 }
@@ -384,7 +384,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis)
+scale(Ray<T>& arbitraryAxis, T value, const Ray<T>& axis)
 {
     scale(arbitraryAxis.position, value, axis);
 }
@@ -393,7 +393,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+scale(Ray<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
     scale(arbitraryAxis.position, values, pivotPoint);
 }
@@ -402,7 +402,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+scale(Ray<T>& arbitraryAxis, const Transforms<T>& transforms)
 {
     scale(arbitraryAxis.position, transforms);
 }
@@ -457,7 +457,7 @@ scaled(const Vector<3,T>& vector, T value, const Vector<3,T>& direction, const V
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-scaled(const Vector<3,T>& vector, T value, const ArbitraryAxis<T>& axis)
+scaled(const Vector<3,T>& vector, T value, const Ray<T>& axis)
 {
     auto copy = vector;
     scale(copy, value, axis);
@@ -593,7 +593,7 @@ scaled(const Matrix<4,4,T>& matrix, T value, const Vector<3,T>& direction, const
 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scaled(const Matrix<4,4,T>& matrix, T value, const ArbitraryAxis<T>& axis)
+scaled(const Matrix<4,4,T>& matrix, T value, const Ray<T>& axis)
 {
     auto copy = matrix;
     scale(copy, value, axis);
@@ -672,7 +672,7 @@ scaled(const Pivot<T>& pivot, T value, const Vector<3,T>& direction, const Vecto
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-scaled(const Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis)
+scaled(const Pivot<T>& pivot, T value, const Ray<T>& axis)
 {
     auto copy = pivot;
     scale(copy, value, axis);
@@ -706,8 +706,8 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value)
 {
     auto copy = arbitraryAxis;
     scale<Axis>(copy, value);
@@ -717,8 +717,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Vector<3,T>& values)
 {
     auto copy = arbitraryAxis;
     scale(copy, values);
@@ -728,8 +728,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value, const Vector<3,T>& direction)
 {
     auto copy = arbitraryAxis;
     scale(copy, value, direction);
@@ -739,8 +739,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<3,T>& direct
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, T value, const Ray<T>& axis)
 {
     auto copy = arbitraryAxis;
     scale(copy, value, axis);
@@ -750,8 +750,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& a
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
     auto copy = arbitraryAxis;
     scale(copy, values, pivotPoint);
@@ -761,8 +761,8 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& values, const P
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+constexpr CGM_FORCEINLINE Ray<T>
+scaled(const Ray<T>& arbitraryAxis, const Transforms<T>& transforms)
 {
     auto copy = arbitraryAxis;
     scale(copy, transforms);
@@ -885,7 +885,7 @@ scalingMatrix(T value, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-scalingMatrix(T value, const ArbitraryAxis<T>& axis)
+scalingMatrix(T value, const Ray<T>& axis)
 {
     auto mat = CGM::identity<4,T>();
     scale(mat, value, axis);

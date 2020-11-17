@@ -4,7 +4,7 @@
 #include <CGM/Core/Operators/Vector.hpp>
 #include <CGM/Cartesian/3D/Operators/Axes.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 
@@ -69,7 +69,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B);
+operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B);
 
 /**
  * Compares two axis for inequality.
@@ -79,7 +79,7 @@ operator == (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::Arbitrar
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B);
+operator != (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B);
 
 
 #include "Operators.inl"

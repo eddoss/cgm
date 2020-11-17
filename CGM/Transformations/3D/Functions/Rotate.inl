@@ -94,7 +94,7 @@ rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis)
+rotate(Vector<3,T>& vector, T angle, const Ray<T>& axis)
 {
     vector -= axis.position;
     orient(vector, orientationQuaternion(axis.direction, angle));
@@ -501,7 +501,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
+rotate(Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis)
 {
     const auto quat = orientationQuaternion(axis.direction, angle);
 
@@ -525,9 +525,9 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-    rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-    rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+    rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
+    rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
+    rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -540,44 +540,44 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
     {
         case ERotationOrder::XYZ:
         {
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
             break;
         }
         case ERotationOrder::XZY:
         {
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
             break;
         }
         case ERotationOrder::YXZ:
         {
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
             break;
         }
         case ERotationOrder::YZX:
         {
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
             break;
         }
         case ERotationOrder::ZXY:
         {
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
             break;
         }
         case ERotationOrder::ZYX:
         {
-            rotate(matrix, angles.z, ArbitraryAxis<T>(pivotPoint.axes.z, pivotPoint.position));
-            rotate(matrix, angles.y, ArbitraryAxis<T>(pivotPoint.axes.y, pivotPoint.position));
-            rotate(matrix, angles.x, ArbitraryAxis<T>(pivotPoint.axes.x, pivotPoint.position));
+            rotate(matrix, angles.z, Ray<T>(pivotPoint.axes.z, pivotPoint.position));
+            rotate(matrix, angles.y, Ray<T>(pivotPoint.axes.y, pivotPoint.position));
+            rotate(matrix, angles.x, Ray<T>(pivotPoint.axes.x, pivotPoint.position));
             break;
         }
     }
@@ -641,7 +641,7 @@ rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis)
+rotate(Pivot<T>& pivot, T angle, const Ray<T>& axis)
 {
     rotate(pivot.axes.x, angle, axis);
     rotate(pivot.axes.y, angle, axis);
@@ -700,7 +700,7 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms)
 
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle)
+rotate(Ray<T>& arbitraryAxis, T angle)
 {
     rotate<Axis>(arbitraryAxis.direction, angle);
     rotate<Axis>(arbitraryAxis.position, angle);
@@ -710,7 +710,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles)
 {
     rotate(arbitraryAxis.direction, angles);
     rotate(arbitraryAxis.position, angles);
@@ -720,7 +720,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
     rotate(arbitraryAxis.direction, angles, rotationOrder);
     rotate(arbitraryAxis.position, angles, rotationOrder);
@@ -730,7 +730,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrde
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
+rotate(Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
 {
     rotate(arbitraryAxis.direction, angle, direction);
     rotate(arbitraryAxis.position, angle, direction);
@@ -740,7 +740,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
+rotate(Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis)
 {
     rotate(arbitraryAxis.direction, angle, axis);
     rotate(arbitraryAxis.position, angle, axis);
@@ -750,7 +750,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
     rotate(arbitraryAxis.direction, angles, pivotPoint);
     rotate(arbitraryAxis.position, angles, pivotPoint);
@@ -760,7 +760,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
     rotate(arbitraryAxis.direction, angles, pivotPoint, rotationOrder);
     rotate(arbitraryAxis.position, angles, pivotPoint, rotationOrder);
@@ -770,7 +770,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
+rotate(Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 {
     rotate(arbitraryAxis.direction, quaternion);
     rotate(arbitraryAxis.position, quaternion);
@@ -780,7 +780,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+rotate(Ray<T>& arbitraryAxis, const Transforms<T>& transforms)
 {
     rotate(arbitraryAxis.direction, transforms);
     rotate(arbitraryAxis.position, transforms);
@@ -932,7 +932,7 @@ rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis)
+rotated(const Vector<3,T>& vector, T angle, const Ray<T>& axis)
 {
     auto copy = vector;
     rotate(copy, angle, axis);
@@ -1123,7 +1123,7 @@ rotated(const Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis)
+rotated(const Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis)
 {
     auto copy = matrix;
     rotate(copy, angle, axis);
@@ -1202,7 +1202,7 @@ rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis)
+rotated(const Pivot<T>& pivot, T angle, const Ray<T>& axis)
 {
     auto copy = pivot;
     rotate(copy, axis);
@@ -1258,8 +1258,8 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle)
 {
     auto copy = arbitraryAxis;
     rotate<Axis>(copy, angle);
@@ -1269,8 +1269,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angles);
@@ -1280,8 +1280,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angles, rotationOrder);
@@ -1291,8 +1291,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotat
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angle, direction);
@@ -1302,8 +1302,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direc
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angle, axis);
@@ -1313,8 +1313,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angles, pivotPoint);
@@ -1324,8 +1324,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder)
 {
     auto copy = arbitraryAxis;
     rotate(copy, angles, pivotPoint, rotationOrder);
@@ -1335,8 +1335,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 {
     auto copy = arbitraryAxis;
     rotate(copy, quaternion);
@@ -1346,8 +1346,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms)
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Transforms<T>& transforms)
 {
     auto copy = arbitraryAxis;
     rotate(copy, transforms);
@@ -1512,7 +1512,7 @@ rotationMatrix(T angle, const Vector<3,T>& direction)
 
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(T angle, const ArbitraryAxis<T>& axis)
+rotationMatrix(T angle, const Ray<T>& axis)
 {
     auto mat = CGM::identity<4,T>();
     rotate(mat, angle, axis);

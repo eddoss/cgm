@@ -181,7 +181,7 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter)
 
 template<EPlane Plane, typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis)
+reflect(Ray<T>& arbitraryAxis)
 {
     reflect<Plane>(arbitraryAxis.direction);
     reflect<Plane>(arbitraryAxis.position);
@@ -191,7 +191,7 @@ reflect(ArbitraryAxis<T>& arbitraryAxis)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
+reflect(Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
 {
     reflect(arbitraryAxis.direction, planeNormal);
     reflect(arbitraryAxis.position, planeNormal);
@@ -201,7 +201,7 @@ reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+reflect(Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
     reflect(arbitraryAxis.direction, planeNormal);
     reflect(arbitraryAxis.position, planeNormal, planeCenter);
@@ -341,8 +341,8 @@ reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCen
 /* ####################################################################################### */
 
 template<EPlane Plane, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis)
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis)
 {
     auto copy = arbitraryAxis;
     reflect<Plane>(copy);
@@ -352,8 +352,8 @@ reflected(const ArbitraryAxis<T>& arbitraryAxis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
 {
     auto copy = arbitraryAxis;
     reflect(copy, planeNormal);
@@ -363,8 +363,8 @@ reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
 {
     auto copy = arbitraryAxis;
     reflect(copy, planeNormal, planeCenter);

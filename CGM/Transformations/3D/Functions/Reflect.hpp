@@ -6,7 +6,7 @@
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 
@@ -143,7 +143,7 @@ reflect(Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCenter);
  */
 template<EPlane Plane, typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis);
+reflect(Ray<T>& arbitraryAxis);
 
 /**
  * Reflects arbitrary axis from a plane.
@@ -152,7 +152,7 @@ reflect(ArbitraryAxis<T>& arbitraryAxis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
+reflect(Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
 
 /**
  * Reflects arbitrary axis from a plane.
@@ -162,7 +162,7 @@ reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-reflect(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
+reflect(Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
@@ -294,8 +294,8 @@ reflected(const Pivot<T>& pivot, Vector<3,T>& planeNormal, Vector<3,T>& planeCen
  * @return Reflected copy of axis.
  */
 template<EPlane Plane, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis);
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis);
 
 /**
  * Reflects arbitrary axis from a plane.
@@ -304,8 +304,8 @@ reflected(const ArbitraryAxis<T>& arbitraryAxis);
  * @return Reflected copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal);
 
 /**
  * Reflects arbitrary axis from a plane.
@@ -315,8 +315,8 @@ reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal)
  * @return Reflected copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-reflected(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
+constexpr CGM_FORCEINLINE Ray<T>
+reflected(const Ray<T>& arbitraryAxis, const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
 /* ####################################################################################### */
 /* Transformation makers */

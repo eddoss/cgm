@@ -84,10 +84,10 @@ FlyableCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 {
     const auto pos = position();
 
-    const auto rightAxis = cgx::ArbitraryAxis(right(), pos);
+    const auto rightAxis = cgx::Ray(right(), pos);
     cgx::rotate(m_space, cgm::radians(vertical), rightAxis);
 
-    const auto upAxis = cgx::ArbitraryAxis(cgx::up(), pos);
+    const auto upAxis = cgx::Ray(cgx::up(), pos);
     cgx::rotate(m_space, cgm::radians(horizontal), upAxis);
 
     m_inverseSpace = m_space;

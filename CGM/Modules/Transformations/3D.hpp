@@ -8,7 +8,7 @@
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/AxisAngle.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 
 #include <CGM/Transformations/3D/Operators.hpp>
 

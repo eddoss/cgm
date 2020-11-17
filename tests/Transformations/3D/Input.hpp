@@ -9,7 +9,7 @@
 #include <CGM/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Cartesian/3D/Functions/Orientation.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 
@@ -42,7 +42,7 @@ namespace cgm_xyz_xform_tests_data
         return values;
     }
 
-    const auto axis = CGM_XFORM3D::ArbitraryAxis<double>
+    const auto axis = CGM_XFORM3D::Ray<double>
     (
         get().pivot.axes.x,
         get().pivot.position

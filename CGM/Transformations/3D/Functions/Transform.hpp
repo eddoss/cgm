@@ -5,7 +5,7 @@
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Core/Functions/Matrix.hpp>
 #include <CGM/Cartesian/Common.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Transformations/3D/Functions/Translate.hpp>
 #include <CGM/Transformations/3D/Functions/Scale.hpp>
@@ -64,7 +64,7 @@ transform(Pivot<T>& pivot, const Transforms<T>& parameters);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-transform(ArbitraryAxis<T>& axis, const Transforms<T>& parameters);
+transform(Ray<T>& axis, const Transforms<T>& parameters);
 
 /* ####################################################################################### */
 /* Outplace */
@@ -119,8 +119,8 @@ transformed(const Pivot<T>& pivot, const Transforms<T>& parameters);
  * @return Transformed axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-transformed(const ArbitraryAxis<T>& axis, const Transforms<T>& parameters);
+constexpr CGM_FORCEINLINE Ray<T>
+transformed(const Ray<T>& axis, const Transforms<T>& parameters);
 
 /* ####################################################################################### */
 /* Transformation makers */

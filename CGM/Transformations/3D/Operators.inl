@@ -63,7 +63,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
 
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B)
+operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B)
 {
     return A.position == B.position && A.direction == B.direction;
 }
@@ -72,7 +72,7 @@ operator == (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::Arbitrar
 
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::ArbitraryAxis<T>& A, const CGM_XFORM3D::ArbitraryAxis<T>& B)
+operator != (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B)
 {
     return A.position != B.position || A.direction != B.direction;
 }

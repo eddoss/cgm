@@ -2,7 +2,7 @@
 
 
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Cartesian/3D/Functions/Converters/Vector.hpp>
 
 
@@ -23,7 +23,7 @@ CGM_XFORM3D_NAMESPACE_BEGIN
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientation);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
@@ -36,7 +36,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation);
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
@@ -48,7 +48,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space);
+convert(Ray<T>& axis, const Matrix<4,4,T>& space);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
@@ -60,7 +60,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space);
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation);
+convert(Ray<T>& axis, const Quaternion<T>& orientation);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
@@ -73,7 +73,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation);
  */
 template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position);
+convert(Ray<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 (inplace) */
@@ -88,7 +88,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -100,7 +100,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -111,7 +111,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -122,7 +122,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -134,7 +134,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quatern
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 with Position (inplace) */
@@ -150,7 +150,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quatern
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -163,7 +163,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -175,7 +175,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -187,7 +187,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -200,7 +200,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix4 (inplace) */
@@ -215,7 +215,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
+convert(Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -227,7 +227,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -238,7 +238,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB);
+convert(Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -249,7 +249,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
+convert(Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -261,7 +261,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Quaternion (inplace) */
@@ -276,7 +276,7 @@ convert(ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -288,7 +288,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -299,7 +299,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -310,7 +310,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -322,7 +322,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quatern
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Quaternion with Position (inplace) */
@@ -338,7 +338,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quatern
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -351,7 +351,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -363,7 +363,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -375,7 +375,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -388,7 +388,7 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Global to local / local to global (outplace) */
@@ -404,8 +404,8 @@ convert(ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<
  * @return Converted axis.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientation);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
@@ -419,8 +419,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation);
  * @return Converted axis.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
@@ -433,8 +433,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientation, const 
  * @return Converted axis.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& space);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
@@ -447,8 +447,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& space);
  * @return Converted axis.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientation);
 
 /**
  * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
@@ -462,8 +462,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation);
  * @return Converted axis.
  */
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientation, const Vector<3,T>& position);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 (outplace) */
@@ -478,8 +478,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientation, const 
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -491,8 +491,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -503,8 +503,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -515,8 +515,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -528,8 +528,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix3 with Position (outplace) */
@@ -545,8 +545,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -559,8 +559,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -572,8 +572,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -585,8 +585,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -599,8 +599,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<3,3,T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Matrix4 (outplace) */
@@ -615,8 +615,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<3,3,T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -628,8 +628,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matri
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -640,8 +640,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matri
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -652,8 +652,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Matri
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -665,8 +665,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quate
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Quaternion (outplace) */
@@ -681,8 +681,8 @@ converted(const ArbitraryAxis<T>& axis, const Matrix<4,4,T>& spaceA, const Quate
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -694,8 +694,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -706,8 +706,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -718,8 +718,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -731,8 +731,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 /* ####################################################################################### */
 /* Local to local: Quaternion with Position (outplace) */
@@ -748,8 +748,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -762,8 +762,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<3,3,T>& orientationB, const Vector<3,T>& positionB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -775,8 +775,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Matrix<4,4,T>& spaceB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -788,8 +788,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB);
 
 /**
  * Convert axis from space A to space B (A and B are in one space). The physically 
@@ -802,8 +802,8 @@ converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const
  * @return Converted axis from space A to B.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-converted(const ArbitraryAxis<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
+constexpr CGM_FORCEINLINE Ray<T>
+converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

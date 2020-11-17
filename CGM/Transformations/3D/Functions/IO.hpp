@@ -3,7 +3,7 @@
 
 #include <iomanip>
 #include <iostream>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/AxisAngle.hpp>
@@ -12,7 +12,7 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::ArbitraryAxis<T>& axis);
+operator << (std::ostream& stream, const CGM_XFORM3D::Ray<T>& axis);
 
 template <typename T>
 constexpr std::ostream&

@@ -9,16 +9,16 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
-struct ArbitraryAxis
+struct Ray
 {
-    CGM_RULE_OF_FIVE(ArbitraryAxis)
+    CGM_RULE_OF_FIVE(Ray)
 
 /* ####################################################################################### */
 /* Attributes */
 /* ####################################################################################### */
 
-    Vector<3,T> direction;    ///< axis direction.
-    Vector<3,T> position;     ///< axis position.
+    Vector<3,T> direction;    ///< ray direction.
+    Vector<3,T> position;     ///< ray position.
 
 /* ####################################################################################### */
 /* Constructors */
@@ -26,15 +26,15 @@ struct ArbitraryAxis
 
     /**
      * Initialize origin and direction.
-     * @param dir Axis direction.
-     * @param pos Axis origin.
+     * @param dir Ray direction.
+     * @param pos Ray origin.
      */
     constexpr
-    ArbitraryAxis(const Vector<3,T>& dir, const Vector<3,T>& pos);
+    Ray(const Vector<3,T>& dir, const Vector<3,T>& pos);
 };
 
 CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
-#include "ArbitraryAxis.inl"
+#include "Ray.inl"

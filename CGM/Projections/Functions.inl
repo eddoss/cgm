@@ -18,7 +18,7 @@ perspectiveViewport(T fov, T aspect, T offset)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE CGM_XYZ::Ray<T>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace)
 {
     const T h = std::tan(fov * number<T>(0.5));
@@ -26,14 +26,20 @@ perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& p
 
     const auto r_offset = CGM_XYZ::right(projectorSpace) * fit11(point.x, -w, w);
     const auto u_offset = CGM_XYZ::up(projectorSpace) * fit11(point.y, -h, h);
+
+    auto ray = CGM_XYZ::Ray<T>{};
+    ray.position = CGM_XYZ::position(projectorSpace);
+
     if constexpr (CGM_CONFIG.handedness == EHandedness::Right)
     {
-        return normalized(CGM_XYZ::forward(projectorSpace) + u_offset - r_offset);
+        ray.direction = normalized(CGM_XYZ::forward(projectorSpace) + u_offset - r_offset);
     }
     else
     {
-        return normalized(CGM_XYZ::forward(projectorSpace) + u_offset + r_offset);
+        ray.direction = normalized(CGM_XYZ::forward(projectorSpace) + u_offset + r_offset);
     }
+
+    return ray;
 }
 
 /* --------------------------------------------------------------------------------------- */

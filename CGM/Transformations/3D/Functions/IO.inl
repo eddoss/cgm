@@ -5,7 +5,7 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::ArbitraryAxis<T>& axis)
+operator << (std::ostream& stream, const CGM_XFORM3D::Ray<T>& axis)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 

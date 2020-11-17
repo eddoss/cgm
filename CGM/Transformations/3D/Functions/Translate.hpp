@@ -10,7 +10,7 @@
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 
 
@@ -183,7 +183,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
  */
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, T value);
+translate(Ray<T>& axis, T value);
 
 /**
  * Translate axis.
@@ -192,7 +192,7 @@ translate(ArbitraryAxis<T>& axis, T value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value);
+translate(Ray<T>& axis, const Vector<3,T>& value);
 
 /**
  * Translate axis along other vector. Result offset is depend on other vector length.
@@ -202,7 +202,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along);
+translate(Ray<T>& axis, T value, const Vector<3,T>& along);
 
 /**
  * Translate axis along pivot axes.
@@ -212,7 +212,7 @@ translate(ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot);
+translate(Ray<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Translates axis using "transforms.translations".
@@ -221,7 +221,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& piv
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
+translate(Ray<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Vector (outplace) */
@@ -403,8 +403,8 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Translated axis.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, T value);
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, T value);
 
 /**
  * Translate axis.
@@ -413,8 +413,8 @@ translated(const ArbitraryAxis<T>& axis, T value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value);
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Vector<3,T>& value);
 
 /**
  * Translate axis along other vector. Result offset is depend on other vector length.
@@ -424,8 +424,8 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along);
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, T value, const Vector<3,T>& along);
 
 /**
  * Translate axis along pivot axes.
@@ -435,8 +435,8 @@ translated(const ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot);
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
  * Translates axis using "transforms.translations".
@@ -445,8 +445,8 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Transformation makers */

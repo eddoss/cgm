@@ -100,7 +100,7 @@ AimCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::f
 void
 AimCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 {
-    const auto axis = cgx::ArbitraryAxis(cgx::right(m_space), m_aim);
+    const auto axis = cgx::Ray(cgx::right(m_space), m_aim);
 
     cgx::rotate(m_space, cgm::radians(vertical), axis);
     cgx::rotate(m_space, cgm::radians(horizontal), cgx::up());

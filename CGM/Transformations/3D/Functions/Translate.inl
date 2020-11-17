@@ -183,7 +183,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, T value)
+translate(Ray<T>& axis, T value)
 {
     translate<Axis>(axis.position, value);
 }
@@ -192,7 +192,7 @@ translate(ArbitraryAxis<T>& axis, T value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value)
+translate(Ray<T>& axis, const Vector<3,T>& value)
 {
     axis.position += value;
 }
@@ -201,7 +201,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<3,T>& value)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along)
+translate(Ray<T>& axis, T value, const Vector<3,T>& along)
 {
     axis.position += along * value;
 }
@@ -210,7 +210,7 @@ translate(ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along)
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot)
+translate(Ray<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     axis.position += pivot.axes.x * values.x;
     axis.position += pivot.axes.y * values.y;
@@ -221,7 +221,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& piv
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
-translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
+translate(Ray<T>& axis, const Transforms<T>& transforms)
 {
     translate(axis, transforms.translation, transforms.pivot);
 }
@@ -402,8 +402,8 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, T value)
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, T value)
 {
     auto copy = axis;
     translate<Axis>(copy, value);
@@ -413,8 +413,8 @@ translated(const ArbitraryAxis<T>& axis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value)
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Vector<3,T>& value)
 {
     auto copy = axis;
     translate(copy, value);
@@ -424,8 +424,8 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along)
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, T value, const Vector<3,T>& along)
 {
     auto copy = axis;
     translate(copy, value, along);
@@ -435,8 +435,8 @@ translated(const ArbitraryAxis<T>& axis, T value, const Vector<3,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot)
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto copy = axis;
     translate(copy, values, pivot);
@@ -446,8 +446,8 @@ translated(const ArbitraryAxis<T>& axis, const Vector<3,T>& values, const Pivot<
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
+constexpr CGM_FORCEINLINE Ray<T>
+translated(const Ray<T>& axis, const Transforms<T>& transforms)
 {
     auto copy = axis;
     translate(copy, transforms);

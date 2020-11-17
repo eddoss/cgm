@@ -14,7 +14,7 @@
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Transformations/3D/Types/ArbitraryAxis.hpp>
+#include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Transformations/3D/Types/Transforms.hpp>
 #include <CGM/Transformations/3D/Functions/Utils.hpp>
@@ -76,7 +76,7 @@ rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
+rotate(Vector<3,T>& vector, T angle, const Ray<T>& axis);
 
 /**
  * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -249,7 +249,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr void
-rotate(Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
+rotate(Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -322,7 +322,7 @@ rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
+rotate(Pivot<T>& pivot, T angle, const Ray<T>& axis);
 
 /**
  * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
@@ -375,7 +375,7 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
  */
 template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle);
+rotate(Ray<T>& arbitraryAxis, T angle);
 
 /**
  * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
@@ -384,7 +384,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
 
 /**
  * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
@@ -394,7 +394,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates arbitrary axis around arbitrary direction.
@@ -404,7 +404,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrde
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
+rotate(Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates arbitrary axis around arbitrary axis.
@@ -414,7 +414,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
+rotate(Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -424,7 +424,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
@@ -435,7 +435,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates arbitrary axis by Quaternion.
@@ -444,7 +444,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
+rotate(Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
@@ -453,7 +453,7 @@ rotate(ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE void
-rotate(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+rotate(Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Quaternion (inplace) */
@@ -576,7 +576,7 @@ rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
-rotated(const Vector<3,T>& vector, T angle, const ArbitraryAxis<T>& axis);
+rotated(const Vector<3,T>& vector, T angle, const Ray<T>& axis);
 
 /**
  * Rotates vector around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -764,7 +764,7 @@ rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr Matrix<4,4,T>
-rotated(const Matrix<4,4,T>& matrix, T angle, const ArbitraryAxis<T>& axis);
+rotated(const Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
 
 /**
  * Rotates orientation matrix around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -844,7 +844,7 @@ rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Pivot<T>
-rotated(const Pivot<T>& pivot, T angle, const ArbitraryAxis<T>& axis);
+rotated(const Pivot<T>& pivot, T angle, const Ray<T>& axis);
 
 /**
  * Rotates pivot around each axis of pivot point on angle contained in "angles" (in 'XYZ' rotation order).
@@ -901,8 +901,8 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Rotated copy of axis.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle);
 
 /**
  * Rotates arbitrary axis around default Cartesian axes (in 'XYZ' rotation order).
@@ -911,8 +911,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
 
 /**
  * Rotates arbitrary axis around default Cartesian axes (in given rotation order).
@@ -922,8 +922,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
  * Rotates arbitrary axis around arbitrary direction.
@@ -933,8 +933,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, ERotat
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
 /**
  * Rotates arbitrary axis around arbitrary axis.
@@ -944,8 +944,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const Vector<3,T>& direc
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& axis);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in 'XYZ' rotation order).
@@ -955,8 +955,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, T angle, const ArbitraryAxis<T>& 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "angles" (in given rotation order).
@@ -967,8 +967,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
  * Rotates arbitrary axis by Quaternion.
@@ -977,8 +977,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Vector<3,T>& angles, const 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
 /**
  * Rotates arbitrary axis around each axis of pivot on angle contained in "transform.rotations".
@@ -987,8 +987,8 @@ rotated(const ArbitraryAxis<T>& arbitraryAxis, const Quaternion<T>& quaternion);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
-rotated(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
+constexpr CGM_FORCEINLINE Ray<T>
+rotated(const Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
 /* Quaternion (outplace) */
@@ -1116,7 +1116,7 @@ rotationMatrix(T angle, const Vector<3,T>& direction);
  */
 template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
-rotationMatrix(T angle, const ArbitraryAxis<T>& axis);
+rotationMatrix(T angle, const Ray<T>& axis);
 
 /**
  * Create rotation matrix (around each axis of pivot on angle contained from "angles" in 'XYZ' rotation order).
