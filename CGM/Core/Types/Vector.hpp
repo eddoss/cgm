@@ -243,6 +243,36 @@ public: /* Access */
      * @param Reference to component.
      */
     constexpr CGM_FORCEINLINE reference
+    get(E2D component);
+
+    /**
+     * Gets component const ref (at runtime).
+     * @param Const reference to component.
+     */
+    constexpr CGM_FORCEINLINE const_reference
+    get(E2D component) const;
+
+    /**
+     * Gets component ref (at compile time).
+     * @param Reference to component.
+     */
+    template <E2D Component>
+    constexpr CGM_FORCEINLINE reference
+    get();
+
+    /**
+     * Gets component const ref (at compile time).
+     * @param Const reference to component.
+     */
+    template <E2D Component>
+    constexpr CGM_FORCEINLINE const_reference
+    get() const;
+
+    /**
+     * Gets component ref (at runtime).
+     * @param Reference to component.
+     */
+    constexpr CGM_FORCEINLINE reference
     get(E3D component);
 
     /**
@@ -401,6 +431,66 @@ public: /* Assignment operator */
 /* ####################################################################################### */
 public: /* Access */
 /* ####################################################################################### */
+
+    /**
+     * Gets component ref (at runtime).
+     * @param Reference to component.
+     */
+    constexpr CGM_FORCEINLINE reference
+    get(E2D component);
+
+    /**
+     * Gets component const ref (at runtime).
+     * @param Const reference to component.
+     */
+    constexpr CGM_FORCEINLINE const_reference
+    get(E2D component) const;
+
+    /**
+     * Gets component ref (at compile time).
+     * @param Reference to component.
+     */
+    template <E2D Component>
+    constexpr CGM_FORCEINLINE reference
+    get();
+
+    /**
+     * Gets component const ref (at compile time).
+     * @param Const reference to component.
+     */
+    template <E2D Component>
+    constexpr CGM_FORCEINLINE const_reference
+    get() const;
+
+    /**
+     * Gets component ref (at runtime).
+     * @param Reference to component.
+     */
+    constexpr CGM_FORCEINLINE reference
+    get(E3D component);
+
+    /**
+     * Gets component const ref (at runtime).
+     * @param Const reference to component.
+     */
+    constexpr CGM_FORCEINLINE const_reference
+    get(E3D component) const;
+
+    /**
+     * Gets component ref (at compile time).
+     * @param Reference to component.
+     */
+    template <E3D Component>
+    constexpr CGM_FORCEINLINE reference
+    get();
+
+    /**
+     * Gets component const ref (at compile time).
+     * @param Const reference to component.
+     */
+    template <E3D Component>
+    constexpr CGM_FORCEINLINE const_reference
+    get() const;
 
     /**
      * Gets component ref (at runtime).

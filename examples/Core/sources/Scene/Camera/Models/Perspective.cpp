@@ -58,7 +58,7 @@ PerspectiveCameraModel::calculateProjection()
     m_viewport = cgm::perspectiveViewport(fov, m_properties.aspect, 1.0f);
     m_projection = cgm::perspective<cgm::EGraphicsApi::OpenGL>
     (
-        cgm::radians(m_properties.fov),
+        fov,
         m_properties.aspect,
         m_properties.near,
         m_properties.far

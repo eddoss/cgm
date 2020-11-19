@@ -9,6 +9,7 @@
 #include <Scene/Camera/Models/Perspective.hpp>
 #include <Scene/Camera/Controllers/Aim.hpp>
 #include <Scene/Camera/Controllers/Flyable.hpp>
+#include <Scene/Camera/Models/Orthographic.hpp>
 
 
 class Application : public BaseWindow
@@ -44,11 +45,11 @@ protected:
     PerspectiveCameraModel::Shared
     scenePerspectiveCameraModel {nullptr};
 
+    OrthographicCameraModel::Shared
+    sceneOrthographicCameraModel {nullptr};
+
     AimCameraController::Shared
     sceneAimCameraController {nullptr};
-
-    FlyableCameraController::Shared
-    sceneFlyableCameraController {nullptr};
 
     Camera::Shared
     sceneCamera {nullptr};

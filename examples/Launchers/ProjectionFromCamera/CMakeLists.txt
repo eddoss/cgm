@@ -2,8 +2,9 @@
 project(ProjectionFromCamera LANGUAGES CXX)
 
 file(GLOB_RECURSE SOURCES_FILES ${CMAKE_CURRENT_LIST_DIR}/*.cpp)
+file(GLOB_RECURSE HEADERS_FILES ${CMAKE_CURRENT_LIST_DIR}/*.hpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES_FILES})
+add_executable(${PROJECT_NAME} ${SOURCES_FILES} ${HEADERS_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC ExamplesCore)

@@ -87,11 +87,8 @@ AimCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::f
     cgx::translate(m_space, u * vertical);
     cgx::translate(m_space, f * forward);
 
-    if (m_isAimMovable)
-    {
-        cgx::translate(m_aim, r * horizontal);
-        cgx::translate(m_aim, u * vertical);
-    }
+    cgx::translate(m_aim, r * horizontal);
+    cgx::translate(m_aim, u * vertical);
 
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);

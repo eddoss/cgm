@@ -37,7 +37,7 @@ constexpr CGM_XYZ::Ray<T>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace);
 
 /**
- * Creates matrix are transit points from camera frustum to clip space for specific graphics API.
+ * Creates (perspective projection) matrix are transit points from camera frustum to clip space for specific graphics API.
  * @note This matrix should be applied to vectors are in camera space.
  * @tparam API Graphics API.
  * @param fov Vertical angle of field of view (in radiance).
@@ -51,7 +51,7 @@ constexpr Matrix<4,4,T>
 perspective(T fov, T aspect, T near, T far);
 
 /**
- * Creates matrix are transit points from camera frustum to clip space.
+ * Creates (perspective projection) matrix are transit points from camera frustum to clip space.
  * @note This matrix should be applied to vectors are in camera space.
  * @tparam Right Target coordinate system right axis label.
  * @tparam Up Target coordinate system up axis label.
@@ -74,4 +74,4 @@ perspective(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist
 CGM_NAMESPACE_END
 
 
-#include "Functions.inl"
+#include "Perspective.inl"

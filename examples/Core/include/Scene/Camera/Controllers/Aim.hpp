@@ -16,17 +16,11 @@ public:
     AimCameraController(const cgm::vec3& aim, const cgm::vec3& position);
 
 public:
-    CGM_FORCEINLINE bool
-    isAimMovable() const {return m_isAimMovable;};
-
     CGM_FORCEINLINE cgm::vec3
     aim() const {return m_aim;};
 
     void
     setAim(const cgm::vec3& aim);
-
-    CGM_FORCEINLINE void
-    setAimMovable(bool movable) {m_isAimMovable = movable;};
 
     void
     focus(const cgm::vec3& aim, const cgm::vec3& position);
@@ -73,7 +67,4 @@ protected:
 
     cgm::vec3
     m_aim;
-
-    bool
-    m_isAimMovable = true;
 };

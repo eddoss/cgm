@@ -35,7 +35,7 @@ void
 Application::beforeLoop()
 {
     sceneMaterial->create();
-    sceneMaterial->addShaderPack(L"Resources/Shaders/ColorView");
+    sceneMaterial->addShaderPack(resource("Shaders/ColorView"));
     sceneMaterial->link();
 
     sceneGrid->init();
@@ -69,9 +69,18 @@ Application::resizeEvent()
 {
     BaseWindow::resizeEvent();
 
-    auto props = scenePerspectiveCameraModel->properties();
-    props.aspect = aspect<cgm::float32>();
-    scenePerspectiveCameraModel->setProperties(props);
+    const auto aspectRatio = aspect<cgm::float32>();
+
+    {
+        auto props = scenePerspectiveCameraModel->properties();
+        props.aspect = aspectRatio;
+        scenePerspectiveCameraModel->setProperties(props);
+    }
+    {
+        auto props = sceneOrthographicCameraModel->properties();
+        props.aspect = aspectRatio;
+        sceneOrthographicCameraModel->setProperties(props);
+    }
 
     glViewport(0, 0, GLsizei(width()), GLsizei(height()));
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -103,6 +112,9 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
     else if (buttonState(EButton::Right) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
         controller->move(0, 0, offset.x * 5 * moveScale.z);
+        auto props = sceneOrthographicCameraModel->properties();
+        props.zoom = cgm::distance(sceneAimCameraController->position(), sceneAimCameraController->aim());
+        sceneOrthographicCameraModel->setProperties(props);
     }
     else if (buttonState(EButton::Middle) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
@@ -113,17 +125,19 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
 void
 Application::setupSceneCamera()
 {
+    const auto position = cgm::vec3 {3.0f, 3.0f, 3.0f};
+    const auto target = cgm::vec3 {0.0f, 0.0f, 0.0f};
+    sceneAimCameraController = std::make_shared<AimCameraController>(target, position);
+
     const cgm::float32 aspect = this->aspect<cgm::float32>();
     const cgm::float32 fov = 45.0f;
     const cgm::float32 near = 0.01f;
     const cgm::float32 far = 1000.0f;
     scenePerspectiveCameraModel = std::make_shared<PerspectiveCameraModel>(aspect, fov, near, far);
 
-    const auto position = cgm::vec3 {3.0f, 3.0f, 3.0f};
-    const auto target = cgm::vec3 {0.0f, 0.0f, 0.0f};
-    sceneAimCameraController = std::make_shared<AimCameraController>(target, position);
+    const cgm::float32 zoom = cgm::distance(position, target);
+    sceneOrthographicCameraModel = std::make_shared<OrthographicCameraModel>(aspect, zoom, near, far);
 
-    sceneFlyableCameraController = std::make_shared<FlyableCameraController>(target, position);
-
+//    sceneCamera = std::make_shared<Camera>(sceneOrthographicCameraModel, sceneAimCameraController);
     sceneCamera = std::make_shared<Camera>(scenePerspectiveCameraModel, sceneAimCameraController);
 }

@@ -25,7 +25,7 @@ option(CGMATH_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
 option(CGMATH_BUILD_EXAMPLES "Build examples projects." ON)
 option(CGMATH_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
 set(CGMATH_MATRIX_LAYOUT "Column" CACHE STRING "Store matrix components by rows or columns (Row/Column).")
-set(CGMATH_MATRIX_MULTIPLICATION_ORDER "Pre" CACHE STRING "If 'Pre' is used vector will be represented as row, if 'Post' - as column.")
+set(CGMATH_MATRIX_MULTIPLICATION_ORDER "Post" CACHE STRING "If 'Pre' is used vector will be represented as row, if 'Post' - as column.")
 set(CGMATH_HANDEDNESS "Right" CACHE STRING "Cartesian system handedness (Right/Left).")
 set(CGMATH_UP_AXIS "Y" CACHE STRING "Label of Up axis of Cartesian system (X/Y/Z).")
 

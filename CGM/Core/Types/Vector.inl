@@ -216,6 +216,44 @@ Vector <D, T, std::enable_if_t<(D == 3)>>::operator = (typename Vector <D, T, st
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::reference
+Vector <D, T, std::enable_if_t<(D == 3)>>::get(E2D component)
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 3)>>::get(E2D component) const
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E2D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::reference
+Vector <D, T, std::enable_if_t<(D == 3)>>::get()
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E2D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 3)>>::get() const
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 3)>>::reference
 Vector <D, T, std::enable_if_t<(D == 3)>>::get(E3D component)
 {
     return *(&x + static_cast<size_t>(component));
@@ -395,6 +433,82 @@ Vector <D, T, std::enable_if_t<(D == 4)>>::operator = (typename Vector <D, T, st
 /* ####################################################################################### */
 /* Access */
 /* ####################################################################################### */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E2D component)
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E2D component) const
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E2D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get()
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E2D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get() const
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E3D component)
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get(E3D component) const
+{
+    return *(&x + static_cast<size_t>(component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E3D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get()
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<size_t D, typename T>
+template <E3D Component>
+constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::const_reference
+Vector <D, T, std::enable_if_t<(D == 4)>>::get() const
+{
+    return *(&x + static_cast<size_t>(Component));
+}
+
+/* --------------------------------------------------------------------------------------- */
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE typename Vector <D, T, std::enable_if_t<(D == 4)>>::reference

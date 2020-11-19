@@ -80,6 +80,8 @@
 
 /* --------------------------------------------------------------------------------------- */
 
+CGM_NAMESPACE_BEGIN
+
 template <typename T, typename TOut>
 using enable_if_floating = std::enable_if_t<std::is_floating_point_v<T>, TOut>;
 
@@ -92,3 +94,5 @@ using enable_if_integral = std::enable_if_t<std::is_integral_v<T>, TOut>;
 
 template <typename T, typename TOut>
 using enable_if_floating_or_integral = std::enable_if_t<(std::is_integral_v<T> || std::is_floating_point_v<T>), TOut>;
+
+CGM_NAMESPACE_END

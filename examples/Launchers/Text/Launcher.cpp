@@ -30,11 +30,11 @@ Text2DLauncher::Text2DLauncher(const CLI& parameters)
     FT_Init_FreeType(&m_ftLibInstance);
 
     m_roughShader->create();
-    m_roughShader->addShaderPack(L"Resources/Shaders/Text/Rough");
+    m_roughShader->addShaderPack(resource("Shaders/Text/Rough"));
     m_roughShader->link();
 
     m_controlShader->create();
-    m_controlShader->addShaderPack(L"Resources/Shaders/Text/Control");
+    m_controlShader->addShaderPack(resource("Shaders/Text/Control"));
     m_controlShader->link();
 
     m_text = std::make_unique<Text>(m_ftLibInstance, m_roughShader, m_controlShader);
@@ -229,7 +229,7 @@ Text2DLauncher::setupScreenPlate()
     m_screenPlateVbo.create();
     m_postProcessShader.create();
 
-    m_postProcessShader.addShaderPack(L"Resources/Shaders/Text/PostProcess");
+    m_postProcessShader.addShaderPack(resource("Shaders/Text/PostProcess"));
     m_postProcessShader.link();
 
     m_screenPlateVao.bind();
