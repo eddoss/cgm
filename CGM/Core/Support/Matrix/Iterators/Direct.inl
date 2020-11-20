@@ -3,7 +3,7 @@
 
 #include <CGM/Global.hpp>
 #include <iterator>
-#ifdef NDEBUG
+#ifndef NDEBUG
     #include <stdexcept>
 #endif
 
