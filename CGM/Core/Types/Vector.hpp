@@ -763,7 +763,7 @@ public: /* Iterators */
 protected: /* Components array */
 /* ####################################################################################### */
 
-    T m_data[D];
+    T m_data[D] {};
 };
 
 CGM_NAMESPACE_END

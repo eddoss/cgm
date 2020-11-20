@@ -913,9 +913,9 @@ remapper()
     auto y = Vector<3,T>(zero<T>);
     auto z = Vector<3,T>(zero<T>);
 
-    x.get<X>() = number<T>(1);
-    y.get<Y>() = number<T>(1);
-    z.get<Z>() = number<T>(1);
+    x.template get<X>() = number<T>(1);
+    y.template get<Y>() = number<T>(1);
+    z.template get<Z>() = number<T>(1);
 
     Matrix<3,3,T> mat;
     set(mat, x, y, z);
@@ -936,10 +936,10 @@ remapper()
     auto z = Vector<4,T>(zero<T>);
     auto w = Vector<4,T>(zero<T>);
 
-    x.get<X>() = number<T>(1);
-    y.get<Y>() = number<T>(1);
-    z.get<Z>() = number<T>(1);
-    w.get<W>() = number<T>(1);
+    x.template get<X>() = number<T>(1);
+    y.template get<Y>() = number<T>(1);
+    z.template get<Z>() = number<T>(1);
+    w.template get<W>() = number<T>(1);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     mat.setColumn(0,x);

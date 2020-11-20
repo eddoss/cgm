@@ -1,8 +1,8 @@
-#pragma once
 
 
 #include <Scene/Camera/Models/Perspective.hpp>
 #include <CGM/Modules/Projections.hpp>
+
 
 PerspectiveCameraModel::PerspectiveCameraModel()
 {

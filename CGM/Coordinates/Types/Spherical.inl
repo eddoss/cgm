@@ -69,9 +69,9 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 Spherical<T>::setLatitude(T latitude)
 {
-    if (latitude > PI)
+    if (latitude > CGM_PI)
     {
-        m_latitude = PI;
+        m_latitude = CGM_PI;
     }
     else if (latitude < 0)
     {

@@ -697,9 +697,9 @@ private: /* Data */
 /* ####################################################################################### */
 
 #ifdef CGM_CFG_ROW_WISE_MATRIX_LAYOUT
-    T m_data[M][N];
+    T m_data[M][N] {};
 #else
-    T m_data[N][M];
+    T m_data[N][M] {};
 #endif
 };
 

@@ -2,7 +2,7 @@
 
 
 #include <CGM/Modules/Core.hpp>
-
+#include <memory>
 
 class ICameraModel
 {

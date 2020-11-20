@@ -30,5 +30,5 @@ static resource(const std::string& path)
         CGM_EXAMPLES_FUNC_ERROR(std::string("Invalid resource file. [") + resPath.string() + "]")
     }
 
-    return resPath;
+    return resPath.wstring();
 }

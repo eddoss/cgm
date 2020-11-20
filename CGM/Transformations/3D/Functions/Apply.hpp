@@ -7,6 +7,7 @@
 #include <CGM/Core/Functions/Matrix.hpp>
 #include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/3D/Types/Axes.hpp>
+#include <CGM/Cartesian/3D/Functions/Utils.hpp>
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/Types/Enums.hpp>

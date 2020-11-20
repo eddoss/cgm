@@ -99,9 +99,9 @@ perspective(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
         Vector<4,T> U(zero<T>);
         Vector<4,T> F(zero<T>);
 
-        U.get<CGM_CONFIG.up>() = number<T>(1);
-        R.get<CGM_CONFIG.right>() = number<T>(1);
-        F.get<CGM_CONFIG.forward>() = number<T>(1);
+        U.template get<CGM_CONFIG.up>() = number<T>(1);
+        R.template get<CGM_CONFIG.right>() = number<T>(1);
+        F.template get<CGM_CONFIG.forward>() = number<T>(1);
 
         Matrix<4,4,T> remapper(zero<T>);
 

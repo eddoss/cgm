@@ -44,7 +44,7 @@ ShaderProgram::getShaderFileExtensionByType(ShaderProgram::EShaderType shaderTyp
 int
 ShaderProgram::getShaderTypeByFile(const std::wstring& file)
 {
-    std::wstring ext = std::filesystem::path(file).extension();
+    std::wstring ext = std::filesystem::path(file).extension().wstring();
 
     if (ext == L".vert") return ShaderProgram::EShaderType::Vertex;
     if (ext == L".tesc") return ShaderProgram::EShaderType::TessellationControl;
@@ -179,7 +179,7 @@ ShaderProgram::addShader(ShaderProgram::EShaderType shaderType, const std::strin
 bool
 ShaderProgram::addShaderFromFile(ShaderProgram::EShaderType shaderType, const std::wstring& file)
 {
-    std::ifstream stream(file);
+    std::ifstream stream((std::filesystem::path(file)));
     std::string sourceCode((std::istreambuf_iterator<char>(stream)),std::istreambuf_iterator<char>());
     if (sourceCode.empty()) {return false;}
     addShader(shaderType, sourceCode);
@@ -196,9 +196,9 @@ ShaderProgram::addShaderPack(const std::wstring& directory)
     for (const auto& it : std::filesystem::directory_iterator(absdir))
     {
         if (!std::filesystem::is_regular_file(it.path())) continue;
-        int type = getShaderTypeByFile(it.path());
+        int type = getShaderTypeByFile(it.path().wstring());
         if (type == -1) continue;
-        addShaderFromFile(ShaderProgram::EShaderType(type), it.path());
+        addShaderFromFile(ShaderProgram::EShaderType(type), it.path().wstring());
     }
     return true;
 }
