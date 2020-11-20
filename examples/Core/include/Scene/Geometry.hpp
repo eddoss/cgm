@@ -8,6 +8,8 @@
 #include <vector>
 
 
+#define CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE std::numeric_limits<cgm::uint32>::max()
+
 class Geometry
 {
 public:
@@ -27,10 +29,6 @@ public:
     using Shared    = std::shared_ptr<Geometry>;
     using Unique    = std::unique_ptr<Geometry>;
     using Weak      = std::weak_ptr<Geometry>;
-
-public:
-    const static uint32_t
-    primitiveRestartValue = std::numeric_limits<cgm::uint32>::max();
 
 public:
     static Geometry::Unique

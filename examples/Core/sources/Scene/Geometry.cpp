@@ -41,10 +41,10 @@ Geometry::makeAxes(ShaderProgram::Shared material)
 
     indices[0] = 0;
     indices[1] = 1;
-    indices[2] = primitiveRestartValue;
+    indices[2] = CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE;
     indices[3] = 2;
     indices[4] = 3;
-    indices[5] = primitiveRestartValue;
+    indices[5] = CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE;
     indices[6] = 4;
     indices[7] = 5;
 
@@ -132,9 +132,9 @@ Geometry::makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4&
     std::vector<uint32_t> indices
     {
 //        0, 1, 2, 3, primitiveRestartValue,
-        1, 4, 0, primitiveRestartValue,
-        2, 4, 1, primitiveRestartValue,
-        3, 4, 2, primitiveRestartValue,
+        1, 4, 0, CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE,
+        2, 4, 1, CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE,
+        3, 4, 2, CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE,
         0, 4, 3
     };
 
@@ -172,7 +172,7 @@ Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& c
         const auto angle = angleStep * i;
         const auto center = cgx::rotated(cgx::right() * radius, angle, cgx::forward()) - cgx::forward() * coeff;
         make_circle(center, radius, 128, color);
-        indices.emplace_back(Geometry::primitiveRestartValue);
+        indices.emplace_back(CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE);
     }
     points.shrink_to_fit();
     indices.shrink_to_fit();

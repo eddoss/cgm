@@ -41,7 +41,7 @@ Application::beforeLoop()
     sceneGrid->init();
     sceneGnomon->init();
 
-    glPrimitiveRestartIndex(Geometry::primitiveRestartValue);
+    glPrimitiveRestartIndex(CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE);
     glEnable(GL_PRIMITIVE_RESTART);
 
     glEnable(GL_MULTISAMPLE);
