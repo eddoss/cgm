@@ -180,22 +180,22 @@ private: /* Window private properties */
     m_visible {GLFW_TRUE};
 
     int
-    m_samples {32};
+    m_samples {0};
 
     int
     m_doubleBuffer {GLFW_TRUE};
 
     int
-    m_redChannelBits {16};
+    m_redChannelBits {8};
 
     int
-    m_greenChannelBits {16};
+    m_greenChannelBits {8};
 
     int
-    m_blueChannelBits {16};
+    m_blueChannelBits {8};
 
     int
-    m_alphaChannelBits {16};
+    m_alphaChannelBits {8};
 
     int
     m_depthBits {32};

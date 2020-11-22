@@ -29,6 +29,15 @@ protected:
     beforeLoop() override;
 
     void
+    drawRoughShape();
+
+    void
+    drawSmoothPieces();
+
+    void
+    drawAntialiasing();
+
+    void
     render() override;
 
     void
@@ -46,6 +55,9 @@ protected:
     void
     setupScreenPlate();
 
+    void
+    setupOffsets();
+
 private:
     CLI
     m_params;
@@ -60,7 +72,7 @@ private:
     m_textOffset {-0.5, 0};
 
     cgm::vec2
-    m_textScale {0.03, 0.03};
+    m_textScale {0.25, 0.25};
 
     uint32_t
     m_fbo = 0;
@@ -82,4 +94,7 @@ private:
 
     ShaderProgram::Shared
     m_controlShader = nullptr;
+
+    std::vector<std::pair<cgm::vec2, cgm::vec4>>
+    samplesProperties;
 };
