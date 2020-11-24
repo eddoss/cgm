@@ -11,16 +11,33 @@ uniform bool enableSPAA;
 
 const vec3 one = vec3(1.0f, 1.0f, 1.0f);
 
+vec2 extractSamples(float value)
+{
+    float scaled = 255.0f * value;
+
+    vec2 result;
+    result.x = mod(scaled, 16.0f);
+    result.y = scaled - result.x * 16.0f;
+
+    return result;
+}
+
 vec3 getTexel(sampler2D image, vec2 coord)
 {
-    vec4 color = 255.0f * texture(image, coord);
+    vec4 color = texture(image, coord);
 
-    float R = mod(color.r, 2.0f);
-    float G = mod(color.g, 2.0f);
-    float B = mod(color.b, 2.0f);
-    float A = mod(color.a, 2.0f);
+    vec2 sample01 = extractSamples(color.r);
+    vec2 sample23 = extractSamples(color.g);
+    vec2 sample45 = extractSamples(color.b);
 
-    float value = 1.0f - (R + G + B + A) / 4.0f;
+    sample01.x = mod(sample01.x, 2.0f);
+    sample01.y = mod(sample01.y, 2.0f);
+    sample23.x = mod(sample23.x, 2.0f);
+    sample23.y = mod(sample23.y, 2.0f);
+    sample45.x = mod(sample45.x, 2.0f);
+    sample45.y = mod(sample45.y, 2.0f);
+    float value = 1.0f - (sample01.x + sample01.y + sample23.x + sample23.y + sample45.x + sample45.y) / 6.0f;
+
     return vec3(value, value, value);
 }
 

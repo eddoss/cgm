@@ -10,8 +10,6 @@ static std::string TEXT = "Our first goal is to fill in all of the pixels inside
                           "has one control point that controls how the curve bends. The control points\n"
                           "are drawn below in gray.";
 
-//static std::string TEXT = "e";
-
 Text2DLauncher::~Text2DLauncher()
 {
     if (m_ftLibInstance)
@@ -241,7 +239,7 @@ void
 Text2DLauncher::setupFrameBuffer()
 {
     glBindTexture(GL_TEXTURE_2D, m_fboTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width(), height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width(), height(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -294,16 +292,34 @@ Text2DLauncher::setupScreenPlate()
 void
 Text2DLauncher::setupOffsets()
 {
-    const auto c = 1.0f / 255.0f;
-    const auto x = 2.0f / (cgm::float32(width()) * 4.0f);
-    const auto y = 2.0f / (cgm::float32(height()) * 4.0f);
+    // [     R     ][     G     ][     B     ]
+    // |-----|-----||-----o-----||-----|-----|
+    // |     |     ||     o     ||     |  5  |
+    // |-----|-----||-----o-----||-----|-----|
+    // |     |  1  ||     o     ||     |     |
+    // |-----|-----||-----o-----||-----|-----|
+    // |     |     ||     o  3  ||     |     |
+    // |ooooo|ooooo||oooooOooooo||ooooo|ooooo|
+    // |     |     ||     o     ||  4  |     |
+    // |-----|-----||-----o-----||-----|-----|
+    // |  0  |     ||     o     ||     |     |
+    // |-----|-----||-----o-----||-----|-----|
+    // |     |     ||  2  o     ||     |     |
+    // |-----|-----||-----o-----||-----|-----|
+
+    const auto a = 1.0f / 255.0f;
+    const auto b = 16.0f / 255.0f;
+    const auto x = 2.0f / (cgm::float32(width()) * 12.0f);
+    const auto y = 2.0f / (cgm::float32(height()) * 12.0f);
 
     samplesProperties =
     {
-        {{-x, -y}, {c, 0.0f, 0.0f, 0.0f}},
-        {{-x, +y}, {0.0f, c, 0.0f, 0.0f}},
-        {{+x, +y}, {0.0f, 0.0f, c, 0.0f}},
-        {{+x, -y}, {0.0f, 0.0f, 0.0f, c}}
+        {{-5 * x, -3 * y}, {a, 0.0f, 0.0f}},  // R channel lower
+        {{-3 * x, +3 * y}, {b, 0.0f, 0.0f}},  // R channel upper
+        {{-1 * x, -5 * y}, {0.0f, a, 0.0f}},  // G channel lower
+        {{+1 * x, +1 * y}, {0.0f, b, 0.0f}},  // G channel upper
+        {{+3 * x, -1 * y}, {0.0f, 0.0f, a}},  // B channel lower
+        {{+5 * x, +5 * y}, {0.0f, 0.0f, b}},  // B channel upper
     };
 }
 

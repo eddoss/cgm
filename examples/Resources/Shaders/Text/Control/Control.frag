@@ -1,6 +1,6 @@
 #version 450 core
 
-uniform vec4 color;
+uniform vec3 color;
 
 float cross2d(vec2 a, vec2 b)
 {
@@ -24,7 +24,7 @@ void main()
 
     if ((h + v) * (h + v) < v)
     {
-        fragColor = color;
+        fragColor = vec4(color, 1.0f);
     }
     else
     {

@@ -72,7 +72,7 @@ private:
     m_textOffset {-0.5, 0};
 
     cgm::vec2
-    m_textScale {0.25, 0.25};
+    m_textScale {0.1, 0.1};
 
     uint32_t
     m_fbo = 0;
@@ -95,6 +95,6 @@ private:
     ShaderProgram::Shared
     m_controlShader = nullptr;
 
-    std::vector<std::pair<cgm::vec2, cgm::vec4>>
+    std::vector<std::pair<cgm::vec2, cgm::vec3>>
     samplesProperties;
 };
