@@ -10,8 +10,6 @@ static std::string TEXT = "Our first goal is to fill in all of the pixels inside
                           "has one control point that controls how the curve bends. The control points\n"
                           "are drawn below in gray.";
 
-//static std::string TEXT = "e";
-
 Text2DLauncher::~Text2DLauncher()
 {
     if (m_ftLibInstance)
