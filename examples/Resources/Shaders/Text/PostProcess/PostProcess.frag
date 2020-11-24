@@ -26,17 +26,17 @@ vec3 getTexel(sampler2D image, vec2 coord)
 {
     vec4 color = texture(image, coord);
 
-    vec2 sample01 = extractSamples(color.r);
-    vec2 sample23 = extractSamples(color.g);
-    vec2 sample45 = extractSamples(color.b);
+    vec2 samples01 = extractSamples(color.r);
+    vec2 samples23 = extractSamples(color.g);
+    vec2 samples45 = extractSamples(color.b);
 
-    sample01.x = mod(sample01.x, 2.0f);
-    sample01.y = mod(sample01.y, 2.0f);
-    sample23.x = mod(sample23.x, 2.0f);
-    sample23.y = mod(sample23.y, 2.0f);
-    sample45.x = mod(sample45.x, 2.0f);
-    sample45.y = mod(sample45.y, 2.0f);
-    float value = 1.0f - (sample01.x + sample01.y + sample23.x + sample23.y + sample45.x + sample45.y) / 6.0f;
+    samples01.x = mod(samples01.x, 2.0f);
+    samples01.y = mod(samples01.y, 2.0f);
+    samples23.x = mod(samples23.x, 2.0f);
+    samples23.y = mod(samples23.y, 2.0f);
+    samples45.x = mod(samples45.x, 2.0f);
+    samples45.y = mod(samples45.y, 2.0f);
+    float value = 1.0f - (samples01.x + samples01.y + samples23.x + samples23.y + samples45.x + samples45.y) / 6.0f;
 
     return vec3(value, value, value);
 }
