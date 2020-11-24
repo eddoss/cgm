@@ -114,7 +114,7 @@ Text::setText(const std::string& text)
     std::stringstream stream(text);
     std::string line;
 
-    uint16_t i = 0;
+    uint16_t lineId = 0;
 
     while(std::getline(stream, line, '\n'))
     {
@@ -134,7 +134,7 @@ Text::setText(const std::string& text)
         hb_glyph_position_t *glyphs_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
 
         offset.x = 0;
-        offset.y = -2200 * i++;
+        offset.y = -2200 * lineId++;
 
         for (size_t i = 0; i < line.size(); ++i)
         {
