@@ -3,24 +3,26 @@
 in vec2 uv;
 out vec4 fragColor;
 
-uniform sampler2D screenTexture;
+uniform sampler2D samplesA;
+uniform sampler2D samplesB;
 uniform int screenWidth;
-//uniform int screenHeight;
 uniform float gammaCorrection;
 uniform bool enableSPAA;
 
 const vec3 one = vec3(1.0f, 1.0f, 1.0f);
 
-vec3 getTexel(sampler2D image, vec2 coord)
+vec3 getTexel(vec2 coord)
 {
-    vec4 color = 255.0f * texture(image, coord);
+    vec4 A = 255.0f * texture(samplesA, coord);
+    vec4 B = 255.0f * texture(samplesB, coord);
 
-    float R = mod(color.r, 2.0f);
-    float G = mod(color.g, 2.0f);
-    float B = mod(color.b, 2.0f);
-    float A = mod(color.a, 2.0f);
+    float r = mod(A.r, 2.0f) + mod(B.r, 2.0f);
+    float g = mod(A.g, 2.0f) + mod(B.g, 2.0f);
+    float b = mod(A.b, 2.0f) + mod(B.b, 2.0f);
+    float a = mod(A.a, 2.0f) + mod(B.a, 2.0f);
 
-    float value = 1.0f - (R + G + B + A) / 4.0f;
+    float value = 1.0f - (r + g + b + a) / 8.0f;
+
     return vec3(value, value, value);
 }
 
@@ -30,9 +32,9 @@ void main()
     {
         const vec2 step = vec2(1.0f / float(screenWidth), 0.0f);
 
-        vec3 c = one - getTexel(screenTexture, uv);           // current pixel
-        vec3 l = one - getTexel(screenTexture, uv - step);    // left pixel
-        vec3 r = one - getTexel(screenTexture, uv + step);    // right pixel
+        vec3 c = one - getTexel(uv);           // current pixel
+        vec3 l = one - getTexel(uv - step);    // left pixel
+        vec3 r = one - getTexel(uv + step);    // right pixel
 
         const float k1 = 1.0f / 9.0f;
         const float k2 = 2.0f / 9.0f;
@@ -45,7 +47,7 @@ void main()
     }
     else
     {
-        fragColor = vec4(getTexel(screenTexture, uv), 1.0f);
+        fragColor = vec4(getTexel(uv), 1.0f);
     }
 
     fragColor.rgb = pow(fragColor.rgb, vec3(1.0f/gammaCorrection));

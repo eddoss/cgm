@@ -78,7 +78,10 @@ private:
     m_fbo = 0;
 
     uint32_t
-    m_fboTexture = 0;
+    m_fboTextureA = 0;
+
+    uint32_t
+    m_fboTextureB = 0;
 
     VAO
     m_screenPlateVao;
@@ -96,5 +99,8 @@ private:
     m_controlShader = nullptr;
 
     std::vector<std::pair<cgm::vec2, cgm::vec4>>
-    samplesProperties;
+    samplesPropertiesA;
+
+    std::vector<std::pair<cgm::vec2, cgm::vec4>>
+    samplesPropertiesB;
 };
