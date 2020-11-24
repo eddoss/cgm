@@ -137,20 +137,20 @@ Text2DLauncher::render()
         drawSmoothPieces();
     }
 
-//    glNamedFramebufferDrawBuffer(m_fbo, GL_COLOR_ATTACHMENT1);
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    for (const auto& [offset, color] : samplesPropertiesB)
-//    {
-//        m_roughShader->bind();
-//        m_roughShader->setUniform("internalOffset", offset);
-//        m_roughShader->setUniform("color", color);
-//        drawRoughShape();
-//
-//        m_controlShader->bind();
-//        m_controlShader->setUniform("internalOffset", offset);
-//        m_controlShader->setUniform("color", color);
-//        drawSmoothPieces();
-//    }
+    glNamedFramebufferDrawBuffer(m_fbo, GL_COLOR_ATTACHMENT1);
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (const auto& [offset, color] : samplesPropertiesB)
+    {
+        m_roughShader->bind();
+        m_roughShader->setUniform("internalOffset", offset);
+        m_roughShader->setUniform("color", color);
+        drawRoughShape();
+
+        m_controlShader->bind();
+        m_controlShader->setUniform("internalOffset", offset);
+        m_controlShader->setUniform("color", color);
+        drawSmoothPieces();
+    }
 
     // draw framebuffer on the screen
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -69,10 +69,10 @@ private:
     m_text = nullptr;
 
     cgm::vec2
-    m_textOffset {-0.5, 0};
+    m_textOffset {-0.99, 0.95};
 
     cgm::vec2
-    m_textScale {0.25, 0.25};
+    m_textScale {0.04, 0.04};
 
     uint32_t
     m_fbo = 0;

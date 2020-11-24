@@ -22,7 +22,6 @@ vec3 getTexel(vec2 coord)
     float a = mod(A.a, 2.0f) + mod(B.a, 2.0f);
 
     float value = 1.0f - (r + g + b + a) / 8.0f;
-
     return vec3(value, value, value);
 }
 
