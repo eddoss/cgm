@@ -81,7 +81,7 @@ Text2DLauncher::drawRoughShape()
     m_roughShader->setUniform("offset", m_textOffset);
     m_roughShader->setUniform("scale", m_textScale);
     m_text->roughVao().bind();
-    glDrawArrays(GL_TRIANGLE_FAN, 0, m_text->roughPointsCount());
+    glDrawArrays(GL_TRIANGLES, 0, m_text->roughPointsCount());
     m_text->roughVao().release();
 }
 
@@ -154,7 +154,6 @@ Text2DLauncher::resizeEvent()
 
     m_postProcessShader.bind();
     m_postProcessShader.setUniform("screenWidth", width());
-//    m_postProcessShader.setUniform("screenHeight", height());
     m_postProcessShader.release();
 
     m_roughShader->bind();
@@ -280,11 +279,8 @@ Text2DLauncher::setupScreenPlate()
     m_postProcessShader.setAttributeBuffer("attrPosition", EGLType::Float, 2, 0, sizeof(cgm::vec2));
     m_postProcessShader.setUniform("screenTexture", m_fboTexture);
     m_postProcessShader.setUniform("screenWidth", width());
-//    m_postProcessShader.setUniform("screenHeight", height());
     m_postProcessShader.setUniform("enableSPAA", m_params.spaa);
     m_postProcessShader.setUniform("gammaCorrection", m_params.gamma);
-//    m_postProcessShader.setUniform("enableSPAA", true);
-//    m_postProcessShader.setUniform("gammaCorrection", 1.0f);
 
     m_screenPlateVao.release();
 }
@@ -314,12 +310,13 @@ Text2DLauncher::setupOffsets()
 
     samplesProperties =
     {
-        {{-5 * x, -3 * y}, {a, 0.0f, 0.0f}},  // R channel lower
-        {{-3 * x, +3 * y}, {b, 0.0f, 0.0f}},  // R channel upper
-        {{-1 * x, -5 * y}, {0.0f, a, 0.0f}},  // G channel lower
-        {{+1 * x, +1 * y}, {0.0f, b, 0.0f}},  // G channel upper
-        {{+3 * x, -1 * y}, {0.0f, 0.0f, a}},  // B channel lower
-        {{+5 * x, +5 * y}, {0.0f, 0.0f, b}},  // B channel upper
+        {{-3 * x, +3 * y}, {b, 0.0f, 0.0f}},  // R channel 16/255
+        {{+1 * x, +1 * y}, {0.0f, b, 0.0f}},  // G channel 16/255
+        {{+5 * x, +5 * y}, {0.0f, 0.0f, b}},  // B channel 16/255
+
+        {{-5 * x, -3 * y}, {a, 0.0f, 0.0f}},  // R channel 1/255
+        {{-1 * x, -5 * y}, {0.0f, a, 0.0f}},  // G channel 1/255
+        {{+3 * x, -1 * y}, {0.0f, 0.0f, a}},  // B channel 1/255
     };
 }
 

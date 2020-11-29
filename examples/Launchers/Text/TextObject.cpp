@@ -133,8 +133,8 @@ Text::setText(const std::string& text)
         hb_glyph_info_t *glyphs_info    = hb_buffer_get_glyph_infos(buf, &glyph_count);
         hb_glyph_position_t *glyphs_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
 
-        offset.x = 0;
-        offset.y = -2200 * lineId++;
+        m_glyphOffset.x = 0;
+        m_glyphOffset.y = -2200 * lineId++;
 
         for (size_t i = 0; i < line.size(); ++i)
         {
@@ -157,14 +157,14 @@ Text::setText(const std::string& text)
                 }
 
                 const auto glyphPos = glyphs_pos[i-1];
-                offset.x += glyphPos.x_advance + kerning_correction_x;
-                offset.y += glyphPos.y_advance + kerning_correction_y;
+                m_glyphOffset.x += glyphPos.x_advance + kerning_correction_x;
+                m_glyphOffset.y += glyphPos.y_advance + kerning_correction_y;
             }
             setupCharacter(line[i]);
         }
 
-        offset.x = 0;
-        offset.y = 0;
+        m_glyphOffset.x = 0;
+        m_glyphOffset.y = 0;
 
         hb_buffer_destroy(buf);
         hb_font_destroy(font);
@@ -191,15 +191,28 @@ Text::setupCharacter(FT_ULong character)
     funcs.move_to = [](const FT_Vector* to, void* user) -> int
     {
         auto& self = reinterpret_cast<Visitor*>(user)->ref;
-        self.m_roughPoints.emplace_back(cgm::vec2(0.0f));
+//        self.m_roughPoints.emplace_back(cgm::vec2(0.0f));
         self.m_roughPoints.emplace_back(self.calculatePosition(*to));
+        self.contourStarted = true;
         return 0;
     };
 
     funcs.line_to = [](const FT_Vector* to, void* user) -> int
     {
         auto& self = reinterpret_cast<Visitor*>(user)->ref;
+
+        if (self.contourStarted)
+        {
+            self.contourStarted = false;
+        }
+        else
+        {
+            const auto prev = self.m_roughPoints.back();
+            self.m_roughPoints.emplace_back(prev);
+        }
+        self.m_roughPoints.emplace_back(self.calculatePosition({0,0}));
         self.m_roughPoints.emplace_back(self.calculatePosition(*to));
+
         return 0;
     };
 
@@ -210,10 +223,20 @@ Text::setupCharacter(FT_ULong character)
         const auto next = self.calculatePosition(*to);
         const auto prev = self.m_roughPoints.back();
 
-        self.m_roughPoints.emplace_back(next);
         self.m_controlPoints.emplace_back(Text::ControlAttrs{prev, prev, ctrl, next});
         self.m_controlPoints.emplace_back(Text::ControlAttrs{ctrl, prev, ctrl, next});
         self.m_controlPoints.emplace_back(Text::ControlAttrs{next, prev, ctrl, next});
+
+        if (self.contourStarted)
+        {
+            self.contourStarted = false;
+        }
+        else
+        {
+            self.m_roughPoints.emplace_back(prev);
+        }
+        self.m_roughPoints.emplace_back(self.calculatePosition({0,0}));
+        self.m_roughPoints.emplace_back(self.calculatePosition(*to));
 
         return 0;
     };
@@ -224,6 +247,7 @@ Text::setupCharacter(FT_ULong character)
     };
 
     Visitor visitor(*this);
+    contourStarted = false;
     FT_Outline_Decompose(&m_ftFace->glyph->outline, &funcs, &visitor);
 
     m_controlPointsCount = m_controlPoints.size();
@@ -235,7 +259,7 @@ Text::calculatePosition(const FT_Vector& vec)
 {
     return
     {
-        cgm::float32(vec.x) + offset.x,
-        cgm::float32(vec.y) + offset.y
+        cgm::float32(vec.x) + m_glyphOffset.x,
+        cgm::float32(vec.y) + m_glyphOffset.y
     };
 }

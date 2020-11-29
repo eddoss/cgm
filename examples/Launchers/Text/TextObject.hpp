@@ -80,7 +80,10 @@ private:
     m_ftFace;
 
     FT_Vector
-    offset {0,0};
+    m_glyphOffset {0,0};
+
+    bool
+    contourStarted = false;
 
     VAO
     m_roughVao;
