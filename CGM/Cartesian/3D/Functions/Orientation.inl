@@ -137,7 +137,8 @@ orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3
         {
             t = 1 + x.x - y.y - z.z;
             q = {t, y.x + x.y, x.z + z.x, z.y - y.z};
-        } else
+        }
+        else
         {
             t = 1 - x.x + y.y - z.z;
             q = {y.x + x.y, t, z.y + y.z, x.z - z.x};

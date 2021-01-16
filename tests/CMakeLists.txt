@@ -1,3 +1,6 @@
+if(NOT ${CGMATH_BUILD_UNIT_TESTS})
+    return()
+endif()
 
 # ##################################################################################### #
 # This function help you add tests based on GoogleTest framework.
@@ -20,7 +23,10 @@ function(cgm_add_test TARGET SOURCES)
             ComputerGraphixMath
     )
     add_test(NAME ${TARGET} COMMAND ${TARGET})
+    gtest_discover_tests(${TARGET})
 endfunction()
+
+enable_testing()
 
 # ####################################################################################### #
 # Init test project
@@ -29,13 +35,7 @@ endfunction()
 project(UnitTests LANGUAGES CXX)
 find_package(GTest REQUIRED)
 
-# ####################################################################################### #
-# Setup libraries output dir
-# ####################################################################################### #
-
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+include(GoogleTest)
 
 # ####################################################################################### #
 # SUITES | Core

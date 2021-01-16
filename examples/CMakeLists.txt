@@ -1,3 +1,6 @@
+if(NOT ${CGMATH_BUILD_EXAMPLES})
+    return()
+endif()
 
 project(Examples LANGUAGES CXX)
 
