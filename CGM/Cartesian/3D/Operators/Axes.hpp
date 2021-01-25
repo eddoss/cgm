@@ -14,7 +14,7 @@
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B);
+operator == (const CGM::Axes<T>& A, const CGM::Axes<T>& B);
 
 /**
  * Compares two axes structs for inequality.
@@ -24,7 +24,7 @@ operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B);
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B);
+operator != (const CGM::Axes<T>& A, const CGM::Axes<T>& B);
 
 
 #include "Axes.inl"

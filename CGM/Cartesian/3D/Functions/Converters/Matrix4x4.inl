@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -356,5 +355,4 @@ converted(const Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const 
     return copy;
 }
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

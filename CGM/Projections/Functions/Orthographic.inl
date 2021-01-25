@@ -18,22 +18,22 @@ orthographicViewport(T aspect, T scale)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_XYZ::Ray<T>
+constexpr CGM::Ray<T>
 orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>& projectorSpace)
 {
-    const auto r_offset = CGM_XYZ::right(projectorSpace) * fit11(point.x, -aspect * scale, aspect * scale);
-    const auto u_offset = CGM_XYZ::up(projectorSpace) * fit11(point.y, -scale, scale);
+    const auto r_offset = CGM::right(projectorSpace) * fit11(point.x, -aspect * scale, aspect * scale);
+    const auto u_offset = CGM::up(projectorSpace) * fit11(point.y, -scale, scale);
 
-    auto ray = CGM_XYZ::Ray<T>{};
-    ray.direction = CGM_XYZ::forward(projectorSpace);
+    auto ray = CGM::Ray<T>{};
+    ray.direction = CGM::forward(projectorSpace);
 
     if constexpr (CGM_CONFIG.handedness == EHandedness::Right)
     {
-        ray.position = CGM_XYZ::position(projectorSpace) - r_offset + u_offset;
+        ray.position = CGM::position(projectorSpace) - r_offset + u_offset;
     }
     else
     {
-        ray.position = CGM_XYZ::position(projectorSpace) + r_offset + u_offset;
+        ray.position = CGM::position(projectorSpace) + r_offset + u_offset;
     }
 
     return ray;
@@ -79,18 +79,18 @@ orthographic(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
         const auto F = CGM_COORD::cartesian(zero<T>, zero<T>, (cmx - cmn) / l);
         const auto P = CGM_COORD::cartesian(zero<T>, zero<T>, (f * cmn - n * cmx) / l);
 
-        CGM_XYZ::setUp(mat, U);
-        CGM_XYZ::setForward(mat, F);
-        CGM_XYZ::setPosition(mat, P);
+        CGM::setUp(mat, U);
+        CGM::setForward(mat, F);
+        CGM::setPosition(mat, P);
         mat(3,3) = number<T>(1);
 
         if constexpr (Handedness == CGM_CONFIG.handedness)
         {
-            CGM_XYZ::setRight(mat, R);
+            CGM::setRight(mat, R);
         }
         else
         {
-            CGM_XYZ::setRight(mat, -R);
+            CGM::setRight(mat, -R);
         }
     }
 

@@ -14,7 +14,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -306,7 +305,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<3,3,T>
 converted(const Matrix<3,3,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

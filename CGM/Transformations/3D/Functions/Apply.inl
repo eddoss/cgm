@@ -8,7 +8,6 @@
 /* ####################################################################################### */
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr CGM_FORCEINLINE void
@@ -234,5 +233,4 @@ applied(const Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transf
     return copy;
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

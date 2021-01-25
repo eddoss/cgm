@@ -21,7 +21,7 @@
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
+operator == (const CGM::Pivot<T>& A, const CGM::Pivot<T>& B);
 
 /**
  * Compares two pivots for inequality.
@@ -31,7 +31,7 @@ operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
+operator != (const CGM::Pivot<T>& A, const CGM::Pivot<T>& B);
 
 /* ####################################################################################### */
 /* Transforms */
@@ -45,7 +45,7 @@ operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B);
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B);
+operator == (const CGM::Transforms<T>& A, const CGM::Transforms<T>& B);
 
 /**
  * Compares two transforms for inequality.
@@ -55,7 +55,7 @@ operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B);
+operator != (const CGM::Transforms<T>& A, const CGM::Transforms<T>& B);
 
 /* ####################################################################################### */
 /* Axis */
@@ -69,7 +69,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
  */
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B);
+operator == (const CGM::Ray<T>& A, const CGM::Ray<T>& B);
 
 /**
  * Compares two axis for inequality.
@@ -79,7 +79,7 @@ operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B);
  */
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B);
+operator != (const CGM::Ray<T>& A, const CGM::Ray<T>& B);
 
 
 #include "Operators.inl"

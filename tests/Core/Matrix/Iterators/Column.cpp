@@ -5,30 +5,18 @@
 #include <CGM/Core/Types/Matrix.hpp>
 
 
-using namespace CGM;
-
 using namespace std;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat55 = Matrix<5,5,int>;
 
 TEST(Matrix_ColumnIterator, Plus)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    Mat33::size_type column = 2;
+    CGM::Matrix<3,3,int>::size_type column = 2;
     auto it_02 = input.beginColumn(column);
     auto it_12 = input.beginColumn(column) + 1;
     auto it_22 = input.beginColumn(column) + 2;
@@ -42,14 +30,14 @@ TEST(Matrix_ColumnIterator, Plus)
 
 TEST(Matrix_ColumnIterator, Minus)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    Matrix<3,3,int>::size_type column = 2;
+    CGM::Matrix<3,3,int>::size_type column = 2;
     auto it_22 = input.endColumn(column) - 1;
     auto it_12 = input.endColumn(column) - 2;
     auto it_02 = input.endColumn(column) - 3;
@@ -63,14 +51,14 @@ TEST(Matrix_ColumnIterator, Minus)
 
 TEST(Matrix_ColumnIterator, PreIncrement)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    Matrix<3,3,int>::size_type column = 2;
+    CGM::Matrix<3,3,int>::size_type column = 2;
     auto it_02 = input.beginColumn(column);
 
     ASSERT_TRUE(*it_02 == 3);
@@ -82,14 +70,14 @@ TEST(Matrix_ColumnIterator, PreIncrement)
 
 TEST(Matrix_ColumnIterator, PostIncrement)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    Matrix<3,3,int>::size_type column = 2;
+    CGM::Matrix<3,3,int>::size_type column = 2;
     auto it_02 = input.beginColumn(column);
 
     ASSERT_TRUE(*(it_02++) == 3);
@@ -99,14 +87,14 @@ TEST(Matrix_ColumnIterator, PostIncrement)
 
 TEST(Matrix_ColumnIterator, PreDecrement)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     };
 
-    Mat33::size_type column = 2;
+    CGM::Matrix<3,3,int>::size_type column = 2;
     auto it_22 = input.endColumn(column);
 
     ASSERT_TRUE(*(--it_22) == 9);
@@ -118,7 +106,7 @@ TEST(Matrix_ColumnIterator, PreDecrement)
 
 TEST(Matrix_ColumnIterator, PostDecrement)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
@@ -132,7 +120,7 @@ TEST(Matrix_ColumnIterator, PostDecrement)
 
 TEST(Matrix_ColumnIterator, Difference)
 {
-    Mat34 input
+    CGM::Matrix<3,4,int> input
     {
         1, 2, 3, 6,
         4, 5, 6, 8,
@@ -161,7 +149,7 @@ TEST(Matrix_ColumnIterator, Difference)
 
 TEST(Matrix_ColumnIterator, Reverse)
 {
-    Mat34 input
+    CGM::Matrix<3,4,int> input
     {
         1, 2, 3, 6,
         4, 5, 6, 8,
@@ -182,7 +170,7 @@ TEST(Matrix_ColumnIterator, Reverse)
 
 TEST(Matrix_ColumnIterator, Reverse_Differece)
 {
-    Mat22 input
+    CGM::Matrix<2,2,int> input
     {
         1, 2,
         4, 5
@@ -199,7 +187,7 @@ TEST(Matrix_ColumnIterator, Reverse_Differece)
 
 TEST(Matrix_ColumnIterator, Reverse_RowsColumns_FirstComponent)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
@@ -216,7 +204,7 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_FirstComponent)
 
 TEST(Matrix_ColumnIterator, Reverse_RowsColumns_MidComponent)
 {
-    Mat24 input
+    CGM::Matrix<2,4,int> input
     {
         1, 2, 3, 4,
         5, 6, 7, 8
@@ -232,7 +220,7 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_MidComponent)
 
 TEST(Matrix_ColumnIterator, Reverse_RowsColumns_LastComponent)
 {
-    Mat33 input
+    CGM::Matrix<3,3,int> input
     {
         1, 2, 3,
         4, 5, 6,
@@ -251,7 +239,7 @@ TEST(Matrix_ColumnIterator, Reverse_RowsColumns_LastComponent)
 
 TEST(Matrix_ColumnIterator, Exception_Dereference)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -273,7 +261,7 @@ TEST(Matrix_ColumnIterator, Exception_Dereference)
 
 TEST(Matrix_ColumnIterator, Exception_PreIncrement)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -294,7 +282,7 @@ TEST(Matrix_ColumnIterator, Exception_PreIncrement)
 
 TEST(Matrix_ColumnIterator, Exception_PostIncrement)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -315,7 +303,7 @@ TEST(Matrix_ColumnIterator, Exception_PostIncrement)
 
 TEST(Matrix_ColumnIterator, Exception_PlusEqual)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -337,7 +325,7 @@ TEST(Matrix_ColumnIterator, Exception_PlusEqual)
 
 TEST(Matrix_ColumnIterator, Exception_Plus)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -359,7 +347,7 @@ TEST(Matrix_ColumnIterator, Exception_Plus)
 
 TEST(Matrix_ColumnIterator, Exception_PreDecrement)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -380,7 +368,7 @@ TEST(Matrix_ColumnIterator, Exception_PreDecrement)
 
 TEST(Matrix_ColumnIterator, Exception_PostDecrement)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -401,7 +389,7 @@ TEST(Matrix_ColumnIterator, Exception_PostDecrement)
 
 TEST(Matrix_ColumnIterator, Exception_MinusEqual)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -423,7 +411,7 @@ TEST(Matrix_ColumnIterator, Exception_MinusEqual)
 
 TEST(Matrix_ColumnIterator, Exception_Minus)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -445,7 +433,7 @@ TEST(Matrix_ColumnIterator, Exception_Minus)
 
 TEST(Matrix_ColumnIterator, Exception_Row)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,
@@ -467,7 +455,7 @@ TEST(Matrix_ColumnIterator, Exception_Row)
 
 TEST(Matrix_ColumnIterator, Exception_Column)
 {
-    Mat32 input
+    CGM::Matrix<3,2,int> input
     {
         1, 2,
         4, 5,

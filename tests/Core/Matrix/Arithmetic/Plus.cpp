@@ -6,39 +6,16 @@
 #include <CGM/Core/Operators/Matrix.hpp>
 
 
-using namespace CGM;
-
 using namespace std;
-using Mat12 = Matrix<1,2,int>;
-using Mat13 = Matrix<1,3,int>;
-using Mat14 = Matrix<1,4,int>;
-using Mat15 = Matrix<1,5,int>;
-using Mat21 = Matrix<2,1,int>;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat25 = Matrix<2,5,int>;
-using Mat31 = Matrix<3,1,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat35 = Matrix<3,5,int>;
-using Mat41 = Matrix<4,1,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat45 = Matrix<4,5,int>;
-using Mat51 = Matrix<5,1,int>;
-using Mat55 = Matrix<5,5,int>;
 
 TEST(Matrix_Arithmetic, PlusScalar)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             3, 4,
         };
@@ -49,11 +26,11 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             3, 4, 5
         };
@@ -64,11 +41,11 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             3, 4, 5, 6
         };
@@ -79,11 +56,11 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             3, 4, 5, 6, 7
         };
@@ -94,12 +71,12 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             3,
             4
@@ -111,12 +88,12 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             3, 4,
             5, 6
@@ -128,12 +105,12 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 5, 6
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             3, 4, 5,
             6, 7, 8
@@ -145,12 +122,12 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8
@@ -162,12 +139,12 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6
@@ -179,13 +156,13 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             3,
             4,
@@ -198,13 +175,13 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             5, 6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             3, 4,
             5, 6,
@@ -217,13 +194,13 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 6, 5
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             3, 4, 5,
             6, 7, 8,
@@ -236,13 +213,13 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6,
             5, 4, 3, 2
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8,
@@ -255,13 +232,13 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
             3, 2, 1, 2, 3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -274,14 +251,14 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             3,
             4,
@@ -295,14 +272,14 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             5, 6,
             7, 6
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             3, 4,
             5, 6,
@@ -316,14 +293,14 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 6, 5,
             4, 3, 2
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             3, 4, 5,
             6, 7, 8,
@@ -337,14 +314,14 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6,
             5, 4, 3, 2,
             1, 2, 3, 4
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8,
@@ -358,14 +335,14 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
             3, 2, 1, 2, 3,
             4, 5, 6, 7, 6
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -379,7 +356,7 @@ TEST(Matrix_Arithmetic, PlusScalar)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
@@ -387,7 +364,7 @@ TEST(Matrix_Arithmetic, PlusScalar)
             4, 5, 6, 7, 6,
             5, 4, 3, 2, 1
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -405,15 +382,15 @@ TEST(Matrix_Arithmetic, PlusScalar)
 TEST(Matrix_Arithmetic, PlusOther)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             2, 3,
         };
-        Mat12 c
+        CGM::Matrix<1,2,int> c
         {
             3, 5,
         };
@@ -424,15 +401,15 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             2, 3, 4
         };
-        Mat13 c
+        CGM::Matrix<1,3,int> c
         {
             3, 5, 7
         };
@@ -443,15 +420,15 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             1, 2, 1, 2
         };
-        Mat14 c
+        CGM::Matrix<1,4,int> c
         {
             2, 4, 4, 6
         };
@@ -462,15 +439,15 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             1, 2, 1, 2, 1
         };
-        Mat15 c
+        CGM::Matrix<1,5,int> c
         {
             2, 4, 4, 6, 6
         };
@@ -481,17 +458,17 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             1,
             2
         };
-        Mat21 c
+        CGM::Matrix<2,1,int> c
         {
             2,
             4
@@ -503,17 +480,17 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             1, 2,
             1, 2
         };
-        Mat22 c
+        CGM::Matrix<2,2,int> c
         {
             2, 4,
             4, 6
@@ -525,17 +502,17 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 5, 6
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             1, 2, 1,
             2, 1, 2
         };
-        Mat23 c
+        CGM::Matrix<2,3,int> c
         {
             2, 4, 4,
             6, 6, 8
@@ -547,17 +524,17 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             1, 2, 1, 2,
             1, 2, 1, 1
         };
-        Mat24 c
+        CGM::Matrix<2,4,int> c
         {
             2, 4, 4, 6,
             6, 8, 8, 9
@@ -569,17 +546,17 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1
         };
-        Mat25 c
+        CGM::Matrix<2,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7
@@ -591,19 +568,19 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             1,
             2,
             1
         };
-        Mat31 c
+        CGM::Matrix<3,1,int> c
         {
             2,
             4,
@@ -616,19 +593,19 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             5, 6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             1, 2,
             1, 2,
             1, 2
         };
-        Mat32 c
+        CGM::Matrix<3,2,int> c
         {
             2, 4,
             4, 6,
@@ -641,19 +618,19 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 8, 7
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             1, 2, 1,
             2, 1, 2,
             1, 1, 1
         };
-        Mat33 c
+        CGM::Matrix<3,3,int> c
         {
             2, 4, 4,
             6, 6, 8,
@@ -666,19 +643,19 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8,
             7, 6, 5, 4
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             1, 2, 1, 2,
             2, 1, 2, 1,
             1, 2, 1, 2
         };
-        Mat34 c
+        CGM::Matrix<3,4,int> c
         {
             2, 4, 4, 6,
             7, 7, 9, 9,
@@ -691,19 +668,19 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 1, 2,
             1, 2, 1, 2, 1
         };
-        Mat35 c
+        CGM::Matrix<3,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 8, 8,
@@ -716,21 +693,21 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             1,
             2,
             1,
             2
         };
-        Mat41 c
+        CGM::Matrix<4,1,int> c
         {
             2,
             4,
@@ -744,21 +721,21 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             5, 6,
             7, 8
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             1, 2,
             2, 1,
             1, 2,
             2, 1
         };
-        Mat42 c
+        CGM::Matrix<4,2,int> c
         {
             2, 4,
             5, 5,
@@ -772,21 +749,21 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 8, 7,
             6, 5, 4
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             1, 2, 1,
             2, 1, 2,
             1, 1, 2,
             1, 2, 1
         };
-        Mat43 c
+        CGM::Matrix<4,3,int> c
         {
             2, 4, 4,
             6, 6, 8,
@@ -800,21 +777,21 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8,
             7, 6, 5, 4,
             3, 2, 1, 2
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             1, 2, 1, 2,
             2, 1, 2, 1,
             1, 2, 1, 2,
             2, 1, 2, 1
         };
-        Mat44 c
+        CGM::Matrix<4,4,int> c
         {
             2, 4, 4, 6,
             7, 7, 9, 9,
@@ -828,21 +805,21 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1,
             2, 3, 4, 5, 6
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1,
             1, 2, 2, 1, 1,
             1, 2, 1, 2, 2
         };
-        Mat45 c
+        CGM::Matrix<4,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7,
@@ -856,7 +833,7 @@ TEST(Matrix_Arithmetic, PlusOther)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
@@ -864,7 +841,7 @@ TEST(Matrix_Arithmetic, PlusOther)
             2, 3, 4, 5, 6,
             6, 7, 8, 7, 6
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1,
@@ -872,7 +849,7 @@ TEST(Matrix_Arithmetic, PlusOther)
             1, 2, 1, 2, 2,
             2, 1, 1, 2, 1
         };
-        Mat55 c
+        CGM::Matrix<5,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7,
@@ -890,11 +867,11 @@ TEST(Matrix_Arithmetic, PlusOther)
 TEST(Matrix_Arithmetic, InplacePlusScalar)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             3, 4,
         };
@@ -905,11 +882,11 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             3, 4, 5
         };
@@ -920,11 +897,11 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             3, 4, 5, 6
         };
@@ -935,11 +912,11 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             3, 4, 5, 6, 7
         };
@@ -950,12 +927,12 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             3,
             4
@@ -967,12 +944,12 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             3, 4,
             5, 6
@@ -984,12 +961,12 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 5, 6
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             3, 4, 5,
             6, 7, 8
@@ -1001,12 +978,12 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8
@@ -1018,12 +995,12 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6
@@ -1035,13 +1012,13 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             3,
             4,
@@ -1054,13 +1031,13 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             5, 6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             3, 4,
             5, 6,
@@ -1073,13 +1050,13 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 6, 5
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             3, 4, 5,
             6, 7, 8,
@@ -1092,13 +1069,13 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6,
             5, 4, 3, 2
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8,
@@ -1111,13 +1088,13 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
             3, 2, 1, 2, 3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -1130,14 +1107,14 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             3,
             4,
@@ -1151,14 +1128,14 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             5, 6,
             7, 6
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             3, 4,
             5, 6,
@@ -1172,14 +1149,14 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 6, 5,
             4, 3, 2
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             3, 4, 5,
             6, 7, 8,
@@ -1193,14 +1170,14 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 6,
             5, 4, 3, 2,
             1, 2, 3, 4
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             3, 4, 5, 6,
             7, 8, 9, 8,
@@ -1214,14 +1191,14 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
             3, 2, 1, 2, 3,
             4, 5, 6, 7, 6
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -1235,7 +1212,7 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 6, 5, 4,
@@ -1243,7 +1220,7 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
             4, 5, 6, 7, 6,
             5, 4, 3, 2, 1
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             3, 4, 5, 6, 7,
             8, 9, 8, 7, 6,
@@ -1261,15 +1238,15 @@ TEST(Matrix_Arithmetic, InplacePlusScalar)
 TEST(Matrix_Arithmetic, InplacePlusOther)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             2, 3,
         };
-        Mat12 c
+        CGM::Matrix<1,2,int> c
         {
             3, 5,
         };
@@ -1280,15 +1257,15 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             2, 3, 4
         };
-        Mat13 c
+        CGM::Matrix<1,3,int> c
         {
             3, 5, 7
         };
@@ -1299,15 +1276,15 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             1, 2, 1, 2
         };
-        Mat14 c
+        CGM::Matrix<1,4,int> c
         {
             2, 4, 4, 6
         };
@@ -1318,15 +1295,15 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             1, 2, 1, 2, 1
         };
-        Mat15 c
+        CGM::Matrix<1,5,int> c
         {
             2, 4, 4, 6, 6
         };
@@ -1337,17 +1314,17 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             1,
             2
         };
-        Mat21 c
+        CGM::Matrix<2,1,int> c
         {
             2,
             4
@@ -1359,17 +1336,17 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             1, 2,
             1, 2
         };
-        Mat22 c
+        CGM::Matrix<2,2,int> c
         {
             2, 4,
             4, 6
@@ -1381,17 +1358,17 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 5, 6
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             1, 2, 1,
             2, 1, 2
         };
-        Mat23 c
+        CGM::Matrix<2,3,int> c
         {
             2, 4, 4,
             6, 6, 8
@@ -1403,17 +1380,17 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             1, 2, 1, 2,
             1, 2, 1, 1
         };
-        Mat24 c
+        CGM::Matrix<2,4,int> c
         {
             2, 4, 4, 6,
             6, 8, 8, 9
@@ -1425,17 +1402,17 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1
         };
-        Mat25 c
+        CGM::Matrix<2,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7
@@ -1447,19 +1424,19 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             1,
             2,
             1
         };
-        Mat31 c
+        CGM::Matrix<3,1,int> c
         {
             2,
             4,
@@ -1472,19 +1449,19 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             5, 6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             1, 2,
             1, 2,
             1, 2
         };
-        Mat32 c
+        CGM::Matrix<3,2,int> c
         {
             2, 4,
             4, 6,
@@ -1497,19 +1474,19 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 8, 7
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             1, 2, 1,
             2, 1, 2,
             1, 1, 1
         };
-        Mat33 c
+        CGM::Matrix<3,3,int> c
         {
             2, 4, 4,
             6, 6, 8,
@@ -1522,19 +1499,19 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8,
             7, 6, 5, 4
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             1, 2, 1, 2,
             2, 1, 2, 1,
             1, 2, 1, 2
         };
-        Mat34 c
+        CGM::Matrix<3,4,int> c
         {
             2, 4, 4, 6,
             7, 7, 9, 9,
@@ -1547,19 +1524,19 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 1, 2,
             1, 2, 1, 2, 1
         };
-        Mat35 c
+        CGM::Matrix<3,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 8, 8,
@@ -1572,21 +1549,21 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             1,
             2,
             1,
             2
         };
-        Mat41 c
+        CGM::Matrix<4,1,int> c
         {
             2,
             4,
@@ -1600,21 +1577,21 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             5, 6,
             7, 8
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             1, 2,
             2, 1,
             1, 2,
             2, 1
         };
-        Mat42 c
+        CGM::Matrix<4,2,int> c
         {
             2, 4,
             5, 5,
@@ -1628,21 +1605,21 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 5, 6,
             7, 8, 7,
             6, 5, 4
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             1, 2, 1,
             2, 1, 2,
             1, 1, 2,
             1, 2, 1
         };
-        Mat43 c
+        CGM::Matrix<4,3,int> c
         {
             2, 4, 4,
             6, 6, 8,
@@ -1656,21 +1633,21 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             5, 6, 7, 8,
             7, 6, 5, 4,
             3, 2, 1, 2
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             1, 2, 1, 2,
             2, 1, 2, 1,
             1, 2, 1, 2,
             2, 1, 2, 1
         };
-        Mat44 c
+        CGM::Matrix<4,4,int> c
         {
             2, 4, 4, 6,
             7, 7, 9, 9,
@@ -1684,21 +1661,21 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
             5, 4, 3, 2, 1,
             2, 3, 4, 5, 6
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1,
             1, 2, 2, 1, 1,
             1, 2, 1, 2, 2
         };
-        Mat45 c
+        CGM::Matrix<4,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7,
@@ -1712,7 +1689,7 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 5,
             6, 7, 8, 7, 6,
@@ -1720,7 +1697,7 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
             2, 3, 4, 5, 6,
             6, 7, 8, 7, 6
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             1, 2, 1, 2, 1,
             2, 1, 1, 2, 1,
@@ -1728,7 +1705,7 @@ TEST(Matrix_Arithmetic, InplacePlusOther)
             1, 2, 1, 2, 2,
             2, 1, 1, 2, 1
         };
-        Mat55 c
+        CGM::Matrix<5,5,int> c
         {
             2, 4, 4, 6, 6,
             8, 8, 9, 9, 7,

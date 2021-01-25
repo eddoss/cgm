@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr Quaternion<T>
@@ -102,5 +101,4 @@ zeroPivot()
     };
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -4,8 +4,6 @@
 #include <CGM/Modules/Transformations/3D.hpp>
 
 
-namespace cgx = cgm::xyz;
-
 Launcher::Launcher()
     : space(Geometry::makeAxes(sceneMaterial))
 {
@@ -16,8 +14,8 @@ void Launcher::render()
 {
     Application::render();
 
-    cgx::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 3), cgx::up());
-    cgx::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 12), cgx::Ray{cgm::normalized(cgx::forward(space->xform)), cgx::position(space->xform)});
+    cgm::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 3), cgm::up());
+    cgm::rotate(space->xform, static_cast<cgm::FLOAT>(tickDelta() * 12), cgm::Ray{cgm::normalized(cgm::forward(space->xform)), cgm::position(space->xform)});
     scenePainter->render(*space, *sceneCamera);
 }
 
@@ -27,9 +25,9 @@ void Launcher::beforeLoop()
 
     space->init();
 
-    cgx::scale(space->xform, cgm::vec3(0.25f));
-    cgx::translate(space->xform, cgx::up() * 0.75f);
-    cgx::rotate(space->xform, cgm::radians(45.0f), cgx::up());
-    cgx::translate(space->xform, cgx::right() * 0.5f);
-    cgx::translate(space->xform, cgx::forward() * 0.5f);
+    cgm::scale(space->xform, cgm::vec3(0.25f));
+    cgm::translate(space->xform, cgm::up() * 0.75f);
+    cgm::rotate(space->xform, cgm::radians(45.0f), cgm::up());
+    cgm::translate(space->xform, cgm::right() * 0.5f);
+    cgm::translate(space->xform, cgm::forward() * 0.5f);
 }

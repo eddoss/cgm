@@ -5,7 +5,6 @@
 
 
 using namespace std;
-using namespace CGM;
 
 /* ####################################################################################### */
 /* Vector */
@@ -80,7 +79,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.75000, +1.20000}
+                CGM::Vector<2,double>{+0.75000, +1.20000}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -89,7 +88,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.25000, +1.70000}
+                CGM::Vector<2,double>{+0.25000, +1.70000}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -100,7 +99,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.691475, +1.434735}
+                CGM::Vector<2,double>{+0.691475, +1.434735}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -109,7 +108,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.015265, +1.641475}
+                CGM::Vector<2,double>{+0.015265, +1.641475}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -128,7 +127,7 @@ TEST(Transformations2D_Translation, Matrix3_ArbitraryOffset)
         const auto expect = CGM_XY::spaceMatrix
         (
             cgm_test::orientation,
-            Vector<2,double>{+0.75000, -0.20000}
+            CGM::Vector<2,double>{+0.75000, -0.20000}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -137,7 +136,7 @@ TEST(Transformations2D_Translation, Matrix3_ArbitraryOffset)
         const auto expect = CGM_XY::spaceMatrix
         (
             cgm_test::orientation,
-            Vector<2,double>{+1.348733, +0.198605}
+            CGM::Vector<2,double>{+1.348733, +0.198605}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -156,7 +155,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.69147, +1.43474}
+                CGM::Vector<2,double>{+0.69147, +1.43474}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -165,7 +164,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.69147, +1.43474}
+                CGM::Vector<2,double>{+0.69147, +1.43474}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -176,7 +175,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.529599, +1.614517}
+                CGM::Vector<2,double>{+0.529599, +1.614517}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -185,7 +184,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
             const auto expect = CGM_XY::spaceMatrix
             (
                 cgm_test::orientation,
-                Vector<2,double>{+0.654599, +2.214517}
+                CGM::Vector<2,double>{+0.654599, +2.214517}
             );
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
@@ -204,7 +203,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongPivotAxes)
         const auto expect = CGM_XY::spaceMatrix
         (
             cgm_test::orientation,
-            Vector<2,double>{+1.34873, +0.19861}
+            CGM::Vector<2,double>{+1.34873, +0.19861}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -213,7 +212,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongPivotAxes)
         const auto expect = CGM_XY::spaceMatrix
         (
             cgm_test::orientation,
-            Vector<2,double>{+1.348733, +0.198605}
+            CGM::Vector<2,double>{+1.348733, +0.198605}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -234,7 +233,7 @@ TEST(Transformations2D_TranslationMatrix, DefaultAxis)
         (
             CGM_XY::x<double>(),
             CGM_XY::y<double>(),
-            Vector<2,double>{+0.50000, +0.00000}
+            CGM::Vector<2,double>{+0.50000, +0.00000}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -244,7 +243,7 @@ TEST(Transformations2D_TranslationMatrix, DefaultAxis)
         (
             CGM_XY::x<double>(),
             CGM_XY::y<double>(),
-            Vector<2,double>{+0.00000, +0.50000}
+            CGM::Vector<2,double>{+0.00000, +0.50000}
         );
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
     }
@@ -279,7 +278,7 @@ TEST(Transformations2D_TranslationMatrix, AlongVector)
     (
         CGM_XY::x<double>(),
         CGM_XY::y<double>(),
-        Vector<2,double>{+0.441475, +0.234735}
+        CGM::Vector<2,double>{+0.441475, +0.234735}
     );
     ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }
@@ -296,7 +295,7 @@ TEST(Transformations2D_TranslationMatrix, AlongPivotAxes)
     (
         CGM_XY::x<double>(),
         CGM_XY::y<double>(),
-        Vector<2,double>{+1.09873, -1.00139}
+        CGM::Vector<2,double>{+1.09873, -1.00139}
     );
     ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
 }

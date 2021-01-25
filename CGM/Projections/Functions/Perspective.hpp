@@ -33,7 +33,7 @@ perspectiveViewport(T fov, T aspect, T offset = number<T>(1));
  * @return 3D ray from projector.
  */
 template<typename T>
-constexpr CGM_XYZ::Ray<T>
+constexpr CGM::Ray<T>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace);
 
 /**

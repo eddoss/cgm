@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr
@@ -48,5 +47,4 @@ Pivot<T>::Pivot(const Axes<T>& orientationAxes, const Vector<3,T>& P)
 
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

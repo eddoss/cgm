@@ -6,8 +6,6 @@
 #include <utility>
 
 
-namespace cgx = cgm::xyz;
-
 Geometry::Point::Point(const cgm::vec3& p, const cgm::vec4& c)
     : color(c)
     , position(p)
@@ -33,11 +31,11 @@ Geometry::makeAxes(ShaderProgram::Shared material)
     indices.resize(8);
 
     points[0] = Point{ null, r };
-    points[1] = Point{ cgm::xyz::x(), r };
+    points[1] = Point{ cgm::x(), r };
     points[2] = Point{ null, g };
-    points[3] = Point{ cgm::xyz::y(), g };
+    points[3] = Point{ cgm::y(), g };
     points[4] = Point{ null, b };
-    points[5] = Point{ cgm::xyz::z(), b };
+    points[5] = Point{ cgm::z(), b };
 
     indices[0] = 0;
     indices[1] = 1;
@@ -82,7 +80,7 @@ Geometry::makeTriangle(ShaderProgram::Shared material)
 Geometry::Unique
 Geometry::makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color, ShaderProgram::Shared material)
 {
-    const auto axis = cgx::forward();
+    const auto axis = cgm::forward();
     const auto angleStep = CGM_PI2 / pointsCount;
 
     std::vector<Point> points {};
@@ -91,7 +89,7 @@ Geometry::makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::ve
     for (size_t i = 0; i < pointsCount; ++i)
     {
         const auto angle = angleStep * i;
-        const auto radiusVector = cgx::rotated(cgx::right() * radius, angle, axis);
+        const auto radiusVector = cgm::rotated(cgm::right() * radius, angle, axis);
 
         points.emplace_back(radiusVector, color);
     }
@@ -151,13 +149,13 @@ Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& c
 
     const auto make_circle = [&points, &indices](const cgm::vec3& center, cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color)
     {
-        const auto axis = cgx::forward();
+        const auto axis = cgm::forward();
         const auto angleStep = CGM_PI2 / pointsCount;
 
         for (size_t i = 0; i < pointsCount; ++i)
         {
             const auto angle = angleStep * i;
-            const auto radiusVector = cgx::rotated(cgx::right() * radius, angle, axis) + center;
+            const auto radiusVector = cgm::rotated(cgm::right() * radius, angle, axis) + center;
 
             indices.emplace_back(points.size());
             points.emplace_back(radiusVector, color);
@@ -170,7 +168,7 @@ Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& c
     {
         const auto coeff = cgm::float32(i) / count;
         const auto angle = angleStep * i;
-        const auto center = cgx::rotated(cgx::right() * radius, angle, cgx::forward()) - cgx::forward() * coeff;
+        const auto center = cgm::rotated(cgm::right() * radius, angle, cgm::forward()) - cgm::forward() * coeff;
         make_circle(center, radius, 128, color);
         indices.emplace_back(CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE);
     }

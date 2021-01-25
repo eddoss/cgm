@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr
@@ -84,5 +83,4 @@ Transforms<T>::Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vect
 
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

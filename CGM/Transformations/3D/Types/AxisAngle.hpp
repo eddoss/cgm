@@ -6,7 +6,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
 struct AxisAngle
@@ -38,7 +37,6 @@ struct AxisAngle
     AxisAngle(const Vector<3,T>& dir, T ang);
 };
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

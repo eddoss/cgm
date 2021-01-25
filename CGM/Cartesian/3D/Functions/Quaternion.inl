@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 
 template<typename T>
@@ -256,5 +255,4 @@ neq(const Quaternion<T>& A, const Quaternion<T>& B, T tolerance)
     CGM::neq(A.scalar, B.scalar, tolerance);
 }
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

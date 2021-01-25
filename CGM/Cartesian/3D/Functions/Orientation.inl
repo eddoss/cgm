@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Axes */
@@ -205,5 +204,4 @@ orientationQuaternion(const Matrix<4,4,T>& space)
     );
 }
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

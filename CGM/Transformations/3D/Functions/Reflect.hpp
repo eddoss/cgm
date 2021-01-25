@@ -13,7 +13,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Vector (inplace) */
@@ -352,7 +351,6 @@ template<size_t N, typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter);
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

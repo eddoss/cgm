@@ -10,7 +10,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
 struct Transforms
@@ -121,7 +120,6 @@ struct Transforms
     Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vector<3,T>& r, T us, const Pivot<T>& p, ERotationOrder ro, ETransformOrder to);
 };
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

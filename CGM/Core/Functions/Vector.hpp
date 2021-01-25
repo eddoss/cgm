@@ -52,7 +52,6 @@ normalized(const Vector<D,T>& vector);
  * Calculates dot product of two vectors.
  * @param A First vector.
  * @param B Second vector.
- * @tparam TResult Type of result. It must be float or double.
  * @return Dot product of A and B.
  */
 template<size_t D, typename T>
@@ -63,7 +62,6 @@ dot(const Vector<D,T>& A, const Vector<D,T>& B);
  * Calculates cross product of two vectors.
  * @param A First vector.
  * @param B Second vector.
- * @tparam TResult Type of result. It must be float or double.
  * @return Cross product of A and B.
  */
 template<size_t AD, size_t BD, typename T>
@@ -71,13 +69,12 @@ constexpr auto
 cross(const Vector<AD,T>& A, const Vector<BD,T>& B) -> typename std::enable_if_t<(AD<5 && BD<5), decltype(A^B)>;
 
 /**
- * Calculates vector length.
+ * Calculates floating vector length.
  * @param vector Vector to calculate.
- * @tparam TResult Type of result. It must be float or double.
  * @return Vector length.
  */
-template<typename TResult=FLOAT, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 length(const Vector<D,T>& vector);
 
 /**
@@ -93,22 +90,20 @@ lengthSquared(const Vector<D,T>& vector);
  * Calculates distance between two vectors.
  * @param A First vector.
  * @param B Second vector.
- * @tparam TResult Type of result. It must be float or double.
  * @return Distance between A and B.
  */
-template<typename TResult=FLOAT, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 distance(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**
- * Calculates angle between two vectors (in radians).
+ * Calculates angle between two floating/double vectors (in radians).
  * @param A First vector.
  * @param B Second vector.
- * @tparam TResult Type of result. It must be float or double.
  * @return Angle between A and B.
  */
-template<typename TResult=FLOAT, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
 
 /**

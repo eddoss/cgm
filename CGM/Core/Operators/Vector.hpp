@@ -304,7 +304,7 @@ operator!=(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
  */
 template<size_t D, typename T>
 constexpr T
-operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
+operator | (const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
 
 /* ####################################################################################### */
 /* Cross product operator */
@@ -318,7 +318,7 @@ operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B);
  */
 template<typename T>
 constexpr T
-operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B);
+operator ^ (const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B);
 
 /**
  * Calculates cross product of 3D vector and 3D vectors.
@@ -328,7 +328,7 @@ operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B);
  */
 template<typename T>
 constexpr CGM::Vector<3,T>
-operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B);
+operator ^ (const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B);
 
 
 #include "Vector.inl"

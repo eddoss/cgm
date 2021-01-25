@@ -472,7 +472,7 @@ ShaderProgram::setUniform(const std::string& name, const cgm::vec4& vector) cons
 /* ####################################################################################### */
 
 void
-ShaderProgram::setUniform(const std::string& name, const cgm::xyz::quat& quaternion) const
+ShaderProgram::setUniform(const std::string& name, const cgm::quat& quaternion) const
 {
     IMPL_SUPPORT_SET_UNIFORM_COMMON
     glUniform4f(location, quaternion.scalar, quaternion.vector.x, quaternion.vector.y, quaternion.vector.z);

@@ -5,7 +5,7 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Ray<T>& axis)
+operator << (std::ostream& stream, const CGM::Ray<T>& axis)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
@@ -23,7 +23,7 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Ray<T>& axis)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot)
+operator << (std::ostream& stream, const CGM::Pivot<T>& pivot)
 {
 
     auto x = pivot.axes.x;
@@ -49,7 +49,7 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
+operator << (std::ostream& stream, const CGM::Transforms<T>& transforms)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
@@ -69,12 +69,12 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
     stream << " ][ ";
     switch (transforms.rotationOrder)
     {
-        case CGM_XFORM3D::ERotationOrder::XYZ: stream << "Rx Ry Rz"; break;
-        case CGM_XFORM3D::ERotationOrder::XZY: stream << "Rx Rz Ry"; break;
-        case CGM_XFORM3D::ERotationOrder::YXZ: stream << "Ry Rx Rz"; break;
-        case CGM_XFORM3D::ERotationOrder::YZX: stream << "Ry Rz Rx"; break;
-        case CGM_XFORM3D::ERotationOrder::ZXY: stream << "Rz Rx Ry"; break;
-        case CGM_XFORM3D::ERotationOrder::ZYX: stream << "Rz Ry Rx"; break;
+        case CGM::ERotationOrder::XYZ: stream << "Rx Ry Rz"; break;
+        case CGM::ERotationOrder::XZY: stream << "Rx Rz Ry"; break;
+        case CGM::ERotationOrder::YXZ: stream << "Ry Rx Rz"; break;
+        case CGM::ERotationOrder::YZX: stream << "Ry Rz Rx"; break;
+        case CGM::ERotationOrder::ZXY: stream << "Rz Rx Ry"; break;
+        case CGM::ERotationOrder::ZYX: stream << "Rz Ry Rx"; break;
     }
     stream << " ]\n";
 
@@ -103,7 +103,7 @@ operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle)
+operator << (std::ostream& stream, const CGM::AxisAngle<T>& axisAngle)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
@@ -119,16 +119,16 @@ operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle)
 /* --------------------------------------------------------------------------------------- */
 
 constexpr std::ostream&
-operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder)
+operator << (std::ostream& stream, CGM::ERotationOrder rotationOrder)
 {
     switch (rotationOrder)
     {
-        case CGM_XFORM3D::ERotationOrder::XYZ: stream << "CGM::XYZ::ERotationOrder::XYZ"; break;
-        case CGM_XFORM3D::ERotationOrder::XZY: stream << "CGM::XYZ::ERotationOrder::XZY"; break;
-        case CGM_XFORM3D::ERotationOrder::YXZ: stream << "CGM::XYZ::ERotationOrder::YXZ"; break;
-        case CGM_XFORM3D::ERotationOrder::YZX: stream << "CGM::XYZ::ERotationOrder::YZX"; break;
-        case CGM_XFORM3D::ERotationOrder::ZXY: stream << "CGM::XYZ::ERotationOrder::ZXY"; break;
-        case CGM_XFORM3D::ERotationOrder::ZYX: stream << "CGM::XYZ::ERotationOrder::ZYX"; break;
+        case CGM::ERotationOrder::XYZ: stream << "CGM::XYZ::ERotationOrder::XYZ"; break;
+        case CGM::ERotationOrder::XZY: stream << "CGM::XYZ::ERotationOrder::XZY"; break;
+        case CGM::ERotationOrder::YXZ: stream << "CGM::XYZ::ERotationOrder::YXZ"; break;
+        case CGM::ERotationOrder::YZX: stream << "CGM::XYZ::ERotationOrder::YZX"; break;
+        case CGM::ERotationOrder::ZXY: stream << "CGM::XYZ::ERotationOrder::ZXY"; break;
+        case CGM::ERotationOrder::ZYX: stream << "CGM::XYZ::ERotationOrder::ZYX"; break;
     }
 
     return stream;

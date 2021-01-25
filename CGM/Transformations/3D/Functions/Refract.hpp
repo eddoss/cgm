@@ -8,7 +8,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Vector (inplace) */
@@ -60,7 +59,6 @@ template<typename T>
 constexpr Vector<3,T>
 refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

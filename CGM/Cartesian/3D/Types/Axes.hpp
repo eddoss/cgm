@@ -6,7 +6,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
 struct Axes
@@ -14,7 +13,7 @@ struct Axes
     CGM_RULE_OF_FIVE(Axes)
 
 /* ####################################################################################### */
-/* Attributes */
+public: /* Attributes */
 /* ####################################################################################### */
 
     Vector<3,T> x;
@@ -22,7 +21,7 @@ struct Axes
     Vector<3,T> z;
 
 /* ####################################################################################### */
-/* Constructors */
+public: /* Constructors */
 /* ####################################################################################### */
 
     /**
@@ -32,7 +31,6 @@ struct Axes
     Axes(const Vector<3,T>& X, const Vector<3,T>& Y, const Vector<3,T>& Z);
 };
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

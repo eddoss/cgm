@@ -7,7 +7,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -805,7 +804,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Ray<T>
 converted(const Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& positionA, const Quaternion<T>& orientationB, const Vector<3,T>& positionB);
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

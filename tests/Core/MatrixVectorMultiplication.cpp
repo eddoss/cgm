@@ -8,47 +8,14 @@
 #include <CGM/Core/Operators/Vector.hpp>
 
 
-using namespace CGM;
-using namespace std;
-
-using Vec2 = Vector<2,int>;
-using Vec3 = Vector<3,int>;
-using Vec4 = Vector<4,int>;
-using Vec5 = Vector<5,int>;
-
-using Mat12 = Matrix<1,2,int>;
-using Mat13 = Matrix<1,3,int>;
-using Mat14 = Matrix<1,4,int>;
-using Mat15 = Matrix<1,5,int>;
-using Mat21 = Matrix<2,1,int>;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat25 = Matrix<2,5,int>;
-using Mat31 = Matrix<3,1,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat35 = Matrix<3,5,int>;
-using Mat41 = Matrix<4,1,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat45 = Matrix<4,5,int>;
-using Mat51 = Matrix<5,1,int>;
-using Mat52 = Matrix<5,2,int>;
-using Mat53 = Matrix<5,3,int>;
-using Mat54 = Matrix<5,4,int>;
-using Mat55 = Matrix<5,5,int>;
-
 /* ####################################################################################### */
 /* Vector to matrix: 2D vector */
 /* ####################################################################################### */
 
 TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat21)
 {
-    Vec2 vec = {2,5};
-    Mat21 mat
+    CGM::Vector<2,int> vec = {2,5};
+    CGM::Matrix<2,1,int> mat
     {
         3,
         4
@@ -65,15 +32,15 @@ TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat21)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat22)
 {
-    Vec2 vec = {2,5};
-    Mat22 mat
+    CGM::Vector<2,int> vec = {2,5};
+    CGM::Matrix<2,2,int> mat
     {
         3,2,
         4,6
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec2(26,34);
+    auto exp = CGM::Vector<2,int>(26,34);
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -83,15 +50,15 @@ TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat22)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat23)
 {
-    Vec2 vec = {2,5};
-    Mat23 mat
+    CGM::Vector<2,int> vec = {2,5};
+    CGM::Matrix<2,3,int> mat
     {
         3,2,1,
         4,6,3
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec3(26,34,17);
+    auto exp = CGM::Vector<3,int>(26,34,17);
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -101,15 +68,15 @@ TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat23)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat24)
 {
-    Vec2 vec = {2,5};
-    Mat24 mat
+    CGM::Vector<2,int> vec = {2,5};
+    CGM::Matrix<2,4,int> mat
     {
         3,2,1,5,
         4,6,3,4
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec4(26,34,17,30);
+    auto exp = CGM::Vector<4,int>(26,34,17,30);
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -119,15 +86,15 @@ TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat24)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat25)
 {
-    Vec2 vec = {2,5};
-    Mat25 mat
+    CGM::Vector<2,int> vec = {2,5};
+    CGM::Matrix<2,5,int> mat
     {
         3,2,1,5,1,
         4,6,3,4,1
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec5 {26,34,17,30,7};
+    auto exp = CGM::Vector<5,int> {26,34,17,30,7};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -139,8 +106,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec2__Mat25)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat31)
 {
-    Vec3 vec = {2,5,4};
-    Mat31 mat
+    CGM::Vector<3,int> vec = {2,5,4};
+    CGM::Matrix<3,1,int> mat
     {
         3,
         4,
@@ -158,8 +125,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat31)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat32)
 {
-    Vec3 vec = {2,5,4};
-    Mat32 mat
+    CGM::Vector<3,int> vec = {2,5,4};
+    CGM::Matrix<3,2,int> mat
     {
         3,2,
         4,6,
@@ -167,7 +134,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat32)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec2 {34,38};
+    auto exp = CGM::Vector<2,int> {34,38};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -177,8 +144,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat32)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat33)
 {
-    Vec3 vec = {2,5,4};
-    Mat33 mat
+    CGM::Vector<3,int> vec = {2,5,4};
+    CGM::Matrix<3,3,int> mat
     {
         3,2,1,
         4,6,3,
@@ -186,7 +153,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat33)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec3 {34,38,33};
+    auto exp = CGM::Vector<3,int> {34,38,33};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -196,8 +163,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat33)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat34)
 {
-    Vec3 vec = {2,5,4};
-    Mat34 mat
+    CGM::Vector<3,int> vec = {2,5,4};
+    CGM::Matrix<3,4,int> mat
     {
         3,2,1,5,
         4,6,3,4,
@@ -205,7 +172,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat34)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec4 {34,38,33,46};
+    auto exp = CGM::Vector<4,int> {34,38,33,46};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -215,8 +182,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat34)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat35)
 {
-    Vec3 vec = {2,5,4};
-    Mat35 mat
+    CGM::Vector<3,int> vec = {2,5,4};
+    CGM::Matrix<3,5,int> mat
     {
         3,2,1,5,1,
         4,6,3,4,1,
@@ -224,7 +191,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat35)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec5 {34,38,33,46,19};
+    auto exp = CGM::Vector<5,int> {34,38,33,46,19};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -236,8 +203,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec3__Mat35)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat41)
 {
-    Vec4 vec = {2,5,4,3};
-    Mat41 mat
+    CGM::Vector<4,int> vec = {2,5,4,3};
+    CGM::Matrix<4,1,int> mat
     {
         3,
         4,
@@ -256,8 +223,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat41)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat42)
 {
-    Vec4 vec = {2,5,4,3};
-    Mat42 mat
+    CGM::Vector<4,int> vec = {2,5,4,3};
+    CGM::Matrix<4,2,int> mat
     {
         3,2,
         4,6,
@@ -266,7 +233,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat42)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec2 {43,56};
+    auto exp = CGM::Vector<2,int> {43,56};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -276,8 +243,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat42)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat43)
 {
-    Vec4 vec = {2,5,4,3};
-    Mat43 mat
+    CGM::Vector<4,int> vec = {2,5,4,3};
+    CGM::Matrix<4,3,int> mat
     {
         3,2,1,
         4,6,3,
@@ -286,7 +253,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat43)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec3 {43,56,36};
+    auto exp = CGM::Vector<3,int> {43,56,36};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -296,8 +263,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat43)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat44)
 {
-    Vec4 vec = {2,5,4,3};
-    Mat44 mat
+    CGM::Vector<4,int> vec = {2,5,4,3};
+    CGM::Matrix<4,4,int> mat
     {
         3,2,1,5,
         4,6,3,4,
@@ -306,7 +273,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat44)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec4 {43,56,36,52};
+    auto exp = CGM::Vector<4,int> {43,56,36,52};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -316,8 +283,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat44)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat45)
 {
-    Vec4 vec = {2,5,4,3};
-    Mat45 mat
+    CGM::Vector<4,int> vec = {2,5,4,3};
+    CGM::Matrix<4,5,int> mat
     {
         3,2,1,5,1,
         4,6,3,4,1,
@@ -326,7 +293,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat45)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec5 {43,56,36,52,28};
+    auto exp = CGM::Vector<5,int> {43,56,36,52,28};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -338,8 +305,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec4__Mat45)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat51)
 {
-    Vec5 vec = {2,5,4,3,1};
-    Mat51 mat
+    CGM::Vector<5,int> vec = {2,5,4,3,1};
+    CGM::Matrix<5,1,int> mat
     {
         3,
         4,
@@ -359,8 +326,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat51)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat52)
 {
-    Vec5 vec = {2,5,4,3,1};
-    Mat52 mat
+    CGM::Vector<5,int> vec = {2,5,4,3,1};
+    CGM::Matrix<5,2,int> mat
     {
         3,2,
         4,6,
@@ -370,7 +337,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat52)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec2 {44,57};
+    auto exp = CGM::Vector<2,int> {44,57};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -380,8 +347,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat52)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat53)
 {
-    Vec5 vec = {2,5,4,3,1};
-    Mat53 mat
+    CGM::Vector<5,int> vec = {2,5,4,3,1};
+    CGM::Matrix<5,3,int> mat
     {
         3,2,1,
         4,6,3,
@@ -391,7 +358,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat53)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec3 {44,57,37};
+    auto exp = CGM::Vector<3,int> {44,57,37};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -401,8 +368,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat53)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat54)
 {
-    Vec5 vec = {2,5,4,3,1};
-    Mat54 mat
+    CGM::Vector<5,int> vec = {2,5,4,3,1};
+    CGM::Matrix<5,4,int> mat
     {
         3,2,1,5,
         4,6,3,4,
@@ -412,7 +379,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat54)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec4 {44,57,37,53};
+    auto exp = CGM::Vector<4,int> {44,57,37,53};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);
@@ -422,8 +389,8 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat54)
 
 TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat55)
 {
-    Vec5 vec = {2,5,4,3,1};
-    Mat55 mat
+    CGM::Vector<5,int> vec = {2,5,4,3,1};
+    CGM::Matrix<5,5,int> mat
     {
         3,2,1,5,1,
         4,6,3,4,1,
@@ -433,7 +400,7 @@ TEST(Matrix_MatrixVectorMultiplication, Vec5__Mat55)
     };
 
     auto trs = transposed(mat);
-    auto exp = Vec5 {44,57,37,53,29};
+    auto exp = CGM::Vector<5,int> {44,57,37,53,29};
 
     ASSERT_TRUE((vec*mat) == exp);
     ASSERT_TRUE((trs*vec) == exp);

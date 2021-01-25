@@ -20,7 +20,6 @@
 /* ####################################################################################### */
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /**
  * Applies transformation to vector.
@@ -178,7 +177,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 applied(const Matrix<4,4,T>& matrix, std::initializer_list<Matrix<4,4,T>> transforms);
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

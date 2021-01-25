@@ -13,7 +13,6 @@
 
 
 using namespace std;
-using namespace CGM;
 
 /* ####################################################################################### */
 /* Axes */
@@ -21,34 +20,34 @@ using namespace CGM;
 
 TEST(Cartesian_3D_Functions_OrientationAxes, FromXYZ)
 {
-    Vector<3,int> x {1, 2, 3};
-    Vector<3,int> y {4, 5, 6};
-    Vector<3,int> z {7, 8, 9};
+    CGM::Vector<3,int> x {1, 2, 3};
+    CGM::Vector<3,int> y {4, 5, 6};
+    CGM::Vector<3,int> z {7, 8, 9};
 
-    auto axes = CGM_XYZ::orientationAxes(x, y, z);
+    auto axes = CGM::orientationAxes(x, y, z);
 
-    ASSERT_TRUE(CGM_XYZ::x(axes) == x);
-    ASSERT_TRUE(CGM_XYZ::y(axes) == y);
-    ASSERT_TRUE(CGM_XYZ::z(axes) == z);
+    ASSERT_TRUE(CGM::x(axes) == x);
+    ASSERT_TRUE(CGM::y(axes) == y);
+    ASSERT_TRUE(CGM::z(axes) == z);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
 {
-    Vector<3,int> in_x {1, 2, 3};
-    Vector<3,int> in_y {4, 5, 6};
-    Vector<3,int> in_z {7, 8, 9};
+    CGM::Vector<3,int> in_x {1, 2, 3};
+    CGM::Vector<3,int> in_y {4, 5, 6};
+    CGM::Vector<3,int> in_z {7, 8, 9};
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    Matrix<3,3,int> mat
+    CGM::Matrix<3,3,int> mat
     {
         in_x.x, in_y.x, in_z.x,
         in_x.y, in_y.y, in_z.y,
         in_x.z, in_y.z, in_z.z
     };
 #else
-    Matrix<3,3,int> mat
+    CGM::Matrix<3,3,int> mat
     {
         in_x.x, in_x.y, in_x.z,
         in_y.x, in_y.y, in_y.z,
@@ -56,7 +55,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
     };
 #endif
 
-    auto [x, y, z] = CGM_XYZ::orientationAxes(mat);
+    auto [x, y, z] = CGM::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -67,12 +66,12 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix3x3)
 
 TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
 {
-    Vector<3,double> expec_x {0.559270,0.302442,-0.771846};
-    Vector<3,double> expec_y {-0.313298,0.939132,0.140980};
-    Vector<3,double> expec_z {0.767503,0.162971,0.619983};
+    CGM::Vector<3,double> expec_x {0.559270,0.302442,-0.771846};
+    CGM::Vector<3,double> expec_y {-0.313298,0.939132,0.140980};
+    CGM::Vector<3,double> expec_z {0.767503,0.162971,0.619983};
 
-    CGM_XYZ::Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
-    auto [x, y, z] = CGM_XYZ::orientationAxes(quat);
+    CGM::Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
+    auto [x, y, z] = CGM::orientationAxes(quat);
 
     ASSERT_TRUE(CGM::eq(expec_x, x, 0.00001));
     ASSERT_TRUE(CGM::eq(expec_y, y, 0.00001));
@@ -83,12 +82,12 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromQuaternion)
 
 TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
 {
-    Vector<3,int> in_x {1, 2, 3};
-    Vector<3,int> in_y {4, 5, 6};
-    Vector<3,int> in_z {7, 8, 9};
+    CGM::Vector<3,int> in_x {1, 2, 3};
+    CGM::Vector<3,int> in_y {4, 5, 6};
+    CGM::Vector<3,int> in_z {7, 8, 9};
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    Matrix<4,4,int> mat
+    CGM::Matrix<4,4,int> mat
     {
         in_x.x, in_y.x, in_z.x, 0,
         in_x.y, in_y.y, in_z.y, 0,
@@ -96,7 +95,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
         0, 0, 0, 1
     };
 #else
-    Matrix<4,4,int> mat
+    CGM::Matrix<4,4,int> mat
     {
         in_x.x, in_x.y, in_x.z, 0,
         in_y.x, in_y.y, in_y.z, 0,
@@ -105,7 +104,7 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
     };
 #endif
 
-    auto [x, y, z] = CGM_XYZ::orientationAxes(mat);
+    auto [x, y, z] = CGM::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -118,19 +117,19 @@ TEST(Cartesian_3D_Functions_OrientationAxes, FromMatrix4x4)
 
 TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
 {
-    Vector<3,int> x {1, 2, 3};
-    Vector<3,int> y {4, 5, 6};
-    Vector<3,int> z {7, 8, 9};
+    CGM::Vector<3,int> x {1, 2, 3};
+    CGM::Vector<3,int> y {4, 5, 6};
+    CGM::Vector<3,int> z {7, 8, 9};
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    Matrix<3,3,int> expect
+    CGM::Matrix<3,3,int> expect
     {
         x.x, y.x, z.x,
         x.y, y.y, z.y,
         x.z, y.z, z.z
     };
 #else
-    Matrix<3,3,int> expect
+    CGM::Matrix<3,3,int> expect
     {
         x.x, x.y, x.z,
         y.x, y.y, y.z,
@@ -138,7 +137,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
     };
 #endif
 
-    auto result = CGM_XYZ::orientationMatrix(x, y, z);
+    auto result = CGM::orientationMatrix(x, y, z);
 
     ASSERT_TRUE(result == expect);
 }
@@ -147,21 +146,21 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromXYZ)
 
 TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
 {
-    Vector<3,int> x {1, 2, 3};
-    Vector<3,int> y {4, 5, 6};
-    Vector<3,int> z {7, 8, 9};
+    CGM::Vector<3,int> x {1, 2, 3};
+    CGM::Vector<3,int> y {4, 5, 6};
+    CGM::Vector<3,int> z {7, 8, 9};
 
-    auto axes = CGM_XYZ::orientationAxes(x,y,z);
+    auto axes = CGM::orientationAxes(x,y,z);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    Matrix<3,3,int> expect
+    CGM::Matrix<3,3,int> expect
     {
         x.x, y.x, z.x,
         x.y, y.y, z.y,
         x.z, y.z, z.z
     };
 #else
-    Matrix<3,3,int> expect
+    CGM::Matrix<3,3,int> expect
     {
         x.x, x.y, x.z,
         y.x, y.y, y.z,
@@ -169,7 +168,7 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
     };
 #endif
 
-    auto result = CGM_XYZ::orientationMatrix(axes);
+    auto result = CGM::orientationMatrix(axes);
 
     ASSERT_TRUE(result == expect);
 }
@@ -178,19 +177,19 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromAxesStruct)
 
 TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 {
-    Vector<3,double> x {0.559270,0.302442,-0.771846};
-    Vector<3,double> y {-0.313298,0.939132,0.140980};
-    Vector<3,double> z {0.767503,0.162971,0.619983};
+    CGM::Vector<3,double> x {0.559270,0.302442,-0.771846};
+    CGM::Vector<3,double> y {-0.313298,0.939132,0.140980};
+    CGM::Vector<3,double> z {0.767503,0.162971,0.619983};
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
-    Matrix<3,3,double> expect
+    CGM::Matrix<3,3,double> expect
     {
         x.x, y.x, z.x,
         x.y, y.y, z.y,
         x.z, y.z, z.z
     };
 #else
-    Matrix<3,3,double> expect
+    CGM::Matrix<3,3,double> expect
     {
         x.x, x.y, x.z,
         y.x, y.y, y.z,
@@ -198,9 +197,9 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
     };
 #endif
 
-    CGM_XYZ::Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
+    CGM::Quaternion<double> quat {-0.006227,0.435855,0.174342,0.882948};
 
-    auto result = CGM_XYZ::orientationMatrix(quat);
+    auto result = CGM::orientationMatrix(quat);
 
     ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
@@ -209,11 +208,11 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromQuaternion)
 
 TEST(Cartesian_3D_Functions_OrientationMatrix, FromMatrix4x4)
 {
-    Vector<3,int> x {1, 2, 3};
-    Vector<3,int> y {4, 5, 6};
-    Vector<3,int> z {7, 8, 9};
+    CGM::Vector<3,int> x {1, 2, 3};
+    CGM::Vector<3,int> y {4, 5, 6};
+    CGM::Vector<3,int> z {7, 8, 9};
 
-    Matrix<4,4,int> mat
+    CGM::Matrix<4,4,int> mat
     {
         x.x, y.x, z.x, 0,
         x.y, y.y, z.y, 0,
@@ -221,14 +220,14 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromMatrix4x4)
         0, 0, 0, 1
     };
 
-    Matrix<3,3,int> expect
+    CGM::Matrix<3,3,int> expect
     {
         x.x, y.x, z.x,
         x.y, y.y, z.y,
         x.z, y.z, z.z
     };
 
-    auto result = CGM_XYZ::orientationMatrix(mat);
+    auto result = CGM::orientationMatrix(mat);
 
     ASSERT_TRUE(result == expect);
 }
@@ -239,67 +238,67 @@ TEST(Cartesian_3D_Functions_OrientationMatrix, FromMatrix4x4)
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromXYZ)
 {
-    Vector<3,double> x {0.559270,0.302442,-0.771846};
-    Vector<3,double> y {-0.313298,0.939132,0.140980};
-    Vector<3,double> z {0.767503,0.162971,0.619983};
+    CGM::Vector<3,double> x {0.559270,0.302442,-0.771846};
+    CGM::Vector<3,double> y {-0.313298,0.939132,0.140980};
+    CGM::Vector<3,double> z {0.767503,0.162971,0.619983};
 
-    auto expect = CGM_XYZ::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
-    auto result = CGM_XYZ::orientationQuaternion(x,y,z);
+    auto expect = CGM::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
+    auto result = CGM::orientationQuaternion(x,y,z);
 
-    ASSERT_TRUE(CGM_XYZ::eq(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromAxes)
 {
-    CGM_XYZ::Axes<double> axes
+    CGM::Axes<double> axes
     {
-        Vector<3,double> {0.559270,0.302442,-0.771846},
-        Vector<3,double> {-0.313298,0.939132,0.140980},
-        Vector<3,double> {0.767503,0.162971,0.619983}
+        CGM::Vector<3,double> {0.559270,0.302442,-0.771846},
+        CGM::Vector<3,double> {-0.313298,0.939132,0.140980},
+        CGM::Vector<3,double> {0.767503,0.162971,0.619983}
     };
 
-    auto result = CGM_XYZ::orientationQuaternion(axes);
-    auto expect = CGM_XYZ::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
+    auto result = CGM::orientationQuaternion(axes);
+    auto expect = CGM::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM_XYZ::eq(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix3x3)
 {
-    Vector<3,double> x {0.559270,0.302442,-0.771846};
-    Vector<3,double> y {-0.313298,0.939132,0.140980};
-    Vector<3,double> z {0.767503,0.162971,0.619983};
+    CGM::Vector<3,double> x {0.559270,0.302442,-0.771846};
+    CGM::Vector<3,double> y {-0.313298,0.939132,0.140980};
+    CGM::Vector<3,double> z {0.767503,0.162971,0.619983};
 
-    Matrix<3,3,double> matrix {};
-    CGM_XYZ::setX(matrix, x);
-    CGM_XYZ::setY(matrix, y);
-    CGM_XYZ::setZ(matrix, z);
+    CGM::Matrix<3,3,double> matrix {};
+    CGM::setX(matrix, x);
+    CGM::setY(matrix, y);
+    CGM::setZ(matrix, z);
 
-    auto result = CGM_XYZ::orientationQuaternion(matrix);
-    auto expect = CGM_XYZ::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
+    auto result = CGM::orientationQuaternion(matrix);
+    auto expect = CGM::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM_XYZ::eq(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 TEST(Cartesian_3D_Functions_OrientationQuaternion, FromMatrix4x4)
 {
-    Vector<3,double> x {0.559270,0.302442,-0.771846};
-    Vector<3,double> y {-0.313298,0.939132,0.140980};
-    Vector<3,double> z {0.767503,0.162971,0.619983};
+    CGM::Vector<3,double> x {0.559270,0.302442,-0.771846};
+    CGM::Vector<3,double> y {-0.313298,0.939132,0.140980};
+    CGM::Vector<3,double> z {0.767503,0.162971,0.619983};
 
-    Matrix<4,4,double> matrix {};
-    CGM_XYZ::setX(matrix, x);
-    CGM_XYZ::setY(matrix, y);
-    CGM_XYZ::setZ(matrix, z);
+    CGM::Matrix<4,4,double> matrix {};
+    CGM::setX(matrix, x);
+    CGM::setY(matrix, y);
+    CGM::setZ(matrix, z);
 
-    auto result = CGM_XYZ::orientationQuaternion(matrix);
-    auto expect = CGM_XYZ::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
+    auto result = CGM::orientationQuaternion(matrix);
+    auto expect = CGM::Quaternion<double>{0.006227,-0.435855,-0.174342, 0.882948};
 
-    ASSERT_TRUE(CGM_XYZ::eq(result, expect, 0.00001));
+    ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
 }

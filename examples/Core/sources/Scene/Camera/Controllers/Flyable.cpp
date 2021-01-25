@@ -4,18 +4,16 @@
 #include <CGM/Modules/Transformations/3D.hpp>
 
 
-namespace cgx = cgm::xyz;
-
 FlyableCameraController::FlyableCameraController()
 {
-    m_space = cgx::lookAt(cgm::vec3(1), cgm::vec3(0), cgx::up());
+    m_space = cgm::lookAt(cgm::vec3(1), cgm::vec3(0), cgm::up());
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);
 }
 
 FlyableCameraController::FlyableCameraController(const cgm::vec3& aim, const cgm::vec3& position)
 {
-    m_space = cgx::lookAt(position, aim, cgx::up());
+    m_space = cgm::lookAt(position, aim, cgm::up());
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);
 }
@@ -23,7 +21,7 @@ FlyableCameraController::FlyableCameraController(const cgm::vec3& aim, const cgm
 void
 FlyableCameraController::focus(const cgm::vec3& aim, const cgm::vec3& position)
 {
-    m_space = cgx::lookAt(position, aim, cgx::up());
+    m_space = cgm::lookAt(position, aim, cgm::up());
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);
 }
@@ -31,25 +29,25 @@ FlyableCameraController::focus(const cgm::vec3& aim, const cgm::vec3& position)
 cgm::vec3
 FlyableCameraController::position() const
 {
-    return cgx::position(m_space);
+    return cgm::position(m_space);
 }
 
 cgm::vec3
 FlyableCameraController::right() const
 {
-    return cgx::right(m_space);
+    return cgm::right(m_space);
 }
 
 cgm::vec3
 FlyableCameraController::up() const
 {
-    return cgx::up(m_space);
+    return cgm::up(m_space);
 }
 
 cgm::vec3
 FlyableCameraController::forward() const
 {
-    return cgx::forward(m_space);
+    return cgm::forward(m_space);
 }
 
 const cgm::mat4&
@@ -68,12 +66,12 @@ void
 FlyableCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forward)
 {
 #ifdef CGM_CFG_RHS
-    cgx::translate(m_space, -this->right() * horizontal);
+    cgm::translate(m_space, -this->right() * horizontal);
 #else
-    cgx::translate(m_space, this->right() * horizontal);
+    cgm::translate(m_space, this->right() * horizontal);
 #endif
-    cgx::translate(m_space, this->up() * vertical);
-    cgx::translate(m_space, this->forward() * forward);
+    cgm::translate(m_space, this->up() * vertical);
+    cgm::translate(m_space, this->forward() * forward);
 
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);
@@ -84,11 +82,11 @@ FlyableCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 {
     const auto pos = position();
 
-    const auto rightAxis = cgx::Ray(right(), pos);
-    cgx::rotate(m_space, cgm::radians(vertical), rightAxis);
+    const auto rightAxis = cgm::Ray(right(), pos);
+    cgm::rotate(m_space, cgm::radians(vertical), rightAxis);
 
-    const auto upAxis = cgx::Ray(cgx::up(), pos);
-    cgx::rotate(m_space, cgm::radians(horizontal), upAxis);
+    const auto upAxis = cgm::Ray(cgm::up(), pos);
+    cgm::rotate(m_space, cgm::radians(horizontal), upAxis);
 
     m_inverseSpace = m_space;
     cgm::invert(m_inverseSpace);
@@ -97,5 +95,5 @@ FlyableCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
 void
 FlyableCameraController::setPosition(const cgm::vec3& position)
 {
-    cgx::setPosition(m_space, position);
+    cgm::setPosition(m_space, position);
 }

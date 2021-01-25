@@ -18,25 +18,25 @@ perspectiveViewport(T fov, T aspect, T offset)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE CGM_XYZ::Ray<T>
+constexpr CGM_FORCEINLINE CGM::Ray<T>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace)
 {
     const T h = std::tan(fov * number<T>(0.5));
     const T w = h * aspect;
 
-    const auto r_offset = CGM_XYZ::right(projectorSpace) * fit11(point.x, -w, w);
-    const auto u_offset = CGM_XYZ::up(projectorSpace) * fit11(point.y, -h, h);
+    const auto r_offset = CGM::right(projectorSpace) * fit11(point.x, -w, w);
+    const auto u_offset = CGM::up(projectorSpace) * fit11(point.y, -h, h);
 
-    auto ray = CGM_XYZ::Ray<T>{};
-    ray.position = CGM_XYZ::position(projectorSpace);
+    auto ray = CGM::Ray<T>{};
+    ray.position = CGM::position(projectorSpace);
 
     if constexpr (CGM_CONFIG.handedness == EHandedness::Right)
     {
-        ray.direction = normalized(CGM_XYZ::forward(projectorSpace) + u_offset - r_offset);
+        ray.direction = normalized(CGM::forward(projectorSpace) + u_offset - r_offset);
     }
     else
     {
-        ray.direction = normalized(CGM_XYZ::forward(projectorSpace) + u_offset + r_offset);
+        ray.direction = normalized(CGM::forward(projectorSpace) + u_offset + r_offset);
     }
 
     return ray;
@@ -78,18 +78,18 @@ perspective(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
         const auto P = CGM_COORD::cartesian(zero<T>, zero<T>, n * f * (cmn - cmx) / l);
         const auto H = CGM_COORD::cartesian(zero<T>, zero<T>, number<T>(1));
 
-        CGM_XYZ::setUp(mat, U);
-        CGM_XYZ::setForward(mat, F);
-        CGM_XYZ::setPosition(mat, P);
-        CGM_XYZ::setHomogeneous(mat, H);
+        CGM::setUp(mat, U);
+        CGM::setForward(mat, F);
+        CGM::setPosition(mat, P);
+        CGM::setHomogeneous(mat, H);
 
         if constexpr (Handedness == CGM_CONFIG.handedness)
         {
-            CGM_XYZ::setRight(mat, R);
+            CGM::setRight(mat, R);
         }
         else
         {
-            CGM_XYZ::setRight(mat, -R);
+            CGM::setRight(mat, -R);
         }
     }
 

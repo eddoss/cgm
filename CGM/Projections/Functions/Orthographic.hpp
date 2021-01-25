@@ -31,7 +31,7 @@ orthographicViewport(T aspect, T scale = number<T>(1));
  * @return 3D ray from projector.
  */
 template<typename T>
-constexpr CGM_XYZ::Ray<T>
+constexpr CGM::Ray<T>
 orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>& projectorSpace);
 
 /**

@@ -8,7 +8,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y, Z axes */
@@ -88,7 +87,6 @@ template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<3,T>
 backward();
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

@@ -6,20 +6,14 @@
 #include <CGM/Core/Operators/Vector.hpp>
 
 
-using namespace CGM;
-
 using namespace std;
-using Vec2 = Vector<2>;
-using Vec3 = Vector<3>;
-using Vec4 = Vector<4>;
-using Vec5 = Vector<5>;
 
 TEST(Vector_ComparisonWithOther, Equal)
 {
     {
-        Vec2 vec { 2, 4 };
-        Vec2 eql { 2, 4 };
-        Vec2 neq { 1, 2 };
+        CGM::Vector<2,int> vec { 2, 4 };
+        CGM::Vector<2,int> eql { 2, 4 };
+        CGM::Vector<2,int> neq { 1, 2 };
         ASSERT_TRUE(vec == eql);
         ASSERT_FALSE(vec == neq);
     }
@@ -27,9 +21,9 @@ TEST(Vector_ComparisonWithOther, Equal)
     /* -------------- */
 
     {
-        Vec3 vec { 3, 6, 9 };
-        Vec3 eql { 3, 6, 9 };
-        Vec3 neq { 1, 2, 3 };
+        CGM::Vector<3,int> vec { 3, 6, 9 };
+        CGM::Vector<3,int> eql { 3, 6, 9 };
+        CGM::Vector<3,int> neq { 1, 2, 3 };
         ASSERT_TRUE(vec == eql);
         ASSERT_FALSE(vec == neq);
     }
@@ -37,9 +31,9 @@ TEST(Vector_ComparisonWithOther, Equal)
     /* -------------- */
 
     {
-        Vec4 vec { 2, 4, 6, 8 };
-        Vec4 eql { 2, 4, 6, 8 };
-        Vec4 neq { 1, 2, 3, 4 };
+        CGM::Vector<4,int> vec { 2, 4, 6, 8 };
+        CGM::Vector<4,int> eql { 2, 4, 6, 8 };
+        CGM::Vector<4,int> neq { 1, 2, 3, 4 };
         ASSERT_TRUE(vec == eql);
         ASSERT_FALSE(vec == neq);
     }
@@ -47,9 +41,9 @@ TEST(Vector_ComparisonWithOther, Equal)
     /* -------------- */
 
     {
-        Vec5 vec { 2, 4, 6, 8, 10 };
-        Vec5 eql { 2, 4, 6, 8, 10 };
-        Vec5 neq { 1, 2, 3, 4, 5 };
+        CGM::Vector<5,int> vec { 2, 4, 6, 8, 10 };
+        CGM::Vector<5,int> eql { 2, 4, 6, 8, 10 };
+        CGM::Vector<5,int> neq { 1, 2, 3, 4, 5 };
         ASSERT_TRUE(vec == eql);
         ASSERT_FALSE(vec == neq);
     }
@@ -60,9 +54,9 @@ TEST(Vector_ComparisonWithOther, Equal)
 TEST(Vector_ComparisonWithOther, NonEqual)
 {
     {
-        Vec2 vec { 2, 4 };
-        Vec2 eql { 2, 4 };
-        Vec2 neq { 1, 2 };
+        CGM::Vector<2,int> vec { 2, 4 };
+        CGM::Vector<2,int> eql { 2, 4 };
+        CGM::Vector<2,int> neq { 1, 2 };
         ASSERT_TRUE(vec != neq);
         ASSERT_FALSE(vec != eql);
     }
@@ -70,9 +64,9 @@ TEST(Vector_ComparisonWithOther, NonEqual)
     /* -------------- */
 
     {
-        Vec3 vec { 3, 6, 9 };
-        Vec3 eql { 3, 6, 9 };
-        Vec3 neq { 1, 2, 3 };
+        CGM::Vector<3,int> vec { 3, 6, 9 };
+        CGM::Vector<3,int> eql { 3, 6, 9 };
+        CGM::Vector<3,int> neq { 1, 2, 3 };
         ASSERT_TRUE(vec != neq);
         ASSERT_FALSE(vec != eql);
     }
@@ -80,9 +74,9 @@ TEST(Vector_ComparisonWithOther, NonEqual)
     /* -------------- */
 
     {
-        Vec4 vec { 2, 4, 6, 8 };
-        Vec4 eql { 2, 4, 6, 8 };
-        Vec4 neq { 1, 2, 3, 4 };
+        CGM::Vector<4,int> vec { 2, 4, 6, 8 };
+        CGM::Vector<4,int> eql { 2, 4, 6, 8 };
+        CGM::Vector<4,int> neq { 1, 2, 3, 4 };
         ASSERT_TRUE(vec != neq);
         ASSERT_FALSE(vec != eql);
     }
@@ -90,9 +84,9 @@ TEST(Vector_ComparisonWithOther, NonEqual)
     /* -------------- */
 
     {
-        Vec5 vec { 2, 4, 6, 8, 10 };
-        Vec5 eql { 2, 4, 6, 8, 10 };
-        Vec5 neq { 1, 2, 3, 4, 5 };
+        CGM::Vector<5,int> vec { 2, 4, 6, 8, 10 };
+        CGM::Vector<5,int> eql { 2, 4, 6, 8, 10 };
+        CGM::Vector<5,int> neq { 1, 2, 3, 4, 5 };
         ASSERT_TRUE(vec != neq);
         ASSERT_FALSE(vec != eql);
     }

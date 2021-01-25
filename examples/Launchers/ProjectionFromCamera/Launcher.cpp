@@ -6,8 +6,6 @@
 #include <Rendering/DotPainter.hpp>
 
 
-namespace cgx = cgm::xyz;
-
 Launcher::Launcher()
     : projector(new Camera)
     , dotPainter(new DotPainter)
@@ -18,9 +16,9 @@ Launcher::Launcher()
     object = Geometry::makeAxes(sceneMaterial);
 
 #ifdef CGM_CFG_COLUMN_MAJOR
-    object->xform = object->xform * cgx::scalingMatrix(cgm::vec3(0.2f));
+    object->xform = object->xform * cgm::scalingMatrix(cgm::vec3(0.2f));
 #else
-    object->xform = cgx::scalingMatrix(cgm::vec3(0.2f)) * object->xform;
+    object->xform = cgm::scalingMatrix(cgm::vec3(0.2f)) * object->xform;
 #endif
 }
 
@@ -103,7 +101,7 @@ Launcher::setupDots(size_t freq)
 //        {
 //            const auto y = cgm::fit01(stepHeight * j, -1.0f, 1.0f);
 //            const auto ray = cgm::perspectiveRay({x,y}, projectorFov, projectorAspect, projectorSpace);
-//            const auto pos = intersection(ray, projectorPos, cgx::up(), cgm::vec3(0.0f));
+//            const auto pos = intersection(ray, projectorPos, cgm::up(), cgm::vec3(0.0f));
 //            points.emplace_back(pos, color);
 //        }
 //    }
@@ -198,7 +196,7 @@ Launcher::locateSpace(const cgm::vec2& tap)
     const auto& space  = contr.space();
 
     const auto ray = cgm::perspectiveRay(tap, fov, aspect, space);
-    const auto intersec = intersection(ray.direction, ray.position, cgx::up(), cgm::vec3(0));
+    const auto intersec = intersection(ray.direction, ray.position, cgm::up(), cgm::vec3(0));
 
-    cgx::setPosition(object->xform, intersec);
+    cgm::setPosition(object->xform, intersec);
 }

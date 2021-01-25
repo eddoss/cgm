@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Vector (inplace) */
@@ -436,5 +435,4 @@ reflectionMatrix(const Vector<3,T>& planeNormal, const Vector<3,T>& planeCenter)
     return mat;
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -6,7 +6,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
 struct Ray
@@ -33,7 +32,6 @@ struct Ray
     Ray(const Vector<3,T>& dir, const Vector<3,T>& pos);
 };
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

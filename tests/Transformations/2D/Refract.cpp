@@ -5,7 +5,6 @@
 
 
 using namespace std;
-using namespace CGM;
 
 TEST(Transformations2D_Refraction, Vector_PlaneNormal)
 {

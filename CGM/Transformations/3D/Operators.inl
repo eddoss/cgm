@@ -9,7 +9,7 @@
 
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B)
+operator == (const CGM::Pivot<T>& A, const CGM::Pivot<T>& B)
 {
     return A.position == B.position && A.axes == B.axes;
 }
@@ -18,7 +18,7 @@ operator == (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B)
 
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B)
+operator != (const CGM::Pivot<T>& A, const CGM::Pivot<T>& B)
 {
     return A.position != B.position || A.axes != B.axes;
 }
@@ -29,7 +29,7 @@ operator != (const CGM_XFORM3D::Pivot<T>& A, const CGM_XFORM3D::Pivot<T>& B)
 
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B)
+operator == (const CGM::Transforms<T>& A, const CGM::Transforms<T>& B)
 {
     return
     A.translation       == B.translation
@@ -45,7 +45,7 @@ operator == (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
 
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<T>& B)
+operator != (const CGM::Transforms<T>& A, const CGM::Transforms<T>& B)
 {
     return
     A.translation       != B.translation
@@ -63,7 +63,7 @@ operator != (const CGM_XFORM3D::Transforms<T>& A, const CGM_XFORM3D::Transforms<
 
 template<typename T>
 constexpr bool
-operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B)
+operator == (const CGM::Ray<T>& A, const CGM::Ray<T>& B)
 {
     return A.position == B.position && A.direction == B.direction;
 }
@@ -72,7 +72,7 @@ operator == (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B)
 
 template<typename T>
 constexpr bool
-operator != (const CGM_XFORM3D::Ray<T>& A, const CGM_XFORM3D::Ray<T>& B)
+operator != (const CGM::Ray<T>& A, const CGM::Ray<T>& B)
 {
     return A.position != B.position || A.direction != B.direction;
 }

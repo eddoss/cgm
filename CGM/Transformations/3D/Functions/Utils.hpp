@@ -9,7 +9,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /**
  * Create quaternion from axis and angle.
@@ -75,7 +74,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE T
 zeroPivot();
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

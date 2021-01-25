@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Vector (inplace) */
@@ -597,5 +596,4 @@ translationMatrix(const Transforms<T>& transforms)
     return translationMatrix(transforms.translation, transforms.pivot);
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

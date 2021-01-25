@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Vector */
@@ -794,7 +793,7 @@ template<E3D Axis, typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle)
 {
-    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(axis<Axis,T>(), angle));
+    rotate(quaternion, CGM::orientationQuaternion(axis<Axis,T>(), angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -803,7 +802,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction)
 {
-    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(direction, angle));
+    rotate(quaternion, CGM::orientationQuaternion(direction, angle));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -812,9 +811,9 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint)
 {
-    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-    rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+    rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
+    rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
+    rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -827,39 +826,39 @@ rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& piv
     {
         case ERotationOrder::XYZ:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
         }
         case ERotationOrder::XZY:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
         }
         case ERotationOrder::YXZ:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
         }
         case ERotationOrder::YZX:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
         }
         case ERotationOrder::ZXY:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
         }
         case ERotationOrder::ZYX:
         {
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.z, angles.z));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.y, angles.y));
-            rotate(quaternion, CGM_XFORM3D::orientationQuaternion(pivotPoint.axes.x, angles.x));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.z, angles.z));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.y, angles.y));
+            rotate(quaternion, CGM::orientationQuaternion(pivotPoint.axes.x, angles.x));
         }
     }
 }
@@ -1564,5 +1563,4 @@ rotationMatrix(const Transforms<T>& transforms)
     return mat;
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

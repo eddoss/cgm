@@ -12,22 +12,22 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Ray<T>& axis);
+operator << (std::ostream& stream, const CGM::Ray<T>& axis);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Pivot<T>& pivot);
+operator << (std::ostream& stream, const CGM::Pivot<T>& pivot);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::Transforms<T>& transforms);
+operator << (std::ostream& stream, const CGM::Transforms<T>& transforms);
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XFORM3D::AxisAngle<T>& axisAngle);
+operator << (std::ostream& stream, const CGM::AxisAngle<T>& axisAngle);
 
 constexpr std::ostream&
-operator << (std::ostream& stream, CGM_XFORM3D::ERotationOrder rotationOrder);
+operator << (std::ostream& stream, CGM::ERotationOrder rotationOrder);
 
 
 #include "IO.inl"

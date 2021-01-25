@@ -13,7 +13,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -331,7 +330,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 converted(const Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB);
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

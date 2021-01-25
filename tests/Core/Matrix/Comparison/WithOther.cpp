@@ -6,39 +6,16 @@
 #include <CGM/Core/Operators/Matrix.hpp>
 
 
-using namespace CGM;
-
 using namespace std;
-using Mat12 = Matrix<1,2,int>;
-using Mat13 = Matrix<1,3,int>;
-using Mat14 = Matrix<1,4,int>;
-using Mat15 = Matrix<1,5,int>;
-using Mat21 = Matrix<2,1,int>;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat25 = Matrix<2,5,int>;
-using Mat31 = Matrix<3,1,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat35 = Matrix<3,5,int>;
-using Mat41 = Matrix<4,1,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat45 = Matrix<4,5,int>;
-using Mat51 = Matrix<5,1,int>;
-using Mat55 = Matrix<5,5,int>;
 
 TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1,2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             1,2
         };
@@ -47,11 +24,11 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1,2,3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             1,2,3
         };
@@ -60,11 +37,11 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1,2,3,4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             1,2,3,4
         };
@@ -73,11 +50,11 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1,2,3,4,5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             1,2,3,4,5
         };
@@ -86,12 +63,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             1,
             2
@@ -101,12 +78,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1,2,
             6,7
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             1,2,
             6,7
@@ -116,12 +93,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1,2,3,
             6,7,8
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             1,2,3,
             6,7,8
@@ -131,12 +108,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             1,2,3,4,
             6,7,8,9
@@ -146,12 +123,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8
@@ -161,13 +138,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             1,
             2,
@@ -178,13 +155,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1,2,
             6,7,
             7,6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             1,2,
             6,7,
@@ -195,13 +172,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1,2,3,
             6,7,8,
             7,6,5
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             1,2,3,
             6,7,8,
@@ -212,13 +189,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -229,13 +206,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -246,14 +223,14 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             1,
             2,
@@ -265,12 +242,12 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             1,2,3,4,
             6,7,8,9
@@ -280,13 +257,13 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -297,14 +274,14 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4,
             2,1,2,3
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -316,14 +293,14 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3,
             2,1,2,3,4
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -335,7 +312,7 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat51 a
+        CGM::Matrix<5,1,int> a
         {
             1,
             2,
@@ -343,7 +320,7 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
             4,
             5
         };
-        Mat51 b
+        CGM::Matrix<5,1,int> b
         {
             1,
             2,
@@ -356,7 +333,7 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
     }
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -364,7 +341,7 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
             2,1,2,3,4,
             5,6,7,8,9
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -382,224 +359,224 @@ TEST(Matrix_ComparisonWithOther, Equal_PositiveTest)
 TEST(Matrix_ComparisonWithOther, Equal_NegativeTest)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1,2
         };
-        Mat12 b(1);
+        CGM::Matrix<1,2,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1,2,3
         };
-        Mat13 b(1);
+        CGM::Matrix<1,3,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1,2,3,4
         };
-        Mat14 b(1);
+        CGM::Matrix<1,4,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1,2,3,4,5
         };
-        Mat15 b(1);
+        CGM::Matrix<1,5,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b(1);
+        CGM::Matrix<2,1,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1,2,
             6,7
         };
-        Mat22 b(1);
+        CGM::Matrix<2,2,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1,2,3,
             6,7,8
         };
-        Mat23 b(1);
+        CGM::Matrix<2,3,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat24 b(1);
+        CGM::Matrix<2,4,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8
         };
-        Mat25 b(1);
+        CGM::Matrix<2,5,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b(1);
+        CGM::Matrix<3,1,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1,2,
             6,7,
             7,6
         };
-        Mat32 b(1);
+        CGM::Matrix<3,2,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1,2,3,
             6,7,8,
             7,6,5
         };
-        Mat33 b(1);
+        CGM::Matrix<3,3,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat34 b(1);
+        CGM::Matrix<3,4,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3
         };
-        Mat35 b(1);
+        CGM::Matrix<3,5,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b(1);
+        CGM::Matrix<4,1,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat42 b(1);
+        CGM::Matrix<4,2,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat43 b(1);
+        CGM::Matrix<4,3,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4,
             2,1,2,3
         };
-        Mat44 b(1);
+        CGM::Matrix<4,4,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3,
             2,1,2,3,4
         };
-        Mat45 b(1);
+        CGM::Matrix<4,5,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat51 a
+        CGM::Matrix<5,1,int> a
         {
             1,
             2,
@@ -607,13 +584,13 @@ TEST(Matrix_ComparisonWithOther, Equal_NegativeTest)
             4,
             5
         };
-        Mat51 b(1);
+        CGM::Matrix<5,1,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -621,7 +598,7 @@ TEST(Matrix_ComparisonWithOther, Equal_NegativeTest)
             2,1,2,3,4,
             5,6,7,8,9
         };
-        Mat55 b(1);
+        CGM::Matrix<5,5,int> b(1);
 
         ASSERT_FALSE(a==b);
     }
@@ -632,224 +609,224 @@ TEST(Matrix_ComparisonWithOther, Equal_NegativeTest)
 TEST(Matrix_ComparisonWithOther, NotEqual_PositiveTest)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1,2
         };
-        Mat12 b(1);
+        CGM::Matrix<1,2,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1,2,3
         };
-        Mat13 b(1);
+        CGM::Matrix<1,3,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1,2,3,4
         };
-        Mat14 b(1);
+        CGM::Matrix<1,4,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1,2,3,4,5
         };
-        Mat15 b(1);
+        CGM::Matrix<1,5,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b(1);
+        CGM::Matrix<2,1,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1,2,
             6,7
         };
-        Mat22 b(1);
+        CGM::Matrix<2,2,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1,2,3,
             6,7,8
         };
-        Mat23 b(1);
+        CGM::Matrix<2,3,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat24 b(1);
+        CGM::Matrix<2,4,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8
         };
-        Mat25 b(1);
+        CGM::Matrix<2,5,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b(1);
+        CGM::Matrix<3,1,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1,2,
             6,7,
             7,6
         };
-        Mat32 b(1);
+        CGM::Matrix<3,2,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1,2,3,
             6,7,8,
             7,6,5
         };
-        Mat33 b(1);
+        CGM::Matrix<3,3,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat34 b(1);
+        CGM::Matrix<3,4,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3
         };
-        Mat35 b(1);
+        CGM::Matrix<3,5,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b(1);
+        CGM::Matrix<4,1,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat42 b(1);
+        CGM::Matrix<4,2,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat43 b(1);
+        CGM::Matrix<4,3,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4,
             2,1,2,3
         };
-        Mat44 b(1);
+        CGM::Matrix<4,4,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3,
             2,1,2,3,4
         };
-        Mat45 b(1);
+        CGM::Matrix<4,5,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat51 a
+        CGM::Matrix<5,1,int> a
         {
             1,
             2,
@@ -857,13 +834,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_PositiveTest)
             4,
             5
         };
-        Mat51 b(1);
+        CGM::Matrix<5,1,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -871,7 +848,7 @@ TEST(Matrix_ComparisonWithOther, NotEqual_PositiveTest)
             2,1,2,3,4,
             5,6,7,8,9
         };
-        Mat55 b(1);
+        CGM::Matrix<5,5,int> b(1);
 
         ASSERT_TRUE(a!=b);
     }
@@ -882,11 +859,11 @@ TEST(Matrix_ComparisonWithOther, NotEqual_PositiveTest)
 TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1,2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             1,2
         };
@@ -895,11 +872,11 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1,2,3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             1,2,3
         };
@@ -908,11 +885,11 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1,2,3,4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             1,2,3,4
         };
@@ -921,11 +898,11 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1,2,3,4,5
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             1,2,3,4,5
         };
@@ -934,12 +911,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             1,
             2
@@ -949,12 +926,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1,2,
             6,7
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             1,2,
             6,7
@@ -964,12 +941,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1,2,3,
             6,7,8
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             1,2,3,
             6,7,8
@@ -979,12 +956,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             1,2,3,4,
             6,7,8,9
@@ -994,12 +971,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8
@@ -1009,13 +986,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             1,
             2,
@@ -1026,13 +1003,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1,2,
             6,7,
             7,6
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             1,2,
             6,7,
@@ -1043,13 +1020,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1,2,3,
             6,7,8,
             7,6,5
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             1,2,3,
             6,7,8,
@@ -1060,13 +1037,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -1077,13 +1054,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -1094,14 +1071,14 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             1,
             2,
@@ -1113,12 +1090,12 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1,2,3,4,
             6,7,8,9
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             1,2,3,4,
             6,7,8,9
@@ -1128,13 +1105,13 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -1145,14 +1122,14 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1,2,3,4,
             6,7,8,9,
             7,6,5,4,
             2,1,2,3
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             1,2,3,4,
             6,7,8,9,
@@ -1164,14 +1141,14 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
             7,6,5,4,3,
             2,1,2,3,4
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -1183,7 +1160,7 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat51 a
+        CGM::Matrix<5,1,int> a
         {
             1,
             2,
@@ -1191,7 +1168,7 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
             4,
             5
         };
-        Mat51 b
+        CGM::Matrix<5,1,int> b
         {
             1,
             2,
@@ -1204,7 +1181,7 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
     }
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1,2,3,4,5,
             6,7,8,9,8,
@@ -1212,7 +1189,7 @@ TEST(Matrix_ComparisonWithOther, NotEqual_NegativeTest)
             2,1,2,3,4,
             5,6,7,8,9
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             1,2,3,4,5,
             6,7,8,9,8,

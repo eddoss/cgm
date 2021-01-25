@@ -6,39 +6,16 @@
 #include <CGM/Core/Operators/Matrix.hpp>
 
 
-using namespace CGM;
-
 using namespace std;
-using Mat12 = Matrix<1,2,int>;
-using Mat13 = Matrix<1,3,int>;
-using Mat14 = Matrix<1,4,int>;
-using Mat15 = Matrix<1,5,int>;
-using Mat21 = Matrix<2,1,int>;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat25 = Matrix<2,5,int>;
-using Mat31 = Matrix<3,1,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat35 = Matrix<3,5,int>;
-using Mat41 = Matrix<4,1,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat45 = Matrix<4,5,int>;
-using Mat51 = Matrix<5,1,int>;
-using Mat55 = Matrix<5,5,int>;
 
 TEST(Matrix_Arithmetic, MultipliOnScalar)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             2, 4,
         };
@@ -49,11 +26,11 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             2, 4, 6
         };
@@ -64,11 +41,11 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             2, 4, 6, 8
         };
@@ -79,11 +56,11 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 3
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             2, 4, 6, 8, 6
         };
@@ -94,12 +71,12 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             2,
             4
@@ -111,12 +88,12 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             2, 4,
             6, 8
@@ -128,12 +105,12 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 3, 2
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             2, 4, 6,
             8, 6, 4
@@ -145,12 +122,12 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4
@@ -162,12 +139,12 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8
@@ -179,13 +156,13 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             2,
             4,
@@ -198,13 +175,13 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             3, 2
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             2, 4,
             6, 8,
@@ -217,13 +194,13 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             1, 2, 3
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             2, 4, 6,
             8, 6, 4,
@@ -236,13 +213,13 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4,
@@ -255,13 +232,13 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
             3, 2, 1, 2, 3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,
@@ -274,14 +251,14 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             2,
             4,
@@ -295,14 +272,14 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             3, 2,
             1, 2
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             2, 4,
             6, 8,
@@ -316,14 +293,14 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             1, 2, 3,
             4, 3, 2
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             2, 4, 6,
             8, 6, 4,
@@ -337,14 +314,14 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2,
             1, 2, 3, 4
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4,
@@ -358,14 +335,14 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
             3, 2, 1, 2, 3,
             4, 3, 2, 1, 2
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,
@@ -379,7 +356,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
@@ -387,7 +364,7 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
             4, 3, 2, 1, 2,
             3, 4, 3, 2, 1
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,
@@ -405,11 +382,11 @@ TEST(Matrix_Arithmetic, MultipliOnScalar)
 TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             2, 4,
         };
@@ -420,11 +397,11 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             2, 4, 6
         };
@@ -435,11 +412,11 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             2, 4, 6, 8
         };
@@ -450,11 +427,11 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat15 a
+        CGM::Matrix<1,5,int> a
         {
             1, 2, 3, 4, 3
         };
-        Mat15 b
+        CGM::Matrix<1,5,int> b
         {
             2, 4, 6, 8, 6
         };
@@ -465,12 +442,12 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             2,
             4
@@ -482,12 +459,12 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             2, 4,
             6, 8
@@ -499,12 +476,12 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             1, 2, 3,
             4, 3, 2
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             2, 4, 6,
             8, 6, 4
@@ -516,12 +493,12 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4
@@ -533,12 +510,12 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat25 a
+        CGM::Matrix<2,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4
         };
-        Mat25 b
+        CGM::Matrix<2,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8
@@ -550,13 +527,13 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             2,
             4,
@@ -569,13 +546,13 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             3, 2
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             2, 4,
             6, 8,
@@ -588,13 +565,13 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             1, 2, 3
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             2, 4, 6,
             8, 6, 4,
@@ -607,13 +584,13 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4,
@@ -626,13 +603,13 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat35 a
+        CGM::Matrix<3,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
             3, 2, 1, 2, 3
         };
-        Mat35 b
+        CGM::Matrix<3,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,
@@ -645,14 +622,14 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             2,
             4,
@@ -666,14 +643,14 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             3, 4,
             3, 2,
             1, 2
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             2, 4,
             6, 8,
@@ -687,14 +664,14 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             1, 2, 3,
             4, 3, 2
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             2, 4, 6,
             8, 6, 4,
@@ -708,14 +685,14 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2,
             1, 2, 3, 4
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             2, 4, 6, 8,
             6, 4, 2, 4,
@@ -729,14 +706,14 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
             3, 2, 1, 2, 3,
             4, 3, 2, 1, 2
         };
-        Mat45 b
+        CGM::Matrix<4,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,
@@ -750,7 +727,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
     /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 3, 4, 3,
             2, 1, 2, 3, 4,
@@ -758,7 +735,7 @@ TEST(Matrix_Arithmetic, InplaceMultipliOnScalar)
             4, 3, 2, 1, 2,
             3, 4, 3, 2, 1
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             2, 4, 6, 8, 6,
             4, 2, 4, 6, 8,

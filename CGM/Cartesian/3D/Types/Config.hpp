@@ -8,7 +8,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 struct Config
 {
@@ -52,9 +51,8 @@ struct Config
 /* Macro */
 /* ####################################################################################### */
 
-#define CGM_CONFIG CGM_XYZ::Config()
+#define CGM_CONFIG CGM::Config()
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

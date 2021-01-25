@@ -376,7 +376,7 @@ public: /* Uniform variables setters: float vectors */
      * @param vector Attribute value.
      */
     void
-    setUniform(const std::string& name, const cgm::xyz::quat& quaternion) const;
+    setUniform(const std::string& name, const cgm::quat& quaternion) const;
 
     /**
      * Set uniform attribute value.

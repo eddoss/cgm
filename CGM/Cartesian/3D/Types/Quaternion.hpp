@@ -7,7 +7,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 template<typename T=FLOAT, typename = void> struct Quaternion;
 
@@ -92,7 +91,6 @@ public: /* Components accessing */
     data() const;
 };
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

@@ -915,7 +915,7 @@ operator!=(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
 
 template<size_t D, typename T>
 constexpr T
-operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
+operator | (const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
 {
     if constexpr (D == 2)
     {
@@ -946,7 +946,7 @@ operator|(const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
 
 template<typename T>
 constexpr T
-operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B)
+operator ^ (const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B)
 {
     return A.x * B.y - A.y * B.x;
 }
@@ -955,7 +955,7 @@ operator^(const CGM::Vector<2,T>& A, const CGM::Vector<2,T>& B)
 
 template<typename T>
 constexpr CGM_FORCEINLINE CGM::Vector<3,T>
-operator^(const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B)
+operator ^ (const CGM::Vector<3,T>& A, const CGM::Vector<3,T>& B)
 {
 #ifdef CGM_CFG_LHS
     return

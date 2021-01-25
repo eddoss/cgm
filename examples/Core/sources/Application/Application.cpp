@@ -9,7 +9,6 @@
 #include <Scene/Camera/Models/Perspective.hpp>
 #include <memory>
 
-namespace cgx = cgm::xyz;
 
 Application::Application()
     : sceneCamera(std::make_shared<Camera>())
@@ -19,7 +18,7 @@ Application::Application()
     setupSceneCamera();
 
     sceneGrid = Geometry::makeGrid(20, 100, {0.125,0.125,0.125,1.0}, sceneMaterial);
-    cgx::translate(sceneGrid->xform, 0.005f * cgx::down());
+    cgm::translate(sceneGrid->xform, 0.005f * cgm::down());
 
     sceneGnomon = Geometry::makeAxes(sceneMaterial);
 }
@@ -100,7 +99,7 @@ Application::mouseMoveEvent(cgm::Vector<2,int> position)
 
     if (buttonState(EButton::Left) == EState::Press && keyState(EKey::LeftAlt) == EState::Press)
     {
-        if constexpr (cgm::xyz::Config().handedness == cgm::EHandedness::Left)
+        if constexpr (cgm::Config().handedness == cgm::EHandedness::Left)
         {
             controller->rotate(offset.x * 250 * rotateScale.x, -offset.y * 250 * rotateScale.y);
         }

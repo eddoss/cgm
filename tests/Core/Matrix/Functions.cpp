@@ -7,49 +7,18 @@
 #include <CGM/Core/Functions/Matrix.hpp>
 
 
-using namespace CGM;
 using namespace std;
 
-using Mat12 = Matrix<1,2,int>;
-using Mat13 = Matrix<1,3,int>;
-using Mat14 = Matrix<1,4,int>;
-using Mat15 = Matrix<1,5,int>;
-using Mat21 = Matrix<2,1,int>;
-using Mat22 = Matrix<2,2,int>;
-using Mat23 = Matrix<2,3,int>;
-using Mat24 = Matrix<2,4,int>;
-using Mat25 = Matrix<2,5,int>;
-using Mat31 = Matrix<3,1,int>;
-using Mat32 = Matrix<3,2,int>;
-using Mat33 = Matrix<3,3,int>;
-using Mat34 = Matrix<3,4,int>;
-using Mat35 = Matrix<3,5,int>;
-using Mat41 = Matrix<4,1,int>;
-using Mat42 = Matrix<4,2,int>;
-using Mat43 = Matrix<4,3,int>;
-using Mat44 = Matrix<4,4,int>;
-using Mat45 = Matrix<4,5,int>;
-using Mat51 = Matrix<5,1,int>;
-using Mat54 = Matrix<5,4,int>;
-using Mat55 = Matrix<5,5,int>;
-
-
-template <typename T>
-struct Bas
-{
-    Matrix<4,4,T> f;
-    Vector<3,T> position() { return {*this(0,3), *this(1,3), *this(2,3),};}
-};
 
 TEST(Matrix_Functions, Transpose)
 {
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             1, 3,
             2, 4
@@ -63,13 +32,13 @@ TEST(Matrix_Functions, Transpose)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             6, 7, 3
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             1, 4, 6,
             2, 3, 7,
@@ -84,14 +53,14 @@ TEST(Matrix_Functions, Transpose)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2,
             1, 2, 3, 4
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             1, 3, 3, 1,
             2, 2, 4, 2,
@@ -107,7 +76,7 @@ TEST(Matrix_Functions, Transpose)
    /* -------------- */
 
     {
-        Mat55 a
+        CGM::Matrix<5,5,int> a
         {
             1, 2, 2, 3, 4,
             1, 3, 2, 3, 4,
@@ -115,7 +84,7 @@ TEST(Matrix_Functions, Transpose)
             3, 2, 2, 9, 4,
             1, 3, 3, 0, 1
         };
-        Mat55 b
+        CGM::Matrix<5,5,int> b
         {
             1, 1, 2, 3, 1,
             2, 3, 0, 2, 3,
@@ -135,11 +104,11 @@ TEST(Matrix_Functions, Transpose)
 TEST(Matrix_Functions, Transposed)
 {
     {
-        Mat12 a
+        CGM::Matrix<1,2,int> a
         {
             1, 2
         };
-        Mat21 b
+        CGM::Matrix<2,1,int> b
         {
             1,
             2
@@ -151,11 +120,11 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat13 a
+        CGM::Matrix<1,3,int> a
         {
             1, 2, 3
         };
-        Mat31 b
+        CGM::Matrix<3,1,int> b
         {
             1,
             2,
@@ -168,11 +137,11 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat14 a
+        CGM::Matrix<1,4,int> a
         {
             1, 2, 3, 4
         };
-        Mat41 b
+        CGM::Matrix<4,1,int> b
         {
             1,
             2,
@@ -186,12 +155,12 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat21 a
+        CGM::Matrix<2,1,int> a
         {
             1,
             2
         };
-        Mat12 b
+        CGM::Matrix<1,2,int> b
         {
             1,2
         };
@@ -202,13 +171,13 @@ TEST(Matrix_Functions, Transposed)
         /* -------------- */
 
     {
-        Mat31 a
+        CGM::Matrix<3,1,int> a
         {
             1,
             2,
             3
         };
-        Mat13 b
+        CGM::Matrix<1,3,int> b
         {
             1, 2, 3
         };
@@ -219,14 +188,14 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat41 a
+        CGM::Matrix<4,1,int> a
         {
             1,
             2,
             3,
             4
         };
-        Mat14 b
+        CGM::Matrix<1,4,int> b
         {
             1,2,3,4
         };
@@ -237,12 +206,12 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat23 a
+        CGM::Matrix<2,3,int> a
         {
             3, 5, 1,
             8, 4, 7
         };
-        Mat32 b
+        CGM::Matrix<3,2,int> b
         {
             3, 8,
             5, 4,
@@ -255,12 +224,12 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat24 a
+        CGM::Matrix<2,4,int> a
         {
             1, 2, 3, 5,
             4, 3, 2, 8
         };
-        Mat42 b
+        CGM::Matrix<4,2,int> b
         {
             1, 4,
             2, 3,
@@ -274,13 +243,13 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat32 a
+        CGM::Matrix<3,2,int> a
         {
             1, 2,
             3, 4,
             3, 2
         };
-        Mat23 b
+        CGM::Matrix<2,3,int> b
         {
             1, 3, 3,
             2, 4, 2
@@ -292,13 +261,13 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat34 a
+        CGM::Matrix<3,4,int> a
         {
             1, 2, 5, 4,
             4, 8, 2, 1,
             2, 9, 2, 5
         };
-        Mat43 b
+        CGM::Matrix<4,3,int> b
         {
             1, 4, 2,
             2, 8, 9,
@@ -312,14 +281,14 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat42 a
+        CGM::Matrix<4,2,int> a
         {
             1, 2,
             5, 4,
             4, 8,
             2, 1
         };
-        Mat24 b
+        CGM::Matrix<2,4,int> b
         {
             1, 5, 4, 2,
             2, 4, 8, 1
@@ -331,14 +300,14 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat43 a
+        CGM::Matrix<4,3,int> a
         {
             1, 2, 2,
             3, 4, 3,
             3, 2, 1,
             7, 2, 8
         };
-        Mat34 b
+        CGM::Matrix<3,4,int> b
         {
             1, 3, 3, 7,
             2, 4, 2, 2,
@@ -352,14 +321,14 @@ TEST(Matrix_Functions, Transposed)
     /* -------------- */
 
     {
-        Mat45 a
+        CGM::Matrix<4,5,int> a
         {
             1,2,2,7,8,
             3,4,3,4,9,
             3,2,1,3,1,
             7,2,8,7,8
         };
-        Mat54 b
+        CGM::Matrix<5,4,int> b
         {
             1,3,3,7,
             2,4,2,2,
@@ -377,7 +346,7 @@ TEST(Matrix_Functions, Transposed)
 TEST(Matrix_Functions, Determinant)
 {
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
@@ -389,7 +358,7 @@ TEST(Matrix_Functions, Determinant)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
@@ -402,7 +371,7 @@ TEST(Matrix_Functions, Determinant)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
@@ -416,7 +385,7 @@ TEST(Matrix_Functions, Determinant)
 //   /* -------------- */
 //
 //    {
-//        Mat55 a
+//        CGM::Matrix<5,5,int> a
 //        {
 //            1, 2, 2, 3, 4,
 //            1, 3, 2, 3, 4,
@@ -434,12 +403,12 @@ TEST(Matrix_Functions, Determinant)
 TEST(Matrix_Functions, Cofactors)
 {
     {
-        Mat22 a
+        CGM::Matrix<2,2,int> a
         {
             1, 2,
             3, 4
         };
-        Mat22 b
+        CGM::Matrix<2,2,int> b
         {
             4, -3,
             -2, 1
@@ -451,13 +420,13 @@ TEST(Matrix_Functions, Cofactors)
     /* -------------- */
 
     {
-        Mat33 a
+        CGM::Matrix<3,3,int> a
         {
             1, 2, 3,
             4, 3, 2,
             6, 7, 3
         };
-        Mat33 b
+        CGM::Matrix<3,3,int> b
         {
             -5, 0, 10,
             15, -15, 5,
@@ -470,14 +439,14 @@ TEST(Matrix_Functions, Cofactors)
     /* -------------- */
 
     {
-        Mat44 a
+        CGM::Matrix<4,4,int> a
         {
             2,8,1,7,
             5,3,5,9,
             0,2,1,6,
             4,8,3,2
         };
-        Mat44 b
+        CGM::Matrix<4,4,int> b
         {
             154,-4,-220,38,
             98,-36,-48,20,
@@ -494,13 +463,13 @@ TEST(Matrix_Functions, Cofactors)
 TEST(Matrix_Functions, Inverse)
 {
     {
-        Matrix<2,2,double> mat
+        CGM::Matrix<2,2,double> mat
         {
             1, 2,
             3, 4
         };
 
-        Matrix<2,2,double> inv
+        CGM::Matrix<2,2,double> inv
         {
             -2, 1,
             1.5, -0.5
@@ -509,40 +478,40 @@ TEST(Matrix_Functions, Inverse)
         {
             auto res = mat;
             bool suc = invertSafe(res);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
             res = inverseSafe(res, suc);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             invert(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
             res = inverse(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
 
     /* -------------- */
 
     {
-        Matrix<3,3,double> mat
+        CGM::Matrix<3,3,double> mat
         {
             1, 2, 3,
             4, 3, 2,
             6, 7, 3
         };
 
-        Matrix<3,3,double> inv
+        CGM::Matrix<3,3,double> inv
         {
             -0.2, 0.6, -0.2,
             0, -0.6, 0.4,
@@ -552,40 +521,40 @@ TEST(Matrix_Functions, Inverse)
         {
             auto res = mat;
             bool suc = invertSafe(res);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
             res = inverseSafe(res, suc);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             invert(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
             res = inverse(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
 
     /* -------------- */
 
     {
-        Matrix<4,4,double> mat
+        CGM::Matrix<4,4,double> mat
         {
             1, 2, 3, 4,
             3, 2, 1, 2,
             3, 4, 3, 2,
             1, 2, 3, 2
         };
-        Matrix<4,4,double> inv
+        CGM::Matrix<4,4,double> inv
         {
             -0.5, 0.75, -0.5, 0.75,
             0.5, -0.75, 1.0, -1.25,
@@ -596,26 +565,26 @@ TEST(Matrix_Functions, Inverse)
         {
             auto res = mat;
             bool suc = invertSafe(res);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
             res = inverseSafe(res, suc);
-            ASSERT_TRUE(eq(res, inv, 0.001) && suc);
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             invert(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
             res = inverse(res);
-            ASSERT_TRUE(eq(res, inv, 0.001));
+            ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
 }
@@ -625,7 +594,7 @@ TEST(Matrix_Functions, Inverse)
 TEST(Matrix_Functions, Trace)
 {
     {
-        Mat22 mat
+        CGM::Matrix<2,2,int> mat
         {
             2, 0,
             0, 3
@@ -637,7 +606,7 @@ TEST(Matrix_Functions, Trace)
     /* -------------- */
 
     {
-        Mat33 mat
+        CGM::Matrix<3,3,int> mat
         {
             2, 0, 0,
             0, 3, 0,
@@ -650,7 +619,7 @@ TEST(Matrix_Functions, Trace)
     /* -------------- */
 
     {
-        Mat44 mat
+        CGM::Matrix<4,4,int> mat
         {
             1, 0, 0, 0,
             0, 2, 0, 0,
@@ -664,7 +633,7 @@ TEST(Matrix_Functions, Trace)
     /* -------------- */
 
     {
-        Mat55 mat
+        CGM::Matrix<5,5,int> mat
         {
             1, 0, 0, 0, 0,
             0, 2, 0, 0, 0,
@@ -682,7 +651,7 @@ TEST(Matrix_Functions, Trace)
 TEST(Matrix_Functions, Symmetric)
 {
     {
-        Mat22 mat
+        CGM::Matrix<2,2,int> mat
         {
             1, 2,
             2, 1
@@ -702,7 +671,7 @@ TEST(Matrix_Functions, Symmetric)
     /* -------------- */
 
     {
-        Mat33 mat
+        CGM::Matrix<3,3,int> mat
         {
             1, 2, 3,
             2, 1, 0,
@@ -724,7 +693,7 @@ TEST(Matrix_Functions, Symmetric)
     /* -------------- */
 
     {
-        Mat44 mat
+        CGM::Matrix<4,4,int> mat
         {
             1, 2, 3, 4,
             2, 1, 0, 2,
@@ -748,7 +717,7 @@ TEST(Matrix_Functions, Symmetric)
     /* -------------- */
 
     {
-        Mat55 mat
+        CGM::Matrix<5,5,int> mat
         {
             1, 2, 3, 4, 2,
             2, 1, 0, 2, 3,
@@ -776,7 +745,7 @@ TEST(Matrix_Functions, Symmetric)
 
 TEST(Matrix_Functions, Antisymmetric)
 {
-    Mat33 mat
+    CGM::Matrix<3,3,int> mat
     {
         0, -2, 4,
         2, 0, -3,
@@ -800,20 +769,20 @@ TEST(Matrix_Functions, Antisymmetric)
 TEST(Matrix_Functions, Diagonal)
 {
     {
-        Mat22 mat
+        CGM::Matrix<2,2,int> mat
         {
             3, 0,
             0, 2
         };
 
         ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(Mat22(2)));
+        ASSERT_FALSE(diagonal(CGM::Matrix<2,2,int>(2)));
     }
 
     /* -------------- */
 
     {
-        Mat33 mat
+        CGM::Matrix<3,3,int> mat
         {
             2, 0, 0,
             0, 2, 0,
@@ -821,13 +790,13 @@ TEST(Matrix_Functions, Diagonal)
         };
 
         ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(Mat33(2)));
+        ASSERT_FALSE(diagonal(CGM::Matrix<3,3,int>(2)));
     }
 
     /* -------------- */
 
     {
-        Mat44 mat
+        CGM::Matrix<4,4,int> mat
         {
             2, 0, 0, 0,
             0, 1, 0, 0,
@@ -836,13 +805,13 @@ TEST(Matrix_Functions, Diagonal)
         };
 
         ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(Mat44(2)));
+        ASSERT_FALSE(diagonal(CGM::Matrix<4,4,int>(2)));
     }
 
     /* -------------- */
 
     {
-        Mat55 mat
+        CGM::Matrix<5,5,int> mat
         {
             4, 0, 0, 0, 0,
             0, 5, 0, 0, 0,
@@ -852,7 +821,7 @@ TEST(Matrix_Functions, Diagonal)
         };
 
         ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(Mat55(2)));
+        ASSERT_FALSE(diagonal(CGM::Matrix<5,5,int>(2)));
     }
 }
 
@@ -861,20 +830,20 @@ TEST(Matrix_Functions, Diagonal)
 TEST(Matrix_Functions, Orthogonal)
 {
     {
-        Matrix<2,2,double> mat
+        CGM::Matrix<2,2,double> mat
         {
             0.958072, -0.286529,
             0.286529, 0.958072
         };
 
         ASSERT_TRUE(orthogonal(mat, 0.0001));
-        ASSERT_FALSE(orthogonal(Matrix<2,2,double>(2.0), 0.0001));
+        ASSERT_FALSE(orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
     }
 
     /* -------------- */
 
     {
-        Matrix<3,3,double> mat
+        CGM::Matrix<3,3,double> mat
         {
             0.589794, -0.57689, 0.565102,
             0.180624, 0.776281, 0.603956,
@@ -882,7 +851,7 @@ TEST(Matrix_Functions, Orthogonal)
         };
 
         ASSERT_TRUE(orthogonal(mat, 0.0001));
-        ASSERT_FALSE(orthogonal(Matrix<2,2,double>(2.0), 0.0001));
+        ASSERT_FALSE(orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
     }
 }
 
@@ -891,13 +860,13 @@ TEST(Matrix_Functions, Orthogonal)
 TEST(Matrix_Functions, Identity)
 {
     {
-        Mat22 ident
+        CGM::Matrix<2,2,int> ident
         {
             1, 0,
             0, 1
         };
 
-        auto exp = identity<2,int>();
+        auto exp = cgm::identity<2,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -905,14 +874,14 @@ TEST(Matrix_Functions, Identity)
     /* -------------- */
 
     {
-        Mat33 ident
+        CGM::Matrix<3,3,int> ident
         {
             1, 0, 0,
             0, 1, 0,
             0, 0, 1
         };
 
-        auto exp = identity<3,int>();
+        auto exp = cgm::identity<3,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -920,7 +889,7 @@ TEST(Matrix_Functions, Identity)
     /* -------------- */
 
     {
-        Mat44 ident
+        CGM::Matrix<4,4,int> ident
         {
             1, 0, 0, 0,
             0, 1, 0, 0,
@@ -928,7 +897,7 @@ TEST(Matrix_Functions, Identity)
             0, 0, 0, 1
         };
 
-        auto exp = identity<4,int>();
+        auto exp = cgm::identity<4,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -936,7 +905,7 @@ TEST(Matrix_Functions, Identity)
     /* -------------- */
 
     {
-        Mat55 ident
+        CGM::Matrix<5,5,int> ident
         {
             1, 0, 0, 0, 0,
             0, 1, 0, 0, 0,
@@ -945,7 +914,7 @@ TEST(Matrix_Functions, Identity)
             0, 0, 0, 0, 1
         };
 
-        auto exp = identity<5,int>();
+        auto exp = cgm::identity<5,int>();
 
         ASSERT_TRUE(exp == ident);
     }

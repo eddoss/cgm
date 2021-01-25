@@ -14,7 +14,6 @@
 #include <CGM/Core/Functions/IO.hpp>
 
 using namespace std;
-using namespace CGM;
 
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
 #define CGM_PRINT_BASIS(b) \
@@ -24,7 +23,7 @@ using namespace CGM;
 namespace cgm_xy_xform_tests_data
 {
     static CGM_XFORM2D::Transforms<double>
-    get(ETransformOrder order=ETransformOrder::SRT)
+    get(CGM::ETransformOrder order=CGM::ETransformOrder::SRT)
     {
         // Pivot rotated on {28, 16, 9} deg and translated in {0.4, -0.3, 0.2}.
 
@@ -36,9 +35,9 @@ namespace cgm_xy_xform_tests_data
         values.transformOrder   = order;
         values.pivot            = CGM_XFORM2D::Pivot<double>
         (
-            Vector<2,double>{+0.88295, +0.46947},
-            Vector<2,double>{-0.46947, +0.88295},
-            Vector<2,double>{+0.40000, -0.30000}
+            CGM::Vector<2,double>{+0.88295, +0.46947},
+            CGM::Vector<2,double>{-0.46947, +0.88295},
+            CGM::Vector<2,double>{+0.40000, -0.30000}
         );
 
         return values;
@@ -54,26 +53,26 @@ namespace cgm_xy_xform_tests_data
     // Position {0.25, 1.2}
     const auto space = CGM_XY::spaceMatrix
     (
-        Vector<2,double>{+0.88295, +0.46947},
-        Vector<2,double>{-0.46947, +0.88295},
-        Vector<2,double>{+0.25000, +1.20000}
+        CGM::Vector<2,double>{+0.88295, +0.46947},
+        CGM::Vector<2,double>{-0.46947, +0.88295},
+        CGM::Vector<2,double>{+0.25000, +1.20000}
     );
     const auto orientation = CGM_XY::orientationMatrix(space);
-    const auto vector = Vector<2,double> {+0.250000, +1.200000};
-    const auto normal = Vector<2,double> {+0.450318, +0.892868};
-    const auto origin = Vector<2,double> {+0.300000, -0.130000};
+    const auto vector = CGM::Vector<2,double> {+0.250000, +1.200000};
+    const auto normal = CGM::Vector<2,double> {+0.450318, +0.892868};
+    const auto origin = CGM::Vector<2,double> {+0.300000, -0.130000};
     const auto ior = 0.25;
 
     const auto mat2 = CGM_XY::orientationMatrix
     (
-        Vector<2,double>{+0.88295, +0.46947},
-        Vector<2,double>{-0.46947, +0.88295}
+        CGM::Vector<2,double>{+0.88295, +0.46947},
+        CGM::Vector<2,double>{-0.46947, +0.88295}
     );
 
     const auto mat3 = CGM_XY::spaceMatrix
     (
-        Vector<2,double>{+0.88295, +0.46947},
-        Vector<2,double>{-0.46947, +0.88295},
-        Vector<2,double>{+0.40000, -0.30000}
+        CGM::Vector<2,double>{+0.88295, +0.46947},
+        CGM::Vector<2,double>{-0.46947, +0.88295},
+        CGM::Vector<2,double>{+0.40000, -0.30000}
     );
 }

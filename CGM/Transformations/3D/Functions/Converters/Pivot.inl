@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -720,5 +719,4 @@ converted(const Pivot<T>& pivot, const Quaternion<T>& orientationA, const Vector
     return copy;
 }
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END

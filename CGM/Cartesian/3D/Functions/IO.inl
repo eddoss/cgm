@@ -5,7 +5,7 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::Axes<T>& axes)
+operator << (std::ostream& stream, const CGM::Axes<T>& axes)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 
@@ -39,7 +39,7 @@ operator << (std::ostream& stream, CGM::E3D axis)
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XYZ::Quaternion<T>& quat)
+operator << (std::ostream& stream, const CGM::Quaternion<T>& quat)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 

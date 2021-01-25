@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y, Z axes */
@@ -1290,5 +1289,4 @@ multiply(const Matrix<4,4,T>& A, const Matrix<3,3,T>& B)
     }
 }
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

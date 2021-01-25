@@ -5,7 +5,7 @@
 
 template<typename T>
 constexpr bool
-operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)
+operator == (const CGM::Axes<T>& A, const CGM::Axes<T>& B)
 {
     return
     CGM::eq(A.x, B.x) &&
@@ -17,7 +17,7 @@ operator == (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)
 
 template<typename T>
 constexpr bool
-operator != (const CGM_XYZ::Axes<T>& A, const CGM_XYZ::Axes<T>& B)
+operator != (const CGM::Axes<T>& A, const CGM::Axes<T>& B)
 {
     return
     CGM::neq(A.x, B.x) ||

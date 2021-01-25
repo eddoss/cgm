@@ -4,7 +4,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XYZ_NAMESPACE_BEGIN
 
 constexpr
 Config::Config()
@@ -42,5 +41,4 @@ Config::Config()
 
 }
 
-CGM_XYZ_NAMESPACE_END
 CGM_NAMESPACE_END

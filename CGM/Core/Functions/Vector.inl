@@ -9,7 +9,7 @@ template<size_t D, typename T>
 constexpr enable_if_floating<T, bool>
 normalizeSafe(Vector<D,T>& vector, T lengthTolerance)
 {
-    T len {length<T>(vector)};
+    const T len {length(vector)};
 
     if (std::abs(len) < lengthTolerance)
     {
@@ -54,7 +54,7 @@ template<size_t D, typename T>
 constexpr enable_if_floating<T, Vector<D,T>>
 normalizedSafe(const Vector<D,T>& vector, bool& success, T lengthTolerance)
 {
-    T len {length<T>(vector)};
+    const T len {length(vector)};
 
     if (std::abs(len) < lengthTolerance)
     {
@@ -111,7 +111,7 @@ template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 normalize(Vector<D,T>& vector)
 {
-    T len {length<T>(vector)};
+    const T len {length(vector)};
 
     if constexpr (D == 2)
     {
@@ -149,7 +149,7 @@ template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<D,T>>
 normalized(const Vector<D,T>& vector)
 {
-    T len {length<T>(vector)};
+    const T len {length(vector)};
 
     if constexpr (D == 2)
     {
@@ -232,19 +232,19 @@ cross(const Vector<AD,T>& A, const Vector<BD,T>& B) -> typename std::enable_if_t
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 length(const Vector<D,T>& vector)
 {
-    TResult sum {dot(vector, vector)};
+    const T sum {dot(vector, vector)};
 
-    if (CGM::eq(sum,zero<TResult>))
+    if (eq(sum, zero<T>))
     {
-        return zero<TResult>;
+        return zero<T>;
     }
     else
     {
-        return static_cast<TResult>(sqrt(sum));
+        return static_cast<T>(std::sqrt(sum));
     }
 }
 
@@ -259,17 +259,17 @@ lengthSquared(const Vector<D,T>& vector)
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 distance(const Vector<D,T>& A, const Vector<D,T>& B)
 {
-    return length<TResult,D,T>(A-B);
+    return length(A-B);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
-template<typename TResult, size_t D, typename T>
-constexpr typename std::enable_if_t<std::is_floating_point_v<TResult>, TResult>
+template<size_t D, typename T>
+constexpr enable_if_floating<T,T>
 angle(const Vector<D,T>& A, const Vector<D,T>& B)
 {
     return std::acos(A | B);

@@ -13,7 +13,6 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XFORM3D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Inplace */
@@ -135,7 +134,6 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<4,4,T>
 transformMatrix(const Transforms<T>& parameters);
 
-CGM_XFORM3D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
