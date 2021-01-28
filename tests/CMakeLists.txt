@@ -41,7 +41,7 @@ include(GoogleTest)
 # SUITES | Core
 # ####################################################################################### #
 
-set(TS_CORE_VECTOR
+set(TESTS_FILES_CORE_VECTOR
     Core/Vector/Getters.cpp
     Core/Vector/Functions.cpp
     Core/Vector/Arithmetic.cpp
@@ -49,7 +49,7 @@ set(TS_CORE_VECTOR
     Core/Vector/ComparisonWithScalar.cpp
 )
 
-set(TS_CORE_MATRIX
+set(TESTS_FILES_CORE_MATRIX
     Core/Matrix/Access.cpp
     Core/Matrix/Functions.cpp
     Core/Matrix/Arithmetic/Plus.cpp
@@ -70,32 +70,30 @@ set(TS_CORE_MATRIX
     Core/Matrix/Iterators/Column.cpp
 )
 
-set(TS_MODULE_CORE
-    "${TS_CORE_VECTOR}"
-    "${TS_CORE_MATRIX}"
-    "${TS_CORE_COORDINATES}"
+set(TESTS_FILES_CORE
+    "${TESTS_FILES_CORE_VECTOR}"
+    "${TESTS_FILES_CORE_MATRIX}"
 )
 
-cgm_add_test(ModuleCoreTestSuite         "run.cpp;${TS_MODULE_CORE}")
-cgm_add_test(Core-VectorTestSuite        "run.cpp;${TS_CORE_VECTOR}")
-cgm_add_test(Core-MatrixTestSuite        "run.cpp;${TS_CORE_MATRIX}")
-cgm_add_test(Core-QuaternionTestSuite    "run.cpp;${TS_CORE_QUATERNION}")
+cgm_add_test(Tests_Core         "run.cpp;${TESTS_FILES_CORE}")
+cgm_add_test(Tests_Core-Vector  "run.cpp;${TESTS_FILES_CORE_VECTOR}")
+cgm_add_test(Tests_Core-Matrix  "run.cpp;${TESTS_FILES_CORE_MATRIX}")
 
 # ####################################################################################### #
 # SUITES | Coordinates
 # ####################################################################################### #
 
-set(TS_MODULE_COORDINATES
+set(TESTS_FILES_COORDINATES
     Coordinates.cpp
 )
 
-cgm_add_test(ModuleCoordinatesTestSuite "run.cpp;${TS_MODULE_COORDINATES}")
+cgm_add_test(Tests_Coordinates "run.cpp;${TESTS_FILES_COORDINATES}")
 
 # ####################################################################################### #
 # SUITES | Cartesian
 # ####################################################################################### #
 
-set(TS_CARTESIAN_2D
+set(TESTS_FILES_CARTESIAN_2D
     Cartesian/2D/Functions/Axes.cpp
     Cartesian/2D/Functions/Utils.cpp
     Cartesian/2D/Functions/Orientation.cpp
@@ -113,7 +111,7 @@ set(TS_CARTESIAN_2D
     Cartesian/2D/Functions/Converters/Matrix3x3/LocalToLocal/Matrix2.cpp
 )
 
-set(TS_CARTESIAN_3D
+set(TESTS_FILES_CARTESIAN_3D
     Cartesian/3D/Operators.cpp
     Cartesian/3D/Functions/Axes.cpp
     Cartesian/3D/Functions/Utils.cpp
@@ -136,30 +134,19 @@ set(TS_CARTESIAN_3D
     Cartesian/3D/Functions/Converters/Matrix4x4/LocalToLocal/Quaternion.cpp
 )
 
-set(TS_MODULE_CARTESIAN
-    ${TS_CARTESIAN_2D}
-    ${TS_CARTESIAN_3D}
+set(TESTS_FILES_CARTESIAN
+    ${TESTS_FILES_CARTESIAN_2D}
+    ${TESTS_FILES_CARTESIAN_3D}
 )
 
-cgm_add_test(ModuleCartesianTestSuite "run.cpp;${TS_MODULE_CARTESIAN}")
-cgm_add_test(Cartesian2DTestSuite "run.cpp;${TS_CARTESIAN_2D}")
-cgm_add_test(Cartesian3DTestSuite "run.cpp;${TS_CARTESIAN_3D}")
+cgm_add_test(Tests_Cartesian    "run.cpp;${TESTS_FILES_CARTESIAN}")
+cgm_add_test(Tests_Cartesian-2D "run.cpp;${TESTS_FILES_CARTESIAN_2D}")
+cgm_add_test(Tests_Cartesian-3D "run.cpp;${TESTS_FILES_CARTESIAN_3D}")
 
 # ####################################################################################### #
-# SUITES | Cartesian
+# SUITES | Transformations
 # ####################################################################################### #
-
-set(TS_TRANSFORMATION_3D
-    Transformations/3D/Apply.cpp
-    Transformations/3D/Translation.cpp
-    Transformations/3D/Scale.cpp
-    Transformations/3D/Rotate.cpp
-    Transformations/3D/Reflect.cpp
-    Transformations/3D/Refract.cpp
-    Transformations/3D/Transform.cpp
-)
-
-set(TS_TRANSFORMATION_2D
+set(TESTS_FILES_TRANSFORMATION_2D
     Transformations/2D/Apply.cpp
     Transformations/2D/Translation.cpp
     Transformations/2D/Scale.cpp
@@ -169,24 +156,54 @@ set(TS_TRANSFORMATION_2D
     Transformations/2D/Transform.cpp
 )
 
-set(TS_MODULE_TRANSFORMATION
-    ${TS_TRANSFORMATION_2D}
-    ${TS_TRANSFORMATION_3D}
+set(TESTS_FILES_TRANSFORMATIONS_3D
+    Transformations/3D/Apply.cpp
+    Transformations/3D/Translation.cpp
+    Transformations/3D/Scale.cpp
+    Transformations/3D/Rotate.cpp
+    Transformations/3D/Reflect.cpp
+    Transformations/3D/Refract.cpp
+    Transformations/3D/Transform.cpp
 )
 
-cgm_add_test(Transformation2DTestSuite "run.cpp;${TS_TRANSFORMATION_2D}")
-cgm_add_test(Transformation3DTestSuite "run.cpp;${TS_TRANSFORMATION_3D}")
-cgm_add_test(ModuleTransformationTestSuite "run.cpp;${TS_MODULE_TRANSFORMATION}")
+set(TESTS_FILES_TRANSFORMATIONS
+    ${TESTS_FILES_TRANSFORMATIONS_2D}
+    ${TESTS_FILES_TRANSFORMATIONS_3D}
+)
+
+cgm_add_test(Tests_Transformations      "run.cpp;${TESTS_FILES_TRANSFORMATIONS}")
+cgm_add_test(Tests_Transformations-2D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_2D}")
+cgm_add_test(Tests_Transformations-3D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_3D}")
+
+# ####################################################################################### #
+# SUITES | Interpolations
+# ####################################################################################### #
+
+set(TESTS_FILES_INTERPOLATIONS
+    Interpolations/Clamp.cpp
+    Interpolations/Fit.cpp
+    Interpolations/Fit01.cpp
+    Interpolations/Fit10.cpp
+    Interpolations/Fit11.cpp
+    Interpolations/UnclampedFit.cpp
+    Interpolations/UnclampedFit01.cpp
+    Interpolations/UnclampedFit10.cpp
+    Interpolations/UnclampedFit11.cpp
+    Interpolations/Linear.cpp
+)
+
+cgm_add_test(Tests_Interpolations "run.cpp;${TESTS_FILES_INTERPOLATIONS}")
 
 # ####################################################################################### #
 # SUITES | All modules
 # ####################################################################################### #
 
-set(TS_ALL_MODULES
-    ${TS_MODULE_CORE}
-    ${TS_MODULE_COORDINATES}
-    ${TS_MODULE_CARTESIAN}
-    ${TS_MODULE_TRANSFORMATION}
+set(TESTS_ALL_MODULES
+    ${TESTS_FILES_CORE}
+    ${TESTS_FILES_COORDINATES}
+    ${TESTS_FILES_CARTESIAN}
+    ${TESTS_FILES_TRANSFORMATIONS}
+    ${TESTS_FILES_INTERPOLATIONS}
 )
 
-cgm_add_test(AllModulesTestSuites  "${TS_ALL_MODULES}")
+cgm_add_test(Tests_All "${TESTS_ALL_MODULES}")

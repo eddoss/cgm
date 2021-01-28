@@ -2,6 +2,7 @@
 
 
 #include <CGM/Modules/Core.hpp>
+#include <CGM/Modules/Interpolations.hpp>
 #include <Application/Surface.hpp>
 
 
