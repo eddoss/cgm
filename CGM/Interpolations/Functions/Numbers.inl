@@ -108,9 +108,9 @@ ufit11(T value, T newMin, T newMax)
 
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
-lerp(T A, T B, T bias)
+lerp(T a, T b, T bias)
 {
-    return bias * (B - A) + A;
+    return bias * (b - a) + a;
 }
 
 /* --------------------------------------------------------------------------------------- */

@@ -124,14 +124,14 @@ ufit11(T value, T newMin, T newMax);
 
 /**
  * Performs linear interpolation between the values.
- * @param A First value.
- * @param B Second value.
+ * @param a First value.
+ * @param b Second value.
  * @param bias Interpolation coefficient.
  * @return Interpolated value.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
-lerp(T A, T B, T bias);
+lerp(T a, T b, T bias);
 
 /**
  * Performs a bilinear interpolation between 4 values.
