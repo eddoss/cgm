@@ -185,11 +185,11 @@ set(TESTS_FILES_INTERPOLATIONS
     Interpolations/Fit01.cpp
     Interpolations/Fit10.cpp
     Interpolations/Fit11.cpp
-    Interpolations/UnclampedFit.cpp
-    Interpolations/UnclampedFit01.cpp
-    Interpolations/UnclampedFit10.cpp
-    Interpolations/UnclampedFit11.cpp
-    Interpolations/Linear.cpp
+    Interpolations/FitUnclamped.cpp
+    Interpolations/Fit01Unclamped.cpp
+    Interpolations/Fit10Unclamped.cpp
+    Interpolations/Fit11Unclamped.cpp
+    Interpolations/Interps.cpp
 )
 
 cgm_add_test(Tests_Interpolations "run.cpp;${TESTS_FILES_INTERPOLATIONS}")

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Interpolations/Functions/Numbers.hpp>
+#include <CGM/Interpolations/Functions/Clamp.hpp>
 
 
 using namespace std;
