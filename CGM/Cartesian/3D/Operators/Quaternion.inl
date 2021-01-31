@@ -90,7 +90,7 @@ operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
     }
     else
     {
-        T castedScale = CGM::number<T>(scale);
+        const auto castedScale = CGM::number<T>(scale);
 
         return
         {
@@ -102,19 +102,19 @@ operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
     }
 }
 
+template<typename T, typename TScale>
+constexpr CGM::Quaternion<T>
+operator * (TScale scale, const CGM::Quaternion<T>& quaternion)
+{
+    return quaternion * scale;
+}
+
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
 constexpr CGM::Quaternion<T>
 operator * (const CGM::Quaternion<T>& A, const CGM::Quaternion<T>& B)
 {
-//    return
-//    {
-//        A.vector.x * B.scalar + B.vector.x * A.scalar + A.vector.y * B.vector.z - A.vector.z * B.vector.y,
-//        A.vector.y * B.scalar + B.vector.y * A.scalar + A.vector.z * B.vector.x - A.vector.x * B.vector.z,
-//        A.vector.z * B.scalar + B.vector.z * A.scalar + A.vector.x * B.vector.y - A.vector.y * B.vector.x,
-//        A.scalar * B.scalar - A.vector.x * B.vector.x - A.vector.y * B.vector.y - A.vector.z * B.vector.z
-//    };
     return CGM::Quaternion<T>
     {
         A.vector * B.scalar + B.vector * A.scalar + CGM::cross(A.vector, B.vector),

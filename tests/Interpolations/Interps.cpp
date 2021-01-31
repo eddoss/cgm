@@ -51,3 +51,19 @@ TEST(Interpolations, Billinear)
 
     ASSERT_FLOAT_EQ(r, e);
 }
+
+
+/* --------------------------------------------------------------------------------------- */
+
+TEST(Interpolations, Spherical)
+{
+
+    const auto a = CGM::Quaternion<double>{-0.540327, 0.005888, 0.645047, 0.540302};
+    const auto b = CGM::Quaternion<double>{-0.273366, -0.611370, -0.127001, 0.731689};
+    const auto bias = 0.25;
+
+    const auto e = CGM::Quaternion<double>{-0.528142, -0.181124, 0.492597, 0.667539};
+    const auto r = CGM::slerp(a, b, bias);
+
+    ASSERT_TRUE(CGM::eq(r, e, 0.001));
+}

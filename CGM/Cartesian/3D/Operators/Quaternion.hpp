@@ -66,6 +66,14 @@ constexpr CGM::Quaternion<T>
 operator * (const CGM::Quaternion<T>& quaternion, TScale scale);
 
 /**
+ * Multiply scaling factor by quaternion.
+ * @return The result of scaling.
+ */
+template<typename T, typename TScale>
+constexpr CGM::Quaternion<T>
+operator * (TScale scale, const CGM::Quaternion<T>& quaternion);
+
+/**
  * Gets the result of multiplication quaternion "A" and quaternion "B".
  * @return The result of quaternion multiplication.
  */

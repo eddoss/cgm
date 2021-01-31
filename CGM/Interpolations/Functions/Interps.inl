@@ -36,7 +36,7 @@ bilerp(T A0, T A1, T B0, T B1, T biasU, T biasV)
 
 template<size_t D, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
-lerp(const Vector<D,T>& a, const Vector<D,T>& b, const Vector<D,T>& bias)
+lerp(const Vector<D,T>& a, const Vector<D,T>& b, T bias)
 {
     if constexpr (D == 2)
     {
@@ -120,5 +120,36 @@ bilerp(const Vector<D,T>& A0, const Vector<D,T>& A1, const Vector<D,T>& B0, cons
     }
 }
 
+/* ####################################################################################### */
+/* Quaternions */
+/* ####################################################################################### */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Quaternion<T>
+slerp(const Quaternion<T>& a, const Quaternion<T>& b, T bias)
+{
+    auto angCos = dot(a,b);
+    auto B = b;
+
+    if (angCos < zero<T>)
+    {
+        B = -b;
+        angCos = -angCos;
+    }
+
+    if(angCos > number<T>(1))
+    {
+        return Quaternion<T>
+        {
+            lerp(a.vector, B.vector, bias),
+            lerp(a.scalar, B.scalar, bias)
+        };
+    }
+    else
+    {
+        const T angle = std::acos(angCos);
+        return (std::sin((number<T>(1) - bias) * angle) * a + std::sin(bias * angle) * B) / std::sin(angle);
+    }
+}
 
 CGM_NAMESPACE_END
