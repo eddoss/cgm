@@ -9,6 +9,7 @@
 #include <CGM/Coordinates/Functions/Converters.hpp>
 #include <CGM/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Projections/Types.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -20,7 +21,7 @@ CGM_NAMESPACE_BEGIN
  * @return World space viewport size.
  */
 template<typename T>
-constexpr Vector<2,T>
+constexpr enable_if_floating<T, Vector<2,T>>
 orthographicViewport(T aspect, T scale = val<T>(1));
 
 /**
@@ -31,7 +32,7 @@ orthographicViewport(T aspect, T scale = val<T>(1));
  * @return 3D ray from projector.
  */
 template<typename T>
-constexpr CGM::Ray<T>
+constexpr enable_if_floating<T, Ray<T>>
 orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>& projectorSpace);
 
 /**
@@ -45,7 +46,7 @@ orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>
  * @return Transition matrix.
  */
 template<EGraphicsApi API, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 orthographic(T aspect, T scale, T near, T far);
 
 /**
@@ -66,7 +67,7 @@ orthographic(T aspect, T scale, T near, T far);
  * @return Transition matrix.
  */
 template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 orthographic(T nearPlaneWidth, T nearPlaneHeight, T nearPlaneDist, T farPlaneDist, T cubeWidth, T cubeHeight, T cubeDepthMin, T cubeDepthMax);
 
 CGM_NAMESPACE_END

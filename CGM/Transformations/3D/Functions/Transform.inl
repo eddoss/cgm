@@ -10,7 +10,7 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Vector<3,T>& vector, const Transforms<T>& parameters)
 {
     switch (parameters.transformOrder)
@@ -63,7 +63,7 @@ transform(Vector<3,T>& vector, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 {   
     switch (parameters.transformOrder)
@@ -88,7 +88,7 @@ transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 {
     switch (parameters.transformOrder)
@@ -141,7 +141,7 @@ transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Pivot<T>& pivot, const Transforms<T>& parameters)
 {
     switch (parameters.transformOrder)
@@ -194,7 +194,7 @@ transform(Pivot<T>& pivot, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Ray<T>& axis, const Transforms<T>& parameters)
 {
     switch (parameters.transformOrder)
@@ -249,7 +249,7 @@ transform(Ray<T>& axis, const Transforms<T>& parameters)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 transformed(const Vector<3,T>& vector, const Transforms<T>& parameters)
 {
     auto copy = vector;
@@ -260,7 +260,7 @@ transformed(const Vector<3,T>& vector, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 {
     auto copy = matrix;
@@ -271,7 +271,7 @@ transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 {
     auto copy = matrix;
@@ -282,7 +282,7 @@ transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 transformed(const Pivot<T>& pivot, const Transforms<T>& parameters)
 {
     auto copy = pivot;
@@ -293,7 +293,7 @@ transformed(const Pivot<T>& pivot, const Transforms<T>& parameters)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 transformed(const Ray<T>& axis, const Transforms<T>& parameters)
 {
     auto copy = axis;
@@ -306,7 +306,7 @@ transformed(const Ray<T>& axis, const Transforms<T>& parameters)
 /* ####################################################################################### */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 transformMatrix(const Transforms<T>& parameters)
 {
     auto mat = CGM::identity<4,T>();

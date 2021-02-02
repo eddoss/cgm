@@ -10,6 +10,7 @@
 #include <CGM/Transformations/3D/Functions/Translate.hpp>
 #include <CGM/Transformations/3D/Functions/Scale.hpp>
 #include <CGM/Transformations/3D/Functions/Rotate.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -24,7 +25,7 @@ CGM_NAMESPACE_BEGIN
  * @param parameters Transformation parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Vector<3,T>& vector, const Transforms<T>& parameters);
 
 /**
@@ -33,7 +34,7 @@ transform(Vector<3,T>& vector, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 
 /**
@@ -42,7 +43,7 @@ transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
 
 /**
@@ -52,7 +53,7 @@ transform(Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Pivot<T>& pivot, const Transforms<T>& parameters);
 
 /**
@@ -62,7 +63,7 @@ transform(Pivot<T>& pivot, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Ray<T>& axis, const Transforms<T>& parameters);
 
 /* ####################################################################################### */
@@ -76,7 +77,7 @@ transform(Ray<T>& axis, const Transforms<T>& parameters);
  * @return Transformed vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 transformed(const Vector<3,T>& vector, const Transforms<T>& parameters);
 
 /**
@@ -86,7 +87,7 @@ transformed(const Vector<3,T>& vector, const Transforms<T>& parameters);
  * @return Transformed matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 
 /**
@@ -96,7 +97,7 @@ transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
  * @return Transformed matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
 
 /**
@@ -107,7 +108,7 @@ transformed(const Matrix<4,4,T>& matrix, const Transforms<T>& parameters);
  * @return Transformed pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 transformed(const Pivot<T>& pivot, const Transforms<T>& parameters);
 
 /**
@@ -118,7 +119,7 @@ transformed(const Pivot<T>& pivot, const Transforms<T>& parameters);
  * @return Transformed axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 transformed(const Ray<T>& axis, const Transforms<T>& parameters);
 
 /* ####################################################################################### */
@@ -131,7 +132,7 @@ transformed(const Ray<T>& axis, const Transforms<T>& parameters);
  * @return Transformation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 transformMatrix(const Transforms<T>& parameters);
 
 CGM_NAMESPACE_END

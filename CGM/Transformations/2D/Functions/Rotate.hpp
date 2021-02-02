@@ -13,6 +13,7 @@
 #include <CGM/Transformations/2D/Types/Transforms.hpp>
 #include <CGM/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Transformations/2D/Functions/Utils.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -28,7 +29,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
  * @param angle Rotation angle (in radians).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<2,T>& vector, T angle);
 
 /**
@@ -38,7 +39,7 @@ rotate(Vector<2,T>& vector, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<2,T>& vector, T angle, const Vector<2,T>& point);
 
 /**
@@ -48,7 +49,7 @@ rotate(Vector<2,T>& vector, T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
 
 /**
@@ -57,7 +58,7 @@ rotate(Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -71,7 +72,7 @@ rotate(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<2,2,T>& matrix, T angle);
 
 /**
@@ -81,7 +82,7 @@ rotate(Matrix<2,2,T>& matrix, T angle);
  * @param angle Rotation angle (in radians).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -95,7 +96,7 @@ rotate(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -106,7 +107,7 @@ rotate(Matrix<3,3,T>& matrix, T angle);
  * @param angle Rotation angle.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
 /**
@@ -117,7 +118,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
 
 /**
@@ -127,7 +128,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -140,7 +141,7 @@ rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle);
 
 /**
@@ -150,7 +151,7 @@ rotate(Pivot<T>& pivot, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle, const Vector<2,T>& point);
 
 /**
@@ -160,7 +161,7 @@ rotate(Pivot<T>& pivot, T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -169,7 +170,7 @@ rotate(Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -182,7 +183,7 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(ArbitraryAxis<T>& axis, T angle);
 
 /**
@@ -192,7 +193,7 @@ rotate(ArbitraryAxis<T>& axis, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
 
 /**
@@ -202,7 +203,7 @@ rotate(ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -211,7 +212,7 @@ rotate(ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -225,7 +226,7 @@ rotate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 rotated(const Vector<2,T>& vector, T angle);
 
 /**
@@ -236,7 +237,7 @@ rotated(const Vector<2,T>& vector, T angle);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 rotated(const Vector<2,T>& vector, T angle, const Vector<2,T>& point);
 
 /**
@@ -247,7 +248,7 @@ rotated(const Vector<2,T>& vector, T angle, const Vector<2,T>& point);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 rotated(const Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
 
 /**
@@ -257,7 +258,7 @@ rotated(const Vector<2,T>& vector, T angle, const Pivot<T>& pivot);
  * @return Rotated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 rotated(const Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -272,7 +273,7 @@ rotated(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @return Rotated matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 rotated(const Matrix<2,2,T>& matrix, T angle);
 
 /**
@@ -283,7 +284,7 @@ rotated(const Matrix<2,2,T>& matrix, T angle);
  * @return Rotated matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -298,7 +299,7 @@ rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -310,7 +311,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
 /**
@@ -322,7 +323,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
 
 /**
@@ -333,7 +334,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
  * @return Rotated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -347,7 +348,7 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, T angle);
 
 /**
@@ -358,7 +359,7 @@ rotated(const Pivot<T>& pivot, T angle);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, T angle, const Vector<2,T>& point);
 
 /**
@@ -369,7 +370,7 @@ rotated(const Pivot<T>& pivot, T angle, const Vector<2,T>& point);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -379,7 +380,7 @@ rotated(const Pivot<T>& pivot, T angle, const Pivot<T>& pivotPoint);
  * @return Rotated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -393,7 +394,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 rotated(const ArbitraryAxis<T>& axis, T angle);
 
 /**
@@ -404,7 +405,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 rotated(const ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
 
 /**
@@ -415,7 +416,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle, const Vector<2,T>& point);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 rotated(const ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
 
 /**
@@ -425,7 +426,7 @@ rotated(const ArbitraryAxis<T>& axis, T angle, const Pivot<T>& pivotPoint);
  * @return Rotated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 rotated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -448,7 +449,7 @@ rotationMatrix(T angle);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(T angle, const Vector<2,T>& point);
 
 /**
@@ -458,7 +459,7 @@ rotationMatrix(T angle, const Vector<2,T>& point);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(T angle, const Pivot<T>& pivot);
 
 /**
@@ -467,7 +468,7 @@ rotationMatrix(T angle, const Pivot<T>& pivot);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM2D_NAMESPACE_END

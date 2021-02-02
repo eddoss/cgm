@@ -5,6 +5,7 @@
 #include <CGM/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Cartesian/2D/Functions/Axes.hpp>
 #include <CGM/Transformations/2D/ModuleGlobals.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -17,7 +18,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
  * @return Shortest distance from point to plane.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE T
+constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 shortestDistance(const Vector<2,T>& point, const Vector<2,T>& axisNormal);
 
 /**

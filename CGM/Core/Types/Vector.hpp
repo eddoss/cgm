@@ -2,6 +2,7 @@
 
 
 #include <iterator>
+#include <type_traits>
 #include <initializer_list>
 #include <CGM/Global.hpp>
 #include <CGM/Core/Types/Enums.hpp>

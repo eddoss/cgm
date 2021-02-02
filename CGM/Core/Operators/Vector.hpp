@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <type_traits>
+#include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Utils/Functions/Numbers.hpp>
 #include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Core/Types/Vector.hpp>

@@ -7,6 +7,7 @@
 #include <CGM/Cartesian/3D/Operators/Quaternion.hpp>
 #include <CGM/Core/Functions/Vector.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN

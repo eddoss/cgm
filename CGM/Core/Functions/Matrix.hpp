@@ -1,9 +1,10 @@
 #pragma once
 
 
+#include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Global.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -51,7 +52,7 @@ cofactors(const Matrix<S,S,T>& matrix);
  * @return False if cant calculate inverse matrix. true otherwise.
  */
 template<size_t S, typename T>
-constexpr enable_if_floating<T,bool>
+constexpr enable_if_floating<T, bool>
 invertSafe(Matrix<S,S,T>& matrix, T determinantTolerance=T(0.000001));
 
 /**

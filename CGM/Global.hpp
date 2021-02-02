@@ -54,6 +54,8 @@
     #define CGM_FORCENOINLINE   __declspec(noinline)
 #endif
 
+#define CGM_INLINE              inline
+
 /* ####################################################################################### */
 /* Utils */
 /* ####################################################################################### */
@@ -133,27 +135,5 @@ using float64 = double;
     #define CGM_TO_DEGREES                  57.2957790f
     #define CGM_TO_RADIANS                  0.01745320f
 #endif
-
-/* ####################################################################################### */
-/* Type traits utils */
-/* ####################################################################################### */
-
-template <typename T, typename Out>
-using enable_if_floating = std::enable_if_t<std::is_floating_point_v<T>, Out>;
-
-/* --------------------------------------------------------------------------------------- */
-
-template <typename T, typename Out>
-using enable_if_integral = std::enable_if_t<std::is_integral_v<T>, Out>;
-
-/* --------------------------------------------------------------------------------------- */
-
-template <typename T, typename Out>
-using enable_if_number = std::enable_if_t<(std::is_integral_v<T> || std::is_floating_point_v<T>), Out>;
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename From, typename To, typename Out>
-using enable_if_convertible = std::enable_if_t<(std::is_convertible_v<From, To>), Out>;
 
 CGM_NAMESPACE_END

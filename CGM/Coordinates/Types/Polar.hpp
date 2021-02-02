@@ -2,8 +2,7 @@
 
 
 #include <CGM/Coordinates/ModuleGlobals.hpp>
-#include <CGM/Utils/Functions/Numbers.hpp>
-#include <CGM/Utils/Functions/Comparison.hpp>
+#include <CGM/Utils/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -20,51 +19,23 @@ public: /* Constructors */
 
     /** Constructor initializing angle and radius. */
     constexpr
-    Polar(T angle, T radius);
+    Polar(T Angle, T Radius);
 
 /* ####################################################################################### */
-public: /* Properties getters */
-/* ####################################################################################### */
-
-    /**
-     * @brief Get rotation angle.
-     * @return Angle in radians.
-     */
-    constexpr CGM_FORCEINLINE T
-    angle() const;
-
-    /**
-     * @brief Get circle radius.
-     * @return Circle radius.
-     */
-    constexpr CGM_FORCEINLINE T
-    radius() const;
-
-/* ####################################################################################### */
-public: /* Properties setters */
+public: /* Attributes */
 /* ####################################################################################### */
 
     /**
-     * @brief Set rotation angle.
-     * @param angle Angle in radians.
+     * Rotation angle.
      */
-    constexpr CGM_FORCEINLINE void
-    setAngle(T angle);
+    Angle<T>
+    angle;
 
     /**
-     * @brief Set circle radius. Value must be >= 0.
-     * @param radius Circle radius.
-     * @note If the given value is less than "0", then "0" will be set.
+     * Circle radius.
      */
-    constexpr CGM_FORCEINLINE void
-    setRadius(T radius);
-
-/* ####################################################################################### */
-protected: /* Protected members */
-/* ####################################################################################### */
-
-    T m_angle;
-    T m_radius;
+    Length<T>
+    radius;
 };
 
 CGM_COORD_NAMESPACE_END

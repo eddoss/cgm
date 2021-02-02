@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
 

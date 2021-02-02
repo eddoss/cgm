@@ -47,7 +47,7 @@ public: /* Accessing via methods */
      * @param value New value.
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, void>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, void>
     set(U value);
 
 /* ####################################################################################### */
@@ -66,7 +66,7 @@ public: /* Accessing via operators */
      * @return Rectangle width.
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number&>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number&>
     operator = (U value);
 
 /* ####################################################################################### */
@@ -83,7 +83,7 @@ public: /* Arithmetic operators exposing */
      * Exposes post decrement.
      */
     constexpr CGM_FORCEINLINE Number
-    operator -- (int);
+    operator -- (int) const;
 
     /**
      * Exposes pre increment.
@@ -95,20 +95,26 @@ public: /* Arithmetic operators exposing */
      * Exposes post increment.
      */
     constexpr CGM_FORCEINLINE Number
-    operator ++ (int);
+    operator ++ (int) const;
+
+    /**
+     * Exposes unary minus.
+     */
+    constexpr CGM_FORCEINLINE Number
+    operator - () const;
 
     /**
      * Exposes binary minus (by other).
      */
     constexpr CGM_FORCEINLINE Number
-    operator - (const Number& other);
+    operator - (const Number& other) const;
 
     /**
      * Exposes binary minus (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number>
-    operator - (U other);
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number>
+    operator - (U other) const;
 
     /**
      * Exposes minus with assignment (by other).
@@ -120,21 +126,21 @@ public: /* Arithmetic operators exposing */
      * Exposes minus with assignment (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number&>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number&>
     operator -= (U other);
 
     /**
      * Exposes binary plus (by other).
      */
     constexpr CGM_FORCEINLINE Number
-    operator + (const Number& other);
+    operator + (const Number& other) const;
 
     /**
      * Exposes binary plus (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number>
-    operator + (U other);
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number>
+    operator + (U other) const;
 
     /**
      * Exposes plus with assignment (by other).
@@ -146,21 +152,21 @@ public: /* Arithmetic operators exposing */
      * Exposes plus with assignment (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number&>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number&>
     operator += (U other);
 
     /**
      * Exposes binary multiplication (by other).
      */
     constexpr CGM_FORCEINLINE Number
-    operator * (const Number& other);
+    operator * (const Number& other) const;
 
     /**
      * Exposes binary multiplication (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number>
-    operator * (U other);
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number>
+    operator * (U other) const;
 
     /**
      * Exposes multiplication with assignment (by other).
@@ -172,21 +178,21 @@ public: /* Arithmetic operators exposing */
      * Exposes multiplication with assignment (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number&>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number&>
     operator *= (U other);
 
     /**
      * Exposes binary division (by other).
      */
     constexpr CGM_FORCEINLINE Number
-    operator / (const Number& other);
+    operator / (const Number& other) const;
 
     /**
      * Exposes binary division (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number>
-    operator / (U other);
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number>
+    operator / (U other) const;
 
     /**
      * Exposes division with assignment (by other).
@@ -198,8 +204,84 @@ public: /* Arithmetic operators exposing */
      * Exposes division with assignment (by number).
      */
     template <typename U>
-    constexpr CGM_FORCEINLINE enable_if_convertible<U, T, Number&>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_constructible_v<U, T>, Number&>
     operator /= (U other);
+
+/* ####################################################################################### */
+public: /* Comparison operators exposing */
+/* ####################################################################################### */
+
+    /**
+     * Exposes equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator == (const Number& other) const;
+
+    /**
+     * Exposes equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator == (T value) const;
+
+    /**
+     * Exposes not equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator != (const Number& other) const;
+
+    /**
+     * Exposes not equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator != (T value) const;
+
+    /**
+     * Exposes greater operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator > (const Number& other) const;
+
+    /**
+     * Exposes greater operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator > (T value) const;
+
+    /**
+     * Exposes greater equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator >= (const Number& other) const;
+
+    /**
+     * Exposes greater equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator >= (T value) const;
+
+    /**
+     * Exposes less operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator < (const Number& other) const;
+
+    /**
+     * Exposes less operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator < (T value) const;
+
+    /**
+     * Exposes less equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator <= (const Number& other) const;
+
+    /**
+     * Exposes less equal operator.
+     */
+    constexpr CGM_FORCEINLINE bool
+    operator <= (T value) const;
 
 /* ####################################################################################### */
 private: /* Internal attributes */
@@ -207,7 +289,6 @@ private: /* Internal attributes */
 
     T m_value;
 };
-
 
 /* ####################################################################################### */
 /* Aliases */
@@ -247,6 +328,5 @@ template<typename T=FLOAT>
 using Angle_PI_PI       = Number<T, RadiansAngleConstraint_PI_PI<T>>;
 
 CGM_NAMESPACE_END
-
 
 #include "Number.inl"

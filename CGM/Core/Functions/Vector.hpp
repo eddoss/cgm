@@ -2,12 +2,13 @@
 
 
 #include <cmath>
-#include <type_traits>
+#include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Utils/Functions/Numbers.hpp>
 #include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Utils/Functions/Angles.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN

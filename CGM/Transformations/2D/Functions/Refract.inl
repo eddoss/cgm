@@ -7,7 +7,7 @@ CGM_NAMESPACE_BEGIN
 CGM_XFORM2D_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 refract(Vector<2,T>& vector, const Vector<2,T>& axisNormal, T ior)
 {
     T cosi = -dot(vector, axisNormal);
@@ -26,7 +26,7 @@ refract(Vector<2,T>& vector, const Vector<2,T>& axisNormal, T ior)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<2,T>
+constexpr enable_if_floating<T, Vector<2,T>>
 refracted(const Vector<2,T>& vector, const Vector<2,T>& axisNormal, T ior)
 {
     auto copy = vector;

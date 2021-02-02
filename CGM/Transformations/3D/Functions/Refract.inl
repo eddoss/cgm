@@ -10,7 +10,7 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<EPlane Plane, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 refract(Vector<3,T>& vector, T ior)
 {
     T cosi;
@@ -56,7 +56,7 @@ refract(Vector<3,T>& vector, T ior)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
 {
     T cosi = -dot(vector, planeNormal);
@@ -77,7 +77,7 @@ refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
 /* ####################################################################################### */
 
 template<EPlane Plane, typename T>
-constexpr Vector<3,T>
+constexpr enable_if_floating<T, Vector<3,T>>
 refracted(const Vector<3,T>& vector, T ior)
 {
     auto copy = vector;
@@ -88,7 +88,7 @@ refracted(const Vector<3,T>& vector, T ior)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Vector<3,T>
+constexpr enable_if_floating<T, Vector<3,T>>
 refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior)
 {
     auto copy = vector;

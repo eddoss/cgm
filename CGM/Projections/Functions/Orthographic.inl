@@ -6,7 +6,7 @@
 CGM_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr Vector<2,T>
+constexpr enable_if_floating<T, Vector<2,T>>
 orthographicViewport(T aspect, T scale)
 {
     const auto h = val<T>(2) * scale;
@@ -18,7 +18,7 @@ orthographicViewport(T aspect, T scale)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM::Ray<T>
+constexpr enable_if_floating<T, Ray<T>>
 orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>& projectorSpace)
 {
     const auto r_offset = CGM::right(projectorSpace) * fit11(point.x, -aspect * scale, aspect * scale);
@@ -42,7 +42,7 @@ orthographicRay(const Vector<2,T>& point, T aspect, T scale, const Matrix<4,4,T>
 /* --------------------------------------------------------------------------------------- */
 
 template<EGraphicsApi API, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 orthographic(T aspect, T scale, T near, T far)
 {
     const auto viewport = orthographicViewport(aspect, scale);
@@ -66,7 +66,7 @@ orthographic(T aspect, T scale, T near, T far)
 /* --------------------------------------------------------------------------------------- */
 
 template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 orthographic(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
 {
     auto mat = Matrix<4,4,T>(val<T>(0));

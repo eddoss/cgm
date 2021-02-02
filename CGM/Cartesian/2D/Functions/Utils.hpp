@@ -8,6 +8,7 @@
 #include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/2D/Types/Axes.hpp>
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -252,7 +253,7 @@ transposedOrientation(const Matrix<3,3,T>& basis);
  * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  */
 template<typename T>
-constexpr bool
+constexpr enable_if_floating<T, bool>
 invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance=T(0.000001));
 
 /**
@@ -262,7 +263,7 @@ invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance=T(0.000001));
  * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance=T(0.000001));
 
 /**
@@ -271,7 +272,7 @@ inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantT
  * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 invertOrientation(Matrix<3,3,T>& basis);
 
 /**
@@ -281,7 +282,7 @@ invertOrientation(Matrix<3,3,T>& basis);
  * @param determinantTolerance If determinant less than this parameter, inverting will failed.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 inverseOrientation(const Matrix<3,3,T>& basis);
 
 /* ####################################################################################### */

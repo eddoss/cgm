@@ -31,7 +31,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
  * @param value How much to scale.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, T value);
 
 /**
@@ -40,7 +40,7 @@ scale(Vector<2,T>& vector, T value);
  * @param values How much to scale (value per axis).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, const Vector<2,T>& values);
 
 /**
@@ -50,7 +50,7 @@ scale(Vector<2,T>& vector, const Vector<2,T>& values);
  * @param direction Axis direction.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, T value, const Vector<2,T>& direction);
 
 /**
@@ -60,7 +60,7 @@ scale(Vector<2,T>& vector, T value, const Vector<2,T>& direction);
  * @param axis The axis along which to scale.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -80,7 +80,7 @@ scale(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivotPoint
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -94,7 +94,7 @@ scale(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param value How much to scale.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<2,2,T>& matrix, T value);
 
 /**
@@ -136,7 +136,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -150,7 +150,7 @@ scale(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, T value);
 
 /**
@@ -160,7 +160,7 @@ scale(Matrix<3,3,T>& matrix, T value);
  * @param values How much to scale.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values);
 
 /**
@@ -203,7 +203,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -217,7 +217,7 @@ scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, T value);
 
 
@@ -227,7 +227,7 @@ scale(Pivot<T>& pivot, T value);
  * @param values How much to scale (value per axis).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, const Vector<2,T>& values);
 
  /**
@@ -237,7 +237,7 @@ scale(Pivot<T>& pivot, const Vector<2,T>& values);
  * @param direction Axis direction.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, T value, const Vector<2,T>& direction);
 
 /**
@@ -248,7 +248,7 @@ scale(Pivot<T>& pivot, T value, const Vector<2,T>& direction);
  * @param direction Axis direction.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, T value, const Vector<2,T>& direction, const Vector<2,T>& origin);
 
 /**
@@ -260,7 +260,7 @@ scale(Pivot<T>& pivot, T value, const Vector<2,T>& direction, const Vector<2,T>&
  * @param axis The axis along which to scale.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -270,7 +270,7 @@ scale(Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
  * @param pivotPoint Pivot point.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -279,7 +279,7 @@ scale(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -293,7 +293,7 @@ scale(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param value How much to scale.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, T value);
 
 /**
@@ -302,7 +302,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value);
  * @param values How much to scale (value per axis).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values);
 
 /**
@@ -312,7 +312,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values);
  * @param direction Axis direction.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<2,T>& direction);
 
 /**
@@ -322,7 +322,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<2,T>& direction);
  * @param axis The axis along which to scale.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -332,7 +332,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
  * @param pivot Pivot point.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -342,7 +342,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values, const Pivot<T>
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -357,7 +357,7 @@ scale(ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @return Scaled copy of vector.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, T value);
 
 /**
@@ -367,7 +367,7 @@ scaled(const Vector<2,T>& vector, T value);
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, const Vector<2,T>& values);
 
 /**
@@ -378,7 +378,7 @@ scaled(const Vector<2,T>& vector, const Vector<2,T>& values);
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, T value, const Vector<2,T>& direction);
 
 /**
@@ -390,7 +390,7 @@ scaled(const Vector<2,T>& vector, T value, const Vector<2,T>& direction);
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, T value, const Vector<2,T>& direction, const Vector<2,T>& origin);
 
 /**
@@ -403,7 +403,7 @@ scaled(const Vector<2,T>& vector, T value, const Vector<2,T>& direction, const V
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -416,7 +416,7 @@ scaled(const Vector<2,T>& vector, T value, const ArbitraryAxis<T>& axis);
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -427,7 +427,7 @@ scaled(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& piv
  * @return Scaled copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -442,7 +442,7 @@ scaled(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @return Scaled copy of matrix.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, T value);
 
 /**
@@ -453,7 +453,7 @@ scaled(const Matrix<2,2,T>& matrix, T value);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values);
 
 /**
@@ -464,7 +464,7 @@ scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
 
 /**
@@ -476,7 +476,7 @@ scaled(const Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -487,7 +487,7 @@ scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& p
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<2,2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -502,7 +502,7 @@ scaled(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @return Scaled copy of matrix.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value);
 
 /**
@@ -513,7 +513,7 @@ scaled(const Matrix<3,3,T>& matrix, T value);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values);
 
 /**
@@ -524,7 +524,7 @@ scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
 
 /**
@@ -538,7 +538,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction, const Vector<2,T>& origin);
 
 /**
@@ -551,7 +551,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction, const
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -563,7 +563,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -574,7 +574,7 @@ scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& p
  * @return Scaled copy of matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -589,7 +589,7 @@ scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @return Scaled copy of pivot.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value);
 
 /**
@@ -599,7 +599,7 @@ scaled(const Pivot<T>& pivot, T value);
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, const Vector<2,T>& values);
 
  /**
@@ -610,7 +610,7 @@ scaled(const Pivot<T>& pivot, const Vector<2,T>& values);
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value, const Vector<2,T>& direction);
 
 /**
@@ -622,7 +622,7 @@ scaled(const Pivot<T>& pivot, T value, const Vector<2,T>& direction);
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value, const Vector<2,T>& direction, const Vector<2,T>& origin);
 
 /**
@@ -635,7 +635,7 @@ scaled(const Pivot<T>& pivot, T value, const Vector<2,T>& direction, const Vecto
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -646,7 +646,7 @@ scaled(const Pivot<T>& pivot, T value, const ArbitraryAxis<T>& axis);
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -656,7 +656,7 @@ scaled(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPo
  * @return Scaled copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -671,7 +671,7 @@ scaled(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Scaled copy of axis.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
 
 /**
@@ -681,7 +681,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values);
 
 /**
@@ -692,7 +692,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values);
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<2,T>& direction);
 
 /**
@@ -703,7 +703,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const Vector<2,T>& direct
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -714,7 +714,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, T value, const ArbitraryAxis<T>& a
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -725,7 +725,7 @@ scaled(const ArbitraryAxis<T>& arbitraryAxis, const Vector<2,T>& values, const P
  * @return Scaled copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -772,7 +772,7 @@ scalingMatrix(T value, const Vector<2,T>& direction);
  * @return Scaling matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scalingMatrix(T value, const ArbitraryAxis<T>& axis);
 
 /**
@@ -783,7 +783,7 @@ scalingMatrix(T value, const ArbitraryAxis<T>& axis);
  * @return Scaling matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scalingMatrix(const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -794,7 +794,7 @@ scalingMatrix(const Vector<2,T>& values, const Pivot<T>& pivotPoint);
  * @return Scaling matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scalingMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM2D_NAMESPACE_END

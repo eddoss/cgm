@@ -6,7 +6,6 @@
 #include <CGM/Coordinates/Functions/Converters.hpp>
 #include <CGM/Coordinates/Operators.hpp>
 
-
 using namespace std;
 
 TEST(Coordinates, Spherical_Cartesian)

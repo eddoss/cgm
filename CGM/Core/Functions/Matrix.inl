@@ -277,7 +277,7 @@ cofactors(const Matrix<S,S,T>& matrix)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr enable_if_floating<T,bool>
+constexpr enable_if_floating<T, bool>
 invertSafe(Matrix<S,S,T>& matrix, T determinantTolerance)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");
@@ -320,7 +320,7 @@ inverseSafe(const Matrix<S,S,T>& matrix, bool& success, T determinantTolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<size_t S, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,void>
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 invert(Matrix<S,S,T>& matrix)
 {
     static_assert(S <= 4, "Matrix functions. Cant calculate inverse matrix more than 4x4 size.");

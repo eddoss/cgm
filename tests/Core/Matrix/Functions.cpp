@@ -24,7 +24,7 @@ TEST(Matrix_Functions, Transpose)
             2, 4
         };
 
-        transpose(a);
+        CGM::transpose(a);
 
         ASSERT_TRUE(a == b);
     }
@@ -45,7 +45,7 @@ TEST(Matrix_Functions, Transpose)
             3, 2, 3
         };
 
-        transpose(a);
+        CGM::transpose(a);
 
         ASSERT_TRUE(a == b);
     }
@@ -68,7 +68,7 @@ TEST(Matrix_Functions, Transpose)
             4, 2, 2, 4
         };
 
-        transpose(a);
+        CGM::transpose(a);
 
         ASSERT_TRUE(a == b);
     }
@@ -93,7 +93,7 @@ TEST(Matrix_Functions, Transpose)
             4, 4, 4, 4, 1
         };
 
-        transpose(a);
+        CGM::transpose(a);
 
         ASSERT_TRUE(a == b);
     }
@@ -114,7 +114,7 @@ TEST(Matrix_Functions, Transposed)
             2
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -131,7 +131,7 @@ TEST(Matrix_Functions, Transposed)
             3
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -149,7 +149,7 @@ TEST(Matrix_Functions, Transposed)
             4
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -165,7 +165,7 @@ TEST(Matrix_Functions, Transposed)
             1,2
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
         /* -------------- */
@@ -182,7 +182,7 @@ TEST(Matrix_Functions, Transposed)
             1, 2, 3
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -200,7 +200,7 @@ TEST(Matrix_Functions, Transposed)
             1,2,3,4
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -218,7 +218,7 @@ TEST(Matrix_Functions, Transposed)
             1, 7
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -237,7 +237,7 @@ TEST(Matrix_Functions, Transposed)
             5, 8
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -255,7 +255,7 @@ TEST(Matrix_Functions, Transposed)
             2, 4, 2
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -275,7 +275,7 @@ TEST(Matrix_Functions, Transposed)
             4, 1, 5
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -294,7 +294,7 @@ TEST(Matrix_Functions, Transposed)
             2, 4, 8, 1
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
     /* -------------- */
@@ -314,7 +314,7 @@ TEST(Matrix_Functions, Transposed)
             2, 3, 1, 8
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 
 
@@ -337,7 +337,7 @@ TEST(Matrix_Functions, Transposed)
             8,9,1,8
         };
 
-        ASSERT_TRUE(transposed(a) == b);
+        ASSERT_TRUE(CGM::transposed(a) == b);
     }
 }
 
@@ -352,7 +352,7 @@ TEST(Matrix_Functions, Determinant)
             3, 4
         };
 
-        ASSERT_TRUE(determinant(a) == -2);
+        ASSERT_TRUE(CGM::determinant(a) == -2);
     }
 
     /* -------------- */
@@ -365,7 +365,7 @@ TEST(Matrix_Functions, Determinant)
             6, 7, 3
         };
 
-        ASSERT_TRUE(determinant(a) == 25);
+        ASSERT_TRUE(CGM::determinant(a) == 25);
     }
 
     /* -------------- */
@@ -379,7 +379,7 @@ TEST(Matrix_Functions, Determinant)
             1, 2, 3, 4
         };
 
-        ASSERT_TRUE(determinant(a) == 0);
+        ASSERT_TRUE(CGM::determinant(a) == 0);
     }
 
 //   /* -------------- */
@@ -414,7 +414,7 @@ TEST(Matrix_Functions, Cofactors)
             -2, 1
         };
 
-        ASSERT_TRUE(cofactors(a) == b);
+        ASSERT_TRUE(CGM::cofactors(a) == b);
     }
 
     /* -------------- */
@@ -433,7 +433,7 @@ TEST(Matrix_Functions, Cofactors)
             -5, 10, -5
         };
 
-        ASSERT_TRUE(cofactors(a) == b);
+        ASSERT_TRUE(CGM::cofactors(a) == b);
     }
 
     /* -------------- */
@@ -454,7 +454,7 @@ TEST(Matrix_Functions, Cofactors)
             -119,47,170,-44
         };
 
-        ASSERT_TRUE(cofactors(a) == b);
+        ASSERT_TRUE(CGM::cofactors(a) == b);
     }
 }
 
@@ -477,26 +477,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invertSafe(res);
+            bool suc = CGM::invertSafe(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverseSafe(res, suc);
+            res = CGM::inverseSafe(res, suc);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invert(res);
+            CGM::invert(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverse(res);
+            res = CGM::inverse(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
@@ -520,26 +520,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invertSafe(res);
+            bool suc = CGM::invertSafe(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverseSafe(res, suc);
+            res = CGM::inverseSafe(res, suc);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invert(res);
+            CGM::invert(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverse(res);
+            res = CGM::inverse(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
@@ -564,26 +564,26 @@ TEST(Matrix_Functions, Inverse)
 
         {
             auto res = mat;
-            bool suc = invertSafe(res);
+            bool suc = CGM::invertSafe(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
             bool suc = false;
-            res = inverseSafe(res, suc);
+            res = CGM::inverseSafe(res, suc);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001) && suc);
         }
 
         {
             auto res = mat;
-            invert(res);
+            CGM::invert(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
 
         {
             auto res = mat;
-            res = inverse(res);
+            res = CGM::inverse(res);
             ASSERT_TRUE(CGM::eq(res, inv, 0.001));
         }
     }
@@ -600,7 +600,7 @@ TEST(Matrix_Functions, Trace)
             0, 3
         };
 
-        ASSERT_TRUE(trace(mat) == 5);
+        ASSERT_TRUE(CGM::trace(mat) == 5);
     }
 
     /* -------------- */
@@ -613,7 +613,7 @@ TEST(Matrix_Functions, Trace)
             0, 0, 1
         };
 
-        ASSERT_TRUE(trace(mat) == 6);
+        ASSERT_TRUE(CGM::trace(mat) == 6);
     }
 
     /* -------------- */
@@ -627,7 +627,7 @@ TEST(Matrix_Functions, Trace)
             0, 0, 0, 4
         };
 
-        ASSERT_TRUE(trace(mat) == 8);
+        ASSERT_TRUE(CGM::trace(mat) == 8);
     }
 
     /* -------------- */
@@ -642,7 +642,7 @@ TEST(Matrix_Functions, Trace)
             0, 0, 0, 0, 1
         };
 
-        ASSERT_TRUE(trace(mat) == 13);
+        ASSERT_TRUE(CGM::trace(mat) == 13);
     }
 }
 
@@ -657,7 +657,7 @@ TEST(Matrix_Functions, Symmetric)
             2, 1
         };
 
-        ASSERT_TRUE(symmetric(mat));
+        ASSERT_TRUE(CGM::symmetric(mat));
 
         mat =
         {
@@ -665,7 +665,7 @@ TEST(Matrix_Functions, Symmetric)
             3,4
         };
 
-        ASSERT_FALSE(symmetric(mat));
+        ASSERT_FALSE(CGM::symmetric(mat));
     }
 
     /* -------------- */
@@ -678,7 +678,7 @@ TEST(Matrix_Functions, Symmetric)
             3, 0, 3
         };
 
-        ASSERT_TRUE(symmetric(mat));
+        ASSERT_TRUE(CGM::symmetric(mat));
 
         mat =
         {
@@ -687,7 +687,7 @@ TEST(Matrix_Functions, Symmetric)
             3, 5, 3
         };
 
-        ASSERT_FALSE(symmetric(mat));
+        ASSERT_FALSE(CGM::symmetric(mat));
     }
 
     /* -------------- */
@@ -701,7 +701,7 @@ TEST(Matrix_Functions, Symmetric)
             4, 2, 2, 3
         };
 
-        ASSERT_TRUE(symmetric(mat));
+        ASSERT_TRUE(CGM::symmetric(mat));
 
         mat =
         {
@@ -711,7 +711,7 @@ TEST(Matrix_Functions, Symmetric)
             4, 2, 2, 3
         };
 
-        ASSERT_FALSE(symmetric(mat));
+        ASSERT_FALSE(CGM::symmetric(mat));
     }
 
     /* -------------- */
@@ -726,7 +726,7 @@ TEST(Matrix_Functions, Symmetric)
             2, 3, 5, 2, 2
         };
 
-        ASSERT_TRUE(symmetric(mat));
+        ASSERT_TRUE(CGM::symmetric(mat));
 
         mat =
         {
@@ -737,7 +737,7 @@ TEST(Matrix_Functions, Symmetric)
             2, 3, 5, 2, 2
         };
 
-        ASSERT_FALSE(symmetric(mat));
+        ASSERT_FALSE(CGM::symmetric(mat));
     }
 }
 
@@ -752,7 +752,7 @@ TEST(Matrix_Functions, Antisymmetric)
         -4, 3, 0
     };
 
-    ASSERT_TRUE(antisymmetric(mat));
+    ASSERT_TRUE(CGM::antisymmetric(mat));
 
     mat =
     {
@@ -761,7 +761,7 @@ TEST(Matrix_Functions, Antisymmetric)
         3, 0, 4
     };
 
-    ASSERT_FALSE(antisymmetric(mat));
+    ASSERT_FALSE(CGM::antisymmetric(mat));
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -775,8 +775,8 @@ TEST(Matrix_Functions, Diagonal)
             0, 2
         };
 
-        ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(CGM::Matrix<2,2,int>(2)));
+        ASSERT_TRUE(CGM::diagonal(mat));
+        ASSERT_FALSE(CGM::diagonal(CGM::Matrix<2,2,int>(2)));
     }
 
     /* -------------- */
@@ -789,8 +789,8 @@ TEST(Matrix_Functions, Diagonal)
             0, 0, 4
         };
 
-        ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(CGM::Matrix<3,3,int>(2)));
+        ASSERT_TRUE(CGM::diagonal(mat));
+        ASSERT_FALSE(CGM::diagonal(CGM::Matrix<3,3,int>(2)));
     }
 
     /* -------------- */
@@ -804,8 +804,8 @@ TEST(Matrix_Functions, Diagonal)
             0, 0, 0, 1
         };
 
-        ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(CGM::Matrix<4,4,int>(2)));
+        ASSERT_TRUE(CGM::diagonal(mat));
+        ASSERT_FALSE(CGM::diagonal(CGM::Matrix<4,4,int>(2)));
     }
 
     /* -------------- */
@@ -820,8 +820,8 @@ TEST(Matrix_Functions, Diagonal)
             0, 0, 0, 0, 1
         };
 
-        ASSERT_TRUE(diagonal(mat));
-        ASSERT_FALSE(diagonal(CGM::Matrix<5,5,int>(2)));
+        ASSERT_TRUE(CGM::diagonal(mat));
+        ASSERT_FALSE(CGM::diagonal(CGM::Matrix<5,5,int>(2)));
     }
 }
 
@@ -836,8 +836,8 @@ TEST(Matrix_Functions, Orthogonal)
             0.286529, 0.958072
         };
 
-        ASSERT_TRUE(orthogonal(mat, 0.0001));
-        ASSERT_FALSE(orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
+        ASSERT_TRUE(CGM::orthogonal(mat, 0.0001));
+        ASSERT_FALSE(CGM::orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
     }
 
     /* -------------- */
@@ -850,8 +850,8 @@ TEST(Matrix_Functions, Orthogonal)
             -0.787094, -0.254139, 0.562046
         };
 
-        ASSERT_TRUE(orthogonal(mat, 0.0001));
-        ASSERT_FALSE(orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
+        ASSERT_TRUE(CGM::orthogonal(mat, 0.0001));
+        ASSERT_FALSE(CGM::orthogonal(CGM::Matrix<2,2,double>(2.0), 0.0001));
     }
 }
 
@@ -866,7 +866,7 @@ TEST(Matrix_Functions, Identity)
             0, 1
         };
 
-        auto exp = cgm::identity<2,int>();
+        auto exp = CGM::identity<2,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -881,7 +881,7 @@ TEST(Matrix_Functions, Identity)
             0, 0, 1
         };
 
-        auto exp = cgm::identity<3,int>();
+        auto exp = CGM::identity<3,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -897,7 +897,7 @@ TEST(Matrix_Functions, Identity)
             0, 0, 0, 1
         };
 
-        auto exp = cgm::identity<4,int>();
+        auto exp = CGM::identity<4,int>();
 
         ASSERT_TRUE(exp == ident);
     }
@@ -914,7 +914,7 @@ TEST(Matrix_Functions, Identity)
             0, 0, 0, 0, 1
         };
 
-        auto exp = cgm::identity<5,int>();
+        auto exp = CGM::identity<5,int>();
 
         ASSERT_TRUE(exp == ident);
     }

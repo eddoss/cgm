@@ -1,8 +1,7 @@
 #pragma once
 
 
-#include <type_traits>
-#include <CGM/Global.hpp>
+#include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Support/Matrix/ReverseMatrixIterator.inl>
 #include <CGM/Core/Support/Matrix/Iterators/Direct.inl>

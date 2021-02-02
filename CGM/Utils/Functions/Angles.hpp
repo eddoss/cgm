@@ -20,7 +20,7 @@ angle(T value);
  * @param angle Angle to convert.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
 radians(T angle);
 
 /**
@@ -28,7 +28,7 @@ radians(T angle);
  * @param angle Angle to convert.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
 degrees(T angle);
 
 CGM_NAMESPACE_END

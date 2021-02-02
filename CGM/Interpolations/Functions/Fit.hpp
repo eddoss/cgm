@@ -5,6 +5,7 @@
 #include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Interpolations/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN

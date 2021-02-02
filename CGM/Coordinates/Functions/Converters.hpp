@@ -8,6 +8,7 @@
 #include <CGM/Coordinates/Types/Spherical.hpp>
 #include <CGM/Coordinates/Types/Cylindrical.hpp>
 #include <CGM/Coordinates/Functions/VectorComponents.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -23,7 +24,7 @@ CGM_COORD_NAMESPACE_BEGIN
  * @return 2D Cartesian coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 cartesian(const Polar<T>& coord);
 
 /**
@@ -32,7 +33,7 @@ cartesian(const Polar<T>& coord);
  * @return 3D Cartesian coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 cartesian(const Spherical<T>& coord);
 
 /**
@@ -41,7 +42,7 @@ cartesian(const Spherical<T>& coord);
  * @return 3D Cartesian coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 cartesian(const Cylindrical<T>& coord);
 
 /**
@@ -51,7 +52,7 @@ cartesian(const Cylindrical<T>& coord);
  * @param forward Forward component of coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 cartesian(T up, T right, T forward);
 
 /**
@@ -62,7 +63,7 @@ cartesian(T up, T right, T forward);
  * @param homogeneous Homogeneous component of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<4,T>>
 cartesian(T up, T right, T forward, T homogeneous);
 
 /* ####################################################################################### */
@@ -75,7 +76,7 @@ cartesian(T up, T right, T forward, T homogeneous);
  * @return Polar coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Polar<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Polar<T>>
 polar(const Vector<2,T>& coord);
 
 /* ####################################################################################### */
@@ -88,7 +89,7 @@ polar(const Vector<2,T>& coord);
  * @return Spherical coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Spherical<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Spherical<T>>
 spherical(const Vector<3,T>& coord);
 
 /**
@@ -97,7 +98,7 @@ spherical(const Vector<3,T>& coord);
  * @return Spherical coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Spherical<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Spherical<T>>
 spherical(const Cylindrical<T>& coord);
 
 /* ####################################################################################### */
@@ -110,7 +111,7 @@ spherical(const Cylindrical<T>& coord);
  * @return Cylindrical coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Cylindrical<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Cylindrical<T>>
 cylindrical(const Spherical<T>& coord);
 
 /**
@@ -119,7 +120,7 @@ cylindrical(const Spherical<T>& coord);
  * @return Cylindrical coord.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Cylindrical<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Cylindrical<T>>
 cylindrical(const Vector<3,T>& coord);
 
 CGM_COORD_NAMESPACE_END

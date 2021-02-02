@@ -4,6 +4,7 @@
 #include <type_traits>
 #include <CGM/Cartesian/3D/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN

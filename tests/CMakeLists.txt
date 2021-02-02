@@ -146,7 +146,7 @@ cgm_add_test(Tests_Cartesian-3D "run.cpp;${TESTS_FILES_CARTESIAN_3D}")
 # ####################################################################################### #
 # SUITES | Transformations
 # ####################################################################################### #
-set(TESTS_FILES_TRANSFORMATION_2D
+set(TESTS_FILES_TRANSFORMATIONS_2D
     Transformations/2D/Apply.cpp
     Transformations/2D/Translation.cpp
     Transformations/2D/Scale.cpp

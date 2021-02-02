@@ -6,7 +6,7 @@
 CGM_NAMESPACE_BEGIN
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 perspectiveViewport(T fov, T aspect, T offset)
 {
     const T h = val<T>(2) * offset * std::tan(fov * val<T>(0.5));
@@ -18,7 +18,7 @@ perspectiveViewport(T fov, T aspect, T offset)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE CGM::Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& projectorSpace)
 {
     const T h = std::tan(fov * val<T>(0.5));
@@ -45,7 +45,7 @@ perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& p
 /* --------------------------------------------------------------------------------------- */
 
 template<EGraphicsApi API, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 perspective(T fov, T aspect, T near, T far)
 {
     auto viewport = perspectiveViewport(fov, aspect, near);
@@ -65,7 +65,7 @@ perspective(T fov, T aspect, T near, T far)
 /* --------------------------------------------------------------------------------------- */
 
 template<CGM::E3D Right, CGM::E3D Up, CGM::E3D Forward, EHandedness Handedness, typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 perspective(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
 {
     auto mat = Matrix<4,4,T>(val<T>(0));

@@ -2,8 +2,7 @@
 
 
 #include <CGM/Coordinates/ModuleGlobals.hpp>
-#include <CGM/Utils/Functions/Numbers.hpp>
-#include <CGM/Utils/Functions/Comparison.hpp>
+#include <CGM/Utils/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -19,70 +18,33 @@ public: /* Constructors */
 /* ####################################################################################### */
 
     /**
-     * @brief Constructor initializing longitude (horizontal) angle,
+     * Constructor initializing longitude (horizontal) angle,
      * latitude (vertical) angle and sphere radius.
      */
     constexpr
-    Spherical(T longitude, T latitude, T radius);
+    Spherical(T Longitude, T Latitude, T Radius);
 
 /* ####################################################################################### */
 public: /* Properties getters */
 /* ####################################################################################### */
 
     /**
-     * @brief Get longitude angle.
-     * @return Horizontal angle in radians.
+     * Longitude angle. Horizontal angle in radians [-2PI, 2PI].
      */
-    constexpr CGM_FORCEINLINE T
-    longitude() const;
+    Angle<T>
+    longitude;
 
     /**
-     * @brief Get latitude angle.
-     * @return Vertical angle in radians.
+     * Latitude angle. Vertical angle in radians [-PI, PI].
      */
-    constexpr CGM_FORCEINLINE T
-    latitude() const;
+    Angle_PI_PI<T>
+    latitude;
 
     /**
-     * @brief Get sphere radius.
-     * @return Sphere radius.
+     * Sphere radius.
      */
-    constexpr CGM_FORCEINLINE T
-    radius() const;
-
-/* ####################################################################################### */
-public: /* Properties setters */
-/* ####################################################################################### */
-
-    /**
-     * @brief Set longitude angle.
-     * @param longitude Horizontal angle in radians.
-     */
-    constexpr CGM_FORCEINLINE void
-    setLongitude(T longitude);
-
-    /**
-     * Set longitude angle in radians. Value must be in range [0, PI].
-     * @note If the given value is out of range, given value
-     * will be clamped.
-     */
-    constexpr CGM_FORCEINLINE void
-    setLatitude(T latitude);
-
-    /**
-     * Set sphere radius. Value must be >= 0.
-     * @note If the given value is less than "0", then "0" will be set.
-     */
-    constexpr CGM_FORCEINLINE void
-    setRadius(T radius);
-
-/* ####################################################################################### */
-protected: /* Protected members */
-/* ####################################################################################### */
-
-    T m_longitude;    // azimuth, horizontal
-    T m_latitude;     // elevation, vertical
-    T m_radius;
+    Length<T>
+    radius;
 };
 
 CGM_COORD_NAMESPACE_END

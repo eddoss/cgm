@@ -8,6 +8,7 @@
 #include <CGM/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Cartesian/3D/Functions/Quaternion.hpp>
 #include <CGM/Cartesian/3D/Operators/Quaternion.hpp>
+#include <CGM/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN

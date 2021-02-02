@@ -27,7 +27,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
  * @param value How much to translate.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, T value);
 
 /**
@@ -36,7 +36,7 @@ translate(Vector<2,T>& vector, T value);
  * @param value How much to translate.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Vector<2,T>& value);
 
 /**
@@ -46,7 +46,7 @@ translate(Vector<2,T>& vector, const Vector<2,T>& value);
  * @param along Vector to translate along to.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, T value, const Vector<2,T>& along);
 
 /**
@@ -56,7 +56,7 @@ translate(Vector<2,T>& vector, T value, const Vector<2,T>& along);
  * @param pivot Pivot point.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -65,7 +65,7 @@ translate(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot)
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -79,7 +79,7 @@ translate(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value);
 
 /**
@@ -90,7 +90,7 @@ translate(Matrix<3,3,T>& basis, T value);
  * @param value How much to translate.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& value);
 
 /**
@@ -102,7 +102,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& value);
  * @param along Vector to translate along to.
  */
 template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
 
 /**
@@ -113,7 +113,7 @@ translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
  * @param pivot Pivot point.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -123,7 +123,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot
  * @param transforms Transformations parameters.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -136,7 +136,7 @@ translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, T value);
 
 /**
@@ -145,7 +145,7 @@ translate(Pivot<T>& pivot, T value);
  * @param value How much to translate.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Vector<2,T>& value);
 
 /**
@@ -155,7 +155,7 @@ translate(Pivot<T>& pivot, const Vector<2,T>& value);
  * @param along Vector to translate along to.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, T value, const Vector<2,T>& along);
 
 /**
@@ -165,7 +165,7 @@ translate(Pivot<T>& pivot, T value, const Vector<2,T>& along);
  * @param pivotPoint Pivot point.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -174,7 +174,7 @@ translate(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -187,7 +187,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param value How much to translate.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, T value);
 
 /**
@@ -196,7 +196,7 @@ translate(ArbitraryAxis<T>& axis, T value);
  * @param value How much to translate.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Vector<2,T>& value);
 
 /**
@@ -206,7 +206,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<2,T>& value);
  * @param along Vector to translate along to.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along);
 
 /**
@@ -216,7 +216,7 @@ translate(ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along);
  * @param pivot Pivot point.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -225,7 +225,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& piv
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -240,7 +240,7 @@ translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @return Translated vector.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, T value);
 
 /**
@@ -250,7 +250,7 @@ translated(const Vector<2,T>& vector, T value);
  * @return Translated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Vector<2,T>& value);
 
 /**
@@ -261,7 +261,7 @@ translated(const Vector<2,T>& vector, const Vector<2,T>& value);
  * @return Translated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, T value, const Vector<2,T>& along);
 
 /**
@@ -272,7 +272,7 @@ translated(const Vector<2,T>& vector, T value, const Vector<2,T>& along);
  * @return Translated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -282,7 +282,7 @@ translated(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>&
  * @return Translated vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -297,7 +297,7 @@ translated(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @return Translated matrix.
  */
 template<E2D Axis, ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, T value);
 
 /**
@@ -308,7 +308,7 @@ translated(const Matrix<3,3,T>& matrix, T value);
  * @return Translated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value);
 
 /**
@@ -321,7 +321,7 @@ translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value);
  * @return Translated matrix.
  */
 template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
 
 /**
@@ -333,7 +333,7 @@ translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
  * @return Translated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -344,7 +344,7 @@ translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>
  * @return Translated matrix.
  */
 template<ESpace Space = ESpace::World, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -358,7 +358,7 @@ translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @return Translated pivot.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, T value);
 
 /**
@@ -368,7 +368,7 @@ translated(const Pivot<T>& pivot, T value);
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Vector<2,T>& value);
 
 /**
@@ -379,7 +379,7 @@ translated(const Pivot<T>& pivot, const Vector<2,T>& value);
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, T value, const Vector<2,T>& along);
 
 /**
@@ -390,7 +390,7 @@ translated(const Pivot<T>& pivot, T value, const Vector<2,T>& along);
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint);
 
 /**
@@ -400,7 +400,7 @@ translated(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& piv
  * @return Translated pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -414,7 +414,7 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Translated axis.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, T value);
 
 /**
@@ -424,7 +424,7 @@ translated(const ArbitraryAxis<T>& axis, T value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& value);
 
 /**
@@ -435,7 +435,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& value);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along);
 
 /**
@@ -446,7 +446,7 @@ translated(const ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along);
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -456,7 +456,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<
  * @return Translated axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -470,7 +470,7 @@ translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
  * @return Translation matrix.
  */
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(T value);
 
 /**
@@ -479,7 +479,7 @@ translationMatrix(T value);
  * @return Translation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Vector<2,T>& values);
 
 /**
@@ -489,7 +489,7 @@ translationMatrix(const Vector<2,T>& values);
  * @return Translation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(T value, const Vector<2,T>& along);
 
 /**
@@ -499,7 +499,7 @@ translationMatrix(T value, const Vector<2,T>& along);
  * @return Translation axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
@@ -508,7 +508,7 @@ translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot);
  * @return Translation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Transforms<T>& transforms);
 
 CGM_XFORM2D_NAMESPACE_END

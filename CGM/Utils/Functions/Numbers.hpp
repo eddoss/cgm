@@ -11,7 +11,7 @@ CGM_NAMESPACE_BEGIN
  * Convert value from type A to type B.
  */
 template<typename AT, typename BT>
-constexpr CGM_FORCEINLINE enable_if_number<AT,AT>
+constexpr CGM_FORCEINLINE std::enable_if_t<(std::is_floating_point_v<AT> || std::is_integral_v<AT>), AT>
 val(BT value);
 
 /**

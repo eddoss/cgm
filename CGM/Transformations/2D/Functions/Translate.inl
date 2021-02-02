@@ -11,7 +11,7 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, T value)
 {
     if constexpr (Axis == E2D::X)
@@ -27,7 +27,7 @@ translate(Vector<2,T>& vector, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Vector<2,T>& value)
 {
     vector += value;
@@ -36,7 +36,7 @@ translate(Vector<2,T>& vector, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, T value, const Vector<2,T>& along)
 {
     vector += along * value;
@@ -45,7 +45,7 @@ translate(Vector<2,T>& vector, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     vector += pivot.axes.x * values.x;
@@ -55,18 +55,18 @@ translate(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Vector<2,T>& vector, const Transforms<T>& transforms)
 {
     translate(vector, transforms.translation, transforms.pivot);
 }
 
 /* ####################################################################################### */
-/* Matrix4 (inplace) */
+/* Matrix3 (inplace) */
 /* ####################################################################################### */
 
 template<E2D Axis, ESpace Space, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value)
 {
     Vector<2,T> axs;
@@ -101,7 +101,7 @@ translate(Matrix<3,3,T>& basis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& value)
 {
     if constexpr (Space == ESpace::World)
@@ -128,7 +128,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, EVectorRepresentation AlongRepr, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along)
 {
     if constexpr (Space == ESpace::World)
@@ -144,7 +144,7 @@ translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     if constexpr (Space == ESpace::World)
@@ -168,7 +168,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms)
 {
     translate<Space>(basis, transforms.translation, transforms.pivot);
@@ -179,7 +179,7 @@ translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, T value)
 {
     translate<Axis>(pivot.position, value);
@@ -188,7 +188,7 @@ translate(Pivot<T>& pivot, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Vector<2,T>& value)
 {
     pivot.position += value;
@@ -197,7 +197,7 @@ translate(Pivot<T>& pivot, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, T value, const Vector<2,T>& along)
 {
     pivot.position += along * value;
@@ -206,7 +206,7 @@ translate(Pivot<T>& pivot, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint)
 {
     pivot.position += pivotPoint.axes.x * values.x;
@@ -216,7 +216,7 @@ translate(Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     translate(pivot, transforms.translation, transforms.pivot);
@@ -227,7 +227,7 @@ translate(Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, T value)
 {
     translate<Axis>(axis.position, value);
@@ -236,7 +236,7 @@ translate(ArbitraryAxis<T>& axis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Vector<2,T>& value)
 {
     axis.position += value;
@@ -245,7 +245,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along)
 {
     axis.position += along * value;
@@ -254,7 +254,7 @@ translate(ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     axis.position += pivot.axes.x * values.x;
@@ -264,7 +264,7 @@ translate(ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& piv
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 {
     translate(axis, transforms.translation, transforms.pivot);
@@ -275,7 +275,7 @@ translate(ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, T value)
 {
     auto copy = vector;
@@ -286,7 +286,7 @@ translated(const Vector<2,T>& vector, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Vector<2,T>& value)
 {
     auto copy = vector;
@@ -297,7 +297,7 @@ translated(const Vector<2,T>& vector, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, T value, const Vector<2,T>& along)
 {
     auto copy = vector;
@@ -308,7 +308,7 @@ translated(const Vector<2,T>& vector, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto copy = vector;
@@ -319,7 +319,7 @@ translated(const Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>&
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<2,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 translated(const Vector<2,T>& vector, const Transforms<T>& transforms)
 {
     auto copy = vector;
@@ -332,7 +332,7 @@ translated(const Vector<2,T>& vector, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, T value)
 {
     auto copy = matrix;
@@ -343,7 +343,7 @@ translated(const Matrix<3,3,T>& matrix, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value)
 {
     auto copy = matrix;
@@ -354,7 +354,7 @@ translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, EVectorRepresentation AlongRepr, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along)
 {
     auto copy = basis;
@@ -365,7 +365,7 @@ translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto copy = basis;
@@ -376,7 +376,7 @@ translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>
 /* --------------------------------------------------------------------------------------- */
 
 template<ESpace Space, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 {
     auto copy = matrix;
@@ -389,7 +389,7 @@ translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, T value)
 {
     auto copy = pivot;
@@ -400,7 +400,7 @@ translated(const Pivot<T>& pivot, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Vector<2,T>& value)
 {
     auto copy = pivot;
@@ -411,7 +411,7 @@ translated(const Pivot<T>& pivot, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, T value, const Vector<2,T>& along)
 {
     auto copy = pivot;
@@ -422,7 +422,7 @@ translated(const Pivot<T>& pivot, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& pivotPoint)
 {
     auto copy = pivot;
@@ -433,7 +433,7 @@ translated(const Pivot<T>& pivot, const Vector<2,T>& values, const Pivot<T>& piv
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 {
     auto copy = pivot;
@@ -446,7 +446,7 @@ translated(const Pivot<T>& pivot, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, T value)
 {
     auto copy = axis;
@@ -457,7 +457,7 @@ translated(const ArbitraryAxis<T>& axis, T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& value)
 {
     auto copy = axis;
@@ -468,7 +468,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along)
 {
     auto copy = axis;
@@ -479,7 +479,7 @@ translated(const ArbitraryAxis<T>& axis, T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto copy = axis;
@@ -490,7 +490,7 @@ translated(const ArbitraryAxis<T>& axis, const Vector<2,T>& values, const Pivot<
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE ArbitraryAxis<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 {
     auto copy = axis;
@@ -503,7 +503,7 @@ translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms)
 /* ####################################################################################### */
 
 template<E2D Axis, typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(T value)
 {
 #ifdef CGM_CFG_MATRIX_POSTMULT
@@ -550,7 +550,7 @@ translationMatrix(T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Vector<2,T>& values)
 {
 #ifdef CGM_CFG_MATRIX_POSTMULT
@@ -573,7 +573,7 @@ translationMatrix(const Vector<2,T>& values)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(T value, const Vector<2,T>& along)
 {
 #ifdef CGM_CFG_MATRIX_POSTMULT
@@ -596,7 +596,7 @@ translationMatrix(T value, const Vector<2,T>& along)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto mat = identity<3,T>();
@@ -607,7 +607,7 @@ translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Transforms<T>& transforms)
 {
     return translationMatrix(transforms.translation, transforms.pivot);

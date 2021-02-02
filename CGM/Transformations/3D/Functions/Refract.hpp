@@ -20,7 +20,7 @@ CGM_NAMESPACE_BEGIN
  * @param ior Index of refraction.
  */
 template<EPlane Plane, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 refract(Vector<3,T>& vector, T ior);
 
 /**
@@ -30,7 +30,7 @@ refract(Vector<3,T>& vector, T ior);
  * @param ior Index of refraction.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
 /* ####################################################################################### */
@@ -45,7 +45,7 @@ refract(Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
  * @return Copy of refracted vector.
  */
 template<EPlane Plane, typename T>
-constexpr Vector<3,T>
+constexpr enable_if_floating<T, Vector<3,T>>
 refracted(const Vector<3,T>& vector, T ior);
 
 /**
@@ -56,7 +56,7 @@ refracted(const Vector<3,T>& vector, T ior);
  * @return Copy of refracted vector.
  */
 template<typename T>
-constexpr Vector<3,T>
+constexpr enable_if_floating<T, Vector<3,T>>
 refracted(const Vector<3,T>& vector, const Vector<3,T>& planeNormal, T ior);
 
 CGM_NAMESPACE_END

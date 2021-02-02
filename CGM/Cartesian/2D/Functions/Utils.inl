@@ -328,7 +328,7 @@ transposedOrientation(const Matrix<3,3,T>& basis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr bool
+constexpr enable_if_floating<T, bool>
 invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance)
 {
     Matrix<2,2,T> orient
@@ -355,7 +355,7 @@ invertOrientationSafe(Matrix<3,3,T>& basis, T determinantTolerance)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantTolerance)
 {
     Matrix<2,2,T> orient
@@ -392,7 +392,7 @@ inverseOrientationSafe(const Matrix<3,3,T>& basis, bool& success, T determinantT
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 invertOrientation(Matrix<3,3,T>& basis)
 {
     Matrix<2,2,T> orient
@@ -413,7 +413,7 @@ invertOrientation(Matrix<3,3,T>& basis)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 inverseOrientation(const Matrix<3,3,T>& basis)
 {
     Matrix<2,2,T> orient

@@ -16,7 +16,7 @@ CGM_NAMESPACE_BEGIN
 template <typename T>
 struct PositiveNumberConstraint
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 
@@ -26,7 +26,7 @@ struct PositiveNumberConstraint
 template <typename T>
 struct NegativeNumberConstraint
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 
@@ -40,7 +40,7 @@ struct NegativeNumberConstraint
 template <typename T>
 struct RadiansAngleConstraint_0_PI
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 
@@ -50,7 +50,7 @@ struct RadiansAngleConstraint_0_PI
 template <typename T>
 struct RadiansAngleConstraint_0_2PI
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 
@@ -60,7 +60,7 @@ struct RadiansAngleConstraint_0_2PI
 template <typename T>
 struct RadiansAngleConstraint_PI_PI
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 
@@ -70,7 +70,7 @@ struct RadiansAngleConstraint_PI_PI
 template <typename T>
 struct RadiansAngleConstraint_2PI_2PI
 {
-    constexpr CGM_FORCEINLINE enable_if_floating<T,T>
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
 };
 

@@ -33,7 +33,7 @@ CGM_NAMESPACE_BEGIN
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, T angle);
 
 /**
@@ -43,7 +43,7 @@ rotate(Vector<3,T>& vector, T angle);
  * @param angles Rotation angles (angle per axis).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Vector<3,T>& angles);
 
 /**
@@ -54,7 +54,7 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles);
  * @tparam rotationOrder Rotation order.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -64,7 +64,7 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOr
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
 
 /**
@@ -74,7 +74,7 @@ rotate(Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, T angle, const Ray<T>& axis);
 
 /**
@@ -84,7 +84,7 @@ rotate(Vector<3,T>& vector, T angle, const Ray<T>& axis);
  * @param pivotPoint Rotation pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -95,7 +95,7 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoin
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -104,7 +104,7 @@ rotate(Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoin
  * @param quaternion Quaternion to rotate by.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
 /**
@@ -113,7 +113,7 @@ rotate(Vector<3,T>& vector, const Quaternion<T>& quaternion);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -127,7 +127,7 @@ rotate(Vector<3,T>& vector, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -137,7 +137,7 @@ rotate(Matrix<3,3,T>& matrix, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
@@ -146,7 +146,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
  * @param angles Rotation angles.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
 /**
@@ -156,7 +156,7 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -165,7 +165,7 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
  * @param angles Rotation angles.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
 /**
@@ -175,7 +175,7 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
 /**
@@ -184,7 +184,7 @@ rotate(Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, 
  * @param quaternion Quaternion to rotate by.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
@@ -193,7 +193,7 @@ rotate(Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -207,7 +207,7 @@ rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, T angle);
 
 /**
@@ -217,7 +217,7 @@ rotate(Matrix<4,4,T>& matrix, T angle);
  * @param angles Rotation angles (angle per axis).
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
 /**
@@ -228,7 +228,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
  * @tparam rotationOrder Rotation order.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -238,7 +238,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotation
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
@@ -247,7 +247,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
 
 /**
@@ -257,7 +257,7 @@ rotate(Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
  * @param pivotPoint Rotation pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -268,7 +268,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -277,7 +277,7 @@ rotate(Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param quaternion Quaternion to rotate by.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
@@ -286,7 +286,7 @@ rotate(Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -300,7 +300,7 @@ rotate(Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle);
 
 /**
@@ -310,7 +310,7 @@ rotate(Pivot<T>& pivot, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
 
 /**
@@ -320,7 +320,7 @@ rotate(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, T angle, const Ray<T>& axis);
 
 /**
@@ -330,7 +330,7 @@ rotate(Pivot<T>& pivot, T angle, const Ray<T>& axis);
  * @param pivotPoint Rotation pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -341,7 +341,7 @@ rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -350,7 +350,7 @@ rotate(Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, E
  * @param quaternion Quaternion to rotate by.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion);
 
 /**
@@ -359,7 +359,7 @@ rotate(Pivot<T>& pivot, const Quaternion<T>& quaternion);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -373,7 +373,7 @@ rotate(Pivot<T>& pivot, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, T angle);
 
 /**
@@ -382,7 +382,7 @@ rotate(Ray<T>& arbitraryAxis, T angle);
  * @param angles Rotation angles (angle per axis).
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
 
 /**
@@ -392,7 +392,7 @@ rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
  * @tparam rotationOrder Rotation order.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -402,7 +402,7 @@ rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotation
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
 /**
@@ -412,7 +412,7 @@ rotate(Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
 
 /**
@@ -422,7 +422,7 @@ rotate(Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
  * @param pivotPoint Rotation pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -433,7 +433,7 @@ rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -442,7 +442,7 @@ rotate(Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPo
  * @param quaternion Quaternion to rotate by.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
 /**
@@ -451,7 +451,7 @@ rotate(Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -465,7 +465,7 @@ rotate(Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
  * @param angle Rotation angle.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, T angle);
 
 /**
@@ -475,7 +475,7 @@ rotate(Quaternion<T>& quaternion, T angle);
  * @param angle Rotation angle.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction);
 
 /**
@@ -485,7 +485,7 @@ rotate(Quaternion<T>& quaternion, T angle, const Vector<3,T>& direction);
  * @param pivotPoint Rotation pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -496,7 +496,7 @@ rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& piv
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr void
+constexpr enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -505,7 +505,7 @@ rotate(Quaternion<T>& quaternion, const Vector<3,T>& angles, const Pivot<T>& piv
  * @param quat Quaternion to rotate by.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat);
 
 /**
@@ -514,7 +514,7 @@ rotate(Quaternion<T>& quaternion, const Quaternion<T>& quat);
  * @param transforms Transformations parameters.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE void
+constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -529,7 +529,7 @@ rotate(Quaternion<T>& quaternion, const Transforms<T>& transforms);
  * @return Rotated copy of vector.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, T angle);
 
 /**
@@ -540,7 +540,7 @@ rotated(const Vector<3,T>& vector, T angle);
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Vector<3,T>& angles);
 
 /**
@@ -552,7 +552,7 @@ rotated(const Vector<3,T>& vector, const Vector<3,T>& angles);
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -563,7 +563,7 @@ rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, ERotationOrder rot
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
 
 /**
@@ -574,7 +574,7 @@ rotated(const Vector<3,T>& vector, T angle, const Vector<3,T>& direction);
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, T angle, const Ray<T>& axis);
 
 /**
@@ -585,7 +585,7 @@ rotated(const Vector<3,T>& vector, T angle, const Ray<T>& axis);
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -597,7 +597,7 @@ rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pi
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -607,7 +607,7 @@ rotated(const Vector<3,T>& vector, const Vector<3,T>& angles, const Pivot<T>& pi
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Quaternion<T>& quaternion);
 
 /**
@@ -617,7 +617,7 @@ rotated(const Vector<3,T>& vector, const Quaternion<T>& quaternion);
  * @return Rotated copy of vector.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Vector<3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 rotated(const Vector<3,T>& vector, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -632,7 +632,7 @@ rotated(const Vector<3,T>& vector, const Transforms<T>& transforms);
  * @return Rotated copy of matrix.
  */
 template<E3D Axis, typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
 /**
@@ -643,7 +643,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
@@ -653,7 +653,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<3,T>& direction);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
 
 /**
@@ -664,7 +664,7 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -673,7 +673,7 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, ERotationOrder r
  * @param angles Rotation angles.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot);
 
 /**
@@ -683,7 +683,7 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& 
  * @param rotationOrder Rotation order.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivot, ERotationOrder rotationOrder);
 
 /**
@@ -693,7 +693,7 @@ rotated(const Matrix<3,3,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& 
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<3,3,T>
+constexpr enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
@@ -703,7 +703,7 @@ rotated(const Matrix<3,3,T>& matrix, const Quaternion<T>& quaternion);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<3,3,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -718,7 +718,7 @@ rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated copy of matrix.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, T angle);
 
 /**
@@ -729,7 +729,7 @@ rotated(const Matrix<4,4,T>& matrix, T angle);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
 
 /**
@@ -741,7 +741,7 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -752,7 +752,7 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, ERotationOrder r
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
 
 /**
@@ -762,7 +762,7 @@ rotated(Matrix<4,4,T>& matrix, T angle, const Vector<3,T>& direction);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
 
 /**
@@ -773,7 +773,7 @@ rotated(const Matrix<4,4,T>& matrix, T angle, const Ray<T>& axis);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -785,7 +785,7 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& 
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -795,7 +795,7 @@ rotated(const Matrix<4,4,T>& matrix, const Vector<3,T>& angles, const Pivot<T>& 
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr Matrix<4,4,T>
+constexpr enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
 
 /**
@@ -805,7 +805,7 @@ rotated(const Matrix<4,4,T>& matrix, const Quaternion<T>& quaternion);
  * @return Rotated copy of matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -820,7 +820,7 @@ rotated(const Matrix<4,4,T>& matrix, const Transforms<T>& transforms);
  * @return Rotated copy of pivot.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, T angle);
 
 /**
@@ -831,7 +831,7 @@ rotated(const Pivot<T>& pivot, T angle);
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
 
 /**
@@ -842,7 +842,7 @@ rotated(Pivot<T>& pivot, T angle, const Vector<3,T>& direction);
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, T angle, const Ray<T>& axis);
 
 /**
@@ -853,7 +853,7 @@ rotated(const Pivot<T>& pivot, T angle, const Ray<T>& axis);
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -865,7 +865,7 @@ rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotP
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -875,7 +875,7 @@ rotated(const Pivot<T>& pivot, const Vector<3,T>& angles, const Pivot<T>& pivotP
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion);
 
 /**
@@ -885,7 +885,7 @@ rotated(const Pivot<T>& pivot, const Quaternion<T>& quaternion);
  * @return Rotated copy of pivot.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Pivot<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -900,7 +900,7 @@ rotated(const Pivot<T>& pivot, const Transforms<T>& transforms);
  * @return Rotated copy of axis.
  */
 template<E3D Axis, typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, T angle);
 
 /**
@@ -910,7 +910,7 @@ rotated(const Ray<T>& arbitraryAxis, T angle);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
 
 /**
@@ -921,7 +921,7 @@ rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder rotationOrder);
 
 /**
@@ -932,7 +932,7 @@ rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, ERotationOrder r
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
 
 /**
@@ -943,7 +943,7 @@ rotated(const Ray<T>& arbitraryAxis, T angle, const Vector<3,T>& direction);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
 
 /**
@@ -954,7 +954,7 @@ rotated(const Ray<T>& arbitraryAxis, T angle, const Ray<T>& axis);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -966,7 +966,7 @@ rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -976,7 +976,7 @@ rotated(const Ray<T>& arbitraryAxis, const Vector<3,T>& angles, const Pivot<T>& 
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
 
 /**
@@ -986,7 +986,7 @@ rotated(const Ray<T>& arbitraryAxis, const Quaternion<T>& quaternion);
  * @return Rotated copy of axis.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Ray<T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 rotated(const Ray<T>& arbitraryAxis, const Transforms<T>& transforms);
 
 /* ####################################################################################### */
@@ -1114,7 +1114,7 @@ rotationMatrix(T angle, const Vector<3,T>& direction);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotationMatrix(T angle, const Ray<T>& axis);
 
 /**
@@ -1124,7 +1124,7 @@ rotationMatrix(T angle, const Ray<T>& axis);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
 
 /**
@@ -1135,7 +1135,7 @@ rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint);
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationOrder rotationOrder);
 
 /**
@@ -1144,7 +1144,7 @@ rotationMatrix(const Vector<3,T>& angles, const Pivot<T>& pivotPoint, ERotationO
  * @return Rotation matrix.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Matrix<4,4,T>
+constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 rotationMatrix(const Transforms<T>& transforms);
 
 CGM_NAMESPACE_END
