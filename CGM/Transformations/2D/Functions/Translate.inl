@@ -511,18 +511,18 @@ translationMatrix(T value)
     {
         return
         {
-            number<T>(1), number<T>(0), value,
-            number<T>(0), number<T>(1), number<T>(0),
-            number<T>(0), number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0), value,
+            val<T>(0), val<T>(1), val<T>(0),
+            val<T>(0), val<T>(0), val<T>(1)
         };
     }
     else
     {
         return
         {
-            number<T>(1), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(1), value,
-            number<T>(0), number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(1), value,
+            val<T>(0), val<T>(0), val<T>(1)
         };
     }
 #else
@@ -530,18 +530,18 @@ translationMatrix(T value)
     {
         return
         {
-            number<T>(1), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(1), number<T>(0),
-            value, number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(1), val<T>(0),
+            value, val<T>(0), val<T>(1)
         };
     }
     else
     {
         return
         {
-            number<T>(1), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(1), number<T>(0),
-            number<T>(0), value, number<T>(1)
+            val<T>(1), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(1), val<T>(0),
+            val<T>(0), value, val<T>(1)
         };
     }
 #endif
@@ -556,16 +556,16 @@ translationMatrix(const Vector<2,T>& values)
 #ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
-        number<T>(1), number<T>(0), values.x,
-        number<T>(0), number<T>(1), values.y,
-        number<T>(0), number<T>(0), number<T>(1)
+        val<T>(1), val<T>(0), values.x,
+        val<T>(0), val<T>(1), values.y,
+        val<T>(0), val<T>(0), val<T>(1)
     };
 #else
     return
     {
-        number<T>(1), number<T>(0), number<T>(0),
-        number<T>(0), number<T>(1), number<T>(0),
-        values.x, values.y, number<T>(1)
+        val<T>(1), val<T>(0), val<T>(0),
+        val<T>(0), val<T>(1), val<T>(0),
+        values.x, values.y, val<T>(1)
     };
 #endif
 }
@@ -579,16 +579,16 @@ translationMatrix(T value, const Vector<2,T>& along)
 #ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
-        number<T>(1), number<T>(0), along.x * value,
-        number<T>(0), number<T>(1), along.y * value,
-        number<T>(0), number<T>(0), number<T>(1)
+        val<T>(1), val<T>(0), along.x * value,
+        val<T>(0), val<T>(1), along.y * value,
+        val<T>(0), val<T>(0), val<T>(1)
     };
 #else
     return
     {
-        number<T>(1), number<T>(0), number<T>(0),
-        number<T>(0), number<T>(1), number<T>(0),
-        along.x * value, along.y * value, number<T>(1)
+        val<T>(1), val<T>(0), val<T>(0),
+        val<T>(0), val<T>(1), val<T>(0),
+        along.x * value, along.y * value, val<T>(1)
     };
 #endif
 }

@@ -1,7 +1,5 @@
-#include <CGM/Global.hpp>
-#include <CGM/Common.hpp>
-#include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/ModuleGlobals.hpp>
+#include <CGM/Cartesian/Common.hpp>
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 #include <CGM/Cartesian/2D/Types/Axes.hpp>

@@ -14,8 +14,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Vector<2,T>& vector, T angle)
 {
-    const auto  sin = number<T>(std::sin(angle));
-    const auto  cos = number<T>(std::cos(angle));
+    const auto  sin = val<T>(std::sin(angle));
+    const auto  cos = val<T>(std::cos(angle));
     Vector<2,T> res;
 
 #ifdef CGM_CFG_LHS
@@ -70,8 +70,8 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 rotate(Matrix<2,2,T>& matrix, T angle)
 {
-    const T sin = number<T>(std::sin(angle));
-    const T cos = number<T>(std::cos(angle));
+    const T sin = val<T>(std::sin(angle));
+    const T cos = val<T>(std::cos(angle));
 
     auto axs = orientationAxes(matrix);
     Vector<2,T> tmp;
@@ -114,8 +114,8 @@ template<ESpace Space, typename T>
 constexpr void
 rotate(Matrix<3,3,T>& matrix, T angle)
 {
-    const T sin = number<T>(std::sin(angle));
-    const T cos = number<T>(std::cos(angle));
+    const T sin = val<T>(std::sin(angle));
+    const T cos = val<T>(std::cos(angle));
 
     auto axs = orientationAxes(matrix);
     Vector<2,T> tmp;

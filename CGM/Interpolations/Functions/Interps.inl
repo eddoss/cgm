@@ -131,13 +131,13 @@ slerp(const Quaternion<T>& a, const Quaternion<T>& b, T bias)
     auto angCos = dot(a,b);
     auto B = b;
 
-    if (angCos < zero<T>)
+    if (angCos < val<T>(0))
     {
         B = -b;
         angCos = -angCos;
     }
 
-    if(angCos > number<T>(1))
+    if(angCos > val<T>(1))
     {
         return Quaternion<T>
         {
@@ -148,7 +148,7 @@ slerp(const Quaternion<T>& a, const Quaternion<T>& b, T bias)
     else
     {
         const T angle = std::acos(angCos);
-        return (std::sin((number<T>(1) - bias) * angle) * a + std::sin(bias * angle) * B) / std::sin(angle);
+        return (std::sin((val<T>(1) - bias) * angle) * a + std::sin(bias * angle) * B) / std::sin(angle);
     }
 }
 

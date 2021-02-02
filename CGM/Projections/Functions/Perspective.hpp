@@ -22,7 +22,7 @@ CGM_NAMESPACE_BEGIN
  */
 template<typename T>
 constexpr Vector<2,T>
-perspectiveViewport(T fov, T aspect, T offset = number<T>(1));
+perspectiveViewport(T fov, T aspect, T offset = val<T>(1));
 
 /**
  * Create ray from projector to specific viewport position.

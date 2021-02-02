@@ -1,5 +1,3 @@
-#include <CGM/Global.hpp>
-#include <CGM/Common.hpp>
 #include <CGM/Coordinates/ModuleGlobals.hpp>
 
 #include <CGM/Coordinates/Types/Polar.hpp>

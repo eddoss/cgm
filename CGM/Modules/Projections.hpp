@@ -1,5 +1,3 @@
-#include <CGM/Global.hpp>
-#include <CGM/Common.hpp>
 #include <CGM/Projections/ModuleGlobals.hpp>
 
 #include <CGM/Projections/Types.hpp>

@@ -29,7 +29,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 fit01(T value, T newMin, T newMax)
 {
-    return (value > number<T>(1) ? number<T>(1) : value < number<T>(0) ? number<T>(0) : value) * (newMax - newMin) + newMin;
+    return (value > val<T>(1) ? val<T>(1) : value < val<T>(0) ? val<T>(0) : value) * (newMax - newMin) + newMin;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -38,7 +38,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 fit10(T value, T newMin, T newMax)
 {
-    return ((value > number<T>(1) ? number<T>(1) : value < number<T>(0) ? number<T>(0) : value) - number<T>(1)) * (newMin - newMax) + newMin;
+    return ((value > val<T>(1) ? val<T>(1) : value < val<T>(0) ? val<T>(0) : value) - val<T>(1)) * (newMin - newMax) + newMin;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -47,7 +47,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 fit11(T value, T newMin, T newMax)
 {
-    return ((value > number<T>(1) ? number<T>(1) : value < number<T>(-1) ? number<T>(-1) : value) - number<T>(-1)) / number<T>(2) * (newMax - newMin) + newMin;
+    return ((value > val<T>(1) ? val<T>(1) : value < val<T>(-1) ? val<T>(-1) : value) - val<T>(-1)) / val<T>(2) * (newMax - newMin) + newMin;
 }
 
 /* ####################################################################################### */

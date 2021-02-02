@@ -1,8 +1,9 @@
 #pragma once
 
 
-#include <CGM/Common.hpp>
 #include <CGM/Coordinates/ModuleGlobals.hpp>
+#include <CGM/Utils/Functions/Numbers.hpp>
+#include <CGM/Utils/Functions/Comparison.hpp>
 
 
 CGM_NAMESPACE_BEGIN

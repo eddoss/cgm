@@ -14,7 +14,7 @@ template<typename T>
 constexpr void
 reflect(Vector<2,T>& vector, const Vector<2,T>& axisNormal)
 {
-    vector -= number<T>(2) * dot(vector, axisNormal) * axisNormal;
+    vector -= val<T>(2) * dot(vector, axisNormal) * axisNormal;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -27,7 +27,7 @@ reflect(Vector<2,T>& vector, const Vector<2,T>& axisNormal, const Vector<2,T>& a
     auto reflected = vector - projected - projected;
 
     T dist = dot(axisCenter, axisNormal);
-    reflected += axisNormal * dist * number<T>(2);
+    reflected += axisNormal * dist * val<T>(2);
 
     vector = reflected;
 }

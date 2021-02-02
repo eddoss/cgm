@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Common.hpp>
+#include <CGM/Utils/Functions/Numbers.hpp>
+#include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Core/Operators/Vector.hpp>
 #include <CGM/Core/Operators/Matrix.hpp>
 #include <CGM/Core/Functions/Vector.hpp>

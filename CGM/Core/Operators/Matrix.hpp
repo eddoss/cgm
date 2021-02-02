@@ -1,10 +1,11 @@
 #pragma once
 
 
-#include <CGM/Common.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Operators/MatrixVectorMultiplication.hpp>
+#include <CGM/Utils/Functions/Numbers.hpp>
+#include <CGM/Utils/Functions/Comparison.hpp>
 
 
 /* ####################################################################################### */

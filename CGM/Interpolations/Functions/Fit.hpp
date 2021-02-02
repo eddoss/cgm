@@ -1,7 +1,8 @@
 #pragma once
 
 
-#include <CGM/Common.hpp>
+#include <CGM/Utils/Functions/Numbers.hpp>
+#include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Interpolations/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 

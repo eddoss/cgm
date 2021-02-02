@@ -254,14 +254,14 @@ spaceMatrix(const Vector<2,T>& x, const Vector<2,T>& y, const Vector<2,T>& posit
     {
         x.x, y.x, position.x,
         x.y, y.y, position.y,
-        zero<T>,  zero<T>, number<T>(1)
+        val<T>(0),  val<T>(0), val<T>(1)
     };
 #else
     return
     {
-        x.x, x.y, zero<T>,
-        y.x, y.y, zero<T>,
-        position.x, position.y, number<T>(1)
+        x.x, x.y, val<T>(0),
+        y.x, y.y, val<T>(0),
+        position.x, position.y, val<T>(1)
     };
 #endif
 }
@@ -277,14 +277,14 @@ spaceMatrix(const Matrix<2,2,T>& orientation, const Vector<2,T>& position)
     {
         orientation(0,0), orientation(0,1), position.x,
         orientation(1,0), orientation(1,1), position.y,
-        zero<T>, zero<T>, number<T>(1)
+        val<T>(0), val<T>(0), val<T>(1)
     };
 #else
     return
     {
-        orientation(0,0), orientation(0,1), zero<T>,
-        orientation(1,0), orientation(1,1), zero<T>,
-        position.x, position.y, number<T>(1)
+        orientation(0,0), orientation(0,1), val<T>(0),
+        orientation(1,0), orientation(1,1), val<T>(0),
+        position.x, position.y, val<T>(1)
     };
 #endif
 }

@@ -15,15 +15,15 @@ axis()
 {
     if constexpr (Axis == E3D::X)
     {
-        return Vector<3,T>{number<T>(1), zero<T>, zero<T>};
+        return Vector<3,T>{val<T>(1), val<T>(0), val<T>(0)};
     }
     else if constexpr (Axis == E3D::Y)
     {
-        return Vector<3,T>{zero<T>, number<T>(1), zero<T>};
+        return Vector<3,T>{val<T>(0), val<T>(1), val<T>(0)};
     }
     else
     {
-        return Vector<3,T>{zero<T>, zero<T>, number<T>(1)};
+        return Vector<3,T>{val<T>(0), val<T>(0), val<T>(1)};
     }
 }
 
@@ -33,7 +33,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 x()
 {
-    return {number<T>(1), zero<T>, zero<T>};
+    return {val<T>(1), val<T>(0), val<T>(0)};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -42,7 +42,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 y()
 {
-    return {zero<T>, number<T>(1), zero<T>};
+    return {val<T>(0), val<T>(1), val<T>(0)};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -51,7 +51,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 z()
 {
-    return {zero<T>, zero<T>, number<T>(1)};
+    return {val<T>(0), val<T>(0), val<T>(1)};
 }
 
 /* ####################################################################################### */

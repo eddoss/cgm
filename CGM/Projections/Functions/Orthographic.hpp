@@ -21,7 +21,7 @@ CGM_NAMESPACE_BEGIN
  */
 template<typename T>
 constexpr Vector<2,T>
-orthographicViewport(T aspect, T scale = number<T>(1));
+orthographicViewport(T aspect, T scale = val<T>(1));
 
 /**
  * Create ray from projector to specific viewport position.

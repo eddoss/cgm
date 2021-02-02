@@ -212,7 +212,7 @@ dot(const Vector<D,T>& A, const Vector<D,T>& B)
     }
     if constexpr (D > 4)
     {
-        T sum {zero<T>};
+        T sum {val<T>(0)};
         for (size_t i = 0; i < D; ++i)
         {
             sum += A[i] * B[i];
@@ -238,9 +238,9 @@ length(const Vector<D,T>& vector)
 {
     const T sum {dot(vector, vector)};
 
-    if (eq(sum, zero<T>))
+    if (eq(sum, val<T>(0)))
     {
-        return zero<T>;
+        return val<T>(0);
     }
     else
     {

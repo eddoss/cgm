@@ -357,7 +357,7 @@ trace(const Matrix<S,S,T>& matrix)
     }
     else
     {
-        T sum {zero<T>};
+        T sum {val<T>(0)};
 
         for (size_t i = 0; i < S; ++i)
         {
@@ -547,7 +547,7 @@ diagonal(const Matrix<S,S,T>& matrix)
 {
     for (size_t i = 0; i < S; ++i)
     {
-        if (eq(matrix(i,i), zero<T>))
+        if (eq(matrix(i,i), val<T>(0)))
         {
             return false;
         }
@@ -559,7 +559,7 @@ diagonal(const Matrix<S,S,T>& matrix)
         {
             if (m == n) {continue;}
 
-            if (neq(matrix(m,n), zero<T>))
+            if (neq(matrix(m,n), val<T>(0)))
             {
                 return false;
             }
@@ -576,7 +576,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance)
 {
     for (size_t i = 0; i < S; ++i)
     {
-        if (eq(matrix(i,i), zero<T>), tolerance)
+        if (eq(matrix(i,i), val<T>(0)), tolerance)
         {
             return false;
         }
@@ -588,7 +588,7 @@ diagonal(const Matrix<S,S,T>& matrix, T tolerance)
         {
             if (m == n) {continue;}
 
-            if (neq(matrix(m,n), zero<T>, tolerance))
+            if (neq(matrix(m,n), val<T>(0), tolerance))
             {
                 return false;
             }
@@ -672,33 +672,33 @@ identity()
     {
         return
         {
-            number<T>(1), number<T>(0),
-            number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0),
+            val<T>(0), val<T>(1)
         };
     }
     else if constexpr (S==3)
     {
         return
         {
-            number<T>(1), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(1), number<T>(0),
-            number<T>(0), number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(1), val<T>(0),
+            val<T>(0), val<T>(0), val<T>(1)
         };
     }
     else if constexpr (S==4)
     {
         return
         {
-            number<T>(1), number<T>(0), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(1), number<T>(0), number<T>(0),
-            number<T>(0), number<T>(0), number<T>(1), number<T>(0),
-            number<T>(0), number<T>(0), number<T>(0), number<T>(1)
+            val<T>(1), val<T>(0), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(1), val<T>(0), val<T>(0),
+            val<T>(0), val<T>(0), val<T>(1), val<T>(0),
+            val<T>(0), val<T>(0), val<T>(0), val<T>(1)
         };
     }
     else
     {
-        Matrix<S,S,T> matrix(zero<T>);
-        for (size_t i = 0; i < S; ++i) matrix(i,i) = number<T>(1);
+        Matrix<S,S,T> matrix(val<T>(0));
+        for (size_t i = 0; i < S; ++i) matrix(i,i) = val<T>(1);
         return matrix;
     }
 }
@@ -711,48 +711,48 @@ setIdentity(Matrix<S,S,T>& matrix)
 {
     if constexpr (S==2)
     {
-        matrix(0,0) = number<T>(1);
-        matrix(1,1) = number<T>(1);
-        matrix(0,1) = zero<T>;
-        matrix(1,0) = zero<T>;
+        matrix(0,0) = val<T>(1);
+        matrix(1,1) = val<T>(1);
+        matrix(0,1) = val<T>(0);
+        matrix(1,0) = val<T>(0);
     }
     else if constexpr (S==3)
     {
-        matrix(0,0) = number<T>(1);
-        matrix(1,1) = number<T>(1);
-        matrix(2,2) = number<T>(1);
-        matrix(0,1) = zero<T>;
-        matrix(0,2) = zero<T>;
-        matrix(1,0) = zero<T>;
-        matrix(1,2) = zero<T>;
-        matrix(2,0) = zero<T>;
-        matrix(2,1) = zero<T>;
+        matrix(0,0) = val<T>(1);
+        matrix(1,1) = val<T>(1);
+        matrix(2,2) = val<T>(1);
+        matrix(0,1) = val<T>(0);
+        matrix(0,2) = val<T>(0);
+        matrix(1,0) = val<T>(0);
+        matrix(1,2) = val<T>(0);
+        matrix(2,0) = val<T>(0);
+        matrix(2,1) = val<T>(0);
     }
     else if constexpr (S==4)
     {
-        matrix(0,0) = number<T>(1);
-        matrix(1,1) = number<T>(1);
-        matrix(2,2) = number<T>(1);
-        matrix(3,3) = number<T>(1);
-        matrix(0,1) = zero<T>;
-        matrix(0,2) = zero<T>;
-        matrix(0,3) = zero<T>;
-        matrix(1,0) = zero<T>;
-        matrix(1,2) = zero<T>;
-        matrix(1,3) = zero<T>;
-        matrix(2,0) = zero<T>;
-        matrix(2,1) = zero<T>;
-        matrix(2,3) = zero<T>;
-        matrix(3,0) = zero<T>;
-        matrix(3,1) = zero<T>;
-        matrix(3,2) = zero<T>;
+        matrix(0,0) = val<T>(1);
+        matrix(1,1) = val<T>(1);
+        matrix(2,2) = val<T>(1);
+        matrix(3,3) = val<T>(1);
+        matrix(0,1) = val<T>(0);
+        matrix(0,2) = val<T>(0);
+        matrix(0,3) = val<T>(0);
+        matrix(1,0) = val<T>(0);
+        matrix(1,2) = val<T>(0);
+        matrix(1,3) = val<T>(0);
+        matrix(2,0) = val<T>(0);
+        matrix(2,1) = val<T>(0);
+        matrix(2,3) = val<T>(0);
+        matrix(3,0) = val<T>(0);
+        matrix(3,1) = val<T>(0);
+        matrix(3,2) = val<T>(0);
     }
     else
     {
-        matrix = zero<T>;
+        matrix = val<T>(0);
         for (size_t i = 0; i < S; ++i)
         {
-            matrix(i,i) = number<T>(1);
+            matrix(i,i) = val<T>(1);
         }
     }
 }

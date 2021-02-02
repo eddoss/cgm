@@ -931,7 +931,7 @@ operator | (const CGM::Vector<D,T>& A, const CGM::Vector<D,T>& B)
     }
     else
     {
-        T result {CGM::zero<T>};
+        T result {CGM::val<T>(0)};
         for (auto i = 0; i < D; ++i)
         {
             result += A[i] * B[i];

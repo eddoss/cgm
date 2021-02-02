@@ -8,11 +8,11 @@ CGM_NAMESPACE_BEGIN
 template<typename T>
 constexpr
 Transforms<T>::Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vector<3,T>& r)
-    : pivot(x<T>(), y<T>(), z<T>(), Vector<3,T>(zero<T>))
+    : pivot(x<T>(), y<T>(), z<T>(), Vector<3,T>(val<T>(0)))
     , translation(t)
     , rotation(r)
     , scale(s)
-    , uniformScale(number<T>(1))
+    , uniformScale(val<T>(1))
     , transformOrder(ETransformOrder::SRT)
     , rotationOrder(ERotationOrder::XYZ)
 {
@@ -28,7 +28,7 @@ Transforms<T>::Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vect
     , translation(t)
     , rotation(r)
     , scale(s)
-    , uniformScale(number<T>(1))
+    , uniformScale(val<T>(1))
     , transformOrder(ETransformOrder::SRT)
     , rotationOrder(ERotationOrder::XYZ)
 {
@@ -40,7 +40,7 @@ Transforms<T>::Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vect
 template<typename T>
 constexpr
 Transforms<T>::Transforms(const Vector<3,T>& t, const Vector<3,T>& s, const Vector<3,T>& r, T us)
-    : pivot(x<T>(), y<T>(), z<T>(), Vector<3,T>(zero<T>))
+    : pivot(x<T>(), y<T>(), z<T>(), Vector<3,T>(val<T>(0)))
     , translation(t)
     , rotation(r)
     , scale(s)

@@ -2206,7 +2206,7 @@ operator *= (CGM::Matrix<S,S,T>& A, const CGM::Matrix<S,S,T>& B)
         {
             for (auto r = 0; r < S; ++r)
             {
-                sum = CGM::zero<T>;
+                sum = CGM::val<T>(0);
                 for (auto i = 0; i < S; ++i)
                 {
                     sum += A(r,i) * B(i,c);

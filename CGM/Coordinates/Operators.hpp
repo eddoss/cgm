@@ -1,7 +1,8 @@
 #pragma once
 
 
-#include <CGM/Common.hpp>
+#include <CGM/Utils/Functions/Numbers.hpp>
+#include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Coordinates/ModuleGlobals.hpp>
 #include <CGM/Coordinates/Types/Polar.hpp>
 #include <CGM/Coordinates/Types/Spherical.hpp>

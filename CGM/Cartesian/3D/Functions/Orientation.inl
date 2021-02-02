@@ -38,9 +38,9 @@ orientationAxes(const Quaternion<T>& orientation)
 {
     return Axes<T>
     (
-        oriented({number<T>(1),zero<T>,zero<T>}, orientation),
-        oriented({zero<T>,number<T>(1),zero<T>}, orientation),
-        oriented({zero<T>,zero<T>,number<T>(1)}, orientation)
+        oriented({val<T>(1),val<T>(0),val<T>(0)}, orientation),
+        oriented({val<T>(0),val<T>(1),val<T>(0)}, orientation),
+        oriented({val<T>(0),val<T>(0),val<T>(1)}, orientation)
     );
 }
 

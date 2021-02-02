@@ -9,11 +9,11 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 template<typename T>
 constexpr
 Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
+    : pivot(x<T>(), y<T>(), Vector<2,T>(val<T>(0)))
     , translation(t)
     , rotation(r)
     , scale(s)
-    , uniformScale(number<T>(1))
+    , uniformScale(val<T>(1))
     , transformOrder(ETransformOrder::SRT)
 {
 
@@ -24,7 +24,7 @@ Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r)
 template<typename T>
 constexpr
 Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
+    : pivot(x<T>(), y<T>(), Vector<2,T>(val<T>(0)))
     , translation(t)
     , rotation(r)
     , scale(s)
@@ -43,7 +43,7 @@ Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, const
     , translation(t)
     , rotation(r)
     , scale(s)
-    , uniformScale(number<T>(1))
+    , uniformScale(val<T>(1))
     , transformOrder(ETransformOrder::SRT)
 {
 
@@ -69,7 +69,7 @@ Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us,
 template<typename T>
 constexpr
 Transforms<T>::Transforms(const Vector<2,T>& t, const Vector<2,T>& s, T r, T us, const Pivot<T>& p, ETransformOrder to)
-    : pivot(x<T>(), y<T>(), Vector<2,T>(zero<T>))
+    : pivot(x<T>(), y<T>(), Vector<2,T>(val<T>(0)))
     , translation(t)
     , rotation(r)
     , scale(s)

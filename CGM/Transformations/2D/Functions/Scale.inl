@@ -16,11 +16,11 @@ scale(Vector<2,T>& vector, T value)
 {
     if constexpr (Axis == E2D::X)
     {
-        vector.x += vector.x * (value - number<T>(1));
+        vector.x += vector.x * (value - val<T>(1));
     }
     else
     {
-        vector.y += vector.y * (value - number<T>(1));
+        vector.y += vector.y * (value - val<T>(1));
     }
 }
 
@@ -40,7 +40,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<2,T>& vector, T value, const Vector<2,T>& direction)
 {
-    vector += direction * (value - number<T>(1)) * shortestDistance(vector, direction);
+    vector += direction * (value - val<T>(1)) * shortestDistance(vector, direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 scale(Vector<2,T>& vector, T value, const ArbitraryAxis<T>& axis)
 {
-    vector += axis.direction * (value - number<T>(1)) * shortestDistance(vector - axis.position, axis.direction);
+    vector += axis.direction * (value - val<T>(1)) * shortestDistance(vector - axis.position, axis.direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -59,8 +59,8 @@ constexpr void
 scale(Vector<2,T>& vector, const Vector<2,T>& values, const Pivot<T>& pivotPoint)
 {
     auto vec = vector - pivotPoint.position;
-    vector += pivotPoint.axes.x * (values.x - number<T>(1)) * shortestDistance(vec, pivotPoint.axes.x);
-    vector += pivotPoint.axes.y * (values.y - number<T>(1)) * shortestDistance(vec, pivotPoint.axes.y);
+    vector += pivotPoint.axes.x * (values.x - val<T>(1)) * shortestDistance(vec, pivotPoint.axes.x);
+    vector += pivotPoint.axes.y * (values.y - val<T>(1)) * shortestDistance(vec, pivotPoint.axes.y);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -110,8 +110,8 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
 {
     auto scales = Matrix<2,2,T>
     {
-        values.x, number<T>(0),
-        number<T>(0), values.y
+        values.x, val<T>(0),
+        val<T>(0), values.y
     };
 
     if constexpr (Space == ESpace::World)
@@ -160,7 +160,7 @@ constexpr void
 scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
     auto pivotPoint = pivot;
-    pivotPoint.position = Vector<2,T>(zero<T>);
+    pivotPoint.position = Vector<2,T>(val<T>(0));
 
     if constexpr (Space == ESpace::World)
     {
@@ -177,7 +177,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot)
         {
             converted<ESpace::World>(pivotPoint.axes.x, matrix),
             converted<ESpace::World>(pivotPoint.axes.y, matrix),
-            Vector<2,T>(zero<T>)
+            Vector<2,T>(val<T>(0))
         };
 
         scale<ESpace::World>(matrix, values, wsPivot);
@@ -233,9 +233,9 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values)
 {
     auto scales = Matrix<3,3,T>
     {
-        values.x, number<T>(0), number<T>(0),
-        number<T>(0), values.y, number<T>(0),
-        number<T>(0), number<T>(0), number<T>(1)
+        values.x, val<T>(0), val<T>(0),
+        val<T>(0), values.y, val<T>(0),
+        val<T>(0), val<T>(0), val<T>(1)
     };
 
     if constexpr (Space == ESpace::World)
@@ -327,7 +327,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivotPoi
         auto axes = orientationAxes(matrix);
 
         auto axesPivot = pivotPoint;
-        axesPivot.position = Vector<2,T>(zero<T>);
+        axesPivot.position = Vector<2,T>(val<T>(0));
 
         scale(axes.x, values, axesPivot);
         scale(axes.y, values, axesPivot);
@@ -845,16 +845,16 @@ scalingMatrix(T value)
         {
             return
             {
-                value, number<T>(0),
-                number<T>(0), number<T>(1)
+                value, val<T>(0),
+                val<T>(0), val<T>(1)
             };
         }
         else
         {
             return
             {
-                number<T>(1), number<T>(0),
-                number<T>(0), value
+                val<T>(1), val<T>(0),
+                val<T>(0), value
             };
         }
     }
@@ -864,18 +864,18 @@ scalingMatrix(T value)
         {
             return
             {
-                value, number<T>(0), number<T>(0),
-                number<T>(0), number<T>(1), number<T>(0),
-                number<T>(0), number<T>(0), number<T>(1)
+                value, val<T>(0), val<T>(0),
+                val<T>(0), val<T>(1), val<T>(0),
+                val<T>(0), val<T>(0), val<T>(1)
             };
         }
         else
         {
             return
             {
-                number<T>(1), number<T>(0), number<T>(0),
-                number<T>(0), value, number<T>(0),
-                number<T>(0), number<T>(0), number<T>(1)
+                val<T>(1), val<T>(0), val<T>(0),
+                val<T>(0), value, val<T>(0),
+                val<T>(0), val<T>(0), val<T>(1)
             };
         }
     }
@@ -891,17 +891,17 @@ scalingMatrix(const Vector<2,T>& values)
     {
         return
         {
-            values.x, number<T>(0),
-            number<T>(0), values.y,
+            values.x, val<T>(0),
+            val<T>(0), values.y,
         };
     }
     else
     {
         return
         {
-            values.x, number<T>(0), number<T>(0),
-            number<T>(0), values.y, number<T>(0),
-            number<T>(0), number<T>(0), number<T>(1)
+            values.x, val<T>(0), val<T>(0),
+            val<T>(0), values.y, val<T>(0),
+            val<T>(0), val<T>(0), val<T>(1)
         };
     }
 }

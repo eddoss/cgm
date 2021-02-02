@@ -27,14 +27,14 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_number<T,T>
 clamp01(T value)
 {
-    return value > number<T>(1) ? number<T>(1) : value < number<T>(0) ? number<T>(0) : value;
+    return value > val<T>(1) ? val<T>(1) : value < val<T>(0) ? val<T>(0) : value;
 }
 
 template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 clamp11(T value)
 {
-    return value > number<T>(1) ? number<T>(1) : value < number<T>(-1) ? number<T>(-1) : value;
+    return value > val<T>(1) ? val<T>(1) : value < val<T>(-1) ? val<T>(-1) : value;
 }
 
 /* ####################################################################################### */

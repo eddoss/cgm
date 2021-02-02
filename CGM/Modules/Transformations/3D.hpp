@@ -1,5 +1,3 @@
-#include <CGM/Global.hpp>
-#include <CGM/Common.hpp>
 #include <CGM/Transformations/Common.hpp>
 #include <CGM/Transformations/ModuleGlobals.hpp>
 #include <CGM/Transformations/3D/ModuleGlobals.hpp>

@@ -31,7 +31,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 ufit10(T value, T newMin, T newMax)
 {
-    return -(value - number<T>(1)) * (newMax - newMin) + newMin;
+    return -(value - val<T>(1)) * (newMax - newMin) + newMin;
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -40,7 +40,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T,T>
 ufit11(T value, T newMin, T newMax)
 {
-    return (value - number<T>(-1)) * number<T>(0.5) * (newMax - newMin) + newMin;
+    return (value - val<T>(-1)) * val<T>(0.5) * (newMax - newMin) + newMin;
 }
 
 /* ####################################################################################### */

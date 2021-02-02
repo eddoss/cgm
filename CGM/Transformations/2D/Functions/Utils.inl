@@ -23,7 +23,7 @@ zeroPivot()
     {
         x<T>(),
         y<T>(),
-        Vector<2,T>(zero<T>)
+        Vector<2,T>(val<T>(0))
     };
 }
 
