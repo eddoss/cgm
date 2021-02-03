@@ -8,6 +8,16 @@
 CGM_NAMESPACE_BEGIN
 CGM_COORD_NAMESPACE_BEGIN
 
+/**
+ * Return only values clamped in range [0, PI].
+ **/
+template <typename T>
+struct SphericalLatitudeConstraint
+{
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+    operator () (T value);
+};
+
 template<typename T=FLOAT>
 struct Spherical
 {
@@ -37,7 +47,7 @@ public: /* Properties getters */
     /**
      * Latitude angle. Vertical angle in radians [-PI, PI].
      */
-    Angle_PI_PI<T>
+    Number<T, SphericalLatitudeConstraint<T>>
     latitude;
 
     /**
