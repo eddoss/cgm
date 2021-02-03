@@ -14,4 +14,29 @@ val(BT value)
 
 /* --------------------------------------------------------------------------------------- */
 
+template<typename T, typename Constraint>
+constexpr CGM_FORCEINLINE Number<T, Constraint>
+num(T value)
+{
+    return Number<T, Constraint>(value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE PositiveNumber<T>
+posnum(T value)
+{
+    return PositiveNumber<T>(value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE NegativeNumber<T>
+negnum(T value)
+{
+    return NegativeNumber<T>(value);
+}
+
 CGM_NAMESPACE_END

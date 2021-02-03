@@ -310,22 +310,17 @@ using Length            = PositiveNumber<T>;
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle             = Number<T, RadiansAngleConstraint_2PI_2PI<T>>;
+using Angle             = Number<T, AngleConstraint_2PI_2PI<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle_0_PI        = Number<T, RadiansAngleConstraint_0_PI<T>>;
+using Angle_0_2PI       = Number<T, AngleConstraint_0_2PI<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle_0_2PI       = Number<T, RadiansAngleConstraint_0_2PI<T>>;
-
-/* --------------------------------------------------------------------------------------- */
-
-template<typename T=FLOAT>
-using Angle_PI_PI       = Number<T, RadiansAngleConstraint_PI_PI<T>>;
+using Angle_PI_PI       = Number<T, AngleConstraint_PI_PI<T>>;
 
 CGM_NAMESPACE_END
 

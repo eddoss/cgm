@@ -2,6 +2,7 @@
 
 
 #include <CGM/Utils/ModuleGlobals.hpp>
+#include <CGM/Utils/Functions/Angles.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -35,20 +36,10 @@ struct NegativeNumberConstraint
 /* ####################################################################################### */
 
 /**
- * Return only values clamped in range [0, PI].
- **/
-template <typename T>
-struct RadiansAngleConstraint_0_PI
-{
-    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
-    operator () (T value);
-};
-
-/**
  * Return only values clamped in range [0, 2*PI].
  **/
 template <typename T>
-struct RadiansAngleConstraint_0_2PI
+struct AngleConstraint_0_2PI
 {
     constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
@@ -58,7 +49,7 @@ struct RadiansAngleConstraint_0_2PI
  * Return only values clamped in range [-PI, PI].
  **/
 template <typename T>
-struct RadiansAngleConstraint_PI_PI
+struct AngleConstraint_PI_PI
 {
     constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);
@@ -68,7 +59,7 @@ struct RadiansAngleConstraint_PI_PI
  * Return only values clamped in range [-2PI, 2PI].
  **/
 template <typename T>
-struct RadiansAngleConstraint_2PI_2PI
+struct AngleConstraint_2PI_2PI
 {
     constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
     operator () (T value);

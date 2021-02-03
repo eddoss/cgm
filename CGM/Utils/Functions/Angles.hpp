@@ -2,18 +2,31 @@
 
 
 #include <CGM/Utils/ModuleGlobals.hpp>
-#include <CGM/Utils/Functions/Numbers.hpp>
 #include <CGM/Utils/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
 
 /**
- * Creates constrained angle [-2PI, 2PI].
+ * Normalize angle to [-2PI, 2PI] range.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE Angle<T>
-angle(T value);
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
+normalizedAngle(T angle);
+
+/**
+ * Normalize angle to [0, 2PI] range.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
+normalizedAngle_0_2PI(T angle);
+
+/**
+ * Normalize angle to [0, PI] range.
+ */
+template<typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
+normalizedAngle_PI_PI(T angle);
 
 /**
  * Convert degrees to radians.

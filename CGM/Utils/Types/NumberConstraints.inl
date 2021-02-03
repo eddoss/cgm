@@ -27,30 +27,18 @@ NegativeNumberConstraint<T>::operator () (T value)
 
 template <typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
-RadiansAngleConstraint_0_PI<T>::operator () (T value)
+AngleConstraint_0_2PI<T>::operator () (T value)
 {
-    // TODO Normalize angle at first !!!
-    return value > T(CGM_PI) ? T(CGM_PI) : value < T(0) ? T(0) : value;
+    return normalizedAngle_0_2PI(value);
 }
 
 /* --------------------------------------------------------------------------------------- */
 
 template <typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
-RadiansAngleConstraint_0_2PI<T>::operator () (T value)
+AngleConstraint_PI_PI<T>::operator () (T value)
 {
-    // TODO Normalize angle at first !!!
-    return value > T(CGM_PI2) ? T(CGM_PI2) : value < T(0) ? T(0) : value;
-}
-
-/* --------------------------------------------------------------------------------------- */
-
-template <typename T>
-constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
-RadiansAngleConstraint_PI_PI<T>::operator () (T value)
-{
-    // TODO Normalize angle at first !!!
-    return value > T(CGM_PI) ? T(CGM_PI) : value < T(-CGM_PI) ? T(-CGM_PI) : value;
+    return normalizedAngle_PI_PI(value);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -58,10 +46,9 @@ RadiansAngleConstraint_PI_PI<T>::operator () (T value)
 
 template <typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
-RadiansAngleConstraint_2PI_2PI<T>::operator () (T value)
+AngleConstraint_2PI_2PI<T>::operator () (T value)
 {
-    // TODO Normalize angle at first !!!
-    return value > T(CGM_PI2) ? T(CGM_PI2) : value < T(-CGM_PI2) ? T(-CGM_PI2) : value;
+    return normalizedAngle(value);
 }
 
 CGM_NAMESPACE_END
