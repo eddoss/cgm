@@ -3,7 +3,6 @@
 #include "Axes.hpp"
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 template<typename T>
@@ -16,4 +15,3 @@ Axes<T>::Axes(const Vector<2,T>& X, const Vector<2,T>& Y)
 }
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END

@@ -3,7 +3,6 @@
 #include "Matrix3x3.hpp"
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -230,4 +229,3 @@ converted(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix
 }
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END

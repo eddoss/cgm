@@ -5,7 +5,6 @@
 #include <CGM/Utils/Types/Number.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
@@ -50,7 +49,6 @@ public: /* Constructors */
 };
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Size.inl"

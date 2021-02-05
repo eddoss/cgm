@@ -5,7 +5,6 @@
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
@@ -32,7 +31,6 @@ struct Axes
 };
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Axes.inl"

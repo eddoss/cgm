@@ -10,7 +10,6 @@
 #include <CGM/Cartesian/2D/Functions/Orientation.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -168,7 +167,6 @@ constexpr CGM_FORCEINLINE Matrix<2,2,T>
 converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Matrix2x2.inl"

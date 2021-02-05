@@ -10,7 +10,6 @@
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -86,7 +85,6 @@ constexpr CGM_FORCEINLINE Matrix<2,2,T>
 orientationMatrix(const Matrix<3,3,T>& space);
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Orientation.inl"

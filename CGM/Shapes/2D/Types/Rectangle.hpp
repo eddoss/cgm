@@ -8,7 +8,6 @@
 #include <CGM/Core/Types/Vector.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
@@ -40,11 +39,10 @@ public: /* Constructors */
      * Initialize position and size.
      */
     constexpr
-    Rectangle(const Vector<2,T>& Position, const Size<T>& Size);
+    Rectangle(const Vector<2,T>& Position, const Size<T>& SizeValue);
 };
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Rectangle.inl"

@@ -3,7 +3,6 @@
 #include "Axes.hpp"
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -43,4 +42,3 @@ y()
 }
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END

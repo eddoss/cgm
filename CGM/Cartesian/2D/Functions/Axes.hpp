@@ -8,7 +8,6 @@
 #include <CGM/Cartesian/2D/ModuleGlobals.hpp>
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -37,7 +36,6 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 y();
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
 
 
 #include "Axes.inl"

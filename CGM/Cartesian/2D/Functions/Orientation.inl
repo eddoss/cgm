@@ -3,7 +3,6 @@
 #include "Orientation.hpp"
 
 
-CGM_NAMESPACE_BEGIN
 CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
@@ -109,4 +108,3 @@ orientationMatrix(const Matrix<3,3,T>& space)
 }
 
 CGM_2D_NAMESPACE_END
-CGM_NAMESPACE_END
