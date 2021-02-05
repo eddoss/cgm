@@ -21,6 +21,33 @@ NegativeNumberConstraint<T>::operator () (T value)
     return value < T(0) ? value : T(0);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+Range01Constraint<T>::operator () (T value)
+{
+    return value >= T(1) ? T(1) : value <= T(0) ? T(0) : value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+Range10Constraint<T>::operator () (T value)
+{
+    return value >= T(0) ? T(0) : value <= T(-1) ? T(-1) : value;
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template <typename T>
+constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+Range11Constraint<T>::operator () (T value)
+{
+    return value >= T(1) ? T(1) : value <= T(-1) ? T(-1) : value;
+}
+
 /* ####################################################################################### */
 /* Angle */
 /* ####################################################################################### */

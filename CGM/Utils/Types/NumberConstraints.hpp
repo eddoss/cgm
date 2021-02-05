@@ -31,6 +31,36 @@ struct NegativeNumberConstraint
     operator () (T value);
 };
 
+/**
+ * Return only values in range [0, +1].
+ **/
+template <typename T>
+struct Range01Constraint
+{
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+    operator () (T value);
+};
+
+/**
+ * Return only values in range [-1, 0].
+ **/
+template <typename T>
+struct Range10Constraint
+{
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+    operator () (T value);
+};
+
+/**
+ * Return only values in range [-1, +1].
+ **/
+template <typename T>
+struct Range11Constraint
+{
+    constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>,T>
+    operator () (T value);
+};
+
 /* ####################################################################################### */
 /* Angle */
 /* ####################################################################################### */

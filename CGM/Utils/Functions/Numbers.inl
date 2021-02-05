@@ -39,4 +39,31 @@ negnum(T value)
     return NegativeNumber<T>(value);
 }
 
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Number10<T>
+num10(T value)
+{
+    return Number10<T>(value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Number01<T>
+num01(T value)
+{
+    return Number01<T>(value);
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T>
+constexpr CGM_FORCEINLINE Number11<T>
+num11(T value)
+{
+    return Number11<T>(value);
+}
+
 CGM_NAMESPACE_END

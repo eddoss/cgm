@@ -305,6 +305,21 @@ using NegativeNumber    = Number<T, NegativeNumberConstraint<T>>;
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
+using Number10          = Number<T, Range10Constraint<T>>;
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T=FLOAT>
+using Number01          = Number<T, Range01Constraint<T>>;
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T=FLOAT>
+using Number11          = Number<T, Range11Constraint<T>>;
+
+/* --------------------------------------------------------------------------------------- */
+
+template<typename T=FLOAT>
 using Length            = PositiveNumber<T>;
 
 /* --------------------------------------------------------------------------------------- */
