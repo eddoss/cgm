@@ -17,9 +17,9 @@ using namespace std;
 
 #define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
 #define CGM_PRINT_BASIS(b) \
-    std::cout << "\n\n" << CGM_XY::x(b) << ","  << std::endl; \
-    std::cout << CGM_XY::y(b) << "," << std::endl; \
-    std::cout << CGM_XY::position(b) << std::endl;
+    std::cout << "\n\n" << CGM_2D::x(b) << ","  << std::endl; \
+    std::cout << CGM_2D::y(b) << "," << std::endl; \
+    std::cout << CGM_2D::position(b) << std::endl;
 namespace cgm_xy_xform_tests_data
 {
     static CGM_XFORM2D::Transforms<double>
@@ -51,25 +51,25 @@ namespace cgm_xy_xform_tests_data
 
     // Rotated 28 deg
     // Position {0.25, 1.2}
-    const auto space = CGM_XY::spaceMatrix
+    const auto space = CGM_2D::spaceMatrix
     (
         CGM::Vector<2,double>{+0.88295, +0.46947},
         CGM::Vector<2,double>{-0.46947, +0.88295},
         CGM::Vector<2,double>{+0.25000, +1.20000}
     );
-    const auto orientation = CGM_XY::orientationMatrix(space);
+    const auto orientation = CGM_2D::orientationMatrix(space);
     const auto vector = CGM::Vector<2,double> {+0.250000, +1.200000};
     const auto normal = CGM::Vector<2,double> {+0.450318, +0.892868};
     const auto origin = CGM::Vector<2,double> {+0.300000, -0.130000};
     const auto ior = 0.25;
 
-    const auto mat2 = CGM_XY::orientationMatrix
+    const auto mat2 = CGM_2D::orientationMatrix
     (
         CGM::Vector<2,double>{+0.88295, +0.46947},
         CGM::Vector<2,double>{-0.46947, +0.88295}
     );
 
-    const auto mat3 = CGM_XY::spaceMatrix
+    const auto mat3 = CGM_2D::spaceMatrix
     (
         CGM::Vector<2,double>{+0.88295, +0.46947},
         CGM::Vector<2,double>{-0.46947, +0.88295},

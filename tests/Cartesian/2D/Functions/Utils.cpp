@@ -30,8 +30,8 @@ TEST(Cartesian_2D_Functions_Utils, GetX)
         0, 9, 8
     };
 
-    auto value2 = CGM_XY::x(mat2);
-    auto value3 = CGM_XY::x(mat3);
+    auto value2 = CGM_2D::x(mat2);
+    auto value3 = CGM_2D::x(mat3);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Vector<2,int> expec {2,3};
@@ -60,8 +60,8 @@ TEST(Cartesian_2D_Functions_Utils, GetY)
         0, 9, 8
     };
 
-    auto value2 = CGM_XY::y(mat2);
-    auto value3 = CGM_XY::y(mat3);
+    auto value2 = CGM_2D::y(mat2);
+    auto value3 = CGM_2D::y(mat3);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Vector<2,int> expec {4,6};
@@ -109,12 +109,12 @@ TEST(Cartesian_2D_Functions_Utils, SetXYZ)
 #endif
 
     CGM::Matrix<2,2,int> mat2(0);
-    CGM_XY::setX(mat2, x);
-    CGM_XY::setY(mat2, y);
+    CGM_2D::setX(mat2, x);
+    CGM_2D::setY(mat2, y);
 
     CGM::Matrix<3,3,int> mat3(0);
-    CGM_XY::setX(mat3, x);
-    CGM_XY::setY(mat3, y);
+    CGM_2D::setX(mat3, x);
+    CGM_2D::setY(mat3, y);
 
     ASSERT_TRUE(mat2 == expec2);
     ASSERT_TRUE(mat3 == expec3);
@@ -133,7 +133,7 @@ TEST(Cartesian_2D_Functions_Utils, GetPosition)
         0, 9, 1
     };
 
-    auto value = CGM_XY::position(mat);
+    auto value = CGM_2D::position(mat);
 #ifdef CGM_CFG_MATRIX_POSTMULT
     auto expec = CGM::Vector<2,int>{5,7};
 #else
@@ -154,7 +154,7 @@ TEST(Cartesian_2D_Functions_Utils, SetPosition)
         0, 0, 1
     };
 
-    CGM_XY::setPosition(mat, {2,3});
+    CGM_2D::setPosition(mat, {2,3});
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Matrix<3,3,int> expec
@@ -192,7 +192,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
         CGM::Vector<2,int> x {1,2};
         CGM::Vector<2,int> y {4,5};
 
-        CGM_XY::setOrientation(mat, x, y);
+        CGM_2D::setOrientation(mat, x, y);
 
         CGM::Matrix<3,3,int> expec
         {
@@ -201,8 +201,8 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        CGM_XY::setX(expec, x);
-        CGM_XY::setY(expec, y);
+        CGM_2D::setX(expec, x);
+        CGM_2D::setY(expec, y);
 
         ASSERT_TRUE(mat == expec);
     }
@@ -228,7 +228,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        CGM_XY::setOrientation(mat, orient);
+        CGM_2D::setOrientation(mat, orient);
 
         ASSERT_TRUE(mat == expec);
     }
@@ -255,7 +255,7 @@ TEST(Cartesian_2D_Functions_Utils, SetOrientation)
             0, 0, 1
         };
 
-        CGM_XY::setOrientation(mat, basis);
+        CGM_2D::setOrientation(mat, basis);
 
         ASSERT_TRUE(mat == expec);
     }
@@ -271,7 +271,7 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromAxes)
     CGM::Vector<2,int> Y {4,3};
     CGM::Vector<2,int> P {1,2};
 
-    auto basis = CGM_XY::spaceMatrix(X,Y,P);
+    auto basis = CGM_2D::spaceMatrix(X,Y,P);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Matrix<3,3,int> expec
@@ -303,7 +303,7 @@ TEST(Cartesian_2D_Functions_Utils, SpaceMatrix_FromMatrixAndPosition)
         4,3
     };
 
-    auto basis = CGM_XY::spaceMatrix(orientation, position);
+    auto basis = CGM_2D::spaceMatrix(orientation, position);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Matrix<3,3,int> expec
@@ -339,13 +339,13 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyVector2Matrix3)
     };
 
     {
-        auto res = CGM_XY::multiply<CGM_POINT>(vec, mat);
+        auto res = CGM_2D::multiply<CGM_POINT>(vec, mat);
         auto exp = CGM::Vector<2,int> {15,26};
         ASSERT_TRUE(res == exp);
     }
 
     {
-        auto res = CGM_XY::multiply<CGM_DIRECTION>(vec, mat);
+        auto res = CGM_2D::multiply<CGM_DIRECTION>(vec, mat);
         auto exp = CGM::Vector<2,int> {11,23};
         ASSERT_TRUE(res == exp);
     }
@@ -364,13 +364,13 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix3Vector2)
     };
 
     {
-        auto res = CGM_XY::multiply<CGM_POINT>(mat, vec);
+        auto res = CGM_2D::multiply<CGM_POINT>(mat, vec);
         auto exp = CGM::Vector<2,int> {15,26};
         ASSERT_TRUE(res == exp);
     }
 
     {
-        auto res = CGM_XY::multiply<CGM_DIRECTION>(mat, vec);
+        auto res = CGM_2D::multiply<CGM_DIRECTION>(mat, vec);
         auto exp = CGM::Vector<2,int> {11,23};
         ASSERT_TRUE(res == exp);
     }
@@ -400,7 +400,7 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix22Matrix3)
             6,5,3
         };
 
-        auto result = CGM_XY::multiply<2>(mat2, mat3);
+        auto result = CGM_2D::multiply<2>(mat2, mat3);
         ASSERT_TRUE(result == expect);
     }
     {
@@ -424,7 +424,7 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix22Matrix3)
             6,5,3
         };
 
-        auto result = CGM_XY::multiply<3>(mat2, mat3);
+        auto result = CGM_2D::multiply<3>(mat2, mat3);
         ASSERT_TRUE(result == expect);
     }
 }
@@ -453,7 +453,7 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix3Matrix2)
             6,5,3
         };
 
-        auto result = CGM_XY::multiply<2>(mat3, mat2);
+        auto result = CGM_2D::multiply<2>(mat3, mat2);
         ASSERT_TRUE(result == expect);
     }
     {
@@ -477,7 +477,7 @@ TEST(Cartesian_2D_Functions_Utils, MultiplyMatrix3Matrix2)
             6,5,3
         };
 
-        auto result = CGM_XY::multiply<3>(mat3, mat2);
+        auto result = CGM_2D::multiply<3>(mat3, mat2);
         ASSERT_TRUE(result == expect);
     }
 }

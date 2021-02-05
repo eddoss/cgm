@@ -13,7 +13,7 @@ TEST(Cartesian_2D_Functions_Matrix3x3_Converters, LocalToWorld_Mat2)
 {
     using namespace cgm_xy_converters_tests_data;
 
-    auto result = CGM_XY::converted<CGM_WORLD>(MAT3, A_MAT2);
+    auto result = CGM_2D::converted<CGM_WORLD>(MAT3, A_MAT2);
     ASSERT_TRUE(CGM::eq(result, EXPECT_MAT3_TO_WORLD_BY_MAT2, 0.0001));
 }
 
@@ -23,6 +23,6 @@ TEST(Cartesian_2D_Functions_Matrix3x3_Converters, LocalToWorld_Mat3)
 {
     using namespace cgm_xy_converters_tests_data;
 
-    auto result = CGM_XY::converted<CGM_WORLD>(MAT3, A_MAT3);
+    auto result = CGM_2D::converted<CGM_WORLD>(MAT3, A_MAT3);
     ASSERT_TRUE(CGM::eq(result, EXPECT_MAT3_TO_WORLD_BY_MAT3, 0.0001));
 }

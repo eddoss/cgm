@@ -5,7 +5,7 @@
 
 template <typename T>
 constexpr std::ostream&
-operator << (std::ostream& stream, const CGM_XY::Axes<T>& axes)
+operator << (std::ostream& stream, const CGM_2D::Axes<T>& axes)
 {
     CGM_PREPARE_IO_STREAM_FLAGS(stream)
 

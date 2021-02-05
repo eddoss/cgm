@@ -35,9 +35,14 @@
 /* Library namespaces macro */
 /* ####################################################################################### */
 
-#define CGM                 cgm
-#define CGM_NAMESPACE_BEGIN namespace CGM {
-#define CGM_NAMESPACE_END   }
+#define CGM                     cgm
+#define CGM_NAMESPACE_BEGIN     namespace CGM {
+#define CGM_NAMESPACE_END       }
+
+#define CGM_2D_NAMESPACE        xy
+#define CGM_2D_NAMESPACE_BEGIN  namespace CGM_2D_NAMESPACE {
+#define CGM_2D_NAMESPACE_END    }
+#define CGM_2D                  CGM::CGM_2D_NAMESPACE
 
 /* ####################################################################################### */
 /* Platform */

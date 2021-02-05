@@ -41,7 +41,7 @@ TEST(Transformations2D_Apply, Matrix2_Matrix2)
     namespace cgm_test = cgm_xy_xform_tests_data;
 
     const auto result = CGM_XFORM2D::applied(cgm_test::orientation, cgm_test::mat2);
-    const auto expect = CGM_XY::orientationMatrix
+    const auto expect = CGM_2D::orientationMatrix
     (
         CGM::Vector<2,double>{+0.559199, +0.829037},
         CGM::Vector<2,double>{-0.829037, +0.559199}
@@ -56,7 +56,7 @@ TEST(Transformations2D_Apply, Matrix3_Matrix3)
     namespace cgm_test = cgm_xy_xform_tests_data;
 
     const auto result = CGM_XFORM2D::applied(cgm_test::space, cgm_test::mat3);
-    const auto expect = CGM_XY::spaceMatrix
+    const auto expect = CGM_2D::spaceMatrix
     (
         CGM::Vector<2,double>{+0.559199, +0.829037},
         CGM::Vector<2,double>{-0.829037, +0.559199},

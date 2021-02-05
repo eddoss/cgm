@@ -11,7 +11,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace) */
@@ -167,7 +167,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Matrix<2,2,T>
 converted(const Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

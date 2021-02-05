@@ -21,10 +21,10 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromXY)
     CGM::Vector<2,int> x {1, 2};
     CGM::Vector<2,int> y {4, 5};
 
-    auto axes = CGM_XY::orientationAxes(x, y);
+    auto axes = CGM_2D::orientationAxes(x, y);
 
-    ASSERT_TRUE(CGM_XY::x(axes) == x);
-    ASSERT_TRUE(CGM_XY::y(axes) == y);
+    ASSERT_TRUE(CGM_2D::x(axes) == x);
+    ASSERT_TRUE(CGM_2D::y(axes) == y);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix2x2)
     };
 #endif
 
-    auto [x, y] = CGM_XY::orientationAxes(mat);
+    auto [x, y] = CGM_2D::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -78,7 +78,7 @@ TEST(Cartesian_2D_Functions_OrientationAxes, FromMatrix3x3)
     };
 #endif
 
-    auto [x, y] = CGM_XY::orientationAxes(mat);
+    auto [x, y] = CGM_2D::orientationAxes(mat);
 
     ASSERT_TRUE(in_x == x);
     ASSERT_TRUE(in_y == y);
@@ -107,7 +107,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromXY)
     };
 #endif
 
-    auto result = CGM_XY::orientationMatrix(x, y);
+    auto result = CGM_2D::orientationMatrix(x, y);
 
     ASSERT_TRUE(result == expect);
 }
@@ -119,7 +119,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromAxesTuple)
     CGM::Vector<2,int> x {1, 2};
     CGM::Vector<2,int> y {4, 5};
 
-    auto axes = CGM_XY::orientationAxes(x,y);
+    auto axes = CGM_2D::orientationAxes(x,y);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     CGM::Matrix<2,2,int> expect
@@ -135,7 +135,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromAxesTuple)
     };
 #endif
 
-    auto result = CGM_XY::orientationMatrix(axes);
+    auto result = CGM_2D::orientationMatrix(axes);
 
     ASSERT_TRUE(result == expect);
 }
@@ -162,7 +162,7 @@ TEST(Cartesian_2D_Functions_OrientationMatrix, FromMatrix3x3)
         c, d
     };
 
-    auto result = CGM_XY::orientationMatrix(mat);
+    auto result = CGM_2D::orientationMatrix(mat);
 
     ASSERT_TRUE(result == expect);
 }

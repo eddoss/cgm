@@ -9,7 +9,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y axes */
@@ -36,7 +36,7 @@ template<typename T=FLOAT>
 constexpr CGM_FORCEINLINE Vector<2,T>
 y();
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

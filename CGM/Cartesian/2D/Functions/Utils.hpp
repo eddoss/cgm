@@ -12,7 +12,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y axes */
@@ -337,7 +337,7 @@ template<size_t N, typename T>
 constexpr std::enable_if_t<(N == 2 || N == 3), Matrix<N,N,T>>
 multiply(const Matrix<3,3,T>& A, const Matrix<2,2,T>& B);
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 

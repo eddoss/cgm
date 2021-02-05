@@ -85,13 +85,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::SRT));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980}
@@ -102,13 +102,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::STR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980}
@@ -119,13 +119,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::RST));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215}
@@ -136,13 +136,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::RTS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215}
@@ -153,13 +153,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::TSR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980}
@@ -170,13 +170,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::TRS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154}
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215}
@@ -189,13 +189,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::SRT));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 }
@@ -206,13 +206,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::STR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 }
@@ -223,13 +223,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::RST));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 }
@@ -240,13 +240,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::RTS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 }
@@ -257,13 +257,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::TSR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 }
@@ -274,13 +274,13 @@ TEST(Transformations2D_Transform, Matrix2)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::orientation, cgm_test::get(CGM::ETransformOrder::TRS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 }
             );
         #else
-            const auto expect = CGM_XY::orientationMatrix
+            const auto expect = CGM_2D::orientationMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 }
@@ -301,14 +301,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::SRT));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389},
                 CGM::Vector<2,double>{+2.18460, +2.89412}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980},
@@ -320,14 +320,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::STR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389},
                 CGM::Vector<2,double>{+1.72947, +2.55545}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980},
@@ -339,14 +339,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::RST));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154},
                 CGM::Vector<2,double>{+1.83102, +2.46839}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215},
@@ -358,14 +358,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::RTS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154},
                 CGM::Vector<2,double>{+3.52992, +0.29565}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215},
@@ -377,14 +377,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::TSR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.94926, +0.20488},
                 CGM::Vector<2,double>{-0.30731, +2.92389},
                 CGM::Vector<2,double>{+2.49074, -0.09550}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.25986, +1.50145},
                 CGM::Vector<2,double>{-2.25217, +1.88980},
@@ -396,14 +396,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_WORLD>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::TRS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+2.12161, -0.11927},
                 CGM::Vector<2,double>{-0.63146, +2.75154},
                 CGM::Vector<2,double>{+2.67713, -0.44202}
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{+1.08751, +1.82559},
                 CGM::Vector<2,double>{-1.92803, +2.06215},
@@ -417,14 +417,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::SRT));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 },
                 CGM::Vector<2,double>{ +1.095035, +1.625152 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 },
@@ -436,14 +436,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::STR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 },
                 CGM::Vector<2,double>{ +0.852172, +1.112449 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 },
@@ -455,14 +455,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::RST));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 },
                 CGM::Vector<2,double>{ +0.937481, +1.530972 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 },
@@ -474,14 +474,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::RTS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 },
                 CGM::Vector<2,double>{ +3.457554, +0.410129 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 },
@@ -493,14 +493,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::TSR));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.206538, -0.176554 },
                 CGM::Vector<2,double>{ -0.688732, +2.666627 },
                 CGM::Vector<2,double>{ +2.768868, -0.870815 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.709895, +1.405788 },
                 CGM::Vector<2,double>{ -2.347827, +1.439778 },
@@ -512,14 +512,14 @@ TEST(Transformations2D_Transform, Matrix3)
         {
             const auto result = CGM_XFORM2D::transformed<CGM_LOCAL>(cgm_test::space, cgm_test::get(CGM::ETransformOrder::TRS));
         #ifdef CGM_CFG_LHS
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +2.571642, -0.214931 },
                 CGM::Vector<2,double>{ -0.727109, +2.301524 },
                 CGM::Vector<2,double>{ +3.050895, -0.641548 }
             );
         #else
-            const auto expect = CGM_XY::spaceMatrix
+            const auto expect = CGM_2D::spaceMatrix
             (
                 CGM::Vector<2,double>{ +1.344792, +1.444164 },
                 CGM::Vector<2,double>{ -2.309451, +1.804881 },
@@ -540,7 +540,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
 #ifdef CGM_CFG_LHS
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::SRT));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, +0.64378},
             CGM::Vector<2,double>{-1.19179, +2.67783},
@@ -550,7 +550,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::STR));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, +0.64378},
             CGM::Vector<2,double>{-1.19179, +2.67783},
@@ -560,7 +560,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::RST));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, +0.43849},
             CGM::Vector<2,double>{-1.39708, +2.37348},
@@ -570,7 +570,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::RTS));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, +0.43849},
             CGM::Vector<2,double>{-1.39708, +2.37348},
@@ -580,7 +580,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::TSR));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, +0.64378},
             CGM::Vector<2,double>{-1.19179, +2.67783},
@@ -590,7 +590,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::TRS));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, +0.43849},
             CGM::Vector<2,double>{-1.39708, +2.37348},
@@ -601,7 +601,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
 #else
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::SRT));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, -1.39708},
             CGM::Vector<2,double>{+0.43849, +2.37348},
@@ -611,7 +611,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::STR));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, -1.39708},
             CGM::Vector<2,double>{+0.43849, +2.37348},
@@ -621,7 +621,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::RST));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, -1.19179},
             CGM::Vector<2,double>{+0.64378, +2.67783},
@@ -631,7 +631,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::RTS));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, -1.19179},
             CGM::Vector<2,double>{+0.64378, +2.67783},
@@ -641,7 +641,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::TSR));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+2.16972, -1.39708},
             CGM::Vector<2,double>{+0.43849, +2.37348},
@@ -651,7 +651,7 @@ TEST(Transformations2D_Transform, XFormMatrix)
     }
     {
         const auto result = CGM_XFORM2D::transformMatrix(cgm_test::get(CGM::ETransformOrder::TRS));
-        const auto expect = CGM_XY::spaceMatrix
+        const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+1.86537, -1.19179},
             CGM::Vector<2,double>{+0.64378, +2.67783},

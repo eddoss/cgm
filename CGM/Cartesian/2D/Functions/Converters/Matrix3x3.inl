@@ -4,7 +4,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local / local to global (inplace)
@@ -229,5 +229,5 @@ converted(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix
     return copy;
 }
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END

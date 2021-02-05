@@ -99,14 +99,14 @@ TEST(Transformations2D_Rotate, Matrix3_AroundOrigin)
         (
             CGM::Vector<2,double>{+0.99452, +0.10453},
             CGM::Vector<2,double>{-0.10453, +0.99452},
-            CGM_XY::position(cgm_test::space)
+            CGM_2D::position(cgm_test::space)
         );
     #else
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
             CGM::Vector<2,double>{+0.64279, +0.76604},
             CGM::Vector<2,double>{-0.76604, +0.64279},
-            CGM_XY::position(cgm_test::space)
+            CGM_2D::position(cgm_test::space)
         );
     #endif
         ASSERT_TRUE(CGM::eq(result, expect, 0.0001));

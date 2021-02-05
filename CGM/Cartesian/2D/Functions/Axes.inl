@@ -4,7 +4,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* X, Y axes */
@@ -42,5 +42,5 @@ y()
     return {val<T>(0), val<T>(1)};
 }
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END

@@ -12,7 +12,7 @@
 
 
 CGM_NAMESPACE_BEGIN
-CGM_XY_NAMESPACE_BEGIN
+CGM_2D_NAMESPACE_BEGIN
 
 /* ####################################################################################### */
 /* Global to local (inplace) */
@@ -176,7 +176,7 @@ template<EVectorRepresentation Representation=EVectorRepresentation::Point, type
 constexpr CGM_FORCEINLINE Vector<2,T>
 converted(const Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB);
 
-CGM_XY_NAMESPACE_END
+CGM_2D_NAMESPACE_END
 CGM_NAMESPACE_END
 
 
