@@ -14,8 +14,8 @@ CGM_XFORM2D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -26,8 +26,8 @@ constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -39,8 +39,8 @@ constexpr CGM_FORCEINLINE void
 convert(ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -172,8 +172,8 @@ convert(ArbitraryAxis<T>& axis, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>
 /* ####################################################################################### */
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The physically position
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position
  * of the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -185,8 +185,8 @@ constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -200,8 +200,8 @@ constexpr CGM_FORCEINLINE ArbitraryAxis<T>
 converted(const ArbitraryAxis<T>& axis, const Matrix<2,2,T>& orientation, const Vector<2,T>& position);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.

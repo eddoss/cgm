@@ -46,8 +46,8 @@ static const auto B_MAT3    = CGM_2D::spaceMatrix(B_X, B_Y, B_P);
 /* Expect vector */
 /* ####################################################################################### */
 
-static const auto EXPECT_VEC_TO_WORLD_REORIENTED    = CGM::Vector<2, double>{ -0.996201, -0.087153 };
-static const auto EXPECT_VEC_TO_WORLD_REBASED       = CGM::Vector<2, double>{ -1.396201, -0.087153 };
+static const auto EXPECT_VEC_TO_GLOBAL_REORIENTED   = CGM::Vector<2, double>{ -0.996201, -0.087153 };
+static const auto EXPECT_VEC_TO_GLOBAL_REBASED      = CGM::Vector<2, double>{ -1.396201, -0.087153 };
 static const auto EXPECT_VEC_TO_LOCAL_REORIENTED    = CGM::Vector<2, double>{ +0.629319, +0.777142 };
 static const auto EXPECT_VEC_TO_LOCAL_REBASED       = CGM::Vector<2, double>{ +0.785611, +0.408942 };
 static const auto EXPECT_VEC_A2B_MAT2_TO_MAT2       = CGM::Vector<2, double>{ -0.669133, -0.743149 };
@@ -59,7 +59,7 @@ static const auto EXPECT_VEC_A2B_MAT3_TO_MAT3       = CGM::Vector<2, double>{ -1
 /* Expect 2x2 matrix */
 /* ####################################################################################### */
 
-static const auto EXPECT_MAT2_TO_WORLD = CGM_2D::orientationMatrix
+static const auto EXPECT_MAT2_TO_GLOBAL = CGM_2D::orientationMatrix
 (
     CGM::Vector<2, double>{ -0.087152, +0.996191 },
     CGM::Vector<2, double>{ -0.996191, -0.087152 }
@@ -81,14 +81,14 @@ static const auto EXPECT_MAT2_A2B = CGM_2D::orientationMatrix
 /* Expect 3x3 matrix */
 /* ####################################################################################### */
 
-static const auto EXPECT_MAT3_TO_WORLD_BY_MAT2 = CGM_2D::spaceMatrix
+static const auto EXPECT_MAT3_TO_GLOBAL_BY_MAT2 = CGM_2D::spaceMatrix
 (
     CGM::Vector<2, double>{ -0.087152, +0.996191 },
     CGM::Vector<2, double>{ -0.996191, -0.087152 },
     CGM::Vector<2, double>{ -1.006918, +0.699001 }
 );
 
-static const auto EXPECT_MAT3_TO_WORLD_BY_MAT3 = CGM_2D::spaceMatrix
+static const auto EXPECT_MAT3_TO_GLOBAL_BY_MAT3 = CGM_2D::spaceMatrix
 (
     CGM::Vector<2, double>{ -0.087153, +0.996201 },
     CGM::Vector<2, double>{ -0.996201, -0.087153 },

@@ -35,7 +35,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<2,T>& vector, T value);
 
 /**
- * Scales vector related to world center.
+ * Scales vector related to global center.
  * @param vector Vector to scale.
  * @param values How much to scale (value per axis).
  */
@@ -93,17 +93,17 @@ scale(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<2,2,T>& matrix, T value);
 
 /**
- * Scales 3x3 matrix related to local/world center.
+ * Scales 3x3 matrix related to local/global center.
  * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values);
 
@@ -114,7 +114,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values);
  * @param value How much to scale.
  * @param direction Axis direction.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
 
@@ -125,7 +125,7 @@ scale(Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -135,7 +135,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
@@ -149,17 +149,17 @@ scale(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param matrix Matrix to scale.
  * @param value How much to scale.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, T value);
 
 /**
- * Scales 4x4 matrix related to local/world center.
+ * Scales 4x4 matrix related to local/global center.
  * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values);
 
@@ -169,7 +169,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values);
  * @param value How much to scale.
  * @param direction Axis direction.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
 
@@ -181,7 +181,7 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
  * @param value How much to scale.
  * @param axis The axis along which to scale.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
@@ -192,7 +192,7 @@ scale(Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
  * @param values How much to scale.
  * @param pivotPoint Pivot point position.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -202,7 +202,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
  * @param vector Vector to scale.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -222,7 +222,7 @@ scale(Pivot<T>& pivot, T value);
 
 
 /**
- * Scales pivot position related to world center.
+ * Scales pivot position related to global center.
  * @param pivot Pivot position to scale.
  * @param values How much to scale (value per axis).
  */
@@ -297,7 +297,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(ArbitraryAxis<T>& arbitraryAxis, T value);
 
 /**
- * Scales arbitrary axis position related to world center.
+ * Scales arbitrary axis position related to global center.
  * @param arbitraryAxis Arbitrary axis to scale.
  * @param values How much to scale (value per axis).
  */
@@ -361,7 +361,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<2,T>>
 scaled(const Vector<2,T>& vector, T value);
 
 /**
- * Scales vector related to world center.
+ * Scales vector related to global center.
  * @param vector Vector to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of vector.
@@ -441,18 +441,18 @@ scaled(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, T value);
 
 /**
- * Scales 3x3 matrix related to local/world center.
+ * Scales 3x3 matrix related to local/global center.
  * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values);
 
@@ -463,7 +463,7 @@ scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values);
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
 
@@ -475,7 +475,7 @@ scaled(const Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction);
  * @param pivotPoint Pivot point position.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -486,7 +486,7 @@ scaled(const Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& p
  * @param transforms Transformations parameters.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 scaled(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
 
@@ -501,18 +501,18 @@ scaled(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param value How much to scale.
  * @return Scaled copy of matrix.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value);
 
 /**
- * Scales 4x4 matrix related to local/world center.
+ * Scales 4x4 matrix related to local/global center.
  * @tparam Space In which space to scale.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values);
 
@@ -523,7 +523,7 @@ scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values);
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
 
@@ -537,7 +537,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction);
  * @param direction Axis direction.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction, const Vector<2,T>& origin);
 
@@ -550,7 +550,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction, const
  * @param axis The axis along which to scale.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
 
@@ -562,7 +562,7 @@ scaled(const Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis);
  * @param pivotPoint Pivot point position.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -573,7 +573,7 @@ scaled(const Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& p
  * @param transforms Transformations parameters.
  * @return Scaled copy of matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -593,7 +593,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value);
 
 /**
- * Scales pivot position related to world center.
+ * Scales pivot position related to global center.
  * @param pivot Pivot position to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of pivot.
@@ -675,7 +675,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, ArbitraryAxis<T>>
 scaled(const ArbitraryAxis<T>& arbitraryAxis, T value);
 
 /**
- * Scales arbitrary axis position related to world center.
+ * Scales arbitrary axis position related to global center.
  * @param arbitraryAxis Arbitrary axis to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of axis.
@@ -744,7 +744,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(N==2 || N==3), Matrix<N,N,T>>
 scalingMatrix(T value);
 
 /**
- * Create scaling matrix (related to world center).
+ * Create scaling matrix (related to global center).
  * @tparam N Size of matrix need to create (must be 3 or 4).
  * @param values How much to scale (value per axis).
  * @return Scaling matrix.

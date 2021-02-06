@@ -13,7 +13,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = multiply<4>(orientation,matrix);
@@ -37,7 +37,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = space * matrix;
@@ -64,7 +64,7 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientation)
     auto axs = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         orient(axs.x, orientation);
         orient(axs.y, orientation);
@@ -92,7 +92,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -102,7 +102,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, spaceB);
 }
 
@@ -112,7 +112,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -124,7 +124,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World>(matrix, spaceA);
+    convert<ESpace::Global>(matrix, spaceA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -134,7 +134,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World>(matrix, spaceA);
+    convert<ESpace::Global>(matrix, spaceA);
     convert<ESpace::Local>(matrix, spaceB);
 }
 
@@ -144,7 +144,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World>(matrix, spaceA);
+    convert<ESpace::Global>(matrix, spaceA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -156,7 +156,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -166,7 +166,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, spaceB);
 }
 
@@ -176,7 +176,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 

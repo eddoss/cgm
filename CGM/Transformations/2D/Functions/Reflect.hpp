@@ -153,7 +153,7 @@ reflected(const Vector<2,T>& vector, const Vector<2,T>& axisNormal, const Vector
  * @param axisNormal Axis normal.
  * @return Reflected orientation.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr Matrix<2,2,T>
 reflected(const Matrix<2,2,T>& matrix, const Vector<2,T>& axisNormal);
 

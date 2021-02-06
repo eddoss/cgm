@@ -51,8 +51,8 @@ static const auto B_QUAT    = CGM::Quaternion<double>{+0.30071, +0.00000, +0.000
 /* Expect vector */
 /* ####################################################################################### */
 
-static const auto EXPECT_VEC_TO_WORLD_REORIENTED    = CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 };
-static const auto EXPECT_VEC_TO_WORLD_REBASED       = CGM::Vector<3, double>{ -0.760407, +1.863650, +0.952432 };
+static const auto EXPECT_VEC_TO_GLOBAL_REORIENTED   = CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 };
+static const auto EXPECT_VEC_TO_GLOBAL_REBASED      = CGM::Vector<3, double>{ -0.760407, +1.863650, +0.952432 };
 static const auto EXPECT_VEC_TO_LOCAL_REORIENTED    = CGM::Vector<3, double>{ -0.502627, +0.863650, +0.038312 };
 static const auto EXPECT_VEC_TO_LOCAL_REBASED       = CGM::Vector<3, double>{ +0.078464, -0.136350, -0.388694 };
 static const auto EXPECT_VEC_A2B_MAT3_TO_MAT3       = CGM::Vector<3, double>{ -0.360406, +0.909605, -0.206679 };
@@ -64,7 +64,7 @@ static const auto EXPECT_VEC_A2B_MAT4_TO_MAT4       = CGM::Vector<3, double>{ -0
 /* Expect 3x3 matrix */
 /* ####################################################################################### */
 
-static const auto EXPECT_MAT3_TO_WORLD = CGM::orientationMatrix
+static const auto EXPECT_MAT3_TO_GLOBAL = CGM::orientationMatrix
 (
     CGM::Vector<3, double>{ +0.829703, +0.469470, -0.301988 },
     CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 },
@@ -89,7 +89,7 @@ static const auto EXPECT_MAT3_A2B = CGM::orientationMatrix
 /* Expect 4x4 matrix */
 /* ####################################################################################### */
 
-static const auto EXPECT_MAT4_TO_WORLD_BY_MAT3 = CGM::spaceMatrix
+static const auto EXPECT_MAT4_TO_GLOBAL_BY_MAT3 = CGM::spaceMatrix
 (
     CGM::Vector<3, double>{ +0.829703, +0.469470, -0.301988 },
     CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 },
@@ -97,7 +97,7 @@ static const auto EXPECT_MAT4_TO_WORLD_BY_MAT3 = CGM::spaceMatrix
     CGM::Vector<3, double>{ -0.209705, +1.200000, -1.307109 }
 );
 
-static const auto EXPECT_MAT4_TO_WORLD_BY_MAT4 = CGM::spaceMatrix
+static const auto EXPECT_MAT4_TO_GLOBAL_BY_MAT4 = CGM::spaceMatrix
 (
     CGM::Vector<3, double>{ +0.829703, +0.469470, -0.301988 },
     CGM::Vector<3, double>{ -0.360407, +0.863650, +0.352432 },

@@ -13,7 +13,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         vector = orientation * vector;
@@ -37,7 +37,7 @@ template<ESpace Space, EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<3,3,T>& space)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         vector = multiply<Representation>(space, vector);
@@ -63,7 +63,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -73,7 +73,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
@@ -85,7 +85,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
 {
-    convert<ESpace::World>(vector, spaceA);
+    convert<ESpace::Global>(vector, spaceA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -95,7 +95,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
 {
-    convert<ESpace::World>(vector, spaceA);
+    convert<ESpace::Global>(vector, spaceA);
     convert<ESpace::Local>(vector, spaceB);
 }
 

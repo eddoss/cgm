@@ -20,8 +20,8 @@ enum class EVectorRepresentation
  */
 enum class ESpace
 {
-    Local = 0,    /**< Transform in local space. */
-    World         /**< Transform in world space. */
+    Local = 0,      /**< Transform in local space. */
+    Global          /**< Transform in global space. */
 };
 
 /**
@@ -38,7 +38,7 @@ enum class EHandedness
 /* ####################################################################################### */
 
 #define CGM_LOCAL       CGM::ESpace::Local
-#define CGM_WORLD       CGM::ESpace::World
+#define CGM_GLOBAL      CGM::ESpace::Global
 
 #define CGM_POINT       CGM::EVectorRepresentation::Point
 #define CGM_DIRECTION   CGM::EVectorRepresentation::Direction

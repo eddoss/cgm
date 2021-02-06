@@ -13,7 +13,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientation)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = multiply<3>(orientation, matrix);
@@ -37,7 +37,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& space)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = space * matrix;
@@ -63,7 +63,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<2,2,T>& orientationB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -73,7 +73,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<2,2,T>& orientationA, const Matrix<3,3,T>& spaceB)
 {
-    convert<ESpace::World>(matrix, orientationA);
+    convert<ESpace::Global>(matrix, orientationA);
     convert<ESpace::Local>(matrix, spaceB);
 }
 
@@ -85,7 +85,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<2,2,T>& orientationB)
 {
-    convert<ESpace::World>(matrix, spaceA);
+    convert<ESpace::Global>(matrix, spaceA);
     convert<ESpace::Local>(matrix, orientationB);
 }
 
@@ -95,7 +95,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& spaceB)
 {
-    convert<ESpace::World>(matrix, spaceA);
+    convert<ESpace::Global>(matrix, spaceA);
     convert<ESpace::Local>(matrix, spaceB);
 }
 

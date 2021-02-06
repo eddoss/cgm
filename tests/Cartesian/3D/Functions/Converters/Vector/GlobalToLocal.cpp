@@ -9,7 +9,7 @@
 
 using namespace std;
 
-TEST(Cartesian_3D_Functions_Vector_Converters, WorldToLocal_Mat3)
+TEST(Cartesian_3D_Functions_Vector_Converters, GlobalToLocal_Mat3)
 {
     using namespace cgm_xyz_converters_tests_data;
 
@@ -19,7 +19,7 @@ TEST(Cartesian_3D_Functions_Vector_Converters, WorldToLocal_Mat3)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Vector_Converters, WorldToLocal_Mat4)
+TEST(Cartesian_3D_Functions_Vector_Converters, GlobalToLocal_Mat4)
 {
     using namespace cgm_xyz_converters_tests_data;
 
@@ -36,7 +36,7 @@ TEST(Cartesian_3D_Functions_Vector_Converters, WorldToLocal_Mat4)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_3D_Functions_Vector_Converters, WorldToLocal_Quat)
+TEST(Cartesian_3D_Functions_Vector_Converters, GlobalToLocal_Quat)
 {
     using namespace cgm_xyz_converters_tests_data;
 

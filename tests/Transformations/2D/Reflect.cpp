@@ -39,7 +39,7 @@ TEST(Transformations2D_Reflection, Matrix2_PlaneNormal)
     namespace cgm_test = cgm_xy_xform_tests_data;
 
     {
-        const auto result = CGM_XFORM2D::reflected<CGM_WORLD>(cgm_test::orientation, cgm_test::normal);
+        const auto result = CGM_XFORM2D::reflected<CGM_GLOBAL>(cgm_test::orientation, cgm_test::normal);
         const auto expect = CGM_2D::orientationMatrix
         (
             CGM::Vector<2,double>{+0.147326, -0.989089},
@@ -67,7 +67,7 @@ TEST(Transformations2D_Reflection, Matrix3_AxisNormal)
     namespace cgm_test = cgm_xy_xform_tests_data;
 
     {
-        const auto result = CGM_XFORM2D::reflected<CGM_WORLD>(cgm_test::space, cgm_test::normal);
+        const auto result = CGM_XFORM2D::reflected<CGM_GLOBAL>(cgm_test::space, cgm_test::normal);
         const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+0.147326, -0.989089},
@@ -96,7 +96,7 @@ TEST(Transformations2D_Reflection, Matrix3_AxisNormalOrigin)
     namespace cgm_test = cgm_xy_xform_tests_data;
 
     {
-        const auto result = CGM_XFORM2D::reflected<CGM_WORLD>(cgm_test::space, cgm_test::normal, cgm_test::origin);
+        const auto result = CGM_XFORM2D::reflected<CGM_GLOBAL>(cgm_test::space, cgm_test::normal, cgm_test::origin);
         const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+0.147326, -0.989089},
@@ -106,7 +106,7 @@ TEST(Transformations2D_Reflection, Matrix3_AxisNormalOrigin)
         ASSERT_TRUE(CGM::eq(result, expect, 0.00001));
     }
     {
-        const auto result = CGM_XFORM2D::reflected<CGM_WORLD>(cgm_test::space, cgm_test::normal, cgm_test::origin);
+        const auto result = CGM_XFORM2D::reflected<CGM_GLOBAL>(cgm_test::space, cgm_test::normal, cgm_test::origin);
         const auto expect = CGM_2D::spaceMatrix
         (
             CGM::Vector<2,double>{+0.147326, -0.989089},

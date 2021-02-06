@@ -8,7 +8,7 @@ operator << (std::ostream& stream, CGM::ESpace space)
 {
     switch (space)
     {
-        case CGM::ESpace::World: stream << "CGM::ESpace::World"; break;
+        case CGM::ESpace::Global: stream << "CGM::ESpace::Global"; break;
         case CGM::ESpace::Local: stream << "CGM::ESpace::Local"; break;
     }
 

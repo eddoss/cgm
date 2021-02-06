@@ -138,7 +138,7 @@ rotate(Matrix<3,3,T>& matrix, T angle)
     axs.y = tmp;
 #endif
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto pos = position(matrix);
 
@@ -164,7 +164,7 @@ template<ESpace Space, typename T>
 constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) -= point.x;
@@ -174,7 +174,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
         matrix(2,1) -= point.y;
     #endif
 
-        rotate<ESpace::World>(matrix, angle);
+        rotate<ESpace::Global>(matrix, angle);
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) += point.x;
@@ -186,7 +186,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
     }
     else
     {
-        const auto pt = converted<ESpace::World,EVectorRepresentation::Point>(point, matrix);
+        const auto pt = converted<ESpace::Global,EVectorRepresentation::Point>(point, matrix);
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) -= pt.x;
@@ -196,7 +196,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point)
         matrix(2,1) -= pt.y;
     #endif
 
-        rotate<ESpace::World>(matrix, angle);
+        rotate<ESpace::Global>(matrix, angle);
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix(0,2) += pt.x;
@@ -539,7 +539,7 @@ rotationMatrix(T angle)
     }
     else
     {
-        rotate<ESpace::World>(mat, angle);
+        rotate<ESpace::Global>(mat, angle);
         transposeOrientation(mat);
     }
 
@@ -553,7 +553,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(T angle, const Vector<2,T>& point)
 {
     auto mat = identity<3,T>();
-    rotate<ESpace::World>(mat, angle, point);
+    rotate<ESpace::Global>(mat, angle, point);
     transposeOrientation(mat);
     return mat;
 }
@@ -565,7 +565,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(T angle, const Pivot<T>& pivot)
 {
     auto mat = identity<3,T>();
-    rotate<ESpace::World>(mat, angle, pivot.position);
+    rotate<ESpace::Global>(mat, angle, pivot.position);
     transposeOrientation(mat);
     return mat;
 }
@@ -577,7 +577,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotationMatrix(const Transforms<T>& transforms)
 {
     auto mat = identity<3,T>();
-    rotate<ESpace::World>(mat, transforms.rotation, transforms.pivot.position);
+    rotate<ESpace::Global>(mat, transforms.rotation, transforms.pivot.position);
     transposeOrientation(mat);
     return mat;
 }

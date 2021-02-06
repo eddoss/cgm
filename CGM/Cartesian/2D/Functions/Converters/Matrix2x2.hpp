@@ -17,8 +17,8 @@ CGM_2D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 2x2 orientation matrix to convert.
  * @param orientation Local space orientation represented by 2x2 matrix.
@@ -28,8 +28,8 @@ constexpr CGM_FORCEINLINE void
 convert(Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 2x2 orientation matrix to convert.
  * @param space Local basis whose orientation will be used.
@@ -91,8 +91,8 @@ convert(Matrix<2,2,T>& matrix, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>&
 /* ####################################################################################### */
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 2x2 orientation matrix to convert.
  * @param orientation Local space orientation represented by 2x2 matrix.
@@ -103,8 +103,8 @@ constexpr CGM_FORCEINLINE Matrix<2,2,T>
 converted(const Matrix<2,2,T>& matrix, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 2x2 orientation matrix to convert.
  * @param space Local basis whose orientation will be used.

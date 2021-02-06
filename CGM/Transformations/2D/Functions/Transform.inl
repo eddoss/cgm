@@ -67,7 +67,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters)
 {   
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         switch (parameters.transformOrder)
         {
@@ -90,8 +90,8 @@ transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters)
     else
     {
         auto parms = parameters;
-        convert<ESpace::World>(parms.pivot, matrix);
-        transform<ESpace::World>(matrix, parms);
+        convert<ESpace::Global>(parms.pivot, matrix);
+        transform<ESpace::Global>(matrix, parms);
     }
 }
 
@@ -101,7 +101,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         switch (parameters.transformOrder)
         {
@@ -152,11 +152,11 @@ transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters)
     else
     {
         auto parms = parameters;
-        convert<ESpace::World,EVectorRepresentation::Direction>(parms.pivot.axes.x, matrix);
-        convert<ESpace::World,EVectorRepresentation::Direction>(parms.pivot.axes.y, matrix);
-        convert<ESpace::World,EVectorRepresentation::Point>(parms.pivot.position, matrix);
+        convert<ESpace::Global,EVectorRepresentation::Direction>(parms.pivot.axes.x, matrix);
+        convert<ESpace::Global,EVectorRepresentation::Direction>(parms.pivot.axes.y, matrix);
+        convert<ESpace::Global,EVectorRepresentation::Point>(parms.pivot.position, matrix);
         
-        transform<ESpace::World>(matrix, parms);
+        transform<ESpace::Global>(matrix, parms);
     }
 }
 
@@ -332,7 +332,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 transformMatrix(const Transforms<T>& parameters)
 {
     auto mat = identity<3,T>();
-    transform<ESpace::World>(mat, parameters);
+    transform<ESpace::Global>(mat, parameters);
 
     transposeOrientation(mat);
 

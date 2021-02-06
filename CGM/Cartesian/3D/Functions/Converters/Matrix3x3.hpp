@@ -20,8 +20,8 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
@@ -31,8 +31,8 @@ constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param space Local basis whose orientation will be used.
@@ -42,8 +42,8 @@ constexpr CGM_FORCEINLINE void
 convert(Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param orientation orientation Local space orientation represented by quaternion.
@@ -159,8 +159,8 @@ convert(Matrix<3,3,T>& matrix, const Quaternion<T>& orientationA, const Quaterni
 /* ####################################################################################### */
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param orientation Local space orientation represented by 3x3 matrix.
@@ -171,8 +171,8 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 converted(const Matrix<3,3,T>& matrix, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param space Local basis whose orientation will be used.
@@ -183,8 +183,8 @@ constexpr CGM_FORCEINLINE Matrix<3,3,T>
 converted(const Matrix<3,3,T>& matrix, const Matrix<4,4,T>& space);
 
 /**
- * Convert orientation from given space to another space. If 'Space' is 'World' it mean
- * orientation will be converted to from local to world (and vice versa).
+ * Convert orientation from given space to another space. If 'Space' is 'Global' it mean
+ * orientation will be converted to from local to global (and vice versa).
  * @tparam Space Space to convert to.
  * @param matrix 3x3 orientation matrix to convert.
  * @param orientation orientation Local space orientation represented by quaternion.

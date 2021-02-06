@@ -15,10 +15,10 @@
 CGM_NAMESPACE_BEGIN
 
 /**
- * Calculates world space viewport size (for orthographic projection).
+ * Calculates global space viewport size (for orthographic projection).
  * @param scale Affect like a zoom.
  * @param aspect Viewport size ratio (width / height).
- * @return World space viewport size.
+ * @return Global space viewport size.
  */
 template<typename T>
 constexpr enable_if_floating<T, Vector<2,T>>

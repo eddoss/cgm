@@ -452,7 +452,7 @@ translated(const Ray<T>& axis, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Create 4x4 translation matrix (along default Cartesian axis in world space).
+ * Create 4x4 translation matrix (along default Cartesian axis in global space).
  * @tparam Axis Cartesian axis to translate along which.
  * @param value How much to translate.
  * @return Translation matrix.
@@ -462,7 +462,7 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translationMatrix(T value);
 
 /**
- * Create 4x4 translation matrix (on given value in world space).
+ * Create 4x4 translation matrix (on given value in global space).
  * @param values How much to translate.
  * @return Translation matrix.
  */
@@ -491,7 +491,7 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 translationMatrix(const Vector<3,T>& values, const Pivot<T>& pivot);
 
 /**
- * Create 4x4 translation matrix (on value from "transforms.translations" in world space).
+ * Create 4x4 translation matrix (on value from "transforms.translations" in global space).
  * @param value How much to translate.
  * @return Translation matrix.
  */

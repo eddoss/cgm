@@ -13,8 +13,8 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -25,8 +25,8 @@ constexpr CGM_FORCEINLINE void
 convert(Ray<T>& axis, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -38,8 +38,8 @@ constexpr CGM_FORCEINLINE void
 convert(Ray<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -50,8 +50,8 @@ constexpr CGM_FORCEINLINE void
 convert(Ray<T>& axis, const Matrix<4,4,T>& space);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -62,8 +62,8 @@ constexpr CGM_FORCEINLINE void
 convert(Ray<T>& axis, const Quaternion<T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position of
  * the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -394,8 +394,8 @@ convert(Ray<T>& axis, const Quaternion<T>& orientationA, const Vector<3,T>& posi
 /* ####################################################################################### */
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The physically position
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The physically position
  * of the axis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param axis Axis to convert.
@@ -407,8 +407,8 @@ constexpr CGM_FORCEINLINE Ray<T>
 converted(const Ray<T>& axis, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -422,8 +422,8 @@ constexpr CGM_FORCEINLINE Ray<T>
 converted(const Ray<T>& axis, const Matrix<3,3,T>& orientation, const Vector<3,T>& position);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -436,8 +436,8 @@ constexpr CGM_FORCEINLINE Ray<T>
 converted(const Ray<T>& axis, const Matrix<4,4,T>& space);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -450,8 +450,8 @@ constexpr CGM_FORCEINLINE Ray<T>
 converted(const Ray<T>& axis, const Quaternion<T>& orientation);
 
 /**
- * Convert axis from given space to another space. If 'Space' is 'World' it mean axis
- * will be converted to from local to world (and vice versa). The
+ * Convert axis from given space to another space. If 'Space' is 'Global' it mean axis
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the axis does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.

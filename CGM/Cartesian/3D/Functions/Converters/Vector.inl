@@ -13,7 +13,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientation)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         vector = orientation * vector;
@@ -37,7 +37,7 @@ template<ESpace Space, EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& space)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         vector = multiply<Representation>(space, vector);
@@ -61,7 +61,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientation)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         vector = oriented(vector, orientation);
     }
@@ -79,7 +79,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -89,7 +89,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
@@ -99,7 +99,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<3,3,T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -111,7 +111,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Global,Representation>(vector, spaceA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -121,7 +121,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Global,Representation>(vector, spaceA);
     convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
@@ -131,7 +131,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Matrix<4,4,T>& spaceA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World,Representation>(vector, spaceA);
+    convert<ESpace::Global,Representation>(vector, spaceA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -143,7 +143,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<3,3,T>& orientationB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local>(vector, orientationB);
 }
 
@@ -153,7 +153,7 @@ template<EVectorRepresentation Representation, typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Matrix<4,4,T>& spaceB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local,Representation>(vector, spaceB);
 }
 
@@ -163,7 +163,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE void
 convert(Vector<3,T>& vector, const Quaternion<T>& orientationA, const Quaternion<T>& orientationB)
 {
-    convert<ESpace::World>(vector, orientationA);
+    convert<ESpace::Global>(vector, orientationA);
     convert<ESpace::Local>(vector, orientationB);
 }
 

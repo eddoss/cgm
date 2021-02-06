@@ -34,7 +34,7 @@ transform(Vector<2,T>& vector, const Transforms<T>& parameters);
  * @param matrix 3x3 matrix to transform.
  * @param parameters Transformation parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters);
 
@@ -43,7 +43,7 @@ transform(Matrix<2,2,T>& matrix, const Transforms<T>& parameters);
  * @param matrix 4x4 matrix to transform.
  * @param parameters Transformation parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 transform(Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 
@@ -87,7 +87,7 @@ transformed(const Vector<2,T>& vector, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  * @return Transformed matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<2,2,T>>
 transformed(const Matrix<2,2,T>& matrix, const Transforms<T>& parameters);
 
@@ -97,7 +97,7 @@ transformed(const Matrix<2,2,T>& matrix, const Transforms<T>& parameters);
  * @param parameters Transformation parameters.
  * @return Transformed matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 transformed(const Matrix<3,3,T>& matrix, const Transforms<T>& parameters);
 

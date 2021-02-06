@@ -80,7 +80,7 @@ template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<2,2,T>& matrix, T value)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
 
@@ -93,11 +93,11 @@ scale(Matrix<2,2,T>& matrix, T value)
     {
         if constexpr (Axis == E2D::X)
         {
-            scale<ESpace::World>(matrix, value, x(matrix));
+            scale<ESpace::Global>(matrix, value, x(matrix));
         }
         else
         {
-            scale<ESpace::World>(matrix, value, y(matrix));
+            scale<ESpace::Global>(matrix, value, y(matrix));
         }
     }
 }
@@ -114,7 +114,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values)
         val<T>(0), values.y
     };
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = scales * matrix;
@@ -138,7 +138,7 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
 
@@ -149,7 +149,7 @@ scale(Matrix<2,2,T>& matrix, T value, const Vector<2,T>& direction)
     }
     else
     {
-        scale<ESpace::World>(matrix, value, converted<ESpace::World>(direction, matrix));
+        scale<ESpace::Global>(matrix, value, converted<ESpace::Global>(direction, matrix));
     }
 }
 
@@ -162,7 +162,7 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot)
     auto pivotPoint = pivot;
     pivotPoint.position = Vector<2,T>(val<T>(0));
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
 
@@ -175,12 +175,12 @@ scale(Matrix<2,2,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivot)
     {
         auto wsPivot = Pivot<T>
         {
-            converted<ESpace::World>(pivotPoint.axes.x, matrix),
-            converted<ESpace::World>(pivotPoint.axes.y, matrix),
+            converted<ESpace::Global>(pivotPoint.axes.x, matrix),
+            converted<ESpace::Global>(pivotPoint.axes.y, matrix),
             Vector<2,T>(val<T>(0))
         };
 
-        scale<ESpace::World>(matrix, values, wsPivot);
+        scale<ESpace::Global>(matrix, values, wsPivot);
     }
 }
 
@@ -201,7 +201,7 @@ template<E2D Axis, ESpace Space, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, T value)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
         auto pos = position(matrix);
@@ -216,11 +216,11 @@ scale(Matrix<3,3,T>& matrix, T value)
     {
         if constexpr (Axis == E2D::X)
         {
-            scale<ESpace::World>(matrix, value, x(matrix));
+            scale<ESpace::Global>(matrix, value, x(matrix));
         }
         else
         {
-            scale<ESpace::World>(matrix, value, y(matrix));
+            scale<ESpace::Global>(matrix, value, y(matrix));
         }
     }
 }
@@ -238,7 +238,7 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values)
         val<T>(0), val<T>(0), val<T>(1)
     };
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         matrix = scales * matrix;
@@ -263,7 +263,7 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
         auto pos = position(matrix);
@@ -276,10 +276,10 @@ scale(Matrix<3,3,T>& matrix, T value, const Vector<2,T>& direction)
     }
     else
     {
-        scale<ESpace::World>
+        scale<ESpace::Global>
         (
             matrix, value,
-            converted<ESpace::World,EVectorRepresentation::Direction>(direction, matrix)
+            converted<ESpace::Global,EVectorRepresentation::Direction>(direction, matrix)
         );
     }
 }
@@ -290,7 +290,7 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto axes = orientationAxes(matrix);
         auto pos = position(matrix);
@@ -303,13 +303,13 @@ scale(Matrix<3,3,T>& matrix, T value, const ArbitraryAxis<T>& axis)
     }
     else
     {
-        scale<ESpace::World>
+        scale<ESpace::Global>
         (
             matrix, value,
             ArbitraryAxis<T>
             (
-                converted<ESpace::World,EVectorRepresentation::Direction>(axis.direction, matrix),
-                converted<ESpace::World,EVectorRepresentation::Point>(axis.position, matrix)
+                converted<ESpace::Global,EVectorRepresentation::Direction>(axis.direction, matrix),
+                converted<ESpace::Global,EVectorRepresentation::Point>(axis.position, matrix)
             )
         );
     }
@@ -321,7 +321,7 @@ template<ESpace Space, typename T>
 constexpr void
 scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivotPoint)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto pos = position(matrix);
         auto axes = orientationAxes(matrix);
@@ -337,14 +337,14 @@ scale(Matrix<3,3,T>& matrix, const Vector<2,T>& values, const Pivot<T>& pivotPoi
     }
     else
     {
-        auto worldSpacePivot = Pivot<T>
+        auto globalSpacePivot = Pivot<T>
         {
-            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
-            converted<ESpace::World,EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
-            converted<ESpace::World,EVectorRepresentation::Point>(pivotPoint.position, matrix)
+            converted<ESpace::Global,EVectorRepresentation::Direction>(pivotPoint.axes.x, matrix),
+            converted<ESpace::Global,EVectorRepresentation::Direction>(pivotPoint.axes.y, matrix),
+            converted<ESpace::Global,EVectorRepresentation::Point>(pivotPoint.position, matrix)
         };
 
-        scale<ESpace::World>(matrix, values, worldSpacePivot);
+        scale<ESpace::Global>(matrix, values, globalSpacePivot);
     }
 }
 

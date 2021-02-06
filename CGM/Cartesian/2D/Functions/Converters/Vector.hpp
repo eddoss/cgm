@@ -18,8 +18,8 @@ CGM_2D_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @param vector Vector in global space.
  * @param orientation Local space orientation represented as 2x2 matrix.
@@ -29,8 +29,8 @@ constexpr CGM_FORCEINLINE void
 convert(Vector<2,T>& vector, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @param vector Vector in global space.
  * @param space Local space represented as 2x2 matrix.
@@ -96,8 +96,8 @@ convert(Vector<2,T>& vector, const Matrix<3,3,T>& spaceA, const Matrix<3,3,T>& s
 /* ####################################################################################### */
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @param vector Vector in global space.
  * @param orientation Local space orientation represented as 2x2 matrix.
@@ -108,8 +108,8 @@ constexpr CGM_FORCEINLINE Vector<2,T>
 converted(const Vector<2,T>& vector, const Matrix<2,2,T>& orientation);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @param vector Vector in global space.
  * @param space Local space represented as 2x2 matrix.

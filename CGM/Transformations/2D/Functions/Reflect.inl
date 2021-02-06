@@ -42,14 +42,14 @@ reflect(Matrix<2,2,T>& matrix, const Vector<2,T>& axisNormal)
 {
     auto axes = orientationAxes(matrix);
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         reflect(axes.x, axisNormal);
         reflect(axes.y, axisNormal);
     }
     else
     {
-        auto an = converted<ESpace::World>(axisNormal, matrix);
+        auto an = converted<ESpace::Global>(axisNormal, matrix);
 
         reflect(axes.x, an);
         reflect(axes.y, an);
@@ -69,7 +69,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal)
     auto axes = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         reflect(axes.x, axisNormal);
         reflect(axes.y, axisNormal);
@@ -77,7 +77,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal)
     }
     else
     {
-        auto pn = converted<ESpace::World>(axisNormal, matrix);
+        auto pn = converted<ESpace::Global>(axisNormal, matrix);
 
         reflect(axes.x, pn);
         reflect(axes.y, pn);
@@ -96,7 +96,7 @@ reflect(Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal, const Vector<2,T>&
     auto axes = orientationAxes(matrix);
     auto pos = position(matrix);
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         reflect(axes.x, axisNormal);
         reflect(axes.y, axisNormal);
@@ -104,8 +104,8 @@ reflect(Matrix<3,3,T>& matrix, const Vector<2,T>& axisNormal, const Vector<2,T>&
     }
     else
     {
-        auto an = converted<ESpace::World>(axisNormal, matrix);
-        auto ac = converted<ESpace::World>(axisCenter, matrix);
+        auto an = converted<ESpace::Global>(axisNormal, matrix);
+        auto ac = converted<ESpace::Global>(axisCenter, matrix);
 
         reflect(axes.x, an);
         reflect(axes.y, an);

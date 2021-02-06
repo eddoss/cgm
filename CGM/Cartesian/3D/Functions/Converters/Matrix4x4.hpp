@@ -20,8 +20,8 @@ CGM_NAMESPACE_BEGIN
 /* ####################################################################################### */
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
@@ -32,8 +32,8 @@ constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
@@ -44,8 +44,8 @@ constexpr CGM_FORCEINLINE void
 convert(Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector 
- * will be converted to from local to world (and vice versa). The physically position of
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The physically position of
  * the vector does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
@@ -171,8 +171,8 @@ convert(Matrix<4,4,T>& matrix, const Quaternion<T>& orientationA, const Quaterni
 /* ####################################################################################### */
 
 /**
- * Convert basis from given space to another space. If 'Space' is 'World' it mean basis
- * will be converted to from local to world (and vice versa). The physically position
+ * Convert basis from given space to another space. If 'Space' is 'Global' it mean basis
+ * will be converted to from local to global (and vice versa). The physically position
  * of the basis does not change, only recalculation to the local system occurs.
  * @tparam Space Space to convert to.
  * @param matrix 4x4 basis matrix to convert.
@@ -184,8 +184,8 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<3,3,T>& orientation);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.
@@ -198,8 +198,8 @@ constexpr CGM_FORCEINLINE Matrix<4,4,T>
 converted(const Matrix<4,4,T>& matrix, const Matrix<4,4,T>& space);
 
 /**
- * Convert vector from given space to another space. If 'Space' is 'World' it mean vector
- * will be converted to from local to world (and vice versa). The
+ * Convert vector from given space to another space. If 'Space' is 'Global' it mean vector
+ * will be converted to from local to global (and vice versa). The
  * physically position  of the vector does not change, only recalculation to the local
  * system occurs.
  * @tparam Space Space to convert to.

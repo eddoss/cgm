@@ -71,7 +71,7 @@ translate(Matrix<3,3,T>& basis, T value)
 {
     Vector<2,T> axs;
 
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         if constexpr (Axis == E2D::X)
         {
@@ -104,7 +104,7 @@ template<ESpace Space, typename T>
 constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& value)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
     #ifdef CGM_CFG_MATRIX_POSTMULT
         basis(0,2) += value.x;
@@ -131,13 +131,13 @@ template<ESpace Space, EVectorRepresentation AlongRepr, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         setPosition(basis, position(basis) + along * value);
     }
     else
     {
-        setPosition(basis, position(basis) + converted<ESpace::World,AlongRepr>(along, basis) * value);
+        setPosition(basis, position(basis) + converted<ESpace::Global,AlongRepr>(along, basis) * value);
     }
 }
 
@@ -147,7 +147,7 @@ template<ESpace Space, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot)
 {
-    if constexpr (Space == ESpace::World)
+    if constexpr (Space == ESpace::Global)
     {
         auto pos = position(basis);
         pos += values.x * pivot.axes.x;
@@ -157,11 +157,11 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot
     else
     {
         auto piv = pivot;
-        converted<ESpace::World,EVectorRepresentation::Direction>(pivot.axes.x, basis);
-        converted<ESpace::World,EVectorRepresentation::Direction>(pivot.axes.y, basis);
-        converted<ESpace::World,EVectorRepresentation::Point>(pivot.position, basis);
+        converted<ESpace::Global,EVectorRepresentation::Direction>(pivot.axes.x, basis);
+        converted<ESpace::Global,EVectorRepresentation::Direction>(pivot.axes.y, basis);
+        converted<ESpace::Global,EVectorRepresentation::Point>(pivot.position, basis);
 
-        translate<ESpace::World>(basis, values, piv);
+        translate<ESpace::Global>(basis, values, piv);
     }
 }
 

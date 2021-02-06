@@ -35,7 +35,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<3,T>& vector, T value);
 
 /**
- * Scales vector related to world center.
+ * Scales vector related to global center.
  * @param vector Vector to scale.
  * @param values How much to scale (value per axis).
  */
@@ -98,7 +98,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<3,3,T>& matrix, T value);
 
 /**
- * Scales 3x3 matrix related to local/world center.
+ * Scales 3x3 matrix related to local/global center.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
@@ -150,7 +150,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Matrix<4,4,T>& matrix, T value);
 
 /**
- * Scales 4x4 matrix related to local/world center.
+ * Scales 4x4 matrix related to local/global center.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  */
@@ -213,7 +213,7 @@ scale(Pivot<T>& pivot, T value);
 
 
 /**
- * Scales pivot position related to world center.
+ * Scales pivot position related to global center.
  * @param pivot Pivot position to scale.
  * @param values How much to scale (value per axis).
  */
@@ -286,7 +286,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Ray<T>& arbitraryAxis, T value);
 
 /**
- * Scales arbitrary axis position related to world center.
+ * Scales arbitrary axis position related to global center.
  * @param arbitraryAxis Arbitrary axis to scale.
  * @param values How much to scale (value per axis).
  */
@@ -350,7 +350,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Vector<3,T>>
 scaled(const Vector<3,T>& vector, T value);
 
 /**
- * Scales vector related to world center.
+ * Scales vector related to global center.
  * @param vector Vector to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of vector.
@@ -431,7 +431,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 scaled(const Matrix<3,3,T>& matrix, T value);
 
 /**
- * Scales 3x3 matrix related to local/world center.
+ * Scales 3x3 matrix related to local/global center.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
@@ -488,7 +488,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<4,4,T>>
 scaled(const Matrix<4,4,T>& matrix, T value);
 
 /**
- * Scales 4x4 matrix related to local/world center.
+ * Scales 4x4 matrix related to local/global center.
  * @param matrix Matrix to scale.
  * @param values How much to scale.
  * @return Scaled copy of matrix.
@@ -568,7 +568,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Pivot<T>>
 scaled(const Pivot<T>& pivot, T value);
 
 /**
- * Scales pivot position related to world center.
+ * Scales pivot position related to global center.
  * @param pivot Pivot position to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of pivot.
@@ -648,7 +648,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Ray<T>>
 scaled(const Ray<T>& arbitraryAxis, T value);
 
 /**
- * Scales arbitrary axis position related to world center.
+ * Scales arbitrary axis position related to global center.
  * @param arbitraryAxis Arbitrary axis to scale.
  * @param values How much to scale (value per axis).
  * @return Scaled copy of axis.
@@ -717,7 +717,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<(N==3 || N==4), Matrix<N,N,T>>
 scalingMatrix(T value);
 
 /**
- * Create scaling matrix (related to world center).
+ * Create scaling matrix (related to global center).
  * @tparam N Size of matrix need to create (must be 3 or 4).
  * @param values How much to scale (value per axis).
  * @return Scaling matrix.

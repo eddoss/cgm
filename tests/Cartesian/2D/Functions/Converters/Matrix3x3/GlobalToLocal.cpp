@@ -8,7 +8,7 @@
 #include <CGM/Core/Functions/IO.hpp>
 using namespace std;
 
-TEST(Cartesian_2D_Functions_Matrix3x3_Converters, WorldToLocal_Mat2)
+TEST(Cartesian_2D_Functions_Matrix3x3_Converters, GlobalToLocal_Mat2)
 {
     using namespace cgm_xy_converters_tests_data;
 
@@ -18,7 +18,7 @@ TEST(Cartesian_2D_Functions_Matrix3x3_Converters, WorldToLocal_Mat2)
 
 /* --------------------------------------------------------------------------------------- */
 
-TEST(Cartesian_2D_Functions_Matrix3x3_Converters, WorldToLocal_Mat3)
+TEST(Cartesian_2D_Functions_Matrix3x3_Converters, GlobalToLocal_Mat3)
 {
     using namespace cgm_xy_converters_tests_data;
 

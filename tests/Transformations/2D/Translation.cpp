@@ -75,7 +75,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
 
     {
         {
-            const auto result = CGM_XFORM2D::translated<CGM_2D_X,CGM_WORLD>(cgm_test::space, values.translation.x);
+            const auto result = CGM_XFORM2D::translated<CGM_2D_X,CGM_GLOBAL>(cgm_test::space, values.translation.x);
             const auto expect = CGM_2D::spaceMatrix
             (
                 cgm_test::orientation,
@@ -84,7 +84,7 @@ TEST(Transformations2D_Translation, Matrix3_DefaultAxis)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM2D::translated<CGM_2D_Y,CGM_WORLD>(cgm_test::space, values.translation.x);
+            const auto result = CGM_XFORM2D::translated<CGM_2D_Y,CGM_GLOBAL>(cgm_test::space, values.translation.x);
             const auto expect = CGM_2D::spaceMatrix
             (
                 cgm_test::orientation,
@@ -123,7 +123,7 @@ TEST(Transformations2D_Translation, Matrix3_ArbitraryOffset)
     const auto values = cgm_xy_xform_tests_data::get();
 
     {
-        const auto result = CGM_XFORM2D::translated<CGM_WORLD>(cgm_test::space, values.translation);
+        const auto result = CGM_XFORM2D::translated<CGM_GLOBAL>(cgm_test::space, values.translation);
         const auto expect = CGM_2D::spaceMatrix
         (
             cgm_test::orientation,
@@ -151,7 +151,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
 
     {
         {
-            const auto result = CGM_XFORM2D::translated<CGM_WORLD,CGM_DIRECTION>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
+            const auto result = CGM_XFORM2D::translated<CGM_GLOBAL,CGM_DIRECTION>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
             const auto expect = CGM_2D::spaceMatrix
             (
                 cgm_test::orientation,
@@ -160,7 +160,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongVector)
             ASSERT_TRUE(CGM::eq(result, expect, 0.0001));
         }
         {
-            const auto result = CGM_XFORM2D::translated<CGM_WORLD,CGM_POINT>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
+            const auto result = CGM_XFORM2D::translated<CGM_GLOBAL,CGM_POINT>(cgm_test::space, values.translation.x, cgm_test::axis.direction);
             const auto expect = CGM_2D::spaceMatrix
             (
                 cgm_test::orientation,
@@ -199,7 +199,7 @@ TEST(Transformations2D_Translation, Matrix3_AlongPivotAxes)
     const auto values = cgm_xy_xform_tests_data::get();
 
     {
-        const auto result = CGM_XFORM2D::translated<CGM_WORLD>(cgm_test::space, values.translation, values.pivot);
+        const auto result = CGM_XFORM2D::translated<CGM_GLOBAL>(cgm_test::space, values.translation, values.pivot);
         const auto expect = CGM_2D::spaceMatrix
         (
             cgm_test::orientation,

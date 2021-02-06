@@ -74,7 +74,7 @@ TEST(Transformations2D_Rotate, Matrix3_AroundOrigin)
     const auto values = cgm_xy_xform_tests_data::get();
 
     {
-        const auto result = CGM_XFORM2D::rotated<CGM_WORLD>(cgm_test::space, values.rotation);
+        const auto result = CGM_XFORM2D::rotated<CGM_GLOBAL>(cgm_test::space, values.rotation);
     #ifdef CGM_CFG_LHS
         const auto expect = CGM_XFORM2D::spaceMatrix
         (
@@ -121,7 +121,7 @@ TEST(Transformations2D_Rotate, Matrix3_ArounArbitraryPoint)
     const auto values = cgm_xy_xform_tests_data::get();
 
     {
-        const auto result = CGM_XFORM2D::rotated<CGM_WORLD>(cgm_test::space, values.rotation, values.pivot.position);
+        const auto result = CGM_XFORM2D::rotated<CGM_GLOBAL>(cgm_test::space, values.rotation, values.pivot.position);
     #ifdef CGM_CFG_LHS
         const auto expect = CGM_XFORM2D::spaceMatrix
         (

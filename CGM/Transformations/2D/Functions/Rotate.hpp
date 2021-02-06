@@ -95,7 +95,7 @@ rotate(Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param matrix Vector to rotate.
  * @param angle Rotation angle (in radians).
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle);
 
@@ -106,7 +106,7 @@ rotate(Matrix<3,3,T>& matrix, T angle);
  * @param point Point to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
@@ -117,7 +117,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
  * @param pivot Pivot to rotate around.
  * @param angle Rotation angle.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
 
@@ -127,7 +127,7 @@ rotate(Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
  * @param vector Vector to rotate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 rotate(Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -298,7 +298,7 @@ rotated(const Matrix<2,2,T>& matrix, const Transforms<T>& transforms);
  * @param angle Rotation angle (in radians).
  * @return Rotated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle);
 
@@ -310,7 +310,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle);
  * @param angle Rotation angle.
  * @return Rotated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
 
@@ -322,7 +322,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Vector<2,T>& point);
  * @param angle Rotation angle.
  * @return Rotated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
 
@@ -333,7 +333,7 @@ rotated(const Matrix<3,3,T>& matrix, T angle, const Pivot<T>& pivot);
  * @param transforms Transformations parameters.
  * @return Rotated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 rotated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 

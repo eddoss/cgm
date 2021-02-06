@@ -15,11 +15,11 @@
 CGM_NAMESPACE_BEGIN
 
 /**
- * Calculates world space viewport size (for perspective projection).
+ * Calculates global space viewport size (for perspective projection).
  * @param fov Vertical angle of field of view (in radiance).
  * @param aspect Viewport size ratio (width / height).
  * @param offset Distance from projection point and viewport center.
- * @return World space viewport size.
+ * @return Global space viewport size.
  */
 template<typename T>
 constexpr enable_if_floating<T, Vector<2,T>>

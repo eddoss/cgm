@@ -78,7 +78,7 @@ translate(Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value);
 
@@ -89,7 +89,7 @@ translate(Matrix<3,3,T>& basis, T value);
  * @param matrix Matrix to translate.
  * @param value How much to translate.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& value);
 
@@ -101,7 +101,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& value);
  * @param value How much to translate.
  * @param along Vector to translate along to.
  */
-template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
+template<ESpace Space = ESpace::Global, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
 
@@ -112,7 +112,7 @@ translate(Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
  * @param values How much to translate (value per pivot axis).
  * @param pivot Pivot point.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -122,7 +122,7 @@ translate(Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot
  * @param matrix Matrix to translate.
  * @param transforms Transformations parameters.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 translate(Matrix<3,3,T>& basis, const Transforms<T>& transforms);
 
@@ -296,7 +296,7 @@ translated(const Vector<2,T>& vector, const Transforms<T>& transforms);
  * @param value How much to translate.
  * @return Translated matrix.
  */
-template<E2D Axis, ESpace Space = ESpace::World, typename T>
+template<E2D Axis, ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, T value);
 
@@ -307,7 +307,7 @@ translated(const Matrix<3,3,T>& matrix, T value);
  * @param value How much to translate.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value);
 
@@ -320,7 +320,7 @@ translated(const Matrix<3,3,T>& matrix, const Vector<2,T>& value);
  * @param along Vector to translate along to.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
+template<ESpace Space = ESpace::Global, EVectorRepresentation AlongRepr=EVectorRepresentation::Point, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
 
@@ -332,7 +332,7 @@ translated(const Matrix<3,3,T>& basis, T value, const Vector<2,T>& along);
  * @param pivot Pivot point.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>& pivot);
 
@@ -343,7 +343,7 @@ translated(const Matrix<3,3,T>& basis, const Vector<2,T>& values, const Pivot<T>
  * @param transforms Transformations parameters.
  * @return Translated matrix.
  */
-template<ESpace Space = ESpace::World, typename T>
+template<ESpace Space = ESpace::Global, typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translated(const Matrix<3,3,T>& matrix, const Transforms<T>& transforms);
 
@@ -464,7 +464,7 @@ translated(const ArbitraryAxis<T>& axis, const Transforms<T>& transforms);
 /* ####################################################################################### */
 
 /**
- * Create 4x4 translation matrix (along default Cartesian axis in world space).
+ * Create 4x4 translation matrix (along default Cartesian axis in global space).
  * @tparam Axis Cartesian axis to translate along which.
  * @param value How much to translate.
  * @return Translation matrix.
@@ -474,7 +474,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(T value);
 
 /**
- * Create 4x4 translation matrix (on given value in world space).
+ * Create 4x4 translation matrix (on given value in global space).
  * @param values How much to translate.
  * @return Translation matrix.
  */
@@ -503,7 +503,7 @@ constexpr CGM_FORCEINLINE enable_if_floating<T, Matrix<3,3,T>>
 translationMatrix(const Vector<2,T>& values, const Pivot<T>& pivot);
 
 /**
- * Create 4x4 translation matrix (on value from "transforms.translations" in world space).
+ * Create 4x4 translation matrix (on value from "transforms.translations" in global space).
  * @param value How much to translate.
  * @return Translation matrix.
  */
