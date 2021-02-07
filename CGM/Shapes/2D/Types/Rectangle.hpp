@@ -20,10 +20,10 @@ public: /* Attributes */
 /* ####################################################################################### */
 
     /**
-     * Rectangle position (rectangle center).
+     * Rectangle position.
      */
     Vector<2,T>
-    position;
+    center;
 
     /**
      * Rectangle size.
@@ -40,6 +40,39 @@ public: /* Constructors */
      */
     constexpr
     Rectangle(const Vector<2,T>& Position, const Size<T>& SizeValue);
+
+
+/* ####################################################################################### */
+public: /* Getters */
+/* ####################################################################################### */
+
+    /**
+     * Gets top let corner position.
+     * @return Top let corner position
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    topLeft() const;
+    
+    /**
+     * Gets top right corner position.
+     * @return Top right corner position
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    topRight() const;
+    
+    /**
+     * Gets bottom let corner position.
+     * @return Bottom let corner position
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    bottomLeft() const;
+    
+    /**
+     * Gets bottom right corner position.
+     * @return Bottom right corner position
+     */
+    constexpr CGM_FORCEINLINE Vector<2,T>
+    bottomRight() const;
 };
 
 CGM_2D_NAMESPACE_END

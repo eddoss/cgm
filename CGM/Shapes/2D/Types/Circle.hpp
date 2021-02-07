@@ -19,10 +19,10 @@ public: /* Attributes */
 /* ####################################################################################### */
 
     /**
-     * Circle position.
+     * Circle center.
      */
     Vector<2,T>
-    position;
+    center;
 
     /**
      * Circle radius.
@@ -36,7 +36,7 @@ public: /* Constructors */
 
     /**
      * Initialize position and size.
-     * @param position Circle position.
+     * @param position Circle center.
      * @param radius Circle radius.
      */
     constexpr
