@@ -13,17 +13,17 @@ endif()
 # SOURCES   - tests list
 # ##################################################################################### #
 
-function(cgm_add_test TARGET SOURCES)
-    add_executable(${TARGET} ${SOURCES})
-    target_link_libraries(${TARGET}
+function(cgm_add_test TARGET_NAME SOURCES)
+    set(name "CGM_TESTS_${TARGET_NAME}")
+    add_executable(${name} ${SOURCES})
+    target_link_libraries(${name}
         PRIVATE
-            GTest::GTest
-            GTest::Main
+            GTest::gtest GTest::gtest_main
         PUBLIC
             ComputerGraphixMath
     )
-    add_test(NAME ${TARGET} COMMAND ${TARGET})
-    gtest_discover_tests(${TARGET})
+    add_test(NAME ${name} COMMAND ${name})
+    gtest_discover_tests(${name})
 endfunction()
 
 enable_testing()
@@ -32,8 +32,9 @@ enable_testing()
 # Init test project
 # ####################################################################################### #
 
-project(UnitTests LANGUAGES CXX)
-find_package(GTest REQUIRED)
+project(ComputerGraphixMathTests LANGUAGES CXX)
+
+find_package(GTest CONFIG REQUIRED)
 
 include(GoogleTest)
 
@@ -75,9 +76,9 @@ set(TESTS_FILES_CORE
     "${TESTS_FILES_CORE_MATRIX}"
 )
 
-cgm_add_test(Tests_Core         "run.cpp;${TESTS_FILES_CORE}")
-cgm_add_test(Tests_Core-Vector  "run.cpp;${TESTS_FILES_CORE_VECTOR}")
-cgm_add_test(Tests_Core-Matrix  "run.cpp;${TESTS_FILES_CORE_MATRIX}")
+cgm_add_test(Core         "run.cpp;${TESTS_FILES_CORE}")
+cgm_add_test(Core-Vector  "run.cpp;${TESTS_FILES_CORE_VECTOR}")
+cgm_add_test(Core-Matrix  "run.cpp;${TESTS_FILES_CORE_MATRIX}")
 
 # ####################################################################################### #
 # SUITES | Coordinates
@@ -87,7 +88,7 @@ set(TESTS_FILES_COORDINATES
     Coordinates.cpp
 )
 
-cgm_add_test(Tests_Coordinates "run.cpp;${TESTS_FILES_COORDINATES}")
+cgm_add_test(Coordinates "run.cpp;${TESTS_FILES_COORDINATES}")
 
 # ####################################################################################### #
 # SUITES | Cartesian
@@ -139,9 +140,9 @@ set(TESTS_FILES_CARTESIAN
     ${TESTS_FILES_CARTESIAN_3D}
 )
 
-cgm_add_test(Tests_Cartesian    "run.cpp;${TESTS_FILES_CARTESIAN}")
-cgm_add_test(Tests_Cartesian-2D "run.cpp;${TESTS_FILES_CARTESIAN_2D}")
-cgm_add_test(Tests_Cartesian-3D "run.cpp;${TESTS_FILES_CARTESIAN_3D}")
+cgm_add_test(Cartesian    "run.cpp;${TESTS_FILES_CARTESIAN}")
+cgm_add_test(Cartesian-2D "run.cpp;${TESTS_FILES_CARTESIAN_2D}")
+cgm_add_test(Cartesian-3D "run.cpp;${TESTS_FILES_CARTESIAN_3D}")
 
 # ####################################################################################### #
 # SUITES | Transformations
@@ -171,9 +172,9 @@ set(TESTS_FILES_TRANSFORMATIONS
     ${TESTS_FILES_TRANSFORMATIONS_3D}
 )
 
-cgm_add_test(Tests_Transformations      "run.cpp;${TESTS_FILES_TRANSFORMATIONS}")
-cgm_add_test(Tests_Transformations-2D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_2D}")
-cgm_add_test(Tests_Transformations-3D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_3D}")
+cgm_add_test(Transformations      "run.cpp;${TESTS_FILES_TRANSFORMATIONS}")
+cgm_add_test(Transformations-2D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_2D}")
+cgm_add_test(Transformations-3D   "run.cpp;${TESTS_FILES_TRANSFORMATIONS_3D}")
 
 # ####################################################################################### #
 # SUITES | Interpolations
@@ -192,7 +193,7 @@ set(TESTS_FILES_INTERPOLATIONS
     Interpolations/Interps.cpp
 )
 
-cgm_add_test(Tests_Interpolations "run.cpp;${TESTS_FILES_INTERPOLATIONS}")
+cgm_add_test(Interpolations "run.cpp;${TESTS_FILES_INTERPOLATIONS}")
 
 # ####################################################################################### #
 # SUITES | All modules
@@ -206,4 +207,4 @@ set(TESTS_ALL_MODULES
     ${TESTS_FILES_INTERPOLATIONS}
 )
 
-cgm_add_test(Tests_All "${TESTS_ALL_MODULES}")
+cgm_add_test(All "${TESTS_ALL_MODULES}")
