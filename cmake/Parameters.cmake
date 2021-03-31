@@ -10,14 +10,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
 # ####################################################################################### #
 # Promoted cmake options
 # ####################################################################################### #
 
 option(CGMATH_BUILD_UNIT_TESTS "Build unit testing projects." OFF)
-option(CGMATH_BUILD_EXAMPLES "Build examples projects." ON)
+option(CGMATH_BUILD_EXAMPLES "Build examples projects." OFF)
 option(CGMATH_USE_DOUBLE_PRECISION "Use double floating point number precision." OFF)
 set(CGMATH_MATRIX_LAYOUT "Column" CACHE STRING "Store matrix components by rows or columns (Row/Column).")
 set(CGMATH_MATRIX_MULTIPLICATION_ORDER "Post" CACHE STRING "If 'Pre' is used vector will be represented as row, if 'Post' - as column.")

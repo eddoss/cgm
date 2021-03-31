@@ -22,7 +22,7 @@ constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>
 normalizedAngle_0_2PI(T angle);
 
 /**
- * Normalize angle to [0, PI] range.
+ * Normalize angle to [-PI, PI] range.
  */
 template<typename T>
 constexpr CGM_FORCEINLINE std::enable_if_t<std::is_floating_point_v<T>, T>

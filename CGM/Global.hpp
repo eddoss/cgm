@@ -5,25 +5,25 @@
 /* ####################################################################################### */
 
 #if CGMATH_MATRIX_LAYOUT != Row || CGMATH_MATRIX_LAYOUT != Column
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGMATH_MATRIX_LAYOUT'");
+    static_assert(false, "[CGM]: invalid configuration property value: 'CGMATH_MATRIX_LAYOUT'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
 #if CGMATH_HANDEDNESS != Left || CGMATH_HANDEDNESS != Right
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGMATH_HANDEDNESS'");
+    static_assert(false, "[CGM]: invalid configuration property value: 'CGMATH_HANDEDNESS'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
 #if CGM_CFG_AXES != XYZ || CGM_CFG_AXES != YZX || CGM_CFG_AXES != ZXY
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value: 'CGM_CFG_AXES'");
+    static_assert(false, "[CGM]: invalid configuration property value: 'CGM_CFG_AXES'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
 #if CGMATH_MATRIX_MULTIPLICATION_ORDER != Pre || CGMATH_MATRIX_MULTIPLICATION_ORDER != Post
-    static_assert(false, "[ComputerGraphixMath]: invalid configuration property value 'CGM_CFG_AXES'");
+    static_assert(false, "[CGM]: invalid configuration property value 'CGM_CFG_AXES'");
 #endif
 
 
@@ -77,13 +77,13 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-#define CGM_RULE_OF_FIVE(className) \
-    ~className()                                            = default; \
-    constexpr className()                                   = default; \
-    constexpr className(className&&) noexcept               = default; \
-    constexpr className(const className&)                   = default; \
-    constexpr className& operator = (const className&)      = default; \
-    constexpr className& operator = (className&&) noexcept  = default;
+#define CGM_RULE_OF_FIVE(Class)                                        \
+    constexpr Class()                           noexcept    = default; \
+    constexpr Class(Class&&)                    noexcept    = default; \
+    constexpr Class& operator = (Class&&)       noexcept    = default; \
+    constexpr Class(const Class&)                           = default; \
+    constexpr Class& operator = (const Class&)              = default; \
+    ~Class()                                                = default;
 
 /* --------------------------------------------------------------------------------------- */
 

@@ -4,8 +4,6 @@
 
 include(CMakePackageConfigHelpers)
 
-set(ConfigPackageLocation "${CMAKE_INSTALL_PREFIX}/cmake")
-
 write_basic_package_version_file(
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake
     VERSION ${PROJECT_VERSION}
@@ -15,29 +13,29 @@ write_basic_package_version_file(
 configure_package_config_file(
     ${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
-    INSTALL_DESTINATION ${ConfigPackageLocation}
+    INSTALL_DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
 )
 
 install(
     TARGETS ${PROJECT_NAME}
     EXPORT ${PROJECT_NAME}Targets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
+    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/$<CONFIG>
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/$<CONFIG>
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/$<CONFIG>
+    INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include
 )
 
 install(
     EXPORT ${PROJECT_NAME}Targets
     FILE ${PROJECT_NAME}Targets.cmake
-    DESTINATION ${ConfigPackageLocation}
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
 )
 
 install(
     FILES
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-    DESTINATION ${ConfigPackageLocation}
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
 )
 
 install(
