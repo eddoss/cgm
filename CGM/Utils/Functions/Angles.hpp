@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <cmath>
 #include <CGM/Utils/ModuleGlobals.hpp>
 #include <CGM/Utils/Types/Number.hpp>
 

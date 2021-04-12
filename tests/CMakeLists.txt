@@ -20,7 +20,7 @@ function(cgm_add_test TARGET_NAME SOURCES)
         PRIVATE
             GTest::gtest GTest::gtest_main
         PUBLIC
-            ComputerGraphixMath
+            CGM
     )
     add_test(NAME ${name} COMMAND ${name})
     gtest_discover_tests(${name})
@@ -32,9 +32,9 @@ enable_testing()
 # Init test project
 # ####################################################################################### #
 
-project(ComputerGraphixMathTests LANGUAGES CXX)
+project(CGM_Tests LANGUAGES CXX)
 
-find_package(GTest CONFIG REQUIRED)
+find_package(GTest REQUIRED)
 
 include(GoogleTest)
 
@@ -147,6 +147,7 @@ cgm_add_test(Cartesian-3D "run.cpp;${TESTS_FILES_CARTESIAN_3D}")
 # ####################################################################################### #
 # SUITES | Transformations
 # ####################################################################################### #
+
 set(TESTS_FILES_TRANSFORMATIONS_2D
     Transformations/2D/Apply.cpp
     Transformations/2D/Translation.cpp
