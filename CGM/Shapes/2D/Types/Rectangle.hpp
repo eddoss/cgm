@@ -4,7 +4,7 @@
 #include <CGM/Utils/Functions/Numbers.hpp>
 #include <CGM/Utils/Functions/Comparison.hpp>
 #include <CGM/Shapes/2D/ModuleGlobals.hpp>
-#include <CGM/Shapes/2D/Types/Size.hpp>
+#include <CGM/Core/Types/Size.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 
 
@@ -28,7 +28,7 @@ public: /* Attributes */
     /**
      * Rectangle size.
      */
-    Size<T>
+    Size<2,T>
     size;
 
 /* ####################################################################################### */
@@ -39,7 +39,7 @@ public: /* Constructors */
      * Initialize position and size.
      */
     constexpr
-    Rectangle(const Vector<2,T>& Position, const Size<T>& SizeValue);
+    Rectangle(const Vector<2,T>& Position, const Size<2,T>& SizeValue);
 
 
 /* ####################################################################################### */

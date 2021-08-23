@@ -10,7 +10,7 @@ find_package(GLEW REQUIRED)
 add_library(${PROJECT_NAME} STATIC ${SOURCES_FILES} ${HEADERS_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
-target_link_libraries(${PROJECT_NAME} PUBLIC glfw GLEW::GLEW ComputerGraphixMath)
+target_link_libraries(${PROJECT_NAME} PUBLIC glfw GLEW::GLEW CGM)
 target_compile_definitions(${PROJECT_NAME} PUBLIC CGM_EXAMPLES_RESOURCES_DIR=${EXAMPLES_RESOURCES_DIR})
 
 get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} PATH)
