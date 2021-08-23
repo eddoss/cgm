@@ -1,4 +1,4 @@
-if(NOT ${CGMATH_BUILD_EXAMPLES})
+if(NOT ${CGM_BUILD_EXAMPLES})
     return()
 endif()
 

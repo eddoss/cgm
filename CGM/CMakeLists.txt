@@ -4,6 +4,15 @@
 
 add_library(${PROJECT_NAME} INTERFACE)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD                17
+    CXX_STANDARD_REQUIRED       ON
+    CXX_EXTENSIONS              OFF
+    RUNTIME_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/bin"
+    LIBRARY_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/lib"
+    ARCHIVE_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/lib"
+)
+
 target_include_directories(${PROJECT_NAME} INTERFACE
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
@@ -19,68 +28,68 @@ source_group("Implementation" ${${PROJECT_NAME}_INLINES})
 # Target configuration
 # ####################################################################################### #
 
-if(CGMATH_USE_DOUBLE_PRECISION)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_USE_DOUBLE_PRECISION)
+if(CGM_USE_DOUBLE_PRECISION)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_USE_DOUBLE_PRECISION)
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(CGMATH_MATRIX_LAYOUT STREQUAL Row)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_MATRIX_LAYOUT=Row)
+if(CGM_MATRIX_LAYOUT STREQUAL Row)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_LAYOUT=Row)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_ROW_WISE_MATRIX_LAYOUT)
-elseif(CGMATH_MATRIX_LAYOUT STREQUAL Column)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_MATRIX_LAYOUT=Column)
+elseif(CGM_MATRIX_LAYOUT STREQUAL Column)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_LAYOUT=Column)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_COLUMN_WISE_MATRIX_LAYOUT)
 else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGMATH_MATRIX_LAYOUT> configuration property. It must be <Row/Column>.")
+    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_MATRIX_LAYOUT> configuration property. It must be <Row/Column>.")
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(CGMATH_HANDEDNESS STREQUAL Left)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_HANDEDNESS=Left)
+if(CGM_HANDEDNESS STREQUAL Left)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_HANDEDNESS=Left)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_LHS)
-elseif(CGMATH_HANDEDNESS STREQUAL Right)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_HANDEDNESS=Right)
+elseif(CGM_HANDEDNESS STREQUAL Right)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_HANDEDNESS=Right)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_RHS)
 else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGMATH_HANDEDNESS> configuration property. It must be <Left/Right>.")
+    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_HANDEDNESS> configuration property. It must be <Left/Right>.")
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(CGMATH_MATRIX_MULTIPLICATION_ORDER STREQUAL Pre)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_MATRIX_MULTIPLICATION_ORDER=Pre)
+if(CGM_MATRIX_MULTIPLICATION_ORDER STREQUAL Pre)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_MULTIPLICATION_ORDER=Pre)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_MATRIX_PREMULT)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_ROW_MAJOR)
-elseif(CGMATH_MATRIX_MULTIPLICATION_ORDER STREQUAL Post)
-    target_compile_definitions(${PROJECT_NAME} INTERFACE CGMATH_MATRIX_MULTIPLICATION_ORDER=Post)
+elseif(CGM_MATRIX_MULTIPLICATION_ORDER STREQUAL Post)
+    target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_MATRIX_MULTIPLICATION_ORDER=Post)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_MATRIX_POSTMULT)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_COLUMN_MAJOR)
 else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of 'CGMATH_MATRIX_MULTIPLICATION_ORDER' configuration property. It must be <Pre/Post>.")
+    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of 'CGM_MATRIX_MULTIPLICATION_ORDER' configuration property. It must be <Pre/Post>.")
 endif()
 
 # --------------------------------------------------------------------------------------- #
 
-if(CGMATH_UP_AXIS STREQUAL X)
+if(CGM_UP_AXIS STREQUAL X)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES=ZXY)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_RIGHT_IS_Z)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_UP_IS_X)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_FORWARD_IS_Y)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES_ARE_ZXY)
-elseif(CGMATH_UP_AXIS STREQUAL Y)
+elseif(CGM_UP_AXIS STREQUAL Y)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES=XYZ)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_RIGHT_IS_X)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_UP_IS_Y)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_FORWARD_IS_Z)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES_ARE_XYZ)
-elseif(CGMATH_UP_AXIS STREQUAL Z)
+elseif(CGM_UP_AXIS STREQUAL Z)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES=YZX)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_RIGHT_IS_Y)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_UP_IS_Z)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_FORWARD_IS_X)
     target_compile_definitions(${PROJECT_NAME} INTERFACE CGM_CFG_AXES_ARE_YZX)
 else()
-    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGMATH_UP_AXIS> configuration property. It must be <X/Y/Z>.")
+    message(FATAL_ERROR "[${PROJECT_NAME}]: invalid value of <CGM_UP_AXIS> configuration property. It must be <X/Y/Z>.")
 endif()

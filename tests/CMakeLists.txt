@@ -1,4 +1,4 @@
-if(NOT ${CGMATH_BUILD_UNIT_TESTS})
+if(NOT ${CGM_BUILD_UNIT_TESTS})
     return()
 endif()
 

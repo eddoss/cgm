@@ -4,14 +4,14 @@
 /* Library properties validation */
 /* ####################################################################################### */
 
-#if CGMATH_MATRIX_LAYOUT != Row || CGMATH_MATRIX_LAYOUT != Column
-    static_assert(false, "[CGM]: invalid configuration property value: 'CGMATH_MATRIX_LAYOUT'");
+#if CGM_MATRIX_LAYOUT != Row || CGM_MATRIX_LAYOUT != Column
+    static_assert(false, "[CGM]: invalid configuration property value: 'CGM_MATRIX_LAYOUT'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
 
-#if CGMATH_HANDEDNESS != Left || CGMATH_HANDEDNESS != Right
-    static_assert(false, "[CGM]: invalid configuration property value: 'CGMATH_HANDEDNESS'");
+#if CGM_HANDEDNESS != Left || CGM_HANDEDNESS != Right
+    static_assert(false, "[CGM]: invalid configuration property value: 'CGM_HANDEDNESS'");
 #endif
 
 /* --------------------------------------------------------------------------------------- */
@@ -22,7 +22,7 @@
 
 /* --------------------------------------------------------------------------------------- */
 
-#if CGMATH_MATRIX_MULTIPLICATION_ORDER != Pre || CGMATH_MATRIX_MULTIPLICATION_ORDER != Post
+#if CGM_MATRIX_MULTIPLICATION_ORDER != Pre || CGM_MATRIX_MULTIPLICATION_ORDER != Post
     static_assert(false, "[CGM]: invalid configuration property value 'CGM_CFG_AXES'");
 #endif
 
@@ -110,7 +110,7 @@ using f64 = double;
 /* Common constants */
 /* ####################################################################################### */
 
-#ifdef CGMATH_USE_DOUBLE_PRECISION
+#ifdef CGM_USE_DOUBLE_PRECISION
     using FLOAT = double;
     #define CGM_BIG_NUMBER                  1.79768e+308
     #define CGM_SMALL_NEGATIVE_NUMBER       2.22506e-308
