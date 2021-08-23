@@ -25,7 +25,7 @@ Geometry::makeAxes(ShaderProgram::Shared material)
     cgm::vec4 b {0.0f, 0.0f, 1.0f, 1.0f};
 
     std::vector<Point> points {};
-    std::vector<cgm::uint32> indices {};
+    std::vector<cgm::u32> indices {};
 
     points.resize(6);
     indices.resize(8);
@@ -59,7 +59,7 @@ Geometry::makeTriangle(ShaderProgram::Shared material)
     cgm::vec4 b {0.0f, 0.0f, 1.0f, 1.0f};
 
     std::vector<Point> points {};
-    std::vector<cgm::uint32> indices {};
+    std::vector<cgm::u32> indices {};
 
     points.resize(3);
     indices.resize(3);
@@ -78,7 +78,7 @@ Geometry::makeTriangle(ShaderProgram::Shared material)
 /* --------------------------------------------------------------------------------------- */
 
 Geometry::Unique
-Geometry::makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color, ShaderProgram::Shared material)
+Geometry::makeCircle(cgm::f32 radius, cgm::u32 pointsCount, const cgm::vec4& color, ShaderProgram::Shared material)
 {
     const auto axis = cgm::forward();
     const auto angleStep = CGM_PI2 / pointsCount;
@@ -94,11 +94,11 @@ Geometry::makeCircle(cgm::float32 radius, cgm::uint32 pointsCount, const cgm::ve
         points.emplace_back(radiusVector, color);
     }
 
-    return std::make_unique<Geometry>(std::move(points), std::vector<cgm::uint32>{}, std::move(material));
+    return std::make_unique<Geometry>(std::move(points), std::vector<cgm::u32>{}, std::move(material));
 }
 
 Geometry::Unique
-Geometry::makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4& color, ShaderProgram::Shared material)
+Geometry::makePyramid(cgm::f32 radius, cgm::f32 height, const cgm::vec4& color, ShaderProgram::Shared material)
 {
     // Top view. P4 - top of pyramid
     //
@@ -127,7 +127,7 @@ Geometry::makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4&
         Point{ p4, color }
     };
 
-    std::vector<uint32_t> indices
+    std::vector<cgm::u32> indices
     {
 //        0, 1, 2, 3, primitiveRestartValue,
         1, 4, 0, CGM_EXAMPLES_PRIMITIVE_RESTART_VALUE,
@@ -142,12 +142,12 @@ Geometry::makePyramid(cgm::float32 radius, cgm::float32 height, const cgm::vec4&
 /* --------------------------------------------------------------------------------------- */
 
 Geometry::Unique
-Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& color, ShaderProgram::Shared material)
+Geometry::makeCircles(cgm::f32 radius, cgm::u32 count, const cgm::vec4& color, ShaderProgram::Shared material)
 {
     std::vector<Point> points {};
-    std::vector<uint32_t> indices {};
+    std::vector<cgm::u32> indices {};
 
-    const auto make_circle = [&points, &indices](const cgm::vec3& center, cgm::float32 radius, cgm::uint32 pointsCount, const cgm::vec4& color)
+    const auto make_circle = [&points, &indices](const cgm::vec3& center, cgm::f32 radius, cgm::u32 pointsCount, const cgm::vec4& color)
     {
         const auto axis = cgm::forward();
         const auto angleStep = CGM_PI2 / pointsCount;
@@ -166,7 +166,7 @@ Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& c
 
     for (size_t i = 0; i < count; ++i)
     {
-        const auto coeff = cgm::float32(i) / count;
+        const auto coeff = cgm::f32(i) / count;
         const auto angle = angleStep * i;
         const auto center = cgm::rotated(cgm::right() * radius, angle, cgm::forward()) - cgm::forward() * coeff;
         make_circle(center, radius, 128, color);
@@ -180,10 +180,10 @@ Geometry::makeCircles(cgm::float32 radius, cgm::uint32 count, const cgm::vec4& c
 /* --------------------------------------------------------------------------------------- */
 
 Geometry::Unique
-Geometry::makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, ShaderProgram::Shared material)
+Geometry::makeGrid(cgm::f32 radius, size_t count, const cgm::vec4& color, ShaderProgram::Shared material)
 {
     std::vector<Point> points {};
-    std::vector<cgm::uint32> indices {};
+    std::vector<cgm::u32> indices {};
 
     points.reserve(count * 8);
     indices.reserve(count * 6 - 2);
@@ -219,7 +219,7 @@ Geometry::makeGrid(cgm::float32 radius, size_t count, const cgm::vec4& color, Sh
 
 /* --------------------------------------------------------------------------------------- */
 
-Geometry::Geometry(std::vector<Point> points, std::vector<cgm::uint32> indices, ShaderProgram::Shared material)
+Geometry::Geometry(std::vector<Point> points, std::vector<cgm::u32> indices, ShaderProgram::Shared material)
     : m_points(std::move(points))
     , m_indices(std::move(indices))
     , m_pointsCount(m_points.size())
@@ -267,7 +267,7 @@ Geometry::init()
     m_vbo.allocate(m_pointsCount * sizeof(Point), m_points.data());
 
     m_ids.bind();
-    m_ids.allocate(m_indicesCount * sizeof(cgm::uint32), m_indices.data());
+    m_ids.allocate(m_indicesCount * sizeof(cgm::u32), m_indices.data());
 
     m_vbo.bind();
     m_material->enableAttributeArray("attrPosition");

@@ -54,7 +54,7 @@ Launcher::mouseMoveEvent(cgm::Vector<2,int> position)
     if (keyState(EKey::LeftAlt) != EState::Press && buttonState(EButton::Left) == EState::Press)
     {
         const auto windowPos = mousePosition();
-        const auto viewportPos = convertToScreen<cgm::float32>(windowPos);
+        const auto viewportPos = convertToScreen<cgm::f32>(windowPos);
 
         locateSpace(viewportPos);
     }
@@ -68,7 +68,7 @@ Launcher::buttonEvent(BaseWindow::EButton button, BaseWindow::EState state, Base
     if (button == EButton::Left && modifier != EModifier::Alt)
     {
         const auto windowPos = mousePosition();
-        const auto viewportPos = convertToScreen<cgm::float32>(windowPos);
+        const auto viewportPos = convertToScreen<cgm::f32>(windowPos);
 
         locateSpace(viewportPos);
     }
@@ -106,31 +106,31 @@ Launcher::setupDots(size_t freq)
 //        }
 //    }
 
-    dots = std::make_unique<Geometry>(std::move(points), std::vector<cgm::uint32>{}, sceneMaterial);
+    dots = std::make_unique<Geometry>(std::move(points), std::vector<cgm::u32>{}, sceneMaterial);
 }
 
 void
 Launcher::setupFrustum()
 {
-//    const cgm::float32 fov      = cgm::radians(projector->properties().fov);
-//    const cgm::float32 aspect   = projector->properties().aspect;
-//    const cgm::float32 near     = projector->properties().near;
-//    const cgm::float32 far      = projector->properties().far;
+//    const cgm::f32 fov      = cgm::radians(projector->properties().fov);
+//    const cgm::f32 aspect   = projector->properties().aspect;
+//    const cgm::f32 near     = projector->properties().near;
+//    const cgm::f32 far      = projector->properties().far;
 //
-//    const cgm::float32 near_h   = near * std::tan(fov * 0.5f);
-//    const cgm::float32 near_w   = near_h * aspect;
-//    const cgm::float32 far_h    = far * std::tan(fov * 0.5f);
-//    const cgm::float32 far_w    = far_h * aspect;
+//    const cgm::f32 near_h   = near * std::tan(fov * 0.5f);
+//    const cgm::f32 near_w   = near_h * aspect;
+//    const cgm::f32 far_h    = far * std::tan(fov * 0.5f);
+//    const cgm::f32 far_w    = far_h * aspect;
 //
-//    const auto near_lb = cgm::coord::cartesian<cgm::float32>(-near_h, -near_w, near);
-//    const auto near_lt = cgm::coord::cartesian<cgm::float32>(+near_h, -near_w, near);
-//    const auto near_rt = cgm::coord::cartesian<cgm::float32>(+near_h, +near_w, near);
-//    const auto near_rb = cgm::coord::cartesian<cgm::float32>(-near_h, +near_w, near);
+//    const auto near_lb = cgm::coord::cartesian<cgm::f32>(-near_h, -near_w, near);
+//    const auto near_lt = cgm::coord::cartesian<cgm::f32>(+near_h, -near_w, near);
+//    const auto near_rt = cgm::coord::cartesian<cgm::f32>(+near_h, +near_w, near);
+//    const auto near_rb = cgm::coord::cartesian<cgm::f32>(-near_h, +near_w, near);
 //
-//    const auto far_lb = cgm::coord::cartesian<cgm::float32>(-far_h, -far_w, far);
-//    const auto far_lt = cgm::coord::cartesian<cgm::float32>(+far_h, -far_w, far);
-//    const auto far_rt = cgm::coord::cartesian<cgm::float32>(+far_h, +far_w, far);
-//    const auto far_rb = cgm::coord::cartesian<cgm::float32>(-far_h, +far_w, far);
+//    const auto far_lb = cgm::coord::cartesian<cgm::f32>(-far_h, -far_w, far);
+//    const auto far_lt = cgm::coord::cartesian<cgm::f32>(+far_h, -far_w, far);
+//    const auto far_rt = cgm::coord::cartesian<cgm::f32>(+far_h, +far_w, far);
+//    const auto far_rb = cgm::coord::cartesian<cgm::f32>(-far_h, +far_w, far);
 //
 //    const auto color = cgm::vec4 {0.7, 0.0, 0.7, 1.0};
 //    auto points = std::vector<Geometry::Point>
@@ -153,7 +153,7 @@ Launcher::setupFrustum()
 //
 //
 //    const auto rv = Geometry::primitiveRestartValue;
-//    auto indices  = std::vector<cgm::uint32>
+//    auto indices  = std::vector<cgm::u32>
 //    {
 //        0, 1, rv,
 //        2, 3, rv,

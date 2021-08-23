@@ -14,23 +14,23 @@ public:
 public:
     struct Properties
     {
-        cgm::float32
+        cgm::f32
         aspect = 1.0f;
 
-        cgm::float32
+        cgm::f32
         near = 0.01f;
 
-        cgm::float32
+        cgm::f32
         far = 1000.0f;
 
-        cgm::float32
+        cgm::f32
         zoom = 1.0f;
     };
 
 public:
     explicit
     OrthographicCameraModel(const Properties& properties);
-    OrthographicCameraModel(cgm::float32 aspect, cgm::float32 zoom, cgm::float32 near, cgm::float32 far);
+    OrthographicCameraModel(cgm::f32 aspect, cgm::f32 zoom, cgm::f32 near, cgm::f32 far);
     OrthographicCameraModel();
 
 public:

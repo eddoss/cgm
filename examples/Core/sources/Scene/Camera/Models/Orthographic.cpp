@@ -13,7 +13,7 @@ OrthographicCameraModel::OrthographicCameraModel(const Properties& properties)
     calculateProjection();
 }
 
-OrthographicCameraModel::OrthographicCameraModel(cgm::float32 aspect, cgm::float32 zoom, cgm::float32 near, cgm::float32 far)
+OrthographicCameraModel::OrthographicCameraModel(cgm::f32 aspect, cgm::f32 zoom, cgm::f32 near, cgm::f32 far)
 {
     m_properties.aspect = aspect;
     m_properties.near = near;

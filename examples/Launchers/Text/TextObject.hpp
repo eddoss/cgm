@@ -37,7 +37,7 @@ public:
     CGM_FORCEINLINE const VAO&
     roughVao() const;
 
-    CGM_FORCEINLINE cgm::uint16
+    CGM_FORCEINLINE cgm::u16
     roughPointsCount() const;
 
     CGM_FORCEINLINE ShaderProgram::Shared
@@ -46,7 +46,7 @@ public:
     CGM_FORCEINLINE const VAO&
     controlVao() const;
 
-    CGM_FORCEINLINE cgm::uint16
+    CGM_FORCEINLINE cgm::u16
     controlPointsCount() const;
 
     CGM_FORCEINLINE ShaderProgram::Shared
@@ -91,7 +91,7 @@ private:
     std::vector<cgm::vec2>
     m_roughPoints;
 
-    cgm::uint16
+    cgm::u16
     m_roughPointsCount {0};
 
     ShaderProgram::Shared
@@ -106,7 +106,7 @@ private:
     std::vector<ControlAttrs>
     m_controlPoints;
 
-    cgm::uint16
+    cgm::u16
     m_controlPointsCount {0};
 
     ShaderProgram::Shared
@@ -120,7 +120,7 @@ Text::roughVao() const
     return m_roughVao;
 }
 
-CGM_FORCEINLINE cgm::uint16
+CGM_FORCEINLINE cgm::u16
 Text::roughPointsCount() const
 {
     return m_roughPointsCount;
@@ -138,7 +138,7 @@ Text::controlVao() const
     return m_controlVao;
 }
 
-CGM_FORCEINLINE cgm::uint16
+CGM_FORCEINLINE cgm::u16
 Text::controlPointsCount() const
 {
     return m_controlPointsCount;

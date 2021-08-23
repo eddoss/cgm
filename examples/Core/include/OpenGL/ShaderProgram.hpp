@@ -158,7 +158,7 @@ public: /* Methods */
      * @param stride Size of buffer element (in bytes).
      */
     void
-    setAttributeBuffer(const std::string& name, EGLType type, uint32_t componentCount, uint32_t offset, uint32_t stride = 0) const;
+    setAttributeBuffer(const std::string& name, EGLType type, cgm::u32 componentCount, cgm::u32 offset, cgm::u32 stride = 0) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: scalar */
@@ -171,7 +171,7 @@ public: /* Uniform variables setters: scalar */
      * @param scalar Attribute value.
      */
     void
-    setUniform(const std::string& name, int32_t scalar) const;
+    setUniform(const std::string& name, cgm::i32 scalar) const;
 
     /**
      * Set uniform attribute value.
@@ -180,7 +180,7 @@ public: /* Uniform variables setters: scalar */
      * @param scalar Attribute value.
      */
     void
-    setUniform(const std::string& name, uint32_t scalar) const;
+    setUniform(const std::string& name, cgm::u32 scalar) const;
 
     /**
      * Set uniform attribute value.
@@ -189,7 +189,7 @@ public: /* Uniform variables setters: scalar */
      * @param scalar Attribute value.
      */
     void
-    setUniform(const std::string& name, cgm::float32 scalar) const;
+    setUniform(const std::string& name, cgm::f32 scalar) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y */
@@ -203,7 +203,7 @@ public: /* Uniform variables setters: x, y */
      * @param y Attribute Y value.
      */
     void
-    setUniform(const std::string& name, int32_t x, int32_t y) const;
+    setUniform(const std::string& name, cgm::i32 x, cgm::i32 y) const;
 
     /**
      * Set uniform attribute value.
@@ -213,7 +213,7 @@ public: /* Uniform variables setters: x, y */
      * @param y Attribute Y value.
      */
     void
-    setUniform(const std::string& name, uint32_t x, uint32_t y) const;
+    setUniform(const std::string& name, cgm::u32 x, cgm::u32 y) const;
 
     /**
      * Set uniform attribute value.
@@ -223,7 +223,7 @@ public: /* Uniform variables setters: x, y */
      * @param y Attribute Y value.
      */
     void
-    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y) const;
+    setUniform(const std::string& name, cgm::f32 x, cgm::f32 y) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y, z */
@@ -238,7 +238,7 @@ public: /* Uniform variables setters: x, y, z */
      * @param z Attribute Z value.
      */
     void
-    setUniform(const std::string& name, int32_t x, int32_t y, int32_t z) const;
+    setUniform(const std::string& name, cgm::i32 x, cgm::i32 y, cgm::i32 z) const;
 
     /**
      * Set uniform attribute value.
@@ -249,7 +249,7 @@ public: /* Uniform variables setters: x, y, z */
      * @param z Attribute Z value.
      */
     void
-    setUniform(const std::string& name, uint32_t x, uint32_t y, uint32_t z) const;
+    setUniform(const std::string& name, cgm::u32 x, cgm::u32 y, cgm::u32 z) const;
 
     /**
      * Set uniform attribute value.
@@ -260,7 +260,7 @@ public: /* Uniform variables setters: x, y, z */
      * @param z Attribute Z value.
      */
     void
-    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z) const;
+    setUniform(const std::string& name, cgm::f32 x, cgm::f32 y, cgm::f32 z) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: x, y, z, w */
@@ -276,7 +276,7 @@ public: /* Uniform variables setters: x, y, z, w */
      * @param w Attribute w value.
      */
     void
-    setUniform(const std::string& name, int32_t x, int32_t y, int32_t z, int32_t w) const;
+    setUniform(const std::string& name, cgm::i32 x, cgm::i32 y, cgm::i32 z, cgm::i32 w) const;
 
     /**
      * Set uniform attribute value.
@@ -287,7 +287,7 @@ public: /* Uniform variables setters: x, y, z, w */
      * @param w Attribute w value.
      */
     void
-    setUniform(const std::string& name, uint32_t x, uint32_t y, uint32_t z, uint32_t w) const;
+    setUniform(const std::string& name, cgm::u32 x, cgm::u32 y, cgm::u32 z, cgm::u32 w) const;
 
     /**
      * Set uniform attribute value.
@@ -299,7 +299,7 @@ public: /* Uniform variables setters: x, y, z, w */
      * @param w Attribute w value.
      */
     void
-    setUniform(const std::string& name, cgm::float32 x, cgm::float32 y, cgm::float32 z, cgm::float32 w) const;
+    setUniform(const std::string& name, cgm::f32 x, cgm::f32 y, cgm::f32 z, cgm::f32 w) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: array */
@@ -314,7 +314,7 @@ public: /* Uniform variables setters: array */
      * @param componentsCount Array element components count (if element is cgm::vec3, componentCount = 3).
      */
     void
-    setUniform(const std::string& name, const int32_t* values, uint32_t count, uint32_t componentsCount) const;
+    setUniform(const std::string& name, const cgm::i32* values, cgm::u32 count, cgm::u32 componentsCount) const;
 
     /**
      * Set uniform attribute value.
@@ -325,7 +325,7 @@ public: /* Uniform variables setters: array */
      * @param componentsCount Array element components count (if element is cgm::vec3, componentCount = 3).
      */
     void
-    setUniform(const std::string& name, const uint32_t* values, uint32_t count, uint32_t componentsCount) const;
+    setUniform(const std::string& name, const cgm::u32* values, cgm::u32 count, cgm::u32 componentsCount) const;
 
     /**
      * Set uniform attribute value.
@@ -336,7 +336,7 @@ public: /* Uniform variables setters: array */
      * @param componentsCount Array element components count (if element is cgm::vec3, componentCount = 3).
      */
     void
-    setUniform(const std::string& name, const cgm::float32* values, uint32_t count, uint32_t componentsCount) const;
+    setUniform(const std::string& name, const cgm::f32* values, cgm::u32 count, cgm::u32 componentsCount) const;
 
 /* ####################################################################################### */
 public: /* Uniform variables setters: float vectors */
@@ -444,6 +444,6 @@ public: /* Private members */
     bool
     m_linked = false;
 
-    std::vector<uint32_t>
+    std::vector<cgm::u32>
     m_shadersIDs;
 };

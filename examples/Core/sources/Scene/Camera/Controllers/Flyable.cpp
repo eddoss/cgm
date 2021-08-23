@@ -63,7 +63,7 @@ FlyableCameraController::inverseSpace() const
 }
 
 void
-FlyableCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forward)
+FlyableCameraController::move(cgm::f32 horizontal, cgm::f32 vertical, cgm::f32 forward)
 {
 #ifdef CGM_CFG_RHS
     cgm::translate(m_space, -this->right() * horizontal);
@@ -78,7 +78,7 @@ FlyableCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cg
 }
 
 void
-FlyableCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
+FlyableCameraController::rotate(cgm::f32 horizontal, cgm::f32 vertical)
 {
     const auto pos = position();
 

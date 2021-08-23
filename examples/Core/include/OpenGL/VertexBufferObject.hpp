@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include <cstdint>
+#include <memory>
 #include <Global.hpp>
 #include <OpenGL/BaseObject.hpp>
-#include <memory>
+#include <CGM/Global.hpp>
 
 
 /**
@@ -124,7 +124,7 @@ public: /* Properties getters */
     /**
      * Get buffer size (in bytes).
      */
-    int32_t
+    cgm::i32
     size() const;
 
 /* ####################################################################################### */
@@ -138,7 +138,7 @@ public: /* Methods: IO */
      * @param[out] outData output data buffer.
      */
     bool
-    read(uint32_t from, uint32_t count, void* outData) const;
+    read(cgm::u32 from, cgm::u32 count, void* outData) const;
 
     /**
      * Write any bytes to buffer.
@@ -147,7 +147,7 @@ public: /* Methods: IO */
      * @param outData Input data to write.
      */
     bool
-    write(uint32_t from, uint32_t count, const void* data);
+    write(cgm::u32 from, cgm::u32 count, const void* data);
 
     /**
      * Allocate memory for buffer on GPU.
@@ -155,7 +155,7 @@ public: /* Methods: IO */
      * @param data Input data to write in allocated memory.
      */
     void
-    allocate(uint32_t count, const void* data);
+    allocate(cgm::u32 count, const void* data);
 
 /* ####################################################################################### */
 public: /* GL object interface */

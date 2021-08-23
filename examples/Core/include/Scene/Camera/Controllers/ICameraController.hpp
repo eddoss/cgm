@@ -37,10 +37,10 @@ public:
 
 public:
     virtual void
-    move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forward) = 0;
+    move(cgm::f32 horizontal, cgm::f32 vertical, cgm::f32 forward) = 0;
 
     virtual void
-    rotate(cgm::float32 horizontal, cgm::float32 vertical) = 0;
+    rotate(cgm::f32 horizontal, cgm::f32 vertical) = 0;
 
     virtual void
     setPosition(const cgm::vec3& position) = 0;

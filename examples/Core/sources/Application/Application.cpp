@@ -68,7 +68,7 @@ Application::resizeEvent()
 {
     BaseWindow::resizeEvent();
 
-    const auto aspectRatio = aspect<cgm::float32>();
+    const auto aspectRatio = aspect<cgm::f32>();
 
     {
         auto props = scenePerspectiveCameraModel->properties();
@@ -128,13 +128,13 @@ Application::setupSceneCamera()
     const auto target = cgm::vec3 {0.0f, 0.0f, 0.0f};
     sceneAimCameraController = std::make_shared<AimCameraController>(target, position);
 
-    const cgm::float32 aspect = this->aspect<cgm::float32>();
-    const cgm::float32 fov = 45.0f;
-    const cgm::float32 near = 0.01f;
-    const cgm::float32 far = 1000.0f;
+    const cgm::f32 aspect = this->aspect<cgm::f32>();
+    const cgm::f32 fov = 45.0f;
+    const cgm::f32 near = 0.01f;
+    const cgm::f32 far = 1000.0f;
     scenePerspectiveCameraModel = std::make_shared<PerspectiveCameraModel>(aspect, fov, near, far);
 
-    const cgm::float32 zoom = cgm::distance(position, target);
+    const cgm::f32 zoom = cgm::distance(position, target);
     sceneOrthographicCameraModel = std::make_shared<OrthographicCameraModel>(aspect, zoom, near, far);
 
 //    sceneCamera = std::make_shared<Camera>(sceneOrthographicCameraModel, sceneAimCameraController);

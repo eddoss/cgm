@@ -74,10 +74,10 @@ private:
     cgm::vec2
     m_textScale {0.25, 0.25};
 
-    uint32_t
+    cgm::u32
     m_fbo = 0;
 
-    uint32_t
+    cgm::u32
     m_fboTexture = 0;
 
     VAO

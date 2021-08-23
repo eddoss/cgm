@@ -37,7 +37,7 @@ normalizedAngle_PI_PI(T angle)
     T intpart {};
     T trunk = CGM_PI * std::modf(angle / CGM_PI, &intpart);
 
-    return trunk - CGM_PI * (int64_t(intpart) % 2);
+    return trunk - CGM_PI * (i64(intpart) % 2);
 }
 
 /* --------------------------------------------------------------------------------------- */

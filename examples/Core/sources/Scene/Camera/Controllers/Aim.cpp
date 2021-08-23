@@ -71,7 +71,7 @@ AimCameraController::inverseSpace() const
 }
 
 void
-AimCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forward)
+AimCameraController::move(cgm::f32 horizontal, cgm::f32 vertical, cgm::f32 forward)
 {
 #ifdef CGM_CFG_RHS
     const auto r = -cgm::right(m_space);
@@ -93,7 +93,7 @@ AimCameraController::move(cgm::float32 horizontal, cgm::float32 vertical, cgm::f
 }
 
 void
-AimCameraController::rotate(cgm::float32 horizontal, cgm::float32 vertical)
+AimCameraController::rotate(cgm::f32 horizontal, cgm::f32 vertical)
 {
     const auto axis = cgm::Ray(cgm::right(m_space), m_aim);
 

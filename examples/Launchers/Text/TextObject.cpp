@@ -129,7 +129,7 @@ Text::setText(const std::string& text)
         hb_font_t *font = hb_ft_font_create(m_ftFace, nullptr);
         hb_shape(font, buf, nullptr, 0);
 
-        uint32_t glyph_count = 0;
+        cgm::u32 glyph_count = 0;
         hb_glyph_info_t *glyphs_info    = hb_buffer_get_glyph_infos(buf, &glyph_count);
         hb_glyph_position_t *glyphs_pos = hb_buffer_get_glyph_positions(buf, &glyph_count);
 
@@ -235,7 +235,7 @@ Text::calculatePosition(const FT_Vector& vec)
 {
     return
     {
-        cgm::float32(vec.x) + offset.x,
-        cgm::float32(vec.y) + offset.y
+        cgm::f32(vec.x) + offset.x,
+        cgm::f32(vec.y) + offset.y
     };
 }

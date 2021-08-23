@@ -69,7 +69,7 @@ public: /* Typedefs */
     using reference             = const T&;
     using pointer               = const T*;
     using iterator_category     = std::random_access_iterator_tag;
-    using difference_type       = int64_t;
+    using difference_type       = i64;
 
 /* ####################################################################################### */
 public: /* Constructors */

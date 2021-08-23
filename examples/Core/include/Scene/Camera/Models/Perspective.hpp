@@ -14,23 +14,23 @@ public:
 public:
     struct Properties
     {
-        cgm::float32
+        cgm::f32
         aspect = 1.0f;
 
-        cgm::float32
+        cgm::f32
         fov = 45.0f;
 
-        cgm::float32
+        cgm::f32
         near = 0.01f;
 
-        cgm::float32
+        cgm::f32
         far = 1000.0f;
     };
 
 public:
     PerspectiveCameraModel();
     PerspectiveCameraModel(const Properties& properties);
-    PerspectiveCameraModel(cgm::float32 aspect, cgm::float32 fov, cgm::float32 near, cgm::float32 far);
+    PerspectiveCameraModel(cgm::f32 aspect, cgm::f32 fov, cgm::f32 near, cgm::f32 far);
 
 public:
     CGM_FORCEINLINE const Properties&

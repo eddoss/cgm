@@ -74,7 +74,7 @@ VBO::readable() const
 
 /* --------------------------------------------------------------------------------------- */
 
-int32_t
+cgm::i32
 VBO::size() const
 {
     if( !m_objectCreated )
@@ -92,7 +92,7 @@ VBO::size() const
 /* ####################################################################################### */
 
 bool
-VBO::read(uint32_t from, uint32_t count, void* outData) const
+VBO::read(cgm::u32 from, cgm::u32 count, void* outData) const
 {
     if( !m_objectCreated )
     {
@@ -122,7 +122,7 @@ VBO::read(uint32_t from, uint32_t count, void* outData) const
 /* --------------------------------------------------------------------------------------- */
 
 bool
-VBO::write(uint32_t offset, uint32_t count, const void* data )
+VBO::write(cgm::u32 offset, cgm::u32 count, const void* data )
 {
     if( !m_objectCreated )
     {
@@ -152,7 +152,7 @@ VBO::write(uint32_t offset, uint32_t count, const void* data )
 /* --------------------------------------------------------------------------------------- */
 
 void
-VBO::allocate(uint32_t byteCount, const void* data )
+VBO::allocate(cgm::u32 byteCount, const void* data )
 {
     glBufferData(m_bufferType, byteCount, data, m_usagePattern);
 }

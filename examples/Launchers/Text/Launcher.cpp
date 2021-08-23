@@ -295,8 +295,8 @@ void
 Text2DLauncher::setupOffsets()
 {
     const auto c = 1.0f / 255.0f;
-    const auto x = 2.0f / (cgm::float32(width()) * 4.0f);
-    const auto y = 2.0f / (cgm::float32(height()) * 4.0f);
+    const auto x = 2.0f / (cgm::f32(width()) * 4.0f);
+    const auto y = 2.0f / (cgm::f32(height()) * 4.0f);
 
     samplesProperties =
     {

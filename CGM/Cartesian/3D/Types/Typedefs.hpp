@@ -7,7 +7,7 @@
 CGM_NAMESPACE_BEGIN
 
 using quat      = Quaternion<FLOAT>;
-using quat_32   = Quaternion<float32>;
-using quat_64   = Quaternion<float64>;
+using quat_32   = Quaternion<f32>;
+using quat_64   = Quaternion<f64>;
 
 CGM_NAMESPACE_END

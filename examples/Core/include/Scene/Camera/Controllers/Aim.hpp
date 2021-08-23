@@ -46,10 +46,10 @@ public:
 
 public:
     void
-    move(cgm::float32 horizontal, cgm::float32 vertical, cgm::float32 forward) override;
+    move(cgm::f32 horizontal, cgm::f32 vertical, cgm::f32 forward) override;
 
     void
-    rotate(cgm::float32 horizontal, cgm::float32 vertical) override;
+    rotate(cgm::f32 horizontal, cgm::f32 vertical) override;
 
     void
     setPosition(const cgm::vec3& position) override;

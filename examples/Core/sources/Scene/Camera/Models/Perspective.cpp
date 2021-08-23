@@ -15,7 +15,7 @@ PerspectiveCameraModel::PerspectiveCameraModel(const Properties& properties)
     calculateProjection();
 }
 
-PerspectiveCameraModel::PerspectiveCameraModel(cgm::float32 aspect, cgm::float32 fov, cgm::float32 near, cgm::float32 far)
+PerspectiveCameraModel::PerspectiveCameraModel(cgm::f32 aspect, cgm::f32 fov, cgm::f32 near, cgm::f32 far)
 {
     m_properties.aspect = aspect;
     m_properties.fov = fov;
