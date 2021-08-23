@@ -2,11 +2,11 @@
 # Init project
 # ####################################################################################### #
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.18)
 
 project(CGM
     LANGUAGES CXX
-    VERSION 0.0.1
+    VERSION 0.9.1
 )
 
 # ####################################################################################### #

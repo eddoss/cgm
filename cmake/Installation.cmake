@@ -13,7 +13,7 @@ write_basic_package_version_file(
 configure_package_config_file(
     ${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
-    INSTALL_DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/CGM"
 )
 
 install(
@@ -28,14 +28,14 @@ install(
 install(
     EXPORT ${PROJECT_NAME}Targets
     FILE ${PROJECT_NAME}Targets.cmake
-    DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/CGM"
 )
 
 install(
     FILES
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-    DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake"
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/CGM"
 )
 
 install(
