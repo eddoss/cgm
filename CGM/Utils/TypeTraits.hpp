@@ -36,7 +36,6 @@ is_floating_number_v = is_floating_number<T>::value;
 
 template<typename ToCheck, typename Output>
 using enable_if_floating = std::enable_if_t<is_floating_number_v<ToCheck>, Output>;
-//using enable_if_floating = std::enable_if_t<std::is_floating_point_v<ToCheck>, Output>;
 
 /* --------------------------------------------------------------------------------------- */
 

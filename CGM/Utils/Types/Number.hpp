@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <type_traits>
 #include <CGM/Utils/ModuleGlobals.hpp>
 #include <CGM/Utils/Types/NumberConstraints.hpp>
 
@@ -294,8 +295,28 @@ private: /* Internal attributes */
 /* Aliases */
 /* ####################################################################################### */
 
+namespace detail
+{
+    template<typename T, typename = void>
+    struct floating_or_unsigned;
+
+    template<typename T>
+    struct floating_or_unsigned<T, std::enable_if_t<(std::is_floating_point_v<T>)>> {using type = T;};
+
+    template<typename T>
+    struct floating_or_unsigned<T, std::enable_if_t<(std::is_unsigned_v<T>)>> {using type = T;};
+
+    template<typename T>
+    using floating_or_unsigned_t = typename floating_or_unsigned<T>::type;
+}
+
 template<typename T=FLOAT>
-using PositiveNumber    = Number<T, PositiveNumberConstraint<T>>;
+using PositiveNumber  = std::conditional_t
+<
+    std::is_floating_point_v<detail::floating_or_unsigned_t<T>>,
+    Number<T, PositiveNumberConstraint<T>>,
+    T
+>;
 
 /* --------------------------------------------------------------------------------------- */
 
