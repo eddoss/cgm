@@ -4,6 +4,7 @@
 #include <CGM/Core/ModuleGlobals.hpp>
 #include <CGM/Core/Types/Vector.hpp>
 #include <CGM/Core/Types/Matrix.hpp>
+#include <CGM/Core/Types/Size.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -84,5 +85,18 @@ using mat41_64  = Matrix<4,1,f64>;
 using mat42_64  = Matrix<4,2,f64>;
 using mat43_64  = Matrix<4,3,f64>;
 using mat44_64  = Matrix<4,4,f64>;
+
+/* ####################################################################################### */
+/* Size */
+/* ####################################################################################### */
+
+using size2     = Size<2,FLOAT>;
+using size3     = Size<3,FLOAT>;
+
+using size2_32  = Size<2,f32>;
+using size3_32  = Size<3,f32>;
+
+using size2_64  = Size<2,f64>;
+using size3_64  = Size<3,f64>;
 
 CGM_NAMESPACE_END
