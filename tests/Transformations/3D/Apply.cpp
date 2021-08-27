@@ -1,9 +1,9 @@
 
 
 #include "Input.hpp"
-#include <CGM/Transformations/3D/Functions/Rotate.hpp>
-#include <CGM/Transformations/3D/Functions/Apply.hpp>
-#include <CGM/Core/Functions/IO.hpp>
+#include <CGM/Modules/Transformations/3D/Functions/Rotate.hpp>
+#include <CGM/Modules/Transformations/3D/Functions/Apply.hpp>
+#include <CGM/Modules/Core/Functions/IO.hpp>
 
 using namespace std;
 

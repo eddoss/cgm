@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Interpolations/Functions/Fit.hpp>
+#include <CGM/Modules/Interpolations/Functions/Fit.hpp>
 
 
 using namespace std;

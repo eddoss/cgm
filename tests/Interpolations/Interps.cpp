@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Interpolations/Functions/Interps.hpp>
+#include <CGM/Modules/Interpolations/Functions/Interps.hpp>
 
 
 using namespace std;

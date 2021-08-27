@@ -1,7 +1,7 @@
 
 
 #include <Launcher.hpp>
-#include <CGM/Modules/Coordinates.hpp>
+#include <CGM/Coordinates.hpp>
 
 
 static std::string TEXT = "Our first goal is to fill in all of the pixels inside the glyph using the GPU.\n"

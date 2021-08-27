@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <CGM/Modules/Core.hpp>
+#include <CGM/Core.hpp>
 #include <OpenGL/VertexArrayObject.hpp>
 #include <OpenGL/VertexBufferObject.hpp>
 #include <OpenGL/ShaderProgram.hpp>

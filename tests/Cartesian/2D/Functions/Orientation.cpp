@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Utils/Functions/Numbers.hpp>
-#include <CGM/Utils/Functions/Comparison.hpp>
-#include <CGM/Core/Operators/Vector.hpp>
-#include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Cartesian/2D/Functions/Utils.hpp>
-#include <CGM/Cartesian/2D/Functions/Orientation.hpp>
+#include <CGM/Modules/Utils/Functions/Numbers.hpp>
+#include <CGM/Modules/Utils/Functions/Comparison.hpp>
+#include <CGM/Modules/Core/Operators/Vector.hpp>
+#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/2D/Functions/Orientation.hpp>
 
 
 using namespace std;

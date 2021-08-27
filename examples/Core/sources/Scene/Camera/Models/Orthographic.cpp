@@ -1,6 +1,6 @@
 
 #include <Scene/Camera/Models/Orthographic.hpp>
-#include <CGM/Modules/Projections.hpp>
+#include <CGM/Projections.hpp>
 
 OrthographicCameraModel::OrthographicCameraModel()
 {

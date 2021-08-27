@@ -1,8 +1,8 @@
 
 
 #include <Application/Application.hpp>
-#include <CGM/Cartesian/3D/Types/Config.hpp>
-#include <CGM/Modules/Transformations/3D.hpp>
+#include <CGM/Cartesian/3D.hpp>
+#include <CGM/Transformations/3D.hpp>
 #include <Rendering/LinePainter.hpp>
 #include <Scene/Camera/Controllers/Aim.hpp>
 #include <Scene/Camera/Controllers/Flyable.hpp>

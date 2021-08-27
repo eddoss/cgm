@@ -1,8 +1,8 @@
 
 
 #include <Scene/Geometry.hpp>
-#include <CGM/Modules/Coordinates.hpp>
-#include <CGM/Modules/Transformations/3D.hpp>
+#include <CGM/Coordinates.hpp>
+#include <CGM/Transformations/3D.hpp>
 #include <utility>
 
 

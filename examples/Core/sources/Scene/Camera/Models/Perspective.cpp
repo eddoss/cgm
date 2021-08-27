@@ -1,7 +1,7 @@
 
 
 #include <Scene/Camera/Models/Perspective.hpp>
-#include <CGM/Modules/Projections.hpp>
+#include <CGM/Projections.hpp>
 
 
 PerspectiveCameraModel::PerspectiveCameraModel()

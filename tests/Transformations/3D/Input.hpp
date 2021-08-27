@@ -2,16 +2,16 @@
 
 
 #include <gtest/gtest.h>
-#include <CGM/Core/Types/Vector.hpp>
-#include <CGM/Core/Types/Matrix.hpp>
-#include <CGM/Core/Functions/Vector.hpp>
-#include <CGM/Core/Functions/Matrix.hpp>
-#include <CGM/Cartesian/3D/Functions/Utils.hpp>
-#include <CGM/Cartesian/3D/Functions/Orientation.hpp>
-#include <CGM/Transformations/3D/Types/Enums.hpp>
-#include <CGM/Transformations/3D/Types/Ray.hpp>
-#include <CGM/Transformations/3D/Types/Pivot.hpp>
-#include <CGM/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/Modules/Core/Types/Vector.hpp>
+#include <CGM/Modules/Core/Types/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Vector.hpp>
+#include <CGM/Modules/Core/Functions/Matrix.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Utils.hpp>
+#include <CGM/Modules/Cartesian/3D/Functions/Orientation.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Enums.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Ray.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
+#include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
 
 
 using namespace std;

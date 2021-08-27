@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Interpolations/Functions/FitUnclamped.hpp>
+#include <CGM/Modules/Interpolations/Functions/FitUnclamped.hpp>
 
 
 using namespace std;

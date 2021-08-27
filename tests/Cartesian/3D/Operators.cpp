@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Cartesian/3D/Types/Quaternion.hpp>
-#include <CGM/Cartesian/3D/Operators/Quaternion.hpp>
+#include <CGM/Modules/Cartesian/3D/Types/Quaternion.hpp>
+#include <CGM/Modules/Cartesian/3D/Operators/Quaternion.hpp>
 
 
 using namespace std;

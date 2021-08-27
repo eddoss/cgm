@@ -4,7 +4,7 @@
 #include <memory>
 #include <Global.hpp>
 #include <OpenGL/BaseObject.hpp>
-#include <CGM/Global.hpp>
+#include <CGM/Modules/Global.hpp>
 
 
 /**

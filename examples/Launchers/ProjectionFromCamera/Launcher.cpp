@@ -1,8 +1,8 @@
 
 
 #include <Launcher.hpp>
-#include <CGM/Modules/Projections.hpp>
-#include <CGM/Modules/Transformations/3D.hpp>
+#include <CGM/Projections.hpp>
+#include <CGM/Transformations/3D.hpp>
 #include <Rendering/DotPainter.hpp>
 
 

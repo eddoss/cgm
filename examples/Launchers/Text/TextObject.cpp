@@ -1,7 +1,7 @@
 
 
 #include <TextObject.hpp>
-#include <CGM/Modules/Coordinates.hpp>
+#include <CGM/Coordinates.hpp>
 #include <freetype/ftoutln.h>
 #include <harfbuzz/hb.h>
 #include <harfbuzz/hb-ft.h>

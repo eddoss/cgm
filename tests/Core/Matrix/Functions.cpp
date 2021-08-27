@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Core/Types/Matrix.hpp>
-#include <CGM/Core/Operators/Matrix.hpp>
-#include <CGM/Core/Functions/Matrix.hpp>
+#include <CGM/Modules/Core/Types/Matrix.hpp>
+#include <CGM/Modules/Core/Operators/Matrix.hpp>
+#include <CGM/Modules/Core/Functions/Matrix.hpp>
 
 
 using namespace std;

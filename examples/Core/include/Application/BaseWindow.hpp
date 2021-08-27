@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Core.hpp>
-#include <CGM/Modules/Interpolations.hpp>
+#include <CGM/Core.hpp>
+#include <CGM/Interpolations.hpp>
 #include <Application/Surface.hpp>
 
 
