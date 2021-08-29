@@ -2,7 +2,7 @@
 
 
 #include <CGM/Modules/Coordinates/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Types/Number.hpp>
+#include <CGM/Modules/Primitives/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN

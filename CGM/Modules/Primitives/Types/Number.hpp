@@ -2,8 +2,9 @@
 
 
 #include <type_traits>
-#include <CGM/Modules/Utils/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Types/NumberConstraints.hpp>
+#include <CGM/Modules/Primitives/ModuleGlobals.hpp>
+#include <CGM/Modules/Primitives/Types/Constraints.hpp>
+#include <CGM/Modules/Utils/TypeTraits.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -295,68 +296,53 @@ private: /* Internal attributes */
 /* Aliases */
 /* ####################################################################################### */
 
-namespace detail
-{
-    template<typename T, typename = void>
-    struct floating_or_unsigned;
-
-    template<typename T>
-    struct floating_or_unsigned<T, std::enable_if_t<(std::is_floating_point_v<T>)>> {using type = T;};
-
-    template<typename T>
-    struct floating_or_unsigned<T, std::enable_if_t<(std::is_unsigned_v<T>)>> {using type = T;};
-
-    template<typename T>
-    using floating_or_unsigned_t = typename floating_or_unsigned<T>::type;
-}
-
 template<typename T=FLOAT>
-using PositiveNumber  = std::conditional_t
+using NumberPositive    = std::conditional_t
 <
-    std::is_floating_point_v<detail::floating_or_unsigned_t<T>>,
-    Number<T, PositiveNumberConstraint<T>>,
+    std::is_floating_point_v<floating_or_unsigned_t<T>>,
+    Number<T, NumberConstraintPositive<T>>,
     T
 >;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using NegativeNumber    = Number<T, NegativeNumberConstraint<T>>;
+using NumberNegative    = Number<T, NumberConstraintNegative<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Number10          = Number<T, Range10Constraint<T>>;
+using Number10          = Number<T, NumberConstraintRange10<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Number01          = Number<T, Range01Constraint<T>>;
+using Number01          = Number<T, NumberConstraintRange01<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Number11          = Number<T, Range11Constraint<T>>;
+using Number11          = Number<T, NumberConstraintRange11<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Length            = PositiveNumber<T>;
+using Length            = NumberPositive<T>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle             = Number<T, AngleConstraint_2PI_2PI<T>>;
+using Angle             = Number<T, NumberConstraintAngle2Pi2Pi<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle_0_2PI       = Number<T, AngleConstraint_0_2PI<T>>;
+using Angle02Pi         = Number<T, NumberConstraintAngle02Pi<T>>;
 
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T=FLOAT>
-using Angle_PI_PI       = Number<T, AngleConstraint_PI_PI<T>>;
+using AnglePiPi         = Number<T, NumberConstraintAnglePiPi<T>>;
 
 CGM_NAMESPACE_END
 

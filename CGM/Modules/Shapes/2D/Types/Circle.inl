@@ -19,7 +19,7 @@ Circle<T>::Circle(Vector<2,T> Position, T Radius)
 template <typename T>
 constexpr
 Circle<T>::Circle(T Radius)
-    : center(val<T>(0))
+    : center(T(0))
     , radius(Radius)
 {
 

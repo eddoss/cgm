@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
-#include <CGM/Modules/Utils/Functions/Comparison.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
+#include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 #include <CGM/Shapes/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Core/Types/Size.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
@@ -40,7 +40,6 @@ public: /* Constructors */
      */
     constexpr
     Rectangle(const Vector<2,T>& Position, const Size<2,T>& SizeValue);
-
 
 /* ####################################################################################### */
 public: /* Getters */

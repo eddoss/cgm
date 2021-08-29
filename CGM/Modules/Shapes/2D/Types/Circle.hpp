@@ -2,9 +2,8 @@
 
 
 #include <CGM/Shapes/2D/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Types/Number.hpp>
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
+#include <CGM/Modules/Primitives/Types/Number.hpp>
 
 
 CGM_2D_NAMESPACE_BEGIN

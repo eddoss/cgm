@@ -2,6 +2,7 @@
 
 #include <Scene/Camera/Models/Perspective.hpp>
 #include <CGM/Projections.hpp>
+#include <CGM/Primitives.hpp>
 
 
 PerspectiveCameraModel::PerspectiveCameraModel()

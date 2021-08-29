@@ -16,9 +16,19 @@ endif()
 function(cgm_add_test TARGET_NAME SOURCES)
     set(name "CGM_TESTS_${TARGET_NAME}")
     add_executable(${name} ${SOURCES})
+    set_target_properties(${name} PROPERTIES
+        CXX_STANDARD                17
+        CXX_STANDARD_REQUIRED       ON
+        CXX_EXTENSIONS              OFF
+        MSVC_RUNTIME_LIBRARY        "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+        RUNTIME_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/bin"
+        LIBRARY_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/lib"
+        ARCHIVE_OUTPUT_DIRECTORY    "${CMAKE_BINARY_DIR}/lib"
+    )
     target_link_libraries(${name}
         PRIVATE
-            GTest::gtest GTest::gtest_main
+            GTest::gtest
+            GTest::gtest_main
         PUBLIC
             CGM
     )
@@ -34,7 +44,7 @@ enable_testing()
 
 project(CGM_Tests LANGUAGES CXX)
 
-find_package(GTest REQUIRED)
+find_package(GTest CONFIG REQUIRED)
 
 include(GoogleTest)
 

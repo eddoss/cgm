@@ -2,6 +2,7 @@
 
 #include <Scene/Camera/Controllers/Aim.hpp>
 #include <CGM/Transformations/3D.hpp>
+#include <CGM/Primitives.hpp>
 
 
 AimCameraController::AimCameraController()

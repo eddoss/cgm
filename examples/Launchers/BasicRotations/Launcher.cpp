@@ -2,6 +2,7 @@
 
 #include <Launcher.hpp>
 #include <CGM/Transformations/3D.hpp>
+#include <CGM/Primitives.hpp>
 
 
 Launcher::Launcher()

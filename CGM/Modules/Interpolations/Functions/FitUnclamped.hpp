@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
-#include <CGM/Modules/Utils/Functions/Comparison.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
+#include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 #include <CGM/Modules/Interpolations/ModuleGlobals.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Utils/TypeTraits.hpp>

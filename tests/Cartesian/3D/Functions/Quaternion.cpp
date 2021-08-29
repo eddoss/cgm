@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <gtest/gtest.h>
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
-#include <CGM/Modules/Utils/Functions/Comparison.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
+#include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 #include <CGM/Modules/Core/Functions/Vector.hpp>
 #include <CGM/Modules/Cartesian/3D/Types/Quaternion.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Quaternion.hpp>

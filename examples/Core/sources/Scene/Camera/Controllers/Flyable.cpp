@@ -2,6 +2,7 @@
 
 #include <Scene/Camera/Controllers/Flyable.hpp>
 #include <CGM/Transformations/3D.hpp>
+#include <CGM/Primitives.hpp>
 
 
 FlyableCameraController::FlyableCameraController()

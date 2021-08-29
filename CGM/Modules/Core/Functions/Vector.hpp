@@ -3,9 +3,8 @@
 
 #include <cmath>
 #include <CGM/Modules/Core/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
-#include <CGM/Modules/Utils/Functions/Comparison.hpp>
-#include <CGM/Modules/Utils/Functions/Angles.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
+#include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Operators/Vector.hpp>
 #include <CGM/Modules/Utils/TypeTraits.hpp>
@@ -108,66 +107,6 @@ distance(const Vector<D,T>& A, const Vector<D,T>& B);
 template<size_t D, typename T>
 constexpr enable_if_floating<T,T>
 angle(const Vector<D,T>& A, const Vector<D,T>& B);
-
-/**
- * Convert given values from degrees to radians and pack them to 2D vector.
- * @param x Value for X component.
- * @param y Value for Y component.
- * @return Vector of radians.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
-radians(T x, T y);
-
-/**
- * Convert given values from degrees to radians and pack them to 3D vector.
- * @param x Value for X component.
- * @param y Value for Y component.
- * @param z Value for Z component.
- * @return Vector of radians.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
-radians(T x, T y, T z);
-
-/**
- * Convert vector of degrees to vector of radians.
- * @param angles Vector of degrees.
- * @return Vector of radians.
- */
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
-radians(const Vector<D,T>& angles);
-
-/**
- * Convert given values from radians to degrees and pack them to 2D vector.
- * @param x Value for X component.
- * @param y Value for Y component.
- * @return Vector of degrees.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<2,T>>
-degrees(T x, T y);
-
-/**
- * Convert given values from radians to degrees and pack them to 3D vector.
- * @param x Value for X component.
- * @param y Value for Y component.
- * @param z Value for Z component.
- * @return Vector of degrees.
- */
-template<typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<3,T>>
-degrees(T x, T y, T z);
-
-/**
- * Convert vector of radians to vector of degrees.
- * @param angles Vector of radians.
- * @return Vector of degrees.
- */
-template<size_t D, typename T>
-constexpr CGM_FORCEINLINE enable_if_floating<T,Vector<D,T>>
-degrees(const Vector<D,T>& angles);
 
 /**
  * Compare vector A and B (floating point based).

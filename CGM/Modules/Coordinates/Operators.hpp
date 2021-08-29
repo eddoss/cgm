@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
-#include <CGM/Modules/Utils/Functions/Comparison.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
+#include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 #include <CGM/Modules/Coordinates/ModuleGlobals.hpp>
 #include <CGM/Modules/Coordinates/Types/Polar.hpp>
 #include <CGM/Modules/Coordinates/Types/Spherical.hpp>

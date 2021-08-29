@@ -24,7 +24,7 @@ num(T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE PositiveNumber<T>
+constexpr CGM_FORCEINLINE NumberPositive<T>
 posnum(T value)
 {
     return PositiveNumber<T>(value);
@@ -33,7 +33,7 @@ posnum(T value)
 /* --------------------------------------------------------------------------------------- */
 
 template<typename T>
-constexpr CGM_FORCEINLINE NegativeNumber<T>
+constexpr CGM_FORCEINLINE NumberNegative<T>
 negnum(T value)
 {
     return NegativeNumber<T>(value);

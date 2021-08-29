@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <CGM/Modules/Utils/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Types/Number.hpp>
+#include <CGM/Modules/Primitives/ModuleGlobals.hpp>
+#include <CGM/Modules/Primitives/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -25,14 +25,14 @@ num(T value);
  * Creates positive constrained number.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE PositiveNumber<T>
+constexpr CGM_FORCEINLINE NumberPositive<T>
 posnum(T value);
 
 /**
  * Creates negative constrained number.
  */
 template<typename T>
-constexpr CGM_FORCEINLINE NegativeNumber<T>
+constexpr CGM_FORCEINLINE NumberNegative<T>
 negnum(T value);
 
 /**

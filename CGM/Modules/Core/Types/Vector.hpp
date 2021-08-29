@@ -4,7 +4,7 @@
 #include <iterator>
 #include <type_traits>
 #include <initializer_list>
-#include <CGM/Modules/Global.hpp>
+#include <CGM/Modules/Core/ModuleGlobals.hpp>
 #include <CGM/Modules/Core/Types/Enums.hpp>
 
 

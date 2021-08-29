@@ -1,8 +1,9 @@
 #pragma once
 
 
-#include <CGM/Modules/Utils/ModuleGlobals.hpp>
-#include <CGM/Modules/Utils/Functions/Numbers.hpp>
+#include <type_traits>
+#include <CGM/Modules/Primitives/ModuleGlobals.hpp>
+#include <CGM/Modules/Primitives/Functions/Numbers.hpp>
 
 
 CGM_NAMESPACE_BEGIN
