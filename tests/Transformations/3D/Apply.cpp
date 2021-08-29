@@ -3,11 +3,10 @@
 #include "Input.hpp"
 #include <CGM/Modules/Transformations/3D/Functions/Rotate.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Apply.hpp>
-#include <CGM/Modules/Core/Functions/IO.hpp>
+#include <CGM/Modules/Primitives/Functions/Angles.hpp>
 
 using namespace std;
 
-#define CGM_PRINT(what) std::cout << "\n" << what << std::endl;
 
 TEST(Transformations3D_Apply, Vector_Matrix3)
 {
@@ -75,9 +74,9 @@ TEST(Transformations3D_Apply, Vector_Matrix3_Variadic)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto A = CGM::rotationMatrix<3>(CGM::radians(1.0, 2.3, 1.6));
-    const auto B = CGM::rotationMatrix<3>(CGM::radians(2.3, 0.5, 6.1));
-    const auto C = CGM::rotationMatrix<3>(CGM::radians(0.2, 0.7, 3.6));
+    const auto A = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(1.0), CGM::radians(2.3), CGM::radians(1.6)});
+    const auto B = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(2.3), CGM::radians(0.5), CGM::radians(6.1)});
+    const auto C = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(0.2), CGM::radians(0.7), CGM::radians(3.6)});
 
     const auto result = CGM::applied(cgm_test::vector, {A,B,C});
 
@@ -96,9 +95,9 @@ TEST(Transformations3D_Apply, Vector_Matrix4_Variadic)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto A = CGM::rotationMatrix<4>(CGM::radians(1.0, 2.3, 1.6));
-    const auto B = CGM::rotationMatrix<4>(CGM::radians(2.3, 0.5, 6.1));
-    const auto C = CGM::rotationMatrix<4>(CGM::radians(0.2, 0.7, 3.6));
+    const auto A = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(1.0), CGM::radians(2.3), CGM::radians(1.6)});
+    const auto B = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(2.3), CGM::radians(0.5), CGM::radians(6.1)});
+    const auto C = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(0.2), CGM::radians(0.7), CGM::radians(3.6)});
 
     const auto result = CGM::applied<CGM_DIRECTION>(cgm_test::vector, {A,B,C});
 
@@ -117,9 +116,9 @@ TEST(Transformations3D_Apply, Matrix3_Variadic)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto A = CGM::rotationMatrix<3>(CGM::radians(1.0, 2.3, 1.6));
-    const auto B = CGM::rotationMatrix<3>(CGM::radians(2.3, 0.5, 6.1));
-    const auto C = CGM::rotationMatrix<3>(CGM::radians(0.2, 0.7, 3.6));
+    const auto A = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(1.0), CGM::radians(2.3), CGM::radians(1.6)});
+    const auto B = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(2.3), CGM::radians(0.5), CGM::radians(6.1)});
+    const auto C = CGM::rotationMatrix<3>(cgm::Vector<3,cgm::f64>{CGM::radians(0.2), CGM::radians(0.7), CGM::radians(3.6)});
 
     const auto result = CGM::applied(cgm_test::orientation, {A,B,C});
 
@@ -138,9 +137,9 @@ TEST(Transformations3D_Apply, Matrix4_Variadic)
 {
     namespace cgm_test = cgm_xyz_xform_tests_data;
 
-    const auto A = CGM::rotationMatrix<4>(CGM::radians(1.0, 2.3, 1.6));
-    const auto B = CGM::rotationMatrix<4>(CGM::radians(2.3, 0.5, 6.1));
-    const auto C = CGM::rotationMatrix<4>(CGM::radians(0.2, 0.7, 3.6));
+    const auto A = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(1.0), CGM::radians(2.3), CGM::radians(1.6)});
+    const auto B = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(2.3), CGM::radians(0.5), CGM::radians(6.1)});
+    const auto C = CGM::rotationMatrix<4>(cgm::Vector<3,cgm::f64>{CGM::radians(0.2), CGM::radians(0.7), CGM::radians(3.6)});
 
     const auto result = CGM::applied(cgm_test::space, {A,B,C});
 

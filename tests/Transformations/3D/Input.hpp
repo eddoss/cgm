@@ -12,6 +12,7 @@
 #include <CGM/Modules/Transformations/3D/Types/Ray.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/3D/Types/Transforms.hpp>
+#include <CGM/Modules/Primitives/Functions/Angles.hpp>
 
 
 using namespace std;
@@ -26,7 +27,7 @@ namespace cgm_xyz_xform_tests_data
         CGM::Transforms<double> values {};
         values.translation      = {+0.5, -1.4, +2.3};
         values.scale            = {+1.4, +2.1, +0.3};
-        values.rotation         = CGM::radians(CGM::Vector<3,double>{22.0, 30.0, -17.0});
+        values.rotation         = {CGM::radians(22.0), CGM::radians(30.0), CGM::radians(-17.0)};
         values.uniformScale     = values.scale.x;
         values.transformOrder   = order;
         values.rotationOrder    = CGM::ERotationOrder::XYZ;

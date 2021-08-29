@@ -11,15 +11,10 @@
 #include <CGM/Modules/Transformations/2D/Types/ArbitraryAxis.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Transforms.hpp>
-#include <CGM/Modules/Core/Functions/IO.hpp>
+#include <CGM/Modules/Primitives/Functions/Angles.hpp>
 
 using namespace std;
 
-#define CGM_PRINT(what) std::cout << "\n\n" << what << std::endl;
-#define CGM_PRINT_BASIS(b) \
-    std::cout << "\n\n" << CGM_2D::x(b) << ","  << std::endl; \
-    std::cout << CGM_2D::y(b) << "," << std::endl; \
-    std::cout << CGM_2D::position(b) << std::endl;
 namespace cgm_xy_xform_tests_data
 {
     static CGM_XFORM2D::Transforms<double>
