@@ -24,7 +24,11 @@ struct Size <D, T, std::enable_if_t<(D == 2)>>
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using value_type    = T;
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
 /* ####################################################################################### */
 public: /* Attributes */
@@ -50,6 +54,24 @@ public: /* Constructors */
      */
     constexpr explicit
     Size(T value);
+
+/* ####################################################################################### */
+public: /* Getters */
+/* ####################################################################################### */
+
+    /**
+     * Gets raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
+
+    /**
+     * Gets const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
 };
 
 /* ####################################################################################### */
@@ -67,7 +89,11 @@ struct Size <D, T, std::enable_if_t<(D == 3)>>
 public: /* Typedefs */
 /* ####################################################################################### */
 
-    using value_type    = T;
+    using value_type                = T;
+    using pointer                   = T*;
+    using reference                 = T&;
+    using const_pointer             = const T*;
+    using const_reference           = const T&;
 
 /* ####################################################################################### */
 public: /* Attributes */
@@ -96,6 +122,24 @@ public: /* Constructors */
      */
     constexpr explicit
     Size(T value);
+
+/* ####################################################################################### */
+public: /* Getters */
+/* ####################################################################################### */
+
+    /**
+     * Gets raw pointer at the first component.
+     * @param first component raw pointer.
+     */
+    constexpr CGM_FORCEINLINE pointer
+    data();
+
+    /**
+     * Gets const raw pointer at the first component.
+     * @param first component const raw pointer.
+     */
+    constexpr CGM_FORCEINLINE const_pointer
+    data() const;
 };
 
 CGM_NAMESPACE_END
