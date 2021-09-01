@@ -3,11 +3,11 @@
 
 #include <CGM/Modules/Core/ModuleGlobals.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
-#include <CGM/Modules/Core/Support/Matrix/ReverseMatrixIterator.inl>
-#include <CGM/Modules/Core/Support/Matrix/Iterators/Direct.inl>
-#include <CGM/Modules/Core/Support/Matrix/Iterators/Indirect.inl>
-#include <CGM/Modules/Core/Support/Matrix/Iterators/Row.inl>
-#include <CGM/Modules/Core/Support/Matrix/Iterators/Column.inl>
+#include <CGM/Modules/Core/Types/MatrixIterators/ReverseMatrixIterator.inl>
+#include <CGM/Modules/Core/Types/MatrixIterators/Direct.inl>
+#include <CGM/Modules/Core/Types/MatrixIterators/Indirect.inl>
+#include <CGM/Modules/Core/Types/MatrixIterators/Row.inl>
+#include <CGM/Modules/Core/Types/MatrixIterators/Column.inl>
 
 
 CGM_NAMESPACE_BEGIN
