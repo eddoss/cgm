@@ -23,13 +23,13 @@ public: /* Attributes */
      * Rectangle position.
      */
     Vector<2,T>
-    center;
+    center {T(0), {T(0)}};
 
     /**
      * Rectangle size.
      */
     Size<2,T>
-    size;
+    size {T(1), {T(1)}};
 
 /* ####################################################################################### */
 public: /* Constructors */

@@ -24,43 +24,43 @@ struct Transforms
      * Transformations pivot point.
      */
     Pivot<T>
-    pivot;
+    pivot {};
 
     /**
      * Describe translations.
      */
     Vector<3,T>
-    translation;
+    translation {T(0), T(0), T(0)};
 
     /**
      * Describe Rotations (in radians).
      */
     Vector<3,T>
-    rotation;
+    rotation {T(0), T(0), T(0)};
 
     /**
      * Describe scales.
      */
     Vector<3,T>
-    scale;
+    scale {T(1), T(1), T(1)};
 
     /**
      * Describe uniform scale.
      */
     T
-    uniformScale;
+    uniformScale {T(1)};
 
     /**
      * Describe transformation order.
      */
     ETransformOrder
-    transformOrder;
+    transformOrder {ETransformOrder::SRT};
 
     /**
      * Describe rotation order.
      */
     ERotationOrder
-    rotationOrder;
+    rotationOrder {ERotationOrder::XYZ};
 
 /* ####################################################################################### */
 /* Constructors */

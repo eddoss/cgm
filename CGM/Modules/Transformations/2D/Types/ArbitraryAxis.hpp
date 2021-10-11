@@ -17,8 +17,8 @@ struct ArbitraryAxis
 /* Attributes */
 /* ####################################################################################### */
 
-    Vector<2,T> direction;    ///< axis direction.
-    Vector<2,T> position;     ///< axis position.
+    Vector<2,T> direction {T(1), T(0)};    ///< axis direction.
+    Vector<2,T> position {T(0), T(0)};     ///< axis position.
 
 /* ####################################################################################### */
 /* Constructors */

@@ -32,8 +32,8 @@ public: /* Typedefs */
 public: /* Components */
 /* ####################################################################################### */
 
-    vector_type vector;
-    scalar_type scalar;
+    vector_type vector {T(0), T(0), T(0)};
+    scalar_type scalar {T(1)};
 
 /* ####################################################################################### */
 public: /* Constructors */

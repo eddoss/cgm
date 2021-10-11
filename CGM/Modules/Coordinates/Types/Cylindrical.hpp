@@ -21,19 +21,19 @@ public: /* Attributes */
      * Rotation angle.
      */
     Angle<T>
-    angle;
+    angle {T(0)};
 
     /**
      * Cylinder radius.
      */
     Length<T>
-    radius;
+    radius {T(1)};
 
     /**
      * Cylinder height.
      */
     Length<T>
-    height;
+    height {T(1)};
 
 /* ####################################################################################### */
 public: /* Constructors */

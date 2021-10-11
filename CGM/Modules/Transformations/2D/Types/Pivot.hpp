@@ -19,11 +19,11 @@ struct Pivot
 
     /** Orientation axes. */
     Axes<T>
-    axes;
+    axes {};
 
     /** Pivot position. */
     Vector<2,T>
-    position;
+    position {T(0), T(0)};
 
 /* ####################################################################################### */
 /* Constructors */

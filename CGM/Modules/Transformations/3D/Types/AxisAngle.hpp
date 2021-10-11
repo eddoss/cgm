@@ -18,11 +18,11 @@ struct AxisAngle
 
     /** Rotation axis direction. */
     Vector<3,T>
-    direction;
+    direction {T(1), T(0), T(0)};
 
     /** Rotation angle in radians. */
     T
-    angle;
+    angle {T(0)};
 
 /* ####################################################################################### */
 /* Constructors */

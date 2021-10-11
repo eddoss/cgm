@@ -21,13 +21,13 @@ public: /* Attributes */
      * Circle center.
      */
     Vector<2,T>
-    center;
+    center {T(0), T(0)};
 
     /**
      * Circle radius.
      */
     Length<T>
-    radius;
+    radius {T(1)};
 
 /* ####################################################################################### */
 public: /* Constructors */

@@ -29,13 +29,13 @@ public: /* Attributes */
      * Rotation angle.
      */
     Angle<T>
-    angle;
+    angle {T(0)};
 
     /**
      * Circle radius.
      */
     Length<T>
-    radius;
+    radius {T(1)};
 };
 
 CGM_COORD_NAMESPACE_END

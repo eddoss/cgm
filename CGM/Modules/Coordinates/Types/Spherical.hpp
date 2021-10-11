@@ -43,19 +43,19 @@ public: /* Properties getters */
      * Longitude angle. Horizontal angle in radians [-2PI, 2PI].
      */
     Angle<T>
-    longitude;
+    longitude {T(0)};
 
     /**
      * Latitude angle. Vertical angle in radians [-PI, PI].
      */
     Number<T, SphericalLatitudeConstraint<T>>
-    latitude;
+    latitude {T(0)};
 
     /**
      * Sphere radius.
      */
     Length<T>
-    radius;
+    radius {T(1)};
 };
 
 CGM_COORD_NAMESPACE_END

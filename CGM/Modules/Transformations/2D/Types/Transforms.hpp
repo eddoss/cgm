@@ -6,6 +6,7 @@
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
+#include <CGM/Modules/Primitives/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -24,37 +25,37 @@ struct Transforms
      * Describe translations.
      */
     Pivot<T>
-    pivot;
+    pivot {};
 
     /**
      * Describe translations.
      */
     Vector<2,T>
-    translation;
+    translation {T(0), T(0)};
 
     /**
      * Describe scales.
      */
     Vector<2,T>
-    scale;
+    scale {T(1), T(1)};
 
     /**
      * Describe uniform scale.
      */
     T
-    uniformScale;
+    uniformScale {T(1)};
 
     /**
      * Describe rotation (in radians).
      */
-    T
-    rotation;
+    Angle<T>
+    rotation {T(0)};
 
     /**
      * Describe transformation order.
      */
     ETransformOrder
-    transformOrder;
+    transformOrder {ETransformOrder::SRT};
 
 /* ####################################################################################### */
 /* Constructors */

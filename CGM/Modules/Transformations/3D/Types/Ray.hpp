@@ -16,8 +16,8 @@ struct Ray
 /* Attributes */
 /* ####################################################################################### */
 
-    Vector<3,T> direction;    ///< ray direction.
-    Vector<3,T> position;     ///< ray position.
+    Vector<3,T> direction {T(1), T(0), T(0)};    ///< ray direction.
+    Vector<3,T> position {T(0), T(0), T(0)};     ///< ray position.
 
 /* ####################################################################################### */
 /* Constructors */
