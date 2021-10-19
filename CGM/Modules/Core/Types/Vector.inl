@@ -408,8 +408,8 @@ constexpr
 Vector <D, T, std::enable_if_t<(D == 4)>>::Vector(const Vector<2,T>& XY, const Vector<2,T>& ZW)
     : x(XY.x)
     , y(XY.y)
-    , z(ZW.z)
-    , w(ZW.w)
+    , z(ZW.x)
+    , w(ZW.y)
 {
 
 }
