@@ -31,4 +31,6 @@ void Launcher::beforeLoop()
     cgm::rotate(space->xform, cgm::radians(45.0f), cgm::up());
     cgm::translate(space->xform, cgm::right() * 0.5f);
     cgm::translate(space->xform, cgm::forward() * 0.5f);
+
+    sceneAimCameraController->focus(cgm::vec3{0,0,0}, cgm::vec3{3,3,3});
 }

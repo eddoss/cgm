@@ -1,6 +1,7 @@
 
 
 #include <Launcher.hpp>
+#include <CGM/Primitives.hpp>
 #include <CGM/Projections.hpp>
 #include <CGM/Transformations/3D.hpp>
 #include <Rendering/DotPainter.hpp>
@@ -44,6 +45,8 @@ Launcher::beforeLoop()
 //    dots->init();
     object->init();
 //    frustum->init();
+
+    sceneCamera->model = sceneOrthographicCameraModel;
 }
 
 void
@@ -188,14 +191,13 @@ Launcher::intersection(const cgm::vec3& rayVector, const cgm::vec3& rayPoint,con
 void
 Launcher::locateSpace(const cgm::vec2& tap)
 {
-    const auto& model = *scenePerspectiveCameraModel;
-    const auto& contr = *sceneAimCameraController;
+    const auto fov     = cgm::radians(scenePerspectiveCameraModel->properties().fov);
+    const auto aspect  = scenePerspectiveCameraModel->properties().aspect;
+    const auto zoom  = sceneOrthographicCameraModel->properties().zoom;
+    const auto& space  = sceneAimCameraController->space();
 
-    const auto fov     = cgm::radians(model.properties().fov);
-    const auto aspect  = model.properties().aspect;
-    const auto& space  = contr.space();
-
-    const auto ray = cgm::perspectiveRay(tap, fov, aspect, space);
+//    const auto ray = cgm::perspectiveRay(tap, fov, aspect, space);
+    const auto ray = cgm::orthographicRay(tap, aspect, zoom, space);
     const auto intersec = intersection(ray.direction, ray.position, cgm::up(), cgm::vec3(0));
 
     cgm::setPosition(object->xform, intersec);

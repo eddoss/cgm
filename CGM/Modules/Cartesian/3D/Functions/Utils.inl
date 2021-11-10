@@ -880,11 +880,12 @@ template<typename T>
 constexpr Matrix<4,4,T>
 lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>& up)
 {
-    const auto f = CGM::normalized(target - position);
 #ifdef CGM_CFG_RHS
+    const auto f = CGM::normalized(position - target);
     const auto r = CGM::normalized(CGM::cross(up, f));
     const auto u = CGM::normalized(CGM::cross(f, r));
 #else
+    const auto f = CGM::normalized(target - position);
     const auto r = CGM::normalized(CGM::cross(f, up));
     const auto u = CGM::normalized(CGM::cross(r, f));
 #endif

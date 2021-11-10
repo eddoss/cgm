@@ -24,19 +24,19 @@ perspectiveRay(const Vector<2,T>& point, T fov, T aspect, const Matrix<4,4,T>& p
     const T h = std::tan(fov * val<T>(0.5));
     const T w = h * aspect;
 
-    const auto r_offset = CGM::right(projectorSpace) * fit11(point.x, -w, w);
-    const auto u_offset = CGM::up(projectorSpace) * fit11(point.y, -h, h);
+    const auto offsetR = CGM::right(projectorSpace) * fit11(point.x, -w, w);
+    const auto offsetU = CGM::up(projectorSpace) * fit11(point.y, -h, h);
 
     auto ray = CGM::Ray<T>{};
     ray.position = CGM::position(projectorSpace);
 
     if constexpr (CGM_CONFIG.handedness == EHandedness::Right)
     {
-        ray.direction = normalized(CGM::forward(projectorSpace) + u_offset - r_offset);
+        ray.direction = CGM::normalized(offsetR + offsetU - CGM::forward(projectorSpace));
     }
     else
     {
-        ray.direction = normalized(CGM::forward(projectorSpace) + u_offset + r_offset);
+        ray.direction = CGM::normalized(offsetR + offsetU + CGM::forward(projectorSpace));
     }
 
     return ray;
@@ -71,39 +71,41 @@ perspective(T w, T h, T n, T f, T cw, T ch, T cmn, T cmx)
     auto mat = Matrix<4,4,T>(val<T>(0));
 
     {
-        const auto l = f - n;
         const auto R = CGM_COORD::cartesian(val<T>(0), cw * n / w, val<T>(0));
         const auto U = CGM_COORD::cartesian(ch * n / h, val<T>(0), val<T>(0));
-        const auto F = CGM_COORD::cartesian(val<T>(0), val<T>(0), (f * cmx - n * cmn) / l);
-        const auto P = CGM_COORD::cartesian(val<T>(0), val<T>(0), n * f * (cmn - cmx) / l);
-        const auto H = CGM_COORD::cartesian(val<T>(0), val<T>(0), val<T>(1));
 
         CGM::setUp(mat, U);
-        CGM::setForward(mat, F);
-        CGM::setPosition(mat, P);
-        CGM::setHomogeneous(mat, H);
+        CGM::setRight(mat, R);
 
         if constexpr (Handedness == CGM_CONFIG.handedness)
         {
-            CGM::setRight(mat, R);
+            const auto F = CGM_COORD::cartesian(val<T>(0), val<T>(0), (f * cmx - n * cmn) / (f - n));
+            const auto P = CGM_COORD::cartesian(val<T>(0), val<T>(0), n * f * (cmn - cmx) / (f - n));
+            const auto H = CGM_COORD::cartesian(val<T>(0), val<T>(0), val<T>(1));
+
+            CGM::setForward(mat, F);
+            CGM::setPosition(mat, P);
+            CGM::setHomogeneous(mat, H);
         }
         else
         {
-            CGM::setRight(mat, -R);
+            const auto F = CGM_COORD::cartesian(val<T>(0), val<T>(0), (f * cmx - n * cmn) / (n - f));
+            const auto P = CGM_COORD::cartesian(val<T>(0), val<T>(0), n * f * (cmx - cmn) / (n - f));
+            const auto H = CGM_COORD::cartesian(val<T>(0), val<T>(0), val<T>(-1));
+
+            CGM::setForward(mat, F);
+            CGM::setPosition(mat, P);
+            CGM::setHomogeneous(mat, H);
         }
     }
 
     if constexpr (CGM_CONFIG.right != Right || CGM_CONFIG.up != Up || CGM_CONFIG.forward != Forward)
     {
-        Vector<4,T> R(val<T>(0));
-        Vector<4,T> U(val<T>(0));
-        Vector<4,T> F(val<T>(0));
+        const auto R = CGM_COORD::cartesian(T(0), T(1), T(0), T(0));
+        const auto U = CGM_COORD::cartesian(T(1), T(0), T(0), T(0));
+        const auto F = CGM_COORD::cartesian(T(0), T(0), T(1), T(0));
 
-        U.template get<CGM_CONFIG.up>() = val<T>(1);
-        R.template get<CGM_CONFIG.right>() = val<T>(1);
-        F.template get<CGM_CONFIG.forward>() = val<T>(1);
-
-        Matrix<4,4,T> remapper(val<T>(0));
+        auto remapper = Matrix<4,4,T>(val<T>(0));
 
     #ifdef CGM_CFG_MATRIX_POSTMULT
         remapper.setRow(static_cast<size_t>(Up), U);
