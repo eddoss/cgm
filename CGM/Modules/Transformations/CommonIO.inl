@@ -3,8 +3,6 @@
 #include "Common.hpp"
 
 
-CGM_NAMESPACE_BEGIN
-
 constexpr std::ostream&
 operator << (std::ostream& stream, CGM::ETransformOrder transformOrder)
 {
@@ -20,5 +18,3 @@ operator << (std::ostream& stream, CGM::ETransformOrder transformOrder)
 
     return stream;
 }
-
-CGM_NAMESPACE_END

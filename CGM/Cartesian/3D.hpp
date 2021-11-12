@@ -17,4 +17,3 @@
 #include <CGM/Modules/Cartesian/3D/Functions/Converters/Vector.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters/Matrix3x3.hpp>
 #include <CGM/Modules/Cartesian/3D/Functions/Converters/Matrix4x4.hpp>
-#include <CGM/Modules/Cartesian/3D/Functions/IO.hpp>

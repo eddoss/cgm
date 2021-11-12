@@ -20,4 +20,3 @@
 #include <CGM/Modules/Transformations/3D/Functions/Transform.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Converters/Axis.hpp>
 #include <CGM/Modules/Transformations/3D/Functions/Converters/Pivot.hpp>
-#include <CGM/Modules/Transformations/3D/Functions/IO.hpp>

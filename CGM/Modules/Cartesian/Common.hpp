@@ -47,13 +47,3 @@ enum class EHandedness
 #define CGM_RH          CGM::EHandedness::Right
 
 CGM_NAMESPACE_END
-
-/* ####################################################################################### */
-/* IO */
-/* ####################################################################################### */
-
-constexpr std::ostream&
-operator << (std::ostream& stream, CGM::ESpace space);
-
-
-#include "Common.inl"

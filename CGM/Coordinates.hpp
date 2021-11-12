@@ -8,4 +8,3 @@
 
 #include <CGM/Modules/Coordinates/Functions/Converters.hpp>
 #include <CGM/Modules/Coordinates/Functions/VectorComponents.hpp>
-#include <CGM/Modules/Coordinates/Functions/IO.hpp>
