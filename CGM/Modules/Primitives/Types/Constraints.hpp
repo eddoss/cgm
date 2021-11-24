@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <cmath>
 #include <type_traits>
 #include <CGM/Modules/Primitives/ModuleGlobals.hpp>
 
@@ -42,7 +43,7 @@ CGM_DECLARE_NUMBER_CONSTRAINT(NumberConstraintRange10)
 /**
  * Return only values in range [-1, +1].
  **/
- CGM_DECLARE_NUMBER_CONSTRAINT(NumberConstraintRange11)
+CGM_DECLARE_NUMBER_CONSTRAINT(NumberConstraintRange11)
 
 /* ####################################################################################### */
 /* Angles */

@@ -44,7 +44,7 @@ enable_testing()
 
 project(CGM_Tests LANGUAGES CXX)
 
-find_package(GTest CONFIG REQUIRED)
+find_package(GTest REQUIRED)
 
 include(GoogleTest)
 

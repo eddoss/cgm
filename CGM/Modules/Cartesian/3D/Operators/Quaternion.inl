@@ -90,7 +90,7 @@ operator * (const CGM::Quaternion<T>& quaternion, TScale scale)
     }
     else
     {
-        const auto castedScale = CGM::val<T>(scale);
+        const auto castedScale = T(scale);
 
         return
         {
@@ -137,7 +137,7 @@ operator *= (CGM::Quaternion<T>& quaternion, TScale scale)
     }
     else
     {
-        T castedScale = CGM::val<T>(scale);
+        T castedScale = T(scale);
 
         quaternion.vector.x *= castedScale;
         quaternion.vector.y *= castedScale;
@@ -179,7 +179,7 @@ operator / (const CGM::Quaternion<T>& quaternion, TDivider divider)
     }
     else
     {
-        T castedDivider = CGM::val<T>(divider);
+        T castedDivider = T(divider);
 
         return
         {
@@ -206,7 +206,7 @@ operator /= (CGM::Quaternion<T>& quaternion, TDivider divider)
     }
     else
     {
-        T castedDivider = CGM::val<T>(divider);
+        T castedDivider = T(divider);
 
         quaternion.vector.x /= castedDivider;
         quaternion.vector.y /= castedDivider;

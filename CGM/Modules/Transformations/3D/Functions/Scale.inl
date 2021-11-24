@@ -15,15 +15,15 @@ scale(Vector<3,T>& vector, T value)
 {
     if constexpr (Axis == E3D::X)
     {
-        vector.x += vector.x * (value - val<T>(1));
+        vector.x += vector.x * (value - T(1));
     }
     else if constexpr (Axis == E3D::Y)
     {
-        vector.y += vector.y * (value - val<T>(1));
+        vector.y += vector.y * (value - T(1));
     }
     else
     {
-        vector.z += vector.z * (value - val<T>(1));
+        vector.z += vector.z * (value - T(1));
     }
 }
 
@@ -44,7 +44,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<3,T>& vector, T value, const Vector<3,T>& direction)
 {
-    vector += direction * (value - val<T>(1)) * shortestDistance(vector, direction);
+    vector += direction * (value - T(1)) * shortestDistance(vector, direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -53,7 +53,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE enable_if_floating<T, void>
 scale(Vector<3,T>& vector, T value, const Ray<T>& axis)
 {
-    vector += axis.direction * (value - val<T>(1)) * shortestDistance(vector - axis.position, axis.direction);
+    vector += axis.direction * (value - T(1)) * shortestDistance(vector - axis.position, axis.direction);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -63,9 +63,9 @@ constexpr enable_if_floating<T, void>
 scale(Vector<3,T>& vector, const Vector<3,T>& values, const Pivot<T>& pivotPoint)
 {
     auto vec = vector - pivotPoint.position;
-    vector += pivotPoint.axes.x * (values.x - val<T>(1)) * shortestDistance(vec, pivotPoint.axes.x);
-    vector += pivotPoint.axes.y * (values.y - val<T>(1)) * shortestDistance(vec, pivotPoint.axes.y);
-    vector += pivotPoint.axes.z * (values.z - val<T>(1)) * shortestDistance(vec, pivotPoint.axes.z);
+    vector += pivotPoint.axes.x * (values.x - T(1)) * shortestDistance(vec, pivotPoint.axes.x);
+    vector += pivotPoint.axes.y * (values.y - T(1)) * shortestDistance(vec, pivotPoint.axes.y);
+    vector += pivotPoint.axes.z * (values.z - T(1)) * shortestDistance(vec, pivotPoint.axes.z);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -150,17 +150,17 @@ scale(Matrix<3,3,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
 {
     auto axes = orientationAxes(matrix);
 
-    axes.x += pivot.axes.x * (values.x - val<T>(1)) * shortestDistance(axes.x, pivot.axes.x);
-    axes.x += pivot.axes.y * (values.y - val<T>(1)) * shortestDistance(axes.x, pivot.axes.y);
-    axes.x += pivot.axes.z * (values.z - val<T>(1)) * shortestDistance(axes.x, pivot.axes.z);
+    axes.x += pivot.axes.x * (values.x - T(1)) * shortestDistance(axes.x, pivot.axes.x);
+    axes.x += pivot.axes.y * (values.y - T(1)) * shortestDistance(axes.x, pivot.axes.y);
+    axes.x += pivot.axes.z * (values.z - T(1)) * shortestDistance(axes.x, pivot.axes.z);
 
-    axes.y += pivot.axes.x * (values.x - val<T>(1)) * shortestDistance(axes.y, pivot.axes.x);
-    axes.y += pivot.axes.y * (values.y - val<T>(1)) * shortestDistance(axes.y, pivot.axes.y);
-    axes.y += pivot.axes.z * (values.z - val<T>(1)) * shortestDistance(axes.y, pivot.axes.z);
+    axes.y += pivot.axes.x * (values.x - T(1)) * shortestDistance(axes.y, pivot.axes.x);
+    axes.y += pivot.axes.y * (values.y - T(1)) * shortestDistance(axes.y, pivot.axes.y);
+    axes.y += pivot.axes.z * (values.z - T(1)) * shortestDistance(axes.y, pivot.axes.z);
 
-    axes.z += pivot.axes.x * (values.x - val<T>(1)) * shortestDistance(axes.z, pivot.axes.x);
-    axes.z += pivot.axes.y * (values.y - val<T>(1)) * shortestDistance(axes.z, pivot.axes.y);
-    axes.z += pivot.axes.z * (values.z - val<T>(1)) * shortestDistance(axes.z, pivot.axes.z);
+    axes.z += pivot.axes.x * (values.x - T(1)) * shortestDistance(axes.z, pivot.axes.x);
+    axes.z += pivot.axes.y * (values.y - T(1)) * shortestDistance(axes.z, pivot.axes.y);
+    axes.z += pivot.axes.z * (values.z - T(1)) * shortestDistance(axes.z, pivot.axes.z);
 
     set(matrix, axes);
 }
@@ -275,7 +275,7 @@ scale(Matrix<4,4,T>& matrix, const Vector<3,T>& values, const Pivot<T>& pivot)
     auto pos = position(matrix);
     auto axes = orientationAxes(matrix);
 
-    const auto piv = Pivot<T>{pivot.axes, Vector<3,T>(val<T>(0))};
+    const auto piv = Pivot<T>{pivot.axes, Vector<3,T>(T(0))};
 
     scale(axes.x, values, piv);
     scale(axes.y, values, piv);
@@ -782,27 +782,27 @@ scalingMatrix(T value)
         {
             return
             {
-                value, val<T>(0), val<T>(0),
-                val<T>(0), val<T>(1), val<T>(0),
-                val<T>(0), val<T>(0), val<T>(1)
+                value, T(0), T(0),
+                T(0), T(1), T(0),
+                T(0), T(0), T(1)
             };
         }
         else if constexpr (Axis == E3D::Y)
         {
             return
             {
-                val<T>(1), val<T>(0), val<T>(0),
-                val<T>(0), value, val<T>(0),
-                val<T>(0), val<T>(0), val<T>(1)
+                T(1), T(0), T(0),
+                T(0), value, T(0),
+                T(0), T(0), T(1)
             };
         }
         else
         {
             return
             {
-                val<T>(1), val<T>(0), val<T>(0),
-                val<T>(0), val<T>(1), val<T>(0),
-                val<T>(0), val<T>(0), value
+                T(1), T(0), T(0),
+                T(0), T(1), T(0),
+                T(0), T(0), value
             };
         }
     }
@@ -812,30 +812,30 @@ scalingMatrix(T value)
         {
             return
             {
-                value, val<T>(0), val<T>(0), val<T>(0),
-                val<T>(0), val<T>(1), val<T>(0), val<T>(0),
-                val<T>(0), val<T>(0), val<T>(1), val<T>(0),
-                val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+                value, T(0), T(0), T(0),
+                T(0), T(1), T(0), T(0),
+                T(0), T(0), T(1), T(0),
+                T(0), T(0), T(0), T(1)
             };
         }
         else if constexpr (Axis == E3D::Y)
         {
             return
             {
-                val<T>(1), val<T>(0), val<T>(0), val<T>(0),
-                val<T>(0), value, val<T>(0), val<T>(0),
-                val<T>(0), val<T>(0), val<T>(1), val<T>(0),
-                val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+                T(1), T(0), T(0), T(0),
+                T(0), value, T(0), T(0),
+                T(0), T(0), T(1), T(0),
+                T(0), T(0), T(0), T(1)
             };
         }
         else
         {
             return
             {
-                val<T>(1), val<T>(0), val<T>(0), val<T>(0),
-                val<T>(0), val<T>(1), val<T>(0), val<T>(0),
-                val<T>(0), val<T>(0), value, val<T>(0),
-                val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+                T(1), T(0), T(0), T(0),
+                T(0), T(1), T(0), T(0),
+                T(0), T(0), value, T(0),
+                T(0), T(0), T(0), T(1)
             };
         }
     }
@@ -850,19 +850,19 @@ scalingMatrix(const Vector<3,T>& values)
     if constexpr (N == 3)
     {
         return {
-            values.x, val<T>(0), val<T>(0),
-            val<T>(0), values.y, val<T>(0),
-            val<T>(0), val<T>(0), values.z
+            values.x, T(0), T(0),
+            T(0), values.y, T(0),
+            T(0), T(0), values.z
         };
     }
     else
     {
         return
         {
-            values.x, val<T>(0), val<T>(0), val<T>(0),
-            val<T>(0), values.y, val<T>(0), val<T>(0),
-            val<T>(0), val<T>(0), values.z, val<T>(0),
-            val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+            values.x, T(0), T(0), T(0),
+            T(0), values.y, T(0), T(0),
+            T(0), T(0), values.z, T(0),
+            T(0), T(0), T(0), T(1)
         };
     }
 }

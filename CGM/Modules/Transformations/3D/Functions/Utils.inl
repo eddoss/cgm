@@ -9,7 +9,7 @@ template<typename T>
 constexpr Quaternion<T>
 orientationQuaternion(const Vector<3,T>& axis, T angle)
 {
-    T ang = angle * val<T>(0.5);
+    T ang = angle * T(0.5);
     T sin = T(std::sin(ang));
 
     return Quaternion<T>
@@ -37,7 +37,7 @@ constexpr AxisAngle<T>
 axisAngle(const Quaternion<T>& quaternion)
 {
     T ang = angle(quaternion);
-    T isn = val<T>(1) / std::sin(ang * val<T>(0.5));
+    T isn = T(1) / std::sin(ang * T(0.5));
 
     auto axs = Vector<3,T>
     {
@@ -56,7 +56,7 @@ constexpr Vector<3,T>
 axis(const Quaternion<T>& quaternion)
 {
     T ang = angle(quaternion);
-    T isn = val<T>(1) / std::sin(ang * val<T>(0.5));
+    T isn = T(1) / std::sin(ang * T(0.5));
 
     auto axs = Vector<3,T>
     {
@@ -97,7 +97,7 @@ zeroPivot()
         x<T>(),
         y<T>(),
         z<T>(),
-        Vector<3,T>(val<T>(0))
+        Vector<3,T>(T(0))
     };
 }
 

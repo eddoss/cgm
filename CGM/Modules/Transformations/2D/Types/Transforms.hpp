@@ -6,7 +6,6 @@
 #include <CGM/Modules/Transformations/Common.hpp>
 #include <CGM/Modules/Transformations/2D/ModuleGlobals.hpp>
 #include <CGM/Modules/Transformations/2D/Types/Pivot.hpp>
-#include <CGM/Modules/Primitives/Types/Number.hpp>
 
 
 CGM_NAMESPACE_BEGIN
@@ -48,7 +47,7 @@ struct Transforms
     /**
      * Describe rotation (in radians).
      */
-    Angle<T>
+    T
     rotation {T(0)};
 
     /**

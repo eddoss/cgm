@@ -44,7 +44,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 x(const Quaternion<T>& orientation)
 {
-    return oriented({val<T>(1),val<T>(0),val<T>(0)}, orientation);
+    return oriented({T(1),T(0),T(0)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -84,7 +84,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 y(const Quaternion<T>& orientation)
 {
-    return oriented({val<T>(0),val<T>(1),val<T>(0)}, orientation);
+    return oriented({T(0),T(1),T(0)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -124,7 +124,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<3,T>
 z(const Quaternion<T>& orientation)
 {
-    return oriented({val<T>(0),val<T>(0),val<T>(1)}, orientation);
+    return oriented({T(0),T(0),T(1)}, orientation);
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -806,15 +806,15 @@ spaceMatrix(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z, co
         x.x, y.x, z.x, position.x,
         x.y, y.y, z.y, position.y,
         x.z, y.z, z.z, position.z,
-        val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+        T(0), T(0), T(0), T(1)
     };
 #else
     return
     {
-        x.x, x.y, x.z, val<T>(0),
-        y.x, y.y, y.z, val<T>(0),
-        z.x, z.y, z.z, val<T>(0),
-        position.x, position.y, position.z, val<T>(1)
+        x.x, x.y, x.z, T(0),
+        y.x, y.y, y.z, T(0),
+        z.x, z.y, z.z, T(0),
+        position.x, position.y, position.z, T(1)
     };
 #endif
 }
@@ -831,15 +831,15 @@ spaceMatrix(const Matrix<3,3,T>& orientation, const Vector<3,T>& position)
         orientation(0,0), orientation(0,1), orientation(0,2), position.x,
         orientation(1,0), orientation(1,1), orientation(1,2), position.y,
         orientation(2,0), orientation(2,1), orientation(2,2), position.z,
-        val<T>(0), val<T>(0), val<T>(0), val<T>(1)
+        T(0), T(0), T(0), T(1)
     };
 #else
     return
     {
-        orientation(0,0), orientation(0,1), orientation(0,2), val<T>(0),
-        orientation(1,0), orientation(1,1), orientation(1,2), val<T>(0),
-        orientation(2,0), orientation(2,1), orientation(2,2), val<T>(0),
-        position.x, position.y, position.z, val<T>(1)
+        orientation(0,0), orientation(0,1), orientation(0,2), T(0),
+        orientation(1,0), orientation(1,1), orientation(1,2), T(0),
+        orientation(2,0), orientation(2,1), orientation(2,2), T(0),
+        position.x, position.y, position.z, T(1)
     };
 #endif
 }
@@ -852,9 +852,9 @@ spaceMatrix(const Quaternion<T>& orientation, const Vector<3,T>& position)
 {
     return spaceMatrix
     (
-        oriented({val<T>(1),val<T>(0),val<T>(0)}, orientation),
-        oriented({val<T>(0),val<T>(1),val<T>(0)}, orientation),
-        oriented({val<T>(0),val<T>(0),val<T>(1)}, orientation),
+        oriented({T(1),T(0),T(0)}, orientation),
+        oriented({T(0),T(1),T(0)}, orientation),
+        oriented({T(0),T(0),T(1)}, orientation),
         position
     );
 }
@@ -891,7 +891,7 @@ lookAt(const Vector<3,T>& position, const Vector<3,T>& target, const Vector<3,T>
 #endif
 
     Matrix<4,4,T> mat {};
-    mat(3,3) = val<T>(1);
+    mat(3,3) = T(1);
 
     setUp(mat, u);
     setRight(mat, r);
@@ -909,13 +909,13 @@ template<E3D X, E3D Y, E3D Z, typename T>
 constexpr Matrix<3,3,T>
 remapper()
 {
-    auto x = Vector<3,T>(val<T>(0));
-    auto y = Vector<3,T>(val<T>(0));
-    auto z = Vector<3,T>(val<T>(0));
+    auto x = Vector<3,T>(T(0));
+    auto y = Vector<3,T>(T(0));
+    auto z = Vector<3,T>(T(0));
 
-    x.template get<X>() = val<T>(1);
-    y.template get<Y>() = val<T>(1);
-    z.template get<Z>() = val<T>(1);
+    x.template get<X>() = T(1);
+    y.template get<Y>() = T(1);
+    z.template get<Z>() = T(1);
 
     Matrix<3,3,T> mat;
     set(mat, x, y, z);
@@ -931,15 +931,15 @@ remapper()
 {
     Matrix<4,4,T> mat;
 
-    auto x = Vector<4,T>(val<T>(0));
-    auto y = Vector<4,T>(val<T>(0));
-    auto z = Vector<4,T>(val<T>(0));
-    auto w = Vector<4,T>(val<T>(0));
+    auto x = Vector<4,T>(T(0));
+    auto y = Vector<4,T>(T(0));
+    auto z = Vector<4,T>(T(0));
+    auto w = Vector<4,T>(T(0));
 
-    x.template get<X>() = val<T>(1);
-    y.template get<Y>() = val<T>(1);
-    z.template get<Z>() = val<T>(1);
-    w.template get<W>() = val<T>(1);
+    x.template get<X>() = T(1);
+    y.template get<Y>() = T(1);
+    z.template get<Z>() = T(1);
+    w.template get<W>() = T(1);
 
 #ifdef CGM_CFG_MATRIX_POSTMULT
     mat.setColumn(0,x);

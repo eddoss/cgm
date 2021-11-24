@@ -23,7 +23,7 @@ operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
         }
         else
         {
-            T sum {CGM::val<T>(0)};
+            T sum {T(0)};
 
             for (size_t i = 0; i < D; ++i)
             {
@@ -66,7 +66,7 @@ operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
             }
             else
             {
-                CGM::Vector<N,T> vec(CGM::val<T>(0));
+                CGM::Vector<N,T> vec(T(0));
 
                 for (size_t i = 0; i < N; ++i)
                 {
@@ -107,7 +107,7 @@ operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
             }
             else
             {
-                CGM::Vector<N,T> vec(CGM::val<T>(0));
+                CGM::Vector<N,T> vec(T(0));
 
                 for (size_t i = 0; i < N; ++i)
                 {
@@ -148,7 +148,7 @@ operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
             }
             else
             {
-                CGM::Vector<N,T> vec(CGM::val<T>(0));
+                CGM::Vector<N,T> vec(T(0));
 
                 for (size_t i = 0; i < N; ++i)
                 {
@@ -160,7 +160,7 @@ operator * (const CGM::Vector<D,T>& A, const CGM::Matrix<D,N,T>& B)
         }
         else
         {
-            CGM::Vector<N,T> vec(CGM::val<T>(0));
+            CGM::Vector<N,T> vec(T(0));
 
             if constexpr (N == 2)
             {
@@ -218,7 +218,7 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
         }
         else
         {
-            T sum {CGM::val<T>(0)};
+            T sum {T(0)};
 
             for (size_t i = 0; i < D; ++i)
             {
@@ -261,7 +261,7 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
             }
             else
             {
-                CGM::Vector<M,T> vec(CGM::val<T>(0));
+                CGM::Vector<M,T> vec(T(0));
 
                 for (size_t i = 0; i < M; ++i)
                 {
@@ -302,7 +302,7 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
             }
             else
             {
-                CGM::Vector<M,T> vec(CGM::val<T>(0));
+                CGM::Vector<M,T> vec(T(0));
 
                 for (size_t i = 0; i < M; ++i)
                 {
@@ -343,7 +343,7 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
             }
             else
             {
-                CGM::Vector<M,T> vec(CGM::val<T>(0));
+                CGM::Vector<M,T> vec(T(0));
 
                 for (size_t i = 0; i < M; ++i)
                 {
@@ -355,7 +355,7 @@ operator * (const CGM::Matrix<M,D,T>& A, const CGM::Vector<D,T>& B)
         }
         else
         {
-            CGM::Vector<M,T> vec(CGM::val<T>(0));
+            CGM::Vector<M,T> vec(T(0));
 
             if constexpr (M == 2)
             {

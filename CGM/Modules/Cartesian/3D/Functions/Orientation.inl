@@ -38,9 +38,9 @@ orientationAxes(const Quaternion<T>& orientation)
 {
     return Axes<T>
     (
-        oriented({val<T>(1),val<T>(0),val<T>(0)}, orientation),
-        oriented({val<T>(0),val<T>(1),val<T>(0)}, orientation),
-        oriented({val<T>(0),val<T>(0),val<T>(1)}, orientation)
+        oriented({T(1),T(0),T(0)}, orientation),
+        oriented({T(0),T(1),T(0)}, orientation),
+        oriented({T(0),T(0),T(1)}, orientation)
     );
 }
 
@@ -128,7 +128,8 @@ template<typename T>
 constexpr Quaternion<T>
 orientationQuaternion(const Vector<3,T>& x, const Vector<3,T>& y, const Vector<3,T>& z)
 {
-    Quaternion<T> q; T t;
+    auto q = Quaternion<T>{};
+    auto t = T{};
 
     if (z.z < 0)
     {

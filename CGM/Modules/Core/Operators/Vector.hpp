@@ -4,6 +4,7 @@
 #include <CGM/Modules/Core/ModuleGlobals.hpp>
 #include <CGM/Modules/Core/Types/Vector.hpp>
 #include <CGM/Modules/Core/Types/Matrix.hpp>
+#include <CGM/Modules/Primitives/Types/Number.hpp>
 #include <CGM/Modules/Primitives/Functions/Comparison.hpp>
 
 

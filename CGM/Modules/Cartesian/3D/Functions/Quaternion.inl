@@ -60,9 +60,9 @@ length(const Quaternion<T>& quaternion)
 {
     T nrm {norm(quaternion)};
 
-    if (CGM::eq(nrm, val<T>(0)))
+    if (CGM::eq(nrm, T(0)))
     {
-        return val<T>(0);
+        return T(0);
     }
     else
     {
@@ -226,7 +226,7 @@ template<typename T>
 constexpr Quaternion<T>
 identity()
 {
-    return Quaternion<T> {val<T>(0), val<T>(1)};
+    return Quaternion<T> {T(0), T(1)};
 }
 
 /* --------------------------------------------------------------------------------------- */

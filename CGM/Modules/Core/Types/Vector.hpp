@@ -221,7 +221,7 @@ public: /* Constructors */
      * Initialize X and Y components from 2D vector.
      */
     constexpr explicit
-    Vector(const Vector<2,T>& XY, T Z=val<T>(0));
+    Vector(const Vector<2,T>& XY, T Z=T(0));
 
 /* ####################################################################################### */
 public: /* Assignment operator */
@@ -409,7 +409,7 @@ public: /* Constructors */
      * Initialize X, Y, Z components from 3D vector.
      */
     constexpr explicit
-    Vector(const Vector<3,T>& XYZ, T W=val<T>(0));
+    Vector(const Vector<3,T>& XYZ, T W=T(0));
 
     /**
      * Initialize components from two 2D vectors.

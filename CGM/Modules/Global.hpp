@@ -78,7 +78,7 @@
 /* --------------------------------------------------------------------------------------- */
 
 #define CGM_RULE_OF_FIVE(Class)                                        \
-    constexpr Class()                           noexcept    = default; \
+    constexpr Class()                                       = default; \
     constexpr Class(Class&&)                    noexcept    = default; \
     constexpr Class& operator = (Class&&)       noexcept    = default; \
     constexpr Class(const Class&)                           = default; \

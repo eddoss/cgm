@@ -511,18 +511,18 @@ translationMatrix(T value)
     {
         return
         {
-            val<T>(1), val<T>(0), value,
-            val<T>(0), val<T>(1), val<T>(0),
-            val<T>(0), val<T>(0), val<T>(1)
+            T(1), T(0), value,
+            T(0), T(1), T(0),
+            T(0), T(0), T(1)
         };
     }
     else
     {
         return
         {
-            val<T>(1), val<T>(0), val<T>(0),
-            val<T>(0), val<T>(1), value,
-            val<T>(0), val<T>(0), val<T>(1)
+            T(1), T(0), T(0),
+            T(0), T(1), value,
+            T(0), T(0), T(1)
         };
     }
 #else
@@ -530,18 +530,18 @@ translationMatrix(T value)
     {
         return
         {
-            val<T>(1), val<T>(0), val<T>(0),
-            val<T>(0), val<T>(1), val<T>(0),
-            value, val<T>(0), val<T>(1)
+            T(1), T(0), T(0),
+            T(0), T(1), T(0),
+            value, T(0), T(1)
         };
     }
     else
     {
         return
         {
-            val<T>(1), val<T>(0), val<T>(0),
-            val<T>(0), val<T>(1), val<T>(0),
-            val<T>(0), value, val<T>(1)
+            T(1), T(0), T(0),
+            T(0), T(1), T(0),
+            T(0), value, T(1)
         };
     }
 #endif
@@ -556,16 +556,16 @@ translationMatrix(const Vector<2,T>& values)
 #ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
-        val<T>(1), val<T>(0), values.x,
-        val<T>(0), val<T>(1), values.y,
-        val<T>(0), val<T>(0), val<T>(1)
+        T(1), T(0), values.x,
+        T(0), T(1), values.y,
+        T(0), T(0), T(1)
     };
 #else
     return
     {
-        val<T>(1), val<T>(0), val<T>(0),
-        val<T>(0), val<T>(1), val<T>(0),
-        values.x, values.y, val<T>(1)
+        T(1), T(0), T(0),
+        T(0), T(1), T(0),
+        values.x, values.y, T(1)
     };
 #endif
 }
@@ -579,16 +579,16 @@ translationMatrix(T value, const Vector<2,T>& along)
 #ifdef CGM_CFG_MATRIX_POSTMULT
     return
     {
-        val<T>(1), val<T>(0), along.x * value,
-        val<T>(0), val<T>(1), along.y * value,
-        val<T>(0), val<T>(0), val<T>(1)
+        T(1), T(0), along.x * value,
+        T(0), T(1), along.y * value,
+        T(0), T(0), T(1)
     };
 #else
     return
     {
-        val<T>(1), val<T>(0), val<T>(0),
-        val<T>(0), val<T>(1), val<T>(0),
-        along.x * value, along.y * value, val<T>(1)
+        T(1), T(0), T(0),
+        T(0), T(1), T(0),
+        along.x * value, along.y * value, T(1)
     };
 #endif
 }

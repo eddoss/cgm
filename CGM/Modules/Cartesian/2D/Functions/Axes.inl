@@ -15,11 +15,11 @@ axis()
 {
     if constexpr (Axis == E2D::X)
     {
-        return {val<T>(1), val<T>(0)};
+        return {T(1), T(0)};
     }
     else
     {
-        return {val<T>(0), val<T>(1)};
+        return {T(0), T(1)};
     }
 }
 
@@ -29,7 +29,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 x()
 {
-    return {val<T>(1), val<T>(0)};
+    return {T(1), T(0)};
 }
 
 /* --------------------------------------------------------------------------------------- */
@@ -38,7 +38,7 @@ template<typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
 y()
 {
-    return {val<T>(0), val<T>(1)};
+    return {T(0), T(1)};
 }
 
 CGM_2D_NAMESPACE_END
