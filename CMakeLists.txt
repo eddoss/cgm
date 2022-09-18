@@ -4,22 +4,22 @@
 
 cmake_minimum_required(VERSION 3.18)
 
-project(CGM
+project(cgm
     LANGUAGES CXX
-    VERSION 0.9.1
+    VERSION 0.9.2
 )
 
 # ####################################################################################### #
 # Project parameters
 # ####################################################################################### #
 
-include(cmake/Parameters.cmake)
+include(cmake/parameters.cmake)
 
 # ####################################################################################### #
 # Subprojects
 # ####################################################################################### #
 
-add_subdirectory(CGM)
+add_subdirectory(cgm)
 add_subdirectory(tests)
 add_subdirectory(examples)
 
@@ -27,4 +27,4 @@ add_subdirectory(examples)
 # Installation
 # ####################################################################################### #
 
-include(cmake/Installation.cmake)
+include(cmake/installation.cmake)
