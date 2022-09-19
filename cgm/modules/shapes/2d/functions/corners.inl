@@ -9,32 +9,36 @@ CGM_2D_NAMESPACE_BEGIN
 /* Ranges */
 /* ####################################################################################### */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-topLeft(const Range<T>& range) const
+topLeft(const Range<T>& range)
 {
     return {range.min.x, range.max.y};
 }
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-topRight(const Range<T>& range) const
+topRight(const Range<T>& range)
 {
     return range.max;
 }
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-bottomLeft(const Range<T>& range) const
+bottomLeft(const Range<T>& range)
 {
     return range.min;
 }
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-bottomRight(const Range<T>& range) const
+bottomRight(const Range<T>& range)
 {
     return {range.max.x, range.min.y};
 }
@@ -43,8 +47,9 @@ bottomRight(const Range<T>& range) const
 /* Rectangle */
 /* ####################################################################################### */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-topLeft(const Rectangle<T>& rectangle) const
+topLeft(const Rectangle<T>& rectangle)
 {
     return
     {
@@ -55,8 +60,9 @@ topLeft(const Rectangle<T>& rectangle) const
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-topRight(const Rectangle<T>& rectangle) const
+topRight(const Rectangle<T>& rectangle)
 {
     return
     {
@@ -67,8 +73,9 @@ topRight(const Rectangle<T>& rectangle) const
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-bottomLeft(const Rectangle<T>& rectangle) const
+bottomLeft(const Rectangle<T>& rectangle)
 {
     return
     {
@@ -79,8 +86,9 @@ bottomLeft(const Rectangle<T>& rectangle) const
 
 /*  --------------------------------------------------------------------------------------- */
 
+template <typename T>
 constexpr CGM_FORCEINLINE Vector<2,T>
-bottomRight(const Rectangle<T>& rectangle) const
+bottomRight(const Rectangle<T>& rectangle)
 {
     return
     {

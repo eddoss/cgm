@@ -13,7 +13,7 @@ size(const Range<T>& range)
     {
         std::fabs(range.max.x - range.min.x),
         std::fabs(range.max.y - range.min.y)
-    }
+    };
 }
 
 /*  --------------------------------------------------------------------------------------- */
@@ -27,5 +27,3 @@ size(const Rectangle<T>& rectangle)
 
 CGM_2D_NAMESPACE_END
 
-
-#include "size.inl"

@@ -24,7 +24,7 @@ overlapped(const Rectangle<T>& A, const Rectangle<T>& B);
  * @return Overlap region (rectangle) and true, if exists, zero rectangle and false otherwise.
  */
 template<typename T>
-constexpr std::tuple<Rectangle<T>, bool>
+constexpr std::tuple<bool, Rectangle<T>>
 overlapping(const Rectangle<T>& A, const Rectangle<T>& B);
 
 CGM_2D_NAMESPACE_END

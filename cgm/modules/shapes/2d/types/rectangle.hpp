@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <cgm/shapes/2d/module_globals.hpp>
+#include <cgm/modules/shapes/2d/module_globals.hpp>
 #include <cgm/modules/core/types/size.hpp>
 #include <cgm/modules/core/types/vector.hpp>
 #include <cgm/modules/primitives/functions/numbers.hpp>
