@@ -4,45 +4,44 @@
 #include <cgm/modules/primitives/functions/numbers.hpp>
 #include <cgm/modules/primitives/functions/comparison.hpp>
 #include <cgm/shapes/2d/module_globals.hpp>
-#include <cgm/modules/core/types/size.hpp>
 #include <cgm/modules/core/types/vector.hpp>
 
 
 CGM_2D_NAMESPACE_BEGIN
 
 template<typename T=FLOAT>
-struct Rectangle
+struct Range
 {
-    CGM_RULE_OF_FIVE(Rectangle)
+    CGM_RULE_OF_FIVE(Range)
 
 /* ####################################################################################### */
 public: /* Attributes */
 /* ####################################################################################### */
 
     /**
-     * Rectangle position.
+     * Range min.
      */
     Vector<2,T>
-    center {T(0), {T(0)}};
+    min {T(0), {T(0)}};
 
     /**
-     * Rectangle size.
+     * Range max.
      */
-    Size<2,T>
-    size {T(1), {T(1)}};
+    Vector<2,T>
+    max {T(0), {T(0)}};
 
 /* ####################################################################################### */
 public: /* Constructors */
 /* ####################################################################################### */
 
     /**
-     * Initialize position and size.
+     * Initialize minimum and maximum.
      */
     constexpr
-    Rectangle(const Vector<2,T>& Position, const Size<2,T>& SizeValue);
+    Range(const Vector<2,T>& minimum, const Vector<2,T>& maximum);
 };
 
 CGM_2D_NAMESPACE_END
 
 
-#include "rectangle.inl"
+#include "range.inl"
